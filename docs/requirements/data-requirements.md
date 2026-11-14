@@ -27,13 +27,15 @@ A dataset may build the label or the features only when its source passes every 
 
 ## 3. Bottom Line
 
-1. **No free or low-cost source gives historical point-in-time consensus.** yfinance and Alpha Vantage return current values. Financial Modeling Prep (FMP) states that it keeps no revision history and that users must store their own snapshots. Snapshots collected from now on cannot backfill 2015 to 2024.
-2. **I/B/E/S via WRDS is the only route found to historical point-in-time consensus, and it is restricted at Manchester.** The library FAQ says IBES via WRDS is available "for AMBS Accounting and Finance researchers only". This blocks Gate 2 for the label. It needs a decision now, not in week 1 of the build.
-3. **For transcripts, S&P Capital IQ Transcripts via WRDS is the strongest source found.** The library FAQ names no eligibility limit for it. That is not the same as confirming access for a Computer Science student.
-4. **For membership and prices, CRSP via WRDS is the preferred source.** The library FAQ confirms it holds the full history of S&P 500 constituents. Eligibility is unverified.
+1. **No free source gives historical point-in-time consensus, and no low-cost source has been proven to.** yfinance returns Yahoo's current estimates. Financial Modeling Prep (FMP) states that it keeps no revision history. Two low-cost vendors, Alpha Vantage ($49.99 a month) and EODHD (from £49.99 a month), return one estimate beside each past actual, but neither documents whether that estimate is the consensus as it stood before the announcement, and neither returns the standard deviation of estimates that the proposal's SUE needs. Snapshots collected from now on cannot backfill 2015 to 2024.
+2. **I/B/E/S via WRDS is still the preferred route to historical point-in-time consensus with a standard deviation, and it is restricted at Manchester.** The library FAQ says IBES via WRDS is available "for AMBS Accounting and Finance researchers only". The only other routes found with documented point-in-time history are S&P Capital IQ Estimates and Intrinio's Zacks surprises, which are enterprise products with no public price. This blocks GATE-2 for the label as the proposal defines it. It needs a decision now, not in week 1 of the build.
+3. **For transcripts, S&P Capital IQ Transcripts via WRDS is the strongest licensed source found, and Alpha Vantage is the best low-cost source.** The library FAQ names no eligibility limit for Capital IQ Transcripts. That is not the same as confirming access for a Computer Science student. Alpha Vantage's transcript endpoint covers "any quarter since 2010Q1" with speaker, title and content for each turn, which also helps Q&A separation (TX-06). Its demo-use licence is unverified.
+4. **For membership and prices, CRSP via WRDS is the preferred source, and EODHD's S&P Global feed is the best low-cost source for membership.** The library FAQ confirms CRSP holds the full history of S&P 500 constituents. Eligibility is unverified. EODHD sells an S&P index constituents add-on (£29.99 a month) with dated additions and removals, taken from S&P Global. EODHD's terms limit it to personal, non-commercial use.
 5. **Yahoo-derived data cannot go into a public demo.** yfinance's README states that Yahoo's API is "intended for personal use only". The GitHub index file checked also takes its data from Yahoo Finance. Tiingo is limited to internal and personal use unless it is licensed.
 6. **The public demo cannot rely on most licensed data.** It needs one of two designs: a historical demo slice built from redistributable data, or a bring-your-own-key design where the user supplies their own licensed credentials.
 7. **The proposal's plan to take transcripts from SEC EDGAR is not sound.** Some issuers file transcripts as 8-K exhibits, but coverage is not systematic. This corrects Market DR-03.
+8. **yfinance is not good enough for the label or for a public demo.** It scrapes Yahoo's calendar page and returns current estimates, its history depth is set by Yahoo, it has no standard deviation of estimates, and Yahoo limits the API to personal use. Use it for development and cross-checks only.
+9. **The proposal's SUE needs a standard deviation of analyst estimates that most low-cost sources do not return.** If I/B/E/S access fails, the label has to change to a time-series SUE (CE-05), which is a change from proposal Section 5.1 and needs a change entry (Project-Wide SS-04).
 
 ## 4. Source Assessment
 
@@ -45,8 +47,15 @@ A dataset may build the label or the features only when its source passes every 
 | Refinitiv Advanced Events Search | Transcripts | Yes, by event | Manchester library access. Export is by PDF, Word or text; batch export needs a Windows tool. | Unverified | Fallback for small manual samples only. Not suitable for the pipeline. |
 | FMP transcripts | Transcripts | Event-dated. Coverage of about 8,200 companies and 200,000 or more transcripts, from 10+ years by quarter. | Paid. Transcripts are included only in the Ultimate plan: $139 per month, or $99 per month billed annually. | Unverified | Commercial fallback if WRDS access fails. Check licence before paying. |
 | FMP estimates | Consensus | No. Returns the current consensus only and states it has no revision history. | Paid plan | Unverified | Fails Gate 2 for backtesting. Usable forward-only from a start date. |
-| yfinance | Consensus (current), recent EPS history, prices | No for estimates. `earnings_estimate` reads Yahoo's current estimates. `get_earnings_dates` scrapes Yahoo's calendar web page (default 12 rows, maximum 100). Depth of `earnings_history` is set by Yahoo. | Free, no key. Unofficial. | Fails: "intended for personal use only" under Yahoo's API terms. | Development and cross-checks only. |
-| Alpha Vantage EARNINGS | Quarterly EPS with estimate and surprise | Unverified. Likely a current snapshot at fetch time. | Free key. Free-tier limit unverified. The official documentation could not be read from this environment. | Unverified | Cross-check for actual EPS only, until tested. |
+| yfinance | Consensus (current), recent EPS history, prices | No for estimates. `earnings_estimate` reads Yahoo's current estimates. `get_earnings_dates` scrapes Yahoo's calendar web page (default 12 rows, maximum 100) and returns an estimate and a reported EPS per past date, but nothing says the estimate is the pre-announcement value. No standard deviation of estimates. Depth of `earnings_history` is set by Yahoo. | Free, no key. Unofficial. | Fails: "intended for personal use only" under Yahoo's API terms. | Development and cross-checks only. Not suitable for the label. |
+| Alpha Vantage EARNINGS and EARNINGS_ESTIMATES | Quarterly reported EPS, estimated EPS, surprise, report date and time; estimate average, high, low and analyst count | Unverified. The documentation does not say whether `estimatedEPS` is the consensus before the announcement. EARNINGS returns reported date, reported EPS, estimated EPS, surprise and report time (before or after market) per quarter, with demo history from 1996. EARNINGS_ESTIMATES has the average, high, low, analyst count and revision values at 7, 30, 60 and 90 days, but no standard deviation and no as-of timestamp. A three-point check on one ticker found past estimates close to the 30 and 60 day values, which suggests a near-announcement estimate. That is inconclusive. | Free key limited to 25 requests a day. Paid plans from $49.99 a month. Neither endpoint carries a premium label in the documentation. | Unverified | Candidate for the label only if the pre-announcement test (VL-12) passes and CE-05 is accepted. Otherwise cross-check only. |
+| Alpha Vantage EARNINGS_CALL_TRANSCRIPT | Earnings call transcripts | Event-dated by quarter. First-publication timestamps unverified. | "Any quarter since 2010Q1". Each turn has speaker, title, content and a sentiment string. Same key and limits as above. | Unverified | Best low-cost transcript candidate. Run the segmentation test (TX-03) and a coverage test (TX-04) on 50 S&P 500 names before paying. |
+| EODHD earnings and fundamentals history | Reported EPS, consensus estimate, surprise per quarter; estimate trends with analyst count | Unverified. The documentation stores the estimate beside the actual and does not say when the estimate was taken. Fields: report date, fiscal period end, before or after market, actual, estimate. No standard deviation. History "back to the 1990s" for major US companies. | Fundamentals plan from £49.99 a month (annual billing) or £59.99 monthly. EOD prices are a separate plan. | Personal use only. EODHD's terms prohibit redistribution and display. | Same status as Alpha Vantage: candidate only if VL-12 passes. |
+| EODHD S&P Dow Jones Indices historical constituents | S&P 500 membership with dated additions and removals | Yes, dated additions and removals. Source is S&P Global under a direct contract. History for the S&P 500 "in 1957" per the product page. | Add-on from £29.99 a month. | Personal use only. | Best low-cost membership source found. Check it against 10 known removals (IM-02) before use. |
+| Wikipedia revision history, or the `index-constitution` package | S&P 500 membership, rebuilt from revisions | Approximate. A practitioner method rebuilds past lists from the page's revision history. The package reads Wikipedia and maps old tickers to current names. The author of the method notes messy tables and a CIK column only from 2014. | Free. Package is MIT-licensed. | The licence of the underlying Wikipedia text is not stated on the pages read. | Free fallback for membership only. Must pass IM-01 and IM-02 checks. |
+| S&P Capital IQ Estimates | Point-in-time consensus | Yes. Advertised as point-in-time history without look-ahead bias, with North American history from 1999. | Enterprise product. No public price found. Not available through WRDS to this project as far as is known. | Licensed | Strong on the data, but out of reach unless the university holds it. Ask the library. |
+| Intrinio Zacks EPS surprises | Pre-release mean estimate, surprise, estimate count and standard deviation | Yes per the product page, with 20 or more years of history. | Enterprise only. No history in default plans. No public price found. | Licensed | Only vendor found that lists the standard deviation and count with history. Ask for a quote only if I/B/E/S fails. |
+| FinCall-Surprise (research dataset, GitHub) | 2,688 labelled calls, 2019 to 2021 | No. The label uses the mean of forecasts issued within one month after the call, so it includes post-call revisions. | Free. Repository is Apache-2.0; the paper is CC BY 4.0. Transcripts were scraped mainly from Seeking Alpha. | Upstream transcript rights not covered by those licences. | Development and pipeline testing only. Its labels must not be used in the project's results (Project-Wide SC-04). |
 | SEC EDGAR | Filing dates, 8-K press releases with EPS, some 8-K transcript exhibits | Yes, by filing date | Free and public | Public record | Use for announcement dates and actual-EPS cross-checks. Not a systematic transcript source. |
 | SEC EDGAR XBRL company facts / Compustat via WRDS | Quarterly revenue, gross profit, operating income | EDGAR: yes, each fact carries the filing date (to be verified on a sample). Compustat: report date fields unverified. | EDGAR free and public. Compustat: WRDS eligibility unverified. | EDGAR: public record. Compustat: academic use only. | EDGAR preferred. Use only values from filings filed before the announcement (FD-02). |
 | CRSP via WRDS | Index membership, prices | Yes for membership (full history of S&P 500 constituents per the IESE FAQ). | WRDS. A tutorial states CRSP requires a subscription. Eligibility at Manchester unverified. | Academic use only. | Preferred for membership and prices, subject to access. |
@@ -60,12 +69,15 @@ A dataset may build the label or the features only when its source passes every 
 | Dataset | Gates | Preferred source | Status | Blocker |
 |---|---|---|---|---|
 | Transcripts | GATE-1, GATE-4 | Capital IQ Transcripts via WRDS | Conditional | WRDS eligibility. Segmentation untested. |
-| Transcripts (fallback) | GATE-1, GATE-4 | FMP Ultimate | Conditional | Cost and licence |
+| Transcripts (fallback 1) | GATE-1, GATE-4 | Alpha Vantage EARNINGS_CALL_TRANSCRIPT | Conditional | Licence for demo. Segmentation and coverage untested. |
+| Transcripts (fallback 2) | GATE-1, GATE-4 | FMP Ultimate | Conditional | Cost and licence |
 | Actual EPS | GATE-1 | 8-K Exhibit 99.1 from SEC EDGAR, cross-checked against Capital IQ or IBES | Conditional | Primary-document parsing not built |
 | Pre-announcement consensus | GATE-2 | I/B/E/S via WRDS | Conditional | Manchester eligibility |
-| Consensus (fallback) | GATE-2 | yfinance, Alpha Vantage or FMP snapshots | Fails for backtest. Usable only forward from the capture start date. | No historical data |
+| Consensus (fallback 1) | GATE-2 | Alpha Vantage or EODHD per-quarter estimates, with a time-series SUE (CE-05) | Conditional | Must pass the pre-announcement test VL-12. No standard deviation, so the label definition changes. |
+| Consensus (fallback 2) | GATE-2 | yfinance, Alpha Vantage ESTIMATES or FMP snapshots captured daily | Fails for backtest. Usable only forward from the capture start date. | No historical data |
 | Index membership | GATE-3 | CRSP via WRDS | Conditional | WRDS eligibility |
-| Index membership (fallback) | GATE-3 | Datastream monthly series | Conditional | Series codes not yet checked |
+| Index membership (fallback 1) | GATE-3 | EODHD S&P historical constituents | Conditional | Personal-use licence. Check against known removals. |
+| Index membership (fallback 2) | GATE-3 | Datastream monthly series, or Wikipedia revision history | Conditional | Series codes not yet checked. Wikipedia route is approximate. |
 | Sector history | GATE-3 | Compustat via WRDS | Unverified | GICS field history not checked |
 | Sector (fallback) | GATE-3 | SIC codes from EDGAR | Fails unless historical SIC is verified | EDGAR company records are believed to hold only the current code. To verify. |
 | Prices | GATE-4 (momentum feature) | CRSP via WRDS | Conditional | WRDS eligibility |
@@ -80,7 +92,7 @@ A dataset may build the label or the features only when its source passes every 
 | SR-02 | Must | A dataset builds the label or any feature only if its source passes every gate that depends on it. | Every feature column carries a source tag. An untagged column fails the build. | GATE-1 to GATE-4 | Product FR-02 |
 | SR-03 | Must | Data in the public demo must be redistributable under its licence, or supplied by the user's own credentials. | Demo bundle manifest lists each source and its licence. Any personal-use source fails the check. | GATE-5 | Market DR-05, CP-02 |
 | SR-04 | Must | Raw responses are stored unchanged with retrieval time, source name and source version. | Hash of each stored raw file matches the hash recorded at retrieval. | GATE-5 | Product PL-06 |
-| SR-05 | Must | Eligibility for every WRDS dataset is confirmed in writing before week 3. | Written confirmation from the library or supervisor is on file. | GATE-5 | Market DR-01, DR-03 |
+| SR-05 | Must | Eligibility for every WRDS dataset is requested in week 1 and confirmed in writing by the end of week 2 (before week 3 starts). If any answer is no, the fallback in SR-06 is chosen at the week 2 supervisor meeting. | Written confirmation from the library or supervisor is on file, or a dated refusal with the fallback decision recorded. | GATE-5 | Market DR-01, DR-03; Product Section 16 (weeks 1 to 2) |
 | SR-06 | Must | Every Must dataset has a documented fallback source, and the fallback passes the same tests or the project scope is narrowed. | Register lists a fallback per dataset and records the test result for it. | GATE-5 | Market DR-01 |
 | SR-07 | Should | Scraped sources are used only in development, with request logs kept and rate limits respected. | Request log exists. No scraped source appears in the demo bundle. | GATE-5 | Section 4 |
 | SR-08 | Must | Snapshot-only sources are stored only as timestamped captures from the start date. They are never backfilled into historical rows. | Test rejects any row for a snapshot source whose capture time is missing or earlier than the start date. | GATE-2 | Product FR-14 |
@@ -93,9 +105,9 @@ A dataset may build the label or the features only when its source passes every 
 |---|---|---|---|---|---|
 | TX-01 | Must | Each transcript has a company identifier linked to a permanent identifier, the event date and the call type. | 100% of rows have all three fields. Rows missing one are rejected and logged. | GATE-1 | Product FR-02 |
 | TX-02 | Must | A transcript is dated on or after its announcement, within a window of one trading day. | Violations are zero, or each violation is listed with a reason. | GATE-1 | Product FR-02 |
-| TX-03 | Must | The split between prepared remarks and Q&A is accurate. | On a hand-labelled sample of 50 transcripts, at least 95% of boundaries are correct. | GATE-1 | Product FR-15 |
+| TX-03 | Must | The split between prepared remarks and Q&A is accurate. | On a hand-labelled sample of 50 transcripts, at least 95% of boundaries are correct. | GATE-5 | Product FR-15 |
 | TX-04 | Must | At least 90% of target events, S&P 500 2015 to 2024, have a transcript. | Coverage report lists every missing company and quarter. | GATE-3 | Market DR-03 |
-| TX-05 | Must | One transcript per event. Duplicates are resolved by the earliest first-publication time. | Unique-key test on company and event passes. | GATE-1 | Product FR-13 |
+| TX-05 | Must | Where two transcripts exist for one event, the one with the earliest first-publication time is kept and the other is stored as a rejected duplicate. Uniqueness of the event key is tested by DV-03. | Given two transcripts for one event, the earlier is kept. DV-03 passes. | GATE-1 | Product FR-13 |
 | TX-06 | Should | Speaker and role labels are kept, so analyst questions and management answers can be separated. | Sample of 20 transcripts has labels on every turn. | GATE-1 | Product FR-15 |
 
 ### 7.2 Actual EPS
@@ -115,6 +127,7 @@ A dataset may build the label or the features only when its source passes every 
 | CE-02 | Must | No historical consensus is inferred from a current value. Where only current values exist, the project starts capturing on a dated schedule from the start date. | Test VL-01 passes. SR-08 test passes. | GATE-2 | Product FR-14 |
 | CE-03 | Must | Consensus is on the same basis as the actual EPS it is compared with. | Basis test VL-07 passes. | GATE-2 | Product FR-01 |
 | CE-04 | Must | Events with fewer than three estimates are excluded from the label and the exclusion count is reported. The standard deviation is undefined below that count. | Exclusion count is reported per year. | GATE-2 | Proposal 5.1 (SUE) |
+| CE-05 | Must | If I/B/E/S access fails and no source returns the standard deviation of estimates, the label uses a time-series SUE: the surprise (actual minus estimate) divided by the standard deviation of that company's surprises over its previous eight quarters, using only events announced before D. Companies with fewer than six prior quarters are excluded and counted. This replaces the proposal's definition and is recorded as a change entry (Project-Wide SS-04). The two definitions are never mixed in one dataset. | Test: a planted surprise dated D or later does not enter the denominator. The label definition is stored with the dataset version and shown on the evaluation page (Product FR-23). | GATE-2 | Proposal 5.1; Product FR-23 |
 
 ### 7.4 Index Membership
 
@@ -178,8 +191,9 @@ Validation asks whether the data holds up under the gates. Each test is written 
 | VL-07 | Must | Basis check: 50 sampled events are checked for the same EPS basis in actual and consensus. | Zero mismatches, or every mismatch is corrected and logged. | GATE-2 | AE-03, CE-03 |
 | VL-08 | Must | Known-event canary: 20 widely reported earnings surprises from public records are in the dataset with the expected class. | 20 of 20 correct, or each miss is investigated. | GATE-5 | Product FR-01 |
 | VL-09 | Must | Hand audit: 100 randomly sampled events are checked against their primary documents. | Error rate at or below 2%. | GATE-5 | Market N3 (trust in the data) |
-| VL-10 | Must | Snapshot trial: for 20 tickers, the chosen snapshot source is captured daily for four weeks. Past-dated values are checked for change. | Results are recorded. Any change to a past-dated value rules out that source for backfill. This test is the only way to establish the behaviour of yfinance, Alpha Vantage and FMP, as their documentation could not be read. | GATE-2 | SR-08 |
+| VL-10 | Must | Snapshot trial: for 20 tickers, the chosen snapshot source is captured daily for four weeks. Past-dated values are checked for change. | Results are recorded. Any change to a past-dated value rules out that source for backfill. This test is the only way to establish whether yfinance, FMP or Alpha Vantage's estimates endpoint change past-dated values. Alpha Vantage's documentation was read on 14 November 2026 and does not say. FMP's pages could not be read (HTTP 403). | GATE-2 | SR-08 |
 | VL-11 | Must | Sector history check: companies reclassified in 2023 are checked against the published list of changes. | Every sampled company shows the sector that applied on its event date. | GATE-3 | SEC-01 |
+| VL-12 | Must | Pre-announcement estimate test: for any source that stores one estimate beside each past actual (Alpha Vantage, EODHD, yfinance), compare its stored estimate with the consensus quoted in the company's own 8-K press release or a dated news item, for 30 events across at least 10 sectors and 5 years. | At least 28 of 30 estimates agree within 1 cent or 1%, and none is a value revised after the announcement. Otherwise the source cannot build the label. | GATE-2 | CE-01, CE-02 |
 
 ## 10. Data Governance
 
@@ -203,19 +217,23 @@ These are proposed values. They should be agreed with Professor Goodacre before 
 | Minimum share of any class per year | 10% | VL-06 |
 | Hand-audit error rate, 100 events | At most 2% | VL-09 |
 | Snapshot trial length | 4 weeks, 20 tickers, daily | VL-10 |
+| Pre-announcement estimate test | 28 of 30 events agree within 1 cent or 1% | VL-12 |
+| Time-series SUE history | At least 6 prior quarters, 8-quarter window | CE-05 |
 | Null rate on the three date fields | 0% | DV-02 |
 
 ## 12. Week-One Experiments
 
-Some source documents could not be read from this environment, so these tests should run before any build work relies on them.
+Some source pages could not be read (FMP, Finnhub and the EODHD constituents blog), and no vendor documents when its estimates were taken, so these tests should run before any build work relies on them.
 
 | Experiment | What it settles | Owner |
 |---|---|---|
 | Ask the library, and if needed the supervisor, whether a Computer Science student can get IBES via WRDS. | Whether the label can use point-in-time consensus. | John, with Professor Goodacre |
 | Confirm WRDS access for Capital IQ Transcripts, CRSP and Compustat. | Whether the transcript, membership and sector routes are open. | John, with the library |
 | Start the snapshot trial (VL-10) on 20 tickers. | Whether yfinance, Alpha Vantage or FMP keep past values unchanged. | John |
-| Pull Alpha Vantage EARNINGS for 10 tickers with a free key. | Field names, history depth and free-tier limit. Documentation could not be read. | John |
+| Pull Alpha Vantage EARNINGS and EARNINGS_CALL_TRANSCRIPT for 10 tickers with a free key (25 requests a day). | History depth per ticker, and whether transcripts are complete for 2015 to 2024. Field names and the 25-a-day free limit are already read from the documentation. | John |
 | Run `get_earnings_dates` for 10 tickers over 2019 to 2024. | Depth of past-event coverage and whether reported EPS matches the 8-K. | John |
+| Run the pre-announcement estimate test (VL-12) on Alpha Vantage, EODHD and yfinance for 30 events. | Whether any low-cost source can build the label, and whether the time-series SUE (CE-05) is needed. | John |
+| Ask the library whether the university holds S&P Capital IQ Estimates or an Intrinio or Zacks licence. | Whether a point-in-time consensus with standard deviation exists outside I/B/E/S. | John |
 | Pull 20 events from 8-K Exhibit 99.1 and check the release dates. | Whether AE-01 can be met from primary documents. | John |
 
 ## 13. Changes Needed in Earlier Documents
@@ -237,11 +255,12 @@ The Proposal and the deck have not been edited. Those changes are listed for you
 ## 14. Open Decisions
 
 1. Can a Computer Science student get IBES via WRDS at Manchester? If not, is there an approved route through the supervisor?
-2. If IBES is refused, is the project scope changed to a forward-only label, which means no backtest over 2015 to 2024?
-3. Is FMP's Ultimate plan worth paying for as the transcript fallback? It costs $99 to $139 per month and the licence is unverified.
+2. If IBES is refused, which of three options applies: (a) a low-cost source that passes VL-12 with the time-series SUE (CE-05), which keeps the 2015 to 2024 backtest but changes the label definition; (b) an enterprise licence; or (c) a forward-only label with no backtest over 2015 to 2024?
+3. Which paid transcript fallback is worth paying for: Alpha Vantage (from $49.99 a month) or FMP Ultimate ($99 to $139 a month)? Both have unverified demo licences. FMP's pages could not be read on 14 November 2026.
 4. Does the public demo use a historical slice or a bring-your-own-key design (SR-03)?
 5. Which thresholds in Section 11 does Professor Goodacre accept?
 6. Which fundamentals source is used: EDGAR XBRL company facts (free, filing dates per fact) or Compustat (WRDS eligibility unverified)? Needed by week 1 (FD-01).
+7. What monthly spend ceiling covers the low-cost route? It is about $50 for Alpha Vantage plus £50 to £80 for EODHD (fundamentals and the constituents add-on), before any prices plan (Project-Wide OR-02).
 
 ## 15. Sources Checked
 
@@ -263,4 +282,14 @@ The Proposal and the deck have not been edited. Those changes are listed for you
 | SEC 8-K search results | Some issuers file transcripts as 8-K exhibits. | Search result titles only. Documents not opened. |
 | SSGA note on 2023 GICS changes: https://www.ssga.com/us/en/individual/insights/2023-gics-changes-companies-impacted-and-what-you-need-to-know | Planned as the reference list for VL-11 | Title seen in search. Not read. |
 
-Points not verified: Alpha Vantage limits and fields; yfinance history depth; I/B/E/S revision handling; Compustat GICS history; the claim that EDGAR holds only current SIC codes; the Refinitiv Workspace estimate history; the Datastream series codes; and all licence terms marked "unverified" in Section 4.
+| Alpha Vantage documentation and premium page: https://www.alphavantage.co/documentation/ and https://www.alphavantage.co/premium/ | EARNINGS, EARNINGS_ESTIMATES and EARNINGS_CALL_TRANSCRIPT fields, free limit of 25 requests a day, prices from $49.99 a month, transcripts since 2010Q1 | Read 14 November 2026. Timing of estimates not stated. |
+| EODHD earnings calendar and fundamentals pages: https://eodhd.com/financial-apis/calendar-upcoming-earnings-ipos-and-splits | Earnings and trends fields, history, plan prices | Read 14 November 2026. Timing of estimates not stated. |
+| EODHD S&P constituents product page: https://eodhd.com/financial-apis/sp-and-dow-jones-indices-historical-constituents-data-api | Source, endpoints and add-on price | Read 14 November 2026. The blog page returned 404. |
+| EODHD licence pages: https://eodhd.com/financial-apis/terms-conditions and https://eodhd.com/financial-apis/commercial-vs-personal-license-use | Personal use only, no redistribution | Read 14 November 2026 |
+| FinCall-Surprise: https://arxiv.org/html/2510.03965v1 and https://github.com/Tizzzzy/FinCall-Surprise | Date range, label definition, licences, transcript sources | Read 14 November 2026. LICENSE file not opened. |
+| Koval, Andrews and Yan (2023): https://aclanthology.org/2023.findings-acl.520 | Dataset source and licence | Abstract only. PDF text could not be extracted. The FinCall-Surprise paper says the Koval resources are "not fully open source", which is not verified here. |
+| SEC EDGAR API overview: https://www.sec.gov/search-filings/edgar-application-programming-interfaces | No key needed; 10 requests a second; declared user agent | Read 14 November 2026. Per-fact fields (filing date, fiscal period) not confirmed on the page. |
+| `index-constitution` on PyPI: https://pypi.org/project/index-constitution/ and riazarbi, S&P 500 constituent lists: https://riazarbi.github.io/quant/backtesting-sp500-constituent-history | Wikipedia-based membership, MIT licence, caveats | Read 14 November 2026 |
+| Search results only, not opened: S&P Capital IQ Estimates, Intrinio Zacks EPS surprises (https://intrinio.com/products/eps-surprises), LSEG transcripts, Finnhub, FirstRate Data | Point-in-time claims and coverage | Vendor marketing. Not verified. Finnhub's documentation pages loaded empty. |
+
+Points not verified: FMP plans and endpoints (pages blocked); Finnhub; the timing of every low-cost vendor's stored estimate (VL-12 settles it); the licence of Alpha Vantage data for a public demo; yfinance history depth; I/B/E/S revision handling and whether it stores a standard deviation per announcement; Compustat GICS history; the claim that EDGAR holds only current SIC codes; the Refinitiv Workspace estimate history; the Datastream series codes; and all licence terms marked "unverified" in Section 4.

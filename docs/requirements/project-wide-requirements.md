@@ -173,7 +173,8 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 7. Confirm the ethics route for the user study with the Ethics Decision Tool (ET-01).
 8. Ask the unit lead for the AI tier and declaration format for each assessed item (ET-05).
 9. Approve the wording change for the data route (C14, ASM-05) and the drop order (PD-06).
-10. Choose the fundamentals source (Data FD-01) and confirm point-in-time GICS history (Data SEC-01). If GICS history is unavailable, sector scoring is switched off (Product SRS-14).
+10. If I/B/E/S access is refused, choose between a low-cost source with a time-series SUE label (Data CE-05, a change from proposal Section 5.1), an enterprise licence, or a forward-only label (Data Section 14, item 2).
+11. Choose the fundamentals source (Data FD-01) and confirm point-in-time GICS history (Data SEC-01). If GICS history is unavailable, sector scoring is switched off (Product SRS-14).
 
 ## 6. Changes Needed in Other Documents
 
