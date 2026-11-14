@@ -1,6 +1,6 @@
 # Project-Wide Requirements: Delivery, Assessment, Engineering, Security, Ethics and Operations
 
-Derived from the Third Year Project Proposal (2026-27), the project planning notes stored in project memory, and the Product, Market and Data requirement documents (26 to 30 October 2026). Research on ethics, AI-use and security references was carried out 30 October 2026.
+Derived from the Third Year Project Proposal (2026-27), the project planning notes stored in project memory, and the Product, Market and Data requirement documents (26 to 30 October 2026), and revised on 14 November 2026 after the proposal drift review (`proposal-drift-review.md`). Research on ethics, AI-use and security references was carried out 30 October 2026.
 
 ## 1. Purpose and Scope
 
@@ -36,8 +36,14 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | C9 | Planning notes, Weeks 7, 8 and 9, and "Keep" list | Contrastive multi-agent system, insider and options agent, and live streaming are in the plan. The product document excludes them as non-goals (NG1, NG3). | SC-03, SS-04 |
 | C10 | Planning notes, team capacity | Assumes 25 hours a week for 400 hours, then says the realistic figure is 15 to 20 hours a week. The scope in the notes does not fit either figure with a buffer. | PD-01, PD-02 |
 | C11 | Planning notes, Week 1 | Asks for a 2 to 3 page requirements document. The four requirement documents are much longer. | ASM-04 |
-| C12 | Planning notes, testing table | Backtest target of 70% accuracy and AUC above 0.70. Already removed from the product and market documents, but the notes still carry it. | Product Section 15 (no target carried forward) |
+| ASM-05 | Must | Where the data route differs from the proposal's description (licensed academic sources rather than public EDGAR), the dissertation states the difference and the reason, and the submission justification is worded to match. | Change entry exists (SS-04). The methodology section cites it. | C14; Proposal 1, 5.1, 8 |
+| C12 | Planning notes, testing table | Backtest target of 70% accuracy and AUC above 0.70. Already removed from the product and market documents, but the notes still carry it. The proposal treats SAE-FiRE's 0.67 as a reference, not a pass mark. | Product Section 15 (binary AUC reported as a reference; no target) |
 | C13 | Planning notes, Week 15 | User acceptance with "mock traders". Testing with people needs university ethics approval before recruitment. | ET-01, ET-02 |
+| C14 | Proposal Sections 1, 5.1 and 8 against Data Requirements Section 3 | The proposal calls the corpus public and available through SEC EDGAR, and justifies the project partly on that. Transcripts and point-in-time consensus actually need licensed academic sources (WRDS) with restricted demo use. | SS-04 (change entry), ASM-05 |
+| C15 | Proposal Section 5.2 against Product and Data documents | Revenue growth, gross margin and operating margin had no requirement and no data source. | Product FR-24; Data FD-01 to FD-04 |
+| C16 | Proposal Section 7 against Product ML-06 | Promotion to serving required the baseline comparison to "pass". The proposal accepts a negative result as valid. | Product ML-06 (reworded 14 November) |
+| C17 | Proposal Section 3.3 against Product Section 15 | The AUC target compared a three-class AUC with SAE-FiRE's binary AUC. | Product FR-06 and Section 15 (binary AUC as a reference only) |
+| C18 | Product and Market documents | Same ID used for different requirements (FR-12, FR-16, NFR-05, SC-01, and G1 to G6 against G1 to G5, now PG-1 to PG-6 and GATE-1 to GATE-5). | DO-05 |
 
 ## 3. Requirements
 
@@ -59,6 +65,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | PD-03 | Must | Each milestone in proposal Section 6 has a demonstrable artefact, run from a clean environment, before it is marked complete. | Milestone checklist signed off. | Proposal 6 |
 | PD-04 | Must | If a milestone slips by more than one week, the drop order from PD-02 is applied within that week and recorded. | Decision log entry exists for each slip. | New |
 | PD-05 | Should | The risk register is reviewed every two weeks. Each risk has an owner, a trigger and a mitigation. | Dated review entries. | Product Section 18 |
+| PD-06 | Must | The drop order agreed under PD-02 is applied in this sequence unless the supervisor agrees otherwise: stretch objectives ST-01 to ST-05; Could items (sector comparison view SRS-12, autocomplete, 375 px layout); the consensus-revision baseline; drift, SHAP rank monitoring and the model inventory (Market MR-04 to MR-06, MR-01); LLM judge extras (EX-05, AI-02, AI-03); the load test, runbook and restore drill; then Should items. Sector-relative scoring (Product FR-12, SRS-01 to SRS-14) is kept, as the supervisor requested, but every SRS item marked "Must if built" must pass or the feature is switched off (SRS-14). Proposal-derived Must items are never dropped. | Dated drop-order list approved at SS-03. | C10; Proposal 6; drift review Section 4.2 |
 
 ### 3.3 Supervision and Change Control
 
@@ -137,13 +144,14 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | DO-02 | Must | Each major technology choice has an ADR: queue, frontend, vector store, model format, deployment target and LLM provider. | ADR list is complete before Week 6. | SC-01, SC-02, SC-06, SP-01 |
 | DO-03 | Must | A traceability matrix maps every requirement ID to the test or evidence that proves it. | No requirement without evidence at submission. | ASM-01; Proposal 7 |
 | DO-04 | Should | A runbook covers rollback, worker restart, re-ingestion of one day's data and database restore. Each step is run once in a non-production environment. | Each step has a dated run record. | Product OP-03; OR-01 |
+| DO-05 | Must | Requirement IDs are unique across the four requirement documents. Market functional and non-functional IDs use the MFR and MNFR prefixes; data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14. | A script lists every ID defined in the four documents and reports no duplicate definition. | C18; DO-03 |
 
 ## 4. Summary Count
 
 | Area | Requirements | Must | Should |
 |---|---|---|---|
-| Assessment alignment (ASM) | 4 | 3 | 1 |
-| Delivery and capacity (PD) | 5 | 4 | 1 |
+| Assessment alignment (ASM) | 5 | 4 | 1 |
+| Delivery and capacity (PD) | 6 | 5 | 1 |
 | Supervision and change control (SS) | 4 | 4 | 0 |
 | Scope and architecture (SC) | 6 | 6 | 0 |
 | Engineering quality (EQ) | 8 | 7 | 1 |
@@ -151,8 +159,8 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | Ethics and licensing (ET) | 5 | 5 | 0 |
 | Operations and cost (OR) | 3 | 3 | 0 |
 | LLM operations (AI) | 3 | 2 | 1 |
-| Documentation (DO) | 4 | 3 | 1 |
-| Total | 47 | 41 | 6 |
+| Documentation (DO) | 5 | 4 | 1 |
+| Total | 50 | 44 | 6 |
 
 ## 5. Decisions Needed Before Freeze
 
@@ -164,16 +172,18 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 6. Confirm the monthly spend ceiling for OR-02.
 7. Confirm the ethics route for the user study with the Ethics Decision Tool (ET-01).
 8. Ask the unit lead for the AI tier and declaration format for each assessed item (ET-05).
+9. Approve the wording change for the data route (C14, ASM-05) and the drop order (PD-06).
+10. Choose the fundamentals source (Data FD-01) and confirm point-in-time GICS history (Data SEC-01). If GICS history is unavailable, sector scoring is switched off (Product SRS-14).
 
 ## 6. Changes Needed in Other Documents
 
 | Document | Change |
 |---|---|
 | Planning notes (project memory) | Week 2 and Week 4: choose one queue design and remove Kafka or Redis Streams unless justified. Week 4: remove mock data for reported results. Week 6: record the vector store ADR. Week 9: mark live streaming as pending the SS-04 decision. Week 10: redesign or remove the Slack alert (ET-04). Testing table: replace ROUGE and BERTScore gate with SC-05 metrics. Deployment diagram: correct the Cloud Tasks and Celery relationship. Risk table: remove mock data mitigation, and replace the ROUGE mitigation. Week 15: user testing waits for ET-01. |
-| Proposal | Section 4.2: resolve "Streamlit (or React)". Section 5.1: name the consensus source once IBES access is decided. |
+| Proposal | Section 4.2: resolve "Streamlit (or React)". Section 5.1: name the consensus source once IBES access is decided, and replace the EDGAR transcript route. Sections 1, 3.1 and 8: reword "public corpus" (C14). |
 | Architecture deck | Slide 6: add the decisions in Section 5 of this page. |
 
-I have not edited the planning notes or the proposal. Section 6 lists the changes for you to approve.
+The planning notes and the proposal have not been edited. Section 6 lists the changes for you to approve. The Market, Product and Data documents were revised on 14 November 2026.
 
 ## 7. Sources Checked
 
