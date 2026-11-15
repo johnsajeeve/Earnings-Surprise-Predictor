@@ -4,7 +4,7 @@ The one place for open and closed decisions and for pending edits to documents o
 
 The SSOT ([SSOT.md](SSOT.md)) holds what is fixed. This log holds what is not yet fixed. Claude may update this log. Claude does not change the SSOT.
 
-Last updated: 15 November 2026.
+Last updated: 15 November 2026 (owner answers on dates, hardware, hosting, LLM, retrieval and reminders).
 
 ## 1. Closed decisions (made by the owner)
 
@@ -15,6 +15,13 @@ Last updated: 15 November 2026.
 | C-03 | The primary data route must be free. Sources from any country are acceptable. A forward-only design is acceptable if the alternatives are worse. | 14 Nov 2026 | SSOT Section 4; Data SR-09, Section 4A |
 | C-04 | The SSOT is owner-only. Claude asks permission before any edit to it. | 15 Nov 2026 | SSOT rules |
 | C-05 | Each requirement is defined in exactly one document, by type: market, product, data, project-wide. | 15 Nov 2026 | SSOT Section 12; requirements README |
+| C-06 | An MVP is due by Christmas (25 December 2026), about 40 days from 15 November. | 15 Nov 2026 | Delivery plan; D-28 defines its scope |
+| C-07 | Hosting: a locally runnable Docker build first, then Cloud Run if time allows. | 15 Nov 2026 | Product Section 16 (hardening milestone); Project-Wide EQ-04 |
+| C-08 | Build on the owner's own PC. The owner installs Docker. Models such as FinBERT are downloaded locally. CPU first; a GPU may be added later. | 15 Nov 2026 | Data and NLP pipeline sizing |
+| C-09 | Explanation agent: the working default is one hosted LLM API with a small spend cap. The provider and budget are finalised later (D-27). | 15 Nov 2026 | Project-Wide SP-04, AI-01 |
+| C-10 | The SEC EDGAR User-Agent contact is the owner's email. It is set through an environment variable and is never committed to the repository. | 15 Nov 2026 | Data Section 4A.1 |
+| C-11 | Retrieval for the explanation agent is plain SQL over per-sentence feature scores in PostgreSQL, not a vector store. | 15 Nov 2026 | Project-Wide SC-06; Product FR-05, EX-01 |
+| C-12 | Week-one data spikes (small throwaway tests of the data sources) may be run from the working environment, and their results written into the data requirements. | 15 Nov 2026 | Data Section 12 |
 
 ## 2. Open decisions
 
@@ -29,7 +36,7 @@ Last updated: 15 November 2026.
 | D-07 | Agree the sector peer window (100 days) and minimum peer count (5). | John, with Professor Goodacre | Week 2 | Product SRS-04, SRS-06 |
 | D-08 | Decide whether the explanation layer or the temporal evaluation is the headline contribution. The proposal gives them equal weight. | John, with Professor Goodacre | Week 2 | Market Section 3 |
 | D-09 | Name the independent reviewer who signs off each model release. | John, with Professor Goodacre | Week 2 | Product ML-06 |
-| D-10 | Record ADRs for the queue (Celery with Redis, or justify another), the frontend (Streamlit or React) and the vector store (or plain SQL retrieval). | John | Week 6 | Project-Wide SC-01, SC-02, SC-06, DO-02 |
+| D-10 | Record ADRs for the queue (Celery with Redis, or justify another) and the frontend (Streamlit or React; recommended Streamlit for capacity). Retrieval is decided (C-11). | John | Frontend: before the MVP dashboard. Queue: Week 6 | Project-Wide SC-01, SC-02, DO-02 |
 | D-11 | Confirm mock data is removed from the plan for reported results. | John | Week 2 | Project-Wide SC-04 |
 | D-12 | Confirm explanation quality is judged by rank agreement, sign agreement and citation checks, not by ROUGE or BERTScore thresholds. | John | Week 2 | Project-Wide SC-05 |
 | D-13 | Remove the Slack confidence alert, or redesign it to meet ET-04. | John | Week 2 | Project-Wide C3, ET-04 |
@@ -46,6 +53,10 @@ Last updated: 15 November 2026.
 | D-24 | Read the FinCall-Surprise LICENSE file before using it for the benchmark replication. | John | Before week 6 | Product FR-27 |
 | D-25 | Write the assessment requirements document, or remove it. It is empty today. | John | Week 2 | `requirements/assessment-requirements.md` |
 | D-26 | Re-tag data requirements. 66 of 70 are Must, which is not a priority order. Candidates for Should: VL-08, VL-09, AE-02, TX-03, GS-02, DV-04, VL-10. Also consider halving the sample sizes in VL-09 and AE-02. | John, with Professor Goodacre | Before week 3 | Data Section 11; Project-Wide PD-01, PD-02, PD-06; `requirements/proposal-drift-review.md` Section 4 |
+| D-27 | Choose the LLM provider, monthly budget and licence check for sending transcript text to a third party. Working default: one hosted API with a small cap (C-09). The owner asked to be reminded. | John | Before building the explanation agent | Project-Wide SP-04, AI-01, DO-02 |
+| D-28 | Confirm the MVP scope for 25 December. Proposed: Docker Compose (PostgreSQL, Redis, Celery worker, FastAPI); ingest EDGAR EPS and the Hugging Face transcripts for a subset of companies; time-series label; FinBERT, hedge-word and negation features; tabular baseline and full XGBoost on the temporal split; prediction endpoint with top-three SHAP features; a minimal Streamlit prediction card. Not in the MVP: explanation agent, sector scoring, Cloud Run, full evaluation page. Also start the forward consensus capture job in the first week, since it takes calendar time. | John | This week | Product Section 16; Data SR-10 |
+| D-29 | Give the exact final submission date. The owner said early February 2027 (written "rolly february", read as early) and that the days after December are for polishing and final touches only. Capacity consequence: from 15 November to early February is about 11 to 12 weeks, not 16, so roughly 165 to 240 hours at 15 to 20 hours a week. The write-up, the explanation agent, evaluation and deployment must fit either before Christmas or in a thin January. The owner should reconcile this with D-28 and D-03. | John | This week | Project-Wide PD-01, PD-03, PD-06 |
+| D-30 | Decide where the proposal PDF and planning notes go. Recommended: `docs/source/`, not the requirements folder, because they are sources, not requirements. If the repository is public, they become public. This also needs one new row in the SSOT document map, which only the owner edits. | John | This week | SSOT Section 12 |
 
 ## 3. Pending edits to documents outside the repository
 
@@ -59,4 +70,17 @@ These documents are not edited by Claude. Each row is a change for the owner to 
 | Proposal | Section 3.3: the SAE-FiRE sentence can be read as an XGBoost AUC of about 0.67. The paper reports 0.620 for XGBoost on earnings calls and 0.657 to 0.668 for SAE-FiRE's own models. | Correction, 14 Nov 2026 |
 | Planning notes | Weeks 2 and 4: one queue design (no Kafka or Redis Streams unless justified). Week 4: no mock data in reported results. Week 6: vector store ADR. Week 9: live streaming pending D-14. Week 10: redesign or remove the Slack alert. Testing table: replace the ROUGE and BERTScore gate. Deployment diagram: correct the Cloud Tasks and Celery relationship. Risk table: remove the mock-data mitigation and the ROUGE mitigation. Week 15: user testing waits for D-16. Testing table: remove the 70% accuracy and AUC above 0.70 targets. | Project-Wide C1 to C13 |
 | Deck, slide 2 | Draw the drift monitor, transcript index and model registry as optional. | PD-06 |
-| Deck, slide 6 | List the decisions in Section 2 above. | D-01 to D-26 |
+| Deck, slide 6 | List the decisions in Section 2 above. | D-01 to D-30 |
+
+## 4. Reminders for the owner
+
+Claude surfaces these at the trigger, without being asked. They are also saved in Claude's memory.
+
+| Reminder | Trigger | Related |
+|---|---|---|
+| Install Docker under WSL2. | Before any database or container work. | C-08 |
+| Create free accounts and keys: Hugging Face (token), Alpha Vantage (free key), and later a GCP project. Share them through environment variables, never in the repository. | Hugging Face and Alpha Vantage before ingestion; GCP before Cloud Run. | Data Section 4A.1 |
+| Choose the LLM provider, budget and licence check. | Before building the explanation agent. | D-27 |
+| Add the proposal PDF and planning notes to the repository (or decide not to). | This week. | D-30 |
+| Provide the assessment criteria from the unit, or decide to remove the empty assessment document. | When you have them, and before the requirements freeze. | D-25 |
+| Send the library enquiry for optional institutional data, and ask the supervisor about sponsorship. | Week 1. | D-21 |
