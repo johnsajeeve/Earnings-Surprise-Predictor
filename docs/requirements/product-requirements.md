@@ -617,7 +617,7 @@ Operations, security and engineering requirements are defined in the Project-Wid
 
 ## 16. Milestones
 
-Aligned to Section 6 of the proposal. Weeks are a guide, not a commitment. Two changes from the proposal's order are recorded: the explanation layer comes before the frontend, so the dashboard can show explanations, and the API is deployed at the hardening milestone rather than at the backend milestone.
+Aligned to Section 6 of the proposal. Weeks are a guide, not a commitment. Calendar targets set by the owner (end of December 2026 for the pipeline, models, API, explanation agent and evaluation; late February 2027 for submission) are in the [decision log](../decision-log.md), C-06 and C-13, and take precedence over the week numbers below. Two changes from the proposal's order are recorded: the explanation layer comes before the frontend, so the dashboard can show explanations, and the API is deployed at the hardening milestone rather than at the backend milestone.
 
 | Weeks | Milestone | Done when |
 |---|---|---|

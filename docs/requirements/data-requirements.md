@@ -294,6 +294,21 @@ Some source pages could not be read (FMP, Finnhub and the EODHD constituents blo
 | Run the pre-announcement estimate test (VL-12), only if a vendor estimate source is considered. | Whether a low-cost vendor can build a consensus label. | John |
 | Pull 20 events from 8-K Exhibit 99.1 and check the release dates. | Whether AE-01 can be met from primary documents. | John |
 
+### Spike results
+
+**Hugging Face transcript set, delisted companies (15 November 2026, partial).** The datasets-server filter API was unreliable: a first run of 25 tickers mostly timed out or returned 500 and 502 errors, so it showed nothing. A retry with backoff returned four tickers:
+
+| Ticker | Rows | Year range | Note |
+|---|---|---|---|
+| AAPL (current member) | 79 | 2005 to 2025 | Full coverage |
+| XLNX (acquired 2022) | 60 | 2006 to 2021 | Present, but nothing after 2021 |
+| TWTR (acquired 2022) | 16 | 2018 to 2021 | Present, but starts 2018 |
+| ATVI (acquired 2023) | 27 | 2015 to 2021 | Present, but nothing after 2021 |
+
+What this shows: the set is not limited to current index members. What it does not show: whether coverage of removed companies is complete. Three of three removed companies tested end in 2021 or earlier, which suggests their last quarters or years may be missing. The meaning of the `year` field (fiscal or calendar) was not checked. Sixteen of the twenty removed companies planned for the test were not retried, so TX-07 still needs the full coverage table. The list of removed companies comes from general knowledge and has not been checked against index history.
+
+**EDGAR diluted EPS spike.** Script written, not yet run. It needs the SEC contact in the `SEC_USER_AGENT` environment variable, which the owner sets (decision C-10). It will report how far back EPS goes, whether each fact has a filing date, whether fourth-quarter EPS is missing, and how many duplicate facts restatements create.
+
 ## 13. Open Decisions
 
 Open decisions are in the [decision log](../decision-log.md). Those that concern this document: D-01 (label route), D-06 (thresholds), D-18 (transcript sources and demo design), D-19 (fundamentals source), D-20 (sector history), D-21 (optional institutional access) and D-23 (label thresholds).
