@@ -1,6 +1,6 @@
 # Project-Wide Requirements: Delivery, Assessment, Engineering, Security, Ethics and Operations
 
-Derived from the Third Year Project Proposal (2026-27), the project planning notes stored in project memory, and the Product, Market and Data requirement documents (26 to 30 October 2026), and revised on 14 November 2026 after the proposal drift review (`proposal-drift-review.md`). Research on ethics, AI-use and security references was carried out 30 October 2026.
+Derived from the Third Year Project Proposal (2026-27) (see [SSOT](../SSOT.md)), the project planning notes stored in project memory, and the Product, Market and Data requirement documents. Research on ethics, AI-use and security references was carried out 30 October 2026. Restructured 15 November 2026: engineering, security and operations requirements that were in the product document (secrets, container builds, rollback, test coverage) now live here. Open decisions are in the [decision log](../decision-log.md).
 
 ## 1. Purpose and Scope
 
@@ -36,14 +36,15 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | C9 | Planning notes, Weeks 7, 8 and 9, and "Keep" list | Contrastive multi-agent system, insider and options agent, and live streaming are in the plan. The product document excludes them as non-goals (NG1, NG3). | SC-03, SS-04 |
 | C10 | Planning notes, team capacity | Assumes 25 hours a week for 400 hours, then says the realistic figure is 15 to 20 hours a week. The scope in the notes does not fit either figure with a buffer. | PD-01, PD-02 |
 | C11 | Planning notes, Week 1 | Asks for a 2 to 3 page requirements document. The four requirement documents are much longer. | ASM-04 |
-| ASM-05 | Must | Where the data route differs from the proposal's description (licensed academic sources rather than public EDGAR), the dissertation states the difference and the reason, and the submission justification is worded to match. | Change entry exists (SS-04). The methodology section cites it. | C14; Proposal 1, 5.1, 8 |
 | C12 | Planning notes, testing table | Backtest target of 70% accuracy and AUC above 0.70. Already removed from the product and market documents, but the notes still carry it. The proposal treats SAE-FiRE's 0.67 as a reference, not a pass mark. | Product Section 15 (binary AUC reported as a reference; no target) |
 | C13 | Planning notes, Week 15 | User acceptance with "mock traders". Testing with people needs university ethics approval before recruitment. | ET-01, ET-02 |
 | C14 | Proposal Sections 1, 5.1 and 8 against Data Requirements Section 3 | The proposal calls the corpus public and available through SEC EDGAR, and justifies the project partly on that. Transcripts and point-in-time consensus actually need licensed academic sources (WRDS) with restricted demo use. | SS-04 (change entry), ASM-05 |
 | C15 | Proposal Section 5.2 against Product and Data documents | Revenue growth, gross margin and operating margin had no requirement and no data source. | Product FR-24; Data FD-01 to FD-04 |
 | C16 | Proposal Section 7 against Product ML-06 | Promotion to serving required the baseline comparison to "pass". The proposal accepts a negative result as valid. | Product ML-06 (reworded 14 November) |
 | C17 | Proposal Section 3.3 against Product Section 15 | The AUC target compared a three-class AUC with SAE-FiRE's binary AUC. | Product FR-06 and Section 15 (binary AUC as a reference only) |
-| C18 | Product and Market documents | Same ID used for different requirements (FR-12, FR-16, NFR-05, SC-01, and G1 to G6 against G1 to G5, now PG-1 to PG-6 and GATE-1 to GATE-5). | DO-05 |
+| C20 | Product and Market documents against SAE-FiRE (arXiv 2505.14420, Table 2) | The documents said the XGBoost baseline had AUC about 0.67. The table gives 0.620 for XGBoost on conference calls. 0.67 belongs to SAE-FiRE's own models (0.657 to 0.668). The SAE-FiRE label also uses post-call analyst forecasts and a 2012 to 2014 sample. | Corrected in Product FR-06, FR-27 and Section 15, and Market Section 7 (14 November 2026) |
+| C18 | Product and Market documents | Same ID used for different requirements (for example FR-12, FR-16 and SC-01, and the product goals G1 to G6 against the data gates G1 to G5, now PG-1 to PG-6 and GATE-1 to GATE-5). | DO-05 |
+| C19 | Proposal Section 5.1 against the free-source decision (14 November 2026) | The proposal labels events by the surprise against analyst consensus, standardised by the standard deviation of estimates. No free source gives historical point-in-time consensus, and the project is to use free sources. The label becomes a time-series SUE from EDGAR EPS (Data LB-01 to LB-08), with consensus captured forward as a check. Consequences are in `proposal-drift-review.md`, Section 8. | SC-07, ASM-06, SS-04 |
 
 ## 3. Requirements
 
@@ -52,9 +53,11 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | ASM-01 | Must | Every functional, non-functional and data requirement traces to at least one evaluation criterion in proposal Section 7 or submission skill in Section 8. | Traceability matrix (DO-03) has no requirement without a link. | Proposal 7, 8 |
-| ASM-02 | Must | Every quantitative claim in the report and demo links to a figure, table or test ID generated from code. | Claim checklist is complete before submission. | Market CP-01 |
+| ASM-02 | Must | Every quantitative claim in the report and demo links to a figure, table or test ID generated from code. No accuracy claim appears in the product or any write-up without a link to the evaluation page it comes from. | Claim checklist is complete before submission. | Market N3 |
 | ASM-03 | Must | Each novelty claim is recorded with the literature check that supports it: sources reviewed and date. | Novelty register has an entry for each claim. Unverified claims in the planning notes are marked. | New. Planning notes novelty scorecard. |
 | ASM-04 | Should | A two to three page summary of the four requirement documents is prepared for the Week 2 supervisor meeting. | Summary is reviewed at SS-03. | Planning notes, Week 1 |
+| ASM-05 | Must | Where the data route differs from the proposal's description (licensed academic sources rather than public EDGAR), the dissertation states the difference and the reason, and the submission justification is worded to match. | Change entry exists (SS-04). The methodology section cites it. | C14; Proposal 1, 5.1, 8 |
+| ASM-06 | Must | The dissertation states that the label is a time-series SUE and not a surprise against analyst consensus, reports its agreement with the consensus label on the prospective set, and does not compare its AUC with consensus-based studies (SAE-FiRE, Koval et al.) as if the labels were the same. Every quantitative claim names the label route. | Methodology section and results tables name the route. Claim checklist (ASM-02) has a label-route column. | C19; Data LB-08 |
 
 ### 3.2 Delivery and Capacity
 
@@ -65,14 +68,14 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | PD-03 | Must | Each milestone in proposal Section 6 has a demonstrable artefact, run from a clean environment, before it is marked complete. | Milestone checklist signed off. | Proposal 6 |
 | PD-04 | Must | If a milestone slips by more than one week, the drop order from PD-02 is applied within that week and recorded. | Decision log entry exists for each slip. | New |
 | PD-05 | Should | The risk register is reviewed every two weeks. Each risk has an owner, a trigger and a mitigation. | Dated review entries. | Product Section 18 |
-| PD-06 | Must | The drop order agreed under PD-02 is applied in this sequence unless the supervisor agrees otherwise: stretch objectives ST-01 to ST-05; Could items (sector comparison view SRS-12, autocomplete, 375 px layout); the consensus-revision baseline; drift, SHAP rank monitoring and the model inventory (Market MR-04 to MR-06, MR-01); LLM judge extras (EX-05, AI-02, AI-03); the load test, runbook and restore drill; then Should items. Sector-relative scoring (Product FR-12, SRS-01 to SRS-14) is kept, as the supervisor requested, but every SRS item marked "Must if built" must pass or the feature is switched off (SRS-14). Proposal-derived Must items are never dropped. | Dated drop-order list approved at SS-03. | C10; Proposal 6; drift review Section 4.2 |
+| PD-06 | Must | The drop order agreed under PD-02 is applied in this sequence unless the supervisor agrees otherwise: stretch objectives ST-01 to ST-05; Could items (sector comparison view SRS-12, autocomplete, 375 px layout); the consensus-revision baseline; drift monitoring, SHAP rank monitoring and the model inventory (Product MR-01, MR-04 to MR-06); LLM extras (Product EX-05; AI-02, AI-03); the load test, runbook and restore drill (EQ-05, DO-04, OR-01); then the other Should items. Sector-relative scoring (Product FR-12, SRS-01 to SRS-14) is kept, as the owner decided, but every SRS item marked "Must if built" must pass or the feature is switched off (SRS-14). Proposal-derived Must items are never dropped. | Dated drop-order list approved at SS-03. | C10; Proposal 6; SSOT Section 3A |
 
 ### 3.3 Supervision and Change Control
 
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
-| SS-01 | Must | Supervisor meetings are held on a fixed cadence, proposed fortnightly, with a written agenda and an action list kept after each one. | Action list exists for each meeting. | Market Section 9; Product Section 19 |
-| SS-02 | Must | A decision log records each open decision with its date, owner and outcome. Every open item in the market, product and data documents appears in it. | Each item is closed or has a date. | Market 9, Product 19, Data 14 |
+| SS-01 | Must | Supervisor meetings are held on a fixed cadence, proposed fortnightly, with a written agenda and an action list kept after each one. | Action list exists for each meeting. | Decision log |
+| SS-02 | Must | The decision log (`docs/decision-log.md`) records each open decision with its date, owner and outcome. Every open decision in any requirement document appears in it and nowhere else. | Each item is closed or has a date. No requirement document holds its own open-decision list. | Decision log |
 | SS-03 | Must | The four requirement documents are signed off by the supervisor in Week 2 (requirements freeze). | Sign-off record on file. | Product milestones, Weeks 1 to 2 |
 | SS-04 | Must | After freeze, any added feature or changed non-goal needs a written change entry, a capacity check (PD-01) and supervisor agreement. | Change log is complete. | C9; Product 2.2 |
 
@@ -83,9 +86,10 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | SC-01 | Must | The queue and task design follows the proposal: Celery with Redis as the broker. Kafka, Redis Streams and Cloud Tasks are used only if an architecture decision record (ADR) justifies them. | ADR exists. Deployment diagram matches the ADR. | Proposal 4.1, 4.2; C4, C5 |
 | SC-02 | Must | One frontend framework is chosen by ADR (Streamlit or React). | ADR exists. Only one framework is in the repository. | Proposal 4.2; C6 |
 | SC-03 | Must | Non-goals NG1 to NG5 are checked at every pull request review. Code for a non-goal is rejected. | Review checklist includes the five items. | Product 2.2; C9 |
-| SC-04 | Must | No mock or synthetic data appears in any reported result. Synthetic data is used only in automated tests and is labelled as such. | Reported tables state their data source. The evaluation job refuses synthetic input. | C1; Market TR-03 |
+| SC-04 | Must | No mock or synthetic data appears in any reported result. Synthetic data is used only in automated tests and is labelled as such. Real benchmark data (FinCall-Surprise, Product FR-27) is reported separately, labelled with its own label definition. | Reported tables state their data source. The evaluation job refuses synthetic input. | C1; Data VL-01 |
 | SC-05 | Must | Explanation quality is measured with rank agreement, sign agreement and citation verification. ROUGE and BERTScore may be reported as secondary measures only and are not pass or fail gates. | No ROUGE or BERTScore threshold exists in the evaluation harness. | Proposal 5.5; C2 |
-| SC-06 | Must | The vector store for transcript sentences is chosen by ADR. The ADR records a check that the transcript licence allows hosting and embedding. | ADR exists with the licence check. | Planning notes, Week 6; Data SR-03; C8 |
+| SC-06 | Must | The vector store for transcript sentences is chosen by ADR. The ADR records a check that the transcript licence allows hosting and embedding. | ADR exists with the licence check. | Planning notes, Week 6; C8; Data SR-03 |
+| SC-07 | Must | The label route (time-series SUE, or consensus where a licensed source exists) is chosen by ADR at the end of week 2 and recorded with the supervisor's agreement. The two routes are never mixed in one training set. | ADR exists. A test fails if events with different label routes are in one training set (Data CE-05). | C19; Data CE-05 |
 
 ### 3.5 Engineering Quality
 
@@ -94,11 +98,12 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | EQ-01 | Must | Automated tests run in continuous integration on every pull request. A failing test blocks the merge. | Merge is blocked by a planted failing test. | Planning notes, git workflow; Proposal 8 |
 | EQ-02 | Must | Lint, format and type checks run in continuous integration. | A planted style error fails the job. | Proposal 8 |
 | EQ-03 | Must | The main branch accepts changes only through reviewed pull requests. Direct pushes are blocked. | Branch protection is on in the repository settings. | Planning notes, git workflow |
-| EQ-04 | Must | The service builds from a clean checkout with one documented command and runs in a container. | Build succeeds on a fresh clone in a clean environment. | Planning notes, Weeks 3 and 15; Product OP-02 |
-| EQ-05 | Must | Load test: 100 concurrent requests for cached predictions, with 95th percentile latency under 500 ms, run on the deployed environment. Results are reported. | Load test report exists. | Planning notes, Weeks 12 and 13; Product NFR-01 |
+| EQ-04 | Must | The service builds from a clean checkout with one documented command and runs in a container. Dependencies are pinned to exact versions, and the build fails if one is unpinned. | Build succeeds on a fresh clone in a clean environment. A planted unpinned dependency fails the build. | Planning notes, Weeks 3 and 15 |
+| EQ-05 | Should | Load test: 100 concurrent requests for cached predictions run on the deployed environment, checked against the latency target in Product NFR-01. Results are reported. | Load test report exists. | Planning notes, Weeks 12 and 13; Product NFR-01 |
 | EQ-06 | Must | Fault-injection tests: killing a worker mid-job, restarting the database and making Redis unavailable. Each case recovers with no duplicate or missing rows. | Three scripted tests pass. | Proposal 1 and 8 (distributed design) |
-| EQ-07 | Must | Every queued task is idempotent: running it twice leaves the same database state. | Test runs each task twice and compares state. | Product FR-13 |
+| EQ-07 | Must | Every queued task is idempotent, including ingestion (Product FR-13): running it twice leaves the same database state. | Test runs each task twice and compares state. | Product FR-13 |
 | EQ-08 | Should | Dependencies are scanned for known vulnerabilities in continuous integration. High-severity findings block release. | Scan job runs on every pull request. | Planning notes, Week 15 |
+| EQ-09 | Must | Line coverage on feature engineering, split logic and sector scoring is at least 80%. | Coverage report in continuous integration. | Product ML-02, FR-03, SRS-01 to SRS-14 |
 
 ### 3.6 Security and Privacy
 
@@ -107,8 +112,9 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | SP-01 | Must | Model artefacts are stored and loaded only in non-executable formats: XGBoost native format or ONNX. The loader rejects pickle files. | Loader test with a pickle file fails as expected. | C7; Product ML-03 |
 | SP-02 | Must | A pre-release review of the API against the OWASP API Security Top 10 covers at least: broken object-level authorisation, broken authentication, unrestricted resource consumption, security misconfiguration and unsafe consumption of external APIs. | Review checklist is signed off before release. | Planning notes, Week 15; Product API-06, API-07 |
 | SP-03 | Must | The explanation agent treats transcript text as data. Instructions found in transcripts are not followed. Each claim is checked against retrieved sentences. | Test set of 20 transcript excerpts containing planted instructions: agent behaviour does not change. | OWASP LLM01 (prompt injection); Product FR-05 |
-| SP-04 | Must | Transcript text is sent to a third-party LLM provider only if the transcript licence and the provider's data-use terms allow it. The terms, and the date they were checked, are recorded. | Register entry exists for each provider. | Data SR-03, DR-05; Market CP-02 |
-| SP-05 | Should | Request logs hold only what operations need: request ID, ticker, latency and status. Logs are deleted after a set period, proposed at 30 days. | Log schema test. Retention job runs. | Product NFR-11; Market Section 6 |
+| SP-04 | Must | Transcript text is sent to a third-party LLM provider only if the transcript licence and the provider's data-use terms allow it. The terms, and the date they were checked, are recorded. | Register entry exists for each provider. | Data SR-03, SR-11 |
+| SP-05 | Should | Request logs contain only the fields in Product NFR-11 and the requested ticker. Logs are deleted after a set period, proposed at 30 days. | Log schema test. Retention job runs. | Product NFR-11; Market Section 6 |
+| SP-06 | Must | No secrets are stored in source control. Data-source keys and credentials are read from environment variables or a secret manager. A secret scanner runs in continuous integration. | Secret scanner passes. A planted key fails the job. | Planning notes, deployment |
 
 ### 3.7 Ethics, Licensing and Academic Integrity
 
@@ -116,7 +122,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 |---|---|---|---|---|
 | ET-01 | Must | Before any user study, including the five-user usability test, the university ethics route is confirmed using the Ethics Decision Tool. Approval is obtained before recruitment. | Approval reference on file. | Proposal 7; C13. Manchester ethics page: approval routes are School or Division review, Proportionate UREC or Full UREC. |
 | ET-02 | Must | Participants receive an information sheet and give consent. Identifying data is not kept beyond the approved period. | Documents on file. Retention date recorded. | C13. Information sheet requirement not stated on the ethics page: confirm with the approval route. |
-| ET-03 | Must | A third-party register lists the licence and terms for every dataset, model and library used, including FinBERT weights and spaCy models. | Register is complete before the demo. | Data SR-01, SR-03; Proposal 4.2 |
+| ET-03 | Must | A third-party register lists the licence and terms of every model and library used, including FinBERT weights and spaCy models. Datasets are recorded in the source register (Data SR-01). | Register is complete before the demo. | Data SR-01; Proposal 4.2 |
 | ET-04 | Must | No output or alert uses buy, sell or hold language. Every alert carries the disclaimer in FR-08. Confidence-threshold alerts are removed unless both rules are met. | Text scan of all alert templates. Disclaimer test passes. | C3; Product NG5, FR-08 |
 | ET-05 | Must | The report declares AI-tool use as each assessment's guidance requires. Manchester sets an AI tier for each assignment (Prohibited, Minimal, Permitted or Required), and the tier is set by the unit lead. | Written confirmation of the tier and declaration format from the unit lead for each assessed item. | Manchester AI policy (tiers, per the EdTech Innovation Hub article). Declaration format not confirmed. |
 
@@ -124,16 +130,16 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
-| OR-01 | Must | The PostgreSQL database is backed up daily, and a restore is tested once before the demo. Proposed targets: recovery point 24 hours, recovery time 4 hours. | Restore test log exists. | Planning notes, Cloud SQL; Product OP-03 |
-| OR-02 | Must | A monthly ceiling for cloud and API spend is set before Week 3, with an alert at 80% of the ceiling. The value of the ceiling is a decision for John. | Budget alert exists in the cloud console. | Planning notes, deployment; Data DR-03 and FMP costs |
+| OR-01 | Should | The PostgreSQL database is backed up daily, and a restore is tested once before the demo. Proposed targets: recovery point 24 hours, recovery time 4 hours. | Restore test log exists. | Planning notes, Cloud SQL |
+| OR-02 | Must | The default monthly ceiling for cloud and API spend is zero for data, because the primary data route is free (Data SR-09). Any paid source or cloud spend needs a ceiling and a budget alert at 80% of it, set before it is bought. Cloud hosting spend ceiling is a decision for John. | Source register shows zero cost for every primary-route source. Budget alert exists before any spend. | Planning notes, deployment; Data SR-09 |
 | OR-03 | Must | The demo database is separate from the evaluation dataset. Demo writes never change rows used for training or testing. | Demo service account has no write rights on the evaluation schema. | Data VL-04; Product ML-02 |
 
 ### 3.9 LLM Operations
 
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
-| AI-01 | Must | Each explanation records the prompt version, the model version and the generation settings. | All three fields are non-null on every stored explanation. | Product FR-11; Market EX-02 |
-| AI-02 | Must | A fixed regression set of 50 event cases is re-run whenever the prompt or model changes. Faithfulness results must not fall below the previous version unless the drop is logged as a decision. | Regression report exists for each change. | Market EX-03, EX-04; Proposal 5.5 |
+| AI-01 | Must | Each explanation records the prompt version, the model version and the generation settings. | All three fields are non-null on every stored explanation. | Product FR-11; Product EX-02 |
+| AI-02 | Should | A fixed regression set of 50 event cases is re-run whenever the prompt or model changes. Faithfulness results must not fall below the previous version unless the drop is logged as a decision. | Regression report exists for each change. | Product EX-03, EX-04; Proposal 5.5 |
 | AI-03 | Should | LLM-based metrics are reported as the mean and range across three runs, because LLM output varies between runs. | Results table shows three values per metric. | Proposal 5.5; Product Section 15 |
 
 ### 3.10 Documentation and Handover
@@ -141,50 +147,34 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | DO-01 | Must | A new machine can run the system from the README in under 30 minutes. The test is timed on a clean environment, ideally by someone other than the builder. | Timed run recorded. | Planning notes, Week 14; Proposal 8 |
-| DO-02 | Must | Each major technology choice has an ADR: queue, frontend, vector store, model format, deployment target and LLM provider. | ADR list is complete before Week 6. | SC-01, SC-02, SC-06, SP-01 |
+| DO-02 | Must | Each major technology choice has an ADR: queue, frontend, vector store, model format, deployment target, LLM provider and label route. | ADR list is complete before Week 6. | SC-01, SC-02, SC-06, SC-07, SP-01 |
 | DO-03 | Must | A traceability matrix maps every requirement ID to the test or evidence that proves it. | No requirement without evidence at submission. | ASM-01; Proposal 7 |
-| DO-04 | Should | A runbook covers rollback, worker restart, re-ingestion of one day's data and database restore. Each step is run once in a non-production environment. | Each step has a dated run record. | Product OP-03; OR-01 |
+| DO-04 | Should | A runbook covers rollback to the previous revision within 10 minutes, worker restart, re-ingestion of one day's data and database restore. Each step is run once in a non-production environment, and the rollback is timed. | Each step has a dated run record. | OR-01 |
 | DO-05 | Must | Requirement IDs are unique across the four requirement documents. Market functional and non-functional IDs use the MFR and MNFR prefixes; data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14. | A script lists every ID defined in the four documents and reports no duplicate definition. | C18; DO-03 |
 
 ## 4. Summary Count
 
 | Area | Requirements | Must | Should |
 |---|---|---|---|
-| Assessment alignment (ASM) | 5 | 4 | 1 |
+| Assessment alignment (ASM) | 6 | 5 | 1 |
 | Delivery and capacity (PD) | 6 | 5 | 1 |
 | Supervision and change control (SS) | 4 | 4 | 0 |
-| Scope and architecture (SC) | 6 | 6 | 0 |
-| Engineering quality (EQ) | 8 | 7 | 1 |
-| Security and privacy (SP) | 5 | 4 | 1 |
+| Scope and architecture (SC) | 7 | 7 | 0 |
+| Engineering quality (EQ) | 9 | 7 | 2 |
+| Security and privacy (SP) | 6 | 5 | 1 |
 | Ethics and licensing (ET) | 5 | 5 | 0 |
-| Operations and cost (OR) | 3 | 3 | 0 |
-| LLM operations (AI) | 3 | 2 | 1 |
+| Operations and cost (OR) | 3 | 2 | 1 |
+| LLM operations (AI) | 3 | 1 | 2 |
 | Documentation (DO) | 5 | 4 | 1 |
-| Total | 50 | 44 | 6 |
+| Total | 54 | 45 | 9 |
 
 ## 5. Decisions Needed Before Freeze
 
-1. Confirm the ADR decisions for queue (SC-01), frontend (SC-02) and vector store (SC-06).
-2. Confirm that mock data is removed from the plan for reported results (SC-04).
-3. Confirm that the explanation evaluation uses the proposal's metrics (SC-05).
-4. Remove the Slack confidence alert, or redesign it to meet ET-04 (C3).
-5. Decide whether live streaming, insider and options, and the contrastive multi-agent system stay in scope. The product document excludes them, and the planning notes keep them (C9). A change needs SS-04.
-6. Confirm the monthly spend ceiling for OR-02.
-7. Confirm the ethics route for the user study with the Ethics Decision Tool (ET-01).
-8. Ask the unit lead for the AI tier and declaration format for each assessed item (ET-05).
-9. Approve the wording change for the data route (C14, ASM-05) and the drop order (PD-06).
-10. If I/B/E/S access is refused, choose between a low-cost source with a time-series SUE label (Data CE-05, a change from proposal Section 5.1), an enterprise licence, or a forward-only label (Data Section 14, item 2).
-11. Choose the fundamentals source (Data FD-01) and confirm point-in-time GICS history (Data SEC-01). If GICS history is unavailable, sector scoring is switched off (Product SRS-14).
+Open decisions are in the [decision log](../decision-log.md), Section 2. Those that concern this document: D-01 to D-03, D-10 to D-17.
 
 ## 6. Changes Needed in Other Documents
 
-| Document | Change |
-|---|---|
-| Planning notes (project memory) | Week 2 and Week 4: choose one queue design and remove Kafka or Redis Streams unless justified. Week 4: remove mock data for reported results. Week 6: record the vector store ADR. Week 9: mark live streaming as pending the SS-04 decision. Week 10: redesign or remove the Slack alert (ET-04). Testing table: replace ROUGE and BERTScore gate with SC-05 metrics. Deployment diagram: correct the Cloud Tasks and Celery relationship. Risk table: remove mock data mitigation, and replace the ROUGE mitigation. Week 15: user testing waits for ET-01. |
-| Proposal | Section 4.2: resolve "Streamlit (or React)". Section 5.1: name the consensus source once IBES access is decided, and replace the EDGAR transcript route. Sections 1, 3.1 and 8: reword "public corpus" (C14). |
-| Architecture deck | Slide 6: add the decisions in Section 5 of this page. |
-
-The planning notes and the proposal have not been edited. Section 6 lists the changes for you to approve. The Market, Product and Data documents were revised on 14 November 2026.
+Pending edits to the proposal, planning notes and deck are in the [decision log](../decision-log.md), Section 3. They are for the owner to approve. Claude does not edit the proposal or the planning notes.
 
 ## 7. Sources Checked
 
