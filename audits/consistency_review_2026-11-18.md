@@ -64,3 +64,18 @@ No change was made to the SSOT. The SSOT document map still lacks rows for the f
 - The proposal text (Section 4.3) says "multi-step tool-using" and the SSOT says "single-pass". The SSOT wins, and the agent document follows it. The proposal is not edited by Claude.
 - Priority load: the new documents add 79 Must requirements. Whether that fits capacity is the existing D-03 and D-26 question.
 - Unverified inputs remain: Bernard and Thomas eight-quarter window, whether "believe" is on the Loughran and McDonald list, and the Hugging Face transcript licence.
+
+## 5. Update: four further component documents
+
+Added later on 18 November 2026: ingestion and preparation (IG), modelling and evaluation (MD), API and serving (SV), deployment and operations (DP). The same checks were run again over all twelve requirement documents: checker passes (checks 1 to 6), no broken tables, no dashes, no undefined decision references, no email address in any file, traceability generator gives identical output twice (424 requirements).
+
+| # | Finding | Fix |
+|---|---|---|
+| 19 | Decision D-01 (supervisor agreement on the label) was still cited as open in Data, Product, Project-Wide, the drift review and pipeline.md after John decided the label route himself. | Recorded as C-25, which closes D-01. Stale wording corrected. The SSOT still says "pending supervisor approval" and is owner-only, so the wording change is proposed in D-46. |
+| 20 | Project-Wide SC-07 and SS-04 ask for the supervisor's agreement in writing, and John reports only that Professor Goodacre does not mind. | Not edited. D-46 asks John to note the no-objection in the next meeting action list. |
+| 21 | Product Section 12 says the service refuses to serve when a model artefact fails its checksum, but decision C-15 says the API reads stored predictions and does not load a model. | Resolved in API and Serving SV-08: the API checks the artefact's checksum without loading it for scoring. |
+| 22 | Two draft ingestion rows repeated Data TX-05 and DV-07. | Reduced to citations. |
+| 23 | Product FR-01 requires three class probabilities summing to 1, which rules out a binary-only model. | Modelling and Evaluation Section 2 recommends one three-class model with the beat-against-miss AUC derived from it (D-42). |
+| 24 | Drift review counts and coverage rows were out of date again. | Updated: 376 requirements outside the market document, 304 of them Must. |
+
+Not checked: the pinned library versions that the new documents mention (PyJWT, a rate limiter, a metrics library) were not looked up. They are added to the dependency lists under change control when built. Prices for any managed cloud component were not verified.

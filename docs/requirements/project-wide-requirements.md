@@ -4,7 +4,7 @@ Derived from the Third Year Project Proposal (2026-27) (see [SSOT](../SSOT.md)),
 
 ## 1. Purpose and Scope
 
-The product, market and data requirement documents cover what the product does, what the market needs and which data it depends on. They do not cover how the project is delivered, assessed, secured, governed or run. Four component documents added on 18 November 2026 (feature engineering, explanation agent, database and frontend, awaiting approval under decision D-40) hold the detail for those pipeline steps.
+The product, market and data requirement documents cover what the product does, what the market needs and which data it depends on. They do not cover how the project is delivered, assessed, secured, governed or run. Eight component documents added on 18 November 2026 (feature engineering, explanation agent, database, frontend, ingestion and preparation, modelling and evaluation, API and serving, and deployment and operations, awaiting approval under decisions D-40 and D-46) hold the detail for those pipeline steps.
 
 This page sets those requirements. It covers ten areas:
 
@@ -76,7 +76,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 |---|---|---|---|---|
 | SS-01 | Must | Supervisor meetings are held on a fixed cadence, proposed fortnightly, with a written agenda and an action list kept after each one. | Action list exists for each meeting. | Decision log |
 | SS-02 | Must | The decision log (`docs/decision-log.md`) records each open decision with its date, owner and outcome. Every open decision in any requirement document appears in it and nowhere else. | Each item is closed or has a date. No requirement document holds its own open-decision list. | Decision log |
-| SS-03 | Must | The requirement documents (market, product, data and project-wide, and the four component documents once approved under D-40) are signed off by the supervisor in Week 2 (requirements freeze). | Sign-off record on file. | Product milestones, Weeks 1 to 2 |
+| SS-03 | Must | The requirement documents (market, product, data and project-wide, and the eight component documents once approved under D-40 and D-46) are signed off by the supervisor in Week 2 (requirements freeze). | Sign-off record on file. | Product milestones, Weeks 1 to 2 |
 | SS-04 | Must | After freeze, any added feature or changed non-goal needs a written change entry, a capacity check (PD-01) and supervisor agreement. | Change log is complete. | C9; Product 2.2 |
 
 ### 3.4 Scope and Architecture Consistency
@@ -150,7 +150,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | DO-02 | Must | Each major technology choice has an ADR: queue, frontend, sentence retrieval method (decision C-11), model format, deployment target, LLM provider and label route. | ADR list is complete before Week 6. | SC-01, SC-02, SC-06, SC-07, SP-01 |
 | DO-03 | Must | A traceability matrix maps every requirement ID to the test or evidence that proves it. | No requirement without evidence at submission. | ASM-01; Proposal 7 |
 | DO-04 | Should | A runbook covers rollback to the previous revision within 10 minutes, worker restart, re-ingestion of one day's data and database restore. Each step is run once in a non-production environment, and the rollback is timed. | Each step has a dated run record. | OR-01 |
-| DO-05 | Must | Requirement IDs are unique across the requirement documents. Market functional and non-functional IDs use the MFR and MNFR prefixes; data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14; the component documents use the prefixes FE (feature engineering), AG (explanation agent), DB (database) and UX (frontend). | A script lists every ID defined in the documents and reports no duplicate definition. | C18; DO-03 |
+| DO-05 | Must | Requirement IDs are unique across the requirement documents. Market functional and non-functional IDs use the MFR and MNFR prefixes; data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14; the component documents use the prefixes FE (feature engineering), AG (explanation agent), DB (database), UX (frontend), IG (ingestion and preparation), MD (modelling and evaluation), SV (API and serving) and DP (deployment and operations). | A script lists every ID defined in the documents and reports no duplicate definition. | C18; DO-03 |
 
 ## 4. Summary Count
 
@@ -170,7 +170,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 
 ## 5. Decisions Needed Before Freeze
 
-Open decisions are in the [decision log](../decision-log.md), Section 2. Those that concern this document: D-01 to D-03, D-11 to D-17.
+Open decisions are in the [decision log](../decision-log.md), Section 2. Those that concern this document: D-02, D-03, D-11 to D-17.
 
 ## 6. Changes Needed in Other Documents
 

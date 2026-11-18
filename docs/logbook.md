@@ -207,12 +207,20 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Full list of edits to existing files: `audits/consistency_review_2026-11-18.md`.
 - Work by Claude. Decisions by John.
 
+### 18 Nov 2026: four more component documents and two owner answers
+
+- Answers from John: the label route is his decision because Professor Goodacre does not mind which label is used, so the time-series SUE stays (C-25, closes D-01); asked which of three-class and binary suits the project (recommendation: one three-class model, D-42); authentication is a later problem (deferred, SV-15).
+- Added four draft documents in `docs/requirements/`: ingestion and preparation (IG-01 to IG-22), modelling and evaluation (MD-01 to MD-23), API and serving (SV-01 to SV-16) and deployment and operations (DP-01 to DP-15). Each requirement names where in the project it comes from. Open values are in D-42 to D-45, approval and SSOT wording in D-46. The checker, the traceability generator and the README cover all twelve documents.
+- Findings that shaped them: FR-01 needs three class probabilities, so a binary model would contradict it; the API only reads stored predictions (C-15), so a cloud demo needs no worker; the label has no forward-looking window, so no purging is needed in the split; Product Section 12 has an artefact-checksum error state that C-15 seemed to contradict, resolved in SV-08.
+- Not done: SSOT edits (owner-only, wording in D-46). Nothing committed. Not run: any code.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - D-33: approve the exact requirement wording that follows from C-17 (shown in the decision log).
 - D-34: approve the negation and forward-guidance definitions.
-- D-35 to D-41: FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
-- D-01: has Professor Goodacre agreed to the time-series label?
+- D-35 to D-46: FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
+- D-46: note in the next supervisor meeting action list that Professor Goodacre has no objection to the time-series label (C-25 closed D-01 on John's word; SC-07 and SS-04 ask for it in writing).
 - D-32 (membership source) and D-20 (sector spike).
 - D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.
 - D-29: the exact submission date.

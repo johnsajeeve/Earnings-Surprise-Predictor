@@ -106,7 +106,7 @@ Status of each dataset against the gates it depends on. The primary route is the
 | Dataset | Gates | Primary source (free) | Status | Blocker | Optional upgrade |
 |---|---|---|---|---|---|
 | Actual EPS | GATE-1 | SEC EDGAR XBRL diluted EPS and 8-K Item 2.02 filing dates | Conditional | Fourth-quarter derivation, early-period coverage and press-release parsing untested (LB-03) | Compustat or I/B/E/S actuals |
-| Earnings surprise label | GATE-2 | Time-series SUE from EDGAR EPS (LB-01 to LB-06) | Conditional, pending supervisor approval (decision D-01). Weaker than a consensus label. | Untested warm-up and restatement handling | Consensus label from I/B/E/S via WRDS, Zacks or a vendor that passes VL-12 |
+| Earnings surprise label | GATE-2 | Time-series SUE from EDGAR EPS (LB-01 to LB-06) | Conditional. Decided by the owner (C-25). Weaker than a consensus label. | Untested warm-up and restatement handling | Consensus label from I/B/E/S via WRDS, Zacks or a vendor that passes VL-12 |
 | Consensus (forward check) | GATE-2 | Daily snapshots from yfinance, Finnhub or FMP free tiers, from the start date (SR-10) | Usable only forward. Fails for a backtest. | Current values only, no standard deviation, personal-use terms | Historical consensus from a licensed source |
 | Transcripts | GATE-1, GATE-4 | Hugging Face `kurry/sp500_earnings_transcripts` for history; Alpha Vantage free key going forward | Conditional | Origin and licence of the Hugging Face set; survivorship in coverage (TX-07); Alpha Vantage free limit of 25 requests a day; segmentation untested | Capital IQ Transcripts via WRDS; FMP Ultimate |
 | Index membership | GATE-3 | Candidates in Section 4A.1 (decision D-32 open); Wikipedia revision history or the `index-constitution` package as fallback | Conditional | Approximate. Must pass IM-01 and IM-02. | CRSP via WRDS; EODHD S&P Global constituents |
@@ -311,7 +311,7 @@ What this shows: the set is not limited to current index members. What it does n
 
 ## 13. Open Decisions
 
-Open decisions are in the [decision log](../decision-log.md). Those that concern this document: D-01 (label route), D-06 (thresholds), D-18 (transcript sources and demo design), D-19 (fundamentals source), D-20 (sector history), D-21 (optional institutional access) and D-23 (label thresholds).
+Open decisions are in the [decision log](../decision-log.md). Those that concern this document: D-06 (thresholds), D-18 (transcript sources and demo design), D-19 (fundamentals source), D-20 (sector history), D-21 (optional institutional access) and D-23 (label thresholds).
 
 ## 14. Sources Checked
 

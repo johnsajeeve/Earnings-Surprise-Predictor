@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Structural checks for the requirement documents (market, product, data, project-wide and the four component documents).
+"""Structural checks for the requirement documents (market, product, data, project-wide and the eight component documents).
 
 Run from anywhere:  python3 docs/tools/check_requirements.py
 
@@ -19,7 +19,9 @@ REQ = os.path.join(DOCS, "requirements")
 FILES = {"market": "market-requirements.md", "product": "product-requirements.md",
          "data": "data-requirements.md", "project-wide": "project-wide-requirements.md",
          "feature": "feature-engineering-requirements.md", "agent": "explanation-agent-requirements.md",
-         "database": "database-requirements.md", "frontend": "frontend-requirements.md"}
+         "database": "database-requirements.md", "frontend": "frontend-requirements.md",
+         "ingestion": "ingestion-and-preparation-requirements.md", "modelling": "modelling-and-evaluation-requirements.md",
+         "serving": "api-and-serving-requirements.md", "deployment": "deployment-and-operations-requirements.md"}
 OWNER = {
     "market": {"N"},
     "product": {"PG", "NG", "ST", "FR", "SRS", "EX", "NFR", "API", "PL", "ML", "TR", "MR", "UI"},
@@ -29,6 +31,10 @@ OWNER = {
     "agent": {"AG"},
     "database": {"DB"},
     "frontend": {"UX"},
+    "ingestion": {"IG"},
+    "modelling": {"MD"},
+    "serving": {"SV"},
+    "deployment": {"DP"},
 }
 WITHDRAWN = ({f"MFR-{i:02d}" for i in range(1, 20)} | {f"MNFR-{i:02d}" for i in range(1, 8)} |
               {f"DR-{i:02d}" for i in range(1, 11)} |
@@ -36,7 +42,8 @@ WITHDRAWN = ({f"MFR-{i:02d}" for i in range(1, 20)} | {f"MNFR-{i:02d}" for i in 
                "NFR-05", "NFR-06", "NFR-10"})
 CITE = {"Product": "product", "Data": "data", "Project-Wide": "project-wide", "Market": "market",
         "Feature Engineering": "feature", "Explanation Agent": "agent", "Database": "database",
-        "Frontend": "frontend"}
+        "Frontend": "frontend", "Ingestion and Preparation": "ingestion", "Modelling and Evaluation": "modelling",
+        "API and Serving": "serving", "Deployment and Operations": "deployment"}
 
 
 def read(path):
@@ -82,7 +89,7 @@ def main():
 
     wrong = []
     for k, t in text.items():
-        for m in re.finditer(r"\b(Product|Data|Project-Wide|Market|Feature Engineering|Explanation Agent|Database|Frontend) ([A-Z]{1,5}-?\d+)\b", t):
+        for m in re.finditer(r"\b(Product|Data|Project-Wide|Market|Feature Engineering|Explanation Agent|Database|Frontend|Ingestion and Preparation|Modelling and Evaluation|API and Serving|Deployment and Operations) ([A-Z]{1,5}-?\d+)\b", t):
             i = m.group(2)
             if i in defs and CITE[m.group(1)] not in defs[i]:
                 wrong.append((k, m.group(1), i, defs[i]))

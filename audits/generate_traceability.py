@@ -4,7 +4,7 @@
 Run from anywhere:  python3 audits/generate_traceability.py
 
 Inputs:
-  - the eight requirement documents in docs/requirements/ (read, never modified);
+  - the twelve requirement documents in docs/requirements/ (read, never modified);
   - audits/assessments.py, which holds the audit findings made by inspecting the repository.
 Output: the same file every time for the same inputs. No timestamps are generated.
 
@@ -36,6 +36,10 @@ DOCS = [
     ("agent", "explanation-agent-requirements.md", "Explanation Agent"),
     ("database", "database-requirements.md", "Database"),
     ("frontend", "frontend-requirements.md", "Frontend"),
+    ("ingestion", "ingestion-and-preparation-requirements.md", "Ingestion and Preparation"),
+    ("modelling", "modelling-and-evaluation-requirements.md", "Modelling and Evaluation"),
+    ("serving", "api-and-serving-requirements.md", "API and Serving"),
+    ("deployment", "deployment-and-operations-requirements.md", "Deployment and Operations"),
 ]
 PRIORITY = re.compile(r"^(Must if built|Must|Should|Could|Won't)\b")
 NOT_ASSESSED = "Not assessed in this audit (scope: Docker skeleton). No evidence either way."
@@ -133,7 +137,7 @@ def main():
         "",
         "## Summary",
         "",
-        f"- Requirements found in the eight documents: {total} (market {len(per_doc['market'])}, product {len(per_doc['product'])}, data {len(per_doc['data'])}, project-wide {len(per_doc['project-wide'])}, feature engineering {len(per_doc['feature'])}, explanation agent {len(per_doc['agent'])}, database {len(per_doc['database'])}, frontend {len(per_doc['frontend'])}).",
+        f"- Requirements found in the twelve documents: {total} (market {len(per_doc['market'])}, product {len(per_doc['product'])}, data {len(per_doc['data'])}, project-wide {len(per_doc['project-wide'])}, feature engineering {len(per_doc['feature'])}, explanation agent {len(per_doc['agent'])}, database {len(per_doc['database'])}, frontend {len(per_doc['frontend'])}, ingestion and preparation {len(per_doc['ingestion'])}, modelling and evaluation {len(per_doc['modelling'])}, API and serving {len(per_doc['serving'])}, deployment and operations {len(per_doc['deployment'])}).",
         f"- Assessed in this audit: {len(ASSESSED)}. "
         + ", ".join(
             f"{k} {assessed_counts[k]}"

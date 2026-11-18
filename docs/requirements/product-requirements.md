@@ -665,7 +665,7 @@ Aligned to Section 6 of the proposal. Weeks are a guide, not a commitment. Calen
 
 ## 19. Open Questions
 
-Open questions are in the [decision log](../decision-log.md). Those that concern this document: D-01 (label route), D-05 (non-functional targets), D-07 (peer window and minimum peers), D-09 (independent reviewer), D-22 (FinBERT cutoff date) and D-23 (SUE thresholds).
+Open questions are in the [decision log](../decision-log.md). Those that concern this document: D-05 (non-functional targets), D-07 (peer window and minimum peers), D-09 (independent reviewer), D-22 (FinBERT cutoff date) and D-23 (SUE thresholds).
 
 ## 20. Sources Checked
 
