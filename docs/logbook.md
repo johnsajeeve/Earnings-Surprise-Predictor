@@ -23,7 +23,7 @@ This is a record of what was done and when, with the commit messages. It is not 
 | 4727aa9 | 15 Nov 2026 | Restructure requirements, add SSOT and decision log, rewrite drift review |
 | 70149d8 | 15 Nov 2026 | Record owner answers: MVP date, hosting, SQL retrieval, reminders, submission window |
 | c6f01ce | 15 Nov 2026 | Spike results, delivery plan, log book |
-| Next commit | 15 Nov 2026 | |
+| 422a6a8 | 15 Nov 2026 | Update log book: fill commit c6f01ce |
 
 ## Entries
 
@@ -129,8 +129,74 @@ This is a record of what was done and when, with the commit messages. It is not 
 - John asked for a log book of commits and work done. First version was written as a draft report with a word budget and report use notes. John said he wants a plain log only. Rewritten as this file.
 - Work by Claude. Direction from John.
 
+### 16 Nov 2026: pipeline architecture and source research
+
+- John asked for a start-to-finish pipeline with the components for each step, then for it to be written into the architecture folder with no contradictions against the existing documents, and for web research on prediction timing, transcript timestamps, index membership and sector sources.
+- Written: `docs/architecture/pipeline.md`.
+- Found a conflict in the existing documents: transcripts are dated on or after the announcement (TX-02, FR-02), but every input must be dated before it (GATE-2, FR-22). Logged as D-31 with a proposed fix. Not edited in the requirements.
+- Facts read from primary pages: the Hugging Face card gives a call date with a time of day, plus fiscal year and quarter, but not what the time means or where the transcripts came from. SEC FAQ gives the EDGAR acceptance time as HHMMSS in Eastern time and a 10 requests a second limit.
+- Membership: `fja05680/sp500` (MIT) is the best free candidate, with stated gaps in early years. `Johnbrick123/sp500-data` has no licence. Logged as D-32.
+- Sector: no free point-in-time GICS history found. SIC from EDGAR mapped to Fama-French groups is the only free option, and whether the SIC is dated was not verified (the SEC pages that would say returned 404). Added to D-20.
+- Closed from John's answers: Loughran and McDonald hedge list (C-14), stored-prediction lookup (C-15), Streamlit (C-16).
+- Not run: no spike. `SEC_USER_AGENT` is still not set.
+- SSOT and requirement documents not edited.
+- Work by Claude. Decisions by John.
+
+### 17 Nov 2026: Docker skeleton
+
+- John installed Docker Desktop and set WSL memory to about 10 GB (`free -g` showed 9 total).
+- Built the skeleton: `docker-compose.yml` (PostgreSQL 16, Redis 7, Celery worker, FastAPI), `Dockerfile` (Python 3.12, CPU PyTorch, spaCy small English model), `requirements.txt`, `requirements.lock`, `.env.example`, `.gitignore`, `.dockerignore`, and `src/earnings/` with settings, Celery app, one test task and a `/health` endpoint.
+- Result, measured: image 3.64 GB. From a clean start all four containers report healthy. `/health` returns 200 with Postgres, Redis and worker all ok. A Celery task made the full round trip. With the worker stopped, `/health` returns 503 and names the worker. All planned ML packages import (torch 2.15.0 CPU, transformers 5.23.0, spaCy 3.8.18, XGBoost 3.4.1, SHAP 0.54.1).
+- Checked: `.env` is ignored by git, and no email address or key appears in any new file. The `SEC_USER_AGENT` pass-through works (tested with a dummy value, then reset). It is still unset in the real shell.
+- Not done: no database tables, no ingestion, no model downloads, no commit.
+- Work by Claude.
+
+### 17 Nov 2026: working rules and proposal read
+
+- John supplied a set of audit rules ("Deterministic Auditing") and asked that Claude always follow them, with the SSOT as the source of truth. Saved first as `CLAUDE.md` in the repository root, text unchanged, with a short binding note added at the top that points "original requirements" at the SSOT, the requirement documents and the decision log. John then renamed it to `Deterministic_audit.md`. Claude Code only loads `CLAUDE.md` automatically, so the rules no longer load by themselves (see audit finding F-08).
+- The pasted rules have no Section 2 (numbering goes from 1 to 3). Kept as supplied.
+- Read the proposal PDF in `docs/source/` (8 pages, text extracted inside a throwaway Docker container, nothing installed on the PC).
+- Findings against earlier work are in the session reply: the proposal's task uses the call transcript itself (bears on D-31); the proposal defines the guidance ratio but not the negation patterns; the skeleton added dependencies and has no automated tests.
+- Not done: `audits/requirements_traceability.md` does not exist yet. No SSOT or requirement edits. No commit.
+- Work by Claude. Rules from John.
+
+### 17 Nov 2026: independent audit of the Docker skeleton
+
+- John asked for the audit under the new rules. Scope: the Docker skeleton only.
+- Added: `audits/audit_2026-11-17.md` (evidence and findings), `audits/requirements_traceability.md` (generated by `audits/generate_traceability.py`, 263 requirements, same file on every run), `tests/` (3 files, 16 tests) and `requirements-dev.txt`.
+- Result, measured: 16 tests passed (4.64 s). With the worker stopped, 2 of the 3 selected tests failed, which shows the tests can fail. A no-cache build from a clean checkout succeeded and matched `requirements.lock` (129 of 129).
+- Overall status: not PASS. Of 15 requirements assessed: 0 PASS, 7 PARTIAL, 4 FAIL (EQ-02, EQ-04, NFR-11, PL-03), 4 UNVERIFIED. The other 248 are UNVERIFIED because they were not assessed.
+- Main defects: no exact dependency pins (0 of 22), no CI or lint configuration, no request id or latency in logs, a database password containing `@` breaks the connection URL.
+- Not changed: compose file, Dockerfile, `requirements.txt`, source code, SSOT, requirement documents. Eight proposed changes (F-01 to F-08) await John's approval.
+- Not done: no commit.
+- Work by Claude.
+
+### 17 Nov 2026: audit findings F-01 to F-08 fixed
+
+- John approved all eight findings and asked for no new per-requirement tests yet (a later step). None were written. Existing tests were only updated to match changed code.
+- Changes: exact pins everywhere with a build-time check (`scripts/check_pins.py`), runtime trimmed to what the code uses (image 3.64 GB to 326 MB, locked packages 129 to 39), request logging with id and latency, database URL built from parts, CI workflow, ruff and mypy configuration, health check cached for 5 seconds, two draft ADRs, `CLAUDE.md` importing `Deterministic_audit.md`, new README.
+- Two defects found and fixed on the way: `packaging` is an undeclared dependency of Celery's Redis transport (the worker crashed without it), and the Celery ping made every uncached `/health` take about 2.1 s.
+- Result, measured: 19 test cases pass, lint, format and types clean, a planted unpinned dependency fails the build, a planted fake token fails the secret scan, `pip-audit` reports no known vulnerabilities, a password with `@ : / # ?` connects.
+- Re-assessed 17 requirements: PASS 2, PARTIAL 10, FAIL 2 (EQ-03 no branch protection, PL-03), UNVERIFIED 3. Not PASS overall. Details in `audits/remediation_2026-11-17.md`.
+- Not verified: the CI workflow has never run on GitHub. The repository is public and `docs/source/` is untracked but not ignored.
+- Not done: no commit, no push, no change to GitHub settings, SSOT or requirements.
+- Work by Claude. Approval from John.
+
+### 18 Nov 2026: decisions, branch protection and commits
+
+- Answers from John: both prediction points are built, with the pre-release forecast (T0) as the headline and the post-call nowcast (T1) secondary (C-17); 100 companies for December, about 20 of them removed from the index (C-18); SEC CIK as the company identifier (C-19); a TranscriptSentence entity added to the data model (C-20); the proposal PDF stays out of the public repository (C-21); ADRs 0001 and 0002 accepted (C-22); branch protection on `main` (C-23); SSOT map rows approved (C-24).
+- Done: branch protection enabled and read back from the GitHub API. `docs/source/` added to `.gitignore`. `adr/` row added to the SSOT map. `TranscriptSentence` added to Product Section 11. ADRs marked Accepted. Decision log and `pipeline.md` updated. Traceability regenerated (PASS 3, PARTIAL 10, FAIL 1, UNVERIFIED 3).
+- Not applied, because John has not seen exact wording: the requirement edits that follow from C-17 (D-33) and the negation and forward-guidance definitions (D-34). D-01 (supervisor agreement on the label) is unanswered and still open.
+- Probe before the decisions: one request pair to SEC EDGAR for one company (Apple). The submissions data has a UTC acceptance time with seconds and an `items` field. `sic` is a single current value. EPS facts have a `filed` date. There is no Q4 EPS fact. One company only.
+- Not verified: lint, format, types and tests were not re-run today because Docker Desktop was stopped. No source, test or build file changed since the last green run. The CI workflow has never run on GitHub.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
-- Set `SEC_USER_AGENT` so the EDGAR spike can run.
-- Exact submission date (D-29).
-- Permission for two small edits to the SSOT document map: add the prefix GATE to the data row, and add a row for this log book.
+- D-33: approve the exact requirement wording that follows from C-17 (shown in the decision log).
+- D-34: approve the negation and forward-guidance definitions.
+- D-01: has Professor Goodacre agreed to the time-series label?
+- D-32 (membership source) and D-20 (sector spike).
+- D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.
+- D-29: the exact submission date.
+- Two small SSOT document map edits still unapproved: the prefix GATE on the data row, and a row for this log book.

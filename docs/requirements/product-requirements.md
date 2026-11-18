@@ -550,6 +550,7 @@ Operations, security and engineering requirements are defined in the Project-Wid
 | FundamentalsFiling | company_id, fiscal_period, form, filed_at, revenue, gross_profit, operating_income, source, version | FR-24; Data FD-01 to FD-04. |
 | Transcript | transcript_id, event_id, source, source_url, retrieved_at, raw_text, cleaned_text, raw_hash | PL-06, FR-05; Data SR-04. |
 | TranscriptSection | section_id, transcript_id, kind (prepared or qa), text | FR-15. |
+| TranscriptSentence | sentence_id, transcript_id, section_id, position, text, finbert_positive, finbert_negative, finbert_neutral, hedge_count, negation_count, word_count | One row per sentence, so the explanation agent retrieves the sentences behind a feature by plain SQL (decision C-11). FR-05, FR-15 to FR-17; EX-01. A forward-guidance field is added when decision D-34 settles the rule. |
 | FeatureVector | event_id, feature_set_version, features (JSON), computed_at | FR-24. Tabular, text and sector features in one row per event. |
 | SectorBenchmark | event_id, sector, gics_version, as_of_date, peer_event_ids (JSON), mean_sue, std_sue, peer_count, status | SRS-10. Stored with the as-of date so the no-lookahead rule can be checked. |
 | ModelVersion | model_version, trained_on_from, trained_on_to, training_event_count, metrics (JSON), artefact_path, checksum, seed, retrained_at | FR-11, FR-21, ML-01, ML-03. |
