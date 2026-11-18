@@ -4,7 +4,7 @@
 Run from anywhere:  python3 audits/generate_traceability.py
 
 Inputs:
-  - the four requirement documents in docs/requirements/ (read, never modified);
+  - the eight requirement documents in docs/requirements/ (read, never modified);
   - audits/assessments.py, which holds the audit findings made by inspecting the repository.
 Output: the same file every time for the same inputs. No timestamps are generated.
 
@@ -32,6 +32,10 @@ DOCS = [
     ("product", "product-requirements.md", "Product"),
     ("data", "data-requirements.md", "Data"),
     ("project-wide", "project-wide-requirements.md", "Project-Wide"),
+    ("feature", "feature-engineering-requirements.md", "Feature Engineering"),
+    ("agent", "explanation-agent-requirements.md", "Explanation Agent"),
+    ("database", "database-requirements.md", "Database"),
+    ("frontend", "frontend-requirements.md", "Frontend"),
 ]
 PRIORITY = re.compile(r"^(Must if built|Must|Should|Could|Won't)\b")
 NOT_ASSESSED = "Not assessed in this audit (scope: Docker skeleton). No evidence either way."
@@ -129,7 +133,7 @@ def main():
         "",
         "## Summary",
         "",
-        f"- Requirements found in the four documents: {total} (market {len(per_doc['market'])}, product {len(per_doc['product'])}, data {len(per_doc['data'])}, project-wide {len(per_doc['project-wide'])}).",
+        f"- Requirements found in the eight documents: {total} (market {len(per_doc['market'])}, product {len(per_doc['product'])}, data {len(per_doc['data'])}, project-wide {len(per_doc['project-wide'])}, feature engineering {len(per_doc['feature'])}, explanation agent {len(per_doc['agent'])}, database {len(per_doc['database'])}, frontend {len(per_doc['frontend'])}).",
         f"- Assessed in this audit: {len(ASSESSED)}. "
         + ", ".join(
             f"{k} {assessed_counts[k]}"

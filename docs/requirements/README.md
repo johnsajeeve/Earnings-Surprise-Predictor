@@ -2,7 +2,7 @@
 
 Authority: the [SSOT](../SSOT.md) is the single source of truth. Only the owner edits it. These documents must agree with it. If one does not, the document is corrected, not the SSOT. Open and pending items are in the [decision log](../decision-log.md).
 
-Status: draft, restructured 15 November 2026.
+Status: draft, restructured 15 November 2026. Four component documents added 18 November 2026 (feature engineering, explanation agent, database, frontend), awaiting the owner's approval.
 
 ## Documents
 
@@ -14,6 +14,10 @@ Each requirement is defined in exactly one document. Other documents cite its ID
 | [product-requirements.md](product-requirements.md) | What the system does: functional, sector scoring, explanation, non-functional, API, pipeline, ML, evaluation and trust, model governance, UI | 91 requirements, plus 6 goals, 5 non-goals and 5 stretch objectives |
 | [data-requirements.md](data-requirements.md) | Data sources, licences, label construction, verification and validation | 70 requirements, plus the five data gates |
 | [project-wide-requirements.md](project-wide-requirements.md) | Delivery, assessment, supervision, engineering, security, ethics, operations, LLM operations, documentation | 54 requirements, plus 20 conflicts to resolve (C1 to C20) |
+| [feature-engineering-requirements.md](feature-engineering-requirements.md) | How the feature matrix is built: text preparation, FinBERT scoring, linguistic and tabular features, versioning. Draft | 31 requirements (FE-01 to FE-31) |
+| [explanation-agent-requirements.md](explanation-agent-requirements.md) | How the explanation agent retrieves, generates, verifies, is kept safe and is evaluated. Draft | 26 requirements (AG-01 to AG-26) |
+| [database-requirements.md](database-requirements.md) | PostgreSQL access, schema management, time and append-only rules, raw data, writes, recovery. Draft | 17 requirements (DB-01 to DB-17) |
+| [frontend-requirements.md](frontend-requirements.md) | Streamlit dashboard structure, API use, states, caching, rendering, privacy, testing. Draft | 11 requirements (UX-01 to UX-11) |
 | [proposal-drift-review.md](proposal-drift-review.md) | Comparison of all documents with the SSOT | Not a requirements document |
 | [library-enquiry-draft.md](library-enquiry-draft.md) | Draft email to the library for optional institutional data | Not a requirements document |
 | assessment-requirements.md | Empty. Decision D-25 | None |
@@ -30,7 +34,13 @@ An ID prefix belongs to one document.
 | Product | PG (goals), NG (non-goals), ST (stretch), FR, SRS (sector scoring), EX (explanation), NFR, API, PL (pipeline), ML, TR (evaluation and trust), MR (model governance), UI |
 | Data | GATE, SR (sources), TX, AE, CE, LB (label), IM, SEC, PX, FD, DV, VL, GS |
 | Project-wide | C (conflicts), ASM, PD, SS, SC, EQ, SP, ET, OR, AI, DO |
+| Feature engineering | FE |
+| Explanation agent | AG |
+| Database | DB |
+| Frontend | UX |
 | Decision log | C-nn (closed), D-nn (open) |
+
+Pipeline coverage: every step has an owner document. Ingestion and labels are in the Data document; storage in the Database document; preparation and features in the Feature Engineering document; modelling and evaluation in Product Sections 8 and 8A; serving in Product Sections 6 and 13; the explanation layer in the Explanation Agent document; the dashboard in the Frontend document; delivery and operations in the Project-Wide document.
 
 Rules:
 1. An ID is never reused. A withdrawn ID stays in the table below.

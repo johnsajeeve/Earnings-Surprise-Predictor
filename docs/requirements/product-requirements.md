@@ -309,7 +309,7 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 
 | Group | Feature | As-of rule | Detail |
 |---|---|---|---|
-| Text | Mean FinBERT positive, negative and neutral scores across all sentences | Transcript | FR-16 |
+| Text | Mean FinBERT positive, negative and neutral scores across all analytic sentences (Feature Engineering FE-02, FE-07) | Transcript | FR-16 |
 | Text | Sentiment trajectory: first half against second half of the call | Transcript | |
 | Text | Uncertainty score: hedge words divided by word count | Transcript | FR-17 |
 | Text | Negation frequency | Transcript | FR-17 |

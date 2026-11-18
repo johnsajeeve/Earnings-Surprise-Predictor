@@ -27,7 +27,8 @@ This is a record of what was done and when, with the commit messages. It is not 
 | 8c5ba5d | 18 Nov 2026 | Docs: pipeline architecture, ADRs, decisions C-14 to C-24, TranscriptSentence entity |
 | 47a23da | 18 Nov 2026 | Docker skeleton: compose stack, pinned dependencies, health check, request logging, CI |
 | 03943cb | 18 Nov 2026 | Governance: audit rules, requirements traceability, audit and remediation reports |
-| Next commit | 18 Nov 2026 | |
+| a720023 | 18 Nov 2026 | Update log book: fill commit hashes 8c5ba5d, 47a23da, 03943cb |
+| Next commit | 18 Nov 2026 | Requirements: four component documents, consistency fixes across all documents |
 
 ## Entries
 
@@ -195,10 +196,22 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Not verified: lint, format, types and tests were not re-run today because Docker Desktop was stopped. No source, test or build file changed since the last green run. The CI workflow has never run on GitHub.
 - Work by Claude. Decisions by John.
 
+### 18 Nov 2026: component requirement documents and consistency review
+
+- Asked by John: requirements for feature engineering, the explanation agent, the database and the frontend, with each pipeline component in its own file, nothing from outside the project, and a check of all files for errors and contradictions.
+- Added four draft documents in `docs/requirements/`: feature engineering (FE-01 to FE-31), explanation agent (AG-01 to AG-26), database (DB-01 to DB-17) and frontend (UX-01 to UX-11). Each requirement names where in the project it comes from. Rules that the project leaves open are marked "pending" and sit in decisions D-36 to D-39. Ideas that did not trace to the project were removed and listed in D-41.
+- Errors found and fixed in earlier files: D-33 proposed a new FR-28 but FR-28 already exists (now FR-29); several documents said "three" or "four" requirement documents; Product SC-06 and DO-02 still required a vector store ADR although decision C-11 chose plain SQL; the Data document named a different membership source from pipeline.md (D-32 is open); the Data spike section said the EDGAR script was not run although a one-company probe was; the commit register lacked a720023; the traceability generator ignored any new document.
+- Edited existing requirement text, listed so John can reverse any: Product FR-24 (mean sentiment over analytic sentences), Project-Wide SC-06, DO-02, DO-05, SS-03, ASM-04 and C11 wording, Data 4A.1 and the gate matrix (membership source), Data Section 12 (spike result).
+- Not done: the SSOT map rows for the four documents (owner-only, proposed in D-40).
+- Verified after Docker Desktop was started: stack healthy, `/health` 200, `ruff check`, `ruff format --check`, `mypy` clean, 19 tests passed. The document checker passes (checks 1 to 6) and the traceability generator gives identical output on repeated runs. The CI workflow has still never run on GitHub.
+- Full list of edits to existing files: `audits/consistency_review_2026-11-18.md`.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - D-33: approve the exact requirement wording that follows from C-17 (shown in the decision log).
 - D-34: approve the negation and forward-guidance definitions.
+- D-35 to D-41: FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
 - D-01: has Professor Goodacre agreed to the time-series label?
 - D-32 (membership source) and D-20 (sector spike).
 - D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.

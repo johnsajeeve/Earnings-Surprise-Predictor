@@ -1,6 +1,6 @@
 # Proposal Drift Review
 
-Compares every requirement document and the architecture deck with the [SSOT](../SSOT.md), which restates the proposal and the owner's decisions. Rewritten 15 November 2026. The SSOT is a draft awaiting the owner's approval, so this review compares against the draft.
+Compares every requirement document and the architecture deck with the [SSOT](../SSOT.md), which restates the proposal and the owner's decisions. Rewritten 15 November 2026. Updated 18 November 2026 for the four component documents (Sections 2, 4 and 6). The SSOT is a draft awaiting the owner's approval, so this review compares against the draft.
 
 How to repeat it: run `python3 docs/tools/check_requirements.py` (structure), then read Sections 2 to 4 of this file against the SSOT (meaning).
 
@@ -8,7 +8,7 @@ How to repeat it: run `python3 docs/tools/check_requirements.py` (structure), th
 
 1. **The core is intact.** Every commitment in SSOT Sections 2 to 10 has a requirement (Section 2).
 2. **Five deliberate variants** differ from the proposal. None is approved yet (Section 3).
-3. **Capacity is the main remaining drift.** 161 of the 215 requirements outside the market document are Must, and 66 of the 70 data requirements are Must. The proposal's capacity (15 to 20 hours a week) is not shown to fit (Section 4).
+3. **Capacity is the main remaining drift.** 240 of the 300 requirements outside the market document are Must (the four component documents added on 18 November 2026 contribute 85 requirements, 79 of them Must), and 66 of the 70 data requirements are Must. The proposal's capacity (15 to 20 hours a week) is not shown to fit (Section 4).
 4. **Structure is fixed.** No ID is defined twice. Each requirement is in the document that owns its type. Withdrawn IDs are in the README registry. A script checks this.
 5. **Open items** are in the [decision log](../decision-log.md), not here.
 
@@ -17,8 +17,8 @@ How to repeat it: run `python3 docs/tools/check_requirements.py` (structure), th
 | SSOT item | Defined in | Status |
 |---|---|---|
 | Research question (NLP against tabular baseline, negative result valid) | Product PG-2, FR-06, ML-06 | Covered |
-| Ingestion pipeline and PostgreSQL schema | Product PL-01 to PL-06, FR-13, Section 11; Data SR, TX, AE, DV | Covered |
-| NLP features: FinBERT, hedge words, negation, Q&A, z-score, trajectory, guidance ratio, question counts | Product FR-15 to FR-18, FR-24 | Covered |
+| Ingestion pipeline and PostgreSQL schema | Product PL-01 to PL-06, FR-13, Section 11; Data SR, TX, AE, DV; Database DB-01 to DB-17 (draft) | Covered |
+| NLP features: FinBERT, hedge words, negation, Q&A, z-score, trajectory, guidance ratio, question counts | Product FR-15 to FR-18, FR-24; Feature Engineering FE-01 to FE-17 (draft) | Covered. Exact rules pending D-34 and D-36. |
 | Tabular features: EPS surprise trend, revenue growth, margins, dispersion, momentum | Product FR-24; Data FD-01 to FD-04, PX-01 to PX-03 | Covered. Dispersion is a variant (Section 3). |
 | XGBoost, tabular baseline, full model | Product FR-06, ML-01 to ML-06 | Covered |
 | Split 2015-21 / 2022 / 2023-24, test set read once | Product FR-03, ML-02; Data VL-04 | Covered |
@@ -27,13 +27,13 @@ How to repeat it: run `python3 docs/tools/check_requirements.py` (structure), th
 | Target corpus: S&P 500, 2015-2024, 4,000 to 5,000 events, membership as of each date | Data TX-04, IM-01 to IM-03 | Covered |
 | F1, Brier, precision at top 20%; SHAP global and local | Product FR-04, FR-06, FR-10, FR-26 | Covered |
 | FinBERT pretraining-cutoff check | Product FR-25 | Covered |
-| Explanation agent: top SHAP features, retrieval, synthesis | Product FR-04, FR-05, FR-19, EX-01 to EX-04 | Covered |
+| Explanation agent: top SHAP features, retrieval, synthesis | Product FR-04, FR-05, FR-19, EX-01 to EX-04; Explanation Agent AG-01 to AG-26 (draft) | Covered |
 | Agent step 3, optional 8-K corroboration | Product ST-05 (stretch) | Covered as stretch, as the proposal calls it optional |
 | Faithfulness: rank agreement, sign agreement, citation check | Product EX-03, FR-05; Project-Wide SC-05 | Covered |
 | FastAPI endpoints: prediction, explanation, history | Product Section 13, API-01 to API-07 | Covered |
 | Edge cases: no transcript, API failure, cold start | Product FR-07, FR-20, Section 12 | Covered |
-| Frontend: ticker search, prediction card, feature chart | Product Section 14, UI-01 to UI-05 | Covered |
-| Stack: Celery with Redis, FastAPI, PostgreSQL, Docker, Cloud Run | Project-Wide SC-01, SC-02, EQ-04; decision D-10 | Covered. Streamlit or React is still to be chosen. |
+| Frontend: ticker search, prediction card, feature chart | Product Section 14, UI-01 to UI-05; Frontend UX-01 to UX-11 (draft) | Covered |
+| Stack: Celery with Redis, FastAPI, PostgreSQL, Docker, Cloud Run | Project-Wide SC-01, SC-02, EQ-04; decisions C-16, C-22 | Covered. Streamlit chosen (C-16), ADRs accepted (C-22). |
 | Milestones 1 to 7 | Product Section 16 | Covered. Order differs (Section 3). |
 | Evaluation criteria 1 to 6 | Product Section 15, FR-06, FR-26, FR-07, UI-03, EX-03 | Covered |
 | Stretch: fine-tuning, five-class, P&L | Product ST-01, ST-02, ST-04 | Covered, all Could |
@@ -74,8 +74,12 @@ Consequences for requirements: the consensus-revision baseline exists only on th
 | Product | 91 | 50 | 8 | 29 | 4 |
 | Data | 70 | 66 | 0 | 4 | 0 |
 | Project-wide | 54 | 45 | 0 | 9 | 0 |
+| Feature engineering (draft) | 31 | 29 | 0 | 2 | 0 |
+| Explanation agent (draft) | 26 | 26 | 0 | 0 | 0 |
+| Database (draft) | 17 | 16 | 0 | 1 | 0 |
+| Frontend (draft) | 11 | 8 | 0 | 3 | 0 |
 
-- **The proposal has 7 milestones and a lightweight dashboard.** The documents hold 215 requirements outside the market document. 161 are Must.
+- **The proposal has 7 milestones and a lightweight dashboard.** The documents hold 300 requirements outside the market document. 240 are Must. The four component documents mostly spell out features and checks that existing Must requirements already name, so they add detail more than scope, but they also add work.
 - **Data requirements are almost all Must (66 of 70).** Most are verification and validation checks. Large samples add work: a 100-event hand audit (VL-09), a 200-event EPS cross-check (AE-02), a 50-transcript hand label (TX-03), 30-event replays (VL-02, VL-03), and 20 canary events (VL-08).
 - **Not shown:** no hours estimate exists for any milestone. PD-01 requires one, and it has not been made.
 - **Mitigation in place:** PD-06 sets a drop order and sector scoring is kept with a switch-off rule (SRS-14).
@@ -113,7 +117,7 @@ Candidates to retag from Must to Should, for the owner to decide (D-26): VL-08, 
 ## 6. Still open
 
 - The SSOT is a draft until the owner approves it.
-- Decisions D-01 to D-26 in the [decision log](../decision-log.md). The highest priority are D-01 (label route), D-03 (drop order) and D-26 (Must tags on data requirements).
+- Decisions D-01 to D-41 in the [decision log](../decision-log.md). The highest priority are D-01 (label route), D-03 (drop order) and D-26 (Must tags on data requirements).
 - `assessment-requirements.md` is empty (D-25).
 - The deck's slide 2 does not yet mark the drift monitor, transcript index and model registry as optional, and slide 6 does not yet list the open decisions.
 - The proposal and planning notes are not edited by Claude. Pending edits are in the decision log, Section 3.

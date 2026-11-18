@@ -61,7 +61,7 @@ These existing requirements cannot all hold:
 | Product FR-01 | A ticker with no transcript gets no class. This reads as if the transcript of the event being predicted is required. |
 | Product FR-24 | Text features have the as-of rule "Transcript". |
 
-If the text features come from the call for the same quarter, that call happens on or after the announcement, so FR-22 and GATE-2 fail by construction. If they come from earlier calls, FR-22 holds and FR-01 needs its wording changed. The SSOT does not say which. Logged as decision D-31.
+If the text features come from the call for the same quarter, that call happens on or after the announcement, so FR-22 and GATE-2 fail by construction. If they come from earlier calls, FR-22 holds and FR-01 needs its wording changed. The SSOT does not say which. Logged as decision D-31, closed as C-17.
 
 ### 2.3 Design (decision C-17, 18 November 2026)
 
@@ -124,7 +124,7 @@ The per-sentence table matters most. The agent later retrieves evidence by plain
 
 ### Step 4. Feature engineering
 
-All features are in FR-24. Each has a source tag and an as-of rule.
+All features are in FR-24. Each has a source tag and an as-of rule. How each is computed is in the [Feature Engineering requirements](../requirements/feature-engineering-requirements.md). Storage rules are in the [Database requirements](../requirements/database-requirements.md), the agent in the [Explanation Agent requirements](../requirements/explanation-agent-requirements.md) and the dashboard in the [Frontend requirements](../requirements/frontend-requirements.md). These four documents are drafts until decision D-40 is approved.
 
 - **Text (per sentence, then per call):** FinBERT positive, negative and neutral (FR-16); hedge-word rate and negation (FR-17); Q&A sentiment delta and Q&A-only rates (FR-15); sentiment trajectory; guidance ratio; sentiment surprise against the trailing four calls (FR-18).
 - **Hedge list:** the Loughran and McDonald uncertainty word list (C-14).
