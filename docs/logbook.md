@@ -24,6 +24,10 @@ This is a record of what was done and when, with the commit messages. It is not 
 | 70149d8 | 15 Nov 2026 | Record owner answers: MVP date, hosting, SQL retrieval, reminders, submission window |
 | c6f01ce | 15 Nov 2026 | Spike results, delivery plan, log book |
 | 422a6a8 | 15 Nov 2026 | Update log book: fill commit c6f01ce |
+| 8c5ba5d | 18 Nov 2026 | Docs: pipeline architecture, ADRs, decisions C-14 to C-24, TranscriptSentence entity |
+| 47a23da | 18 Nov 2026 | Docker skeleton: compose stack, pinned dependencies, health check, request logging, CI |
+| 03943cb | 18 Nov 2026 | Governance: audit rules, requirements traceability, audit and remediation reports |
+| Next commit | 18 Nov 2026 | |
 
 ## Entries
 
