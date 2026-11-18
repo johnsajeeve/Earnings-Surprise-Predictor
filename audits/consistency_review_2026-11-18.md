@@ -79,3 +79,19 @@ Added later on 18 November 2026: ingestion and preparation (IG), modelling and e
 | 24 | Drift review counts and coverage rows were out of date again. | Updated: 376 requirements outside the market document, 304 of them Must. |
 
 Not checked: the pinned library versions that the new documents mention (PyJWT, a rate limiter, a metrics library) were not looked up. They are added to the dependency lists under change control when built. Prices for any managed cloud component were not verified.
+
+## 6. Update: drift controls
+
+Requested by John: reduce every drift risk, and give requirements IDs that tests can use. Details are in decision C-26 and the logbook. Summary of what each risk now has:
+
+| Drift risk | Control | Shown to work |
+|---|---|---|
+| Building from memory of an earlier session | CLAUDE.md loads the requirements index. Rule 1 and 2 of the Drift controls require reading the owner documents and a task brief | Rule only. A person checks the brief |
+| Using a pending value as if final | `audits/pending_values.md` lists the 42 requirements that cite an open decision. The task brief must name them and stop | Rule and generated list. Nothing in code blocks it |
+| Code that traces to no requirement | Code commits must name an ID (`scripts/check_commit_refs.py`). Tests carry `@pytest.mark.req` markers (`scripts/check_requirement_refs.py`) | Both failed on a planted fault and passed on the real tree |
+| Tests that point at nothing | Marker references are checked against the generated acceptance index | Failed on a planted unknown reference |
+| Requirement text changed or reworded quietly | The acceptance index changes when a check changes, and CI fails until it is regenerated and committed | Failed on a planted edit, passed on the real tree |
+| A requirement marked done with no evidence | Traceability file is generated, now including marked tests | Run twice, identical |
+| Requirements with no ID to test against | Added ER, EP, SCR, SM and TH IDs. Every check has an `ID-ACn` reference (584) | Generator output |
+
+Limits: the controls read IDs, links and references, not meaning. A marker says what a test exercises, not that the requirement is satisfied. The new CI job has not run on GitHub yet, and it is not a required check until John approves that repository setting. `actionlint` was not re-run on the changed workflow in this session.

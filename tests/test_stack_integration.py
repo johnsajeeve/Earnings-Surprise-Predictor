@@ -11,6 +11,8 @@ import os
 import urllib.error
 import urllib.request
 
+import pytest
+
 API_URL = os.environ.get("TEST_API_URL", "http://api:8000")
 
 
@@ -29,6 +31,7 @@ def test_health_reports_all_services_ok():
     assert body["checks"] == {"postgres": "ok", "redis": "ok", "worker": "ok"}
 
 
+@pytest.mark.req("SC-01")
 def test_celery_task_round_trip_through_redis_and_worker():
     from earnings.tasks import ping
 
@@ -44,12 +47,14 @@ def test_postgres_accepts_a_query_with_the_app_credentials():
         assert conn.execute(text("SELECT 1")).scalar() == 1
 
 
+@pytest.mark.req("API-01-AC1")
 def test_openapi_specification_is_served_and_lists_health():
     status, text = _get("/openapi.json")
     assert status == 200
     assert "/health" in json.loads(text)["paths"]
 
 
+@pytest.mark.req("API-02-AC1")
 def test_unknown_unversioned_path_returns_404():
     status, _ = _get("/not-a-real-path")
     assert status == 404

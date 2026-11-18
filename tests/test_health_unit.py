@@ -50,6 +50,7 @@ def test_any_failure_returns_503_and_names_the_component(client, monkeypatch, fa
     assert body["checks"][failing] == "error: boom"
 
 
+@pytest.mark.req("SP-06")
 def test_sec_user_agent_value_is_never_returned(client, monkeypatch):
     _stub(monkeypatch)
     monkeypatch.setattr(

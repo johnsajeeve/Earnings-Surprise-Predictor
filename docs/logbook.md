@@ -28,7 +28,9 @@ This is a record of what was done and when, with the commit messages. It is not 
 | 47a23da | 18 Nov 2026 | Docker skeleton: compose stack, pinned dependencies, health check, request logging, CI |
 | 03943cb | 18 Nov 2026 | Governance: audit rules, requirements traceability, audit and remediation reports |
 | a720023 | 18 Nov 2026 | Update log book: fill commit hashes 8c5ba5d, 47a23da, 03943cb |
-| Next commit | 18 Nov 2026 | Requirements: four component documents, consistency fixes across all documents |
+| 200b881 | 18 Nov 2026 | Requirements: four component documents, consistency fixes across all documents |
+| 173215e | 18 Nov 2026 | Requirements: ingestion, modelling, API and deployment documents; label route decision |
+| Next commit | 18 Nov 2026 | Drift controls and numbered requirements for tests |
 
 ## Entries
 
@@ -213,6 +215,15 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Added four draft documents in `docs/requirements/`: ingestion and preparation (IG-01 to IG-22), modelling and evaluation (MD-01 to MD-23), API and serving (SV-01 to SV-16) and deployment and operations (DP-01 to DP-15). Each requirement names where in the project it comes from. Open values are in D-42 to D-45, approval and SSOT wording in D-46. The checker, the traceability generator and the README cover all twelve documents.
 - Findings that shaped them: FR-01 needs three class probabilities, so a binary model would contradict it; the API only reads stored predictions (C-15), so a cloud demo needs no worker; the label has no forward-looking window, so no purging is needed in the split; Product Section 12 has an artefact-checksum error state that C-15 seemed to contradict, resolved in SV-08.
 - Not done: SSOT edits (owner-only, wording in D-46). Nothing committed. Not run: any code.
+- Work by Claude. Decisions by John.
+
+### 18 Nov 2026: drift controls and numbered requirements for tests
+
+- Asked by John: reduce every drift risk and give requirements IDs that tests can use later.
+- IDs added: numbered error states ER-01 to ER-13, endpoints EP-01 to EP-09, screens SCR-01 to SCR-07, success metrics SM-01 to SM-08 (Product) and thresholds TH-01 to TH-15 (Data). Every check of every requirement now has a reference `ID-ACn` in the generated `audits/acceptance_index.md` (584 checks). Goals, non-goals, stretch objectives, market needs, conflicts and gates have no check of their own and are listed as such.
+- Controls added (decision C-26): a task brief before every build task and IDs in commits and tests (Deterministic_audit.md, Drift controls; CLAUDE.md now also loads the requirements index); `audits/pending_values.md` lists the 42 requirements that cite an open decision; `@pytest.mark.req(...)` markers on tests, filled into the traceability file; `scripts/check_requirement_refs.py` and `scripts/check_commit_refs.py`; a CI job "Requirements consistency (DO-03, DO-05)" (DP-07 is now Must). Four existing tests were marked (SC-01, API-01-AC1, API-02-AC1, SP-06). Eight older tests are on a legacy list that only shrinks.
+- Verified: each check was shown to fail on a planted fault (unknown reference, unmarked test, code commit without an ID, stale generated file) and to pass on the real tree. Stack healthy, ruff, format and mypy clean, 19 tests passed with unknown markers treated as errors, requirement checker and pins check pass, generator output identical on repeat runs.
+- Not verified: the new CI job has not run on GitHub. `actionlint` was not re-run on the changed workflow because the image pull was blocked in this session. Making the new job a required check is a repository setting and needs John's approval.
 - Work by Claude. Decisions by John.
 
 ## Waiting on John

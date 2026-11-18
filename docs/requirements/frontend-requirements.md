@@ -28,7 +28,7 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | UX-01 | Must | The dashboard is a client of the API only. It has no database connection and imports no model, feature or agent code. Everything it shows comes from an API response, so authentication and request logging (Product API-06, NFR-11) apply to it. | The dashboard's container has no database credentials. A search finds no database import. | Product API-06, NFR-11; pipeline.md Step 8; ADR 0002 |
-| UX-02 | Must | All API calls go through one client module with a timeout, and it maps each failure to the matching Product Section 12 message. Raw exceptions and stack traces are never shown. Each row of Section 12 has a test against a stubbed API. The timeout value is pending D-39. | One test per row of Section 12. | Product Section 12; pending D-39 |
+| UX-02 | Must | All API calls go through one client module with a timeout, and it maps each failure to the matching Product Section 12 message. Raw exceptions and stack traces are never shown. Each error state in Section 12 (ER-01 to ER-13) has a test against a stubbed API. The timeout value is pending D-39. | One test per error state ER-01 to ER-13. | Product Section 12; pending D-39 |
 
 ## 3. Behaviour
 

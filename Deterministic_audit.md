@@ -5,6 +5,18 @@
 - The proposal PDF is in [docs/source/](docs/source/). It is the scope baseline behind the SSOT.
 - If any instruction below conflicts with the SSOT, the SSOT wins and the conflict is reported to John.
 
+## Drift controls (added 18 November 2026, approved by John)
+
+These make drift visible and stop it before it reaches the code. They add to the rules below and do not replace them.
+
+1. **Read first.** Every session starts with the requirements index ([docs/requirements/README.md](docs/requirements/README.md), loaded by CLAUDE.md). Before work on a task, read the owner document of each requirement the task touches. Memory of an earlier session is not a source.
+2. **Task brief.** Before any build task, write a short brief and show it to John: the requirement IDs and acceptance references (`ID-ACn`, from [audits/acceptance_index.md](audits/acceptance_index.md)) the task serves; the files to change; the tests to write or update; every open decision the requirements cite (from [audits/pending_values.md](audits/pending_values.md)); and what is out of scope. If the work needs a value that is still pending, stop and ask. A pending value is never filled in with a default.
+3. **IDs in the work.** A commit that changes `src/`, `tests/` or `scripts/` names the requirement ID in its message, or says "Requirement: none" with a reason. A test names the check it exercises with `@pytest.mark.req("ID-ACn")`. The generated traceability file then lists those tests. A marker says what a test exercises. Whether the requirement is satisfied is decided by the audit.
+4. **Requirement edits.** Requirement text is never changed to fit the code. A change to a requirement document needs John's approval, is logged in the decision log or the logbook, and regenerates the three generated files in the same change.
+5. **Generated files are never edited by hand.** `audits/requirements_traceability.md`, `audits/acceptance_index.md` and `audits/pending_values.md` come from `python3 audits/generate_traceability.py`.
+6. **Automatic checks.** CI runs `docs/tools/check_requirements.py`, the generator (the generated files must match what is committed), `scripts/check_requirement_refs.py` and `scripts/check_commit_refs.py`. A failure blocks the change. These checks read IDs, links and references. They do not read meaning, so a person still reads each requirement change.
+7. **Report drift.** If code, a test or a document no longer agrees with a requirement, say so in the completion report. Do not adjust the requirement or the test to make the disagreement disappear.
+
 ---
 
 # SYSTEM INSTRUCTIONS: DETERMINISTIC AUDITING

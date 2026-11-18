@@ -35,6 +35,7 @@ Last updated: 18 November 2026 (new open decisions D-35 to D-46 for the eight co
 | C-23 | Branch protection is on for `main`: a pull request with one approving review and the five CI checks are required, force pushes and deletion are blocked, and administrators can bypass (a solo owner cannot approve their own pull request). | 18 Nov 2026 | Project-Wide EQ-01, EQ-03 |
 | C-24 | SSOT document map rows for `architecture/pipeline.md` (17 Nov) and `adr/` (18 Nov) are approved. | 17 and 18 Nov 2026 | SSOT Section 12 |
 | C-25 | **Label route.** The historical label is the time-series SUE built from EDGAR EPS, with analyst consensus captured forward as a check (Data LB-01 to LB-08). John decided this on 18 Nov 2026 and said that Professor Goodacre does not mind which label is used. No written supervisor agreement exists, and Project-Wide SC-07 and SS-04 ask for one (see D-46). Closes D-01. | 18 Nov 2026 | SSOT Section 4; Data CE-05, LB-01; Project-Wide SC-07, ASM-06, C19 |
+| C-26 | Drift controls approved: a task brief before every build task, requirement IDs in commits and test markers, a generated acceptance index with a reference for every check, a generated list of requirements that depend on open decisions, and a CI job that checks them. Numbered error states (ER), endpoints (EP), screens (SCR), success metrics (SM) and thresholds (TH) were added so tests can name them. | 18 Nov 2026 | Deterministic_audit.md (Drift controls); Project-Wide DO-03, DO-05; Deployment and Operations DP-07 |
 
 ## 2. Open decisions
 

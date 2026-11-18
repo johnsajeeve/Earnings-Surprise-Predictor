@@ -259,23 +259,23 @@ Validation asks whether the data holds up under the gates. Each test is written 
 
 These are proposed values. They should be agreed with Professor Goodacre before they are treated as commitments.
 
-| Measure | Proposed threshold | Requirement |
-|---|---|---|
-| Transcript coverage, target events | At least 90% | TX-04 |
-| Segmentation accuracy, 50-transcript sample | At least 95% | TX-03 |
-| Actual EPS agreement across two sources, 200-event sample | At least 98% within 0.5% | AE-02 |
-| Consensus minimum estimate count | 3 | CE-04 |
-| Index company count at sampled year-ends | Within 5 of published count | IM-01 |
-| Survivorship gap | To be set after the first comparison run | VL-05 |
-| Minimum share of any class per year | 10% | VL-06 |
-| Hand-audit error rate, 100 events | At most 2% | VL-09 |
-| Snapshot trial length | 4 weeks, 20 tickers, daily | VL-10 |
-| Pre-announcement estimate test | 28 of 30 events agree within 1 cent or 1% | VL-12 |
-| Time-series SUE history | At least 6 prior seasonal differences, 8-difference window | LB-01, LB-02 |
-| Derived fourth-quarter EPS error | Differences above 1% listed | LB-03 |
-| Label agreement (Route B against consensus) | Reported; no pass mark | LB-08 |
-| Free-source cost | Zero | SR-09 |
-| Null rate on the three date fields | 0% | DV-02 |
+| ID | Measure | Proposed threshold | Requirement |
+|---|---|---|---|
+| TH-01 | Transcript coverage, target events | At least 90% | TX-04 |
+| TH-02 | Segmentation accuracy, 50-transcript sample | At least 95% | TX-03 |
+| TH-03 | Actual EPS agreement across two sources, 200-event sample | At least 98% within 0.5% | AE-02 |
+| TH-04 | Consensus minimum estimate count | 3 | CE-04 |
+| TH-05 | Index company count at sampled year-ends | Within 5 of published count | IM-01 |
+| TH-06 | Survivorship gap | To be set after the first comparison run | VL-05 |
+| TH-07 | Minimum share of any class per year | 10% | VL-06 |
+| TH-08 | Hand-audit error rate, 100 events | At most 2% | VL-09 |
+| TH-09 | Snapshot trial length | 4 weeks, 20 tickers, daily | VL-10 |
+| TH-10 | Pre-announcement estimate test | 28 of 30 events agree within 1 cent or 1% | VL-12 |
+| TH-11 | Time-series SUE history | At least 6 prior seasonal differences, 8-difference window | LB-01, LB-02 |
+| TH-12 | Derived fourth-quarter EPS error | Differences above 1% listed | LB-03 |
+| TH-13 | Label agreement (Route B against consensus) | Reported; no pass mark | LB-08 |
+| TH-14 | Free-source cost | Zero | SR-09 |
+| TH-15 | Null rate on the three date fields | 0% | DV-02 |
 
 ## 12. Week-One Experiments
 

@@ -24,8 +24,8 @@ FILES = {"market": "market-requirements.md", "product": "product-requirements.md
          "serving": "api-and-serving-requirements.md", "deployment": "deployment-and-operations-requirements.md"}
 OWNER = {
     "market": {"N"},
-    "product": {"PG", "NG", "ST", "FR", "SRS", "EX", "NFR", "API", "PL", "ML", "TR", "MR", "UI"},
-    "data": {"GATE", "SR", "TX", "AE", "CE", "LB", "IM", "SEC", "PX", "FD", "DV", "VL", "GS"},
+    "product": {"PG", "NG", "ST", "FR", "SRS", "EX", "NFR", "API", "PL", "ML", "TR", "MR", "UI", "ER", "EP", "SCR", "SM"},
+    "data": {"GATE", "SR", "TX", "AE", "CE", "LB", "IM", "SEC", "PX", "FD", "DV", "VL", "GS", "TH"},
     "project-wide": {"C", "ASM", "PD", "SS", "SC", "EQ", "SP", "ET", "OR", "AI", "DO"},
     "feature": {"FE"},
     "agent": {"AG"},

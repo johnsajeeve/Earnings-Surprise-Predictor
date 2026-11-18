@@ -561,60 +561,60 @@ Operations, security and engineering requirements are defined in the Project-Wid
 
 ## 12. Error States
 
-| Condition | User sees | System does |
-|---|---|---|
-| No transcript for ticker | "No transcript available for this ticker." | Logs the request; no prediction stored. |
-| Ticker not in universe | "Ticker not in universe." (404) | Logs the request. |
-| Invalid ticker format | "Invalid ticker format." (422) | Rejects before lookup. |
-| Upstream API failure | "Data source unavailable. Try again later." (503) | Retries on the next scheduled run; no partial prediction. |
-| Rate limit exceeded | "Too many requests. Try again shortly." (429) | Returns Retry-After header. |
-| Limited history | Prediction with "Limited history" label. | Marks trailing features as unavailable. |
-| Segmentation failed | "Q&A analysis unavailable for this call." | Stores Q&A features as unavailable. |
-| Insufficient peers | "Insufficient peers" in the sector section. | Stores sector features as unavailable (SRS-06). |
-| Sector history unavailable | "Sector comparison unavailable." | Sector features switched off (SRS-14). |
-| Realised sector score before announcement | "Pending." | No value computed (SRS-09). |
-| Citation not found | Explanation marked "partially verified". | Logs the failure with prediction identifier. |
-| Explanation job failed | "Explanation could not be generated." | Stores the failure reason and returns it with the status. |
-| Model artefact missing or checksum mismatch | "Service temporarily unavailable." (503) | Refuses to serve; raises an alert. |
+| ID | Condition | User sees | System does |
+|---|---|---|---|
+| ER-01 | No transcript for ticker | "No transcript available for this ticker." | Logs the request; no prediction stored. |
+| ER-02 | Ticker not in universe | "Ticker not in universe." (404) | Logs the request. |
+| ER-03 | Invalid ticker format | "Invalid ticker format." (422) | Rejects before lookup. |
+| ER-04 | Upstream API failure | "Data source unavailable. Try again later." (503) | Retries on the next scheduled run; no partial prediction. |
+| ER-05 | Rate limit exceeded | "Too many requests. Try again shortly." (429) | Returns Retry-After header. |
+| ER-06 | Limited history | Prediction with "Limited history" label. | Marks trailing features as unavailable. |
+| ER-07 | Segmentation failed | "Q&A analysis unavailable for this call." | Stores Q&A features as unavailable. |
+| ER-08 | Insufficient peers | "Insufficient peers" in the sector section. | Stores sector features as unavailable (SRS-06). |
+| ER-09 | Sector history unavailable | "Sector comparison unavailable." | Sector features switched off (SRS-14). |
+| ER-10 | Realised sector score before announcement | "Pending." | No value computed (SRS-09). |
+| ER-11 | Citation not found | Explanation marked "partially verified". | Logs the failure with prediction identifier. |
+| ER-12 | Explanation job failed | "Explanation could not be generated." | Stores the failure reason and returns it with the status. |
+| ER-13 | Model artefact missing or checksum mismatch | "Service temporarily unavailable." (503) | Refuses to serve; raises an alert. |
 
 ## 13. API Surface
 
-| Method | Path | Purpose | Requirement |
-|---|---|---|---|
-| GET | /v1/predictions/{ticker} | Latest prediction, top three features, evidence base, input as-of times and sector context. | FR-01, FR-04, FR-21, FR-22, SRS-11, API-04 |
-| GET | /v1/predictions/{ticker}/sector | Peer list and statistics behind the sector context and realised score. | SRS-10, SRS-12 |
-| GET | /v1/predictions/{ticker}/explanation | Explanation with citations and verification status. | FR-04, FR-05, FR-19 |
-| POST | /v1/predictions/{ticker}/explanation/jobs | Starts an explanation job and returns the job identifier. | FR-19 |
-| GET | /v1/jobs/{job_id} | Status of an explanation job. | FR-19 |
-| GET | /v1/predictions/{ticker}/history?from=&to=&page= | Past predictions with outcomes and realised sector scores. | FR-09, SRS-09, API-05 |
-| GET | /v1/evaluation/metrics?model=full\|tabular\|majority\|previous\|consensus | Test-set metrics for a model version. | FR-06, FR-10, FR-23, FR-26 |
-| GET | /health | Service, data freshness and ingestion status. | NFR-03, PL-03 |
-| GET | /metrics | Service metrics for scraping. | NFR-12 |
+| ID | Method | Path | Purpose | Requirement |
+|---|---|---|---|---|
+| EP-01 | GET | /v1/predictions/{ticker} | Latest prediction, top three features, evidence base, input as-of times and sector context. | FR-01, FR-04, FR-21, FR-22, SRS-11, API-04 |
+| EP-02 | GET | /v1/predictions/{ticker}/sector | Peer list and statistics behind the sector context and realised score. | SRS-10, SRS-12 |
+| EP-03 | GET | /v1/predictions/{ticker}/explanation | Explanation with citations and verification status. | FR-04, FR-05, FR-19 |
+| EP-04 | POST | /v1/predictions/{ticker}/explanation/jobs | Starts an explanation job and returns the job identifier. | FR-19 |
+| EP-05 | GET | /v1/jobs/{job_id} | Status of an explanation job. | FR-19 |
+| EP-06 | GET | /v1/predictions/{ticker}/history?from=&to=&page= | Past predictions with outcomes and realised sector scores. | FR-09, SRS-09, API-05 |
+| EP-07 | GET | /v1/evaluation/metrics?model=full\|tabular\|majority\|previous\|consensus | Test-set metrics for a model version. | FR-06, FR-10, FR-23, FR-26 |
+| EP-08 | GET | /health | Service, data freshness and ingestion status. | NFR-03, PL-03 |
+| EP-09 | GET | /metrics | Service metrics for scraping. | NFR-12 |
 
 ## 14. Screens
 
-| Screen | Contents | Journey | Priority |
-|---|---|---|---|
-| Ticker search | Input field, submit, recent lookups. Autocomplete if UI-01 is built. | J1 | Must |
-| Prediction card | Class, probabilities, confidence, evidence base, input as-of times, sector context (SRS-11), not-investment-advice notice, link to explanation. | J1 | Must |
-| Feature chart | Horizontal bars for top three SHAP features, coloured by direction, with a data table alternative. | J1, J2 | Must |
-| Explanation view | Each claim, its faithfulness label, the cited sentence and its verification status. | J2 | Must |
-| History table | Date, class, confidence, realised outcome, realised sector score, pending state, pagination. | J4 | Must |
-| Evaluation page | Baseline comparison table with confidence intervals, calibration plot, precision at top 20%, global SHAP, label definition, limitations notice. | J3 | Must |
-| Sector comparison | Peer list and statistics (SRS-12). | J1 | Could |
+| ID | Screen | Contents | Journey | Priority |
+|---|---|---|---|---|
+| SCR-01 | Ticker search | Input field, submit, recent lookups. Autocomplete if UI-01 is built. | J1 | Must |
+| SCR-02 | Prediction card | Class, probabilities, confidence, evidence base, input as-of times, sector context (SRS-11), not-investment-advice notice, link to explanation. | J1 | Must |
+| SCR-03 | Feature chart | Horizontal bars for top three SHAP features, coloured by direction, with a data table alternative. | J1, J2 | Must |
+| SCR-04 | Explanation view | Each claim, its faithfulness label, the cited sentence and its verification status. | J2 | Must |
+| SCR-05 | History table | Date, class, confidence, realised outcome, realised sector score, pending state, pagination. | J4 | Must |
+| SCR-06 | Evaluation page | Baseline comparison table with confidence intervals, calibration plot, precision at top 20%, global SHAP, label definition, limitations notice. | J3 | Must |
+| SCR-07 | Sector comparison | Peer list and statistics (SRS-12). | J1 | Could |
 
 ## 15. Success Metrics
 
-| Metric | Target | Counter-metric | Why the counter-metric matters |
-|---|---|---|---|
-| Full model against tabular baseline on 2023-2024 test set | F1 and AUC difference reported with 95% bootstrap intervals. No pass mark: a negative result is valid (Proposal 7). | Brier score reported beside it | A higher AUC with poor calibration misleads users about confidence. |
-| Binary AUC (beat against miss, in-line excluded) | Reported beside the SAE-FiRE XGBoost baseline (0.620 on calls) as a reference point, not a pass mark. The label, period and universe differ, so the comparison is indicative only (FR-27). The three-class AUC is not compared with it. | Share of events excluded as in-line | Excluding the middle band makes the binary task easier. |
-| Precision at top 20% | Reported; no target until baseline known | Coverage: share of events receiving a prediction | High precision on a small subset is not useful if most events are excluded. |
-| Sector context coverage (SRS-13) | At least 90% of predictions have a numeric sector context (proposed) | Share showing "Insufficient peers", by year and sector | A score that is hidden for most events is not useful, so coverage must be reported beside the score. |
-| Citation verification rate | 100% verified or flagged | Explanation length | Verifying shorter explanations is easier and could hide weak evidence. |
-| Rank and sign agreement | Reported on held-out sample | Number of features discussed per explanation | Discussing more features raises agreement chances without raising faithfulness. |
-| Claim faithfulness rate (EX-02) | Reported per explanation | Human agreement with automated labels (EX-05) | Automated labels that humans disagree with are not evidence of faithfulness. |
-| Usability (five test users, after ethics approval, Project-Wide ET-01) | All complete J1 without help | Time to complete J2 | Fast completion can mean users skipped the explanation. |
+| ID | Metric | Target | Counter-metric | Why the counter-metric matters |
+|---|---|---|---|---|
+| SM-01 | Full model against tabular baseline on 2023-2024 test set | F1 and AUC difference reported with 95% bootstrap intervals. No pass mark: a negative result is valid (Proposal 7). | Brier score reported beside it | A higher AUC with poor calibration misleads users about confidence. |
+| SM-02 | Binary AUC (beat against miss, in-line excluded) | Reported beside the SAE-FiRE XGBoost baseline (0.620 on calls) as a reference point, not a pass mark. The label, period and universe differ, so the comparison is indicative only (FR-27). The three-class AUC is not compared with it. | Share of events excluded as in-line | Excluding the middle band makes the binary task easier. |
+| SM-03 | Precision at top 20% | Reported; no target until baseline known | Coverage: share of events receiving a prediction | High precision on a small subset is not useful if most events are excluded. |
+| SM-04 | Sector context coverage (SRS-13) | At least 90% of predictions have a numeric sector context (proposed) | Share showing "Insufficient peers", by year and sector | A score that is hidden for most events is not useful, so coverage must be reported beside the score. |
+| SM-05 | Citation verification rate | 100% verified or flagged | Explanation length | Verifying shorter explanations is easier and could hide weak evidence. |
+| SM-06 | Rank and sign agreement | Reported on held-out sample | Number of features discussed per explanation | Discussing more features raises agreement chances without raising faithfulness. |
+| SM-07 | Claim faithfulness rate (EX-02) | Reported per explanation | Human agreement with automated labels (EX-05) | Automated labels that humans disagree with are not evidence of faithfulness. |
+| SM-08 | Usability (five test users, after ethics approval, Project-Wide ET-01) | All complete J1 without help | Time to complete J2 | Fast completion can mean users skipped the explanation. |
 
 ## 16. Milestones
 
