@@ -1,0 +1,7 @@
+# Test, lint, type and security tools. Not installed in the application image.
+# Exact pins (Project-Wide EQ-04). Versions are the ones the audit of 17 Nov 2026 ran with.
+pytest==9.2.0
+httpx==0.28.1        # needed by FastAPI's TestClient (moved out of runtime, audit finding F-02)
+ruff==0.17.5
+mypy==2.4.1
+pip-audit==2.10.1

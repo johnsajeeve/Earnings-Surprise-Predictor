@@ -1,0 +1,70 @@
+# Continuous integration (Project-Wide EQ-01, EQ-02, EQ-04, EQ-08, SP-06).
+# A failing job blocks a merge only once branch protection requires these checks (EQ-03),
+# which is a repository setting and is not configured by this file.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  pins:
+    name: Dependencies are pinned (EQ-04)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: python3 scripts/check_pins.py requirements.txt requirements.lock requirements-pending.txt requirements-dev.txt
+
+  lint-and-types:
+    name: Lint, format, types (EQ-02)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.12.16"
+      - run: pip install -r requirements.txt -c requirements.lock -r requirements-dev.txt
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy
+
+  tests:
+    name: Tests against the running stack (EQ-01)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: cp .env.example .env
+      - run: docker compose up --build -d --wait --wait-timeout 300
+      - run: >
+          docker compose run --rm --no-deps
+          -v "$PWD/tests:/app/tests:ro"
+          -v "$PWD/requirements-dev.txt:/app/requirements-dev.txt:ro"
+          api sh -c 'pip install --user -q -r requirements-dev.txt && python -m pytest -p no:cacheprovider tests'
+      - if: failure()
+        run: docker compose logs --no-color
+      - if: always()
+        run: docker compose down -v
+
+  secrets:
+    name: Secret scan (SP-06)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.30.1 git --redact --no-banner /repo
+
+  vulnerabilities:
+    name: Known vulnerabilities in dependencies (EQ-08)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.12.16"
+      - run: pip install -r requirements-dev.txt
+      - run: pip-audit -r requirements.lock --no-deps --disable-pip

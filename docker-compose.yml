@@ -1,0 +1,88 @@
+# Four services: PostgreSQL, Redis, the Celery worker and the FastAPI app.
+# Start:  cp .env.example .env && docker compose up --build -d
+# Check:  curl http://localhost:8000/health
+# Stop:   docker compose down        (add -v to also delete the database volume)
+# Image versions are pinned to exact versions (Project-Wide EQ-04).
+
+x-app-env: &app-env
+  # The database URL is built in code from these parts, so a password with special characters is safe.
+  POSTGRES_HOST: db
+  POSTGRES_USER: ${POSTGRES_USER:-earnings}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env first}
+  POSTGRES_DB: ${POSTGRES_DB:-earnings}
+  CELERY_BROKER_URL: redis://redis:6379/0
+  CELERY_RESULT_BACKEND: redis://redis:6379/1
+  # Passed through from your shell. Empty if unset. Never written to a file in the repo.
+  SEC_USER_AGENT: ${SEC_USER_AGENT:-}
+
+services:
+  db:
+    image: postgres:16.16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-earnings}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env first}
+      POSTGRES_DB: ${POSTGRES_DB:-earnings}
+    volumes:
+      # A named volume, not a folder on the Windows disk, which is slow for databases.
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-earnings} -d ${POSTGRES_DB:-earnings}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4.12-alpine
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  worker:
+    build: .
+    command: celery -A earnings.celery_app worker --loglevel=info --concurrency=2
+    environment: *app-env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A earnings.celery_app inspect ping -d celery@$$HOSTNAME -t 5"]
+      interval: 15s
+      timeout: 10s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build: .
+    command: uvicorn earnings.api.main:app --host 0.0.0.0 --port 8000 --no-access-log
+    environment: *app-env
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    healthcheck:
+      # Passes only when /health returns 200, so it covers Postgres, Redis and the worker.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      start_period: 15s
+      retries: 5
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      worker:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
