@@ -30,7 +30,8 @@ This is a record of what was done and when, with the commit messages. It is not 
 | a720023 | 18 Nov 2026 | Update log book: fill commit hashes 8c5ba5d, 47a23da, 03943cb |
 | 200b881 | 18 Nov 2026 | Requirements: four component documents, consistency fixes across all documents |
 | 173215e | 18 Nov 2026 | Requirements: ingestion, modelling, API and deployment documents; label route decision |
-| Next commit | 18 Nov 2026 | Drift controls and numbered requirements for tests |
+| 46b2a82 | 18 Nov 2026 | Requirement: DO-03, DO-05, DP-07 (drift controls and numbered requirements for tests) |
+| Next commit | 19 Nov 2026 | Feasibility review fixes (C-27 to C-40) and a test for every acceptance check |
 
 ## Entries
 
@@ -226,13 +227,39 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Not verified: the new CI job has not run on GitHub. `actionlint` was not re-run on the changed workflow because the image pull was blocked in this session. Making the new job a required check is a repository setting and needs John's approval.
 - Work by Claude. Decisions by John.
 
+### 19 Nov 2026: feasibility review, prediction point wording and gap fixes
+
+- Asked by John: count the requirements, check that every feature has one, check that each can be implemented, then fix the first issue and the gaps. Result: 476 IDs, of which 376 were requirements before today. The full review is `audits/feasibility_review_2026-11-19.md` (15 issues, 8 gaps, a test class for every requirement).
+- Approved by John and applied: the requirement wording that follows from C-17 (Product FR-01, FR-07, FR-18, FR-22, FR-24, ER-01, new FR-29, Data GATE-2), closing D-33 as C-27. Gap fixes G-01 to G-08 as C-28: Feature Engineering FE-32 (EDA notebook), Product EP-10 and SCR-01, five schema additions in Database Section 9, FR-28 wording, manual retraining in the Modelling document, SSOT Sections 5 and 8 (edited with John's permission), and one sentence in the Drift controls about stretch objectives.
+- Two changes differ from what John was first shown, both recorded in C-28: FE-32 is Must, not Should, because the proposal lists the EDA notebook as a milestone 2 deliverable; and the non-goal NG1 was not extended, because that would rule out a later forecast for upcoming events. FR-28 carries a milder sentence instead.
+- Checked against: the SSOT, the decision log, pipeline.md, and the proposal PDF (text recovered by hand from its streams, because no PDF tool is installed; the Read tool could not render it). The proposal confirms the EDA notebook deliverable and the "analyst consensus dispersion" wording. It also says the API loads the serialised model, while SV-01 and decision C-15 have the API read stored predictions. That variance is not new and is left for John.
+- I-02 (sector history), approved by John and applied as C-29: SIC spike run on 18 companies (header SIC equal to today's value in every year, inconclusive, leaning negative; recorded in Data Section 12). Sector scoring is off for the December scope. Data SEC-01, SEC-02, VL-03 and VL-11 are Must if built, and the "by sector" reports in VL-02, TX-07, IG-22, TR-04, FE-20, FE-31 and EQ-09 apply only where a dated sector history exists. D-20 is closed.
+- I-03 (consensus baseline), approved and applied as C-30: Market N4 reworded, and Product FR-06 shows the consensus-revision baseline in its own table on the prospective set. The proposal asks only for a tabular-only baseline, so this is an extension and is not a drift from it.
+- I-04 (failure handling after C-15), approved with the warning and applied as C-31: FR-07, ER-04, new ER-14, SV-12, SV-14, UX-02 and the pipeline Step 6 sentence.
+- I-05 (explanation job state), option A approved and applied as C-32: the job is the Explanation row, the API role may insert it, a unique key guarantees one job, and failure_reason and completed_at are added.
+- I-06 (no alert channel), approved and applied as C-33: ER-13, SV-08, SV-12, DP-09; D-13 closed (Slack alert dropped). From now on John approved following proposals automatically when they align with the SSOT, the proposal and the other documents; each is checked first and recorded.
+- I-07 to I-15 checked against the SSOT, the proposal and the other documents, and applied as C-34 to C-40: NFR-03 and NFR-04 made testable; TX-04, TX-07 and IG-22 measured against the loaded company list; FR-25 and MD-20 handle an uninformative cutoff; LB-06, VL-05, VL-06, VL-08, AE-02 and TX-04 say what happens on a miss; FR-27 limited to what the benchmark supplies; six small wording fixes; /metrics needs the token. No pending value was filled in. The SSOT corpus sentence (S&P 500, 4,000 to 5,000 events) was not edited. I-12 (people and approvals) and I-13 (42 pending values) stay with John.
+- Not applied: SSOT Section 4 label route wording (D-46), because the exact sentence has not been shown to John. Issues I-06 to I-15 are open.
+- Work by Claude. Decisions by John.
+
+### 19 Nov 2026: a test for every acceptance check
+
+- Asked by John: a test for each requirement, a requirement for each test, and the test showing the project code it exercises. Tests are written against requirements, not product features.
+- Done: 597 acceptance checks (432 IDs) each have at least one test in `tests/test_req_*.py`, one file per requirement document. Every test carries `@pytest.mark.req(...)` and, where code exists, `@pytest.mark.code(...)`. The eight older tests were marked and `tests/legacy_unmarked.txt` is now empty. `scripts/requirement_tests.py` has three commands: `check` (coverage rules), `map` (requirement, test, code table) and `scaffold` (placeholder for any new acceptance check).
+- Honest status: 16 checks have a real test, 2 have a test that is expected to fail because the requirement is not met yet (SC-06, SC-07), and 579 are placeholders that skip with a reason (407 not implemented, 56 blocked by an open decision, 81 need a measurement, 35 need a person). Skipped is NOT TESTED, never a pass. The test run prints the counts.
+- Run with pytest 9.2.0, ruff 0.17.5 and mypy 2.4.1 (pinned versions, installed into a folder outside the repository, Python 3.14 here against 3.12 in the image): 31 passed, 2 expected failures, 0 failed, 579 skipped (not tested). `ruff check`, `ruff format --check` and `mypy` pass. The integration file `tests/test_stack_integration.py` was not run because Docker was stopped, so its five tests are NOT TESTED in this session. The repository checks skip as NEEDS REPO inside the CI test container, which holds only `src/` and `scripts/`.
+- No test without a requirement: `tests/conftest.py` refuses to run the suite if a collected test has no `@pytest.mark.req(...)`. A planted unmarked test and a planted test with a made up reference were both rejected by pytest, `scripts/check_requirement_refs.py` and `scripts/requirement_tests.py check`, and removed.
+- Two placeholders that duplicated checks with real tests (NFR-04-AC1, DP-01-AC1) were removed.
+- Needs John: add `python3 scripts/requirement_tests.py check` to the CI requirements job (change to DP-07), and run the full CI test command once with Docker running, which also runs the integration tests.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
-- D-33: approve the exact requirement wording that follows from C-17 (shown in the decision log).
+- Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).
 - D-34: approve the negation and forward-guidance definitions.
 - D-35 to D-46: FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
 - D-46: note in the next supervisor meeting action list that Professor Goodacre has no objection to the time-series label (C-25 closed D-01 on John's word; SC-07 and SS-04 ask for it in writing).
-- D-32 (membership source) and D-20 (sector spike).
+- D-32 (membership source).
 - D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.
 - D-29: the exact submission date.
 - Two small SSOT document map edits still unapproved: the prefix GATE on the data row, and a row for this log book.

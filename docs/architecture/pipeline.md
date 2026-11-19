@@ -65,7 +65,7 @@ If the text features come from the call for the same quarter, that call happens 
 
 ### 2.3 Design (decision C-17, 18 November 2026)
 
-Use one feature store where every input carries an as-of time, and define two prediction points. John chose option C on 18 November 2026: both points are built and T0 is the headline. The requirement wording that follows is decision D-33, which is not yet approved, so FR-01, FR-22, FR-24 and GATE-2 still read as before.
+Use one feature store where every input carries an as-of time, and define two prediction points. John chose option C on 18 November 2026: both points are built and T0 is the headline. The requirement wording that follows was approved on 19 November 2026 (decision C-27) and is applied in FR-01, FR-07, FR-18, FR-22, FR-24, FR-29 and GATE-2.
 
 | | T0: pre-release forecast (headline) | T1: post-call nowcast (secondary, tagged Should) |
 |---|---|---|
@@ -143,7 +143,7 @@ Output: one row per event in the feature matrix, tagged with a feature-set versi
 
 ### Step 6. Serving
 
-FastAPI loads the model and reads stored features and predictions. Endpoints are in the Product Requirements: prediction lookup, explanation job, job status, health. Failure cases are explicit: no prior transcript (cold start), upstream API failure, unknown ticker (FR-01 and the edge-case requirement). Every prediction shows the as-of time of each input group (FR-22).
+FastAPI loads the model and reads stored features and predictions. Endpoints are in the Product Requirements: prediction lookup, explanation job, job status, health. Failure cases are explicit: no prior transcript (cold start), ingestion failure (the last stored result is served with a warning), unknown ticker (FR-01 and the edge-case requirement). Every prediction shows the as-of time of each input group (FR-22).
 
 ### Step 7. Explanation agent
 
@@ -192,7 +192,7 @@ What was found:
 | Ken French industry groups (12 and 48) | Free, widely used, defined from four-digit SIC codes, with downloadable definition files (`Siccodes12.zip`, `Siccodes48.zip`). French assigns each stock each June from its SIC code at that time, which is point-in-time. His SIC inputs come from Compustat and CRSP, which are paid, so his assignments cannot be reproduced for free. Only the SIC-to-industry mapping is free. The zip contents were not opened. |
 | SIC code from SEC EDGAR | The only free route with a plausible dated history. The submissions API page does not mention a SIC field, and the pages that would say whether filing headers carry SIC as at the filing date returned 404. It is unverified. From general knowledge, EDGAR filing headers include a SIC line, but that has not been checked here. |
 
-Proposed route (D-20, pending John):
+Proposed route (D-20). Outcome: the spike of 19 November 2026 was inconclusive and leaned negative (Data Section 12), and decision C-29 switched sector scoring off for the December scope. The steps below are kept for a later attempt:
 1. Run a spike on 20 companies: download old and new 10-K or 8-K headers and see whether SIC is present and whether it differs across dates.
 2. If SIC is dated per filing, map it to Fama-French 12 groups and use those as the sector level. This needs wording changes in Product SRS-02, SRS-10 and the SectorAssignment entity, which now say GICS. John approves any such change.
 3. If not, sector scoring is switched off under SRS-14, and the project proceeds without it.
@@ -218,9 +218,7 @@ One proposed addition for John to approve: a row in the SSOT document map for `a
 
 ## 7. Still open
 
-- D-33: approve the requirement wording that follows from decision C-17 (T0 headline, T1 secondary).
 - D-34: approve the negation and forward-guidance definitions.
-- D-20: approve the SIC spike, and approve the wording change if it works.
 - D-32: approve `fja05680/sp500` as the membership route.
 - Set `SEC_USER_AGENT` so the EDGAR spikes (EPS, announcement time, SIC) can run.
 - The December company subset is decided (C-18). FinBERT speed on this PC is still unmeasured.

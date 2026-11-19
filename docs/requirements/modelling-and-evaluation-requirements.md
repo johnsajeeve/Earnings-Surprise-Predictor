@@ -6,6 +6,8 @@ Status: DRAFT, written 18 November 2026 for the owner's approval. Nothing here i
 
 This document owns how the models are trained, tuned, calibrated, explained, scored and evaluated. Product Section 8 (ML-01 to ML-06), Section 8A (TR) and FR-03, FR-06, FR-10, FR-25 and FR-26 state what must hold. They do not say which task is trained, how confidence is defined, which SHAP output is used for three classes, how calibration is fitted, or how the metrics are computed. This document does.
 
+Retraining is started by hand. There is no scheduled retrain in this version. Every retrain is a new model version and passes the Product ML-06 gate.
+
 Every requirement has a "Traces to" entry naming where in the project it comes from. A requirement that fixes a value the project leaves open says "pending D-42", and it is not final until John decides D-42 in the [decision log](../decision-log.md) (Project-Wide SS-02). Research on the internet informed the choices in Section 2 and is listed in Section 8. It is not a requirement by itself.
 
 | Already defined elsewhere | Where |
@@ -18,7 +20,7 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | Calibration and precision display; global SHAP; pretraining-cutoff check | Product FR-10, FR-26, FR-25 |
 | Model inventory, model card, drift monitoring | Product MR-01 to MR-06 |
 | Label thresholds frozen on 2015 to 2021 | Data LB-06, VL-06 |
-| Features and the feature-set version | Feature Engineering FE-01 to FE-31 |
+| Features and the feature-set version | Feature Engineering FE-01 to FE-32 |
 
 ## 2. Choices made, with the reasons
 
@@ -67,7 +69,7 @@ Cost of B: with a middle band, the in-line class can dominate. FinCall-Surprise'
 | MD-17 | Must | Intervals are 95% bootstrap intervals resampling by event, with a fixed seed and a stated number of resamples (proposed 1,000, pending D-42). | Interval code run twice gives identical bounds. | Product TR-01 |
 | MD-18 | Must | The two naive baselines are computed on the same test rows: the majority class of the training window, and the previous event's class for the same company. Events with no previous event are listed and handled the same way for every model. | Both appear in the FR-06 table with the exclusion count. | Product TR-06, FR-06 |
 | MD-19 | Must | Every model fit counts as a variant: tuning trials, weighted and unweighted, calibration options, feature-set versions and prediction points. The count and the multiple-testing method for the headline result are written down before the test read. The method is pending D-42. | Report states the count and the method, and both are dated before the test read. | Product TR-02; pending D-42 |
-| MD-20 | Must | The FinBERT pretraining-cutoff check (Product FR-25) uses, for each quarter, the rank correlation between call-level net sentiment and the event's SUE, plotted with the pretraining cutoff marked. The cutoff date is decision D-22. | Per-quarter series exists with the cutoff marked. | Product FR-25; Proposal 5.4; decision D-22 |
+| MD-20 | Must | The FinBERT pretraining-cutoff check (Product FR-25) uses, for each quarter, the rank correlation between call-level net sentiment and the event's SUE, plotted with the pretraining cutoff marked. The cutoff date is decision D-22. | Per-quarter series exists with the cutoff marked. If no labelled quarter lies before the cutoff, the report says the check cannot show a jump and gives the reason. | Product FR-25; Proposal 5.4; decision D-22 |
 | MD-21 | Must | Evaluation results are produced by code and stored in report tables. The evaluation endpoint reads the stored report and never recomputes. Every number shown links to a stored report row. | Number on the page equals the stored row. | Project-Wide ASM-02; Product Section 13 |
 
 ## 6. Scoring job
@@ -79,7 +81,7 @@ Cost of B: with a middle band, the in-line class can dominate. FinCall-Surprise'
 
 ## 7. Pending items
 
-Choices that need John are in decision D-42: the three-class recommendation (Section 2), the class used for SHAP and direction labels (MD-13), the calibration method (MD-11), the search space and trial count (MD-05), the number of resamples (MD-17) and the multiple-testing method (MD-19). The pretraining cutoff is D-22. The T1 reporting wording is D-33.
+Choices that need John are in decision D-42: the three-class recommendation (Section 2), the class used for SHAP and direction labels (MD-13), the calibration method (MD-11), the search space and trial count (MD-05), the number of resamples (MD-17) and the multiple-testing method (MD-19). The pretraining cutoff is D-22. The T1 reporting rule is Product FR-29 (decision C-27).
 
 ## 8. Evidence read
 

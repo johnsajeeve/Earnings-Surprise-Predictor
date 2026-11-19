@@ -8,7 +8,7 @@ How to repeat it: run `python3 docs/tools/check_requirements.py` (structure), th
 
 1. **The core is intact.** Every commitment in SSOT Sections 2 to 10 has a requirement (Section 2).
 2. **Five deliberate variants** differ from the proposal. None is approved yet (Section 3).
-3. **Capacity is the main remaining drift.** 304 of the 376 requirements outside the market document are Must (the eight component documents added on 18 November 2026 contribute 161 requirements, 143 of them Must), and 66 of the 70 data requirements are Must. The proposal's capacity (15 to 20 hours a week) is not shown to fit (Section 4).
+3. **Capacity is the main remaining drift.** 301 of the 378 requirements outside the market document are Must (the eight component documents added on 18 November 2026 contribute 162 requirements, 144 of them Must), and 66 of the 70 data requirements are Must. The proposal's capacity (15 to 20 hours a week) is not shown to fit (Section 4).
 4. **Structure is fixed.** No ID is defined twice. Each requirement is in the document that owns its type. Withdrawn IDs are in the README registry. A script checks this.
 5. **Open items** are in the [decision log](../decision-log.md), not here.
 
@@ -71,10 +71,10 @@ Consequences for requirements: the consensus-revision baseline exists only on th
 | Document | Requirements | Must | Must if built | Should | Could |
 |---|---|---|---|---|---|
 | Market | 7 needs | 6 | 0 | 1 | 0 |
-| Product | 91 | 50 | 8 | 29 | 4 |
-| Data | 70 | 66 | 0 | 4 | 0 |
+| Product | 92 | 50 | 8 | 30 | 4 |
+| Data | 70 | 62 | 4 | 4 | 0 |
 | Project-wide | 54 | 45 | 0 | 9 | 0 |
-| Feature engineering (draft) | 31 | 29 | 0 | 2 | 0 |
+| Feature engineering (draft) | 32 | 30 | 0 | 2 | 0 |
 | Explanation agent (draft) | 26 | 26 | 0 | 0 | 0 |
 | Database (draft) | 17 | 16 | 0 | 1 | 0 |
 | Frontend (draft) | 11 | 8 | 0 | 3 | 0 |
@@ -83,8 +83,8 @@ Consequences for requirements: the consensus-revision baseline exists only on th
 | API and serving (draft) | 16 | 14 | 0 | 2 | 0 |
 | Deployment and operations (draft) | 15 | 9 | 0 | 6 | 0 |
 
-- **The proposal has 7 milestones and a lightweight dashboard.** The documents hold 376 requirements outside the market document. 304 are Must. The eight component documents mostly spell out features and checks that existing Must requirements already name, so they add detail more than scope, but they also add work.
-- **Data requirements are almost all Must (66 of 70).** Most are verification and validation checks. Large samples add work: a 100-event hand audit (VL-09), a 200-event EPS cross-check (AE-02), a 50-transcript hand label (TX-03), 30-event replays (VL-02, VL-03), and 20 canary events (VL-08).
+- **The proposal has 7 milestones and a lightweight dashboard.** The documents hold 378 requirements outside the market document. 301 are Must. The eight component documents mostly spell out features and checks that existing Must requirements already name, so they add detail more than scope, but they also add work.
+- **Data requirements are mostly Must (62 of 70, and four more are Must if built since decision C-29).** Most are verification and validation checks. Large samples add work: a 100-event hand audit (VL-09), a 200-event EPS cross-check (AE-02), a 50-transcript hand label (TX-03), 30-event replays (VL-02, VL-03), and 20 canary events (VL-08).
 - **Not shown:** no hours estimate exists for any milestone. PD-01 requires one, and it has not been made.
 - **Mitigation in place:** PD-06 sets a drop order and sector scoring is kept with a switch-off rule (SRS-14).
 

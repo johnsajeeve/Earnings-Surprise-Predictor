@@ -18,6 +18,8 @@ REQUIRED = (
 )
 
 
+@pytest.mark.req("SP-06")
+@pytest.mark.code("src/earnings/config.py")
 @pytest.mark.parametrize("missing", REQUIRED)
 def test_missing_required_setting_raises(monkeypatch, missing):
     for name in REQUIRED:
@@ -27,6 +29,8 @@ def test_missing_required_setting_raises(monkeypatch, missing):
         Settings(_env_file=None)
 
 
+@pytest.mark.req("SP-06")
+@pytest.mark.code("src/earnings/config.py")
 def test_sec_user_agent_is_optional(monkeypatch):
     for name in REQUIRED:
         monkeypatch.setenv(name, "x://placeholder")

@@ -17,7 +17,7 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | Run records, retries and dead letter, idempotency, raw text | Product PL-01 to PL-06, FR-13, FR-14 |
 | Segmentation and cleaned text | Product FR-15; Data TX-03 |
 | Storage rules | Database DB-01 to DB-17 |
-| Feature computation | Feature Engineering FE-01 to FE-31 |
+| Feature computation | Feature Engineering FE-01 to FE-32 |
 
 ## 2. Job framework
 
@@ -69,7 +69,7 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | IG-21 | Should | Ingestion takes its company list as a parameter. The December run uses the 100-company subset, about 20 of them removed from the index, and widening needs no code change. | The same job runs for 5 and for 100 companies from a list file. | Decision C-18; D-28 |
-| IG-22 | Must | After each load a coverage report is produced: the share of universe events with a transcript by year, by sector and separately for companies that left the index, with every missing company and quarter listed. | Report exists after a run and matches a hand count on 5 companies. | Data TX-04, TX-07 |
+| IG-22 | Must | After each load a coverage report is produced: the share of target events (Data TX-04) with a transcript by year, by sector where a dated sector history exists (SEC-01) and separately for companies that left the index, with every missing company and quarter listed. | Report exists after a run and matches a hand count on 5 companies. | Data TX-04, TX-07 |
 
 ## 8. Evidence read
 

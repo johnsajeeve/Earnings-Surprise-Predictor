@@ -28,14 +28,15 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | EP-07-AC1 | GET /v1/evaluation/metrics?model=full\\|tabular\\|majority\\|previous\\|consensus: Test-set metrics for a model version. |
 | EP-08-AC1 | GET /health: Service, data freshness and ingestion status. |
 | EP-09-AC1 | GET /metrics: Service metrics for scraping. |
+| EP-10-AC1 | GET /v1/universe: Tickers in the universe with company names, for ticker autocomplete. Could. |
 | ER-01-AC1 | User sees "No transcript available for this ticker." |
 | ER-01-AC2 | System: Logs the request; no prediction stored. |
 | ER-02-AC1 | User sees "Ticker not in universe." (404) |
 | ER-02-AC2 | System: Logs the request. |
 | ER-03-AC1 | User sees "Invalid ticker format." (422) |
 | ER-03-AC2 | System: Rejects before lookup. |
-| ER-04-AC1 | User sees "Data source unavailable. Try again later." (503) |
-| ER-04-AC2 | System: Retries on the next scheduled run; no partial prediction. |
+| ER-04-AC1 | User sees "Data refresh failed on <date>. Showing the last stored result." beside the stored prediction. |
+| ER-04-AC2 | System: Retries up to three times, then dead-letters the task (PL-02); marks the run failed (PL-01); /health shows ingestion degraded; stores no partial event. |
 | ER-05-AC1 | User sees "Too many requests. Try again shortly." (429) |
 | ER-05-AC2 | System: Returns Retry-After header. |
 | ER-06-AC1 | User sees Prediction with "Limited history" label. |
@@ -53,7 +54,9 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | ER-12-AC1 | User sees "Explanation could not be generated." |
 | ER-12-AC2 | System: Stores the failure reason and returns it with the status. |
 | ER-13-AC1 | User sees "Service temporarily unavailable." (503) |
-| ER-13-AC2 | System: Refuses to serve; raises an alert. |
+| ER-13-AC2 | System: Refuses to serve; logs an error line with the request identifier and the artefact identifier, and sets the artefact check in /health to failed (SV-08). |
+| ER-14-AC1 | User sees "Service temporarily unavailable." (503) |
+| ER-14-AC2 | System: Logs the request identifier; returns no partial result. |
 | EX-01-AC1 | A claim with no link is rejected before the explanation is stored. |
 | EX-02-AC1 | Every stored claim has a label and a reason. |
 | EX-03-AC1 | Rank-agreement test on the evaluation sample. |
@@ -61,7 +64,7 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | EX-05-AC1 | Agreement statistic exists for the sample. |
 | FR-01-AC1 | Given a ticker with a stored transcript and feature vector, when the user submits the ticker, then the prediction card shows the class, the three class probabilities summing to 1.00 within rounding, a confidence value, and three features. |
 | FR-01-AC2 | Given the same ticker submitted twice without new data, then the same prediction is returned both times. |
-| FR-01-AC3 | Given a ticker with no transcript, then the card shows "No transcript available for this ticker" and no class. |
+| FR-01-AC3 | Given a ticker with no earlier transcript (a cold-start ticker), then the card shows "No transcript available for this ticker" and no class. |
 | FR-02-AC1 | Given any event in the database, when its record is read, then all three date fields are present and non-null, or the event is marked incomplete. The label route is stored beside them. |
 | FR-02-AC2 | Given a transcript dated after its announcement by more than the window in Data TX-02, then the event is flagged for review and excluded from training. |
 | FR-03-AC1 | Given the training pipeline runs, when any training row has a date after 31 December 2021, then the pipeline fails with an error naming the row. |
@@ -70,11 +73,12 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | FR-04-AC2 | Given a feature with a positive SHAP value for miss, then its direction is labelled "toward miss". |
 | FR-05-AC1 | Given an explanation citing a sentence, when the source transcript is checked, then the sentence is present verbatim, or the citation is removed and the explanation is marked "partially verified". |
 | FR-05-AC2 | Given a citation that cannot be found, then the failure is logged with the prediction identifier. |
-| FR-06-AC1 | Given the evaluation page loads, then every model shown has accuracy, weighted F1, three-class AUC (one-against-rest, macro average), binary AUC (beat against miss, in-line excluded), Brier score and precision at top 20%, computed on the same rows. Accuracy, weighted F1 and binary AUC follow the SAE-FiRE definitions so that tables line up with the literature. |
+| FR-06-AC1 | Given the evaluation page loads, then every model shown has accuracy, weighted F1, three-class AUC (one-against-rest, macro average), binary AUC (beat against miss, in-line excluded), Brier score and precision at top 20%, computed on the same rows. The consensus-revision baseline, where it exists, is shown in its own table on the prospective set, with the full and tabular models re-scored on those same rows. Accuracy, weighted F1 and binary AUC follow the SAE-FiRE definitions so that tables line up with the literature. |
 | FR-06-AC2 | Given any headline metric, then TR-01 (confidence intervals) and TR-02 (variants tried) apply. |
 | FR-06-AC3 | Given the full model does not outperform a baseline, then the page states this without hiding either result. |
-| FR-07-AC1 | Given an upstream API returns an error, then the response has status 503, a message naming the failed source, and no partial prediction. |
-| FR-07-AC2 | Given a ticker with fewer than four prior quarters of history, then the prediction is returned with the label "Limited history" and the trailing-average feature is marked as unavailable. |
+| FR-07-AC1 | Given a data source returns an error during ingestion, then the task retries and is then dead-lettered (PL-02), the run record shows the failure (PL-01), no partial event is stored (DB-13), and /health reports the ingestion status without changing its HTTP status. Predictions already stored are still served, with the warning "Data refresh failed on <date>. Showing the last stored result." in the response envelope (API-04). |
+| FR-07-AC2 | Given PostgreSQL is unavailable, then every data endpoint returns 503 "Service temporarily unavailable." with no partial result. Given Redis is unavailable, then only the explanation job endpoint returns 503, and other endpoints are unaffected. |
+| FR-07-AC3 | Given a ticker with too little history for a trailing feature (fewer than five earlier calls at T0 for the sentiment surprise, or fewer than four prior SUE values for the surprise trend), then the prediction is returned with the label "Limited history" and that feature is marked as unavailable. |
 | FR-08-AC1 | Given any prediction or explanation is shown, then the notice appears in the same view, not behind a link. |
 | FR-09-AC1 | Given a ticker and a range covering four events, then four rows are returned, each showing the prediction date, class, confidence and realised outcome. |
 | FR-09-AC2 | Given a prediction whose outcome is not yet known, then the outcome field shows "Pending". |
@@ -94,27 +98,29 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | FR-17-AC2 | Given a transcript with zero words, then the feature is stored as unavailable and no division is attempted. |
 | FR-18-AC1 | Given four prior quarters of scores, then the z-score equals (current minus the mean of the four) divided by their standard deviation. |
 | FR-18-AC2 | Given the standard deviation of the four prior quarters is zero, then the feature is stored as unavailable, not as infinity. |
-| FR-18-AC3 | Given fewer than four prior quarters, then the prediction carries the "Limited history" label (FR-07). |
+| FR-18-AC3 | Given the call being scored and fewer than four calls before it, then the prediction carries the "Limited history" label (FR-07). At T0 the call being scored is the most recent earlier call. |
 | FR-19-AC1 | Given an explanation request, then the API returns a job identifier within 500 ms and the job status is pending. |
 | FR-19-AC2 | Given the job completes, then the status changes to complete and the explanation is retrievable by identifier. |
 | FR-19-AC3 | Given the job fails, then the failure reason is stored and returned with the status. |
 | FR-20-AC1 | Given a ticker not in the universe for any date in the dataset, then the response is 404 with the message "Ticker not in universe". |
 | FR-20-AC2 | Given a ticker with characters outside letters, digits, dot or hyphen, or longer than ten characters, then the response is 422 with the message "Invalid ticker format". |
 | FR-21-AC1 | Given any prediction card, then all four values are shown and match the ModelVersion record of the model that produced it. |
-| FR-22-AC1 | Given a prediction for an event announced on date D, then every stored as-of timestamp is before D. A test fails the build if any is not. |
+| FR-22-AC1 | Given a T0 prediction for an event with cutoff C (the earlier of the call time and the 8-K Item 2.02 acceptance time), then every stored as-of timestamp is before C. A test fails the build if any is not. A T1 prediction is labelled "post-call" and records its own transcript time, which is after C. Every other input of a T1 prediction is still before C. |
 | FR-22-AC2 | Given the prediction card, then the timestamps are visible in the same view or one click away. |
 | FR-23-AC1 | Given the evaluation page, then the thresholds shown equal the frozen values recorded under Data VL-06. |
 | FR-24-AC1 | Given the feature-set version, then every feature in the table is listed with its source tag and as-of rule, or is listed as dropped with a decision-log reference. |
 | FR-24-AC2 | Given a fixture event, then each computed feature equals a hand-calculated value. |
-| FR-25-AC1 | Given the evaluation report, then it contains a per-quarter series of a sentiment-only metric with the pretraining cutoff marked, and the result is stated either way. |
+| FR-25-AC1 | Given the evaluation report, then it contains a per-quarter series of a sentiment-only metric with the pretraining cutoff marked, and the result is stated either way. If no labelled quarter lies before the cutoff, the report says the check cannot show a jump and gives the reason (Modelling and Evaluation MD-20). |
 | FR-26-AC1 | Given the evaluation page, then it shows mean absolute SHAP value for every feature. |
 | FR-26-AC2 | Given at least four named features, then their expected directions are recorded before the test set is read, and the observed direction is shown beside each. Mismatches are reported, not hidden. |
-| FR-27-AC1 | Given the benchmark, then the tabular-only and text-augmented baselines are run with the same features and split rules as the main model, and accuracy, weighted F1 and binary AUC are reported with intervals. |
+| FR-27-AC1 | Given the benchmark, then the tabular-only and text-augmented baselines are run with the same features and split rules as the main model, where the benchmark supplies the inputs. Features it cannot supply are listed and left out of both models, and if it supplies no tabular input only the text model is reported and the report says so. Accuracy, weighted F1 and binary AUC are reported with intervals. |
 | FR-27-AC2 | Given the report, then the benchmark's label definition, licence (CC BY-NC-ND for transcripts; the repository is Apache-2.0) and the note that its label uses post-call forecasts are stated beside every number. |
 | FR-27-AC3 | Given any comparison with SAE-FiRE (AUC 0.620), then it is labelled as indicative, because the label, period and universe differ. |
 | FR-27-AC4 | Given the public demo, then no benchmark data is shown or redistributed (Data SR-03). |
 | FR-28-AC1 | Given a first visit, then the notice is shown before the first prediction. |
 | FR-28-AC2 | Given any screen, then the notice can be reopened from that screen. |
+| FR-29-AC1 | Given the evaluation page, then the T1 result is in its own table labelled "post-call nowcast, not a forecast", with the same metrics, intervals and rows as the T0 table. |
+| FR-29-AC2 | Given any headline claim, then it names T0 or T1. |
 | ML-01-AC1 | Two runs with the same seed and snapshot produce identical predictions, and the metrics match to two decimal places. |
 | ML-02-AC1 | Access log shows test rows read only in the final evaluation job. |
 | ML-03-AC1 | Altered artefact fails to load with a checksum error. |
@@ -128,8 +134,8 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | MR-06-AC1 | Rank-change flag fires on a planted change. |
 | NFR-01-AC1 | Under 500 ms |
 | NFR-02-AC1 | Under 10 s, or returned as pending |
-| NFR-03-AC1 | Within 24 hours |
-| NFR-04-AC1 | Best effort; no SLA |
+| NFR-03-AC1 | Check runs every 24 hours |
+| NFR-04-AC1 | /health returns 200 when the database, Redis and worker are healthy, and 503 when one is not |
 | NFR-07-AC1 | Automated check passes |
 | NFR-08-AC1 | No horizontal scrolling on prediction card |
 | NFR-09-AC1 | Completes within 24 hours |
@@ -142,7 +148,7 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | PL-04-AC1 | Fixture with insufficient EPS history is rejected with the logged reason. |
 | PL-05-AC1 | Migration history matches the deployed schema on a clean database. |
 | PL-06-AC1 | Hash of raw text is identical before and after cleaning. |
-| SCR-01-AC1 | Input field, submit, recent lookups. Autocomplete if UI-01 is built. |
+| SCR-01-AC1 | Input field, submit. Autocomplete if UI-01 is built (EP-10). |
 | SCR-02-AC1 | Class, probabilities, confidence, evidence base, input as-of times, sector context (SRS-11), not-investment-advice notice, link to explanation. |
 | SCR-03-AC1 | Horizontal bars for top three SHAP features, coloured by direction, with a data table alternative. |
 | SCR-04-AC1 | Each claim, its faithfulness label, the cited sentence and its verification status. |
@@ -188,7 +194,7 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | SRS-14-AC1 | Configuration test: with sector history missing, no sector column is produced and the card shows "Sector comparison unavailable". |
 | TR-01-AC1 | Every headline metric on the evaluation page has a 95% interval. |
 | TR-02-AC1 | The evaluation page states the variant count and the adjustment. |
-| TR-04-AC1 | Per-year and per-sector table exists. |
+| TR-04-AC1 | Per-year table exists, and a per-sector table where sector history exists. |
 | TR-05-AC1 | Decile calibration plot exists. |
 | TR-06-AC1 | Both appear in the FR-06 table on the same rows. |
 | UI-01-AC1 | Typing two letters shows matching tickers. |
@@ -290,7 +296,7 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | TX-05-AC1 | Given two transcripts for one event, the earlier is kept. |
 | TX-05-AC2 | DV-03 passes. |
 | TX-06-AC1 | Sample of 20 transcripts has labels on every turn. |
-| TX-07-AC1 | Coverage table by year, sector and survivor status exists. |
+| TX-07-AC1 | Coverage table by year, survivor status and, where sector history exists, sector exists. |
 | VL-01-AC1 | The pipeline excludes it. |
 | VL-01-AC2 | Any leaked row fails the build. |
 | VL-02-AC1 | Rebuilt vectors match stored vectors. |
@@ -298,10 +304,11 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | VL-03-AC1 | Recomputed values match stored values. |
 | VL-04-AC1 | Counts and date ranges match the definitions. |
 | VL-05-AC1 | A persistent gap above a threshold set in Section 11 is investigated and recorded. |
-| VL-06-AC1 | No class is below 10% in any year (proposed threshold). |
+| VL-05-AC2 | TH-06 is set from the first comparison run and recorded in the decision log before the validation set is read. |
+| VL-06-AC1 | No class is below 10% in any year (proposed threshold), or each year below it is listed with its shares. |
 | VL-06-AC2 | Any change after the freeze is logged. |
 | VL-07-AC1 | Zero mismatches, or every mismatch is corrected and logged. |
-| VL-08-AC1 | 20 of 20 correct, or each miss is investigated. |
+| VL-08-AC1 | 20 of 20 stored EPS values match the record and 20 of 20 classes match the hand calculation, or each miss is investigated. |
 | VL-09-AC1 | Error rate at or below 2%. |
 | VL-10-AC1 | Results are recorded. |
 | VL-10-AC2 | Any change to a past-dated value rules out that source for backfill. |
@@ -430,6 +437,8 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | FE-29-AC1 | Re-running a batch leaves the row count unchanged. |
 | FE-30-AC1 | The feature-set version in the test-read log equals the frozen version. |
 | FE-31-AC1 | Report exists and the baseline is stored. |
+| FE-32-AC1 | The notebook executes without error in the project container. |
+| FE-32-AC2 | A planted 2023 row does not change the thresholds it proposes. |
 
 ## Explanation Agent (explanation-agent-requirements.md)
 
@@ -506,7 +515,7 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 |---|---|
 | UX-01-AC1 | The dashboard's container has no database credentials. |
 | UX-01-AC2 | A search finds no database import. |
-| UX-02-AC1 | One test per error state ER-01 to ER-13. |
+| UX-02-AC1 | One test per error state ER-01 to ER-14. |
 | UX-03-AC1 | Stubbed job that completes after 6 seconds shows the three states. |
 | UX-04-AC1 | UI test on complete and partially verified fixtures. |
 | UX-05-AC1 | Fixture with two warnings shows both. |
@@ -587,6 +596,7 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | MD-18-AC1 | Both appear in the FR-06 table with the exclusion count. |
 | MD-19-AC1 | Report states the count and the method, and both are dated before the test read. |
 | MD-20-AC1 | Per-quarter series exists with the cutoff marked. |
+| MD-20-AC2 | If no labelled quarter lies before the cutoff, the report says the check cannot show a jump and gives the reason. |
 | MD-21-AC1 | Number on the page equals the stored row. |
 | MD-22-AC1 | Event with features gets one stored prediction per point. |
 | MD-22-AC2 | A second run adds none. |
@@ -605,9 +615,12 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | SV-05-AC1 | Fixture with each invalid input returns the expected status and message. |
 | SV-06-AC1 | Two identical requests give one job. |
 | SV-06-AC2 | Status never moves backwards. |
+| SV-06-AC3 | A queue failure leaves a failed row. |
+| SV-06-AC4 | An unknown identifier returns 404. |
 | SV-07-AC1 | Fixture with an unreleased event shows Pending. |
 | SV-07-AC2 | Unknown model name returns 422. |
 | SV-08-AC1 | Altered artefact makes the prediction endpoint return 503 with the Section 12 message. |
+| SV-08-AC2 | The error log line exists. |
 | SV-09-AC1 | Load test report states the 95th percentile against 500 ms. |
 | SV-10-AC1 | Load fixture over the limit gets 429 with the header. |
 | SV-10-AC2 | Redis stopped: requests pass and a warning is logged. |

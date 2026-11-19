@@ -24,6 +24,8 @@ def _get(path):
         return err.code, err.read().decode()
 
 
+@pytest.mark.req("NFR-04-AC1", "DP-01-AC1")
+@pytest.mark.code("src/earnings/api/main.py", "docker-compose.yml")
 def test_health_reports_all_services_ok():
     status, text = _get("/health")
     body = json.loads(text)
@@ -32,12 +34,15 @@ def test_health_reports_all_services_ok():
 
 
 @pytest.mark.req("SC-01")
+@pytest.mark.code("src/earnings/celery_app.py", "src/earnings/tasks.py")
 def test_celery_task_round_trip_through_redis_and_worker():
     from earnings.tasks import ping
 
     assert ping.delay().get(timeout=20) == "pong"
 
 
+@pytest.mark.req("DP-01-AC1")
+@pytest.mark.code("src/earnings/db.py", "docker-compose.yml")
 def test_postgres_accepts_a_query_with_the_app_credentials():
     from sqlalchemy import text
 
@@ -48,6 +53,7 @@ def test_postgres_accepts_a_query_with_the_app_credentials():
 
 
 @pytest.mark.req("API-01-AC1")
+@pytest.mark.code("src/earnings/api/main.py")
 def test_openapi_specification_is_served_and_lists_health():
     status, text = _get("/openapi.json")
     assert status == 200
@@ -55,6 +61,7 @@ def test_openapi_specification_is_served_and_lists_health():
 
 
 @pytest.mark.req("API-02-AC1")
+@pytest.mark.code("src/earnings/api/main.py")
 def test_unknown_unversioned_path_returns_404():
     status, _ = _get("/not-a-real-path")
     assert status == 404

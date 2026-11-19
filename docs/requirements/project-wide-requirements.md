@@ -103,7 +103,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | EQ-06 | Must | Fault-injection tests: killing a worker mid-job, restarting the database and making Redis unavailable. Each case recovers with no duplicate or missing rows. | Three scripted tests pass. | Proposal 1 and 8 (distributed design) |
 | EQ-07 | Must | Every queued task is idempotent, including ingestion (Product FR-13): running it twice leaves the same database state. | Test runs each task twice and compares state. | Product FR-13 |
 | EQ-08 | Should | Dependencies are scanned for known vulnerabilities in continuous integration. High-severity findings block release. | Scan job runs on every pull request. | Planning notes, Week 15 |
-| EQ-09 | Must | Line coverage on feature engineering, split logic and sector scoring is at least 80%. | Coverage report in continuous integration. | Product ML-02, FR-03, SRS-01 to SRS-14 |
+| EQ-09 | Must | Line coverage on feature engineering, split logic and sector scoring (if built) is at least 80%. | Coverage report in continuous integration. | Product ML-02, FR-03, SRS-01 to SRS-14 |
 
 ### 3.6 Security and Privacy
 
@@ -150,7 +150,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | DO-02 | Must | Each major technology choice has an ADR: queue, frontend, sentence retrieval method (decision C-11), model format, deployment target, LLM provider and label route. | ADR list is complete before Week 6. | SC-01, SC-02, SC-06, SC-07, SP-01 |
 | DO-03 | Must | A traceability matrix maps every requirement ID to the test or evidence that proves it. | No requirement without evidence at submission. | ASM-01; Proposal 7 |
 | DO-04 | Should | A runbook covers rollback to the previous revision within 10 minutes, worker restart, re-ingestion of one day's data and database restore. Each step is run once in a non-production environment, and the rollback is timed. | Each step has a dated run record. | OR-01 |
-| DO-05 | Must | Requirement IDs are unique across the requirement documents. Market functional and non-functional IDs use the MFR and MNFR prefixes; data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14; the component documents use the prefixes FE (feature engineering), AG (explanation agent), DB (database), UX (frontend), IG (ingestion and preparation), MD (modelling and evaluation), SV (API and serving) and DP (deployment and operations). | A script lists every ID defined in the documents and reports no duplicate definition. | C18; DO-03 |
+| DO-05 | Must | Requirement IDs are unique across the requirement documents. market needs are N1 to N7 (the MFR and MNFR prefixes are withdrawn, see the README registry); data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14; the component documents use the prefixes FE (feature engineering), AG (explanation agent), DB (database), UX (frontend), IG (ingestion and preparation), MD (modelling and evaluation), SV (API and serving) and DP (deployment and operations). | A script lists every ID defined in the documents and reports no duplicate definition. | C18; DO-03 |
 
 ## 4. Summary Count
 

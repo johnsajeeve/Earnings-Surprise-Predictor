@@ -1,11 +1,3 @@
 # Tests written before requirement references were introduced (18 November 2026).
-# This list only shrinks. When one of these tests gets a @pytest.mark.req(...) marker, remove it here.
-# Checked by scripts/check_requirement_refs.py.
-test_config.py::test_missing_required_setting_raises
-test_config.py::test_sec_user_agent_is_optional
-test_health_unit.py::test_all_ok_returns_200
-test_health_unit.py::test_any_failure_returns_503_and_names_the_component
-test_health_unit.py::test_sec_user_agent_unset_is_reported_false
-test_health_unit.py::test_database_exception_is_reported_not_raised
-test_stack_integration.py::test_health_reports_all_services_ok
-test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials
+# All of them were given a requirement marker on 19 November 2026, so this list is empty.
+# Checked by scripts/check_requirement_refs.py. An entry added here is a test with no requirement.

@@ -31,6 +31,8 @@ def _stub(monkeypatch, postgres="ok", redis="ok", worker="ok"):
     monkeypatch.setattr(main, "_check_worker", lambda: worker)
 
 
+@pytest.mark.req("NFR-04-AC1")
+@pytest.mark.code("src/earnings/api/main.py")
 def test_all_ok_returns_200(client, monkeypatch):
     _stub(monkeypatch)
     response = client.get("/health")
@@ -40,6 +42,8 @@ def test_all_ok_returns_200(client, monkeypatch):
     assert body["checks"] == {"postgres": "ok", "redis": "ok", "worker": "ok"}
 
 
+@pytest.mark.req("NFR-04-AC1")
+@pytest.mark.code("src/earnings/api/main.py")
 @pytest.mark.parametrize("failing", ["postgres", "redis", "worker"])
 def test_any_failure_returns_503_and_names_the_component(client, monkeypatch, failing):
     _stub(monkeypatch, **{failing: "error: boom"})
@@ -51,6 +55,7 @@ def test_any_failure_returns_503_and_names_the_component(client, monkeypatch, fa
 
 
 @pytest.mark.req("SP-06")
+@pytest.mark.code("src/earnings/api/main.py", "src/earnings/config.py")
 def test_sec_user_agent_value_is_never_returned(client, monkeypatch):
     _stub(monkeypatch)
     monkeypatch.setattr(
@@ -63,6 +68,8 @@ def test_sec_user_agent_value_is_never_returned(client, monkeypatch):
     assert response.json()["sec_user_agent_set"] is True
 
 
+@pytest.mark.req("SP-06")
+@pytest.mark.code("src/earnings/api/main.py", "src/earnings/config.py")
 def test_sec_user_agent_unset_is_reported_false(client, monkeypatch):
     _stub(monkeypatch)
     monkeypatch.setattr(
@@ -71,6 +78,8 @@ def test_sec_user_agent_unset_is_reported_false(client, monkeypatch):
     assert client.get("/health").json()["sec_user_agent_set"] is False
 
 
+@pytest.mark.req("NFR-04-AC1")
+@pytest.mark.code("src/earnings/api/main.py", "src/earnings/db.py")
 def test_database_exception_is_reported_not_raised(monkeypatch):
     def broken_engine():
         raise RuntimeError("database unreachable")

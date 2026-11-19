@@ -29,7 +29,6 @@ A requirement listed here cites a decision that is still open. Before a build ta
 | FE-19 | D-36 |
 | FE-21 | D-36 |
 | FE-22 | D-36 |
-| FE-23 | D-33 |
 | IG-05 | D-45 |
 | IG-13 | D-32 |
 | IG-18 | D-45 |

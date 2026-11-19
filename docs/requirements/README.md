@@ -11,10 +11,10 @@ Each requirement is defined in exactly one document. Other documents cite its ID
 | Document | Owns | Requirements |
 |---|---|---|
 | [market-requirements.md](market-requirements.md) | Users, competitors, market needs and constraints | 7 needs (N1 to N7) |
-| [product-requirements.md](product-requirements.md) | What the system does: functional, sector scoring, explanation, non-functional, API, pipeline, ML, evaluation and trust, model governance, UI | 91 requirements, plus 6 goals, 5 non-goals and 5 stretch objectives, and 37 numbered error states, endpoints, screens and success metrics (ER, EP, SCR, SM) |
+| [product-requirements.md](product-requirements.md) | What the system does: functional, sector scoring, explanation, non-functional, API, pipeline, ML, evaluation and trust, model governance, UI | 92 requirements, plus 6 goals, 5 non-goals and 5 stretch objectives, and 39 numbered error states, endpoints, screens and success metrics (ER, EP, SCR, SM) |
 | [data-requirements.md](data-requirements.md) | Data sources, licences, label construction, verification and validation | 70 requirements, plus the five data gates and 15 numbered thresholds (TH) |
 | [project-wide-requirements.md](project-wide-requirements.md) | Delivery, assessment, supervision, engineering, security, ethics, operations, LLM operations, documentation | 54 requirements, plus 20 conflicts to resolve (C1 to C20) |
-| [feature-engineering-requirements.md](feature-engineering-requirements.md) | How the feature matrix is built: text preparation, FinBERT scoring, linguistic and tabular features, versioning. Draft | 31 requirements (FE-01 to FE-31) |
+| [feature-engineering-requirements.md](feature-engineering-requirements.md) | How the feature matrix is built: text preparation, FinBERT scoring, linguistic and tabular features, versioning. Draft | 32 requirements (FE-01 to FE-32) |
 | [explanation-agent-requirements.md](explanation-agent-requirements.md) | How the explanation agent retrieves, generates, verifies, is kept safe and is evaluated. Draft | 26 requirements (AG-01 to AG-26) |
 | [database-requirements.md](database-requirements.md) | PostgreSQL access, schema management, time and append-only rules, raw data, writes, recovery. Draft | 17 requirements (DB-01 to DB-17) |
 | [frontend-requirements.md](frontend-requirements.md) | Streamlit dashboard structure, API use, states, caching, rendering, privacy, testing. Draft | 11 requirements (UX-01 to UX-11) |

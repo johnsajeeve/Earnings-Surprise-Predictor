@@ -27,7 +27,7 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | DB-01 | Must | PostgreSQL is the only store for entities, features, predictions and explanations. Redis is the task broker and result backend only and holds no project data of record. The PostgreSQL version is the exact tag in `docker-compose.yml`. Every extension in use is created by a migration. | A search of the code finds no other database for entities. The extension list matches the migrations. | SSOT Section 8; Project-Wide SC-01, EQ-04 |
-| DB-02 | Must | Separate database roles exist for: migrations, the workers (write), the API (read) and the explanation agent (read the evidence tables, write only the explanation tables, Explanation Agent AG-02). No application role is a superuser. Passwords come from the environment. | Each role is tested for one allowed and one forbidden statement. | Explanation Agent AG-02; Project-Wide SP-02, SP-06; pending D-38 |
+| DB-02 | Must | Separate database roles exist for: migrations, the workers (write), the API (read) and the explanation agent (read the evidence tables, write only the explanation tables, Explanation Agent AG-02). The API role is read, plus insert-only on the Explanation table so it can create a pending explanation job (API and Serving SV-06). No application role is a superuser. Passwords come from the environment. | Each role is tested for one allowed and one forbidden statement. | Explanation Agent AG-02; Project-Wide SP-02, SP-06; pending D-38 |
 | DB-03 | Must | Pools are bounded so the API and the workers together stay below the server's connection limit, and a statement time-out is set. The values are pending D-38. | A load fixture with more clients than the pool does not exhaust connections. A long query is cancelled. | Project-Wide SP-02 (unrestricted resource consumption); pending D-38 |
 
 ## 3. Keys and integrity
@@ -35,7 +35,7 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | DB-04 | Must | `company_id` is the SEC CIK (decision C-19), stored in one canonical form that is written down. No table uses the ticker as a key. | Join on `company_id` across ten known ticker changes gives one history (Data IM-03). | Decision C-19; Data IM-03 |
-| DB-05 | Must | Uniqueness is enforced by the database, not only by code: event on company, fiscal period and announcement date (Data DV-03); one kept transcript per event (Data TX-05); one FeatureVector per event, feature-set version and prediction point; one Prediction per event, model version and prediction point. | Inserting a duplicate of each fails. | Data DV-03, TX-05; Product FR-13, FR-11, FR-01 |
+| DB-05 | Must | Uniqueness is enforced by the database, not only by code: event on company, fiscal period and announcement date (Data DV-03); one kept transcript per event (Data TX-05); one FeatureVector per event, feature-set version and prediction point; one Prediction per event, model version and prediction point; one Explanation per prediction, prompt version and model version. | Inserting a duplicate of each fails. | Data DV-03, TX-05; Product FR-13, FR-11, FR-01 |
 | DB-06 | Must | The three date fields are NOT NULL, or the event row is marked incomplete. Class values, probabilities (each between 0 and 1) and statuses have CHECK constraints. | Insert of an out-of-range probability fails. | Product FR-02; Data DV-02 |
 
 ## 4. Time and history
@@ -58,7 +58,7 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
-| DB-13 | Must | The unit of work is one event. All rows for an event in one stage are written in one transaction, so a failure leaves no partial event. Writes are upserts on the keys in DB-05. Rows that fail validation go to a quarantine table with the reason (Data DV-01). | Fault injected mid-event leaves no rows for that event. Re-running a stage leaves the row count unchanged. | Product FR-13; Data DV-01 |
+| DB-13 | Must | The unit of work is one event. All rows for an event in one stage are written in one transaction, so a failure leaves no partial event. Writes are upserts on the keys in DB-05. On the append-only tables in DB-08 the write is insert-or-ignore. Rows that fail validation go to a quarantine table with the reason (Data DV-01). | Fault injected mid-event leaves no rows for that event. Re-running a stage leaves the row count unchanged. | Product FR-13; Data DV-01 |
 
 ## 7. Performance and size
 
@@ -85,7 +85,13 @@ These are changes to Product Section 11 and need approval under change control b
 | `FeatureSetVersion` table: registry hash and each component version | Feature Engineering FE-28 |
 | `Prediction`: prediction point (T0 or T1) | Decision C-17 |
 | `Explanation` and `ClaimLabel`: evidence ids per claim, token counts, estimated cost | Explanation Agent AG-26 |
+| `Explanation`: `failure_reason`, `completed_at`, the unique key on prediction, prompt version and model version, and the API role's insert grant. The job identifier is the explanation identifier | API and Serving SV-06; Product FR-19, NFR-02; DB-02, DB-05 |
 | Quarantine table, and run records shared by ingestion, features and explanation jobs | DB-13, Product PL-01 |
+| `EvaluationReport` table: model version, prediction point, metric, value, interval bounds, label route, created time | Modelling and Evaluation MD-21 |
+| `TestReadLog` table, append-only: read time, job, model version, feature-set version, row count | Product ML-02; Feature Engineering FE-30 |
+| `ThresholdFreeze` table, append-only: thresholds, clip limits, window, frozen time, code version | Data LB-06, VL-06; Ingestion and Preparation IG-19; Feature Engineering FE-25 |
+| `Signoff` table, append-only: subject (model version or dataset version), reviewer, date, record reference | Product ML-06; Data GS-01 |
+| `DeadLetter` table: task name, argument hash, error class, time, attempt count | Ingestion and Preparation IG-02 |
 
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
