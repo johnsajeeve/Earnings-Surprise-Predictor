@@ -2,7 +2,7 @@
 
 **Project:** LLM-Powered Earnings Surprise Predictor
 **Owner:** John. Only the owner edits this file.
-**Status:** DRAFT for the owner's approval. Drafted by Claude on 15 November 2026 from the Third Year Project Proposal (2026-27) and the owner's instructions in this working session. Once the owner approves it, it is frozen.
+**Status:** DRAFT for the owner's approval. Drafted by Claude from the Third Year Project Proposal (2026-27) and the owner's instructions in this working session. Once the owner approves it, it is frozen.
 
 ## Rules for this file
 
@@ -54,7 +54,7 @@ Extensions are allowed. Scope and capacity must stay at the proposal's level, so
 
 **Text, per transcript:** FinBERT mean positive, negative and neutral scores; sentiment trajectory (first half against second half); uncertainty score (hedge words divided by word count); forward-guidance ratio; Q&A sentiment delta; sentiment surprise (z-score against the company's trailing four-quarter average); Q&A-only sentiment and hedge-word rate.
 
-**Tabular, per company-quarter:** prior four-quarter EPS surprise trend; revenue growth; gross and operating margin; analyst consensus dispersion; price momentum (three-month return before the announcement). Question counts and negation frequency are also computed (proposal Section 4.1).
+**Tabular, per company-quarter:** prior four-quarter EPS surprise trend; revenue growth; gross and operating margin; surprise dispersion (the standard deviation of the prior 8 seasonal EPS differences on the time-series label route; analyst consensus dispersion where a consensus standard deviation exists); price momentum (three-month return before the announcement). Question counts and negation frequency are also computed (proposal Section 4.1).
 
 ## 6. Model, split and evaluation
 
@@ -85,7 +85,7 @@ The agent only explains a decision the model has already made. It does not touch
 | NLP features | spaCy |
 | Tabular ML | XGBoost, scikit-learn |
 | Explainability | SHAP |
-| Frontend | Streamlit or React (one to be chosen) |
+| Frontend | Streamlit |
 | Infrastructure | Docker, GCP Cloud Run |
 
 ## 9. Milestones
@@ -128,5 +128,7 @@ The agent only explains a decision the model has already made. It does not touch
 | requirements/README.md | Index, ID registry, withdrawn IDs | Requirements |
 | requirements/proposal-drift-review.md | Comparison of the documents with this file | Requirements |
 | architecture/earnings-predictor-architecture.pptx | Architecture and workflow diagrams | Requirements |
+| architecture/pipeline.md | Step-by-step pipeline, components per step, source research summaries | Requirements |
+| adr/ | Architecture decision records, one file per decision | Requirements |
 
 A requirement is defined in exactly one document. Other documents cite its ID.

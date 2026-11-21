@@ -1,0 +1,3 @@
+# Tests written before requirement references were introduced (18 November 2026).
+# All of them were given a requirement marker on 19 November 2026, so this list is empty.
+# Checked by scripts/check_requirement_refs.py. An entry added here is a test with no requirement.

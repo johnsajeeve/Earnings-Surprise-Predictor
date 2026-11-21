@@ -1,0 +1,29 @@
+# NOT installed by the Dockerfile. These are packages the proposal's stack (Section 4.2) or an
+# approved requirement needs in a later step. Versions are the ones that built and imported
+# successfully on 17 Nov 2026. When a step first uses one, move its line to requirements.txt,
+# regenerate requirements.lock and rebuild (audit finding F-02).
+#
+# Also deferred, because they need a special install and so are written as comments:
+#   torch==2.15.0+cpu    install with: pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+#   en_core_web_sm 3.8.0 install with: python -m spacy download en_core_web_sm-3.8.0 --direct
+
+# Ingestion (Proposal 4.2: requests, yfinance, EDGAR; Data D-18: Hugging Face transcripts)
+requests==2.34.2
+yfinance==1.8.0
+datasets==5.2.0
+pandas==3.1.1
+
+# Migrations (Project-Wide / Product PL-05: versioned migrations)
+alembic==1.20.1
+
+# Text features (Proposal 4.2: FinBERT via Transformers, spaCy)
+transformers==5.23.0
+spacy==3.8.18
+
+# Models and explainability (Proposal 4.2: XGBoost, scikit-learn, SHAP)
+scikit-learn==1.9.1
+xgboost==3.4.1
+shap==0.54.1
+
+# Frontend (Proposal 4.2; decision C-16: Streamlit)
+streamlit==1.67.0

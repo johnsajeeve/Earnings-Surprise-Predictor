@@ -1,0 +1,41 @@
+# Tool configuration only. This file does not define a package and installs nothing.
+# Lint, format and type checks run in CI (Project-Wide EQ-02). Dependencies are in requirements*.txt.
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+# docs/tools/check_requirements.py predates this configuration and is not part of the application.
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+# Explicit rule list, so a new ruff release cannot silently change what is enforced.
+# E, W: pycodestyle. F: pyflakes. I: import order. B: likely bugs. UP: modern syntax.
+# BLE: blind except. The three deliberate cases in the health check carry a noqa with a reason.
+select = ["E", "W", "F", "I", "B", "UP", "BLE"]
+
+[tool.ruff.lint.per-file-ignores]
+# The generator holds long evidence strings that cannot be wrapped without changing the output.
+"audits/*" = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+packages = ["earnings"]
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+# These libraries ship no type information.
+module = ["celery.*", "kombu.*"]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+# Which project files each test executes. scripts/test_matrix.py reads the result (DO-03).
+# Run: python -m coverage run -m pytest tests, then: python -m coverage json --show-contexts
+source = ["src/earnings"]
+relative_files = true
+dynamic_context = "test_function"

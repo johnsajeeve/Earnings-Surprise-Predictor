@@ -1,0 +1,23 @@
+# Runtime dependencies that the current code uses. Exact pins (Project-Wide EQ-04).
+# scripts/check_pins.py fails the build if any line here is not pinned with ==.
+# The full resolved set, including transitive packages, is in requirements.lock and is used
+# as a constraints file by the Dockerfile.
+#
+# Packages the proposal names but the code does not use yet are in requirements-pending.txt.
+# Move a line here in the step that first uses it (audit finding F-02).
+
+# Web API (Proposal 4.2: FastAPI)
+fastapi==0.163.1
+uvicorn[standard]==0.54.0
+pydantic-settings==2.16.3
+
+# Task queue (Proposal 4.2: Celery + Redis). The redis package is the client Celery's Redis transport needs.
+celery==5.7.0
+redis==8.1.0
+# kombu 5.7.0 (Celery's transport library) imports packaging in its Redis transport but does not
+# declare it as a dependency. Found when the worker crashed on start without it (17 Nov 2026).
+packaging==26.3
+
+# Database access to PostgreSQL (Proposal 4.2: PostgreSQL)
+sqlalchemy==2.1.9
+psycopg[binary]==3.3.9

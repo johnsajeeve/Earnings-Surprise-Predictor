@@ -4,7 +4,7 @@ Derived from the Third Year Project Proposal (2026-27) (see [SSOT](../SSOT.md)),
 
 ## 1. Purpose and Scope
 
-The three requirement documents cover what the product does, what the market needs and which data it depends on. They do not yet cover how the project is delivered, assessed, secured, governed or run.
+The product, market and data requirement documents cover what the product does, what the market needs and which data it depends on. They do not cover how the project is delivered, assessed, secured, governed or run. Eight component documents added on 18 November 2026 (feature engineering, explanation agent, database, frontend, ingestion and preparation, modelling and evaluation, API and serving, and deployment and operations, awaiting approval under decisions D-40 and D-46) hold the detail for those pipeline steps.
 
 This page sets those requirements. It covers ten areas:
 
@@ -35,7 +35,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | C8 | Planning notes, Week 6 | Vector store choice left open (Pinecone, Weaviate or FAISS). Transcript text is licensed. | SC-06 |
 | C9 | Planning notes, Weeks 7, 8 and 9, and "Keep" list | Contrastive multi-agent system, insider and options agent, and live streaming are in the plan. The product document excludes them as non-goals (NG1, NG3). | SC-03, SS-04 |
 | C10 | Planning notes, team capacity | Assumes 25 hours a week for 400 hours, then says the realistic figure is 15 to 20 hours a week. The scope in the notes does not fit either figure with a buffer. | PD-01, PD-02 |
-| C11 | Planning notes, Week 1 | Asks for a 2 to 3 page requirements document. The four requirement documents are much longer. | ASM-04 |
+| C11 | Planning notes, Week 1 | Asks for a 2 to 3 page requirements document. The requirement documents are much longer. | ASM-04 |
 | C12 | Planning notes, testing table | Backtest target of 70% accuracy and AUC above 0.70. Already removed from the product and market documents, but the notes still carry it. The proposal treats SAE-FiRE's 0.67 as a reference, not a pass mark. | Product Section 15 (binary AUC reported as a reference; no target) |
 | C13 | Planning notes, Week 15 | User acceptance with "mock traders". Testing with people needs university ethics approval before recruitment. | ET-01, ET-02 |
 | C14 | Proposal Sections 1, 5.1 and 8 against Data Requirements Section 3 | The proposal calls the corpus public and available through SEC EDGAR, and justifies the project partly on that. Transcripts and point-in-time consensus actually need licensed academic sources (WRDS) with restricted demo use. | SS-04 (change entry), ASM-05 |
@@ -55,7 +55,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | ASM-01 | Must | Every functional, non-functional and data requirement traces to at least one evaluation criterion in proposal Section 7 or submission skill in Section 8. | Traceability matrix (DO-03) has no requirement without a link. | Proposal 7, 8 |
 | ASM-02 | Must | Every quantitative claim in the report and demo links to a figure, table or test ID generated from code. No accuracy claim appears in the product or any write-up without a link to the evaluation page it comes from. | Claim checklist is complete before submission. | Market N3 |
 | ASM-03 | Must | Each novelty claim is recorded with the literature check that supports it: sources reviewed and date. | Novelty register has an entry for each claim. Unverified claims in the planning notes are marked. | New. Planning notes novelty scorecard. |
-| ASM-04 | Should | A two to three page summary of the four requirement documents is prepared for the Week 2 supervisor meeting. | Summary is reviewed at SS-03. | Planning notes, Week 1 |
+| ASM-04 | Should | A two to three page summary of the requirement documents is prepared for the Week 2 supervisor meeting. | Summary is reviewed at SS-03. | Planning notes, Week 1 |
 | ASM-05 | Must | Where the data route differs from the proposal's description (licensed academic sources rather than public EDGAR), the dissertation states the difference and the reason, and the submission justification is worded to match. | Change entry exists (SS-04). The methodology section cites it. | C14; Proposal 1, 5.1, 8 |
 | ASM-06 | Must | The dissertation states that the label is a time-series SUE and not a surprise against analyst consensus, reports its agreement with the consensus label on the prospective set, and does not compare its AUC with consensus-based studies (SAE-FiRE, Koval et al.) as if the labels were the same. Every quantitative claim names the label route. | Methodology section and results tables name the route. Claim checklist (ASM-02) has a label-route column. | C19; Data LB-08 |
 
@@ -76,7 +76,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 |---|---|---|---|---|
 | SS-01 | Must | Supervisor meetings are held on a fixed cadence, proposed fortnightly, with a written agenda and an action list kept after each one. | Action list exists for each meeting. | Decision log |
 | SS-02 | Must | The decision log (`docs/decision-log.md`) records each open decision with its date, owner and outcome. Every open decision in any requirement document appears in it and nowhere else. | Each item is closed or has a date. No requirement document holds its own open-decision list. | Decision log |
-| SS-03 | Must | The four requirement documents are signed off by the supervisor in Week 2 (requirements freeze). | Sign-off record on file. | Product milestones, Weeks 1 to 2 |
+| SS-03 | Must | The requirement documents (market, product, data and project-wide, and the eight component documents once approved under D-40 and D-46) are signed off by the supervisor in Week 2 (requirements freeze). | Sign-off record on file. | Product milestones, Weeks 1 to 2 |
 | SS-04 | Must | After freeze, any added feature or changed non-goal needs a written change entry, a capacity check (PD-01) and supervisor agreement. | Change log is complete. | C9; Product 2.2 |
 
 ### 3.4 Scope and Architecture Consistency
@@ -88,7 +88,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | SC-03 | Must | Non-goals NG1 to NG5 are checked at every pull request review. Code for a non-goal is rejected. | Review checklist includes the five items. | Product 2.2; C9 |
 | SC-04 | Must | No mock or synthetic data appears in any reported result. Synthetic data is used only in automated tests and is labelled as such. Real benchmark data (FinCall-Surprise, Product FR-27) is reported separately, labelled with its own label definition. | Reported tables state their data source. The evaluation job refuses synthetic input. | C1; Data VL-01 |
 | SC-05 | Must | Explanation quality is measured with rank agreement, sign agreement and citation verification. ROUGE and BERTScore may be reported as secondary measures only and are not pass or fail gates. | No ROUGE or BERTScore threshold exists in the evaluation harness. | Proposal 5.5; C2 |
-| SC-06 | Must | The vector store for transcript sentences is chosen by ADR. The ADR records a check that the transcript licence allows hosting and embedding. | ADR exists with the licence check. | Planning notes, Week 6; C8; Data SR-03 |
+| SC-06 | Must | Retrieval of transcript sentences is plain SQL over per-sentence scores (decision C-11), so no vector store is built. An ADR records that choice and its reason. If a vector store is ever added, the ADR also records a check that the transcript licence allows hosting and embedding. | ADR exists with the licence check. | Planning notes, Week 6; C8; Data SR-03 |
 | SC-07 | Must | The label route (time-series SUE, or consensus where a licensed source exists) is chosen by ADR at the end of week 2 and recorded with the supervisor's agreement. The two routes are never mixed in one training set. | ADR exists. A test fails if events with different label routes are in one training set (Data CE-05). | C19; Data CE-05 |
 
 ### 3.5 Engineering Quality
@@ -103,7 +103,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | EQ-06 | Must | Fault-injection tests: killing a worker mid-job, restarting the database and making Redis unavailable. Each case recovers with no duplicate or missing rows. | Three scripted tests pass. | Proposal 1 and 8 (distributed design) |
 | EQ-07 | Must | Every queued task is idempotent, including ingestion (Product FR-13): running it twice leaves the same database state. | Test runs each task twice and compares state. | Product FR-13 |
 | EQ-08 | Should | Dependencies are scanned for known vulnerabilities in continuous integration. High-severity findings block release. | Scan job runs on every pull request. | Planning notes, Week 15 |
-| EQ-09 | Must | Line coverage on feature engineering, split logic and sector scoring is at least 80%. | Coverage report in continuous integration. | Product ML-02, FR-03, SRS-01 to SRS-14 |
+| EQ-09 | Must | Line coverage on feature engineering, split logic and sector scoring (if built) is at least 80%. | Coverage report in continuous integration. | Product ML-02, FR-03, SRS-01 to SRS-14 |
 
 ### 3.6 Security and Privacy
 
@@ -147,10 +147,10 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | DO-01 | Must | A new machine can run the system from the README in under 30 minutes. The test is timed on a clean environment, ideally by someone other than the builder. | Timed run recorded. | Planning notes, Week 14; Proposal 8 |
-| DO-02 | Must | Each major technology choice has an ADR: queue, frontend, vector store, model format, deployment target, LLM provider and label route. | ADR list is complete before Week 6. | SC-01, SC-02, SC-06, SC-07, SP-01 |
+| DO-02 | Must | Each major technology choice has an ADR: queue, frontend, sentence retrieval method (decision C-11), model format, deployment target, LLM provider and label route. | ADR list is complete before Week 6. | SC-01, SC-02, SC-06, SC-07, SP-01 |
 | DO-03 | Must | A traceability matrix maps every requirement ID to the test or evidence that proves it. | No requirement without evidence at submission. | ASM-01; Proposal 7 |
 | DO-04 | Should | A runbook covers rollback to the previous revision within 10 minutes, worker restart, re-ingestion of one day's data and database restore. Each step is run once in a non-production environment, and the rollback is timed. | Each step has a dated run record. | OR-01 |
-| DO-05 | Must | Requirement IDs are unique across the four requirement documents. Market functional and non-functional IDs use the MFR and MNFR prefixes; data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14. | A script lists every ID defined in the four documents and reports no duplicate definition. | C18; DO-03 |
+| DO-05 | Must | Requirement IDs are unique across the requirement documents. market needs are N1 to N7 (the MFR and MNFR prefixes are withdrawn, see the README registry); data gates are GATE-1 to GATE-5; data sector requirements are SEC-01 and SEC-02; product goals are PG-1 to PG-6; stretch objectives are ST-01 to ST-05; sector scoring is SRS-01 to SRS-14; the component documents use the prefixes FE (feature engineering), AG (explanation agent), DB (database), UX (frontend), IG (ingestion and preparation), MD (modelling and evaluation), SV (API and serving) and DP (deployment and operations). | A script lists every ID defined in the documents and reports no duplicate definition. | C18; DO-03 |
 
 ## 4. Summary Count
 
@@ -170,7 +170,7 @@ Section 2 lists conflicts between the planning notes and the requirements alread
 
 ## 5. Decisions Needed Before Freeze
 
-Open decisions are in the [decision log](../decision-log.md), Section 2. Those that concern this document: D-01 to D-03, D-10 to D-17.
+Open decisions are in the [decision log](../decision-log.md), Section 2. Those that concern this document: D-02, D-03, D-11 to D-17.
 
 ## 6. Changes Needed in Other Documents
 

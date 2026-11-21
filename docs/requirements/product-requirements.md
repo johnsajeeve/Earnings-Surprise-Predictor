@@ -80,7 +80,7 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 **Acceptance criteria.**
 - Given a ticker with a stored transcript and feature vector, when the user submits the ticker, then the prediction card shows the class, the three class probabilities summing to 1.00 within rounding, a confidence value, and three features.
 - Given the same ticker submitted twice without new data, then the same prediction is returned both times.
-- Given a ticker with no transcript, then the card shows "No transcript available for this ticker" and no class.
+- Given a ticker with no earlier transcript (a cold-start ticker), then the card shows "No transcript available for this ticker" and no class.
 
 ### FR-02: Date fields on every event (J3)
 
@@ -129,7 +129,7 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 **Requirement.** The evaluation page shows the full model against the tabular-only baseline and the two naive baselines in TR-06 on the same test rows. The consensus-revision baseline (Market N4) is added only if historical estimate revisions are available (a licensed source, Data CE-01) or, for the prospective set only, from the captured snapshots; otherwise the page states that it is unavailable and why.
 
 **Acceptance criteria.**
-- Given the evaluation page loads, then every model shown has accuracy, weighted F1, three-class AUC (one-against-rest, macro average), binary AUC (beat against miss, in-line excluded), Brier score and precision at top 20%, computed on the same rows. Accuracy, weighted F1 and binary AUC follow the SAE-FiRE definitions so that tables line up with the literature.
+- Given the evaluation page loads, then every model shown has accuracy, weighted F1, three-class AUC (one-against-rest, macro average), binary AUC (beat against miss, in-line excluded), Brier score and precision at top 20%, computed on the same rows. The consensus-revision baseline, where it exists, is shown in its own table on the prospective set, with the full and tabular models re-scored on those same rows. Accuracy, weighted F1 and binary AUC follow the SAE-FiRE definitions so that tables line up with the literature.
 - Given any headline metric, then TR-01 (confidence intervals) and TR-02 (variants tried) apply.
 - Given the full model does not outperform a baseline, then the page states this without hiding either result.
 
@@ -140,8 +140,9 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 **Requirement.** The system handles missing transcripts, upstream API failures and cold-start tickers explicitly.
 
 **Acceptance criteria.**
-- Given an upstream API returns an error, then the response has status 503, a message naming the failed source, and no partial prediction.
-- Given a ticker with fewer than four prior quarters of history, then the prediction is returned with the label "Limited history" and the trailing-average feature is marked as unavailable.
+- Given a data source returns an error during ingestion, then the task retries and is then dead-lettered (PL-02), the run record shows the failure (PL-01), no partial event is stored (DB-13), and /health reports the ingestion status without changing its HTTP status. Predictions already stored are still served, with the warning "Data refresh failed on <date>. Showing the last stored result." in the response envelope (API-04).
+- Given PostgreSQL is unavailable, then every data endpoint returns 503 "Service temporarily unavailable." with no partial result. Given Redis is unavailable, then only the explanation job endpoint returns 503, and other endpoints are unaffected.
+- Given a ticker with too little history for a trailing feature (fewer than five earlier calls at T0 for the sentiment surprise, or fewer than four prior SUE values for the surprise trend), then the prediction is returned with the label "Limited history" and that feature is marked as unavailable.
 
 ### FR-08: Disclaimer (all journeys)
 
@@ -250,7 +251,7 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 **Acceptance criteria.**
 - Given four prior quarters of scores, then the z-score equals (current minus the mean of the four) divided by their standard deviation.
 - Given the standard deviation of the four prior quarters is zero, then the feature is stored as unavailable, not as infinity.
-- Given fewer than four prior quarters, then the prediction carries the "Limited history" label (FR-07).
+- Given the call being scored and fewer than four calls before it, then the prediction carries the "Limited history" label (FR-07). At T0 the call being scored is the most recent earlier call.
 
 ### FR-19: Asynchronous explanation
 
@@ -289,7 +290,7 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 **Requirement.** Every prediction records and shows the as-of timestamp of each input group: transcript, estimate snapshot, prices, fundamentals and sector context.
 
 **Acceptance criteria.**
-- Given a prediction for an event announced on date D, then every stored as-of timestamp is before D. A test fails the build if any is not.
+- Given a T0 prediction for an event with cutoff C (the earlier of the call time and the 8-K Item 2.02 acceptance time), then every stored as-of timestamp is before C. A test fails the build if any is not. A T1 prediction is labelled "post-call" and records its own transcript time, which is after C. Every other input of a T1 prediction is still before C.
 - Given the prediction card, then the timestamps are visible in the same view or one click away.
 
 ### FR-23: Label definition shown (J3)
@@ -309,15 +310,15 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 
 | Group | Feature | As-of rule | Detail |
 |---|---|---|---|
-| Text | Mean FinBERT positive, negative and neutral scores across all sentences | Transcript | FR-16 |
-| Text | Sentiment trajectory: first half against second half of the call | Transcript | |
-| Text | Uncertainty score: hedge words divided by word count | Transcript | FR-17 |
-| Text | Negation frequency | Transcript | FR-17 |
-| Text | Question count in the Q&A section | Transcript | FR-15 |
-| Text | Forward-guidance ratio: sentences mentioning future quarters divided by total sentences | Transcript | |
-| Text | Q&A sentiment delta: analyst question sentiment against management answer sentiment | Transcript | FR-15 |
-| Text | Q&A-only sentiment and Q&A-only hedge-word rate | Transcript | FR-15 |
-| Text | Sentiment surprise: z-score against the trailing four quarters | Transcript and prior events | FR-18 |
+| Text | Mean FinBERT positive, negative and neutral scores across all analytic sentences (Feature Engineering FE-02, FE-07) | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | FR-16 |
+| Text | Sentiment trajectory: first half against second half of the call | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | |
+| Text | Uncertainty score: hedge words divided by word count | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | FR-17 |
+| Text | Negation frequency | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | FR-17 |
+| Text | Question count in the Q&A section | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | FR-15 |
+| Text | Forward-guidance ratio: sentences mentioning future quarters divided by total sentences | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | |
+| Text | Q&A sentiment delta: analyst question sentiment against management answer sentiment | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | FR-15 |
+| Text | Q&A-only sentiment and Q&A-only hedge-word rate | Transcript of an earlier quarter (T0); the event's own transcript (T1 only) | FR-15 |
+| Text | Sentiment surprise: z-score against the trailing four quarters | Transcripts of earlier quarters (T0); also the event's own transcript (T1 only) | FR-18 |
 | Tabular | Prior four-quarter EPS surprise trend, from the label's own prior SUE values | Prior events announced before D | Data LB-01 |
 | Tabular | Revenue growth, gross margin, operating margin | Latest filing filed before D (Data FD-02). The current quarter's figures are not known before D. | |
 | Tabular | Surprise dispersion: standard deviation of the prior 8 seasonal EPS differences (the SUE denominator). Analyst dispersion replaces it only where a consensus standard deviation exists. | EPS first filed before D | Data LB-01 |
@@ -335,7 +336,7 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 **Requirement.** The relationship between FinBERT sentiment and the outcome is compared for transcripts close to FinBERT's pretraining-corpus cutoff and for transcripts well after it, to look for a jump at the cutoff that would suggest the pretraining corpus overlaps with later outcomes.
 
 **Acceptance criteria.**
-- Given the evaluation report, then it contains a per-quarter series of a sentiment-only metric with the pretraining cutoff marked, and the result is stated either way.
+- Given the evaluation report, then it contains a per-quarter series of a sentiment-only metric with the pretraining cutoff marked, and the result is stated either way. If no labelled quarter lies before the cutoff, the report says the check cannot show a jump and gives the reason (Modelling and Evaluation MD-20).
 
 ### FR-26: Global SHAP and domain consistency
 
@@ -354,7 +355,7 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 **Requirement.** The baseline pipeline is run on a published labelled benchmark, so the project has an external anchor for its numbers. The benchmark is FinCall-Surprise (2019 to 2021, IBES consensus with forecasts issued up to one month after the call), or the SAE-FiRE dataset if it becomes available. Results are reported separately, with the benchmark's own label stated, and are never mixed with the project's results.
 
 **Acceptance criteria.**
-- Given the benchmark, then the tabular-only and text-augmented baselines are run with the same features and split rules as the main model, and accuracy, weighted F1 and binary AUC are reported with intervals.
+- Given the benchmark, then the tabular-only and text-augmented baselines are run with the same features and split rules as the main model, where the benchmark supplies the inputs. Features it cannot supply are listed and left out of both models, and if it supplies no tabular input only the text model is reported and the report says so. Accuracy, weighted F1 and binary AUC are reported with intervals.
 - Given the report, then the benchmark's label definition, licence (CC BY-NC-ND for transcripts; the repository is Apache-2.0) and the note that its label uses post-call forecasts are stated beside every number.
 - Given any comparison with SAE-FiRE (AUC 0.620), then it is labelled as indicative, because the label, period and universe differ.
 - Given the public demo, then no benchmark data is shown or redistributed (Data SR-03).
@@ -363,11 +364,21 @@ Each requirement is written as a user-visible behaviour or system behaviour with
 
 **Priority.** Must (Market N6).
 
-**Requirement.** Before first use, the user sees a short summary of what the system cannot do: no live calls, historical testing only, the label definition in use, and the known data limits.
+**Requirement.** Before first use, the user sees a short summary of what the system cannot do: no live calls, no scoring of events that have not yet been announced, historical testing only, the label definition in use, and the known data limits.
 
 **Acceptance criteria.**
 - Given a first visit, then the notice is shown before the first prediction.
 - Given any screen, then the notice can be reopened from that screen.
+
+### FR-29: Post-call result reported separately (J3)
+
+**Priority.** Should (decision C-17).
+
+**Requirement.** The evaluation reports the T1 post-call result separately from the T0 forecast, labelled a nowcast, on the same split and metrics as FR-06.
+
+**Acceptance criteria.**
+- Given the evaluation page, then the T1 result is in its own table labelled "post-call nowcast, not a forecast", with the same metrics, intervals and rows as the T0 table.
+- Given any headline claim, then it names T0 or T1.
 
 ## 4A. Sector-Relative Scoring Requirements
 
@@ -452,8 +463,8 @@ Thresholds are proposed and are to be agreed with the supervisor (decision D-05)
 |---|---|---|---|---|
 | NFR-01 | Should | Latency | Cached prediction response time, 95th percentile. | Under 500 ms |
 | NFR-02 | Should | Latency | Full explanation response time, 95th percentile, from request to complete status. | Under 10 s, or returned as pending |
-| NFR-03 | Should | Freshness | New transcripts available after publication. | Within 24 hours |
-| NFR-04 | Must | Availability | Demo deployment uptime. | Best effort; no SLA |
+| NFR-03 | Should | Freshness | The daily check for new transcripts (Ingestion IG-05) runs at least once in every 24 hours. Each transcript it finds is stored in that run unless a source limit defers it (IG-07). Deferrals and the latest transcript date per ticker are shown in /health (PL-03). | Check runs every 24 hours |
+| NFR-04 | Must | Availability | The service reports its own health. No uptime percentage is promised for the demo. | /health returns 200 when the database, Redis and worker are healthy, and 503 when one is not |
 | NFR-07 | Should | Accessibility | Dashboard meets WCAG 2.1 AA colour contrast, checked by an automated accessibility tool. Chart alternatives and keyboard operation are UI-02 and UI-05. | Automated check passes |
 | NFR-08 | Could | Responsiveness | Dashboard usable at 375 px width. | No horizontal scrolling on prediction card |
 | NFR-09 | Should | Batch throughput | Backfill of the full target corpus (4,000-5,000 events) on demo infrastructure. | Completes within 24 hours |
@@ -470,7 +481,7 @@ Thresholds are proposed and are to be agreed with the supervisor (decision D-05)
 | API-03 | Should | Every error response has the same shape: code, message and request identifier. | Contract test checks the shape for 404, 422, 401, 429 and 503. |
 | API-04 | Must | Prediction endpoints return the envelope: data, warnings array and model_version. | Contract test on each prediction endpoint. |
 | API-05 | Should | The history endpoint is paginated, with a default page size of 20 and a maximum of 100. | Request for 500 rows returns 100 with a next-page link. |
-| API-06 | Must | Every endpoint except /health requires a JWT. | Request without a token returns 401. |
+| API-06 | Must | Every endpoint except /health requires a JWT. This includes /metrics, which is outside /v1 only because of API-02. | Request without a token returns 401. |
 | API-07 | Should | Each client is rate limited, and a limited request returns 429 with a Retry-After header. | Load test exceeding the limit returns 429 with the header present. |
 
 ## 7. Data Pipeline Requirements
@@ -503,7 +514,7 @@ These are the checks a quantitative user applies before reading any headline num
 |---|---|---|---|---|
 | TR-01 | Must | Report bootstrap confidence intervals, resampling by event, on all headline metrics. | Every headline metric on the evaluation page has a 95% interval. | N3; Harvey and Liu (2015) on noise in backtests |
 | TR-02 | Must | Disclose the number of model variants tried and apply a multiple-testing adjustment to the headline result. | The evaluation page states the variant count and the adjustment. | N3; Harvey and Liu (2015) |
-| TR-04 | Should | Report performance separately for 2023 and 2024, and by sector, to show whether results are stable. | Per-year and per-sector table exists. | N3; Proposal 5.3 |
+| TR-04 | Should | Report performance separately for 2023 and 2024, and by sector where a dated sector history exists (SEC-01), to show whether results are stable. | Per-year table exists, and a per-sector table where sector history exists. | N3; Proposal 5.3 |
 | TR-05 | Should | Report calibration by confidence decile, not only one Brier score. | Decile calibration plot exists. | FR-10; Proposal 5.3 |
 | TR-06 | Must | Report two naive baselines: majority class, and repeating the previous quarter's surprise class. | Both appear in the FR-06 table on the same rows. | N4; FR-06 |
 
@@ -525,7 +536,7 @@ These follow the core expectations of SR 11-7, the US supervisory guidance on mo
 
 | ID | Priority | Requirement | Acceptance check |
 |---|---|---|---|
-| UI-01 | Could | Ticker search offers autocomplete from the universe. | Typing two letters shows matching tickers. |
+| UI-01 | Could | Ticker search offers autocomplete from the universe (EP-10). | Typing two letters shows matching tickers. |
 | UI-02 | Should | Every chart has a text alternative and a switch to a data table. | Automated accessibility check finds no chart without an alternative. |
 | UI-03 | Must | The explanation view shows the verification status beside each citation. | Each citation in the view has a visible status. |
 | UI-04 | Could | A sector comparison view shows the peers used for a prediction (SRS-12). | View lists every peer used in the calculation. |
@@ -550,6 +561,7 @@ Operations, security and engineering requirements are defined in the Project-Wid
 | FundamentalsFiling | company_id, fiscal_period, form, filed_at, revenue, gross_profit, operating_income, source, version | FR-24; Data FD-01 to FD-04. |
 | Transcript | transcript_id, event_id, source, source_url, retrieved_at, raw_text, cleaned_text, raw_hash | PL-06, FR-05; Data SR-04. |
 | TranscriptSection | section_id, transcript_id, kind (prepared or qa), text | FR-15. |
+| TranscriptSentence | sentence_id, transcript_id, section_id, position, text, finbert_positive, finbert_negative, finbert_neutral, hedge_count, negation_count, word_count | One row per sentence, so the explanation agent retrieves the sentences behind a feature by plain SQL (decision C-11). FR-05, FR-15 to FR-17; EX-01. A forward-guidance field is added when decision D-34 settles the rule. |
 | FeatureVector | event_id, feature_set_version, features (JSON), computed_at | FR-24. Tabular, text and sector features in one row per event. |
 | SectorBenchmark | event_id, sector, gics_version, as_of_date, peer_event_ids (JSON), mean_sue, std_sue, peer_count, status | SRS-10. Stored with the as-of date so the no-lookahead rule can be checked. |
 | ModelVersion | model_version, trained_on_from, trained_on_to, training_event_count, metrics (JSON), artefact_path, checksum, seed, retrained_at | FR-11, FR-21, ML-01, ML-03. |
@@ -560,69 +572,71 @@ Operations, security and engineering requirements are defined in the Project-Wid
 
 ## 12. Error States
 
-| Condition | User sees | System does |
-|---|---|---|
-| No transcript for ticker | "No transcript available for this ticker." | Logs the request; no prediction stored. |
-| Ticker not in universe | "Ticker not in universe." (404) | Logs the request. |
-| Invalid ticker format | "Invalid ticker format." (422) | Rejects before lookup. |
-| Upstream API failure | "Data source unavailable. Try again later." (503) | Retries on the next scheduled run; no partial prediction. |
-| Rate limit exceeded | "Too many requests. Try again shortly." (429) | Returns Retry-After header. |
-| Limited history | Prediction with "Limited history" label. | Marks trailing features as unavailable. |
-| Segmentation failed | "Q&A analysis unavailable for this call." | Stores Q&A features as unavailable. |
-| Insufficient peers | "Insufficient peers" in the sector section. | Stores sector features as unavailable (SRS-06). |
-| Sector history unavailable | "Sector comparison unavailable." | Sector features switched off (SRS-14). |
-| Realised sector score before announcement | "Pending." | No value computed (SRS-09). |
-| Citation not found | Explanation marked "partially verified". | Logs the failure with prediction identifier. |
-| Explanation job failed | "Explanation could not be generated." | Stores the failure reason and returns it with the status. |
-| Model artefact missing or checksum mismatch | "Service temporarily unavailable." (503) | Refuses to serve; raises an alert. |
+| ID | Condition | User sees | System does |
+|---|---|---|---|
+| ER-01 | No earlier transcript for ticker (cold start) | "No transcript available for this ticker." | Logs the request; no prediction stored. |
+| ER-02 | Ticker not in universe | "Ticker not in universe." (404) | Logs the request. |
+| ER-03 | Invalid ticker format | "Invalid ticker format." (422) | Rejects before lookup. |
+| ER-04 | Data source failure during ingestion | "Data refresh failed on <date>. Showing the last stored result." beside the stored prediction. | Retries up to three times, then dead-letters the task (PL-02); marks the run failed (PL-01); /health shows ingestion degraded; stores no partial event. |
+| ER-05 | Rate limit exceeded | "Too many requests. Try again shortly." (429) | Returns Retry-After header. |
+| ER-06 | Limited history | Prediction with "Limited history" label. | Marks trailing features as unavailable. |
+| ER-07 | Segmentation failed | "Q&A analysis unavailable for this call." | Stores Q&A features as unavailable. |
+| ER-08 | Insufficient peers | "Insufficient peers" in the sector section. | Stores sector features as unavailable (SRS-06). |
+| ER-09 | Sector history unavailable | "Sector comparison unavailable." | Sector features switched off (SRS-14). |
+| ER-10 | Realised sector score before announcement | "Pending." | No value computed (SRS-09). |
+| ER-11 | Citation not found | Explanation marked "partially verified". | Logs the failure with prediction identifier. |
+| ER-12 | Explanation job failed | "Explanation could not be generated." | Stores the failure reason and returns it with the status. |
+| ER-13 | Model artefact missing or checksum mismatch | "Service temporarily unavailable." (503) | Refuses to serve; logs an error line with the request identifier and the artefact identifier, and sets the artefact check in /health to failed (SV-08). |
+| ER-14 | Database or queue unavailable | "Service temporarily unavailable." (503) | Logs the request identifier; returns no partial result. |
 
 ## 13. API Surface
 
-| Method | Path | Purpose | Requirement |
-|---|---|---|---|
-| GET | /v1/predictions/{ticker} | Latest prediction, top three features, evidence base, input as-of times and sector context. | FR-01, FR-04, FR-21, FR-22, SRS-11, API-04 |
-| GET | /v1/predictions/{ticker}/sector | Peer list and statistics behind the sector context and realised score. | SRS-10, SRS-12 |
-| GET | /v1/predictions/{ticker}/explanation | Explanation with citations and verification status. | FR-04, FR-05, FR-19 |
-| POST | /v1/predictions/{ticker}/explanation/jobs | Starts an explanation job and returns the job identifier. | FR-19 |
-| GET | /v1/jobs/{job_id} | Status of an explanation job. | FR-19 |
-| GET | /v1/predictions/{ticker}/history?from=&to=&page= | Past predictions with outcomes and realised sector scores. | FR-09, SRS-09, API-05 |
-| GET | /v1/evaluation/metrics?model=full\|tabular\|majority\|previous\|consensus | Test-set metrics for a model version. | FR-06, FR-10, FR-23, FR-26 |
-| GET | /health | Service, data freshness and ingestion status. | NFR-03, PL-03 |
-| GET | /metrics | Service metrics for scraping. | NFR-12 |
+| ID | Method | Path | Purpose | Requirement |
+|---|---|---|---|---|
+| EP-01 | GET | /v1/predictions/{ticker} | Latest prediction, top three features, evidence base, input as-of times and sector context. | FR-01, FR-04, FR-21, FR-22, SRS-11, API-04 |
+| EP-02 | GET | /v1/predictions/{ticker}/sector | Peer list and statistics behind the sector context and realised score. | SRS-10, SRS-12 |
+| EP-03 | GET | /v1/predictions/{ticker}/explanation | Explanation with citations and verification status. | FR-04, FR-05, FR-19 |
+| EP-04 | POST | /v1/predictions/{ticker}/explanation/jobs | Starts an explanation job and returns the job identifier. | FR-19 |
+| EP-05 | GET | /v1/jobs/{job_id} | Status of an explanation job. | FR-19 |
+| EP-06 | GET | /v1/predictions/{ticker}/history?from=&to=&page= | Past predictions with outcomes and realised sector scores. | FR-09, SRS-09, API-05 |
+| EP-07 | GET | /v1/evaluation/metrics?model=full\|tabular\|majority\|previous\|consensus | Test-set metrics for a model version. | FR-06, FR-10, FR-23, FR-26 |
+| EP-08 | GET | /health | Service, data freshness and ingestion status. | NFR-03, PL-03 |
+| EP-09 | GET | /metrics | Service metrics for scraping. | NFR-12 |
+| EP-10 | GET | /v1/universe | Tickers in the universe with company names, for ticker autocomplete. Could. | UI-01, FR-20 |
 
 ## 14. Screens
 
-| Screen | Contents | Journey | Priority |
-|---|---|---|---|
-| Ticker search | Input field, submit, recent lookups. Autocomplete if UI-01 is built. | J1 | Must |
-| Prediction card | Class, probabilities, confidence, evidence base, input as-of times, sector context (SRS-11), not-investment-advice notice, link to explanation. | J1 | Must |
-| Feature chart | Horizontal bars for top three SHAP features, coloured by direction, with a data table alternative. | J1, J2 | Must |
-| Explanation view | Each claim, its faithfulness label, the cited sentence and its verification status. | J2 | Must |
-| History table | Date, class, confidence, realised outcome, realised sector score, pending state, pagination. | J4 | Must |
-| Evaluation page | Baseline comparison table with confidence intervals, calibration plot, precision at top 20%, global SHAP, label definition, limitations notice. | J3 | Must |
-| Sector comparison | Peer list and statistics (SRS-12). | J1 | Could |
+| ID | Screen | Contents | Journey | Priority |
+|---|---|---|---|---|
+| SCR-01 | Ticker search | Input field, submit. Autocomplete if UI-01 is built (EP-10). | J1 | Must |
+| SCR-02 | Prediction card | Class, probabilities, confidence, evidence base, input as-of times, sector context (SRS-11), not-investment-advice notice, link to explanation. | J1 | Must |
+| SCR-03 | Feature chart | Horizontal bars for top three SHAP features, coloured by direction, with a data table alternative. | J1, J2 | Must |
+| SCR-04 | Explanation view | Each claim, its faithfulness label, the cited sentence and its verification status. | J2 | Must |
+| SCR-05 | History table | Date, class, confidence, realised outcome, realised sector score, pending state, pagination. | J4 | Must |
+| SCR-06 | Evaluation page | Baseline comparison table with confidence intervals, calibration plot, precision at top 20%, global SHAP, label definition, limitations notice. | J3 | Must |
+| SCR-07 | Sector comparison | Peer list and statistics (SRS-12). | J1 | Could |
 
 ## 15. Success Metrics
 
-| Metric | Target | Counter-metric | Why the counter-metric matters |
-|---|---|---|---|
-| Full model against tabular baseline on 2023-2024 test set | F1 and AUC difference reported with 95% bootstrap intervals. No pass mark: a negative result is valid (Proposal 7). | Brier score reported beside it | A higher AUC with poor calibration misleads users about confidence. |
-| Binary AUC (beat against miss, in-line excluded) | Reported beside the SAE-FiRE XGBoost baseline (0.620 on calls) as a reference point, not a pass mark. The label, period and universe differ, so the comparison is indicative only (FR-27). The three-class AUC is not compared with it. | Share of events excluded as in-line | Excluding the middle band makes the binary task easier. |
-| Precision at top 20% | Reported; no target until baseline known | Coverage: share of events receiving a prediction | High precision on a small subset is not useful if most events are excluded. |
-| Sector context coverage (SRS-13) | At least 90% of predictions have a numeric sector context (proposed) | Share showing "Insufficient peers", by year and sector | A score that is hidden for most events is not useful, so coverage must be reported beside the score. |
-| Citation verification rate | 100% verified or flagged | Explanation length | Verifying shorter explanations is easier and could hide weak evidence. |
-| Rank and sign agreement | Reported on held-out sample | Number of features discussed per explanation | Discussing more features raises agreement chances without raising faithfulness. |
-| Claim faithfulness rate (EX-02) | Reported per explanation | Human agreement with automated labels (EX-05) | Automated labels that humans disagree with are not evidence of faithfulness. |
-| Usability (five test users, after ethics approval, Project-Wide ET-01) | All complete J1 without help | Time to complete J2 | Fast completion can mean users skipped the explanation. |
+| ID | Metric | Target | Counter-metric | Why the counter-metric matters |
+|---|---|---|---|---|
+| SM-01 | Full model against tabular baseline on 2023-2024 test set | F1 and AUC difference reported with 95% bootstrap intervals. No pass mark: a negative result is valid (Proposal 7). | Brier score reported beside it | A higher AUC with poor calibration misleads users about confidence. |
+| SM-02 | Binary AUC (beat against miss, in-line excluded) | Reported beside the SAE-FiRE XGBoost baseline (0.620 on calls) as a reference point, not a pass mark. The label, period and universe differ, so the comparison is indicative only (FR-27). The three-class AUC is not compared with it. | Share of events excluded as in-line | Excluding the middle band makes the binary task easier. |
+| SM-03 | Precision at top 20% | Reported; no target until baseline known | Coverage: share of events receiving a prediction | High precision on a small subset is not useful if most events are excluded. |
+| SM-04 | Sector context coverage (SRS-13) | At least 90% of predictions have a numeric sector context (proposed) | Share showing "Insufficient peers", by year and sector | A score that is hidden for most events is not useful, so coverage must be reported beside the score. |
+| SM-05 | Citation verification rate | 100% verified or flagged | Explanation length | Verifying shorter explanations is easier and could hide weak evidence. |
+| SM-06 | Rank and sign agreement | Reported on held-out sample | Number of features discussed per explanation | Discussing more features raises agreement chances without raising faithfulness. |
+| SM-07 | Claim faithfulness rate (EX-02) | Reported per explanation | Human agreement with automated labels (EX-05) | Automated labels that humans disagree with are not evidence of faithfulness. |
+| SM-08 | Usability (five test users, after ethics approval, Project-Wide ET-01) | All complete J1 without help | Time to complete J2 | Fast completion can mean users skipped the explanation. |
 
 ## 16. Milestones
 
-Aligned to Section 6 of the proposal. Weeks are a guide, not a commitment. Two changes from the proposal's order are recorded: the explanation layer comes before the frontend, so the dashboard can show explanations, and the API is deployed at the hardening milestone rather than at the backend milestone.
+Aligned to Section 6 of the proposal. Weeks are a guide, not a commitment. Calendar targets set by the owner (end of December 2026 for the pipeline, models, API, explanation agent and evaluation; late February 2027 for submission) are in the [decision log](../decision-log.md), C-06 and C-13, and take precedence over the week numbers below. Two changes from the proposal's order are recorded: the explanation layer comes before the frontend, so the dashboard can show explanations, and the API is deployed at the hardening milestone rather than at the backend milestone.
 
 | Weeks | Milestone | Done when |
 |---|---|---|
 | 1-2 | Requirements, data verification (Data Sections 4A and 12) | Label route agreed with the supervisor; free sources tested; the forward consensus capture job (Data SR-10) is running; this document agreed. |
-| 3-5 | Data pipeline and feature engineering | Feature matrix stored; EDA notebook complete; SUE thresholds frozen; PL-01 to PL-06, FR-02, FR-03, FR-13 to FR-18, FR-24 tests pass; SRS-01 to SRS-08 pass if FR-12 is built. |
+| 3-5 | Data pipeline and feature engineering | Feature matrix stored; EDA notebook complete (Feature Engineering FE-32); SUE thresholds frozen; PL-01 to PL-06, FR-02, FR-03, FR-13 to FR-18, FR-24 tests pass; SRS-01 to SRS-08 pass if FR-12 is built. |
 | 6-7 | Model development and baseline comparison | Full model and baselines trained; ML-01, ML-02, ML-05 pass; FR-06, FR-25, FR-26 and FR-27 results available. |
 | 8-9 | Backend endpoints | Section 13 endpoints running; API-01 to API-07, FR-01, FR-04, FR-07, FR-09, FR-20, FR-21, FR-22 pass; SRS-09 to SRS-11 pass if FR-12 is built. |
 | 10-11 | Explanation layer and citation verification | FR-05, FR-19, EX checks pass on test set; faithfulness rates reported. |
@@ -664,7 +678,7 @@ Aligned to Section 6 of the proposal. Weeks are a guide, not a commitment. Two c
 
 ## 19. Open Questions
 
-Open questions are in the [decision log](../decision-log.md). Those that concern this document: D-01 (label route), D-05 (non-functional targets), D-07 (peer window and minimum peers), D-09 (independent reviewer), D-22 (FinBERT cutoff date) and D-23 (SUE thresholds).
+Open questions are in the [decision log](../decision-log.md). Those that concern this document: D-05 (non-functional targets), D-07 (peer window and minimum peers), D-09 (independent reviewer), D-22 (FinBERT cutoff date) and D-23 (SUE thresholds).
 
 ## 20. Sources Checked
 
