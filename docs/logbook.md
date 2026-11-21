@@ -31,7 +31,8 @@ This is a record of what was done and when, with the commit messages. It is not 
 | 200b881 | 18 Nov 2026 | Requirements: four component documents, consistency fixes across all documents |
 | 173215e | 18 Nov 2026 | Requirements: ingestion, modelling, API and deployment documents; label route decision |
 | 46b2a82 | 18 Nov 2026 | Requirement: DO-03, DO-05, DP-07 (drift controls and numbered requirements for tests) |
-| Next commit | 19 Nov 2026 | Feasibility review fixes (C-27 to C-40) and a test for every acceptance check |
+| f4503db | 19 Nov 2026 | Feasibility review fixes (C-27 to C-40) and a test for every acceptance check |
+| Next commit | 21 Nov 2026 | Reversible requirement, test and code matrix |
 
 ## Entries
 
@@ -251,6 +252,14 @@ This is a record of what was done and when, with the commit messages. It is not 
 - No test without a requirement: `tests/conftest.py` refuses to run the suite if a collected test has no `@pytest.mark.req(...)`. A planted unmarked test and a planted test with a made up reference were both rejected by pytest, `scripts/check_requirement_refs.py` and `scripts/requirement_tests.py check`, and removed.
 - Two placeholders that duplicated checks with real tests (NFR-04-AC1, DP-01-AC1) were removed.
 - Needs John: add `python3 scripts/requirement_tests.py check` to the CI requirements job (change to DP-07), and run the full CI test command once with Docker running, which also runs the integration tests.
+- Work by Claude. Decisions by John.
+
+### 21 Nov 2026: reversible test matrix
+
+- Asked by John: a reversible requirement, test and code matrix, with the check text fingerprinted, run results from pytest, and test to code links measured by coverage.
+- Done: `scripts/test_matrix.py` (build, verify, accept, trace, results). `audits/test_matrix.json` and `.md` are generated and committed, with three views of one relationship: check to tests, test to checks and code, code to tests and checks. The markers on the tests are the only place the relationship is written. `tests/requirement_checks.lock` fingerprints the wording of all 597 checks. `coverage==7.17.4` was added to `requirements-dev.txt` and a coverage section to `pyproject.toml` (dynamic context per test function). `test-results/` and `.coverage` are ignored by git. CI: the requirements job runs `build` before the generated-files diff and `verify` after the reference check. README and Deterministic_audit rules 5 and 6 describe it.
+- Verified: pytest 38 passed, 2 expected failures, 0 failed, 579 not tested (integration file not run, Docker stopped). ruff, ruff format and mypy pass. A planted reword of FR-01-AC2 and a swap of the two FR-04 criteria made `verify` fail and were restored. A measured run merged 13 PASS, 2 known FAIL, 56 BLOCKED and 526 NOT TESTED checks from the unit tests and showed where declared code and executed code differ.
+- Limits: coverage cannot attribute code that runs at import time, and tests that only read files execute no project code, so declared and measured code differ for them. The measured report is not committed and has not run in CI. The CI change has not run on GitHub.
 - Work by Claude. Decisions by John.
 
 ## Waiting on John

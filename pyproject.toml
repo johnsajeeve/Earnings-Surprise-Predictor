@@ -32,3 +32,10 @@ no_implicit_optional = true
 # These libraries ship no type information.
 module = ["celery.*", "kombu.*"]
 ignore_missing_imports = true
+
+[tool.coverage.run]
+# Which project files each test executes. scripts/test_matrix.py reads the result (DO-03).
+# Run: python -m coverage run -m pytest tests, then: python -m coverage json --show-contexts
+source = ["src/earnings"]
+relative_files = true
+dynamic_context = "test_function"

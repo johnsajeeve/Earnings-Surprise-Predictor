@@ -169,6 +169,129 @@ def test_sp_05_ac1_the_request_log_holds_only_the_allowed_fields(request_log):
     assert "testclient" not in line
 
 
+def _matrix():
+    """The test matrix tool, loaded from a full checkout (the CI test image has no copy)."""
+    repo_path("scripts/test_matrix.py")
+    repo_path("audits/acceptance_index.md")
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import test_matrix
+
+    return test_matrix
+
+
+@pytest.mark.req("DO-03")
+@pytest.mark.code("scripts/test_matrix.py")
+def test_do_03_a_check_fingerprint_ignores_spacing_but_not_wording():
+    tool = _matrix()
+    assert tool.fingerprint("Given a ticker,   then  X.") == tool.fingerprint(
+        "Given a ticker, then X."
+    )
+    assert tool.fingerprint("then X.") != tool.fingerprint("then Y.")
+
+
+@pytest.mark.req("DO-03")
+@pytest.mark.code("scripts/test_matrix.py")
+def test_do_03_the_lock_flags_a_changed_new_and_removed_check():
+    tool = _matrix()
+    locked = {"FR-01-AC1": "aaa", "FR-01-AC2": "bbb", "FR-01-AC3": "ccc"}
+    current = {"FR-01-AC1": "aaa", "FR-01-AC2": "CHANGED", "FR-01-AC4": "ddd"}
+    problems = tool.lock_problems(current, locked)
+    assert len(problems) == 3
+    assert any("FR-01-AC2" in p and "wording changed" in p for p in problems)
+    assert any("FR-01-AC4" in p and "new check" in p for p in problems)
+    assert any("FR-01-AC3" in p and "removed or renumbered" in p for p in problems)
+    assert tool.lock_problems(current, current) == []
+
+
+@pytest.mark.req("DO-03")
+@pytest.mark.code("scripts/test_matrix.py", "tests/requirement_checks.lock")
+def test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against():
+    tool = _matrix()
+    assert tool.lock_problems(tool.current_fingerprints(), tool.read_lock()) == []
+
+
+@pytest.mark.req("DO-03")
+@pytest.mark.code("scripts/test_matrix.py")
+def test_do_03_junit_outcomes_map_to_pass_fail_blocked_and_not_tested():
+    tool = _matrix()
+    xml = """<testsuites><testsuite>
+      <testcase classname="tests.test_a" name="test_pass"/>
+      <testcase classname="tests.test_a" name="test_fail"><failure message="boom"/></testcase>
+      <testcase classname="tests.test_a" name="test_stub">
+        <skipped type="pytest.skip" message="NOT IMPLEMENTED: not built"/></testcase>
+      <testcase classname="tests.test_a" name="test_wait">
+        <skipped type="pytest.skip" message="BLOCKED: waits for D-37"/></testcase>
+      <testcase classname="tests.test_a" name="test_known">
+        <skipped type="pytest.xfail" message="NOT SATISFIED: x"/></testcase>
+      <testcase classname="tests.test_a" name="test_cases[one]"/>
+      <testcase classname="tests.test_a" name="test_cases[two]"><failure message="x"/></testcase>
+    </testsuite></testsuites>"""
+    got = tool.parse_junit(xml)
+    assert got["tests/test_a.py::test_pass"] == ["PASS"]
+    assert got["tests/test_a.py::test_fail"] == ["FAIL"]
+    assert got["tests/test_a.py::test_stub"] == ["NOT TESTED"]
+    assert got["tests/test_a.py::test_wait"] == ["BLOCKED"]
+    assert got["tests/test_a.py::test_known"] == ["FAIL (known, requirement not met yet)"]
+    assert tool.strongest(got["tests/test_a.py::test_cases"]) == "FAIL"
+    assert tool.strongest(["PASS", "NOT TESTED"]) == "PASS"
+    assert tool.strongest([]) == "NOT TESTED"
+
+
+@pytest.mark.req("DO-03")
+@pytest.mark.code("scripts/test_matrix.py")
+def test_do_03_coverage_contexts_map_each_test_to_the_files_it_executed():
+    tool = _matrix()
+    data = {
+        "files": {
+            "src/earnings/api/main.py": {"contexts": {"10": ["test_a.test_one"], "11": [""]}},
+            "src/earnings/config.py": {"contexts": {"3": ["test_a.test_one", "test_a.test_two"]}},
+        }
+    }
+    got = tool.parse_coverage(data)
+    assert got["tests/test_a.py::test_one"] == [
+        "src/earnings/api/main.py",
+        "src/earnings/config.py",
+    ]
+    assert got["tests/test_a.py::test_two"] == ["src/earnings/config.py"]
+
+
+@pytest.mark.req("DO-03")
+@pytest.mark.code("scripts/test_matrix.py", "audits/test_matrix.json", "audits/test_matrix.md")
+def test_do_03_the_committed_matrix_is_what_the_markers_produce_now():
+    tool = _matrix()
+    matrix = tool.build_matrix()
+    assert repo_path("audits/test_matrix.json").read_text(encoding="utf-8") == tool.render_json(
+        matrix
+    )
+    assert repo_path("audits/test_matrix.md").read_text(encoding="utf-8") == tool.render_markdown(
+        matrix
+    )
+
+
+@pytest.mark.req("DO-03")
+@pytest.mark.code("scripts/test_matrix.py")
+def test_do_03_the_matrix_can_be_walked_in_both_directions():
+    matrix = _matrix().build_matrix()
+    for rid, entry in matrix["requirements"].items():
+        for check in entry["checks"]:
+            for test in check["tests"]:
+                assert check["ref"] in matrix["tests"][test]["requirements"]
+        for test in entry["id_level_tests"]:
+            assert rid in matrix["tests"][test]["requirements"]
+    for key, test in matrix["tests"].items():
+        for ref in test["requirements"]:
+            rid = ref.split("-AC")[0]
+            entry = matrix["requirements"][rid]
+            linked = {t for c in entry["checks"] if c["ref"] == ref for t in c["tests"]}
+            assert key in linked | set(entry["id_level_tests"]), (key, ref)
+        for path in test["code"]:
+            assert key in matrix["code"][path]["tests"]
+            assert set(test["requirements"]) <= set(matrix["code"][path]["requirements"])
+    for path, entry in matrix["code"].items():
+        for key in entry["tests"]:
+            assert path in matrix["tests"][key]["code"]
+
+
 # Placeholders written by scripts/requirement_tests.py scaffold. Replace the call to
 # not_tested() with a real check when the code this test exercises is built.
 @pytest.mark.req("AI-01-AC1")

@@ -35,6 +35,28 @@ docker compose run --rm --no-deps -v "$PWD/tests:/app/tests:ro" -v "$PWD/require
 
 The tests that call the live services need the stack running (`docker compose up -d --wait`).
 
+### Requirement, test and code matrix
+
+Every test names the requirement check it exercises with `@pytest.mark.req("FR-01-AC1")`, and the project files it exercises with `@pytest.mark.code("src/...")`. `scripts/test_matrix.py` turns those markers into one matrix that can be followed in any direction. It needs only Python.
+
+```
+python3 scripts/test_matrix.py build     # writes audits/test_matrix.json and .md (generated, committed)
+python3 scripts/test_matrix.py verify    # every check has a test, and no check changed since its tests were reviewed
+python3 scripts/test_matrix.py trace FR-01-AC1        # from a check to its tests and code
+python3 scripts/test_matrix.py trace src/earnings/api/middleware.py   # from code to tests and checks
+python3 scripts/test_matrix.py accept FR-01           # after reviewing the tests for FR-01
+```
+
+`tests/requirement_checks.lock` holds the wording of each check the tests were reviewed against. If a requirement is reworded, or checks are inserted or reordered, `verify` fails until the tests are reviewed and `accept` is run. To add measured results, which are not committed:
+
+```
+python -m coverage run -m pytest -p no:cacheprovider tests --junitxml=test-results/junit.xml
+python -m coverage json --show-contexts -o test-results/coverage.json
+python3 scripts/test_matrix.py results --junit test-results/junit.xml --coverage test-results/coverage.json
+```
+
+The report gives PASS, FAIL, BLOCKED or NOT TESTED for each check, and the files each test really executed beside the files its markers declare. A PASS means a test passed, not that the requirement is satisfied.
+
 ## Dependencies
 
 Every dependency is pinned to an exact version (Project-Wide EQ-04), and the image build fails if one is not.

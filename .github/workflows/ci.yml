@@ -58,9 +58,11 @@ jobs:
           fetch-depth: 0
       - run: python3 docs/tools/check_requirements.py
       - run: python3 audits/generate_traceability.py
+      - run: python3 scripts/test_matrix.py build
       - name: Generated files match what is committed
         run: git diff --exit-code -- audits
       - run: python3 scripts/check_requirement_refs.py
+      - run: python3 scripts/test_matrix.py verify
       - run: python3 scripts/check_commit_refs.py
 
   secrets:

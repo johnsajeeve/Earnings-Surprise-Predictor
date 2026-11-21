@@ -19,6 +19,11 @@ venv/
 .mypy_cache/
 *.egg-info/
 
+# Measured test results and coverage data (scripts/test_matrix.py results)
+test-results/
+.coverage
+.coverage.*
+
 # Notebooks
 .ipynb_checkpoints/
 
