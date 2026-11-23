@@ -296,11 +296,26 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: Wave 1.1 is partial. Alpha Vantage limit and counter deferred, the worker-kill test is for Wave 7.1, the other three scheduled jobs and the event flag come with their waves, and the retry waits were tested eagerly, not in real time. Not run on GitHub Actions.
 - Work by Claude. Decisions by John.
 
+### 23 Nov 2026: Finnhub, storage rules (Wave 1.2), branch pushed, Phase 0 audit started
+
+- Asked by John: place the Finnhub key in the file for keys, finish the leftovers of earlier waves, push the branch, start Wave 1.2, make sure the auditing works, and log it.
+- Key: stored in the git-ignored `.env` as `FINNHUB_API_KEY`, never printed. A scan of every tracked file and the whole git history found it nowhere. It is not passed into the containers, because no code uses it.
+- Finnhub spike (leftover of Wave 0.1): the free key gets 403 on the quarterly estimate endpoint (0 of 5 tickers) and `/stock/earnings` returns only the last 4 quarters, so it cannot be a forward consensus source and cannot pass VL-12's five-year test. Its terms allow personal use only and forbid redistribution. Recorded in the source register as optional, not adopted; the yfinance fallback is now recorded as failed.
+- Wave 1.2 done: the worker cannot update or delete any append-only table, with a test that the list and the database agree; an as-of read that returns only versions strictly before the date; half-open validity ranges with overlap refused by the database, for ticker history and index membership; a hash check of stored payloads (5 real payloads, 0 mismatches). While building it I found that the migration history table was writable by the worker and API roles, and closed that.
+- Plan change: DB-11-AC1 moved to Wave 1.4, DB-12 to 2.4, DB-13 to 1.6 and DB-14 to 1.7, because their checks need tables or data that come later. Coverage map and plan edited together and the coverage check passes.
+- Verified: full-repository pytest 105 passed, 3 expected failures, 0 failed (94 before); CI-style 87 passed; ruff, format and mypy pass; two off-by-one faults in the as-of read and the validity boundary made tests fail; no earlier passing test regressed.
+- Pushed `build/wave-0-1` to GitHub (CI runs only on a pull request, so nothing has run there yet).
+- Auditing: an independent agent audit of Phase 0 was started in an isolated clone, given only requirement IDs. A new section of the audit file lists the time-gated checks that cannot be run yet (the 22:30 UTC capture, the second look at the SEC bulk files, the real retry waits).
+- Limits: SR-04 lacks a source version column (DR-14, needs John). DB-08 and DB-09 cover only the tables that exist. The 22:30 UTC capture, the second capture day and the bulk-file check are still to happen.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).
 - D-34: approve the negation and forward-guidance definitions.
 - D-35 to D-46 (D-35 now also needs a view on the CC BY-NC-SA licence of the ProsusAI/finbert weights): FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
+- DR-14: add a nullable `source_version` column to `raw_payload` (Data SR-04 asks for it).
+- DR-10, DR-06, DR-08 and the ProsusAI/finbert licence (D-35): see the audit file's drift register.
 - D-46: note in the next supervisor meeting action list that Professor Goodacre has no objection to the time-series label (C-25 closed D-01 on John's word; SC-07 and SS-04 ask for it in writing).
 - D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.
 - D-29: the exact submission date.

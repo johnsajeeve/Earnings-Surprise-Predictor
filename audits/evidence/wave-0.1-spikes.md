@@ -53,8 +53,17 @@ Results, measured:
 - yfinance returned, for all 5 tickers, for the current quarter: mean (`avg`), `low`, `high`, `numberOfAnalysts`, `yearAgoEps`, growth, currency and a `methodology` field. No standard deviation. Current values only.
 - The `methodology` field differs by ticker: AAPL `gaap`, and MSFT, JPM, KO, F `normalized`. For the label this matters, because CE-03 requires the estimate and the actual to be on the same EPS basis.
 - The plan's rule (mean and analyst count for at least 4 of 5 tickers): met, 5 of 5, for yfinance.
-- Finnhub and FMP: not run. Both need a free key that John must create. BLOCKED.
+- Finnhub: run on 23 November 2026, see Spike C2 (not usable on the free key). FMP: not run, needs a key from John.
 - Yahoo's terms of use for this data were not read in this step. The data document records them as personal-use terms. That is not confirmed here.
+
+### Spike C2: Finnhub free key (23 November 2026, rules in the spike plan)
+
+- `/stock/eps-estimate` (quarterly): HTTP 403 "You don't have access to this resource" for all 5 tickers (AAPL, MSFT, JPM, KO, F). The plan's rule (mean and analyst count for at least 4 of 5) is not met, so Finnhub is not a candidate second source for the forward capture.
+- `/stock/earnings`: 200 for all 5. Each row has `actual`, `estimate`, `surprise`, `surprisePercent`, `period`, `quarter`, `year`, `symbol`. A request for 40 rows returned 4 (2025-12-31 to 2026-09-30). The free key therefore gives only the last 4 quarters, so VL-12's 30 events across 5 years cannot be tested with it, and nothing shows when each stored estimate was taken. No standard deviation or analyst count.
+- Limits seen in the response headers: 60 calls a minute.
+- Terms read: all plans are for personal use only; data and derived results may not be redistributed or shared without written approval (https://finnhub.io/terms-of-service, read 23 November 2026). The register records route `optional`, demo redistribution `no`.
+- The key was read from the git-ignored `.env`, sent only to finnhub.io in a header and never printed. A scan of every tracked file and the whole git history found it nowhere.
+- Script: `wave-0.1-scripts/spikeC2.py.txt` (reads the key from `.env`; the key is not in the script).
 
 ### Spike D: transcript source (D-18), partial
 

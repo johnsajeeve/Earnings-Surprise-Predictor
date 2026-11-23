@@ -237,9 +237,9 @@ Notation: requirement IDs cite the owner document (README index). "D-nn" are ope
 - Step 1.1.7 **First real slice:** 5 companies through the EDGAR client, a task, the database and a read back. This is the first end-to-end proof on real data and runs before any widening to 100.
 - Test: unit and recorded-response; injected failure gives three retries and one dead-letter row (IG-02-AC1); kill a worker mid-task and restart (IG-01-AC2, first EQ-06 case).
 
-**Wave 1.2. Storage rules** (DB-06, DB-08 to DB-14)
-- Step 1.2.1 Raw payload store (DB-11). Step 1.2.2 Append-only tables (DB-08). Step 1.2.3 The single as-of function or view (DB-09). Step 1.2.4 Half-open validity periods (DB-10). Step 1.2.5 Provenance columns and one-event unit of work (DB-12, DB-13). Step 1.2.6 Indexes for the queries in use (DB-14).
-- Test: planted-future query through the as-of view returns nothing after the cutoff (feeds VL-01).
+**Wave 1.2. Storage rules** (DB-08, DB-09, DB-10; Data SR-04). Plan change of 23 November 2026: DB-11-AC1 moves to Wave 1.4 (a rebuild needs the parsed tables), DB-12 to Wave 2.4 (the lineage check needs the FeatureVector table), DB-13 to Wave 1.6 (it needs events) and DB-14 to Wave 1.7 (the plan check needs the loaded 100-company data). The raw payload table itself was built in Wave 1.1 (C-45).
+- Step 1.2.1 Append-only by privilege and a registry of append-only tables, with a check that the registry and the database agree (DB-08). Step 1.2.2 One documented as-of function pattern, the first instance on `estimate_snapshot`, strictly before the date (DB-09). Step 1.2.3 Half-open validity ranges with overlap refused by the database: the `btree_gist` extension by migration, and the `ticker_history` and `index_membership` tables of Product Section 11 (DB-10). Step 1.2.4 A hash check of every stored raw payload (SR-04).
+- Test: the worker's UPDATE and DELETE fail on every registered table; a planted version dated D is not returned for date D; an overlapping membership insert fails and a boundary date resolves to one period; a tampered payload is found by the hash check.
 
 **Wave 1.3. Universe and identifiers** (IG-13, IG-21; Data IM-01 to IM-03; DB-04 join test across ten known ticker changes; TH-05, TH-06)
 - Step 1.3.1 Build the membership table from the D-32 source. Step 1.3.2 CIK as `company_id`, ticker matching, name matching with a logged review list (C-19). Step 1.3.3 Company list as a parameter, 100 companies with about 20 removed from the index (C-18).

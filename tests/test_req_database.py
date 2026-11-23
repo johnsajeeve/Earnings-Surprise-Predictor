@@ -217,36 +217,6 @@ def test_db_07_ac1_schema_query_finds_no_timestamp_without_zone(test_db_name):
     assert bad == []
 
 
-@pytest.mark.req("DB-08-AC1")
-def test_db_08_ac1_the_worker_role_s_update_on_each():
-    """DB-08-AC1: The worker role's UPDATE on each such table fails."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DB-09-AC1")
-def test_db_09_ac1_a_planted_version_dated_d_or_later():
-    """DB-09-AC1: A planted version dated D or later is not returned."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DB-09-AC2")
-def test_db_09_ac2_a_test_finds_no_direct_read_of():
-    """DB-09-AC2: A test finds no direct read of a versioned table in the feature code."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DB-10-AC1")
-def test_db_10_ac1_an_overlapping_membership_insert_fails():
-    """DB-10-AC1: An overlapping membership insert fails."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DB-10-AC2")
-def test_db_10_ac2_a_date_on_a_boundary_resolves_to():
-    """DB-10-AC2: A date on a boundary resolves to exactly one period."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("DB-11-AC1")
 def test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table():
     """DB-11-AC1: Rebuild from stored payloads gives identical table hashes (Data DV-08)."""

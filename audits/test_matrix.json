@@ -181,6 +181,14 @@
         "tests/test_req_project_wide.py::test_do_03_the_matrix_can_be_walked_in_both_directions"
       ]
     },
+    "src/earnings": {
+      "requirements": [
+        "DB-09-AC2"
+      ],
+      "tests": [
+        "tests/test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly"
+      ]
+    },
     "src/earnings/api/main.py": {
       "requirements": [
         "API-01-AC1",
@@ -345,6 +353,13 @@
         "DB-04",
         "DB-05",
         "DB-07-AC1",
+        "DB-08",
+        "DB-08-AC1",
+        "DB-09",
+        "DB-09-AC1",
+        "DB-10",
+        "DB-10-AC1",
+        "DB-10-AC2",
         "DB-11",
         "IG-02-AC1",
         "IG-03-AC1",
@@ -364,7 +379,14 @@
         "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form",
         "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database",
         "tests/test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone",
-        "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on"
+        "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on",
+        "tests/test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period",
+        "tests/test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned",
+        "tests/test_storage_rules.py::test_an_overlapping_membership_insert_fails",
+        "tests/test_storage_rules.py::test_the_append_only_registry_matches_the_privileges_in_the_database",
+        "tests/test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period",
+        "tests/test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table",
+        "tests/test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company"
       ]
     },
     "src/earnings/parsing.py": {
@@ -382,11 +404,13 @@
       "requirements": [
         "DB-11",
         "IG-01",
-        "IG-10"
+        "IG-10",
+        "SR-04-AC1"
       ],
       "tests": [
         "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
-        "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash"
+        "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash",
+        "tests/test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded"
       ]
     },
     "src/earnings/runlog.py": {
@@ -412,6 +436,18 @@
       "tests": [
         "tests/test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run",
         "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task"
+      ]
+    },
+    "src/earnings/schema.py": {
+      "requirements": [
+        "DB-08",
+        "DB-08-AC1",
+        "DB-09-AC1"
+      ],
+      "tests": [
+        "tests/test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned",
+        "tests/test_storage_rules.py::test_the_append_only_registry_matches_the_privileges_in_the_database",
+        "tests/test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table"
       ]
     },
     "src/earnings/source_register.csv": {
@@ -476,10 +512,12 @@
     },
     "tests/db_support.py": {
       "requirements": [
+        "DB-09-AC2",
         "DB-16-AC1"
       ],
       "tests": [
-        "tests/test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against"
+        "tests/test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against",
+        "tests/test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly"
       ]
     },
     "tests/fixtures/edgar_companyfacts_aapl_trimmed.json": {
@@ -1499,13 +1537,15 @@
           "fingerprint": "0ed1e228e9cc",
           "ref": "DB-08-AC1",
           "tests": [
-            "tests/test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each"
+            "tests/test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table"
           ],
           "text": "The worker role's UPDATE on each such table fails."
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_storage_rules.py::test_the_append_only_registry_matches_the_privileges_in_the_database"
+      ]
     },
     "DB-09": {
       "checks": [
@@ -1513,7 +1553,7 @@
           "fingerprint": "86b1c534c190",
           "ref": "DB-09-AC1",
           "tests": [
-            "tests/test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later"
+            "tests/test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned"
           ],
           "text": "A planted version dated D or later is not returned."
         },
@@ -1521,13 +1561,15 @@
           "fingerprint": "645e7fe7514d",
           "ref": "DB-09-AC2",
           "tests": [
-            "tests/test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of"
+            "tests/test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly"
           ],
           "text": "A test finds no direct read of a versioned table in the feature code."
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period"
+      ]
     },
     "DB-10": {
       "checks": [
@@ -1535,7 +1577,7 @@
           "fingerprint": "671a35897c0e",
           "ref": "DB-10-AC1",
           "tests": [
-            "tests/test_req_database.py::test_db_10_ac1_an_overlapping_membership_insert_fails"
+            "tests/test_storage_rules.py::test_an_overlapping_membership_insert_fails"
           ],
           "text": "An overlapping membership insert fails."
         },
@@ -1543,13 +1585,15 @@
           "fingerprint": "a27e0056745c",
           "ref": "DB-10-AC2",
           "tests": [
-            "tests/test_req_database.py::test_db_10_ac2_a_date_on_a_boundary_resolves_to"
+            "tests/test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period"
           ],
           "text": "A date on a boundary resolves to exactly one period."
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company"
+      ]
     },
     "DB-11": {
       "checks": [
@@ -6326,7 +6370,7 @@
           "fingerprint": "d0e8f1635958",
           "ref": "SR-04-AC1",
           "tests": [
-            "tests/test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches"
+            "tests/test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded"
           ],
           "text": "Hash of each stored raw file matches the hash recorded at retrieval."
         }
@@ -8907,13 +8951,6 @@
         "SR-03-AC2"
       ]
     },
-    "tests/test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "SR-04-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_sr_05_ac1_written_answer_or_dated_refusal_on_file": {
       "code": [],
       "kind": "not tested (NEEDS PERSON)",
@@ -9389,41 +9426,6 @@
       "kind": "real check",
       "requirements": [
         "DB-07-AC1"
-      ]
-    },
-    "tests/test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-08-AC1"
-      ]
-    },
-    "tests/test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-09-AC1"
-      ]
-    },
-    "tests/test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-09-AC2"
-      ]
-    },
-    "tests/test_req_database.py::test_db_10_ac1_an_overlapping_membership_insert_fails": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-10-AC1"
-      ]
-    },
-    "tests/test_req_database.py::test_db_10_ac2_a_date_on_a_boundary_resolves_to": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-10-AC2"
       ]
     },
     "tests/test_req_database.py::test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table": {
@@ -12662,6 +12664,91 @@
       "kind": "real check",
       "requirements": [
         "API-02-AC1"
+      ]
+    },
+    "tests/test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-10-AC2"
+      ]
+    },
+    "tests/test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/schema.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-09-AC1"
+      ]
+    },
+    "tests/test_storage_rules.py::test_an_overlapping_membership_insert_fails": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-10-AC1"
+      ]
+    },
+    "tests/test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly": {
+      "code": [
+        "src/earnings",
+        "tests/db_support.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-09-AC2"
+      ]
+    },
+    "tests/test_storage_rules.py::test_the_append_only_registry_matches_the_privileges_in_the_database": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/schema.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-08"
+      ]
+    },
+    "tests/test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-09"
+      ]
+    },
+    "tests/test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded": {
+      "code": [
+        "src/earnings/rawstore.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-04-AC1"
+      ]
+    },
+    "tests/test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/schema.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-08-AC1"
+      ]
+    },
+    "tests/test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-10"
       ]
     }
   }

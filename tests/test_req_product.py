@@ -995,6 +995,8 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
             "ingestion_run",
             "dead_letter",
             "raw_payload",
+            "ticker_history",
+            "index_membership",
         }
         assert columns == ["company_id", "name"]
         migrate.downgrade(name, "base")  # the history is reversible

@@ -372,12 +372,6 @@ def test_sr_03_ac2_any_personal_use_source_fails_the_check():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("SR-04-AC1")
-def test_sr_04_ac1_hash_of_each_stored_raw_file_matches():
-    """SR-04-AC1: Hash of each stored raw file matches the hash recorded at retrieval."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("SR-05-AC1")
 def test_sr_05_ac1_written_answer_or_dated_refusal_on_file():
     """SR-05-AC1: Written answer or dated refusal on file, or a decision log entry that no

@@ -65,4 +65,4 @@ Real slice, 16:50 UTC: 5 of 5 stored, run records all `succeeded` with 1 row rea
 
 ## Measured values
 
-- Hours for this wave: about 6. Acceptance checks moved from NOT TESTED to a real result: IG-02-AC1, IG-03-AC1, IG-03-AC2, IG-05-AC2, IG-08-AC1, PL-01-AC1, PL-02-AC1, IG-01-AC1, SR-07-AC1 (9). Five checks keep placeholders with a stated reason (IG-04-AC1, IG-06-AC1, IG-07-AC1, IG-10-AC1, IG-12-AC1, IG-12-AC2, DB-11-AC1, IG-01-AC2, IG-05-AC1).
+- Hours for this wave: about 6. Acceptance checks moved from NOT TESTED to a real result: IG-02-AC1, IG-03-AC1, IG-03-AC2, IG-05-AC2, IG-08-AC1, PL-01-AC1, PL-02-AC1, IG-01-AC1, SR-07-AC1 (9). Nine checks keep placeholders with a stated reason: IG-04-AC1, IG-06-AC1, IG-07-AC1, IG-10-AC1, IG-12-AC1, IG-12-AC2, DB-11-AC1, IG-01-AC2 and IG-05-AC1.

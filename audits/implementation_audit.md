@@ -83,6 +83,7 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-10 | 23 Nov 2026 | Data SR-06, source register | The register has no documented fallback for the 8-K announcement time, and every other fallback is untested | OPEN. Needs John: name a fallback or accept a stated scope limit |
 | DR-12 | 23 Nov 2026 | `src/earnings/consensus.py`, first capture | The first day's 10 rows carry the run start time, not each row's arrival time (up to 12 s) | FIXED in code for later rows; the stored rows stay as they are (append-only) |
 | DR-13 | 23 Nov 2026 | `main` branch protection, `.github/workflows/ci.yml` | C-23 listed five required checks and the sixth CI job (Requirements consistency) was not required | CLOSED 23 Nov 2026 by decision C-45: the sixth check is now required (applied with gh) |
+| DR-14 | 23 Nov 2026 | Data SR-04, `raw_payload` (C-45) | SR-04 asks for the source version to be stored; the approved table has no such column | OPEN. Needs John: add a nullable `source_version` column |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords and the superuser password are in every service's environment | OPEN, accepted for local use. Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -108,7 +109,7 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W0.2 | Database foundation and plumbing slice | PARTIAL | audits/evidence/wave-0.2.md |
 | W0.3 | Forward consensus capture job | IN PROGRESS | audits/evidence/wave-0.3.md |
 | W1.1 | Task framework and client rules | PARTIAL | audits/evidence/wave-1.1.md |
-| W1.2 | Storage rules | NOT STARTED | - |
+| W1.2 | Storage rules | PARTIAL | audits/evidence/wave-1.2.md |
 | W1.3 | Universe and identifiers | NOT STARTED | - |
 | W1.4 | Financial data | NOT STARTED | - |
 | W1.5 | Transcripts and preparation | NOT STARTED | - |
@@ -142,3 +143,24 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W8.2 | Usability study | NOT STARTED | - |
 | W8.3 | Dissertation | NOT STARTED | - |
 | W8.4 | Buffer and polish | NOT STARTED | - |
+
+## 8. Time-gated checks (cannot be run yet)
+
+Checks that need a later moment or later data. Anyone continuing the work runs these first and records the result in the evidence file of the wave they belong to. A passed date does not mean a pass: run the command.
+
+| Check | Earliest | Command | What a pass looks like | Belongs to |
+|---|---|---|---|---|
+| The scheduled 22:30 UTC capture fires by itself | after 2026-11-23 22:30 UTC | `docker compose exec -T api python -m earnings.consensus`, and `docker compose logs worker | grep "Scheduler: Sending due task"` | at least 2 capture days listed, no gap, a beat line for `capture-consensus` | Wave 0.3 (SR-10-AC1) |
+| SEC bulk files refreshed nightly (second observation) | 2026-11-24 | HEAD request to `companyfacts.zip` and `submissions.zip` under `https://www.sec.gov/Archives/edgar/daily-index/`, compare Last-Modified with 2026-11-21 05:08 and 05:15 GMT | a later Last-Modified on both | Wave 0.1 (IG-09) |
+| Capture has run on 4 or more days without a gap over 3 days | 2026-11-27 | `python -m earnings.consensus` | no GAP line | Wave 0.3 (SR-10-AC2), VL-10 needs 4 weeks |
+| Retry waits are real (30, 60, 120 s before jitter) | any time | inject a failing task into the running worker and read the worker log | three retries at roughly those intervals, one dead letter | Wave 1.1 (IG-02) |
+
+## 9. Audit health check, 23 November 2026
+
+What was run to see that the auditing itself works, and what it showed:
+
+- `python3 scripts/check_plan_coverage.py`: 480 of 480 requirements mapped, 38 waves in the plan and the ledger, passes. A planted PASS without evidence and a planted invented ID were both rejected earlier.
+- The drift controls (`check_requirements`, generator diff, matrix `verify`, reference and commit checks) pass on every wave commit.
+- A fault injected into each new rule (roles, time-outs, retries, rate limit, host check, as-of strictness, validity boundary, append-only privileges) made at least one test fail, and the files were restored each time.
+- The independent audit of Phase 0 (Section 4) was started with a fresh agent, in an isolated clone, given only requirement IDs. Its result is recorded in `audits/evidence/phase-0-independent.md` when it returns.
+- Where my own checks were wrong I wrote it down (Section 6), for example the test arithmetic error in the late-job test and the first fault injection that only broke the migration.

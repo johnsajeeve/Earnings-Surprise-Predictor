@@ -41,3 +41,28 @@ def latest_payload(engine: Engine, source: str, url: str) -> bytes | None:
             {"s": source, "u": url},
         ).first()
     return None if row is None else bytes(row[0])
+
+
+def verify_hashes(engine: Engine) -> list[int]:
+    """Ids of stored payloads whose body no longer matches the hash recorded at retrieval
+    (Data SR-04). An empty list means every payload is intact.
+    """
+    with engine.connect() as conn:
+        rows = conn.execute(
+            text(
+                "SELECT payload_id FROM raw_payload "
+                "WHERE encode(sha256(body), 'hex') <> sha256 ORDER BY payload_id"
+            )
+        )
+        return [int(r[0]) for r in rows]
+
+
+if __name__ == "__main__":
+    from earnings.db import get_engine
+
+    engine = get_engine("api")
+    with engine.connect() as conn:
+        total = conn.execute(text("SELECT count(*) FROM raw_payload")).scalar_one()
+    bad = verify_hashes(engine)
+    print(f"raw payloads: {total}; hash mismatches: {len(bad)} {bad}")
+    raise SystemExit(1 if bad else 0)

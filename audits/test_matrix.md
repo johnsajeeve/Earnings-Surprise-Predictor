@@ -256,7 +256,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | SR-02-AC2 | d79e07584849 | test_req_data.py::test_sr_02_ac2_an_untagged_column_fails_the_build | not tested (NOT IMPLEMENTED) |
 | SR-03-AC1 | e1655f8a9749 | test_req_data.py::test_sr_03_ac1_demo_bundle_manifest_lists_each_source_and | not tested (NOT IMPLEMENTED) |
 | SR-03-AC2 | ab2d77d9f586 | test_req_data.py::test_sr_03_ac2_any_personal_use_source_fails_the_check | not tested (NOT IMPLEMENTED) |
-| SR-04-AC1 | d0e8f1635958 | test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches | not tested (NOT IMPLEMENTED) |
+| SR-04-AC1 | d0e8f1635958 | test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded | real check |
 | SR-05-AC1 | 719b1f5d00d1 | test_req_data.py::test_sr_05_ac1_written_answer_or_dated_refusal_on_file | not tested (NEEDS PERSON) |
 | SR-06-AC1 | 543a5a773e18 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | expected failure (requirement not met yet) |
 | SR-07-AC1 | e364b4a2e82d | test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call | real check |
@@ -468,11 +468,11 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | DB-05-AC1 | 4c8dd45eb9d1 | test_req_database.py::test_db_05_ac1_inserting_a_duplicate_of_each_fails | not tested (NOT IMPLEMENTED) |
 | DB-06-AC1 | 1da7d438cbc2 | test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability | not tested (NOT IMPLEMENTED) |
 | DB-07-AC1 | a0c98b50be17 | test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | real check |
-| DB-08-AC1 | 0ed1e228e9cc | test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each | not tested (NOT IMPLEMENTED) |
-| DB-09-AC1 | 86b1c534c190 | test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later | not tested (NOT IMPLEMENTED) |
-| DB-09-AC2 | 645e7fe7514d | test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of | not tested (NOT IMPLEMENTED) |
-| DB-10-AC1 | 671a35897c0e | test_req_database.py::test_db_10_ac1_an_overlapping_membership_insert_fails | not tested (NOT IMPLEMENTED) |
-| DB-10-AC2 | a27e0056745c | test_req_database.py::test_db_10_ac2_a_date_on_a_boundary_resolves_to | not tested (NOT IMPLEMENTED) |
+| DB-08-AC1 | 0ed1e228e9cc | test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table | real check |
+| DB-09-AC1 | 86b1c534c190 | test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned | real check |
+| DB-09-AC2 | 645e7fe7514d | test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly | real check |
+| DB-10-AC1 | 671a35897c0e | test_storage_rules.py::test_an_overlapping_membership_insert_fails | real check |
+| DB-10-AC2 | a27e0056745c | test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period | real check |
 | DB-11-AC1 | 924b81e649e6 | test_req_database.py::test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table | not tested (NOT IMPLEMENTED) |
 | DB-12-AC1 | 7bb3d16990e9 | test_req_database.py::test_db_12_ac1_insert_of_a_featurevector_without_a_feature | not tested (NOT IMPLEMENTED) |
 | DB-13-AC1 | b431d2cfe695 | test_req_database.py::test_db_13_ac1_fault_injected_mid_event_leaves_no_rows | not tested (NOT IMPLEMENTED) |
@@ -734,7 +734,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_data.py::test_sr_02_ac2_an_untagged_column_fails_the_build | SR-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_03_ac1_demo_bundle_manifest_lists_each_source_and | SR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_03_ac2_any_personal_use_source_fails_the_check | SR-03-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches | SR-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_05_ac1_written_answer_or_dated_refusal_on_file | SR-05-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | SR-06-AC1 | src/earnings/source_register.csv | expected failure (requirement not met yet) |
 | test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo | SR-07-AC2 | none yet | not tested (NOT IMPLEMENTED) |
@@ -797,11 +796,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_database.py::test_db_05_ac1_inserting_a_duplicate_of_each_fails | DB-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability | DB-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | DB-07-AC1 | src/earnings/migrations/versions | real check |
-| test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each | DB-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later | DB-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of | DB-09-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_10_ac1_an_overlapping_membership_insert_fails | DB-10-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_10_ac2_a_date_on_a_boundary_resolves_to | DB-10-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table | DB-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_12_ac1_insert_of_a_featurevector_without_a_feature | DB-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_13_ac1_fault_injected_mid_event_leaves_no_rows | DB-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1254,6 +1248,15 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials | DP-01-AC1 | docker-compose.yml, src/earnings/db.py | real check |
 | test_stack_integration.py::test_openapi_specification_is_served_and_lists_health | API-01-AC1 | src/earnings/api/main.py | real check |
 | test_stack_integration.py::test_unknown_unversioned_path_returns_404 | API-02-AC1 | src/earnings/api/main.py | real check |
+| test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table | DB-08-AC1 | src/earnings/migrations/versions, src/earnings/schema.py | real check |
+| test_storage_rules.py::test_the_append_only_registry_matches_the_privileges_in_the_database | DB-08 | src/earnings/migrations/versions, src/earnings/schema.py | real check |
+| test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned | DB-09-AC1 | src/earnings/migrations/versions, src/earnings/schema.py | real check |
+| test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period | DB-09 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly | DB-09-AC2 | src/earnings, tests/db_support.py | real check |
+| test_storage_rules.py::test_an_overlapping_membership_insert_fails | DB-10-AC1 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period | DB-10-AC2 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company | DB-10 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded | SR-04-AC1 | src/earnings/rawstore.py | real check |
 
 ## C. Code to tests and requirements
 
@@ -1278,6 +1281,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | scripts/check_pins.py | test_eq_04_ac2_an_unpinned_dependency_fails_the_pin_check<br>test_eq_04_the_dependency_files_in_the_repository_are_pinned | EQ-04, EQ-04-AC2 |
 | scripts/check_requirement_refs.py | test_dp_07_ci_runs_the_requirement_consistency_checks | DP-07 |
 | scripts/test_matrix.py | test_do_03_a_check_fingerprint_ignores_spacing_but_not_wording<br>test_do_03_coverage_contexts_map_each_test_to_the_files_it_executed<br>test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against<br>test_do_03_junit_outcomes_map_to_pass_fail_blocked_and_not_tested<br>test_do_03_the_committed_matrix_is_what_the_markers_produce_now<br>test_do_03_the_lock_flags_a_changed_new_and_removed_check<br>test_do_03_the_matrix_can_be_walked_in_both_directions | DO-03 |
+| src/earnings | test_no_feature_code_reads_a_versioned_table_directly | DB-09-AC2 |
 | src/earnings/api/main.py | test_all_ok_returns_200<br>test_any_failure_returns_503_and_names_the_component<br>test_database_exception_is_reported_not_raised<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_health_reports_all_services_ok<br>test_openapi_specification_is_served_and_lists_health<br>test_unknown_unversioned_path_returns_404 | API-01-AC1, API-02-AC1, DP-01-AC1, NFR-04-AC1, SP-06, SV-01-AC1 |
 | src/earnings/api/middleware.py | test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_nfr_11_ac1_every_request_is_logged_with_id_latency_and_status<br>test_sp_05_ac1_the_request_log_holds_only_the_allowed_fields | NFR-11-AC1, SP-05-AC1, SV-01-AC1 |
 | src/earnings/capture_universe.csv | test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers | SR-10 |
@@ -1289,15 +1293,16 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | src/earnings/identifiers.py | test_db_04_company_id_is_one_canonical_cik_form | DB-04 |
 | src/earnings/limits.py | test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock<br>test_two_worker_processes_together_stay_under_the_limit_through_redis | IG-07 |
 | src/earnings/migrate.py | test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_02_ac1_each_role_is_tested_for_one_allowed<br>test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden<br>test_db_03_ac2_a_long_query_is_cancelled<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-02, DB-02-AC1, DB-03-AC2, PL-05-AC1 |
-| src/earnings/migrations/versions | test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected<br>test_sr_08_snapshots_are_append_only_for_the_worker_role<br>test_raw_payloads_are_insert_only_and_the_length_is_checked<br>test_an_injected_failure_gives_three_retries_and_one_dead_letter_row<br>test_each_run_produces_a_queryable_row<br>test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_04_company_id_is_one_canonical_cik_form<br>test_db_05_company_duplicate_is_refused_by_the_database<br>test_db_07_ac1_schema_query_finds_no_timestamp_without_zone<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-04, DB-05, DB-07-AC1, DB-11, IG-02-AC1, IG-03-AC1, PL-01-AC1, PL-02-AC1, PL-05-AC1, SR-08, SR-08-AC1 |
+| src/earnings/migrations/versions | test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected<br>test_sr_08_snapshots_are_append_only_for_the_worker_role<br>test_raw_payloads_are_insert_only_and_the_length_is_checked<br>test_an_injected_failure_gives_three_retries_and_one_dead_letter_row<br>test_each_run_produces_a_queryable_row<br>test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_04_company_id_is_one_canonical_cik_form<br>test_db_05_company_duplicate_is_refused_by_the_database<br>test_db_07_ac1_schema_query_finds_no_timestamp_without_zone<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on<br>test_a_date_on_a_boundary_resolves_to_exactly_one_period<br>test_a_planted_version_dated_d_or_later_is_not_returned<br>test_an_overlapping_membership_insert_fails<br>test_the_append_only_registry_matches_the_privileges_in_the_database<br>test_the_as_of_read_returns_one_latest_row_per_source_and_period<br>test_the_worker_role_cannot_update_or_delete_an_append_only_table<br>test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company | DB-01-AC2, DB-04, DB-05, DB-07-AC1, DB-08, DB-08-AC1, DB-09, DB-09-AC1, DB-10, DB-10-AC1, DB-10-AC2, DB-11, IG-02-AC1, IG-03-AC1, PL-01-AC1, PL-02-AC1, PL-05-AC1, SR-08, SR-08-AC1 |
 | src/earnings/parsing.py | test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline<br>test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network | DB-11, IG-10, IG-12 |
-| src/earnings/rawstore.py | test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline<br>test_fetching_the_same_payload_twice_leaves_an_identical_table_hash | DB-11, IG-01, IG-10 |
+| src/earnings/rawstore.py | test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline<br>test_fetching_the_same_payload_twice_leaves_an_identical_table_hash<br>test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded | DB-11, IG-01, IG-10, SR-04-AC1 |
 | src/earnings/runlog.py | test_a_forced_error_gives_status_failed<br>test_a_job_with_no_success_for_more_than_three_days_is_reported<br>test_a_run_that_reports_failure_with_zero_rows_is_not_a_success<br>test_each_run_produces_a_queryable_row | IG-03, IG-03-AC1, IG-03-AC2, IG-06, PL-01-AC1 |
 | src/earnings/schedule.py | test_a_job_missing_from_the_schedule_file_does_not_run<br>test_every_listed_job_has_a_utc_time_and_a_registered_task | IG-05, IG-05-AC2 |
+| src/earnings/schema.py | test_a_planted_version_dated_d_or_later_is_not_returned<br>test_the_append_only_registry_matches_the_privileges_in_the_database<br>test_the_worker_role_cannot_update_or_delete_an_append_only_table | DB-08, DB-08-AC1, DB-09-AC1 |
 | src/earnings/source_register.csv | test_sr_01_ac1_register_has_one_row_per_dataset_each<br>test_sr_06_ac1_register_lists_a_fallback_per_dataset_and<br>test_sr_09_ac1_source_register_has_a_cost_column_and<br>test_th_14_ac1_zero<br>test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1, SR-01-AC1, SR-06-AC1, SR-09-AC1, TH-14-AC1 |
 | src/earnings/tasking.py | test_a_task_that_recovers_leaves_no_dead_letter<br>test_an_injected_failure_gives_three_retries_and_one_dead_letter_row<br>test_retry_settings_and_late_acknowledgement_follow_decision_c_45<br>test_the_redis_redelivery_timeout_is_four_hours | IG-02, IG-02-AC1, IG-04, PL-02-AC1 |
 | src/earnings/tasks.py | test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent<br>test_sr_10_catch_up_asks_only_when_today_has_no_capture<br>test_sr_10_daily_schedule_runs_at_22_30_utc<br>test_fetching_the_same_payload_twice_leaves_an_identical_table_hash<br>test_two_worker_processes_together_stay_under_the_limit_through_redis<br>test_capture_task_records_a_failed_run_when_every_company_fails<br>test_running_the_same_tasks_twice_gives_an_identical_table_hash<br>test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_celery_task_round_trip_through_redis_and_worker | EQ-07, IG-01, IG-01-AC1, IG-03, IG-07, SC-01, SR-10 |
 | tests/conftest.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 |
-| tests/db_support.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 |
+| tests/db_support.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against<br>test_no_feature_code_reads_a_versioned_table_directly | DB-09-AC2, DB-16-AC1 |
 | tests/fixtures/edgar_companyfacts_aapl_trimmed.json | test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network | IG-10, IG-12 |
 | tests/requirement_checks.lock | test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against | DO-03 |

@@ -31,3 +31,14 @@ def table_hash(conn, table: str, columns: list[str]) -> str:
         f"FROM (SELECT {cols} FROM {table}) t"
     ).scalar()
     return str(row)
+
+
+def find_direct_reads(source: str, tables: list[str]) -> list[str]:
+    """Names of versioned tables that a piece of source code reads directly (FROM or JOIN)."""
+    import re
+
+    found = []
+    for table in tables:
+        if re.search(rf"\b(from|join)\s+{table}\b", source, re.IGNORECASE):
+            found.append(table)
+    return found

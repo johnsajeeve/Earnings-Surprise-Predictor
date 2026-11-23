@@ -70,3 +70,12 @@ Spike A2 ran first. Its result: the business-hours test rules out H3 (London) an
 - Sample: every row in 2015 to 2024 whose stamp is 16:30 or 17:00, with a matched 8-K Item 2.02 (nearest filing date, within 3 days, ties to the earliest) whose acceptance time is between 16:00 and 16:30 Eastern.
 - Test: for H1 and H2, the median gap (filing minus call) in summer (April to October) and in winter (December to February), with the number of events in each. The right reading gives the same median in both seasons. A reading that ignores daylight saving shifts the summer median by about 60 minutes.
 - Decision rule: the reading with the smaller summer-winter difference is preferred if it is below 20 minutes and the other is above 40 minutes. Otherwise the result is inconclusive and John is told so.
+
+## Spike C2: Finnhub free key (added 23 November 2026, before it ran)
+
+John supplied a free Finnhub key, so the part of Spike C that was blocked can run.
+
+- Question: on a free key, does Finnhub return (a) a quarterly estimate mean, high, low and analyst count for the upcoming quarter, and (b) past actual and estimate pairs per quarter (which would bear on VL-12)?
+- Data: the same 5 tickers as Spike C (AAPL, MSFT, JPM, KO, F). Endpoints tried: `/stock/eps-estimate` (quarterly) and `/stock/earnings`. One call each per ticker, key in the `X-Finnhub-Token` header, sent only to `finnhub.io`.
+- Report: HTTP status, fields returned, number of periods, whether a standard deviation is present, and the response when the plan does not cover the endpoint. The key is never printed or stored in any file in the repository.
+- Decision rule: Finnhub is a candidate second source for Wave 0.3 if the estimate endpoint returns a mean and an analyst count for at least 4 of 5 tickers on the free key. If it answers 403 or similar, it is reported as not available on the free plan and the register says so. `/stock/earnings` results are reported for VL-12 but do not by themselves adopt Finnhub as a label source, because nothing shows when each stored estimate was taken.
