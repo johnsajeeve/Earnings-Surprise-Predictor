@@ -999,7 +999,8 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
             columns = [c["name"] for c in inspect(conn).get_columns("company")]
         engine.dispose()
         assert head == migrate.head_revision()
-        assert tables == {"alembic_version", "company"}
+        # The expected schema at head. A new migration adds its table here in the same change.
+        assert tables == {"alembic_version", "company", "estimate_snapshot"}
         assert columns == ["company_id", "name"]
         migrate.downgrade(name, "base")  # the history is reversible
         engine = create_engine(migrate.migrator_url(name), poolclass=NullPool)

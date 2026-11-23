@@ -261,7 +261,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | SR-06-AC1 | 543a5a773e18 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | expected failure (requirement not met yet) |
 | SR-07-AC1 | e364b4a2e82d | test_req_data.py::test_sr_07_ac1_request_log_exists | not tested (NOT IMPLEMENTED) |
 | SR-07-AC2 | 7b1966ebfc7f | test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo | not tested (NOT IMPLEMENTED) |
-| SR-08-AC1 | 989d24e7a461 | test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot | not tested (NOT IMPLEMENTED) |
+| SR-08-AC1 | 989d24e7a461 | test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected | real check |
 | SR-09-AC1 | 6277d59075f9 | test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | real check |
 | SR-10-AC1 | 423a7f8f5f14 | test_req_data.py::test_sr_10_ac1_job_log_shows_a_successful_daily_run | not tested (NEEDS MEASUREMENT) |
 | SR-10-AC2 | 38c8241fdd26 | test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive | not tested (NEEDS MEASUREMENT) |
@@ -614,6 +614,15 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 |---|---|---|---|
 | test_config.py::test_missing_required_setting_raises | SP-06 | src/earnings/config.py | real check |
 | test_config.py::test_sec_user_agent_is_optional | SP-06 | src/earnings/config.py | real check |
+| test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected | SR-08-AC1 | src/earnings/consensus.py, src/earnings/migrations/versions | real check |
+| test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role | SR-08 | src/earnings/migrations/versions | real check |
+| test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent | SR-10 | src/earnings/consensus.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row | SR-10 | src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported | SR-10 | src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture | SR-10 | src/earnings/consensus.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc | SR-10 | src/earnings/celery_app.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers | SR-10 | src/earnings/capture_universe.csv, src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored | SR-10 | src/earnings/consensus.py | real check |
 | test_health_unit.py::test_all_ok_returns_200 | NFR-04-AC1 | src/earnings/api/main.py | real check |
 | test_health_unit.py::test_any_failure_returns_503_and_names_the_component | NFR-04-AC1 | src/earnings/api/main.py | real check |
 | test_health_unit.py::test_sec_user_agent_value_is_never_returned | SP-06 | src/earnings/api/main.py, src/earnings/config.py | real check |
@@ -708,7 +717,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | SR-06-AC1 | src/earnings/source_register.csv | expected failure (requirement not met yet) |
 | test_req_data.py::test_sr_07_ac1_request_log_exists | SR-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo | SR-07-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot | SR-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | SR-09-AC1 | src/earnings/source_register.csv | real check |
 | test_req_data.py::test_sr_10_ac1_job_log_shows_a_successful_daily_run | SR-10-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive | SR-10-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
@@ -1259,14 +1267,16 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | scripts/test_matrix.py | test_do_03_a_check_fingerprint_ignores_spacing_but_not_wording<br>test_do_03_coverage_contexts_map_each_test_to_the_files_it_executed<br>test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against<br>test_do_03_junit_outcomes_map_to_pass_fail_blocked_and_not_tested<br>test_do_03_the_committed_matrix_is_what_the_markers_produce_now<br>test_do_03_the_lock_flags_a_changed_new_and_removed_check<br>test_do_03_the_matrix_can_be_walked_in_both_directions | DO-03 |
 | src/earnings/api/main.py | test_all_ok_returns_200<br>test_any_failure_returns_503_and_names_the_component<br>test_database_exception_is_reported_not_raised<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_health_reports_all_services_ok<br>test_openapi_specification_is_served_and_lists_health<br>test_unknown_unversioned_path_returns_404 | API-01-AC1, API-02-AC1, DP-01-AC1, NFR-04-AC1, SP-06, SV-01-AC1 |
 | src/earnings/api/middleware.py | test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_nfr_11_ac1_every_request_is_logged_with_id_latency_and_status<br>test_sp_05_ac1_the_request_log_holds_only_the_allowed_fields | NFR-11-AC1, SP-05-AC1, SV-01-AC1 |
-| src/earnings/celery_app.py | test_sc_01_ac1_adr_records_celery_with_redis_as_accepted<br>test_celery_task_round_trip_through_redis_and_worker | SC-01, SC-01-AC1 |
+| src/earnings/capture_universe.csv | test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers | SR-10 |
+| src/earnings/celery_app.py | test_sr_10_daily_schedule_runs_at_22_30_utc<br>test_sc_01_ac1_adr_records_celery_with_redis_as_accepted<br>test_celery_task_round_trip_through_redis_and_worker | SC-01, SC-01-AC1, SR-10 |
 | src/earnings/config.py | test_missing_required_setting_raises<br>test_sec_user_agent_is_optional<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden<br>test_db_03_ac1_a_load_fixture_with_more_clients_than | DB-01-AC1, DB-02, DB-03-AC1, SP-06 |
+| src/earnings/consensus.py | test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected<br>test_sr_10_a_row_with_no_mean_is_not_stored<br>test_sr_10_a_source_failure_is_reported_and_stores_no_row<br>test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent<br>test_sr_10_catch_up_asks_only_when_today_has_no_capture<br>test_sr_10_gap_longer_than_three_days_is_reported<br>test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers | SR-08-AC1, SR-10 |
 | src/earnings/db.py | test_database_exception_is_reported_not_raised<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_db_03_ac1_a_load_fixture_with_more_clients_than<br>test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_postgres_accepts_a_query_with_the_app_credentials | DB-01-AC1, DB-03-AC1, DP-01-AC1, EQ-07, NFR-04-AC1 |
 | src/earnings/identifiers.py | test_db_04_company_id_is_one_canonical_cik_form | DB-04 |
 | src/earnings/migrate.py | test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_02_ac1_each_role_is_tested_for_one_allowed<br>test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden<br>test_db_03_ac2_a_long_query_is_cancelled<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-02, DB-02-AC1, DB-03-AC2, PL-05-AC1 |
-| src/earnings/migrations/versions | test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_04_company_id_is_one_canonical_cik_form<br>test_db_05_company_duplicate_is_refused_by_the_database<br>test_db_07_ac1_schema_query_finds_no_timestamp_without_zone<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-04, DB-05, DB-07-AC1, PL-05-AC1 |
+| src/earnings/migrations/versions | test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected<br>test_sr_08_snapshots_are_append_only_for_the_worker_role<br>test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_04_company_id_is_one_canonical_cik_form<br>test_db_05_company_duplicate_is_refused_by_the_database<br>test_db_07_ac1_schema_query_finds_no_timestamp_without_zone<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-04, DB-05, DB-07-AC1, PL-05-AC1, SR-08, SR-08-AC1 |
 | src/earnings/source_register.csv | test_sr_01_ac1_register_has_one_row_per_dataset_each<br>test_sr_06_ac1_register_lists_a_fallback_per_dataset_and<br>test_sr_09_ac1_source_register_has_a_cost_column_and<br>test_th_14_ac1_zero<br>test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1, SR-01-AC1, SR-06-AC1, SR-09-AC1, TH-14-AC1 |
-| src/earnings/tasks.py | test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_celery_task_round_trip_through_redis_and_worker | EQ-07, SC-01 |
+| src/earnings/tasks.py | test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent<br>test_sr_10_catch_up_asks_only_when_today_has_no_capture<br>test_sr_10_daily_schedule_runs_at_22_30_utc<br>test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_celery_task_round_trip_through_redis_and_worker | EQ-07, SC-01, SR-10 |
 | tests/conftest.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 |
 | tests/db_support.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 |
 | tests/requirement_checks.lock | test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against | DO-03 |

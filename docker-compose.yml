@@ -63,7 +63,8 @@ services:
 
   worker:
     build: .
-    command: celery -A earnings.celery_app worker --loglevel=info --concurrency=2
+    # -B runs the scheduler inside the worker (decision C-44). Its schedule file is written to /tmp.
+    command: celery -A earnings.celery_app worker -B -s /tmp/celerybeat-schedule --loglevel=info --concurrency=2
     environment: *app-env
     depends_on:
       db:

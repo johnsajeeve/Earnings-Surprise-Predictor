@@ -214,12 +214,22 @@
         "tests/test_req_project_wide.py::test_sp_05_ac1_the_request_log_holds_only_the_allowed_fields"
       ]
     },
+    "src/earnings/capture_universe.csv": {
+      "requirements": [
+        "SR-10"
+      ],
+      "tests": [
+        "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers"
+      ]
+    },
     "src/earnings/celery_app.py": {
       "requirements": [
         "SC-01",
-        "SC-01-AC1"
+        "SC-01-AC1",
+        "SR-10"
       ],
       "tests": [
+        "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
         "tests/test_req_project_wide.py::test_sc_01_ac1_adr_records_celery_with_redis_as_accepted",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
       ]
@@ -239,6 +249,21 @@
         "tests/test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql",
         "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden",
         "tests/test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than"
+      ]
+    },
+    "src/earnings/consensus.py": {
+      "requirements": [
+        "SR-08-AC1",
+        "SR-10"
+      ],
+      "tests": [
+        "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
+        "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
+        "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row",
+        "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
+        "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
+        "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
+        "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers"
       ]
     },
     "src/earnings/db.py": {
@@ -287,9 +312,13 @@
         "DB-04",
         "DB-05",
         "DB-07-AC1",
-        "PL-05-AC1"
+        "PL-05-AC1",
+        "SR-08",
+        "SR-08-AC1"
       ],
       "tests": [
+        "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
+        "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role",
         "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations",
         "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form",
         "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database",
@@ -316,9 +345,13 @@
     "src/earnings/tasks.py": {
       "requirements": [
         "EQ-07",
-        "SC-01"
+        "SC-01",
+        "SR-10"
       ],
       "tests": [
+        "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
+        "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
+        "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
       ]
@@ -6209,13 +6242,15 @@
           "fingerprint": "989d24e7a461",
           "ref": "SR-08-AC1",
           "tests": [
-            "tests/test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot"
+            "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected"
           ],
           "text": "Test rejects any row for a snapshot source whose capture time is missing or earlier than the start date."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role"
+      ]
     },
     "SR-09": {
       "checks": [
@@ -6251,7 +6286,15 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
+        "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row",
+        "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
+        "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
+        "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
+        "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
+        "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers"
+      ]
     },
     "SR-11": {
       "checks": [
@@ -7773,6 +7816,92 @@
         "SP-06"
       ]
     },
+    "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-08-AC1"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-08"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored": {
+      "code": [
+        "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row": {
+      "code": [
+        "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc": {
+      "code": [
+        "src/earnings/celery_app.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported": {
+      "code": [
+        "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers": {
+      "code": [
+        "src/earnings/capture_universe.csv",
+        "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
     "tests/test_health_unit.py::test_all_ok_returns_200": {
       "code": [
         "src/earnings/api/main.py"
@@ -8449,13 +8578,6 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "SR-07-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "SR-08-AC1"
       ]
     },
     "tests/test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and": {

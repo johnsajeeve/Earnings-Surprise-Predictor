@@ -81,6 +81,7 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-08 | 23 Nov 2026 | `.github/workflows/ci.yml`, tests | The CI `tests` job mounts only `tests/` and one file, so 20 checks that read documents, the workflow and scripts skip as NEEDS REPO there | OPEN. Needs John (CI change) |
 | DR-09 | 23 Nov 2026 | decision-log C-19, D-32, Spike D | The membership candidate is keyed by ticker with no company identifier, but C-19 makes the CIK the permanent identifier | OPEN. The ticker to CIK mapping is an IM-03 task for Wave 1.3 |
 | DR-10 | 23 Nov 2026 | Data SR-06, source register | The register has no documented fallback for the 8-K announcement time, and every other fallback is untested | OPEN. Needs John: name a fallback or accept a stated scope limit |
+| DR-12 | 23 Nov 2026 | `src/earnings/consensus.py`, first capture | The first day's 10 rows carry the run start time, not each row's arrival time (up to 12 s) | FIXED in code for later rows; the stored rows stay as they are (append-only) |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords and the superuser password are in every service's environment | OPEN, accepted for local use. Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -104,7 +105,7 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 |---|---|---|---|
 | W0.1 | Baseline, source register and spikes | IN PROGRESS | audits/evidence/wave-0.1-register-and-adr.md |
 | W0.2 | Database foundation and plumbing slice | PARTIAL | audits/evidence/wave-0.2.md |
-| W0.3 | Forward consensus capture job | NOT STARTED | - |
+| W0.3 | Forward consensus capture job | IN PROGRESS | audits/evidence/wave-0.3.md |
 | W1.1 | Task framework and client rules | NOT STARTED | - |
 | W1.2 | Storage rules | NOT STARTED | - |
 | W1.3 | Universe and identifiers | NOT STARTED | - |

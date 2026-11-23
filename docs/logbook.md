@@ -279,6 +279,14 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: DB-02 is partial (no agent role until Wave 5.1). DB-04 and DB-05 only cover the company table so far. The wave is not run on GitHub Actions and not audited independently. All role passwords are in every service's environment (acceptable locally).
 - Work by Claude. Decisions by John.
 
+### 23 Nov 2026: Wave 0.3, forward consensus capture
+
+- Asked by John: do Wave 0.3 first if it is better. It was the time-critical one, so Wave 0.2's database slice was built first and 0.3 followed straight after. John chose 22:30 UTC, with a catch-up capture when the worker starts and today has no snapshot.
+- Done: migration 0002 (`estimate_snapshot`, append-only for the worker role, nothing before 23 Nov 2026 00:00 UTC, one row per company, source, period and UTC day); `earnings.consensus` (capture, gap report, catch-up check); the `capture_consensus` task and the daily beat in the worker; a list of 10 companies. The first real capture ran by itself when the worker started: 10 of 10 companies stored, 12 seconds.
+- Verified: full-repository pytest 69 passed, 3 expected failures, 0 failed; CI-style 51 passed; ruff, format and mypy pass; planted faults in the migration made the SR-08 tests fail; no earlier passing test regressed.
+- Limits: the job has run on one day, so SR-10 stays partial until real runs on later days. The 22:30 run has not happened yet. Capture only runs while Docker and the PC are on. Ten companies only. XOM left out until the CIK question (DR-06) is settled.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).

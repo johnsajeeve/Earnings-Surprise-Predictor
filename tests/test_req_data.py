@@ -416,14 +416,6 @@ def test_sr_07_ac2_no_scraped_source_appears_in_the_demo():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("SR-08-AC1")
-def test_sr_08_ac1_test_rejects_any_row_for_a_snapshot():
-    """SR-08-AC1: Test rejects any row for a snapshot source whose capture time is missing
-    or earlier than the start date.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("SR-09-AC1")
 @pytest.mark.code("src/earnings/source_register.csv")
 def test_sr_09_ac1_source_register_has_a_cost_column_and():
