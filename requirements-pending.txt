@@ -9,12 +9,8 @@
 
 # Ingestion (Proposal 4.2: requests, yfinance, EDGAR; Data D-18: Hugging Face transcripts)
 requests==2.34.2
-yfinance==1.8.0
 datasets==5.2.0
 pandas==3.1.1
-
-# Migrations (Project-Wide / Product PL-05: versioned migrations)
-alembic==1.20.1
 
 # Text features (Proposal 4.2: FinBERT via Transformers, spaCy)
 transformers==5.23.0

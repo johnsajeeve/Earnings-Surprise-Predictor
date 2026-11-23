@@ -144,7 +144,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | PL-02-AC1 | 01a4d0a18feb | test_req_product.py::test_pl_02_ac1_injected_failure_produces_three_retries_and_one | not tested (NOT IMPLEMENTED) |
 | PL-03-AC1 | 794642428c88 | test_req_product.py::test_pl_03_ac1_health_response_lists_the_date_for_a | not tested (NOT IMPLEMENTED) |
 | PL-04-AC1 | 614fda020da7 | test_req_product.py::test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected | not tested (NOT IMPLEMENTED) |
-| PL-05-AC1 | 7ed3e4ffc2fd | test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | not tested (NOT IMPLEMENTED) |
+| PL-05-AC1 | 7ed3e4ffc2fd | test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | real check |
 | PL-06-AC1 | be9f2109f8a8 | test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before | not tested (NOT IMPLEMENTED) |
 | SCR-01-AC1 | 5d49425c3e3a | test_req_product.py::test_scr_01_ac1_input_field_submit_autocomplete_if_ui_01 | not tested (NOT IMPLEMENTED) |
 | SCR-02-AC1 | d171d15bb44b | test_req_product.py::test_scr_02_ac1_class_probabilities_confidence_evidence_base_input_as | not tested (NOT IMPLEMENTED) |
@@ -460,14 +460,14 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | AG-25-AC1 | 1206dcf82a09 | test_req_explanation_agent.py::test_ag_25_ac1_results_table_has_all_three_values_per | not tested (NEEDS MEASUREMENT) |
 | AG-26-AC1 | cf7bb015f009 | test_req_explanation_agent.py::test_ag_26_ac1_migration_exists_and_the_fields_are_populated | not tested (NOT IMPLEMENTED) |
 | DB-01-AC1 | 9f7c33ece34d | test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql | real check |
-| DB-01-AC2 | 1f6839ebdbfa | test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | not tested (NOT IMPLEMENTED) |
-| DB-02-AC1 | 504f4171484a | test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | not tested (BLOCKED) |
-| DB-03-AC1 | 61553542c50f | test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | not tested (BLOCKED) |
-| DB-03-AC2 | 0b503f907749 | test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | not tested (BLOCKED) |
+| DB-01-AC2 | 1f6839ebdbfa | test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | real check |
+| DB-02-AC1 | 504f4171484a | test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | expected failure (requirement not met yet) |
+| DB-03-AC1 | 61553542c50f | test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | real check |
+| DB-03-AC2 | 0b503f907749 | test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | real check |
 | DB-04-AC1 | 194bfc45ce6b | test_req_database.py::test_db_04_ac1_join_on_company_id_across_ten_known | not tested (NOT IMPLEMENTED) |
 | DB-05-AC1 | 4c8dd45eb9d1 | test_req_database.py::test_db_05_ac1_inserting_a_duplicate_of_each_fails | not tested (NOT IMPLEMENTED) |
 | DB-06-AC1 | 1da7d438cbc2 | test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability | not tested (NOT IMPLEMENTED) |
-| DB-07-AC1 | a0c98b50be17 | test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | not tested (NOT IMPLEMENTED) |
+| DB-07-AC1 | a0c98b50be17 | test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | real check |
 | DB-08-AC1 | 0ed1e228e9cc | test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each | not tested (NOT IMPLEMENTED) |
 | DB-09-AC1 | 86b1c534c190 | test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later | not tested (NOT IMPLEMENTED) |
 | DB-09-AC2 | 645e7fe7514d | test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of | not tested (NOT IMPLEMENTED) |
@@ -479,7 +479,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | DB-13-AC2 | 529e9566adbe | test_req_database.py::test_db_13_ac2_re_running_a_stage_leaves_the_row | not tested (NOT IMPLEMENTED) |
 | DB-14-AC1 | c41d812d12fd | test_req_database.py::test_db_14_ac1_explain_output_for_each_named_query_is | not tested (NOT IMPLEMENTED) |
 | DB-15-AC1 | 1333b5197f76 | test_req_database.py::test_db_15_ac1_size_report_exists | not tested (NEEDS MEASUREMENT) |
-| DB-16-AC1 | 931636ac485f | test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | not tested (NOT IMPLEMENTED) |
+| DB-16-AC1 | 931636ac485f | test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | real check |
 | DB-17-AC1 | 76b4852da8d3 | test_req_database.py::test_db_17_ac1_section_11_matches_the_migrated_schema | not tested (BLOCKED) |
 | UX-01-AC1 | 56226558b098 | test_req_frontend.py::test_ux_01_ac1_the_dashboard_s_container_has_no_database | not tested (NOT IMPLEMENTED) |
 | UX-01-AC2 | aad81e4365ca | test_req_frontend.py::test_ux_01_ac2_a_search_finds_no_database_import | not tested (NOT IMPLEMENTED) |
@@ -759,14 +759,15 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_data.py::test_vl_12_ac1_at_least_28_of_30_estimates_agree | VL-12-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_vl_12_ac2_otherwise_the_source_cannot_build_the_label | VL-12-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql | DB-01-AC1 | src/earnings/config.py, src/earnings/db.py | real check |
-| test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | DB-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | DB-02-AC1 | none yet | not tested (BLOCKED) |
-| test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | DB-03-AC1 | none yet | not tested (BLOCKED) |
-| test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | DB-03-AC2 | none yet | not tested (BLOCKED) |
+| test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | DB-01-AC2 | src/earnings/migrate.py, src/earnings/migrations/versions | real check |
+| test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden | DB-02 | src/earnings/config.py, src/earnings/migrate.py | real check |
+| test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | DB-02-AC1 | src/earnings/migrate.py | expected failure (requirement not met yet) |
+| test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | DB-03-AC1 | src/earnings/config.py, src/earnings/db.py | real check |
+| test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | DB-03-AC2 | src/earnings/migrate.py | real check |
 | test_req_database.py::test_db_04_ac1_join_on_company_id_across_ten_known | DB-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_05_ac1_inserting_a_duplicate_of_each_fails | DB-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability | DB-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | DB-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | DB-07-AC1 | src/earnings/migrations/versions | real check |
 | test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each | DB-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later | DB-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of | DB-09-AC2 | none yet | not tested (NOT IMPLEMENTED) |
@@ -778,7 +779,9 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_database.py::test_db_13_ac2_re_running_a_stage_leaves_the_row | DB-13-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_14_ac1_explain_output_for_each_named_query_is | DB-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_15_ac1_size_report_exists | DB-15-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 | tests/conftest.py, tests/db_support.py | real check |
+| test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form | DB-04 | src/earnings/identifiers.py, src/earnings/migrations/versions | real check |
+| test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database | DB-05 | src/earnings/migrations/versions | real check |
 | test_req_database.py::test_db_17_ac1_section_11_matches_the_migrated_schema | DB-17-AC1 | none yet | not tested (BLOCKED) |
 | test_req_deployment_and_operations.py::test_dp_07_ci_runs_the_requirement_consistency_checks | DP-07 | .github/workflows/ci.yml, docs/tools/check_requirements.py, scripts/check_commit_refs.py, scripts/check_requirement_refs.py | real check |
 | test_req_deployment_and_operations.py::test_dp_10_ac1_no_private_file_is_tracked_by_git | DP-10-AC1 | .gitignore | real check |
@@ -1089,7 +1092,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_product.py::test_pl_02_ac1_injected_failure_produces_three_retries_and_one | PL-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_pl_03_ac1_health_response_lists_the_date_for_a | PL-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected | PL-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | PL-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | PL-05-AC1 | src/earnings/migrate.py, src/earnings/migrations/versions | real check |
 | test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before | PL-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_scr_01_ac1_input_field_submit_autocomplete_if_ui_01 | SCR-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_scr_02_ac1_class_probabilities_confidence_evidence_base_input_as | SCR-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1189,6 +1192,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_eq_05_ac1_load_test_report_exists | EQ-05-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_project_wide.py::test_eq_06_ac1_three_scripted_tests_pass | EQ-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_eq_07_ac1_test_runs_each_task_twice_and_compares | EQ-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows | EQ-07 | src/earnings/db.py, src/earnings/tasks.py | real check |
 | test_req_project_wide.py::test_eq_09_ac1_coverage_report_in_continuous_integration | EQ-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_et_01_ac1_approval_reference_on_file | ET-01-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_project_wide.py::test_et_02_ac1_documents_on_file | ET-02-AC1 | none yet | not tested (NEEDS PERSON) |
@@ -1256,8 +1260,13 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | src/earnings/api/main.py | test_all_ok_returns_200<br>test_any_failure_returns_503_and_names_the_component<br>test_database_exception_is_reported_not_raised<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_health_reports_all_services_ok<br>test_openapi_specification_is_served_and_lists_health<br>test_unknown_unversioned_path_returns_404 | API-01-AC1, API-02-AC1, DP-01-AC1, NFR-04-AC1, SP-06, SV-01-AC1 |
 | src/earnings/api/middleware.py | test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_nfr_11_ac1_every_request_is_logged_with_id_latency_and_status<br>test_sp_05_ac1_the_request_log_holds_only_the_allowed_fields | NFR-11-AC1, SP-05-AC1, SV-01-AC1 |
 | src/earnings/celery_app.py | test_sc_01_ac1_adr_records_celery_with_redis_as_accepted<br>test_celery_task_round_trip_through_redis_and_worker | SC-01, SC-01-AC1 |
-| src/earnings/config.py | test_missing_required_setting_raises<br>test_sec_user_agent_is_optional<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql | DB-01-AC1, SP-06 |
-| src/earnings/db.py | test_database_exception_is_reported_not_raised<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_postgres_accepts_a_query_with_the_app_credentials | DB-01-AC1, DP-01-AC1, NFR-04-AC1 |
+| src/earnings/config.py | test_missing_required_setting_raises<br>test_sec_user_agent_is_optional<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden<br>test_db_03_ac1_a_load_fixture_with_more_clients_than | DB-01-AC1, DB-02, DB-03-AC1, SP-06 |
+| src/earnings/db.py | test_database_exception_is_reported_not_raised<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_db_03_ac1_a_load_fixture_with_more_clients_than<br>test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_postgres_accepts_a_query_with_the_app_credentials | DB-01-AC1, DB-03-AC1, DP-01-AC1, EQ-07, NFR-04-AC1 |
+| src/earnings/identifiers.py | test_db_04_company_id_is_one_canonical_cik_form | DB-04 |
+| src/earnings/migrate.py | test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_02_ac1_each_role_is_tested_for_one_allowed<br>test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden<br>test_db_03_ac2_a_long_query_is_cancelled<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-02, DB-02-AC1, DB-03-AC2, PL-05-AC1 |
+| src/earnings/migrations/versions | test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_04_company_id_is_one_canonical_cik_form<br>test_db_05_company_duplicate_is_refused_by_the_database<br>test_db_07_ac1_schema_query_finds_no_timestamp_without_zone<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-04, DB-05, DB-07-AC1, PL-05-AC1 |
 | src/earnings/source_register.csv | test_sr_01_ac1_register_has_one_row_per_dataset_each<br>test_sr_06_ac1_register_lists_a_fallback_per_dataset_and<br>test_sr_09_ac1_source_register_has_a_cost_column_and<br>test_th_14_ac1_zero<br>test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1, SR-01-AC1, SR-06-AC1, SR-09-AC1, TH-14-AC1 |
-| src/earnings/tasks.py | test_celery_task_round_trip_through_redis_and_worker | SC-01 |
+| src/earnings/tasks.py | test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_celery_task_round_trip_through_redis_and_worker | EQ-07, SC-01 |
+| tests/conftest.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 |
+| tests/db_support.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 |
 | tests/requirement_checks.lock | test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against | DO-03 |

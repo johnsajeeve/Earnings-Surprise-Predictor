@@ -556,7 +556,7 @@ Operations, security and engineering requirements are defined in the Project-Wid
 | SectorAssignment | company_id, gics_sector, gics_version, valid_from, valid_to | SRS-01, SRS-02; Data SEC-01. |
 | EarningsEvent | event_id, company_id, fiscal_period, transcript_date, information_date, announcement_date, announcement_time_utc, eps_basis, label_route, sue, label, consensus_label (prospective set only) | FR-02; Data DV-06, DV-07, AE-03. Label derived from SUE thresholds frozen during EDA. |
 | ActualEps | event_id, version, value, basis, source, document_id, released_at | Data AE-01 to AE-04. The first-reported value is kept; corrections are new versions. |
-| EstimateSnapshot | snapshot_id, event_id, mean_estimate, std_estimate (nullable), estimate_count, source, captured_at | FR-14; Data SR-10, CE-01, CE-04. Append-only. Holds the forward capture set. |
+| EstimateSnapshot | snapshot_id, company_id, event_id (nullable until the event is built), mean_estimate, low_estimate, high_estimate, std_estimate (nullable), estimate_count, eps_basis, period_label, source, source_version, captured_at, raw_payload (decision C-44) | FR-14; Data SR-10, CE-01, CE-04. Append-only. Holds the forward capture set. |
 | EpsHistory | company_id, fiscal_period, eps_diluted, derived (boolean), first_filed_at, source_document | Data LB-01 to LB-05. First-filed values are kept; restated values are new versions. |
 | FundamentalsFiling | company_id, fiscal_period, form, filed_at, revenue, gross_profit, operating_income, source, version | FR-24; Data FD-01 to FD-04. |
 | Transcript | transcript_id, event_id, source, source_url, retrieved_at, raw_text, cleaned_text, raw_hash | PL-06, FR-05; Data SR-04. |

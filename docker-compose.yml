@@ -1,4 +1,4 @@
-# Four services: PostgreSQL, Redis, the Celery worker and the FastAPI app.
+# Five services: PostgreSQL, Redis, a one-shot migration step, the Celery worker and the FastAPI app.
 # Start:  cp .env.example .env && docker compose up --build -d
 # Check:  curl http://localhost:8000/health
 # Stop:   docker compose down        (add -v to also delete the database volume)
@@ -10,6 +10,11 @@ x-app-env: &app-env
   POSTGRES_USER: ${POSTGRES_USER:-earnings}
   POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env first}
   POSTGRES_DB: ${POSTGRES_DB:-earnings}
+  # Passwords of the application roles (Database DB-02, decision C-44). The superuser above only
+  # creates the roles and the database. The services run as earnings_worker and earnings_api.
+  DB_MIGRATOR_PASSWORD: ${DB_MIGRATOR_PASSWORD:?Copy .env.example to .env first}
+  DB_WORKER_PASSWORD: ${DB_WORKER_PASSWORD:?Copy .env.example to .env first}
+  DB_API_PASSWORD: ${DB_API_PASSWORD:?Copy .env.example to .env first}
   CELERY_BROKER_URL: redis://redis:6379/0
   CELERY_RESULT_BACKEND: redis://redis:6379/1
   # Passed through from your shell. Empty if unset. Never written to a file in the repo.
@@ -45,6 +50,17 @@ services:
       retries: 10
     restart: unless-stopped
 
+  # Runs once at start: creates the roles, then applies the migrations (Product PL-05, Database
+  # DB-02). The worker and the API wait for it to finish.
+  migrate:
+    build: .
+    command: python -m earnings.migrate
+    environment: *app-env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
   worker:
     build: .
     command: celery -A earnings.celery_app worker --loglevel=info --concurrency=2
@@ -54,6 +70,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD-SHELL", "celery -A earnings.celery_app inspect ping -d celery@$$HOSTNAME -t 5"]
       interval: 15s
@@ -80,6 +98,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
       worker:
         condition: service_healthy
     restart: unless-stopped

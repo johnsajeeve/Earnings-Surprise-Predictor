@@ -431,6 +431,27 @@ def test_eq_07_ac1_test_runs_each_task_twice_and_compares():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
+@pytest.mark.req("EQ-07")
+@pytest.mark.code("src/earnings/tasks.py", "src/earnings/db.py")
+def test_eq_07_load_companies_twice_leaves_the_same_rows(test_db):
+    """First task only (load_companies). Each later task adds its own run-twice test."""
+    from sqlalchemy import text
+
+    from earnings.db import get_engine
+    from earnings.tasks import load_companies
+
+    synthetic = [["320193", "SYNTHETIC one"], ["789019", "SYNTHETIC two"]]
+
+    def snapshot():
+        with get_engine("api").connect() as conn:
+            return conn.execute(text("SELECT company_id, name FROM company ORDER BY 1")).all()
+
+    assert load_companies(synthetic) == 2
+    first = snapshot()
+    assert load_companies(synthetic) == 2
+    assert snapshot() == first == [("0000320193", "SYNTHETIC one"), ("0000789019", "SYNTHETIC two")]
+
+
 @pytest.mark.req("EQ-09-AC1")
 def test_eq_09_ac1_coverage_report_in_continuous_integration():
     """EQ-09-AC1: Coverage report in continuous integration."""

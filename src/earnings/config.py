@@ -17,6 +17,12 @@ class Settings(BaseSettings):
     celery_broker_url: str
     celery_result_backend: str
 
+    # Passwords of the three application roles (Database DB-02, decision C-44). The superuser above
+    # is used only to create the roles and the database, never by the running application.
+    db_migrator_password: str
+    db_worker_password: str
+    db_api_password: str
+
     # Port inside the Docker network. The host port in .env is a different setting.
     postgres_internal_port: int = 5432
 
@@ -26,6 +32,24 @@ class Settings(BaseSettings):
 
     # How long a /health result is reused, in seconds (audit finding F-07).
     health_cache_seconds: float = 5.0
+
+    def role_password(self, role: str) -> str:
+        return {
+            "migrator": self.db_migrator_password,
+            "worker": self.db_worker_password,
+            "api": self.db_api_password,
+        }[role]
+
+    def database_url_for(self, role: str, database: str | None = None) -> URL:
+        """Connection URL for one application role (Database DB-02). Never the superuser."""
+        return URL.create(
+            "postgresql+psycopg",
+            username=ROLE_NAMES[role],
+            password=self.role_password(role),
+            host=self.postgres_host,
+            port=self.postgres_internal_port,
+            database=database or self.postgres_db,
+        )
 
     @property
     def database_url(self) -> URL:
@@ -39,6 +63,13 @@ class Settings(BaseSettings):
             port=self.postgres_internal_port,
             database=self.postgres_db,
         )
+
+
+ROLE_NAMES = {
+    "migrator": "earnings_migrator",
+    "worker": "earnings_worker",
+    "api": "earnings_api",
+}
 
 
 @lru_cache

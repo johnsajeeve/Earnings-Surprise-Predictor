@@ -4,6 +4,7 @@ import logging
 
 import pytest
 
+from db_support import assert_test_database, test_database_name
 from requirement_support import KINDS
 
 
@@ -65,3 +66,36 @@ def request_log():
     logger.addHandler(handler)
     yield messages
     logger.removeHandler(handler)
+
+
+@pytest.fixture(scope="session")
+def test_db_name():
+    """A clean, fully migrated test database (Database DB-16, Product PL-05).
+
+    Built from nothing every session, by the same code that migrates the project database.
+    The rows tests write to it are synthetic.
+    """
+    from earnings import migrate
+
+    name = assert_test_database(test_database_name())
+    migrate.drop_database(name)
+    migrate.bootstrap(name)
+    migrate.upgrade(name)
+    yield name
+    migrate.drop_database(name)
+
+
+@pytest.fixture
+def test_db(test_db_name, monkeypatch):
+    """Point the application at the test database for one test and empty the company table."""
+    from earnings import migrate
+    from earnings.config import get_settings
+    from earnings.db import get_engine
+
+    monkeypatch.setenv("POSTGRES_DB", test_db_name)
+    get_settings.cache_clear()
+    get_engine.cache_clear()
+    migrate.truncate_all(test_db_name)
+    yield test_db_name
+    get_engine.cache_clear()
+    get_settings.cache_clear()

@@ -27,8 +27,8 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|
 | DB-01 | Must | PostgreSQL is the only store for entities, features, predictions and explanations. Redis is the task broker and result backend only and holds no project data of record. The PostgreSQL version is the exact tag in `docker-compose.yml`. Every extension in use is created by a migration. | A search of the code finds no other database for entities. The extension list matches the migrations. | SSOT Section 8; Project-Wide SC-01, EQ-04 |
-| DB-02 | Must | Separate database roles exist for: migrations, the workers (write), the API (read) and the explanation agent (read the evidence tables, write only the explanation tables, Explanation Agent AG-02). The API role is read, plus insert-only on the Explanation table so it can create a pending explanation job (API and Serving SV-06). No application role is a superuser. Passwords come from the environment. | Each role is tested for one allowed and one forbidden statement. | Explanation Agent AG-02; Project-Wide SP-02, SP-06; pending D-38 |
-| DB-03 | Must | Pools are bounded so the API and the workers together stay below the server's connection limit, and a statement time-out is set. The values are pending D-38. | A load fixture with more clients than the pool does not exhaust connections. A long query is cancelled. | Project-Wide SP-02 (unrestricted resource consumption); pending D-38 |
+| DB-02 | Must | Separate database roles exist for: migrations, the workers (write), the API (read) and the explanation agent (read the evidence tables, write only the explanation tables, Explanation Agent AG-02). The API role is read, plus insert-only on the Explanation table so it can create a pending explanation job (API and Serving SV-06). No application role is a superuser. Passwords come from the environment. | Each role is tested for one allowed and one forbidden statement. | Explanation Agent AG-02; Project-Wide SP-02, SP-06; decision C-44 |
+| DB-03 | Must | Pools are bounded so the API and the workers together stay below the server's connection limit, and a statement time-out is set. The values are in decision C-44. | A load fixture with more clients than the pool does not exhaust connections. A long query is cancelled. | Project-Wide SP-02 (unrestricted resource consumption); decision C-44 |
 
 ## 3. Keys and integrity
 
@@ -79,6 +79,7 @@ These are changes to Product Section 11 and need approval under change control b
 
 | Addition | Needed by |
 |---|---|
+| `EstimateSnapshot` (approved, decision C-44): `company_id` required, `event_id` nullable until the event is built, `low_estimate`, `high_estimate`, `eps_basis`, `period_label`, `source_version` and the raw response as received | Data SR-10, CE-01, CE-03; Product FR-14 |
 | `RawPayload` table: payload id, source, URL, retrieval time, hash, body or file path | DB-11 |
 | `TranscriptSentence` columns: analytic flag, truncated flag, forward-guidance flag, speaker role, FinBERT model revision | Feature Engineering FE-02, FE-06, FE-14, FE-05 |
 | `FeatureVector`: prediction point (T0 or T1) and a reason code per unavailable feature | Feature Engineering FE-23, FE-24 |

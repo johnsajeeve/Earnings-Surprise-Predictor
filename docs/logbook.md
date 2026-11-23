@@ -271,6 +271,14 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: SR-06 fails (no fallback for the announcement time, and no fallback tested). SC-07 is partial without the supervisor's written agreement. D-35 stays open: the weights of `ProsusAI/finbert` are CC BY-NC-SA 4.0. The stack was rebuilt over running containers, not from a clean volume. The second bulk-file observation, the Finnhub, FMP and Alpha Vantage spikes and the independent phase audit are not done.
 - Work by Claude. Decisions by John.
 
+### 23 Nov 2026: Wave 0.2, database foundation
+
+- Asked by John: start with whichever of Waves 0.2 and 0.3 is better. Wave 0.3 (forward consensus capture) loses data every day it waits, but it needs a migration, so the database slice came first. John approved (C-44): Alembic and yfinance as runtime dependencies, the role, pool and time-out values, a changed EstimateSnapshot, and embedded Celery beat.
+- Done: Alembic migrations (`earnings.migrate`, one-shot `migrate` compose service, migration 0001 company with the ten-digit CIK as key); roles `earnings_migrator`, `earnings_worker` (no delete) and `earnings_api` (read only), none a superuser; pools of 5 plus 5, statement time-outs 10, 120 and 300 s; a test database built from nothing each session; `load_companies` task, safe to run twice. D-38 narrowed to the tables not yet approved.
+- Verified: full-repository pytest 60 passed, 3 expected failures, 0 failed (47 passed before); CI-style run 42 passed, 0 failed; ruff, ruff format and mypy pass; planted faults in the role grants and a time-out made the role tests fail; no earlier passing test regressed.
+- Limits: DB-02 is partial (no agent role until Wave 5.1). DB-04 and DB-05 only cover the company table so far. The wave is not run on GitHub Actions and not audited independently. All role passwords are in every service's environment (acceptable locally).
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).

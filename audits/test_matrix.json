@@ -227,6 +227,8 @@
     "src/earnings/config.py": {
       "requirements": [
         "DB-01-AC1",
+        "DB-02",
+        "DB-03-AC1",
         "SP-06"
       ],
       "tests": [
@@ -234,19 +236,65 @@
         "tests/test_config.py::test_sec_user_agent_is_optional",
         "tests/test_health_unit.py::test_sec_user_agent_unset_is_reported_false",
         "tests/test_health_unit.py::test_sec_user_agent_value_is_never_returned",
-        "tests/test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql"
+        "tests/test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql",
+        "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden",
+        "tests/test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than"
       ]
     },
     "src/earnings/db.py": {
       "requirements": [
         "DB-01-AC1",
+        "DB-03-AC1",
         "DP-01-AC1",
+        "EQ-07",
         "NFR-04-AC1"
       ],
       "tests": [
         "tests/test_health_unit.py::test_database_exception_is_reported_not_raised",
         "tests/test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql",
+        "tests/test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than",
+        "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials"
+      ]
+    },
+    "src/earnings/identifiers.py": {
+      "requirements": [
+        "DB-04"
+      ],
+      "tests": [
+        "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form"
+      ]
+    },
+    "src/earnings/migrate.py": {
+      "requirements": [
+        "DB-01-AC2",
+        "DB-02",
+        "DB-02-AC1",
+        "DB-03-AC2",
+        "PL-05-AC1"
+      ],
+      "tests": [
+        "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations",
+        "tests/test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed",
+        "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden",
+        "tests/test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled",
+        "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on"
+      ]
+    },
+    "src/earnings/migrations/versions": {
+      "requirements": [
+        "DB-01-AC2",
+        "DB-04",
+        "DB-05",
+        "DB-07-AC1",
+        "PL-05-AC1"
+      ],
+      "tests": [
+        "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations",
+        "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form",
+        "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database",
+        "tests/test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone",
+        "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on"
       ]
     },
     "src/earnings/source_register.csv": {
@@ -267,10 +315,28 @@
     },
     "src/earnings/tasks.py": {
       "requirements": [
+        "EQ-07",
         "SC-01"
       ],
       "tests": [
+        "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
+      ]
+    },
+    "tests/conftest.py": {
+      "requirements": [
+        "DB-16-AC1"
+      ],
+      "tests": [
+        "tests/test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against"
+      ]
+    },
+    "tests/db_support.py": {
+      "requirements": [
+        "DB-16-AC1"
+      ],
+      "tests": [
+        "tests/test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against"
       ]
     },
     "tests/requirement_checks.lock": {
@@ -1189,7 +1255,9 @@
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden"
+      ]
     },
     "DB-03": {
       "checks": [
@@ -1225,7 +1293,9 @@
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form"
+      ]
     },
     "DB-05": {
       "checks": [
@@ -1239,7 +1309,9 @@
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database"
+      ]
     },
     "DB-06": {
       "checks": [
@@ -2135,7 +2207,9 @@
         }
       ],
       "document": "project-wide-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows"
+      ]
     },
     "EQ-08": {
       "checks": [
@@ -8742,29 +8816,49 @@
       ]
     },
     "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/migrate.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
       "requirements": [
         "DB-01-AC2"
       ]
     },
     "tests/test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed": {
-      "code": [],
-      "kind": "not tested (BLOCKED)",
+      "code": [
+        "src/earnings/migrate.py"
+      ],
+      "kind": "expected failure (requirement not met yet)",
       "requirements": [
         "DB-02-AC1"
       ]
     },
+    "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden": {
+      "code": [
+        "src/earnings/config.py",
+        "src/earnings/migrate.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-02"
+      ]
+    },
     "tests/test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than": {
-      "code": [],
-      "kind": "not tested (BLOCKED)",
+      "code": [
+        "src/earnings/config.py",
+        "src/earnings/db.py"
+      ],
+      "kind": "real check",
       "requirements": [
         "DB-03-AC1"
       ]
     },
     "tests/test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled": {
-      "code": [],
-      "kind": "not tested (BLOCKED)",
+      "code": [
+        "src/earnings/migrate.py"
+      ],
+      "kind": "real check",
       "requirements": [
         "DB-03-AC2"
       ]
@@ -8776,11 +8870,30 @@
         "DB-04-AC1"
       ]
     },
+    "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form": {
+      "code": [
+        "src/earnings/identifiers.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-04"
+      ]
+    },
     "tests/test_req_database.py::test_db_05_ac1_inserting_a_duplicate_of_each_fails": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "DB-05-AC1"
+      ]
+    },
+    "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-05"
       ]
     },
     "tests/test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability": {
@@ -8791,8 +8904,10 @@
       ]
     },
     "tests/test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
       "requirements": [
         "DB-07-AC1"
       ]
@@ -8875,8 +8990,11 @@
       ]
     },
     "tests/test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "tests/conftest.py",
+        "tests/db_support.py"
+      ],
+      "kind": "real check",
       "requirements": [
         "DB-16-AC1"
       ]
@@ -11061,8 +11179,11 @@
       ]
     },
     "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/migrate.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
       "requirements": [
         "PL-05-AC1"
       ]
@@ -11737,6 +11858,16 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "EQ-07-AC1"
+      ]
+    },
+    "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows": {
+      "code": [
+        "src/earnings/db.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "EQ-07"
       ]
     },
     "tests/test_req_project_wide.py::test_eq_08_ac1_a_vulnerability_scan_job_runs_on_every_pull_request": {

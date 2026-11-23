@@ -978,9 +978,36 @@ def test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected():
 
 
 @pytest.mark.req("PL-05-AC1")
+@pytest.mark.code("src/earnings/migrate.py", "src/earnings/migrations/versions")
 def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
     """PL-05-AC1: Migration history matches the deployed schema on a clean database."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    from sqlalchemy import create_engine, inspect
+    from sqlalchemy.pool import NullPool
+
+    from db_support import assert_test_database, project_database
+    from earnings import migrate
+
+    name = assert_test_database(project_database() + "_pl05_test")
+    migrate.drop_database(name)
+    try:
+        migrate.bootstrap(name)
+        migrate.upgrade(name)
+        engine = create_engine(migrate.migrator_url(name), poolclass=NullPool)
+        with engine.connect() as conn:
+            head = conn.exec_driver_sql("SELECT version_num FROM alembic_version").scalar()
+            tables = set(inspect(conn).get_table_names())
+            columns = [c["name"] for c in inspect(conn).get_columns("company")]
+        engine.dispose()
+        assert head == migrate.head_revision()
+        assert tables == {"alembic_version", "company"}
+        assert columns == ["company_id", "name"]
+        migrate.downgrade(name, "base")  # the history is reversible
+        engine = create_engine(migrate.migrator_url(name), poolclass=NullPool)
+        with engine.connect() as conn:
+            assert set(inspect(conn).get_table_names()) <= {"alembic_version"}
+        engine.dispose()
+    finally:
+        migrate.drop_database(name)
 
 
 @pytest.mark.req("PL-06-AC1")

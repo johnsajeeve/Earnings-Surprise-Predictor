@@ -10,8 +10,6 @@ A requirement listed here cites a decision that is still open. Before a build ta
 | AG-20 | D-27 |
 | AG-22 | D-37 |
 | AG-24 | D-06, D-37 |
-| DB-02 | D-38 |
-| DB-03 | D-38 |
 | DB-17 | D-38 |
 | DP-11 | D-15 |
 | DP-12 | D-15 |
