@@ -199,34 +199,6 @@ def test_gs_02_ac1_data_card_exists_for_every_dataset_version():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("IM-01-AC1")
-def test_im_01_ac1_at_sampled_year_ends_company_count_matches():
-    """IM-01-AC1: At sampled year-ends, company count matches the published count within 5,
-    and differences are explained.
-    """
-    not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
-
-
-@pytest.mark.req("IM-02-AC1")
-def test_im_02_ac1_each_year_in_the_period_has_at():
-    """IM-02-AC1: Each year in the period has at least one such company."""
-    not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
-
-
-@pytest.mark.req("IM-02-AC2")
-def test_im_02_ac2_each_record_has_a_removal_date_and():
-    """IM-02-AC2: Each record has a removal date and reason."""
-    not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
-
-
-@pytest.mark.req("IM-03-AC1")
-def test_im_03_ac1_join_on_the_permanent_identifier_produces_one():
-    """IM-03-AC1: Join on the permanent identifier produces one continuous history for ten
-    known renames.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("LB-01-AC1")
 def test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue():
     """LB-01-AC1: Fixture company with a hand-calculated SUE matches to four decimal places."""
@@ -470,12 +442,6 @@ def test_th_03_ac1_at_least_98_within_0_5():
 @pytest.mark.req("TH-04-AC1")
 def test_th_04_ac1_3():
     """TH-04-AC1: 3"""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("TH-05-AC1")
-def test_th_05_ac1_within_5_of_published_count():
-    """TH-05-AC1: Within 5 of published count"""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 

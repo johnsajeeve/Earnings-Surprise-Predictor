@@ -206,14 +206,6 @@ def test_db_03_ac2_a_long_query_is_cancelled(test_db):
     assert cfg["idle_in_transaction_session_timeout"] == "60s"
 
 
-@pytest.mark.req("DB-04-AC1")
-def test_db_04_ac1_join_on_company_id_across_ten_known():
-    """DB-04-AC1: Join on `company_id` across ten known ticker changes gives one history
-    (Data IM-03).
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("DB-05-AC1")
 def test_db_05_ac1_inserting_a_duplicate_of_each_fails():
     """DB-05-AC1: Inserting a duplicate of each fails."""

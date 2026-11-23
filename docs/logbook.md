@@ -318,11 +318,23 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Result: Phase 0 is PARTIAL (the lower status of the auditor and me stands). John's own spot-check of five requirements has not happened.
 - Work by Claude, audit by an independent agent. Decisions by John.
 
+### 23 Nov 2026: pull request opened, Wave 1.3 (universe and identifiers)
+
+- Asked by John: open the pull request, start Wave 1.3, and never delete working branches that hold commits. Pull request #3 is open against `build/docker-skeleton` (it is stacked on the still-open #2); no branch was or will be deleted, and that rule is saved to memory.
+- John decided (C-47): companies whose CIK changed are excluded and logged (XOM, new Disney, Baker Hughes and others), Wikipedia's history table is a secondary source for names and removal reasons only, and the 100 companies are chosen with seed 2031 (80 current, 20 removed with at least one per year).
+- Done: four real source files stored as received; parsers that read them offline; exact-name matching with a review list; a rename rule for renamed tickers; the selection; a job that loads 5 or 100 companies from a list file, safe to repeat; 100 companies, their ticker histories and index membership loaded into the project database; the daily capture widened to 89 companies.
+- Found by checking the real data, not the tests: the first matcher accepted `BBT` as "Beacon Financial Corp" (a reused ticker) and linked two renames on one day wrongly, and the first rename rule linked 301 tickers, many wrongly. Each was fixed and the links were read by hand.
+- Results: the company count at each year-end is 499 to 503 against the nominal 500 (tickers 502 to 506, the difference is share classes); all ten known renames give one continuous history; every year has a removed company with a date and reason.
+- Verified: full-repository pytest 125 passed, 3 expected failures, 0 failed (111 before); CI-style 106 passed; ruff, format and mypy pass; faults in the matching rules made 4 tests fail; no earlier test regressed.
+- Limits: 431 of 1,209 tickers have no CIK (62 of the 230 removed ones); the rename rule is beyond the written method and needs John's confirmation (DR-16); removal reasons are Wikipedia's wording; the list was not checked company by company by a person.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).
 - D-34: approve the negation and forward-guidance definitions.
 - D-35 to D-46 (D-35 now also needs a view on the CC BY-NC-SA licence of the ProsusAI/finbert weights): FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
+- DR-16: confirm the rename-adjacent matching rule and read the review list (`audits/evidence/wave-1.3/review_list.csv`).
 - DR-14: add a nullable `source_version` column to `raw_payload` (Data SR-04 asks for it).
 - DR-10, DR-06, DR-08 and the ProsusAI/finbert licence (D-35): see the audit file's drift register.
 - D-46: note in the next supervisor meeting action list that Professor Goodacre has no objection to the time-series label (C-25 closed D-01 on John's word; SC-07 and SS-04 ask for it in writing).

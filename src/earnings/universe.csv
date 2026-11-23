@@ -1,0 +1,101 @@
+company_id,name,status,removal_date,removal_reason
+0001001250,ESTEE LAUDER COMPANIES INC,current,,
+0000073124,NORTHERN TRUST CORP,current,,
+0000045012,HALLIBURTON CO,current,,
+0000029534,DOLLAR GENERAL CORP,current,,
+0000721371,CARDINAL HEALTH INC,current,,
+0001018724,AMAZON COM INC,current,,
+0000075362,PACCAR INC,current,,
+0001316835,"Builders FirstSource, Inc.",current,,
+0000822416,PULTEGROUP INC/MI/,current,,
+0000882184,HORTON D R INC /DE/,current,,
+0000865752,Monster Beverage Corp,current,,
+0000849395,CRH PUBLIC LTD CO,current,,
+0000895126,EXPAND ENERGY Corp,current,,
+0001418135,Keurig Dr Pepper Inc.,current,,
+0000062709,"MARSH & MCLENNAN COMPANIES, INC.",current,,
+0000010795,BECTON DICKINSON & CO,current,,
+0001637459,Kraft Heinz Co,current,,
+0001539838,"Diamondback Energy, Inc.",current,,
+0000091576,KEYCORP /NEW/,current,,
+0001534701,Phillips 66,current,,
+0001674101,Vertiv Holdings Co,current,,
+0000055785,KIMBERLY CLARK CORP,current,,
+0001932393,GE HealthCare Technologies Inc.,current,,
+0001781335,Otis Worldwide Corp,current,,
+0001324424,"Expedia Group, Inc.",current,,
+0000882835,ROPER TECHNOLOGIES INC,current,,
+0001283699,"T-Mobile US, Inc.",current,,
+0000004962,AMERICAN EXPRESS CO,current,,
+0000086312,"TRAVELERS COMPANIES, INC.",current,,
+0000920148,LABCORP HOLDINGS INC.,current,,
+0001285785,MOSAIC CO,current,,
+0001013871,"NRG ENERGY, INC.",current,,
+0000313616,DANAHER CORP /DE/,current,,
+0001403161,VISA INC.,current,,
+0001140859,"Cencora, Inc.",current,,
+0000746515,EXPEDITORS INTERNATIONAL OF WASHINGTON INC,current,,
+0001858681,"Apollo Global Management, Inc.",current,,
+0000947484,ARCH CAPITAL GROUP LTD.,current,,
+0001097864,ON SEMICONDUCTOR CORP,current,,
+0001113169,PRICE T ROWE GROUP INC,current,,
+0000811156,CMS ENERGY CORP,current,,
+0000277948,CSX CORP,current,,
+0000745732,"ROSS STORES, INC.",current,,
+0000027904,"DELTA AIR LINES, INC.",current,,
+0001413329,Philip Morris International Inc.,current,,
+0000906163,NVR INC,current,,
+0000004127,"SKYWORKS SOLUTIONS, INC.",current,,
+0000783325,"WEC ENERGY GROUP, INC.",current,,
+0000002488,ADVANCED MICRO DEVICES INC,current,,
+0001535527,"CrowdStrike Holdings, Inc.",current,,
+0001090872,"AGILENT TECHNOLOGIES, INC.",current,,
+0001327811,"Workday, Inc.",current,,
+0000354950,"HOME DEPOT, INC.",current,,
+0001633917,"PayPal Holdings, Inc.",current,,
+0001037868,AMETEK INC/,current,,
+0001070750,"HOST HOTELS & RESORTS, INC.",current,,
+0001090012,DEVON ENERGY CORP/DE,current,,
+0001091667,"CHARTER COMMUNICATIONS, INC. /MO/",current,,
+0001524472,Xylem Inc.,current,,
+0000024741,CORNING INC /NY,current,,
+0000020286,CINCINNATI FINANCIAL CORP,current,,
+0001601712,Synchrony Financial,current,,
+0000079282,"BROWN & BROWN, INC.",current,,
+0000006281,ANALOG DEVICES INC,current,,
+0001289490,Extra Space Storage Inc.,current,,
+0000035527,FIFTH THIRD BANCORP,current,,
+0000009389,BALL Corp,current,,
+0000107263,"WILLIAMS COMPANIES, INC.",current,,
+0001037038,RALPH LAUREN CORP,current,,
+0001964738,Solventum Corp,current,,
+0000007084,Archer-Daniels-Midland Co,current,,
+0001513761,Norwegian Cruise Line Holdings Ltd.,current,,
+0001713445,"Reddit, Inc.",current,,
+0001512673,"Block, Inc.",current,,
+0000029989,OMNICOM GROUP INC.,current,,
+0001579241,Allegion plc,current,,
+0000318154,AMGEN INC,current,,
+0001659166,Fortive Corp,current,,
+0000075677,PACKAGING CORP OF AMERICA,current,,
+0000036104,US BANCORP \DE\,current,,
+0001274057,Hospira,removed,2015-09-03,Hospira was acquired.
+0000048595,Starwood Hotels and Resorts,removed,2016-09-23,MAR acquired Starwood Hotels
+0000030419,Dun & Bradstreet,removed,2017-04-05,Gartner acquired CEB.
+0000891024,Patterson Companies,removed,2018-03-19,Market capitalization changes.
+0001685040,"Brighthouse Financial, Inc.",removed,2019-04-02,DowDuPont completed the corporate spin-off of Dow Inc.
+0000072333,Nordstrom,removed,2020-06-22,Market capitalization changes.
+0000048039,HollyFrontier,removed,2021-06-04,Market capitalization changes.
+0001418091,Twitter,removed,2022-11-01,Elon Musk acquired Twitter.
+0000718877,Activision Blizzard,removed,2023-10-18,Acquisition of Activision Blizzard by Microsoft.
+0000701985,"Bath & Body Works, Inc.",removed,2024-10-01,Market capitalization changes.
+0000203077,St Jude Medical,removed,2017-01-05,Abbott Laboratories acquired St. Jude Medical.
+0000350563,TECO Energy,removed,2016-07-01,TECO Energy was acquired by EMA.
+0001598014,IHS Markit,removed,2022-03-02,S&P Global acquired IHS Markit.
+0000862178,Lorillard Tobacco Company,removed,2015-06-12,Lorillard was acquired.
+0000909954,Keurig Green Mountain,removed,2016-03-03,JAB Holding Company acquired Keurig Green Mountain.
+0000108772,Xerox,removed,2021-03-22,Market capitalization changes.
+0000865436,Whole Foods Market,removed,2017-08-28,Amazon acquired Whole Foods Market.
+0001124198,FLUOR CORP,removed,2019-06-03,DowDuPont completed the corporate spin-off of Corteva.
+0000098246,Tiffany & Co,removed,2021-01-07,LVMH Moet Hennessy-Louis Vuitton SE acquired Tiffany & Co.
+0000088204,Sealed Air,removed,2023-12-18,Market capitalization changes.

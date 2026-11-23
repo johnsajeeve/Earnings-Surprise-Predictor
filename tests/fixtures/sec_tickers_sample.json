@@ -1,0 +1,92 @@
+{
+ "0": {
+  "cik_str": 320193,
+  "ticker": "AAPL",
+  "title": "Apple Inc."
+ },
+ "6": {
+  "cik_str": 1326801,
+  "ticker": "META",
+  "title": "Meta Platforms, Inc."
+ },
+ "16": {
+  "cik_str": 2115436,
+  "ticker": "XOM",
+  "title": "ExxonMobil Holdings Corp"
+ },
+ "43": {
+  "cik_str": 101829,
+  "ticker": "RTX",
+  "title": "RTX Corp"
+ },
+ "201": {
+  "cik_str": 1156039,
+  "ticker": "ELV",
+  "title": "Elevance Health, Inc."
+ },
+ "264": {
+  "cik_str": 1140859,
+  "ticker": "COR",
+  "title": "Cencora, Inc."
+ },
+ "296": {
+  "cik_str": 92230,
+  "ticker": "TFC",
+  "title": "TRUIST FINANCIAL CORP"
+ },
+ "333": {
+  "cik_str": 202058,
+  "ticker": "LHX",
+  "title": "L3HARRIS TECHNOLOGIES, INC. /DE/"
+ },
+ "339": {
+  "cik_str": 1701605,
+  "ticker": "BKR",
+  "title": "Baker Hughes Co"
+ },
+ "571": {
+  "cik_str": 1792044,
+  "ticker": "VTRS",
+  "title": "Viatris Inc"
+ },
+ "632": {
+  "cik_str": 895126,
+  "ticker": "EXE",
+  "title": "EXPAND ENERGY Corp"
+ },
+ "681": {
+  "cik_str": 31791,
+  "ticker": "RVTY",
+  "title": "REVVITY, INC."
+ },
+ "719": {
+  "cik_str": 1095073,
+  "ticker": "EG",
+  "title": "EVEREST GROUP, LTD."
+ },
+ "866": {
+  "cik_str": 320335,
+  "ticker": "GL",
+  "title": "GLOBE LIFE INC."
+ },
+ "1332": {
+  "cik_str": 1995807,
+  "ticker": "LB",
+  "title": "LandBridge Corp"
+ },
+ "1517": {
+  "cik_str": 18926,
+  "ticker": "LUMN",
+  "title": "Lumen Technologies, Inc."
+ },
+ "1594": {
+  "cik_str": 701985,
+  "ticker": "BBWI",
+  "title": "Bath & Body Works, Inc."
+ },
+ "1911": {
+  "cik_str": 1108134,
+  "ticker": "BBT",
+  "title": "Beacon Financial Corp"
+ }
+}

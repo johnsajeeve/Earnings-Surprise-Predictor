@@ -1,0 +1,891 @@
+ticker,method,name,ciks,note
+AABA,unresolved,,,no name in any source
+AAMRQ,unresolved,,,no name in any source
+ABC,unresolved,,,no name in any source
+ABI,unresolved,,,no name in any source
+ABKFQ,unresolved,,,no name in any source
+ABMD,name,Abiomed,0000815094,matched by exact normalised name
+ABS,name,Albertsons,0001284719,matched by exact normalised name
+ABX,ticker-reused,"Abacus Global Management, Inc.",0001814287,SEC lists this ticker; no name agrees
+ABX,unresolved,,,no name in any source
+ACAS,ambiguous,American Capital,0000004707 0000817473 0001435992 0001543455,name gives several CIKs
+ACKH,unresolved,,,no name in any source
+ACS,unresolved,,,no name in any source
+ACV,ticker-reused,Virtus Diversified Income & Convertible Fund,0001636289,SEC lists this ticker; no name agrees
+ACV,unresolved,,,no name in any source
+ADCT,ticker-reused,ADC Therapeutics SA,0001771910,SEC lists this ticker; no name agrees
+ADCT,name,ADC Telecommunications,0000061478,matched by exact normalised name
+ADS,name,Alliance Data Systems,0001101215,matched by exact normalised name
+AET,name,Aetna,0001013761,matched by exact normalised name
+AFS-A,unresolved,,,no name in any source
+AGC,unresolved,,,no name in any source
+AGN,ambiguous,Allergan,0000850693 0001578845,name gives several CIKs
+AHM,unresolved,,,no name in any source
+AIT,ticker-reused,APPLIED INDUSTRIAL TECHNOLOGIES INC,0000109563,SEC lists this ticker; no name agrees
+AIT,unresolved,,,no name in any source
+AIV,ticker-reused,APARTMENT INVESTMENT & MANAGEMENT CO,0000922864,SEC lists this ticker; no name agrees
+AIV,name,Aimco,0001820877,matched by exact normalised name
+AKS,name,AK Steel,0000918192,matched by exact normalised name
+AL,unresolved,,,no name in any source
+ALTR,name,Altera,0000768251,matched by exact normalised name
+ALXN,name,Alexion Pharmaceuticals,0000899866,matched by exact normalised name
+AM,ticker-reused,Antero Midstream Corp,0001623925,SEC lists this ticker; no name agrees
+AM,unresolved,,,no name in any source
+AMCC,unresolved,,,no name in any source
+AMH,ticker-reused,American Homes 4 Rent,0001562401,SEC lists this ticker; no name agrees
+AMH,unresolved,,,no name in any source
+AMTM,ticker-reused,"Amentum Holdings, Inc.",0002011286,SEC lists this ticker; no name agrees
+AMTM,unresolved,Amentum,,name not in the SEC lookup
+ANDV,name,Andeavor,0000050104,matched by exact normalised name
+ANDW,unresolved,,,no name in any source
+ANF,ticker-reused,ABERCROMBIE & FITCH CO /DE/,0001018840,SEC lists this ticker; no name agrees
+ANF,name,Abercrombie & Fitch,0000001848,matched by exact normalised name
+ANRZQ,unresolved,,,no name in any source
+ANSS,name,Ansys,0001013462,matched by exact normalised name
+ANTM,unresolved,,,no name in any source
+ANV,unresolved,,,no name in any source
+APC,ticker-reused,ARKO Petroleum Corp.,0002080921,SEC lists this ticker; no name agrees
+APC,name,Anadarko Petroleum,0000773910,matched by exact normalised name
+APCC,unresolved,,,no name in any source
+APOL,name,Apollo Education Group,0000929887,matched by exact normalised name
+AR,ticker-reused,ANTERO RESOURCES Corp,0001433270,SEC lists this ticker; no name agrees
+AR,unresolved,,,no name in any source
+ARC,unresolved,,,no name in any source
+ARG,name,Airgas,0000804212,matched by exact normalised name
+ARNC,ambiguous,Arconic,0000004281 0001790982,name gives several CIKs
+AS,ticker-reused,"Amer Sports, Inc.",0001988894,SEC lists this ticker; no name agrees
+AS,unresolved,,,no name in any source
+ASC,ticker-reused,Ardmore Shipping Corp,0001577437,SEC lists this ticker; no name agrees
+ASC,unresolved,,,no name in any source
+ASH,ticker-reused,ASHLAND INC.,0001674862,SEC lists this ticker; no name agrees
+ASH,unresolved,,,no name in any source
+ASN,unresolved,,,no name in any source
+ASND,ticker-reused,Ascendis Pharma A/S,0001612042,SEC lists this ticker; no name agrees
+ASND,unresolved,,,no name in any source
+ASO,ticker-reused,"Academy Sports & Outdoors, Inc.",0001817358,SEC lists this ticker; no name agrees
+ASO,unresolved,,,no name in any source
+AT,unresolved,,,no name in any source
+ATGE,unresolved,,,no name in any source
+ATI,ticker-reused,ATI INC,0001018963,SEC lists this ticker; no name agrees
+ATI,name,Allegheny Technologies,0001018963,matched by exact normalised name
+ATVI,name,Activision Blizzard,0000718877,matched by exact normalised name
+AV,name,Avaya,0001116521,matched by exact normalised name
+AVB,name,AvalonBay Communities,0000915912,matched by exact normalised name
+AVP,name,Avon Products,0000008868,matched by exact normalised name
+AW,unresolved,,,no name in any source
+AWE,unresolved,,,no name in any source
+AYE,name,Allegheny Energy,0000003673,matched by exact normalised name
+AYI,ticker-reused,ACUITY INC. (DE),0001144215,SEC lists this ticker; no name agrees
+AYI,name,Acuity Brands,0001144215,matched by exact normalised name
+AZA-A,unresolved,,,no name in any source
+BAY,unresolved,,,no name in any source
+BBBY,ambiguous,Bed Bath & Beyond,0000886158 0001130713,name gives several CIKs
+BBI,unresolved,,,no name in any source
+BBT,ticker-reused,Beacon Financial Corp,0001108134,SEC lists this ticker; no name agrees
+BBT,unresolved,,,no name in any source
+BCO,ticker-reused,BRINKS CO,0000078890,SEC lists this ticker; no name agrees
+BCO,unresolved,,,no name in any source
+BCR,unresolved,CR Bard,,name not in the SEC lookup
+BDK,unresolved,,,no name in any source
+BEAM,ticker-reused,Beam Therapeutics Inc.,0001745999,SEC lists this ticker; no name agrees
+BEAM,unresolved,Suntory Global Spirits,,name not in the SEC lookup
+BEV,unresolved,,,no name in any source
+BFI,unresolved,,,no name in any source
+BFO,unresolved,,,no name in any source
+BGEN,unresolved,,,no name in any source
+BGG,unresolved,,,no name in any source
+BHGE,unresolved,,,no name in any source
+BHMSQ,unresolved,,,no name in any source
+BIG,name,Big Lots,0000768835,matched by exact normalised name
+BJS,ambiguous,BJ Services,0000864328 0001703085,name gives several CIKs
+BK,unresolved,,,no name in any source
+BKB,unresolved,,,no name in any source
+BLL,unresolved,,,no name in any source
+BLS,unresolved,,,no name in any source
+BLY,unresolved,,,no name in any source
+BMC,name,BMC Software,0000835729,matched by exact normalised name
+BMET,unresolved,,,no name in any source
+BMGCA,unresolved,,,no name in any source
+BMS,ambiguous,Bemis | Bemis Company,0000011199 0001491863 0001521188,name gives several CIKs
+BNI,unresolved,,,no name in any source
+BNL,ticker-reused,"Broadstone Net Lease, Inc.",0001424182,SEC lists this ticker; no name agrees
+BNL,unresolved,,,no name in any source
+BOAT,unresolved,,,no name in any source
+BOL,unresolved,,,no name in any source
+BRCM,ambiguous,Broadcom Corporation,0001054374 0001649338 0001730168,name gives several CIKs
+BRL,unresolved,,,no name in any source
+BSC,unresolved,,,no name in any source
+BT,unresolved,,,no name in any source
+BTUUQ,unresolved,,,no name in any source
+BUD,ticker-reused,Anheuser-Busch InBev SA/NV,0001668717,SEC lists this ticker; no name agrees
+BUD,name,Anheuser Busch,0000006627,matched by exact normalised name
+BVSN,unresolved,,,no name in any source
+BXLT,name,Baxalta,0001620546,matched by exact normalised name
+CA,unresolved,CA Technologies,,name not in the SEC lookup
+CAL,ticker-reused,CALERES INC,0000014707,SEC lists this ticker; no name agrees
+CAL,unresolved,,,no name in any source
+CAM,ambiguous,Cameron International,0000941548 0001281057,name gives several CIKs
+CAR,ticker-reused,"AVIS BUDGET GROUP, INC.",0000723612,SEC lists this ticker; no name agrees
+CAR,unresolved,,,no name in any source
+CBB,unresolved,,,no name in any source
+CBE,ambiguous,Cooper Industries,0000024454 0001141982 0001505206 0001584296,name gives several CIKs
+CBH,unresolved,,,no name in any source
+CBS,unresolved,,,no name in any source
+CBSS,unresolved,,,no name in any source
+CCB,ticker-reused,COASTAL FINANCIAL CORP,0001437958,SEC lists this ticker; no name agrees
+CCB,unresolved,,,no name in any source
+CCE,ambiguous,Coca-Cola Enterprises,0000804055 0001491675,name gives several CIKs
+CCEP,ticker-reused,COCA-COLA EUROPACIFIC PARTNERS plc,0001650107,SEC lists this ticker; no name agrees
+CCEP,unresolved,,,no name in any source
+CCTYQ,unresolved,,,no name in any source
+CCU,ticker-reused,UNITED BREWERIES CO INC,0000888746,SEC lists this ticker; no name agrees
+CCU,unresolved,,,no name in any source
+CDAY,ambiguous,Ceridian,0000109758 0001124887,name gives several CIKs
+CELG,unresolved,Celgene,,name not in the SEC lookup
+CEN,unresolved,,,no name in any source
+CEPH,name,Cephalon,0000873364,matched by exact normalised name
+CERN,name,Cerner,0000804753,matched by exact normalised name
+CFC,name,Countrywide Financial Corp,0000025191,matched by exact normalised name
+CFL,unresolved,,,no name in any source
+CFN,name,Carefusion,0001457543,matched by exact normalised name
+CG,ticker-reused,Carlyle Group Inc.,0001527166,SEC lists this ticker; no name agrees
+CG,unresolved,,,no name in any source
+CGP,unresolved,,,no name in any source
+CHA,ticker-reused,Chagee Holdings Ltd.,0002013649,SEC lists this ticker; no name agrees
+CHA,unresolved,,,no name in any source
+CHIR,unresolved,,,no name in any source
+CHK,name,Chesapeake Energy,0000895126,matched by exact normalised name
+CHRS,ticker-reused,"Coherus Oncology, Inc.",0001512762,SEC lists this ticker; no name agrees
+CHRS,unresolved,,,no name in any source
+CIN,unresolved,,,no name in any source
+CIT-A,unresolved,,,no name in any source
+CITGQ,unresolved,,,no name in any source
+CLF,ticker-reused,CLEVELAND-CLIFFS INC.,0000764065,SEC lists this ticker; no name agrees
+CLF,name,Cliffs Natural Resources,0000764065,matched by exact normalised name
+CMA,name,Comerica,0000028412,matched by exact normalised name
+CMB,unresolved,,,no name in any source
+CMCSK,unresolved,Comcast Series K | Comcast Class K Special,,name not in the SEC lookup
+CMVT,unresolved,,,no name in any source
+CMX,unresolved,,,no name in any source
+CNG,unresolved,,,no name in any source
+CNW,unresolved,,,no name in any source
+CNX,ticker-reused,CNX Resources Corp,0001070412,SEC lists this ticker; no name agrees
+CNX,ambiguous,Consol Energy,0001070412 0001710366,name gives several CIKs
+CNXT,unresolved,,,no name in any source
+COC-B,unresolved,,,no name in any source
+COG,name,Cabot Oil & Gas,0000858470,matched by exact normalised name
+COL,name,Rockwell Collins,0001137411,matched by exact normalised name
+COMS,unresolved,,,no name in any source
+COV,ambiguous,Covidien,0001385187 0001494396,name gives several CIKs
+CPGX,name,Columbia Pipeline Group,0001629995,matched by exact normalised name
+CPNLQ,unresolved,,,no name in any source
+CPQ,unresolved,,,no name in any source
+CPWR,ticker-reused,Ocean Thermal Energy Corp,0000827099,SEC lists this ticker; no name agrees
+CPWR,name,Compuware,0000859014,matched by exact normalised name
+CR,ticker-reused,Crane Co,0001944013,SEC lists this ticker; no name agrees
+CR,unresolved,,,no name in any source
+CRR,unresolved,,,no name in any source
+CSE,unresolved,,,no name in any source
+CSR,ticker-reused,CENTERSPACE,0000798359,SEC lists this ticker; no name agrees
+CSR,unresolved,,,no name in any source
+CSRA,name,CSRA,0001646383,matched by exact normalised name
+CTB,unresolved,,,no name in any source
+CTL,unresolved,,,no name in any source
+CTLT,name,Catalent,0001596783,matched by exact normalised name
+CTRA,name,Coterra Energy,0000858470,matched by exact normalised name
+CTX,name,Centex Corp.,0000018532,matched by exact normalised name
+CTXS,name,Citrix Systems,0000877890,matched by exact normalised name
+CVC,ambiguous,Cablevision Systems | Cablevision,0000784681 0001092733,name gives several CIKs
+CVG,name,Convergys,0001062047,matched by exact normalised name
+CVH,name,Coventry Health Care,0001054833,matched by exact normalised name
+CXO,ambiguous,Concho Resources,0001358071 0001364389,name gives several CIKs
+CYM,unresolved,,,no name in any source
+CYR,unresolved,,,no name in any source
+DALRQ,unresolved,,,no name in any source
+DAY,ambiguous,Dayforce,0001496678 0001725057,name gives several CIKs
+DCNAQ,unresolved,,,no name in any source
+DDR,unresolved,,,no name in any source
+DDS,ticker-reused,"DILLARD'S, INC.",0000028917,SEC lists this ticker; no name agrees
+DDS,unresolved,,,no name in any source
+DEC,ticker-reused,Diversified Energy Co,0001922446,SEC lists this ticker; no name agrees
+DEC,unresolved,,,no name in any source
+DF,ambiguous,Dean Foods,0000027500 0000931336,name gives several CIKs
+DFS,unresolved,Discover Financial,,name not in the SEC lookup
+DGN,unresolved,,,no name in any source
+DI,unresolved,,,no name in any source
+DIGI,unresolved,,,no name in any source
+DISCA,name,"Discovery, Inc.",0001437107,matched by exact normalised name
+DISCK,ambiguous,"Discovery, Inc. | Discovery Communications",0001024333 0001437107 0001466143,name gives several CIKs
+DISH,ambiguous,Dish Network,0000920436 0001001082,name gives several CIKs
+DJ,unresolved,Dow Jones,,name not in the SEC lookup
+DLX,ticker-reused,DELUXE CORP,0000027996,SEC lists this ticker; no name agrees
+DLX,unresolved,,,no name in any source
+DNB,name,Dun & Bradstreet,0000030419,matched by exact normalised name
+DNR,name,Denbury Resources,0000945764,matched by exact normalised name
+DO,ambiguous,Diamond Offshore Drilling,0000949039 0001858463,name gives several CIKs
+DPHIQ,unresolved,,,no name in any source
+DRE,name,Duke Realty,0000783280,matched by exact normalised name
+DTV,ambiguous,DirecTV,0001237917 0001237918 0001465112,name gives several CIKs
+DWD,unresolved,,,no name in any source
+DWDP,unresolved,DuPont,,name not in the SEC lookup
+DYN,ticker-reused,"Dyne Therapeutics, Inc.",0001818794,SEC lists this ticker; no name agrees
+DYN,ambiguous,Dynegy,0000879215 0001379895,name gives several CIKs
+EA,name,Electronic Arts,0000712515,matched by exact normalised name
+EC,ticker-reused,ECOPETROL S.A.,0001444406,SEC lists this ticker; no name agrees
+EC,unresolved,,,no name in any source
+ECH,unresolved,,,no name in any source
+ECO,ticker-reused,Okeanis Eco Tankers Corp.,0001964954,SEC lists this ticker; no name agrees
+ECO,unresolved,,,no name in any source
+EDS,unresolved,,,no name in any source
+EFU,unresolved,,,no name in any source
+EHC,ticker-reused,Encompass Health Corp,0000785161,SEC lists this ticker; no name agrees
+EHC,unresolved,,,no name in any source
+EKDKQ,unresolved,,,no name in any source
+EMC,name,EMC Corporation,0000790070,matched by exact normalised name
+ENDP,name,Endo International,0001593034,matched by exact normalised name
+ENRNQ,unresolved,,,no name in any source
+ENS,ticker-reused,EnerSys,0001289308,SEC lists this ticker; no name agrees
+ENS,unresolved,,,no name in any source
+EOP,unresolved,,,no name in any source
+EP,ticker-reused,EMPIRE PETROLEUM CORP,0000887396,SEC lists this ticker; no name agrees
+EP,ambiguous,El Paso Corporation,0000031974 0001066107,name gives several CIKs
+EQ,ticker-reused,"Equillium, Inc.",0001746466,SEC lists this ticker; no name agrees
+EQ,unresolved,,,no name in any source
+EQR,unresolved,,,no name in any source
+ESRX,name,Express Scripts,0000885721,matched by exact normalised name
+ESV,ambiguous,Ensco | Ensco plc,0000314808 0001866291 0001866303,name gives several CIKs
+ETFC,unresolved,E-Trade,,name not in the SEC lookup
+ETS,ticker-reused,Elite Express Holding Inc.,0002053641,SEC lists this ticker; no name agrees
+ETS,unresolved,,,no name in any source
+EVHC,ambiguous,Envision Healthcare,0001344154 0001678531,name gives several CIKs
+FB,name,Facebook,0001326801,matched by exact normalised name
+FBF,unresolved,,,no name in any source
+FBHS,name,Fortune Brands Home & Security,0001519751,matched by exact normalised name
+FBO,unresolved,,,no name in any source
+FCN,ticker-reused,"FTI CONSULTING, INC",0000887936,SEC lists this ticker; no name agrees
+FCN,unresolved,,,no name in any source
+FCPT,ticker-reused,"Four Corners Property Trust, Inc.",0001650132,SEC lists this ticker; no name agrees
+FCPT,unresolved,,,no name in any source
+FDC,name,First Data,0000883980,matched by exact normalised name
+FDO,name,Family Dollar,0001672323,matched by exact normalised name
+FG,ticker-reused,"F&G Annuities & Life, Inc.",0001934850,SEC lists this ticker; no name agrees
+FG,unresolved,,,no name in any source
+FI,unresolved,,,no name in any source
+FII,unresolved,Federated Investors,,name not in the SEC lookup
+FJ,unresolved,,,no name in any source
+FL,name,Foot Locker,0000850209,matched by exact normalised name
+FLIR,name,FLIR Systems,0000354908,matched by exact normalised name
+FLMIQ,unresolved,,,no name in any source
+FLT,name,FleetCor Technologies,0001175454,matched by exact normalised name
+FLTWQ,unresolved,,,no name in any source
+FMCC,ticker-reused,FEDERAL HOME LOAN MORTGAGE CORP,0001026214,SEC lists this ticker; no name agrees
+FMCC,unresolved,,,no name in any source
+FMY,ticker-reused,FIRST TRUST MORTGAGE INCOME FUND,0001319183,SEC lists this ticker; no name agrees
+FMY,unresolved,,,no name in any source
+FNMA,ticker-reused,FEDERAL NATIONAL MORTGAGE ASSOCIATION FANNIE MAE,0000310522,SEC lists this ticker; no name agrees
+FNMA,unresolved,,,no name in any source
+FPC,unresolved,,,no name in any source
+FRC,name,First Republic Bank,0001132979,matched by exact normalised name
+FRO,ticker-reused,Frontline plc,0000913290,SEC lists this ticker; no name agrees
+FRO,unresolved,,,no name in any source
+FRX,name,Forest Laboratories,0000038074,matched by exact normalised name
+FSH,unresolved,,,no name in any source
+FSL,unresolved,,,no name in any source
+FTL-A,unresolved,,,no name in any source
+FTR,name,Frontier Communications,0000020520,matched by exact normalised name
+FWLT,unresolved,,,no name in any source
+G,ticker-reused,Genpact LTD,0001398659,SEC lists this ticker; no name agrees
+G,unresolved,,,no name in any source
+GAPTQ,unresolved,,,no name in any source
+GAS,name,AGL Resources.,0001004155,matched by exact normalised name
+GDT,unresolved,,,no name in any source
+GDW,unresolved,,,no name in any source
+GENZ,name,Genzyme,0000732485,matched by exact normalised name
+GFS-A,unresolved,,,no name in any source
+GGP,ambiguous,GGP Inc. | General Growth Properties,0000040626 0000895648 0001496048,name gives several CIKs
+GIDL,unresolved,,,no name in any source
+GLD,ticker-reused,SPDR GOLD TRUST,0001222333,SEC lists this ticker; no name agrees
+GLD,unresolved,,,no name in any source
+GLK,name,Great Lakes Chemical,0000043362,matched by exact normalised name
+GMCR,name,Keurig Green Mountain,0000909954,matched by exact normalised name
+GNT,ticker-reused,"GAMCO Natural Resources, Gold & Income Trust",0001438893,SEC lists this ticker; no name agrees
+GNT,unresolved,,,no name in any source
+GP,ticker-reused,GREENPOWER MOTOR Co INC.,0001584547,SEC lists this ticker; no name agrees
+GP,unresolved,,,no name in any source
+GPS,name,Gap,0000039911,matched by exact normalised name
+GPU,unresolved,,,no name in any source
+GR,name,Goodrich Corporation,0000042542,matched by exact normalised name
+GRA,unresolved,WR Grace,,name not in the SEC lookup
+GRN,ticker-reused,BARCLAYS BANK PLC,0000312070,SEC lists this ticker; no name agrees
+GRN,name,General Re,0000317745,matched by exact normalised name
+GSX,unresolved,,,no name in any source
+GT,ticker-reused,GOODYEAR TIRE & RUBBER CO /OH/,0000042582,SEC lists this ticker; no name agrees
+GT,unresolved,The Goodyear Tire & Rubber Company,,name not in the SEC lookup
+GTE,ticker-reused,GRAN TIERRA ENERGY INC.,0001273441,SEC lists this ticker; no name agrees
+GTE,unresolved,,,no name in any source
+GTW,unresolved,,,no name in any source
+GWF,unresolved,,,no name in any source
+GX,unresolved,,,no name in any source
+H,ticker-reused,Hyatt Hotels Corp,0001468174,SEC lists this ticker; no name agrees
+H,unresolved,,,no name in any source
+HAR,unresolved,Harman International,,name not in the SEC lookup
+HBI,name,Hanesbrands,0001359841,matched by exact normalised name
+HBOC,unresolved,,,no name in any source
+HCBK,name,Hudson City Bancorp,0000921847,matched by exact normalised name
+HCP,unresolved,,,no name in any source
+HCR,unresolved,,,no name in any source
+HDLM,unresolved,,,no name in any source
+HES,name,Hess Corporation,0000004447,matched by exact normalised name
+HET,unresolved,,,no name in any source
+HFC,name,HollyFrontier,0000048039,matched by exact normalised name
+HFS,unresolved,,,no name in any source
+HI,unresolved,,,no name in any source
+HM,unresolved,,,no name in any source
+HMA,unresolved,,,no name in any source
+HNZ,unresolved,Heinz,,name not in the SEC lookup
+HOLX,name,Hologic,0000859737,matched by exact normalised name
+HOT,name,Starwood Hotels and Resorts,0000048595,matched by exact normalised name
+HPC,unresolved,,,no name in any source
+HPH,name,Harnischfeger Industries,0000801898,matched by exact normalised name
+HRS,ambiguous,Harris Corporation,0000216374 0001068983,name gives several CIKs
+HSH,unresolved,,,no name in any source
+HSP,name,Hospira,0001274057,matched by exact normalised name
+I,unresolved,,,no name in any source
+IAC,unresolved,,,no name in any source
+IGT,ambiguous,International Game Technology,0000353944 0001619762,name gives several CIKs
+IKN,unresolved,,,no name in any source
+IMNX,unresolved,,,no name in any source
+INCLF,unresolved,,,no name in any source
+INFO,name,IHS Markit,0001598014,matched by exact normalised name
+INGR,ticker-reused,Ingredion Inc,0001046257,SEC lists this ticker; no name agrees
+INGR,unresolved,,,no name in any source
+IPG,unresolved,Interpublic Group,,name not in the SEC lookup
+ITT,ticker-reused,ITT INC.,0000216228,SEC lists this ticker; no name agrees
+ITT,unresolved,,,no name in any source
+JAVA,unresolved,,,no name in any source
+JCP,unresolved,,,no name in any source
+JEC,name,Jacobs Engineering Group,0000878737,matched by exact normalised name
+JH,unresolved,,,no name in any source
+JHF,unresolved,,,no name in any source
+JNPR,name,Juniper Networks,0001043604,matched by exact normalised name
+JNS,name,Janus Capital Group,0001065865,matched by exact normalised name
+JNY,name,Jones Apparel Group,0000874016,matched by exact normalised name
+JOS,unresolved,,,no name in any source
+JOY,name,Joy Global,0000801898,matched by exact normalised name
+JP,unresolved,,,no name in any source
+JWN,name,Nordstrom,0000072333,matched by exact normalised name
+K,name,Kellanova,0000055067,matched by exact normalised name
+KATE,unresolved,,,no name in any source
+KG,ticker-reused,Kestrel Group Ltd,0002055116,SEC lists this ticker; no name agrees
+KG,name,King Pharmaceuticals,0001047699,matched by exact normalised name
+KM,unresolved,,,no name in any source
+KMG,unresolved,,,no name in any source
+KORS,unresolved,Michael Kors,,name not in the SEC lookup
+KRB,unresolved,,,no name in any source
+KRFT,name,Kraft Foods,0001103982,matched by exact normalised name
+KRI,unresolved,,,no name in any source
+KSE,name,KeySpan,0001062379,matched by exact normalised name
+KSS,ticker-reused,KOHLS Corp,0000885639,SEC lists this ticker; no name agrees
+KSS,unresolved,Kohl's,,name not in the SEC lookup
+KSU,name,Kansas City Southern,0000054480,matched by exact normalised name
+KVUE,name,Kenvue,0001944048,matched by exact normalised name
+KWP,unresolved,,,no name in any source
+LB,ticker-reused,LandBridge Corp,0001995807,SEC lists this ticker; no name agrees
+LB,unresolved,,,no name in any source
+LDG,unresolved,,,no name in any source
+LDW-B,unresolved,,,no name in any source
+LEG,name,Leggett & Platt,0000058492,matched by exact normalised name
+LEHMQ,unresolved,,,no name in any source
+LIFE,ticker-reused,Ethos Technologies Inc.,0001788451,SEC lists this ticker; no name agrees
+LIFE,ambiguous,Life Technologies,0000727737 0001073431,name gives several CIKs
+LLL,name,L3 Technologies,0001039101,matched by exact normalised name
+LLTC,unresolved,Linear Technology,,name not in the SEC lookup
+LLX,unresolved,,,no name in any source
+LM,name,Legg Mason,0000704051,matched by exact normalised name
+LO,name,Lorillard Tobacco Company,0000862178,matched by exact normalised name
+LOR,unresolved,,,no name in any source
+LPX,ticker-reused,LOUISIANA-PACIFIC CORP,0000060519,SEC lists this ticker; no name agrees
+LPX,unresolved,,,no name in any source
+LSI,name,LSI Corporation,0000703360,matched by exact normalised name
+LU,ticker-reused,Lufax Holding Ltd,0001816007,SEC lists this ticker; no name agrees
+LU,unresolved,,,no name in any source
+LUB,unresolved,,,no name in any source
+LVLT,ambiguous,Level 3 Communications,0000794323 0001324502,name gives several CIKs
+LW,ticker-reused,"Lamb Weston Holdings, Inc.",0001679273,SEC lists this ticker; no name agrees
+LW,unresolved,Lamb Weston,,name not in the SEC lookup
+LXK,unresolved,Lexmark,,name not in the SEC lookup
+MAT,ticker-reused,MATTEL INC /DE/,0000063276,SEC lists this ticker; no name agrees
+MAT,name,Mattel,0001284721,matched by exact normalised name
+MAY,unresolved,,,no name in any source
+MCIC,unresolved,,,no name in any source
+MD,ticker-reused,"Pediatrix Medical Group, Inc.",0000893949,SEC lists this ticker; no name agrees
+MD,unresolved,,,no name in any source
+MDP,name,Meredith Corp,0000065011,matched by exact normalised name
+MDR,unresolved,,,no name in any source
+MEA,unresolved,,,no name in any source
+MEDI,unresolved,,,no name in any source
+MEE,name,Massey Energy,0000037748,matched by exact normalised name
+MEL,unresolved,,,no name in any source
+MER,unresolved,,,no name in any source
+MERQ,unresolved,,,no name in any source
+MFE,ambiguous,McAfee,0000890801 0001783317,name gives several CIKs
+MHS,name,Medco Health Solutions,0001170650,matched by exact normalised name
+MI,ticker-reused,NFT Ltd,0001958713,SEC lists this ticker; no name agrees
+MI,name,Marshall & Ilsley,0001399315,matched by exact normalised name
+MII,unresolved,,,no name in any source
+MIL,name,Millipore,0000066479,matched by exact normalised name
+MIR,ticker-reused,"Mirion Technologies, Inc.",0001809987,SEC lists this ticker; no name agrees
+MIR,unresolved,,,no name in any source
+MJN,ambiguous,Mead Johnson | Mead Johnson Nutrition,0001444904 0001452575,name gives several CIKs
+MKG,unresolved,,,no name in any source
+MKTX,ticker-reused,MARKETAXESS HOLDINGS INC,0001278021,SEC lists this ticker; no name agrees
+MKTX,name,MarketAxess,0001052461,matched by exact normalised name
+MMC,unresolved,,,no name in any source
+MMI,ticker-reused,"Marcus & Millichap, Inc.",0001578732,SEC lists this ticker; no name agrees
+MMI,unresolved,Motorola Mobility,,name not in the SEC lookup
+MNK,ambiguous,Mallinckrodt,0000061727 0001567892 0001766927,name gives several CIKs
+MNR,ticker-reused,MACH NATURAL RESOURCES LP,0001980088,SEC lists this ticker; no name agrees
+MNR,unresolved,,,no name in any source
+MOB,ticker-reused,Mobilicom Ltd,0001898643,SEC lists this ticker; no name agrees
+MOB,unresolved,,,no name in any source
+MOLX,name,Molex,0000067472,matched by exact normalised name
+MON,name,Monsanto,0000067686,matched by exact normalised name
+MRO,name,Marathon Oil,0000101778,matched by exact normalised name
+MST,unresolved,,,no name in any source
+MTG,ticker-reused,MGIC INVESTMENT CORP,0000876437,SEC lists this ticker; no name agrees
+MTG,unresolved,,,no name in any source
+MTL,unresolved,,,no name in any source
+MTLQQ,unresolved,,,no name in any source
+MTW,ticker-reused,MANITOWOC CO INC,0000061986,SEC lists this ticker; no name agrees
+MTW,unresolved,,,no name in any source
+MWI,unresolved,,,no name in any source
+MWV,unresolved,,,no name in any source
+MWW,name,Monster Worldwide,0001020416,matched by exact normalised name
+MXIM,name,Maxim Integrated Products,0000743316,matched by exact normalised name
+MYG,unresolved,,,no name in any source
+MYL,unresolved,,,no name in any source
+MZIAQ,unresolved,,,no name in any source
+NAE,unresolved,,,no name in any source
+NAV,unresolved,,,no name in any source
+NAVI,ticker-reused,"Navient Holdings, Inc.",0002152623,SEC lists this ticker; no name agrees
+NAVI,ambiguous,Navient,0001297086 0001593538,name gives several CIKs
+NBL,name,Noble Energy,0000072207,matched by exact normalised name
+NC,ticker-reused,NACCO INDUSTRIES INC,0000789933,SEC lists this ticker; no name agrees
+NC,unresolved,,,no name in any source
+NCC,name,National City,0000069970,matched by exact normalised name
+NCE,unresolved,,,no name in any source
+NCR,name,NCR Corporation,0000070866,matched by exact normalised name
+NFB,unresolved,,,no name in any source
+NFX,unresolved,Newfield Exploration,,name not in the SEC lookup
+NGH,unresolved,,,no name in any source
+NLC,unresolved,,,no name in any source
+NLOK,unresolved,,,no name in any source
+NLSN,ambiguous,Nielsen Holdings,0001397568 0001492633 0001634054,name gives several CIKs
+NLV,unresolved,,,no name in any source
+NMK,unresolved,,,no name in any source
+NOVL,name,Novell,0000758004,matched by exact normalised name
+NRTLQ,unresolved,,,no name in any source
+NSI,unresolved,,,no name in any source
+NSM,name,National Semiconductor,0000070530,matched by exact normalised name
+NVLS,name,Novellus Systems,0000836106,matched by exact normalised name
+NXTL,unresolved,,,no name in any source
+NYN,unresolved,,,no name in any source
+NYX,name,NYSE Euronext,0001368007,matched by exact normalised name
+OAT,unresolved,,,no name in any source
+ODP,name,Office Depot,0000800240,matched by exact normalised name
+OI,ticker-reused,"O-I Glass, Inc. /DE/",0000812074,SEC lists this ticker; no name agrees
+OI,unresolved,Owens-Illinois,,name not in the SEC lookup
+OK,unresolved,,,no name in any source
+OM,ticker-reused,"Outset Medical, Inc.",0001484612,SEC lists this ticker; no name agrees
+OM,unresolved,,,no name in any source
+OMX,name,OfficeMax,0000012978,matched by exact normalised name
+ONE,unresolved,,,no name in any source
+ORX,unresolved,,,no name in any source
+OWENQ,unresolved,,,no name in any source
+PAC,ticker-reused,Pacific Airport Group,0001347557,SEC lists this ticker; no name agrees
+PAC,unresolved,,,no name in any source
+PALM,unresolved,,,no name in any source
+PARA,ticker-reused,"Parabolic Technologies, Inc.",0001826011,SEC lists this ticker; no name agrees
+PARA,unresolved,,,no name in any source
+PAS,unresolved,,,no name in any source
+PAYC,ticker-reused,"Paycom Software, Inc.",0001590955,SEC lists this ticker; no name agrees
+PAYC,unresolved,Paycom,,name not in the SEC lookup
+PBCT,name,People's United Financial,0001378946,matched by exact normalised name
+PBG,unresolved,,,no name in any source
+PBI,ticker-reused,PITNEY BOWES INC /DE/,0000078814,SEC lists this ticker; no name agrees
+PBI,unresolved,Pitney Bowes,,name not in the SEC lookup
+PBY,unresolved,,,no name in any source
+PCH,unresolved,,,no name in any source
+PCL,name,Plum Creek Timber,0000849213,matched by exact normalised name
+PCP,name,Precision Castparts Corporation,0000079958,matched by exact normalised name
+PCS,name,MetroPCS,0001121026,matched by exact normalised name
+PD,ticker-reused,"PagerDuty, Inc.",0001568100,SEC lists this ticker; no name agrees
+PD,unresolved,,,no name in any source
+PDCO,name,Patterson Companies,0000891024,matched by exact normalised name
+PDG,unresolved,,,no name in any source
+PEAK,unresolved,,,no name in any source
+PEL,unresolved,,,no name in any source
+PET,unresolved,,,no name in any source
+PETM,name,PetSmart,0000863157,matched by exact normalised name
+PGL,unresolved,,,no name in any source
+PGN,ambiguous,Progress Energy,0001094093 0001172413,name gives several CIKs
+PHA,unresolved,,,no name in any source
+PHB,unresolved,,,no name in any source
+PKI,unresolved,,,no name in any source
+PLL,name,Pall Corporation,0000075829,matched by exact normalised name
+PMCS,unresolved,,,no name in any source
+PMI,ticker-reused,"Picard Medical, Inc.",0002030617,SEC lists this ticker; no name agrees
+PMI,unresolved,,,no name in any source
+PNU,unresolved,,,no name in any source
+POM,ticker-reused,POMDOCTOR Ltd,0001877971,SEC lists this ticker; no name agrees
+POM,name,Pepco Holdings,0001135971,matched by exact normalised name
+PPW,unresolved,,,no name in any source
+PRD,unresolved,,,no name in any source
+PSFT,unresolved,,,no name in any source
+PSKY,unresolved,,,no name in any source
+PTV,name,Pactiv,0001089976,matched by exact normalised name
+PVH,ticker-reused,PVH CORP. /DE/,0000078239,SEC lists this ticker; no name agrees
+PVH,unresolved,PVH,,name not in the SEC lookup
+PVN,unresolved,,,no name in any source
+PVT,unresolved,,,no name in any source
+PWER,unresolved,,,no name in any source
+PWJ,unresolved,,,no name in any source
+PX,unresolved,,,no name in any source
+PXD,name,Pioneer Natural Resources,0001038357,matched by exact normalised name
+PZE,unresolved,,,no name in any source
+QEP,name,QEP Resources,0001108827,matched by exact normalised name
+QLGC,unresolved,,,no name in any source
+QRVO,name,Qorvo,0001604778,matched by exact normalised name
+QTRN,name,Quintiles Transnational,0000919623,matched by exact normalised name
+RAD,name,Rite Aid,0000084129,matched by exact normalised name
+RAI,name,Reynolds American,0001275283,matched by exact normalised name
+RAL,ticker-reused,Ralliant Corp,0002041385,SEC lists this ticker; no name agrees
+RAL,unresolved,,,no name in any source
+RATL,unresolved,,,no name in any source
+RBD,unresolved,,,no name in any source
+RBK,unresolved,,,no name in any source
+RDC,ambiguous,Rowan Companies,0000085408 0001542782 0001549937 0001866495 0001866497,name gives several CIKs
+RDS-A,unresolved,,,no name in any source
+RE,unresolved,Everest Re,,name not in the SEC lookup
+RHT,ambiguous,Red Hat,0001087423 0001367535,name gives several CIKs
+RLM,unresolved,,,no name in any source
+RML,ticker-reused,Resolution Minerals Ltd,0002102907,SEC lists this ticker; no name agrees
+RML,unresolved,,,no name in any source
+RNB,unresolved,,,no name in any source
+ROH,unresolved,,,no name in any source
+RRD,unresolved,RR Donnelley,,name not in the SEC lookup
+RSHCQ,unresolved,,,no name in any source
+RTN,ambiguous,Raytheon Company,0000082267 0001047122,name gives several CIKs
+RX,name,IMS Health,0001058083,matched by exact normalised name
+RYAN,ticker-reused,"RYAN SPECIALTY HOLDINGS, INC.",0001849253,SEC lists this ticker; no name agrees
+RYAN,unresolved,,,no name in any source
+RYC,unresolved,,,no name in any source
+RYI,unresolved,,,no name in any source
+S,ticker-reused,"SentinelOne, Inc.",0001583708,SEC lists this ticker; no name agrees
+S,name,Sprint Nextel,0000101830,matched by exact normalised name
+SAF,unresolved,,,no name in any source
+SAI,name,SAIC,0001336920,matched by exact normalised name
+SANM,ticker-reused,SANMINA CORP,0000897723,SEC lists this ticker; no name agrees
+SANM,unresolved,,,no name in any source
+SAPE,unresolved,,,no name in any source
+SATS,ticker-reused,"Strive, Inc.",0001920406,SEC lists this ticker; no name agrees
+SATS,name,EchoStar,0001415404,matched by exact normalised name
+SB,ticker-reused,"SAFE BULKERS, INC.",0001434754,SEC lists this ticker; no name agrees
+SB,unresolved,,,no name in any source
+SBL,name,Symbol Technologies,0000278352,matched by exact normalised name
+SBNY,name,Signature Bank,0001288784,matched by exact normalised name
+SCG,name,SCANA,0000754737,matched by exact normalised name
+SCI,ticker-reused,SERVICE CORP INTERNATIONAL,0000089089,SEC lists this ticker; no name agrees
+SCI,unresolved,,,no name in any source
+SDS,unresolved,,,no name in any source
+SE,ticker-reused,Sea Ltd,0001703399,SEC lists this ticker; no name agrees
+SE,name,Spectra Energy,0001373835,matched by exact normalised name
+SEBL,unresolved,,,no name in any source
+SEDG,ticker-reused,"SOLAREDGE TECHNOLOGIES, INC.",0001419612,SEC lists this ticker; no name agrees
+SEDG,unresolved,SolarEdge,,name not in the SEC lookup
+SEE,name,Sealed Air,0000088204,matched by exact normalised name
+SEG,ticker-reused,Seaport Entertainment Group Inc.,0002009684,SEC lists this ticker; no name agrees
+SEG,unresolved,,,no name in any source
+SFA,unresolved,,,no name in any source
+SFS,unresolved,,,no name in any source
+SGID,unresolved,,,no name in any source
+SGP,ticker-reused,"SpyGlass Pharma, Inc.",0001778922,SEC lists this ticker; no name agrees
+SGP,name,Schering-Plough,0000310158,matched by exact normalised name
+SHLD,name,Sears Holdings,0001310067,matched by exact normalised name
+SHN,unresolved,,,no name in any source
+SIAL,ambiguous,Sigma-Aldrich,0000090185 0001167381,name gives several CIKs
+SII,ticker-reused,SPROTT INC.,0001512920,SEC lists this ticker; no name agrees
+SII,name,Smith International,0000721083,matched by exact normalised name
+SIVB,name,SVB Financial Group,0000719739,matched by exact normalised name
+SK,unresolved,,,no name in any source
+SLR,name,Solectron,0000835541,matched by exact normalised name
+SMI,unresolved,,,no name in any source
+SMS,name,Shared Medical Systems,0000089415,matched by exact normalised name
+SNI,name,Scripps Networks Interactive,0001430602,matched by exact normalised name
+SNT,ticker-reused,Senstar Technologies Corp,0001993727,SEC lists this ticker; no name agrees
+SNT,unresolved,,,no name in any source
+SNV,unresolved,,,no name in any source
+SOTR,unresolved,,,no name in any source
+SOV,unresolved,,,no name in any source
+SPLS,name,Staples,0000791519,matched by exact normalised name
+SRCL,name,Stericycle,0000861878,matched by exact normalised name
+SRR,unresolved,,,no name in any source
+SSP,ticker-reused,E.W. SCRIPPS Co,0000832428,SEC lists this ticker; no name agrees
+SSP,unresolved,,,no name in any source
+STI,ticker-reused,Solidion Technology Inc.,0001881551,SEC lists this ticker; no name agrees
+STI,name,SunTrust Banks,0000750556,matched by exact normalised name
+STJ,name,St Jude Medical,0000203077,matched by exact normalised name
+STO,unresolved,,,no name in any source
+STR,name,Questar,0000751652,matched by exact normalised name
+SUB,unresolved,,,no name in any source
+SUNEQ,unresolved,,,no name in any source
+SVU,name,Supervalu,0000095521,matched by exact normalised name
+SWN,name,Southwestern Energy,0000007332,matched by exact normalised name
+SWY,name,Safeway,0000086144,matched by exact normalised name
+SXCL,unresolved,,,no name in any source
+SYMC,unresolved,,,no name in any source
+TA,unresolved,,,no name in any source
+TCOMA,unresolved,,,no name in any source
+TDC,ticker-reused,TERADATA CORP /DE/,0000816761,SEC lists this ticker; no name agrees
+TDC,unresolved,Teradata,,name not in the SEC lookup
+TDM,unresolved,,,no name in any source
+TE,ticker-reused,T1 Energy Inc.,0001992243,SEC lists this ticker; no name agrees
+TE,name,TECO Energy,0000350563,matched by exact normalised name
+TEG,name,Integrys Energy Group,0000916863,matched by exact normalised name
+TEK,unresolved,,,no name in any source
+TEN,ticker-reused,TSAKOS ENERGY NAVIGATION LTD,0001166663,SEC lists this ticker; no name agrees
+TEN,unresolved,,,no name in any source
+TEX,ticker-reused,TEREX CORP,0000097216,SEC lists this ticker; no name agrees
+TEX,unresolved,,,no name in any source
+TGNA,name,Tegna,0000039899,matched by exact normalised name
+THY,unresolved,,,no name in any source
+TIE,name,Titanium Metals,0001011657,matched by exact normalised name
+TIF,name,Tiffany & Co,0000098246,matched by exact normalised name
+TIN,unresolved,,,no name in any source
+TKR,ticker-reused,TIMKEN CO,0000098362,SEC lists this ticker; no name agrees
+TKR,unresolved,,,no name in any source
+TLAB,name,Tellabs,0000317771,matched by exact normalised name
+TMC,ticker-reused,TMC the metals Co Inc.,0001798562,SEC lists this ticker; no name agrees
+TMC,name,Times Mirror,0000098349,matched by exact normalised name
+TMC-A,unresolved,,,no name in any source
+TMK,unresolved,,,no name in any source
+TNB,unresolved,,,no name in any source
+TOS,unresolved,,,no name in any source
+TOY,unresolved,,,no name in any source
+TRB,name,Tribune Media,0000726513,matched by exact normalised name
+TRW,unresolved,,,no name in any source
+TSG,ambiguous,Sabre Corporation,0001186199 0001597033,name gives several CIKs
+TSS,unresolved,TSYS,,name not in the SEC lookup
+TUP,unresolved,,,no name in any source
+TWC,ambiguous,Time Warner Cable,0001377013 0001450621,name gives several CIKs
+TWTR,name,Twitter,0001418091,matched by exact normalised name
+TWX,ambiguous,Time Warner,0000736157 0001021387 0001105705,name gives several CIKs
+TX,ticker-reused,Ternium S.A.,0001342874,SEC lists this ticker; no name agrees
+TX,unresolved,,,no name in any source
+TXU,unresolved,,,no name in any source
+UAA,ticker-reused,"Under Armour, Inc.",0001336917,SEC lists this ticker; no name agrees
+UAA,unresolved,Under Armour (Class A),,name not in the SEC lookup
+UAWGQ,unresolved,,,no name in any source
+UCC,unresolved,,,no name in any source
+UCL,ticker-reused,uCloudlink Group Inc.,0001775898,SEC lists this ticker; no name agrees
+UCL,unresolved,,,no name in any source
+UCM,unresolved,,,no name in any source
+UIS,ticker-reused,UNISYS CORP,0000746838,SEC lists this ticker; no name agrees
+UIS,unresolved,,,no name in any source
+UK,ticker-reused,Ucommune International Ltd,0001821424,SEC lists this ticker; no name agrees
+UK,unresolved,,,no name in any source
+UMG,unresolved,,,no name in any source
+UN,unresolved,,,no name in any source
+UNM,ticker-reused,Unum Group,0000005513,SEC lists this ticker; no name agrees
+UNM,ambiguous,Unum,0000795581 0001843579,name gives several CIKs
+UPC,ticker-reused,Universe Pharmaceuticals INC,0001809616,SEC lists this ticker; no name agrees
+UPC,unresolved,,,no name in any source
+UPR,unresolved,,,no name in any source
+USBC,ticker-reused,"USBC, Inc.",0001074828,SEC lists this ticker; no name agrees
+USBC,unresolved,,,no name in any source
+USH,unresolved,,,no name in any source
+USHC,unresolved,,,no name in any source
+USS,unresolved,,,no name in any source
+UST,unresolved,,,no name in any source
+USW,unresolved,,,no name in any source
+UTX,unresolved,,,no name in any source
+UVN,unresolved,,,no name in any source
+VAR,name,Varian Medical Systems,0000203527,matched by exact normalised name
+VAT,unresolved,,,no name in any source
+VFC,ticker-reused,V F CORP,0000103379,SEC lists this ticker; no name agrees
+VFC,unresolved,VF Corporation,,name not in the SEC lookup
+VIAB,ambiguous,Viacom,0000813828 0001339947,name gives several CIKs
+VIAC,unresolved,,,no name in any source
+VIAV,ticker-reused,VIAVI SOLUTIONS INC.,0000912093,SEC lists this ticker; no name agrees
+VIAV,unresolved,,,no name in any source
+VO,unresolved,,,no name in any source
+VRTS,ticker-reused,"VIRTUS INVESTMENT PARTNERS, INC.",0000883237,SEC lists this ticker; no name agrees
+VRTS,unresolved,,,no name in any source
+VSTNQ,unresolved,,,no name in any source
+VTSS,unresolved,,,no name in any source
+WAI,unresolved,,,no name in any source
+WAMUQ,unresolved,,,no name in any source
+WB,ticker-reused,WEIBO Corp,0001595761,SEC lists this ticker; no name agrees
+WB,unresolved,Wachovia Bank,,name not in the SEC lookup
+WBA,name,Walgreens Boots Alliance,0001618921,matched by exact normalised name
+WBD,name,Warner Bros. Discovery,0001437107,matched by exact normalised name
+WCG,name,WellCare,0001804830,matched by exact normalised name
+WCOEQ,unresolved,,,no name in any source
+WEN,ticker-reused,Wendy's Co,0000030697,SEC lists this ticker; no name agrees
+WEN,unresolved,,,no name in any source
+WFM,name,Whole Foods Market,0000865436,matched by exact normalised name
+WFT,unresolved,,,no name in any source
+WHR,ticker-reused,WHIRLPOOL CORP /DE/,0000106640,SEC lists this ticker; no name agrees
+WHR,name,Whirlpool Corporation,0001170279,matched by exact normalised name
+WIN,unresolved,Windstream Communications,,name not in the SEC lookup
+WLA,unresolved,,,no name in any source
+WLL,unresolved,,,no name in any source
+WLP,name,Wellpoint,0001156039,matched by exact normalised name
+WLTW,name,Willis Towers Watson,0001140536,matched by exact normalised name
+WMX,unresolved,,,no name in any source
+WNDXQ,unresolved,,,no name in any source
+WOR,ticker-reused,"WORTHINGTON ENTERPRISES, INC.",0000108516,SEC lists this ticker; no name agrees
+WOR,unresolved,,,no name in any source
+WPX,name,WPX Energy,0001518832,matched by exact normalised name
+WRK,unresolved,,,no name in any source
+WWY,unresolved,,,no name in any source
+WYE,unresolved,,,no name in any source
+WYND,unresolved,,,no name in any source
+X,name,United States Steel,0001163302,matched by exact normalised name
+XEC,name,Cimarex Energy,0001168054,matched by exact normalised name
+XL,ambiguous,XL Group,0000875159 0001523700,name gives several CIKs
+XLNX,name,Xilinx,0000743988,matched by exact normalised name
+XRX,ticker-reused,Xerox Holdings Corp,0001770450,SEC lists this ticker; no name agrees
+XRX,name,Xerox,0000108772,matched by exact normalised name
+XTO,name,XTO Energy,0000868809,matched by exact normalised name
+YNR,unresolved,,,no name in any source
+YRCW,unresolved,,,no name in any source
+ZION,ticker-reused,"ZIONS BANCORPORATION, NATIONAL ASSOCIATION /UT/",0000109380,SEC lists this ticker; no name agrees
+ZION,name,Zions Bancorporation,0001642140,matched by exact normalised name
+HRS,rename-adjacent,"L3HARRIS TECHNOLOGIES, INC. /DE/",0000202058,same day as LHX on 2019-06-01
+TMK,rename-adjacent,GLOBE LIFE INC.,0000320335,same day as GL on 2019-08-08
+BHGE,rename-adjacent,Baker Hughes Co,0001701605,same day as BKR on 2019-10-18
+HCP;SYMC;NLOK;PEAK,ambiguous-rename,,,2 ended and 2 started on 2019-11-05
+BBT,rename-adjacent,TRUIST FINANCIAL CORP,0000092230,same day as TFC on 2019-12-09
+UTX,rename-adjacent,RTX Corp,0000101829,same day as RTX on 2020-04-03
+CTL,rename-adjacent,"Lumen Technologies, Inc.",0000018926,same day as LUMN on 2020-09-18
+MYL,rename-adjacent,Viatris Inc,0001792044,same day as VTRS on 2020-11-17
+LB,rename-adjacent,"Bath & Body Works, Inc.",0000701985,same day as BBWI on 2021-08-03
+BLL,rename-adjacent,BALL Corp,0000009389,same day as BALL on 2022-05-10
+ANTM,rename-adjacent,"Elevance Health, Inc.",0001156039,same day as ELV on 2022-06-28
+NLOK,rename-adjacent,Gen Digital Inc.,0000849399,same day as GEN on 2022-11-08
+PKI,rename-adjacent,"REVVITY, INC.",0000031791,same day as RVTY on 2023-05-16
+FI,rename-adjacent,FISERV INC,0000798354,same day as FISV on 2023-06-07
+RE,rename-adjacent,"EVEREST GROUP, LTD.",0001095073,same day as EG on 2023-07-10
+ABC,rename-adjacent,"Cencora, Inc.",0001140859,same day as COR on 2023-08-30
+PEAK,rename-adjacent,"HEALTHPEAK PROPERTIES, INC.",0000765880,same day as DOC on 2024-03-04
+WRK,rename-adjacent,Smurfit Westrock plc,0002005951,same day as SW on 2024-07-08
+MMC,rename-adjacent,"MARSH & MCLENNAN COMPANIES, INC.",0000062709,same day as MRSH on 2026-01-14
+BK,rename-adjacent,Bank of New York Mellon Corp,0001390777,same day as BNY on 2026-05-21
+EQR,rename-adjacent,VIVMARK RESIDENTIAL,0000906107,same day as VMRK on 2026-08-18
+MWV,rename-adjacent,Smurfit Westrock plc,0002005951,same day as WRK on 2015-07-02
+EL,selected,ESTEE LAUDER COMPANIES INC,0001001250,current
+NTRS,selected,NORTHERN TRUST CORP,0000073124,current
+HAL,selected,HALLIBURTON CO,0000045012,current
+DG,selected,DOLLAR GENERAL CORP,0000029534,current
+CAH,selected,CARDINAL HEALTH INC,0000721371,current
+AMZN,selected,AMAZON COM INC,0001018724,current
+PCAR,selected,PACCAR INC,0000075362,current
+BLDR,selected,"Builders FirstSource, Inc.",0001316835,current
+PHM,selected,PULTEGROUP INC/MI/,0000822416,current
+DHI,selected,HORTON D R INC /DE/,0000882184,current
+MNST,selected,Monster Beverage Corp,0000865752,current
+CRH,selected,CRH PUBLIC LTD CO,0000849395,current
+CHK;EXE,selected,EXPAND ENERGY Corp,0000895126,current
+KDP,selected,Keurig Dr Pepper Inc.,0001418135,current
+MMC;MRSH,selected,"MARSH & MCLENNAN COMPANIES, INC.",0000062709,current
+BDX,selected,BECTON DICKINSON & CO,0000010795,current
+KHC,selected,Kraft Heinz Co,0001637459,current
+FANG,selected,"Diamondback Energy, Inc.",0001539838,current
+KEY,selected,KEYCORP /NEW/,0000091576,current
+PSX,selected,Phillips 66,0001534701,current
+VRT,selected,Vertiv Holdings Co,0001674101,current
+KMB,selected,KIMBERLY CLARK CORP,0000055785,current
+GEHC,selected,GE HealthCare Technologies Inc.,0001932393,current
+OTIS,selected,Otis Worldwide Corp,0001781335,current
+EXPE,selected,"Expedia Group, Inc.",0001324424,current
+ROP,selected,ROPER TECHNOLOGIES INC,0000882835,current
+TMUS,selected,"T-Mobile US, Inc.",0001283699,current
+AXP,selected,AMERICAN EXPRESS CO,0000004962,current
+TRV,selected,"TRAVELERS COMPANIES, INC.",0000086312,current
+LH,selected,LABCORP HOLDINGS INC.,0000920148,current
+MOS,selected,MOSAIC CO,0001285785,current
+NRG,selected,"NRG ENERGY, INC.",0001013871,current
+DHR,selected,DANAHER CORP /DE/,0000313616,current
+V,selected,VISA INC.,0001403161,current
+ABC;COR,selected,"Cencora, Inc.",0001140859,current
+EXPD,selected,EXPEDITORS INTERNATIONAL OF WASHINGTON INC,0000746515,current
+APO,selected,"Apollo Global Management, Inc.",0001858681,current
+ACGL,selected,ARCH CAPITAL GROUP LTD.,0000947484,current
+ON,selected,ON SEMICONDUCTOR CORP,0001097864,current
+TROW,selected,PRICE T ROWE GROUP INC,0001113169,current
+CMS,selected,CMS ENERGY CORP,0000811156,current
+CSX,selected,CSX CORP,0000277948,current
+ROST,selected,"ROSS STORES, INC.",0000745732,current
+DAL,selected,"DELTA AIR LINES, INC.",0000027904,current
+PM,selected,Philip Morris International Inc.,0001413329,current
+NVR,selected,NVR INC,0000906163,current
+SWKS,selected,"SKYWORKS SOLUTIONS, INC.",0000004127,current
+WEC,selected,"WEC ENERGY GROUP, INC.",0000783325,current
+AMD,selected,ADVANCED MICRO DEVICES INC,0000002488,current
+CRWD,selected,"CrowdStrike Holdings, Inc.",0001535527,current
+A,selected,"AGILENT TECHNOLOGIES, INC.",0001090872,current
+WDAY,selected,"Workday, Inc.",0001327811,current
+HD,selected,"HOME DEPOT, INC.",0000354950,current
+PYPL,selected,"PayPal Holdings, Inc.",0001633917,current
+AME,selected,AMETEK INC/,0001037868,current
+HST,selected,"HOST HOTELS & RESORTS, INC.",0001070750,current
+DVN,selected,DEVON ENERGY CORP/DE,0001090012,current
+CHTR,selected,"CHARTER COMMUNICATIONS, INC. /MO/",0001091667,current
+XYL,selected,Xylem Inc.,0001524472,current
+GLW,selected,CORNING INC /NY,0000024741,current
+CINF,selected,CINCINNATI FINANCIAL CORP,0000020286,current
+SYF,selected,Synchrony Financial,0001601712,current
+BRO,selected,"BROWN & BROWN, INC.",0000079282,current
+ADI,selected,ANALOG DEVICES INC,0000006281,current
+EXR,selected,Extra Space Storage Inc.,0001289490,current
+FITB,selected,FIFTH THIRD BANCORP,0000035527,current
+BALL;BLL,selected,BALL Corp,0000009389,current
+WMB,selected,"WILLIAMS COMPANIES, INC.",0000107263,current
+RL,selected,RALPH LAUREN CORP,0001037038,current
+SOLV,selected,Solventum Corp,0001964738,current
+ADM,selected,Archer-Daniels-Midland Co,0000007084,current
+NCLH,selected,Norwegian Cruise Line Holdings Ltd.,0001513761,current
+RDDT,selected,"Reddit, Inc.",0001713445,current
+XYZ,selected,"Block, Inc.",0001512673,current
+OMC,selected,OMNICOM GROUP INC.,0000029989,current
+ALLE,selected,Allegion plc,0001579241,current
+AMGN,selected,AMGEN INC,0000318154,current
+FTV,selected,Fortive Corp,0001659166,current
+PKG,selected,PACKAGING CORP OF AMERICA,0000075677,current
+USB,selected,US BANCORP \DE\,0000036104,current
+HSP,selected,Hospira,0001274057,removed
+HOT,selected,Starwood Hotels and Resorts,0000048595,removed
+DNB,selected,Dun & Bradstreet,0000030419,removed
+PDCO,selected,Patterson Companies,0000891024,removed
+BHF,selected,"Brighthouse Financial, Inc.",0001685040,removed
+JWN,selected,Nordstrom,0000072333,removed
+HFC,selected,HollyFrontier,0000048039,removed
+TWTR,selected,Twitter,0001418091,removed
+ATVI,selected,Activision Blizzard,0000718877,removed
+BBWI;LB,selected,"Bath & Body Works, Inc.",0000701985,removed
+STJ,selected,St Jude Medical,0000203077,removed
+TE,selected,TECO Energy,0000350563,removed
+INFO,selected,IHS Markit,0001598014,removed
+LO,selected,Lorillard Tobacco Company,0000862178,removed
+GMCR,selected,Keurig Green Mountain,0000909954,removed
+XRX,selected,Xerox,0000108772,removed
+WFM,selected,Whole Foods Market,0000865436,removed
+FLR,selected,FLUOR CORP,0001124198,removed
+TIF,selected,Tiffany & Co,0000098246,removed
+SEE,selected,Sealed Air,0000088204,removed
+WCG,excluded,WellCare,0001804830,removed: first SEC filing 2020-05-12 is after 2018-09-17: the CIK is a successor
+FTI,excluded,TechnipFMC plc,0001681459,removed: first SEC filing 2016-08-10 is after 2015-01-01: the CIK is a successor
+XOM,excluded,ExxonMobil Holdings Corp,0002115436,current: first SEC filing 2026-07-01 is after 2015-01-01: the CIK is a successor
+DIS,excluded,Walt Disney Co,0001744489,current: first SEC filing 2018-06-25 is after 2015-01-01: the CIK is a successor
+BHGE;BKR,excluded,Baker Hughes Co,0001701605,current: first SEC filing 2017-03-29 is after 2015-01-01: the CIK is a successor

@@ -33,6 +33,15 @@
         "tests/test_req_project_wide.py::test_eq_04_the_dependency_files_in_the_repository_are_pinned"
       ]
     },
+    "audits/evidence/wave-1.3/report.json": {
+      "requirements": [
+        "IM-01-AC1",
+        "TH-05-AC1"
+      ],
+      "tests": [
+        "tests/test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500"
+      ]
+    },
     "audits/test_matrix.json": {
       "requirements": [
         "DO-03"
@@ -341,6 +350,18 @@
         "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis"
       ]
     },
+    "src/earnings/membership.py": {
+      "requirements": [
+        "IG-13",
+        "IG-13-AC1",
+        "IM-03-AC1"
+      ],
+      "tests": [
+        "tests/test_universe.py::test_names_are_normalised_for_exact_matching_only",
+        "tests/test_universe.py::test_ten_known_renames_resolve_to_one_company",
+        "tests/test_universe.py::test_the_stored_source_files_parse_offline"
+      ]
+    },
     "src/earnings/migrate.py": {
       "requirements": [
         "DB-01-AC2",
@@ -364,6 +385,7 @@
       "requirements": [
         "DB-01-AC2",
         "DB-04",
+        "DB-04-AC1",
         "DB-05",
         "DB-07-AC1",
         "DB-08",
@@ -376,6 +398,8 @@
         "DB-11",
         "IG-02-AC1",
         "IG-03-AC1",
+        "IG-13-AC1",
+        "IM-03-AC1",
         "PL-01-AC1",
         "PL-02-AC1",
         "PL-05-AC1",
@@ -400,7 +424,8 @@
         "tests/test_storage_rules.py::test_the_append_only_registry_matches_the_privileges_in_the_database",
         "tests/test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period",
         "tests/test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table",
-        "tests/test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company"
+        "tests/test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company",
+        "tests/test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history"
       ]
     },
     "src/earnings/parsing.py": {
@@ -519,6 +544,49 @@
         "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
+      ]
+    },
+    "src/earnings/universe.csv": {
+      "requirements": [
+        "IG-21-AC1",
+        "IM-02-AC1",
+        "IM-02-AC2"
+      ],
+      "tests": [
+        "tests/test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason",
+        "tests/test_universe.py::test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file"
+      ]
+    },
+    "src/earnings/universe.py": {
+      "requirements": [
+        "IG-13",
+        "IG-13-AC1",
+        "IG-13-AC2",
+        "IM-01",
+        "IM-02",
+        "IM-03-AC1"
+      ],
+      "tests": [
+        "tests/test_universe.py::test_a_ticker_that_the_sec_gives_to_another_company_is_not_accepted",
+        "tests/test_universe.py::test_company_counts_count_each_company_once_and_explain_share_classes",
+        "tests/test_universe.py::test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list",
+        "tests/test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule",
+        "tests/test_universe.py::test_ten_known_renames_resolve_to_one_company",
+        "tests/test_universe.py::test_touching_and_overlapping_spells_merge_into_one_period",
+        "tests/test_universe.py::test_two_renames_on_one_day_are_not_guessed",
+        "tests/test_universe.py::test_year_end_counts_on_the_real_membership_file"
+      ]
+    },
+    "src/earnings/universe_build.py": {
+      "requirements": [
+        "DB-04-AC1",
+        "IG-13-AC1",
+        "IG-21-AC1",
+        "IM-03-AC1"
+      ],
+      "tests": [
+        "tests/test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history",
+        "tests/test_universe.py::test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file"
       ]
     },
     "tests/conftest.py": {
@@ -1499,7 +1567,7 @@
           "fingerprint": "194bfc45ce6b",
           "ref": "DB-04-AC1",
           "tests": [
-            "tests/test_req_database.py::test_db_04_ac1_join_on_company_id_across_ten_known"
+            "tests/test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history"
           ],
           "text": "Join on `company_id` across ten known ticker changes gives one history (Data IM-03)."
         }
@@ -4430,7 +4498,8 @@
           "fingerprint": "ef3cac898955",
           "ref": "IG-13-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history"
+            "tests/test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history",
+            "tests/test_universe.py::test_ten_known_renames_resolve_to_one_company"
           ],
           "text": "Ten known renames give one continuous history."
         },
@@ -4438,13 +4507,19 @@
           "fingerprint": "8d5378b976cd",
           "ref": "IG-13-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review"
+            "tests/test_universe.py::test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list"
           ],
           "text": "Every name match appears in the review list."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_universe.py::test_a_ticker_that_the_sec_gives_to_another_company_is_not_accepted",
+        "tests/test_universe.py::test_names_are_normalised_for_exact_matching_only",
+        "tests/test_universe.py::test_the_stored_source_files_parse_offline",
+        "tests/test_universe.py::test_touching_and_overlapping_spells_merge_into_one_period",
+        "tests/test_universe.py::test_two_renames_on_one_day_are_not_guessed"
+      ]
     },
     "IG-14": {
       "checks": [
@@ -4582,7 +4657,7 @@
           "fingerprint": "1ad5976be6f4",
           "ref": "IG-21-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_21_ac1_the_same_job_runs_for_5_and"
+            "tests/test_universe.py::test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file"
           ],
           "text": "The same job runs for 5 and for 100 companies from a list file."
         }
@@ -4610,13 +4685,16 @@
           "fingerprint": "70d0fb633443",
           "ref": "IM-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_im_01_ac1_at_sampled_year_ends_company_count_matches"
+            "tests/test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500"
           ],
           "text": "At sampled year-ends, company count matches the published count within 5, and differences are explained."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_universe.py::test_company_counts_count_each_company_once_and_explain_share_classes",
+        "tests/test_universe.py::test_year_end_counts_on_the_real_membership_file"
+      ]
     },
     "IM-02": {
       "checks": [
@@ -4624,7 +4702,7 @@
           "fingerprint": "055954829070",
           "ref": "IM-02-AC1",
           "tests": [
-            "tests/test_req_data.py::test_im_02_ac1_each_year_in_the_period_has_at"
+            "tests/test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason"
           ],
           "text": "Each year in the period has at least one such company."
         },
@@ -4632,13 +4710,15 @@
           "fingerprint": "1477383f9bd6",
           "ref": "IM-02-AC2",
           "tests": [
-            "tests/test_req_data.py::test_im_02_ac2_each_record_has_a_removal_date_and"
+            "tests/test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason"
           ],
           "text": "Each record has a removal date and reason."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule"
+      ]
     },
     "IM-03": {
       "checks": [
@@ -4646,7 +4726,8 @@
           "fingerprint": "a311a0e7f6c7",
           "ref": "IM-03-AC1",
           "tests": [
-            "tests/test_req_data.py::test_im_03_ac1_join_on_the_permanent_identifier_produces_one"
+            "tests/test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history",
+            "tests/test_universe.py::test_ten_known_renames_resolve_to_one_company"
           ],
           "text": "Join on the permanent identifier produces one continuous history for ten known renames."
         }
@@ -7205,7 +7286,7 @@
           "fingerprint": "d18077775a30",
           "ref": "TH-05-AC1",
           "tests": [
-            "tests/test_req_data.py::test_th_05_ac1_within_5_of_published_count"
+            "tests/test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500"
           ],
           "text": "Within 5 of published count"
         }
@@ -8836,34 +8917,6 @@
         "GS-02-AC1"
       ]
     },
-    "tests/test_req_data.py::test_im_01_ac1_at_sampled_year_ends_company_count_matches": {
-      "code": [],
-      "kind": "not tested (NEEDS MEASUREMENT)",
-      "requirements": [
-        "IM-01-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_im_02_ac1_each_year_in_the_period_has_at": {
-      "code": [],
-      "kind": "not tested (NEEDS MEASUREMENT)",
-      "requirements": [
-        "IM-02-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_im_02_ac2_each_record_has_a_removal_date_and": {
-      "code": [],
-      "kind": "not tested (NEEDS MEASUREMENT)",
-      "requirements": [
-        "IM-02-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_im_03_ac1_join_on_the_permanent_identifier_produces_one": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IM-03-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -9099,13 +9152,6 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "TH-04-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_th_05_ac1_within_5_of_published_count": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TH-05-AC1"
       ]
     },
     "tests/test_req_data.py::test_th_06_ac1_to_be_set_after_the_first_comparison": {
@@ -9446,13 +9492,6 @@
       "kind": "real check",
       "requirements": [
         "DB-03-AC2"
-      ]
-    },
-    "tests/test_req_database.py::test_db_04_ac1_join_on_company_id_across_ten_known": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-04-AC1"
       ]
     },
     "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form": {
@@ -10443,20 +10482,6 @@
         "IG-12-AC2"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-13-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-13-AC2"
-      ]
-    },
     "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -10532,13 +10557,6 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-20-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_21_ac1_the_same_job_runs_for_5_and": {
-      "code": [],
-      "kind": "not tested (BLOCKED)",
-      "requirements": [
-        "IG-21-AC1"
       ]
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_22_ac1_report_exists_after_a_run_and_matches": {
@@ -12837,6 +12855,140 @@
       "kind": "real check",
       "requirements": [
         "DB-10"
+      ]
+    },
+    "tests/test_universe.py::test_a_ticker_that_the_sec_gives_to_another_company_is_not_accepted": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-13"
+      ]
+    },
+    "tests/test_universe.py::test_company_counts_count_each_company_once_and_explain_share_classes": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-01"
+      ]
+    },
+    "tests/test_universe.py::test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-13-AC2"
+      ]
+    },
+    "tests/test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/universe_build.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-04-AC1",
+        "IG-13-AC1",
+        "IM-03-AC1"
+      ]
+    },
+    "tests/test_universe.py::test_names_are_normalised_for_exact_matching_only": {
+      "code": [
+        "src/earnings/membership.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-13"
+      ]
+    },
+    "tests/test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason": {
+      "code": [
+        "src/earnings/universe.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-02-AC1",
+        "IM-02-AC2"
+      ]
+    },
+    "tests/test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-02"
+      ]
+    },
+    "tests/test_universe.py::test_ten_known_renames_resolve_to_one_company": {
+      "code": [
+        "src/earnings/membership.py",
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-13-AC1",
+        "IM-03-AC1"
+      ]
+    },
+    "tests/test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500": {
+      "code": [
+        "audits/evidence/wave-1.3/report.json"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-01-AC1",
+        "TH-05-AC1"
+      ]
+    },
+    "tests/test_universe.py::test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file": {
+      "code": [
+        "src/earnings/universe.csv",
+        "src/earnings/universe_build.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-21-AC1"
+      ]
+    },
+    "tests/test_universe.py::test_the_stored_source_files_parse_offline": {
+      "code": [
+        "src/earnings/membership.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-13"
+      ]
+    },
+    "tests/test_universe.py::test_touching_and_overlapping_spells_merge_into_one_period": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-13"
+      ]
+    },
+    "tests/test_universe.py::test_two_renames_on_one_day_are_not_guessed": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-13"
+      ]
+    },
+    "tests/test_universe.py::test_year_end_counts_on_the_real_membership_file": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-01"
       ]
     }
   }

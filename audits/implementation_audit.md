@@ -85,6 +85,8 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-13 | 23 Nov 2026 | `main` branch protection, `.github/workflows/ci.yml` | C-23 listed five required checks and the sixth CI job (Requirements consistency) was not required | CLOSED 23 Nov 2026 by decision C-45: the sixth check is now required (applied with gh) |
 | DR-14 | 23 Nov 2026 | Data SR-04, `raw_payload` (C-45) | SR-04 asks for the source version to be stored; the approved table has no such column | OPEN. Needs John: add a nullable `source_version` column |
 | DR-15 | 23 Nov 2026 | Data SR-08, Phase 0 audit finding 3 | The database enforces only a lower bound on `captured_at`; the worker could insert a future time. The code stamps real time | OPEN, accepted: a check against now() would break tests that use fixed dates |
+| DR-16 | 23 Nov 2026 | Ingestion IG-13 | The rename-adjacent rule (same-day end and start with no recorded index change) is not among the matching methods IG-13 names | OPEN. Needs John to confirm the method; all 21 links were read by hand |
+| DR-17 | 23 Nov 2026 | Data IM-02, Wikipedia | Removal reasons are the source's wording and can describe the paired event | OPEN, stated limit |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords and the superuser password are in every service's environment | OPEN, accepted for local use. Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -112,7 +114,7 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W0.3 | Forward consensus capture job | IN PROGRESS | audits/evidence/wave-0.3.md |
 | W1.1 | Task framework and client rules | PARTIAL | audits/evidence/wave-1.1.md |
 | W1.2 | Storage rules | PARTIAL | audits/evidence/wave-1.2.md |
-| W1.3 | Universe and identifiers | NOT STARTED | - |
+| W1.3 | Universe and identifiers | PARTIAL | audits/evidence/wave-1.3.md |
 | W1.4 | Financial data | NOT STARTED | - |
 | W1.5 | Transcripts and preparation | NOT STARTED | - |
 | W1.6 | Events, label and validation | NOT STARTED | - |

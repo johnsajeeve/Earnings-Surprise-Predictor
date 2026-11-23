@@ -196,8 +196,9 @@ def test_sr_10_daily_schedule_runs_at_22_30_utc():
 @pytest.mark.code("src/earnings/capture_universe.csv", "src/earnings/consensus.py")
 def test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers():
     companies = consensus.load_universe()
-    assert len(companies) == 10
-    assert len({t for t, _, _ in companies}) == 10
+    tickers = {t for t, _, _ in companies}
+    assert len(companies) == len(tickers) >= 10
+    assert {"AAPL", "MSFT", "JPM", "KO", "F", "IBM", "PFE", "GOOGL", "AMZN", "INTC"} <= tickers
     assert all(len(cik) == 10 and cik.isdigit() for _, cik, _ in companies)
 
 

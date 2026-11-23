@@ -79,18 +79,6 @@ def test_ig_11_ac1_load_report_shows_the_revision_and_the():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("IG-13-AC1")
-def test_ig_13_ac1_ten_known_renames_give_one_continuous_history():
-    """IG-13-AC1: Ten known renames give one continuous history."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-13-AC2")
-def test_ig_13_ac2_every_name_match_appears_in_the_review():
-    """IG-13-AC2: Every name match appears in the review list."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("IG-14-AC1")
 def test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason():
     """IG-14-AC1: Unlinked fixture is rejected with a reason."""
@@ -157,12 +145,6 @@ def test_ig_19_ac2_the_label_stage_run_without_a_freeze():
 def test_ig_20_ac1_a_planted_record_dated_after_its_cutoff():
     """IG-20-AC1: A planted record dated after its cutoff makes the test fail."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-21-AC1")
-def test_ig_21_ac1_the_same_job_runs_for_5_and():
-    """IG-21-AC1: The same job runs for 5 and for 100 companies from a list file."""
-    not_tested("BLOCKED", "waits for open decision D-28")
 
 
 @pytest.mark.req("IG-22-AC1")
