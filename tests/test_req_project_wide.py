@@ -64,7 +64,7 @@ def test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check():
 @pytest.mark.req("SC-07-AC1")
 @pytest.mark.code("docs/adr")
 def test_sc_07_ac1_an_adr_records_the_label_route():
-    needed = ("label route", "time-series")
+    needed = ("label route", "time-series", "status:", "accepted", "supervisor")
     assert any(all(word in text for word in needed) for text in _adr_texts())
 
 

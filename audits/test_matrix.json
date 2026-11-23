@@ -252,6 +252,7 @@
         "IG-08",
         "IG-08-AC1",
         "SP-06",
+        "SR-01",
         "SR-07-AC1"
       ],
       "tests": [
@@ -259,7 +260,8 @@
         "tests/test_edgar_client.py::test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock",
         "tests/test_edgar_client.py::test_the_contact_goes_only_to_sec_gov_hosts",
         "tests/test_edgar_client.py::test_the_contact_is_sent_as_the_user_agent_and_never_logged_or_shown",
-        "tests/test_edgar_client.py::test_with_the_contact_unset_the_client_raises_and_sends_nothing"
+        "tests/test_edgar_client.py::test_with_the_contact_unset_the_client_raises_and_sends_nothing",
+        "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row"
       ]
     },
     "src/earnings/config.py": {
@@ -267,11 +269,13 @@
         "DB-01-AC1",
         "DB-02",
         "DB-03-AC1",
-        "SP-06"
+        "SP-06",
+        "SR-10"
       ],
       "tests": [
         "tests/test_config.py::test_missing_required_setting_raises",
         "tests/test_config.py::test_sec_user_agent_is_optional",
+        "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_health_unit.py::test_sec_user_agent_unset_is_reported_false",
         "tests/test_health_unit.py::test_sec_user_agent_value_is_never_returned",
         "tests/test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql",
@@ -282,11 +286,14 @@
     "src/earnings/consensus.py": {
       "requirements": [
         "IG-01-AC1",
+        "IG-06",
         "SR-07-AC1",
+        "SR-08",
         "SR-08-AC1",
         "SR-10"
       ],
       "tests": [
+        "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
         "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
         "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row",
@@ -294,6 +301,7 @@
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
         "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers",
+        "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same",
         "tests/test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call",
         "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash"
       ]
@@ -301,6 +309,7 @@
     "src/earnings/db.py": {
       "requirements": [
         "DB-01-AC1",
+        "DB-03",
         "DB-03-AC1",
         "DP-01-AC1",
         "EQ-07",
@@ -310,6 +319,7 @@
         "tests/test_health_unit.py::test_database_exception_is_reported_not_raised",
         "tests/test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql",
         "tests/test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than",
+        "tests/test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials"
       ]
@@ -336,6 +346,7 @@
         "DB-01-AC2",
         "DB-02",
         "DB-02-AC1",
+        "DB-03",
         "DB-03-AC2",
         "PL-05-AC1"
       ],
@@ -344,6 +355,8 @@
         "tests/test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed",
         "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden",
         "tests/test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled",
+        "tests/test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database",
+        "tests/test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44",
         "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on"
       ]
     },
@@ -372,6 +385,7 @@
       "tests": [
         "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
         "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role",
+        "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same",
         "tests/test_edgar_client.py::test_raw_payloads_are_insert_only_and_the_length_is_checked",
         "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row",
         "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row",
@@ -453,12 +467,14 @@
     "src/earnings/source_register.csv": {
       "requirements": [
         "OR-02-AC1",
+        "SR-01",
         "SR-01-AC1",
         "SR-06-AC1",
         "SR-09-AC1",
         "TH-14-AC1"
       ],
       "tests": [
+        "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row",
         "tests/test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each",
         "tests/test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and",
         "tests/test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and",
@@ -486,14 +502,17 @@
         "IG-01",
         "IG-01-AC1",
         "IG-03",
+        "IG-06",
         "IG-07",
         "SC-01",
         "SR-10"
       ],
       "tests": [
+        "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
+        "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash",
         "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis",
         "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails",
@@ -1446,7 +1465,8 @@
       ],
       "document": "database-requirements.md",
       "id_level_tests": [
-        "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden"
+        "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden",
+        "tests/test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database"
       ]
     },
     "DB-03": {
@@ -1469,7 +1489,9 @@
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44"
+      ]
     },
     "DB-04": {
       "checks": [
@@ -4295,6 +4317,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_ingestion_framework.py::test_a_job_with_no_success_for_more_than_three_days_is_reported"
       ]
     },
@@ -6318,7 +6341,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row"
+      ]
     },
     "SR-02": {
       "checks": [
@@ -6441,7 +6466,8 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
-        "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role"
+        "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role",
+        "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same"
       ]
     },
     "SR-09": {
@@ -6479,6 +6505,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
         "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row",
         "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
@@ -6486,6 +6513,7 @@
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
         "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
         "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers",
+        "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails"
       ]
     },
@@ -8009,6 +8037,17 @@
         "SP-06"
       ]
     },
+    "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-06",
+        "SR-10"
+      ]
+    },
     "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected": {
       "code": [
         "src/earnings/consensus.py",
@@ -8089,6 +8128,26 @@
       "code": [
         "src/earnings/capture_universe.csv",
         "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-08"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on": {
+      "code": [
+        "src/earnings/config.py",
+        "src/earnings/tasks.py"
       ],
       "kind": "real check",
       "requirements": [
@@ -8716,6 +8775,16 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "DV-08-AC1"
+      ]
+    },
+    "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row": {
+      "code": [
+        "src/earnings/clients/edgar.py",
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-01"
       ]
     },
     "tests/test_req_data.py::test_fd_01_ac1_every_row_has_a_filing_date": {
@@ -9485,6 +9554,25 @@
       "kind": "not tested (BLOCKED)",
       "requirements": [
         "DB-17-AC1"
+      ]
+    },
+    "tests/test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database": {
+      "code": [
+        "src/earnings/migrate.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-02"
+      ]
+    },
+    "tests/test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44": {
+      "code": [
+        "src/earnings/db.py",
+        "src/earnings/migrate.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-03"
       ]
     },
     "tests/test_req_deployment_and_operations.py::test_dp_01_ac2_timed_run_is_recorded": {

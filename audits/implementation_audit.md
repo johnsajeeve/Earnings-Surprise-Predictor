@@ -55,7 +55,7 @@ At the end of each phase, in this order:
 
 | Phase | Mechanical | Independent audit | John spot-check | Result |
 |---|---|---|---|---|
-| P0 | not run | not run | not run | NOT STARTED |
+| P0 | run (every wave commit) | run 23 Nov 2026, see audits/evidence/phase-0-independent.md | not run | PARTIAL |
 | P1 | not run | not run | not run | NOT STARTED |
 | P2 | not run | not run | not run | NOT STARTED |
 | P3 | not run | not run | not run | NOT STARTED |
@@ -84,6 +84,7 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-12 | 23 Nov 2026 | `src/earnings/consensus.py`, first capture | The first day's 10 rows carry the run start time, not each row's arrival time (up to 12 s) | FIXED in code for later rows; the stored rows stay as they are (append-only) |
 | DR-13 | 23 Nov 2026 | `main` branch protection, `.github/workflows/ci.yml` | C-23 listed five required checks and the sixth CI job (Requirements consistency) was not required | CLOSED 23 Nov 2026 by decision C-45: the sixth check is now required (applied with gh) |
 | DR-14 | 23 Nov 2026 | Data SR-04, `raw_payload` (C-45) | SR-04 asks for the source version to be stored; the approved table has no such column | OPEN. Needs John: add a nullable `source_version` column |
+| DR-15 | 23 Nov 2026 | Data SR-08, Phase 0 audit finding 3 | The database enforces only a lower bound on `captured_at`; the worker could insert a future time. The code stamps real time | OPEN, accepted: a check against now() would break tests that use fixed dates |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords and the superuser password are in every service's environment | OPEN, accepted for local use. Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -97,6 +98,7 @@ Each row is something where code, a test, a document or the plan does not agree 
 | 23 Nov 2026 | The plan put the SUE class thresholds in Wave 1.6 | LB-06 and VL-06 set them during EDA and freeze them after, so they belong to Wave 2.5 | Read the requirement text during the second review |
 | 23 Nov 2026 | The plan put SR-02 and SR-03 in Wave 0.1 as a source register | They are code checks (feature source tag, demo bundle manifest) for Waves 2.4 and 7.4 | `tests/test_req_data.py` |
 | 23 Nov 2026 | The plan said Wave 0.2 covers DB-04, DB-05 and DB-17 and Wave 0.3 covers CE-01 to CE-04 and FR-14 | Their checks need ticker history, later tables, announcement dates and events, which do not exist in P0 | `audits/test_matrix.json` checks |
+| 23 Nov 2026 | I cited 22:30 UTC in code and a test as approved by C-44 and D-45 | John did approve it, in an answer to a question that day, but I did not record it in the decision log, so the log did not support the claim (found by the Phase 0 independent audit). Recorded as C-46 | `docs/decision-log.md`, audit finding 2 |
 | 23 Nov 2026 | An early draft of the gap table said the plan cited "385 of 480" IDs | The check I ran counted 95 uncited Must requirements among 414 parsed rows. 385 was subtraction I had not measured | Re-ran the check, replaced the sentence |
 
 ## 7. Wave ledger
@@ -162,5 +164,5 @@ What was run to see that the auditing itself works, and what it showed:
 - `python3 scripts/check_plan_coverage.py`: 480 of 480 requirements mapped, 38 waves in the plan and the ledger, passes. A planted PASS without evidence and a planted invented ID were both rejected earlier.
 - The drift controls (`check_requirements`, generator diff, matrix `verify`, reference and commit checks) pass on every wave commit.
 - A fault injected into each new rule (roles, time-outs, retries, rate limit, host check, as-of strictness, validity boundary, append-only privileges) made at least one test fail, and the files were restored each time.
-- The independent audit of Phase 0 (Section 4) was started with a fresh agent, in an isolated clone, given only requirement IDs. Its result is recorded in `audits/evidence/phase-0-independent.md` when it returns.
+- The independent audit of Phase 0 (Section 4) ran with a fresh agent, in an isolated clone, given only requirement IDs. Its report is in `audits/evidence/phase-0-independent.md` with my reconciliation. It found real problems: a writable migration history table, an approval I had not recorded, a test that accepted "not tested", a pool test that followed its own constants, and an unguarded outside call on stack start. All but three were fixed the same day; the rest are listed in its reconciliation table.
 - Where my own checks were wrong I wrote it down (Section 6), for example the test arithmetic error in the late-job test and the first fault injection that only broke the migration.

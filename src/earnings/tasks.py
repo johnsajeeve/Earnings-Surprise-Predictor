@@ -77,6 +77,16 @@ def capture_consensus(self: IdempotentTask) -> dict[str, Any]:
         log.log(logging.ERROR if result.failed else logging.INFO, "consensus capture: %s", summary)
         if result.failed and not result.captured and not result.already_captured:
             raise RuntimeError("consensus capture failed for every company")
+        # Report any run of more than 3 missing days (Data SR-10, Ingestion IG-06).
+        found = consensus.gaps(engine)
+        for gap in found:
+            log.warning(
+                "consensus capture gap: %s to %s (%d days)",
+                gap.first_missing,
+                gap.last_missing,
+                gap.days,
+            )
+        summary["gaps"] = len(found)
         return summary
 
 
@@ -112,6 +122,9 @@ def fetch_company_facts(self: IdempotentTask, cik: str) -> dict[str, Any]:
 def catch_up_capture(**_: Any) -> None:
     """When the worker starts after the scheduled time, capture now if today has no snapshot."""
     try:
+        if not get_settings().capture_catch_up:
+            log.info("capture catch-up is off (CAPTURE_CATCH_UP)")
+            return
         if consensus.missing_today(get_engine("worker")):
             log.info("no consensus snapshot yet today, capturing now")
             capture_consensus.delay()

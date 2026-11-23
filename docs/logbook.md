@@ -309,6 +309,15 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: SR-04 lacks a source version column (DR-14, needs John). DB-08 and DB-09 cover only the tables that exist. The 22:30 UTC capture, the second capture day and the bulk-file check are still to happen.
 - Work by Claude. Decisions by John.
 
+### 23 Nov 2026: independent audit of Phase 0 and the fixes it led to
+
+- Asked by John: make sure the auditing works. A fresh agent audited Phase 0 (Waves 0.1 to 0.3) in an isolated clone with its own Docker project, given only the requirement IDs and the repository, not my evidence or claims. Its report is in `audits/evidence/phase-0-independent.md`.
+- What it found, with my response: the worker could change the migration history table (already closed in Wave 1.2, re-probed live); I had cited 22:30 UTC as approved when I had not recorded John's answer in the decision log (now C-46); the SR-06 test accepted "not tested" as a result (tightened); the connection pool test followed its own constants (approved values now pinned); the schema test only compared migrations with themselves (now every column and the deployed database); a freshly started stack called Yahoo with no off switch (now behind `CAPTURE_CATCH_UP`, off by default, on in John's `.env`); the application roles could connect to the `postgres` database (revoked); the capture task did not report gaps (now logs them); the start date was duplicated in the code and the migration (a test ties them).
+- Not fixed, stated: the database enforces only a lower bound on `captured_at` (DR-15); the register's Yahoo and Hugging Face facts are still "not read" or "unknown"; the source-version column (DR-14); the 20 repo-reading tests skipped in CI (DR-08).
+- Verified after the fixes: full-repository pytest 111 passed, 3 expected failures, 0 failed; CI-style 93 passed; ruff, format and mypy pass.
+- Result: Phase 0 is PARTIAL (the lower status of the auditor and me stands). John's own spot-check of five requirements has not happened.
+- Work by Claude, audit by an independent agent. Decisions by John.
+
 ## Waiting on John
 
 - Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).

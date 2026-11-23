@@ -212,3 +212,71 @@ def test_sr_10_a_row_with_no_mean_is_not_stored(test_db):
     engine = get_engine("worker")
     result = consensus.capture_all(engine, UNIVERSE, fetch=no_mean, now=START + timedelta(days=1))
     assert (result.captured, result.failed) == (0, ["AAPL"])
+
+
+@pytest.mark.req("SR-08")
+@pytest.mark.code("src/earnings/consensus.py", "src/earnings/migrations/versions")
+def test_the_start_date_in_the_code_and_in_the_migration_are_the_same():
+    from pathlib import Path
+
+    migration = Path(consensus.__file__).parent / "migrations" / "versions"
+    source = (migration / "0002_estimate_snapshot.py").read_text("utf-8")
+    literal = source.split('CAPTURE_START = "')[1].split('"')[0]
+    assert datetime.fromisoformat(literal) == consensus.CAPTURE_START
+
+
+@pytest.mark.req("SR-10")
+@pytest.mark.code("src/earnings/tasks.py", "src/earnings/config.py")
+def test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on(monkeypatch):
+    from earnings import tasks
+    from earnings.config import get_settings
+
+    sent = []
+    monkeypatch.setattr(
+        tasks, "capture_consensus", type("T", (), {"delay": lambda s: sent.append(1)})()
+    )
+    monkeypatch.setattr(consensus, "missing_today", lambda engine: True)
+    monkeypatch.setattr(tasks, "get_engine", lambda role: object())
+
+    monkeypatch.delenv("CAPTURE_CATCH_UP", raising=False)
+    get_settings.cache_clear()
+    tasks.catch_up_capture()
+    assert sent == []  # off by default: a test or CI stack makes no outside call
+
+    monkeypatch.setenv("CAPTURE_CATCH_UP", "true")
+    get_settings.cache_clear()
+    tasks.catch_up_capture()
+    assert sent == [1]
+    get_settings.cache_clear()
+
+
+@pytest.mark.req("SR-10", "IG-06")
+@pytest.mark.code("src/earnings/tasks.py", "src/earnings/consensus.py")
+def test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task(test_db, monkeypatch, caplog):
+    import logging
+
+    from earnings import tasks
+    from earnings.db import get_engine
+
+    # SYNTHETIC: a capture on the start day only, and a task run well after it.
+    monkeypatch.setattr(consensus, "load_universe", lambda: UNIVERSE)
+    monkeypatch.setattr(consensus, "fetch_yfinance", _fetch)
+    monkeypatch.setattr(consensus, "PAUSE_SECONDS", 0.0)
+    _insert(get_engine("worker"), captured_at=START + timedelta(hours=2))
+    real_gaps = consensus.gaps
+    monkeypatch.setattr(
+        consensus,
+        "gaps",
+        lambda engine, today=None: real_gaps(engine, START.date() + timedelta(days=9)),
+    )
+    monkeypatch.setattr(
+        consensus,
+        "capture_all",
+        lambda engine, companies, fetch=None, now=None, pause=0.0: consensus.CaptureResult(
+            already_captured=1
+        ),
+    )
+    with caplog.at_level(logging.WARNING):
+        summary = tasks.capture_consensus.apply().get()
+    assert summary["gaps"] == 1
+    assert "consensus capture gap: 2026-11-24 to 2026-12-01 (8 days)" in caplog.text

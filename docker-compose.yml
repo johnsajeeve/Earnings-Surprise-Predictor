@@ -15,6 +15,7 @@ x-app-env: &app-env
   DB_MIGRATOR_PASSWORD: ${DB_MIGRATOR_PASSWORD:?Copy .env.example to .env first}
   DB_WORKER_PASSWORD: ${DB_WORKER_PASSWORD:?Copy .env.example to .env first}
   DB_API_PASSWORD: ${DB_API_PASSWORD:?Copy .env.example to .env first}
+  CAPTURE_CATCH_UP: ${CAPTURE_CATCH_UP:-false}
   CELERY_BROKER_URL: redis://redis:6379/0
   CELERY_RESULT_BACKEND: redis://redis:6379/1
   # Passed through from your shell. Empty if unset. Never written to a file in the repo.

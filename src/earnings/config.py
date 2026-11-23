@@ -26,6 +26,11 @@ class Settings(BaseSettings):
     # Port inside the Docker network. The host port in .env is a different setting.
     postgres_internal_port: int = 5432
 
+    # Capture the day's consensus when the worker starts and today has no snapshot (C-46).
+    # Off by default, so a test or CI stack makes no outside calls. Set true on the machine
+    # that runs the daily capture.
+    capture_catch_up: bool = False
+
     # Contact string the SEC asks for in the User-Agent header (decision C-10).
     # Optional here, because the health check must work before it is set.
     sec_user_agent: str = ""

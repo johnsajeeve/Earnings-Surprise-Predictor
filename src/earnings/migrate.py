@@ -74,6 +74,8 @@ def bootstrap(database: str) -> None:
                         _ident(name), _ident(key), sql.Literal(value)
                     )
                 )
+        # The application roles work in their own database only (found by the Phase 0 audit).
+        conn.execute("REVOKE CONNECT ON DATABASE postgres FROM PUBLIC")
         found = conn.execute("SELECT 1 FROM pg_database WHERE datname = %s", (database,))
         if found.fetchone():
             conn.execute(

@@ -164,6 +164,27 @@ def test_db_03_ac1_a_load_fixture_with_more_clients_than(test_db):
     assert 0 < peak_server[0] <= POOL_SIZE + MAX_OVERFLOW + 2, f"peak connections {peak_server[0]}"
 
 
+@pytest.mark.req("DB-03")
+@pytest.mark.code("src/earnings/db.py", "src/earnings/migrate.py")
+def test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44():
+    from earnings import migrate
+    from earnings.db import MAX_OVERFLOW, POOL_SIZE, POOL_TIMEOUT_SECONDS, get_engine
+
+    assert (POOL_SIZE, MAX_OVERFLOW, POOL_TIMEOUT_SECONDS) == (5, 5, 10)
+    assert get_engine("api").pool._pre_ping is True
+    assert migrate.STATEMENT_TIMEOUT_SECONDS == {"migrator": 300, "worker": 120, "api": 10}
+    assert (migrate.LOCK_TIMEOUT_SECONDS, migrate.IDLE_IN_TRANSACTION_TIMEOUT_SECONDS) == (5, 60)
+
+
+@pytest.mark.req("DB-02")
+@pytest.mark.code("src/earnings/migrate.py")
+def test_the_application_roles_cannot_connect_to_the_postgres_database(test_db):
+    # The refusal comes at connection time, so it is an OperationalError about permission.
+    for role in ("worker", "api"):
+        assert _try(role, test_db, "SELECT 1") is None  # their own database works
+        assert _try(role, "postgres", "SELECT 1") == "OperationalError"
+
+
 @pytest.mark.req("DB-03-AC2")
 @pytest.mark.code("src/earnings/migrate.py")
 def test_db_03_ac2_a_long_query_is_cancelled(test_db):

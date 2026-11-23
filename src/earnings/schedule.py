@@ -12,7 +12,8 @@ from celery.schedules import crontab
 
 # name -> {"task": registered task name, "hour": UTC hour, "minute": UTC minute}
 JOBS: dict[str, dict[str, Any]] = {
-    # After the US close in summer and winter (decision C-44, D-45 run time).
+    # After the US close in summer and winter. 22:30 UTC was approved by John on 23 Nov 2026 as the
+    # D-45 run-time value for this job (decision C-46).
     "capture-consensus": {"task": "earnings.capture_consensus", "hour": 22, "minute": 30},
 }
 

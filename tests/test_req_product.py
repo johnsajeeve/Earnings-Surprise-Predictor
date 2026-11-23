@@ -965,6 +965,53 @@ def test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
+EXPECTED_SCHEMA = {
+    "alembic_version": ["version_num"],
+    "company": ["company_id", "name"],
+    "dead_letter": [
+        "dead_letter_id", "task_name", "args_hash", "error_class", "failed_at", "attempt_count",
+        "run_id",
+    ],
+    "estimate_snapshot": [
+        "snapshot_id", "company_id", "event_id", "mean_estimate", "low_estimate", "high_estimate",
+        "std_estimate", "estimate_count", "eps_basis", "period_label", "source", "source_version",
+        "captured_at", "raw_payload",
+    ],
+    "index_membership": [
+        "index_membership_id", "company_id", "valid_from", "valid_to", "removal_reason",
+    ],
+    "ingestion_run": [
+        "run_id", "job_name", "source", "started_at", "ended_at", "status", "rows_read",
+        "rows_written", "error_class", "task_id",
+    ],
+    "raw_payload": [
+        "payload_id", "source", "url", "retrieved_at", "sha256", "content_type", "byte_length",
+        "body",
+    ],
+    "ticker_history": ["ticker_history_id", "company_id", "ticker", "valid_from", "valid_to"],
+}  # fmt: skip
+
+
+def _schema_snapshot(database):
+    """{table: [columns in order]} plus the index names, read as the superuser."""
+    import os
+
+    import psycopg
+
+    with psycopg.connect(
+        host=os.environ["POSTGRES_HOST"], user=os.environ["POSTGRES_USER"],
+        password=os.environ["POSTGRES_PASSWORD"], dbname=database,
+    ) as conn:  # fmt: skip
+        rows = conn.execute(
+            "SELECT table_name, column_name FROM information_schema.columns "
+            "WHERE table_schema = 'public' ORDER BY table_name, ordinal_position"
+        ).fetchall()
+    out = {}
+    for table, column in rows:
+        out.setdefault(table, []).append(column)
+    return out
+
+
 @pytest.mark.req("PL-05-AC1")
 @pytest.mark.code("src/earnings/migrate.py", "src/earnings/migrations/versions")
 def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
@@ -999,6 +1046,10 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
             "index_membership",
         }
         assert columns == ["company_id", "name"]
+        # Every column of every table, in order, and the same schema as the deployed database.
+        built = _schema_snapshot(name)
+        assert built == EXPECTED_SCHEMA
+        assert _schema_snapshot(project_database()) == built
         migrate.downgrade(name, "base")  # the history is reversible
         engine = create_engine(migrate.migrator_url(name), poolclass=NullPool)
         with engine.connect() as conn:

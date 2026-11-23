@@ -348,6 +348,18 @@ def test_sr_01_ac1_register_has_one_row_per_dataset_each():
             assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", r[field]), f"{r['dataset_id']}: {field}"
 
 
+@pytest.mark.req("SR-01")
+@pytest.mark.code("src/earnings/source_register.csv", "src/earnings/clients/edgar.py")
+def test_every_source_the_code_fetches_from_has_a_register_row():
+    from earnings import consensus
+    from earnings.clients import edgar
+
+    text_ = " ".join(r["source"].lower() + " " + r["dataset"].lower() for r in source_register())
+    assert "sec edgar" in text_ and edgar.SOURCE == "sec-edgar"
+    assert consensus.SOURCE in text_
+    assert "hugging face" in text_  # the transcripts are read from it from Wave 1.5
+
+
 @pytest.mark.req("SR-02-AC1")
 def test_sr_02_ac1_every_feature_column_carries_a_source_tag():
     """SR-02-AC1: Every feature column carries a source tag."""
@@ -392,7 +404,9 @@ def test_sr_06_ac1_register_lists_a_fallback_per_dataset_and():
         if r["route"] != "primary":
             continue
         has_fallback = r["fallback"].strip() not in ("", "none documented")
-        has_result = r["fallback_test_result"].startswith(("passed", "failed", "not tested"))
+        # "not tested" and "failed" do not meet SR-06: the fallback must pass the same tests, or
+        # the scope is narrowed and that is recorded (found by the Phase 0 audit).
+        has_result = r["fallback_test_result"].startswith(("passed", "scope narrowed"))
         if not (has_fallback and has_result):
             gaps.append(r["dataset_id"])
     assert not gaps, f"no fallback or no recorded test result: {gaps}"
