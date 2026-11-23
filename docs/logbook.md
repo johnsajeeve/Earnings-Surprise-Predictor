@@ -287,6 +287,15 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: the job has run on one day, so SR-10 stays partial until real runs on later days. The 22:30 run has not happened yet. Capture only runs while Docker and the PC are on. Ten companies only. XOM left out until the CIK question (DR-06) is settled.
 - Work by Claude. Decisions by John.
 
+### 23 Nov 2026: earlier-wave fixes, then Wave 1.1 (task framework and EDGAR client)
+
+- Asked by John: resolve the open issues of the earlier waves, then start Wave 1.1. John approved (C-45): three new tables (`ingestion_run`, `dead_letter`, `raw_payload`), the retry and queue values, deferring the Alpha Vantage client until a key exists, and requiring the sixth CI check.
+- Earlier waves: the question of five or six required checks was settled by reading the repository settings (five required, the sixth job was not); the sixth is now required. A clean clone built from an empty volume in a separate Compose project reaches healthy services and passes the CI-style tests (EQ-04). The project database was untouched.
+- Wave 1.1 done: retries (3, backoff from 30 s to 300 s, jitter) with a dead-letter table; run records for every task; late acknowledgement; a rate limiter shared through Redis (8 requests a second against the SEC limit of 10); an EDGAR client that refuses to send without the contact, sends it only to sec.gov hosts and never logs it; raw payloads stored as received and parsed offline; one schedule file; a late-job report. First real slice: five companies fetched through the queue, 25.9 MB stored.
+- Verified: full-repository pytest 94 passed, 3 expected failures, 0 failed (69 before); CI-style 76 passed; ruff, format and mypy pass; three injected faults made 7 tests fail; no earlier passing test regressed.
+- Limits: Wave 1.1 is partial. Alpha Vantage limit and counter deferred, the worker-kill test is for Wave 7.1, the other three scheduled jobs and the event flag come with their waves, and the retry waits were tested eagerly, not in real time. Not run on GitHub Actions.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).

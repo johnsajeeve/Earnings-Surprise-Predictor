@@ -568,7 +568,9 @@ Operations, security and engineering requirements are defined in the Project-Wid
 | Prediction | prediction_id, event_id, model_version, feature_set_version, class, probabilities, confidence, input_as_of (JSON), created_at | FR-01, FR-11, FR-22. Realised outcome and realised sector score joined from EarningsEvent and SectorBenchmark. |
 | Explanation | explanation_id, prediction_id, features (JSON), citations (JSON), verification_status, job_status, prompt_version, llm_model_version, generation_settings (JSON), created_at | FR-04, FR-05, FR-19; Project-Wide AI-01. |
 | ClaimLabel | claim_id, explanation_id, claim_text, label, reason | EX-02. |
-| IngestionRun | run_id, job_name, started_at, ended_at, status, row_counts | PL-01. |
+| IngestionRun | run_id, job_name, source, started_at, ended_at, status (running, succeeded, failed), rows_read, rows_written, error_class, task_id | PL-01; Ingestion IG-03. Table `ingestion_run` (decision C-45). |
+| DeadLetter | dead_letter_id, task_name, args_hash, error_class, failed_at, attempt_count, run_id | PL-02; Ingestion IG-02. Insert only (decision C-45). |
+| RawPayload | payload_id, source, url, retrieved_at, sha256, content_type, byte_length, body | Database DB-11; Ingestion IG-10. Insert only, one row per source, URL and hash (decision C-45). |
 
 ## 12. Error States
 

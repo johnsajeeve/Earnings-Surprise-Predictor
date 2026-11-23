@@ -78,10 +78,11 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-03 | 23 Nov 2026 | decision-log C-06, plan Section 5.1 | C-06 says pipeline, models, API, agent and evaluation are finished by end of December. The estimated plan, at about 15 minutes per acceptance check, reaches only part of that and no speed has been measured | DECIDED by John (keep December). RISK OPEN: forecast at each checkpoint, apply PD-04 if it misses by more than a week |
 | DR-06 | 23 Nov 2026 | decision-log C-19, Spike B | C-19 matches current tickers to a CIK through the SEC file. XOM maps to CIK 2115436 (ExxonMobil Holdings Corp, history from 2025-06-30), while its history is under CIK 34088 | OPEN. Needs John |
 | DR-07 | 23 Nov 2026 | Product FR-22, Ingestion IG-15, Spike A | Call times must be stored in UTC, but the Hugging Face `date` field states no time zone | CLOSED 23 Nov 2026 by decision C-42: stamps are US Eastern with daylight saving, stored in UTC. Evidence: Spike A2 |
-| DR-08 | 23 Nov 2026 | `.github/workflows/ci.yml`, tests | The CI `tests` job mounts only `tests/` and one file, so 20 checks that read documents, the workflow and scripts skip as NEEDS REPO there | OPEN. Needs John (CI change) |
+| DR-08 | 23 Nov 2026 | `.github/workflows/ci.yml`, tests | The CI `tests` job mounts only `tests/` and one file, so 20 checks that read documents, the workflow and scripts skip as NEEDS REPO there | OPEN. John did not approve a new CI job on 23 Nov 2026 (C-45) |
 | DR-09 | 23 Nov 2026 | decision-log C-19, D-32, Spike D | The membership candidate is keyed by ticker with no company identifier, but C-19 makes the CIK the permanent identifier | OPEN. The ticker to CIK mapping is an IM-03 task for Wave 1.3 |
 | DR-10 | 23 Nov 2026 | Data SR-06, source register | The register has no documented fallback for the 8-K announcement time, and every other fallback is untested | OPEN. Needs John: name a fallback or accept a stated scope limit |
 | DR-12 | 23 Nov 2026 | `src/earnings/consensus.py`, first capture | The first day's 10 rows carry the run start time, not each row's arrival time (up to 12 s) | FIXED in code for later rows; the stored rows stay as they are (append-only) |
+| DR-13 | 23 Nov 2026 | `main` branch protection, `.github/workflows/ci.yml` | C-23 listed five required checks and the sixth CI job (Requirements consistency) was not required | CLOSED 23 Nov 2026 by decision C-45: the sixth check is now required (applied with gh) |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords and the superuser password are in every service's environment | OPEN, accepted for local use. Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -106,7 +107,7 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W0.1 | Baseline, source register and spikes | IN PROGRESS | audits/evidence/wave-0.1-register-and-adr.md |
 | W0.2 | Database foundation and plumbing slice | PARTIAL | audits/evidence/wave-0.2.md |
 | W0.3 | Forward consensus capture job | IN PROGRESS | audits/evidence/wave-0.3.md |
-| W1.1 | Task framework and client rules | NOT STARTED | - |
+| W1.1 | Task framework and client rules | PARTIAL | audits/evidence/wave-1.1.md |
 | W1.2 | Storage rules | NOT STARTED | - |
 | W1.3 | Universe and identifiers | NOT STARTED | - |
 | W1.4 | Financial data | NOT STARTED | - |

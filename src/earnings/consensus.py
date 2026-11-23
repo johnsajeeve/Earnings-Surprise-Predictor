@@ -25,7 +25,7 @@ CAPTURE_START = datetime(2026, 11, 23, tzinfo=UTC)
 # A gap is more than this many consecutive days without a capture (SR-10).
 MAX_MISSING_DAYS = 3
 _UNIVERSE = Path(__file__).parent / "capture_universe.csv"
-_PAUSE_SECONDS = 1.0  # between sources calls, to stay polite to the free service
+PAUSE_SECONDS = 1.0  # between sources calls, to stay polite to the free service
 
 Fetch = Callable[[str], dict[str, Any]]
 
@@ -92,6 +92,9 @@ def capture_all(
     for ticker, company_id, name in companies:
         try:
             data = fetch(ticker)
+            log.info(
+                "%s fetch %s: mean %s", SOURCE, ticker, data.get("mean")
+            )  # request log (SR-07)
             if data.get("mean") is None:
                 raise ValueError("source returned no mean estimate")
         except Exception as exc:  # noqa: BLE001  one failing company must not stop the others

@@ -123,10 +123,12 @@ def test_db_02_ac1_each_role_is_tested_for_one_allowed():
 @pytest.mark.code("src/earnings/db.py", "src/earnings/config.py")
 def test_db_03_ac1_a_load_fixture_with_more_clients_than(test_db):
     """DB-03-AC1: A load fixture with more clients than the pool does not exhaust connections."""
-    from earnings.db import get_engine
+    from earnings.db import MAX_OVERFLOW, POOL_SIZE, get_engine
 
-    clients, failures, peak = 30, [], [0]
+    clients, failures = 30, []
+    peak_server, peak_pool = [0], [0]
     engine = get_engine("api")  # 5 connections plus 5 overflow, so 30 clients must queue
+    done = threading.Event()
 
     def one_client():
         try:
@@ -137,14 +139,15 @@ def test_db_03_ac1_a_load_fixture_with_more_clients_than(test_db):
 
     def watch():
         with _admin("postgres") as conn:
-            for _ in range(40):
+            while not done.is_set():
                 n = conn.execute(
                     "SELECT count(*) FROM pg_stat_activity "
                     "WHERE usename = 'earnings_api' AND datname = %s",
                     (test_db,),
                 ).fetchone()[0]
-                peak[0] = max(peak[0], n)
-                time.sleep(0.05)
+                peak_server[0] = max(peak_server[0], n)
+                peak_pool[0] = max(peak_pool[0], engine.pool.checkedout())
+                time.sleep(0.02)
 
     threads = [threading.Thread(target=one_client) for _ in range(clients)]
     watcher = threading.Thread(target=watch)
@@ -153,9 +156,12 @@ def test_db_03_ac1_a_load_fixture_with_more_clients_than(test_db):
         th.start()
     for th in threads:
         th.join()
+    done.set()
     watcher.join()
     assert failures == []
-    assert 0 < peak[0] <= 10, f"peak connections {peak[0]}"
+    assert 0 < peak_pool[0] <= POOL_SIZE + MAX_OVERFLOW  # the pool never lends more than 10
+    # The server may briefly show one or two more while closed overflow connections linger.
+    assert 0 < peak_server[0] <= POOL_SIZE + MAX_OVERFLOW + 2, f"peak connections {peak_server[0]}"
 
 
 @pytest.mark.req("DB-03-AC2")

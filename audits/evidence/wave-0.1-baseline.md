@@ -65,3 +65,7 @@ DR-08: the CI `tests` job mounts only `tests/` and `requirements-dev.txt`, so 20
 
 - Test run time: 2.2 s (CI style), 3.4 s (full repository). Build and start of the stack: not timed.
 - Hours spent on this step: about 0.5. Acceptance checks closed: 0 (this is a measurement step).
+
+## Update, 23 November 2026
+
+EQ-04 (clean build): a fresh clone built in a separate Compose project from an empty volume reaches healthy services and passes the CI-style tests. See p0-resolutions-2026-11-23.md. The question of five or six required CI checks (K) was settled by reading the branch protection.

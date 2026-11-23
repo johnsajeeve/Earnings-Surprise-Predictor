@@ -21,3 +21,13 @@ def assert_test_database(name: str) -> str:
     if name == project_database() or not name.endswith("_test"):
         raise RuntimeError(f"refusing to use {name!r}: tests need a database ending in _test")
     return name
+
+
+def table_hash(conn, table: str, columns: list[str]) -> str:
+    """A hash of the chosen columns of a table in a fixed order, to compare table state."""
+    cols = ", ".join(columns)
+    row = conn.exec_driver_sql(
+        f"SELECT md5(coalesce(string_agg(t::text, '|' ORDER BY t::text), '')) "
+        f"FROM (SELECT {cols} FROM {table}) t"
+    ).scalar()
+    return str(row)

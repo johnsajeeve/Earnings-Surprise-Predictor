@@ -224,14 +224,34 @@
     },
     "src/earnings/celery_app.py": {
       "requirements": [
+        "IG-04",
+        "IG-05-AC2",
         "SC-01",
         "SC-01-AC1",
         "SR-10"
       ],
       "tests": [
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
+        "tests/test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run",
+        "tests/test_ingestion_framework.py::test_the_redis_redelivery_timeout_is_four_hours",
         "tests/test_req_project_wide.py::test_sc_01_ac1_adr_records_celery_with_redis_as_accepted",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
+      ]
+    },
+    "src/earnings/clients/edgar.py": {
+      "requirements": [
+        "IG-07",
+        "IG-08",
+        "IG-08-AC1",
+        "SP-06",
+        "SR-07-AC1"
+      ],
+      "tests": [
+        "tests/test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call",
+        "tests/test_edgar_client.py::test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock",
+        "tests/test_edgar_client.py::test_the_contact_goes_only_to_sec_gov_hosts",
+        "tests/test_edgar_client.py::test_the_contact_is_sent_as_the_user_agent_and_never_logged_or_shown",
+        "tests/test_edgar_client.py::test_with_the_contact_unset_the_client_raises_and_sends_nothing"
       ]
     },
     "src/earnings/config.py": {
@@ -253,6 +273,8 @@
     },
     "src/earnings/consensus.py": {
       "requirements": [
+        "IG-01-AC1",
+        "SR-07-AC1",
         "SR-08-AC1",
         "SR-10"
       ],
@@ -263,7 +285,9 @@
         "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
-        "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers"
+        "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers",
+        "tests/test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call",
+        "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash"
       ]
     },
     "src/earnings/db.py": {
@@ -290,6 +314,15 @@
         "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form"
       ]
     },
+    "src/earnings/limits.py": {
+      "requirements": [
+        "IG-07"
+      ],
+      "tests": [
+        "tests/test_edgar_client.py::test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock",
+        "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis"
+      ]
+    },
     "src/earnings/migrate.py": {
       "requirements": [
         "DB-01-AC2",
@@ -312,6 +345,11 @@
         "DB-04",
         "DB-05",
         "DB-07-AC1",
+        "DB-11",
+        "IG-02-AC1",
+        "IG-03-AC1",
+        "PL-01-AC1",
+        "PL-02-AC1",
         "PL-05-AC1",
         "SR-08",
         "SR-08-AC1"
@@ -319,11 +357,61 @@
       "tests": [
         "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
         "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role",
+        "tests/test_edgar_client.py::test_raw_payloads_are_insert_only_and_the_length_is_checked",
+        "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row",
+        "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row",
         "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations",
         "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form",
         "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database",
         "tests/test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone",
         "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on"
+      ]
+    },
+    "src/earnings/parsing.py": {
+      "requirements": [
+        "DB-11",
+        "IG-10",
+        "IG-12"
+      ],
+      "tests": [
+        "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
+        "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
+      ]
+    },
+    "src/earnings/rawstore.py": {
+      "requirements": [
+        "DB-11",
+        "IG-01",
+        "IG-10"
+      ],
+      "tests": [
+        "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
+        "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash"
+      ]
+    },
+    "src/earnings/runlog.py": {
+      "requirements": [
+        "IG-03",
+        "IG-03-AC1",
+        "IG-03-AC2",
+        "IG-06",
+        "PL-01-AC1"
+      ],
+      "tests": [
+        "tests/test_ingestion_framework.py::test_a_forced_error_gives_status_failed",
+        "tests/test_ingestion_framework.py::test_a_job_with_no_success_for_more_than_three_days_is_reported",
+        "tests/test_ingestion_framework.py::test_a_run_that_reports_failure_with_zero_rows_is_not_a_success",
+        "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row"
+      ]
+    },
+    "src/earnings/schedule.py": {
+      "requirements": [
+        "IG-05",
+        "IG-05-AC2"
+      ],
+      "tests": [
+        "tests/test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run",
+        "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task"
       ]
     },
     "src/earnings/source_register.csv": {
@@ -342,9 +430,27 @@
         "tests/test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every"
       ]
     },
+    "src/earnings/tasking.py": {
+      "requirements": [
+        "IG-02",
+        "IG-02-AC1",
+        "IG-04",
+        "PL-02-AC1"
+      ],
+      "tests": [
+        "tests/test_ingestion_framework.py::test_a_task_that_recovers_leaves_no_dead_letter",
+        "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row",
+        "tests/test_ingestion_framework.py::test_retry_settings_and_late_acknowledgement_follow_decision_c_45",
+        "tests/test_ingestion_framework.py::test_the_redis_redelivery_timeout_is_four_hours"
+      ]
+    },
     "src/earnings/tasks.py": {
       "requirements": [
         "EQ-07",
+        "IG-01",
+        "IG-01-AC1",
+        "IG-03",
+        "IG-07",
         "SC-01",
         "SR-10"
       ],
@@ -352,6 +458,10 @@
         "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
+        "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash",
+        "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis",
+        "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails",
+        "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
       ]
@@ -370,6 +480,15 @@
       ],
       "tests": [
         "tests/test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against"
+      ]
+    },
+    "tests/fixtures/edgar_companyfacts_aapl_trimmed.json": {
+      "requirements": [
+        "IG-10",
+        "IG-12"
+      ],
+      "tests": [
+        "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
       ]
     },
     "tests/requirement_checks.lock": {
@@ -1444,7 +1563,10 @@
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
+        "tests/test_edgar_client.py::test_raw_payloads_are_insert_only_and_the_length_is_checked"
+      ]
     },
     "DB-12": {
       "checks": [
@@ -4016,7 +4138,7 @@
           "fingerprint": "35f0f4fe8553",
           "ref": "IG-01-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_01_ac1_running_the_same_task_twice_gives_an"
+            "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash"
           ],
           "text": "Running the same task twice gives an identical table hash."
         },
@@ -4030,7 +4152,9 @@
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash"
+      ]
     },
     "IG-02": {
       "checks": [
@@ -4038,13 +4162,16 @@
           "fingerprint": "f2dd3e0e0b1b",
           "ref": "IG-02-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_02_ac1_an_injected_failure_produces_three_retries_and"
+            "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row"
           ],
           "text": "An injected failure produces three retries and one dead-letter row."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_ingestion_framework.py::test_a_task_that_recovers_leaves_no_dead_letter",
+        "tests/test_ingestion_framework.py::test_retry_settings_and_late_acknowledgement_follow_decision_c_45"
+      ]
     },
     "IG-03": {
       "checks": [
@@ -4052,7 +4179,7 @@
           "fingerprint": "ee776b63eb02",
           "ref": "IG-03-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_03_ac1_each_run_produces_a_queryable_row"
+            "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row"
           ],
           "text": "Each run produces a queryable row."
         },
@@ -4060,13 +4187,16 @@
           "fingerprint": "3ff567b09bca",
           "ref": "IG-03-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_03_ac2_a_forced_error_gives_status_failed"
+            "tests/test_ingestion_framework.py::test_a_forced_error_gives_status_failed"
           ],
           "text": "A forced error gives status failed."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_ingestion_framework.py::test_a_run_that_reports_failure_with_zero_rows_is_not_a_success",
+        "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails"
+      ]
     },
     "IG-04": {
       "checks": [
@@ -4074,13 +4204,15 @@
           "fingerprint": "975848720eb8",
           "ref": "IG-04-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company_run"
           ],
           "text": "The longest task in the 100-company run finishes inside the timeout, and the setting is recorded."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_ingestion_framework.py::test_the_redis_redelivery_timeout_is_four_hours"
+      ]
     },
     "IG-05": {
       "checks": [
@@ -4096,13 +4228,15 @@
           "fingerprint": "89b1a39cbb4a",
           "ref": "IG-05-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_05_ac2_a_job_missing_from_the_file_does"
+            "tests/test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run"
           ],
           "text": "A job missing from the file does not run."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task"
+      ]
     },
     "IG-06": {
       "checks": [
@@ -4110,13 +4244,15 @@
           "fingerprint": "9398f929c9f1",
           "ref": "IG-06-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and_the"
           ],
           "text": "Simulated 4-day gap is reported and the affected events carry the flag."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_ingestion_framework.py::test_a_job_with_no_success_for_more_than_three_days_is_reported"
+      ]
     },
     "IG-07": {
       "checks": [
@@ -4124,13 +4260,16 @@
           "fingerprint": "3e264c726c18",
           "ref": "IG-07-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no_more"
           ],
           "text": "Test with a mocked clock shows no more than 10 EDGAR requests in any second and no more than 25 Alpha Vantage requests in a day."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_edgar_client.py::test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock",
+        "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis"
+      ]
     },
     "IG-08": {
       "checks": [
@@ -4138,13 +4277,16 @@
           "fingerprint": "46b998009ae7",
           "ref": "IG-08-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_08_ac1_with_the_variable_unset_the_client_raises"
+            "tests/test_edgar_client.py::test_with_the_contact_unset_the_client_raises_and_sends_nothing"
           ],
           "text": "With the variable unset, the client raises an error and sends nothing."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_edgar_client.py::test_the_contact_goes_only_to_sec_gov_hosts",
+        "tests/test_edgar_client.py::test_the_contact_is_sent_as_the_user_agent_and_never_logged_or_shown"
+      ]
     },
     "IG-09": {
       "checks": [
@@ -4172,7 +4314,10 @@
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
+        "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
+      ]
     },
     "IG-11": {
       "checks": [
@@ -4208,7 +4353,9 @@
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
+      ]
     },
     "IG-13": {
       "checks": [
@@ -5431,7 +5578,7 @@
           "fingerprint": "07cad780150b",
           "ref": "PL-01-AC1",
           "tests": [
-            "tests/test_req_product.py::test_pl_01_ac1_each_run_produces_a_log_row_that"
+            "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row"
           ],
           "text": "Each run produces a log row that can be queried."
         }
@@ -5445,7 +5592,7 @@
           "fingerprint": "01a4d0a18feb",
           "ref": "PL-02-AC1",
           "tests": [
-            "tests/test_req_product.py::test_pl_02_ac1_injected_failure_produces_three_retries_and_one"
+            "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row"
           ],
           "text": "Injected failure produces three retries and one dead-letter entry."
         }
@@ -6110,6 +6257,7 @@
       "id_level_tests": [
         "tests/test_config.py::test_missing_required_setting_raises",
         "tests/test_config.py::test_sec_user_agent_is_optional",
+        "tests/test_edgar_client.py::test_the_contact_goes_only_to_sec_gov_hosts",
         "tests/test_health_unit.py::test_sec_user_agent_unset_is_reported_false",
         "tests/test_health_unit.py::test_sec_user_agent_value_is_never_returned"
       ]
@@ -6220,7 +6368,7 @@
           "fingerprint": "e364b4a2e82d",
           "ref": "SR-07-AC1",
           "tests": [
-            "tests/test_req_data.py::test_sr_07_ac1_request_log_exists"
+            "tests/test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call"
           ],
           "text": "Request log exists."
         },
@@ -6293,7 +6441,8 @@
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
         "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
-        "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers"
+        "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers",
+        "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails"
       ]
     },
     "SR-11": {
@@ -7902,6 +8051,105 @@
         "SR-10"
       ]
     },
+    "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline": {
+      "code": [
+        "src/earnings/parsing.py",
+        "src/earnings/rawstore.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-11",
+        "IG-10"
+      ]
+    },
+    "tests/test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call": {
+      "code": [
+        "src/earnings/clients/edgar.py",
+        "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-07-AC1"
+      ]
+    },
+    "tests/test_edgar_client.py::test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock": {
+      "code": [
+        "src/earnings/clients/edgar.py",
+        "src/earnings/limits.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-07"
+      ]
+    },
+    "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash": {
+      "code": [
+        "src/earnings/rawstore.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-01"
+      ]
+    },
+    "tests/test_edgar_client.py::test_raw_payloads_are_insert_only_and_the_length_is_checked": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-11"
+      ]
+    },
+    "tests/test_edgar_client.py::test_the_contact_goes_only_to_sec_gov_hosts": {
+      "code": [
+        "src/earnings/clients/edgar.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-08",
+        "SP-06"
+      ]
+    },
+    "tests/test_edgar_client.py::test_the_contact_is_sent_as_the_user_agent_and_never_logged_or_shown": {
+      "code": [
+        "src/earnings/clients/edgar.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-08"
+      ]
+    },
+    "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network": {
+      "code": [
+        "src/earnings/parsing.py",
+        "tests/fixtures/edgar_companyfacts_aapl_trimmed.json"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-10",
+        "IG-12"
+      ]
+    },
+    "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis": {
+      "code": [
+        "src/earnings/limits.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-07"
+      ]
+    },
+    "tests/test_edgar_client.py::test_with_the_contact_unset_the_client_raises_and_sends_nothing": {
+      "code": [
+        "src/earnings/clients/edgar.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-08-AC1"
+      ]
+    },
     "tests/test_health_unit.py::test_all_ok_returns_200": {
       "code": [
         "src/earnings/api/main.py"
@@ -7948,6 +8196,122 @@
       "kind": "real check",
       "requirements": [
         "SP-06"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_a_forced_error_gives_status_failed": {
+      "code": [
+        "src/earnings/runlog.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-03-AC2"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run": {
+      "code": [
+        "src/earnings/celery_app.py",
+        "src/earnings/schedule.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-05-AC2"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_a_job_with_no_success_for_more_than_three_days_is_reported": {
+      "code": [
+        "src/earnings/runlog.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-06"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_a_run_that_reports_failure_with_zero_rows_is_not_a_success": {
+      "code": [
+        "src/earnings/runlog.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-03"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_a_task_that_recovers_leaves_no_dead_letter": {
+      "code": [
+        "src/earnings/tasking.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-02"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/tasking.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-02-AC1",
+        "PL-02-AC1"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails": {
+      "code": [
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-03",
+        "SR-10"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/runlog.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-03-AC1",
+        "PL-01-AC1"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task": {
+      "code": [
+        "src/earnings/schedule.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-05"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_retry_settings_and_late_acknowledgement_follow_decision_c_45": {
+      "code": [
+        "src/earnings/tasking.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-02"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-01-AC1"
+      ]
+    },
+    "tests/test_ingestion_framework.py::test_the_redis_redelivery_timeout_is_four_hours": {
+      "code": [
+        "src/earnings/celery_app.py",
+        "src/earnings/tasking.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-04"
       ]
     },
     "tests/test_req_api_and_serving.py::test_sv_01_ac1_the_api_code_imports_no_model_package": {
@@ -8564,13 +8928,6 @@
       "kind": "expected failure (requirement not met yet)",
       "requirements": [
         "SR-06-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_sr_07_ac1_request_log_exists": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "SR-07-AC1"
       ]
     },
     "tests/test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo": {
@@ -9926,13 +10283,6 @@
         "UX-11-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_01_ac1_running_the_same_task_twice_gives_an": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-01-AC1"
-      ]
-    },
     "tests/test_req_ingestion_and_preparation.py::test_ig_01_ac2_killing_a_worker_mid_task_and_restarting": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -9940,28 +10290,7 @@
         "IG-01-AC2"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_02_ac1_an_injected_failure_produces_three_retries_and": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-02-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_03_ac1_each_run_produces_a_queryable_row": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-03-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_03_ac2_a_forced_error_gives_status_failed": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-03-AC2"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company": {
+    "tests/test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company_run": {
       "code": [],
       "kind": "not tested (NEEDS MEASUREMENT)",
       "requirements": [
@@ -9975,32 +10304,18 @@
         "IG-05-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_05_ac2_a_job_missing_from_the_file_does": {
-      "code": [],
-      "kind": "not tested (BLOCKED)",
-      "requirements": [
-        "IG-05-AC2"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and": {
+    "tests/test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and_the": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-06-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no": {
+    "tests/test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no_more": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-07-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_08_ac1_with_the_variable_unset_the_client_raises": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-08-AC1"
       ]
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses": {
@@ -11270,20 +11585,6 @@
       "kind": "not tested (NEEDS MEASUREMENT)",
       "requirements": [
         "NFR-13-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_pl_01_ac1_each_run_produces_a_log_row_that": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "PL-01-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_pl_02_ac1_injected_failure_produces_three_retries_and_one": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "PL-02-AC1"
       ]
     },
     "tests/test_req_product.py::test_pl_03_ac1_health_response_lists_the_date_for_a": {

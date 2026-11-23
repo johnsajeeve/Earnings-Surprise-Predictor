@@ -1,9 +1,10 @@
 """Celery application. Redis is the broker and the result store."""
 
 from celery import Celery
-from celery.schedules import crontab
 
 from earnings.config import get_settings
+from earnings.schedule import beat_schedule
+from earnings.tasking import VISIBILITY_TIMEOUT_SECONDS
 
 _settings = get_settings()
 
@@ -22,12 +23,9 @@ celery_app.conf.update(
     enable_utc=True,
     # Retry the broker connection at start-up instead of exiting if Redis is slow.
     broker_connection_retry_on_startup=True,
-    # Scheduled jobs (Ingestion IG-05). Run at 22:30 UTC, after the US close in summer and winter
-    # (decision C-44 and the D-45 run-time value). Embedded beat in the worker (docker-compose.yml).
-    beat_schedule={
-        "capture-consensus": {
-            "task": "earnings.capture_consensus",
-            "schedule": crontab(hour=22, minute=30),
-        },
-    },
+    # A task that runs longer than this would be delivered a second time (Ingestion IG-04).
+    broker_transport_options={"visibility_timeout": VISIBILITY_TIMEOUT_SECONDS},
+    # Scheduled jobs: only those listed in earnings/schedule.py run (Ingestion IG-05).
+    # Beat is embedded in the worker (docker-compose.yml).
+    beat_schedule=beat_schedule(),
 )

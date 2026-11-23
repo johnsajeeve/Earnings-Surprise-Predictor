@@ -80,19 +80,19 @@ These are changes to Product Section 11 and need approval under change control b
 | Addition | Needed by |
 |---|---|
 | `EstimateSnapshot` (approved, decision C-44): `company_id` required, `event_id` nullable until the event is built, `low_estimate`, `high_estimate`, `eps_basis`, `period_label`, `source_version` and the raw response as received | Data SR-10, CE-01, CE-03; Product FR-14 |
-| `RawPayload` table: payload id, source, URL, retrieval time, hash, body or file path | DB-11 |
+| `RawPayload` table: payload id, source, URL, retrieval time, hash, body or file path (approved, decision C-45: body as bytea) | DB-11 |
 | `TranscriptSentence` columns: analytic flag, truncated flag, forward-guidance flag, speaker role, FinBERT model revision | Feature Engineering FE-02, FE-06, FE-14, FE-05 |
 | `FeatureVector`: prediction point (T0 or T1) and a reason code per unavailable feature | Feature Engineering FE-23, FE-24 |
 | `FeatureSetVersion` table: registry hash and each component version | Feature Engineering FE-28 |
 | `Prediction`: prediction point (T0 or T1) | Decision C-17 |
 | `Explanation` and `ClaimLabel`: evidence ids per claim, token counts, estimated cost | Explanation Agent AG-26 |
 | `Explanation`: `failure_reason`, `completed_at`, the unique key on prediction, prompt version and model version, and the API role's insert grant. The job identifier is the explanation identifier | API and Serving SV-06; Product FR-19, NFR-02; DB-02, DB-05 |
-| Quarantine table, and run records shared by ingestion, features and explanation jobs | DB-13, Product PL-01 |
+| Quarantine table, and run records shared by ingestion, features and explanation jobs (run records approved as `ingestion_run`, decision C-45; the quarantine table is not yet approved) | DB-13, Product PL-01 |
 | `EvaluationReport` table: model version, prediction point, metric, value, interval bounds, label route, created time | Modelling and Evaluation MD-21 |
 | `TestReadLog` table, append-only: read time, job, model version, feature-set version, row count | Product ML-02; Feature Engineering FE-30 |
 | `ThresholdFreeze` table, append-only: thresholds, clip limits, window, frozen time, code version | Data LB-06, VL-06; Ingestion and Preparation IG-19; Feature Engineering FE-25 |
 | `Signoff` table, append-only: subject (model version or dataset version), reviewer, date, record reference | Product ML-06; Data GS-01 |
-| `DeadLetter` table: task name, argument hash, error class, time, attempt count | Ingestion and Preparation IG-02 |
+| `DeadLetter` table (approved, decision C-45): task name, argument hash, error class, time, attempt count | Ingestion and Preparation IG-02 |
 
 | ID | Priority | Requirement | Acceptance check | Traces to |
 |---|---|---|---|---|

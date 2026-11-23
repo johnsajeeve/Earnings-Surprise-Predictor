@@ -404,12 +404,6 @@ def test_sr_06_ac1_register_lists_a_fallback_per_dataset_and():
     assert not gaps, f"no fallback or no recorded test result: {gaps}"
 
 
-@pytest.mark.req("SR-07-AC1")
-def test_sr_07_ac1_request_log_exists():
-    """SR-07-AC1: Request log exists."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("SR-07-AC2")
 def test_sr_07_ac2_no_scraped_source_appears_in_the_demo():
     """SR-07-AC2: No scraped source appears in the demo bundle."""

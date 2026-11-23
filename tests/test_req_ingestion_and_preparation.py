@@ -13,74 +13,56 @@ from requirement_support import not_tested
 
 # Placeholders written by scripts/requirement_tests.py scaffold. Replace the call to
 # not_tested() with a real check when the code this test exercises is built.
-@pytest.mark.req("IG-01-AC1")
-def test_ig_01_ac1_running_the_same_task_twice_gives_an():
-    """IG-01-AC1: Running the same task twice gives an identical table hash."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("IG-01-AC2")
 def test_ig_01_ac2_killing_a_worker_mid_task_and_restarting():
     """IG-01-AC2: Killing a worker mid-task and restarting gives the row count of a clean run."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("IG-02-AC1")
-def test_ig_02_ac1_an_injected_failure_produces_three_retries_and():
-    """IG-02-AC1: An injected failure produces three retries and one dead-letter row."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-03-AC1")
-def test_ig_03_ac1_each_run_produces_a_queryable_row():
-    """IG-03-AC1: Each run produces a queryable row."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-03-AC2")
-def test_ig_03_ac2_a_forced_error_gives_status_failed():
-    """IG-03-AC2: A forced error gives status failed."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("IG-04-AC1")
-def test_ig_04_ac1_the_longest_task_in_the_100_company():
-    """IG-04-AC1: The longest task in the 100-company run finishes inside the timeout, and
-    the setting is recorded.
+def test_ig_04_ac1_the_longest_task_in_the_100_company_run():
+    """IG-04-AC1: The longest task in the 100-company run finishes inside the timeout, and the
+    setting is recorded.
     """
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
+
+
+@pytest.mark.req("IG-06-AC1")
+def test_ig_06_ac1_simulated_4_day_gap_is_reported_and_the():
+    """IG-06-AC1: Simulated 4-day gap is reported and the affected events carry the flag."""
+    not_tested("NOT IMPLEMENTED", "events do not exist yet; the flag is built with them (Wave 1.6)")
+
+
+@pytest.mark.req("IG-07-AC1")
+def test_ig_07_ac1_test_with_a_mocked_clock_shows_no_more():
+    """IG-07-AC1: Test with a mocked clock shows no more than 10 EDGAR requests in any second and
+    no more than 25 Alpha Vantage requests in a day.
+    """
+    not_tested("NOT IMPLEMENTED", "the Alpha Vantage client and its counter wait for a key (C-45)")
+
+
+@pytest.mark.req("IG-10-AC1")
+def test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the():
+    """IG-10-AC1: Parsing runs from stored payloads with the network disabled."""
+    not_tested("NOT IMPLEMENTED", "only the EDGAR client exists; the others come with their steps")
+
+
+@pytest.mark.req("IG-12-AC1")
+def test_ig_12_ac1_tests_pass_with_the_network_disabled():
+    """IG-12-AC1: Tests pass with the network disabled."""
+    not_tested("NOT IMPLEMENTED", "only the EDGAR and yfinance clients exist so far")
+
+
+@pytest.mark.req("IG-12-AC2")
+def test_ig_12_ac2_fixtures_state_their_origin():
+    """IG-12-AC2: Fixtures state their origin."""
+    not_tested("NOT IMPLEMENTED", "only the EDGAR and yfinance clients exist so far")
 
 
 @pytest.mark.req("IG-05-AC1")
 def test_ig_05_ac1_the_schedule_file_lists_each_job_with():
     """IG-05-AC1: The schedule file lists each job with its time."""
     not_tested("BLOCKED", "waits for open decision D-45")
-
-
-@pytest.mark.req("IG-05-AC2")
-def test_ig_05_ac2_a_job_missing_from_the_file_does():
-    """IG-05-AC2: A job missing from the file does not run."""
-    not_tested("BLOCKED", "waits for open decision D-45")
-
-
-@pytest.mark.req("IG-06-AC1")
-def test_ig_06_ac1_simulated_4_day_gap_is_reported_and():
-    """IG-06-AC1: Simulated 4-day gap is reported and the affected events carry the flag."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-07-AC1")
-def test_ig_07_ac1_test_with_a_mocked_clock_shows_no():
-    """IG-07-AC1: Test with a mocked clock shows no more than 10 EDGAR requests in any
-    second and no more than 25 Alpha Vantage requests in a day.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-08-AC1")
-def test_ig_08_ac1_with_the_variable_unset_the_client_raises():
-    """IG-08-AC1: With the variable unset, the client raises an error and sends nothing."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("IG-09-AC1")
@@ -91,27 +73,9 @@ def test_ig_09_ac1_backfill_of_the_100_company_subset_uses():
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
 
 
-@pytest.mark.req("IG-10-AC1")
-def test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the():
-    """IG-10-AC1: Parsing runs from stored payloads with the network disabled."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("IG-11-AC1")
 def test_ig_11_ac1_load_report_shows_the_revision_and_the():
     """IG-11-AC1: Load report shows the revision and the number of empty rows rejected."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-12-AC1")
-def test_ig_12_ac1_tests_pass_with_the_network_disabled():
-    """IG-12-AC1: Tests pass with the network disabled."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-12-AC2")
-def test_ig_12_ac2_fixtures_state_their_origin():
-    """IG-12-AC2: Fixtures state their origin."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 

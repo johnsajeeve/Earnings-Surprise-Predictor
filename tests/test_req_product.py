@@ -953,18 +953,6 @@ def test_nfr_13_ac1_five_minutes():
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
 
 
-@pytest.mark.req("PL-01-AC1")
-def test_pl_01_ac1_each_run_produces_a_log_row_that():
-    """PL-01-AC1: Each run produces a log row that can be queried."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("PL-02-AC1")
-def test_pl_02_ac1_injected_failure_produces_three_retries_and_one():
-    """PL-02-AC1: Injected failure produces three retries and one dead-letter entry."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("PL-03-AC1")
 def test_pl_03_ac1_health_response_lists_the_date_for_a():
     """PL-03-AC1: Health response lists the date for a test ticker."""
@@ -1000,7 +988,14 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
         engine.dispose()
         assert head == migrate.head_revision()
         # The expected schema at head. A new migration adds its table here in the same change.
-        assert tables == {"alembic_version", "company", "estimate_snapshot"}
+        assert tables == {
+            "alembic_version",
+            "company",
+            "estimate_snapshot",
+            "ingestion_run",
+            "dead_letter",
+            "raw_payload",
+        }
         assert columns == ["company_id", "name"]
         migrate.downgrade(name, "base")  # the history is reversible
         engine = create_engine(migrate.migrator_url(name), poolclass=NullPool)
