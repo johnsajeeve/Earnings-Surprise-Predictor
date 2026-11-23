@@ -14,7 +14,7 @@ import sys
 
 import pytest
 
-from requirement_support import ROOT, not_tested, repo_path
+from requirement_support import ROOT, not_tested, repo_path, source_register
 
 
 def _ci() -> str:
@@ -62,7 +62,6 @@ def test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check():
 
 
 @pytest.mark.req("SC-07-AC1")
-@pytest.mark.xfail(strict=True, reason="NOT SATISFIED: no ADR records the label route yet")
 @pytest.mark.code("docs/adr")
 def test_sc_07_ac1_an_adr_records_the_label_route():
     needed = ("label route", "time-series")
@@ -489,9 +488,11 @@ def test_or_01_ac1_restore_test_log_exists():
 
 
 @pytest.mark.req("OR-02-AC1")
+@pytest.mark.code("src/earnings/source_register.csv")
 def test_or_02_ac1_source_register_shows_zero_cost_for_every():
     """OR-02-AC1: Source register shows zero cost for every primary-route source."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    primary = [r for r in source_register() if r["route"] == "primary"]
+    assert primary and all(float(r["cost_usd_per_month"]) == 0 for r in primary)
 
 
 @pytest.mark.req("OR-02-AC2")

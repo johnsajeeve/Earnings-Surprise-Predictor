@@ -1,0 +1,24 @@
+import csv, random, collections, pyarrow.parquet as pq
+rows=list(csv.DictReader(open("memb/ticker_start_end.csv")))
+by=collections.defaultdict(list)
+for r in rows: by[r["ticker"]].append((r["start_date"],r["end_date"]))
+removed={}
+for t,st in by.items():
+    last=max(st,key=lambda x:x[0])
+    if last[1] and "2015-01-01"<=last[1]<="2024-12-31": removed[t]=last
+print("tickers in membership file:",len(by),"| tickers whose last stint ended 2015-2024:",len(removed))
+rng=random.Random(2029); pick=sorted(rng.sample(sorted(removed),20))
+hf=pq.ParquetFile("hf/part-0.parquet").read(columns=["symbol","company_name","date"]).to_pylist()
+h=collections.defaultdict(list)
+for r in hf: h[r["symbol"].upper()].append((r["date"][:10],r["company_name"]))
+found=0
+for t in pick:
+    s,e=removed[t]; d=sorted(h.get(t,[]))
+    if d:
+        found+=1
+        cov=[x for x in d if s<=x[0]<=e]
+        print(f"{t:6} in index {s}..{e} | HF: {len(d)} transcripts {d[0][0]}..{d[-1][0]} | within stint {len(cov)} | name {(d[-1][1] or "?")[:30]}")
+    else: print(f"{t:6} in index {s}..{e} | HF: none")
+print("present in HF:",found,"of 20")
+# and across all removed tickers
+allp=sum(1 for t in removed if t in h); print("all removed tickers present in HF:",allp,"of",len(removed))

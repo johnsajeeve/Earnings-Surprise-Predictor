@@ -118,13 +118,13 @@ def test_ig_12_ac2_fixtures_state_their_origin():
 @pytest.mark.req("IG-13-AC1")
 def test_ig_13_ac1_ten_known_renames_give_one_continuous_history():
     """IG-13-AC1: Ten known renames give one continuous history."""
-    not_tested("BLOCKED", "waits for open decision D-32")
+    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("IG-13-AC2")
 def test_ig_13_ac2_every_name_match_appears_in_the_review():
     """IG-13-AC2: Every name match appears in the review list."""
-    not_tested("BLOCKED", "waits for open decision D-32")
+    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("IG-14-AC1")

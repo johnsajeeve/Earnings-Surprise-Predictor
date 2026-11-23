@@ -1,0 +1,31 @@
+### python3 docs/tools/check_requirements.py
+IDs defined: {'market': 7, 'product': 147, 'data': 90, 'project-wide': 74, 'feature': 32, 'agent': 26, 'database': 17, 'frontend': 11, 'ingestion': 22, 'modelling': 23, 'serving': 16, 'deployment': 15
+OK: checks 1 to 6 pass
+exit=0
+### python3 audits/generate_traceability.py
+wrote audits/requirements_traceability.md: 480 requirements, 17 assessed; acceptance index 597 checks; pending values 41 requirements
+exit=0
+### python3 scripts/test_matrix.py build
+wrote audits/test_matrix.json and audits/test_matrix.md: 432 requirements, 617 tests, 26 code files
+exit=0
+### python3 scripts/test_matrix.py verify
+  checks whose best test is real check: 16
+IDs with no acceptance check (no test required): 48
+OK
+OK: every check matches the text its tests were reviewed against
+exit=0
+### python3 scripts/check_requirement_refs.py
+OK: 617 tests, 0 legacy unmarked
+exit=0
+### python3 scripts/check_commit_refs.py
+OK: 3 commits after the baseline checked
+exit=0
+### python3 scripts/check_plan_coverage.py
+requirements: 480, mapped: 480, waves in plan: 38, ledger rows: 38
+OK: every requirement mapped once, every wave has a ledger row, every PASS has evidence
+exit=0
+### python3 scripts/check_pins.py requirements.txt requirements.lock requirements-pending.txt requirements-dev.txt
+OK: every requirement line in requirements.txt, requirements.lock, requirements-pending.txt, requirements-dev.txt is pinned
+exit=0
+### git diff generated files
+diff-exit=0

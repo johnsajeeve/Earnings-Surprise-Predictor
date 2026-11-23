@@ -1,0 +1,16 @@
+{
+ "H1 Eastern with DST": {
+  "n_summer": 1674,
+  "n_winter": 698,
+  "median_summer": -35,
+  "median_winter": -35,
+  "abs_diff": 0
+ },
+ "H2 Eastern standard all year (UTC-5)": {
+  "n_summer": 1674,
+  "n_winter": 698,
+  "median_summer": -95,
+  "median_winter": -35,
+  "abs_diff": 60
+ }
+}

@@ -262,13 +262,21 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: coverage cannot attribute code that runs at import time, and tests that only read files execute no project code, so declared and measured code differ for them. The measured report is not committed and has not run in CI. The CI change has not run on GitHub.
 - Work by Claude. Decisions by John.
 
+### 23 Nov 2026: implementation plan, audit ledger and Wave 0.1
+
+- Asked by John: an implementation plan in phases, waves and steps with the best lifecycle method and testing at every level, a deterministic audit file to stop drift and fabricated claims, and then to start building.
+- Done: `docs/implementation-plan.md` (plan-driven phases, weekly waves, test-first steps, three gates); `audits/implementation_audit.md` (accountability rules, gate commands, drift register, ledger); `audits/plan_coverage.txt` and `scripts/check_plan_coverage.py` (each of the 480 requirements mapped to one wave, each wave has a ledger row, a PASS needs an evidence file). Two gap reviews changed the plan: 95 uncited Must requirements, three missing waves, overlapping phases, class thresholds placed before the EDA, and checks mapped to waves that could not test them.
+- Wave 0.1 (in progress): regression baseline measured (25 passed and 599 skipped in the CI-style run, 42 passed and 580 skipped in the full-repository run, 0 failed). Spikes on real data: call time against 8-K time (call stamps are US Eastern with daylight saving, decision C-42), EDGAR EPS depth (9 of 10 companies), consensus from yfinance, removed-company transcript coverage (126 of 230), FinBERT speed (14.7 to 28.3 sentences a second). Source register (7 datasets, all primary entries cost zero) and ADR 0004 (label route). Five placeholder tests became real checks (SR-01, SR-09, TH-14, OR-02, SC-07); a planted bad register row made them fail.
+- Decisions by John: C-41 (plan approved, December target kept), C-42 (call-time zone), C-43 (register placement, ADR 0004, Section 12 wording, D-32 and D-19 closed).
+- Limits: SR-06 fails (no fallback for the announcement time, and no fallback tested). SC-07 is partial without the supervisor's written agreement. D-35 stays open: the weights of `ProsusAI/finbert` are CC BY-NC-SA 4.0. The stack was rebuilt over running containers, not from a clean volume. The second bulk-file observation, the Finnhub, FMP and Alpha Vantage spikes and the independent phase audit are not done.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 - Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).
 - D-34: approve the negation and forward-guidance definitions.
-- D-35 to D-46: FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
+- D-35 to D-46 (D-35 now also needs a view on the CC BY-NC-SA licence of the ProsusAI/finbert weights): FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
 - D-46: note in the next supervisor meeting action list that Professor Goodacre has no objection to the time-series label (C-25 closed D-01 on John's word; SC-07 and SS-04 ask for it in writing).
-- D-32 (membership source).
 - D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.
 - D-29: the exact submission date.
 - Two small SSOT document map edits still unapproved: the prefix GATE on the data row, and a row for this log book.

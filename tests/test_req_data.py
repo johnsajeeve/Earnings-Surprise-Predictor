@@ -6,9 +6,11 @@ reported as NOT TESTED, never as passed. Replace the call with a real check when
 code is built (Deterministic_audit.md, Phase D).
 """
 
+import re
+
 import pytest
 
-from requirement_support import not_tested
+from requirement_support import not_tested, source_register
 
 
 # Placeholders written by scripts/requirement_tests.py scaffold. Replace the call to
@@ -332,9 +334,18 @@ def test_sec_02_ac1_unit_test_on_a_fixed_date_with():
 
 
 @pytest.mark.req("SR-01-AC1")
+@pytest.mark.code("src/earnings/source_register.csv")
 def test_sr_01_ac1_register_has_one_row_per_dataset_each():
     """SR-01-AC1: Register has one row per dataset, each with a licence and a dated access check."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    rows = source_register()
+    assert rows, "the register is empty"
+    ids = [r["dataset_id"] for r in rows]
+    assert len(ids) == len(set(ids)), "a dataset appears twice"
+    for r in rows:
+        for field in ("dataset", "source", "licence", "access_route"):
+            assert r[field].strip(), f"{r['dataset_id']}: {field} is empty"
+        for field in ("licence_checked_on", "access_checked_on"):
+            assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", r[field]), f"{r['dataset_id']}: {field}"
 
 
 @pytest.mark.req("SR-02-AC1")
@@ -376,9 +387,21 @@ def test_sr_05_ac1_written_answer_or_dated_refusal_on_file():
 
 
 @pytest.mark.req("SR-06-AC1")
+@pytest.mark.xfail(
+    strict=True, reason="NOT SATISFIED: announcement_times has no documented fallback source"
+)
+@pytest.mark.code("src/earnings/source_register.csv")
 def test_sr_06_ac1_register_lists_a_fallback_per_dataset_and():
     """SR-06-AC1: Register lists a fallback per dataset and records the test result for it."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    gaps = []
+    for r in source_register():
+        if r["route"] != "primary":
+            continue
+        has_fallback = r["fallback"].strip() not in ("", "none documented")
+        has_result = r["fallback_test_result"].startswith(("passed", "failed", "not tested"))
+        if not (has_fallback and has_result):
+            gaps.append(r["dataset_id"])
+    assert not gaps, f"no fallback or no recorded test result: {gaps}"
 
 
 @pytest.mark.req("SR-07-AC1")
@@ -402,9 +425,14 @@ def test_sr_08_ac1_test_rejects_any_row_for_a_snapshot():
 
 
 @pytest.mark.req("SR-09-AC1")
+@pytest.mark.code("src/earnings/source_register.csv")
 def test_sr_09_ac1_source_register_has_a_cost_column_and():
     """SR-09-AC1: Source register has a cost column, and every primary-route entry shows zero."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    rows = source_register()
+    assert "cost_usd_per_month" in rows[0]
+    primary = [r for r in rows if r["route"] == "primary"]
+    assert primary, "no primary-route entry"
+    assert all(float(r["cost_usd_per_month"]) == 0 for r in primary)
 
 
 @pytest.mark.req("SR-10-AC1")
@@ -506,9 +534,11 @@ def test_th_13_ac1_reported_no_pass_mark():
 
 
 @pytest.mark.req("TH-14-AC1")
+@pytest.mark.code("src/earnings/source_register.csv")
 def test_th_14_ac1_zero():
     """TH-14-AC1: Zero"""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    primary = [r for r in source_register() if r["route"] == "primary"]
+    assert sum(float(r["cost_usd_per_month"]) for r in primary) == 0
 
 
 @pytest.mark.req("TH-15-AC1")

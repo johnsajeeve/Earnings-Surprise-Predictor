@@ -1,0 +1,62 @@
+import os, sys, json, time
+from datetime import date, datetime
+from urllib.parse import urlparse
+import requests
+UA=os.environ.get("SEC_USER_AGENT","")
+if not UA: sys.exit("SEC_USER_AGENT not set")
+_l=[0.0]
+def chk(url):
+    h=urlparse(url).hostname or ""; assert h=="sec.gov" or h.endswith(".sec.gov"), h
+def get(url,head=False):
+    chk(url); w=0.25-(time.time()-_l[0]); 
+    if w>0: time.sleep(w)
+    for a in range(3):
+        r=(requests.head if head else requests.get)(url,headers={"User-Agent":UA},timeout=60,allow_redirects=True)
+        _l[0]=time.time()
+        if r.status_code in (429,500,502,503): time.sleep(2**a); continue
+        return r
+    return r
+tick=get("https://www.sec.gov/files/company_tickers.json").json()
+cik={v["ticker"]:int(v["cik_str"]) for v in tick.values()}
+cik.update({"XLNX":743988,"ATVI":718877})   # removed companies are not in the current ticker file; CIKs checked below by entity name
+names=["AAPL","MSFT","JPM","XOM","KO","IBM","PFE","F","XLNX","ATVI"]
+def d(s): return datetime.strptime(s,"%Y-%m-%d").date()
+out={}
+for t in names:
+    r=get(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik[t]:010d}.json")
+    if r.status_code!=200: out[t]={"error":r.status_code}; continue
+    j=r.json(); f=j["facts"]["us-gaap"].get("EarningsPerShareDiluted")
+    if not f: out[t]={"entity":j["entityName"],"error":"no EarningsPerShareDiluted"}; continue
+    pts=f["units"]["USD/shares"]
+    q={};fy={};allfacts={}
+    for p in pts:
+        if "start" not in p: continue
+        s,e=d(p["start"]),d(p["end"]); n=(e-s).days
+        key=(p["start"],p["end"]); allfacts.setdefault(key,[]).append((p["filed"],p["val"],p["form"]))
+        if 80<=n<=100: q.setdefault(p["end"],[]).append(p)
+        elif 350<=n<=380: fy.setdefault(p["end"],[]).append(p)
+    # derived Q4: FY end e, quarters ending at e-9m, e-6m, e-3m present => derivable
+    qends=sorted(q)
+    def near(e,months):  # a quarter end about `months` before e
+        for x in qends:
+            if abs((d(e)-d(x)).days-months*30.4)<=12: return True
+        return False
+    derived=[e for e in fy if near(e,3) and near(e,6) and near(e,9) and e not in q]
+    allq=sorted(set(qends)|set(derived))
+    before=[e for e in allq if e<="2014-09-30"]
+    # contiguous run of quarters ending at the last quarter on or before 2014-09-30
+    run=0; prev=None
+    for e in reversed(before):
+        if prev is None or abs((d(prev)-d(e)).days-91)<=15: run+=1; prev=e
+        else: break
+    multi=[k for k,v in allfacts.items() if len({x[0] for x in v})>1]
+    changed=[k for k in multi if len({x[1] for x in allfacts[k]})>1]
+    out[t]={"entity":j["entityName"],"quarterly_periods_reported":len(qends),"derived_q4":len(derived),
+      "earliest_quarter_end":allq[0] if allq else None,"quarters_to_2014_09_30":len(before),"contiguous_run_to_2014_09_30":run,
+      "periods_in_more_than_one_filing":len(multi),"periods_whose_value_changed":len(changed)}
+    print(t,out[t])
+n_ok=sum(1 for v in out.values() if v.get("contiguous_run_to_2014_09_30",0)>=10)
+print("companies with >=10 contiguous quarters to 2014-09-30:",n_ok,"of",len(names))
+json.dump(out,open("spikeB_results.json","w"),indent=1)
+for name,u in [("companyfacts.zip","https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip"),("submissions.zip","https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip")]:
+    r=get(u,head=True); print(name,r.status_code,r.headers.get("Last-Modified"),r.headers.get("Content-Length"),"server date",r.headers.get("Date"))

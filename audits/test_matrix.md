@@ -251,18 +251,18 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | PX-03-AC1 | eb2776e30a12 | test_req_data.py::test_px_03_ac1_series_type_check_fails_any_series_containing | not tested (NOT IMPLEMENTED) |
 | SEC-01-AC1 | f488020764a4 | test_req_data.py::test_sec_01_ac1_test_vl_11_a_company_reclassified_in | not tested (NOT IMPLEMENTED) |
 | SEC-02-AC1 | 172b619c8130 | test_req_data.py::test_sec_02_ac1_unit_test_on_a_fixed_date_with | not tested (NOT IMPLEMENTED) |
-| SR-01-AC1 | 6f36b14388ae | test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | not tested (NOT IMPLEMENTED) |
+| SR-01-AC1 | 6f36b14388ae | test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | real check |
 | SR-02-AC1 | 49cc92f213fe | test_req_data.py::test_sr_02_ac1_every_feature_column_carries_a_source_tag | not tested (NOT IMPLEMENTED) |
 | SR-02-AC2 | d79e07584849 | test_req_data.py::test_sr_02_ac2_an_untagged_column_fails_the_build | not tested (NOT IMPLEMENTED) |
 | SR-03-AC1 | e1655f8a9749 | test_req_data.py::test_sr_03_ac1_demo_bundle_manifest_lists_each_source_and | not tested (NOT IMPLEMENTED) |
 | SR-03-AC2 | ab2d77d9f586 | test_req_data.py::test_sr_03_ac2_any_personal_use_source_fails_the_check | not tested (NOT IMPLEMENTED) |
 | SR-04-AC1 | d0e8f1635958 | test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches | not tested (NOT IMPLEMENTED) |
 | SR-05-AC1 | 719b1f5d00d1 | test_req_data.py::test_sr_05_ac1_written_answer_or_dated_refusal_on_file | not tested (NEEDS PERSON) |
-| SR-06-AC1 | 543a5a773e18 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | not tested (NOT IMPLEMENTED) |
+| SR-06-AC1 | 543a5a773e18 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | expected failure (requirement not met yet) |
 | SR-07-AC1 | e364b4a2e82d | test_req_data.py::test_sr_07_ac1_request_log_exists | not tested (NOT IMPLEMENTED) |
 | SR-07-AC2 | 7b1966ebfc7f | test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo | not tested (NOT IMPLEMENTED) |
 | SR-08-AC1 | 989d24e7a461 | test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot | not tested (NOT IMPLEMENTED) |
-| SR-09-AC1 | 6277d59075f9 | test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | not tested (NOT IMPLEMENTED) |
+| SR-09-AC1 | 6277d59075f9 | test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | real check |
 | SR-10-AC1 | 423a7f8f5f14 | test_req_data.py::test_sr_10_ac1_job_log_shows_a_successful_daily_run | not tested (NEEDS MEASUREMENT) |
 | SR-10-AC2 | 38c8241fdd26 | test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive | not tested (NEEDS MEASUREMENT) |
 | SR-11-AC1 | 50571a6da203 | test_req_data.py::test_sr_11_ac1_a_test_fails_any_displayed_excerpt_longer | not tested (NOT IMPLEMENTED) |
@@ -279,7 +279,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | TH-11-AC1 | 5cb616d5f9fc | test_req_data.py::test_th_11_ac1_at_least_6_prior_seasonal_differences_8 | not tested (NOT IMPLEMENTED) |
 | TH-12-AC1 | 36e74346ea34 | test_req_data.py::test_th_12_ac1_differences_above_1_listed | not tested (NOT IMPLEMENTED) |
 | TH-13-AC1 | 49fe50121b0c | test_req_data.py::test_th_13_ac1_reported_no_pass_mark | not tested (NOT IMPLEMENTED) |
-| TH-14-AC1 | 973d0c649aa9 | test_req_data.py::test_th_14_ac1_zero | not tested (NOT IMPLEMENTED) |
+| TH-14-AC1 | 973d0c649aa9 | test_req_data.py::test_th_14_ac1_zero | real check |
 | TH-15-AC1 | d9a847a1a79a | test_req_data.py::test_th_15_ac1_0 | not tested (NOT IMPLEMENTED) |
 | TX-01-AC1 | 15cd3c5a0a8d | test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields | not tested (NOT IMPLEMENTED) |
 | TX-01-AC2 | 5cc51c034c05 | test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged | not tested (NOT IMPLEMENTED) |
@@ -346,7 +346,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | ET-04-AC2 | cd8eed7aae31 | test_req_project_wide.py::test_et_04_ac2_disclaimer_test_passes | not tested (NOT IMPLEMENTED) |
 | ET-05-AC1 | a5c402f529f1 | test_req_project_wide.py::test_et_05_ac1_written_confirmation_of_the_tier_and_declaration | not tested (NEEDS PERSON) |
 | OR-01-AC1 | be6242d842c2 | test_req_project_wide.py::test_or_01_ac1_restore_test_log_exists | not tested (NEEDS MEASUREMENT) |
-| OR-02-AC1 | f782dca454fa | test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | not tested (NOT IMPLEMENTED) |
+| OR-02-AC1 | f782dca454fa | test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | real check |
 | OR-02-AC2 | 61503b843d79 | test_req_project_wide.py::test_or_02_ac2_budget_alert_exists_before_any_spend | not tested (NOT IMPLEMENTED) |
 | OR-03-AC1 | 2b9c2a8bc125 | test_req_project_wide.py::test_or_03_ac1_demo_service_account_has_no_write_rights | not tested (NOT IMPLEMENTED) |
 | PD-01-AC1 | 8d29c883c3a4 | test_req_project_wide.py::test_pd_01_ac1_capacity_check_is_recorded_at_each_milestone | not tested (NEEDS PERSON) |
@@ -364,7 +364,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | SC-04-AC2 | de4c24e67bb4 | test_req_project_wide.py::test_sc_04_ac2_the_evaluation_job_refuses_synthetic_input | not tested (NOT IMPLEMENTED) |
 | SC-05-AC1 | 8cb59c91c091 | test_req_project_wide.py::test_sc_05_ac1_no_rouge_or_bertscore_threshold_exists_in | not tested (NOT IMPLEMENTED) |
 | SC-06-AC1 | b6130c2e8d6e | test_req_project_wide.py::test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check | expected failure (requirement not met yet) |
-| SC-07-AC1 | 82ad50560617 | test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | expected failure (requirement not met yet) |
+| SC-07-AC1 | 82ad50560617 | test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | real check |
 | SC-07-AC2 | 2132217967f2 | test_req_project_wide.py::test_sc_07_ac2_a_test_fails_if_events_with_different | not tested (NOT IMPLEMENTED) |
 | SP-01-AC1 | 4a2271eda027 | test_req_project_wide.py::test_sp_01_ac1_loader_test_with_a_pickle_file_fails | not tested (NOT IMPLEMENTED) |
 | SP-02-AC1 | 3d3f4713e4f1 | test_req_project_wide.py::test_sp_02_ac1_review_checklist_is_signed_off_before_release | not tested (NEEDS PERSON) |
@@ -510,8 +510,8 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | IG-11-AC1 | 80034aba52e1 | test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the | not tested (NOT IMPLEMENTED) |
 | IG-12-AC1 | 0b44fd2e05a5 | test_req_ingestion_and_preparation.py::test_ig_12_ac1_tests_pass_with_the_network_disabled | not tested (NOT IMPLEMENTED) |
 | IG-12-AC2 | 524197fe2ddc | test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin | not tested (NOT IMPLEMENTED) |
-| IG-13-AC1 | ef3cac898955 | test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history | not tested (BLOCKED) |
-| IG-13-AC2 | 8d5378b976cd | test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review | not tested (BLOCKED) |
+| IG-13-AC1 | ef3cac898955 | test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history | not tested (NOT IMPLEMENTED) |
+| IG-13-AC2 | 8d5378b976cd | test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review | not tested (NOT IMPLEMENTED) |
 | IG-14-AC1 | 26e969ea0585 | test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason | not tested (NOT IMPLEMENTED) |
 | IG-14-AC2 | 8c3a096df73e | test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05 | not tested (NOT IMPLEMENTED) |
 | IG-15-AC1 | 87f61dedd0cc | test_req_ingestion_and_preparation.py::test_ig_15_ac1_fixture_with_a_call_before_the_filing | not tested (NOT IMPLEMENTED) |
@@ -698,18 +698,18 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_data.py::test_px_03_ac1_series_type_check_fails_any_series_containing | PX-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sec_01_ac1_test_vl_11_a_company_reclassified_in | SEC-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sec_02_ac1_unit_test_on_a_fixed_date_with | SEC-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | SR-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | SR-01-AC1 | src/earnings/source_register.csv | real check |
 | test_req_data.py::test_sr_02_ac1_every_feature_column_carries_a_source_tag | SR-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_02_ac2_an_untagged_column_fails_the_build | SR-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_03_ac1_demo_bundle_manifest_lists_each_source_and | SR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_03_ac2_any_personal_use_source_fails_the_check | SR-03-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches | SR-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_05_ac1_written_answer_or_dated_refusal_on_file | SR-05-AC1 | none yet | not tested (NEEDS PERSON) |
-| test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | SR-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | SR-06-AC1 | src/earnings/source_register.csv | expected failure (requirement not met yet) |
 | test_req_data.py::test_sr_07_ac1_request_log_exists | SR-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo | SR-07-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot | SR-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | SR-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | SR-09-AC1 | src/earnings/source_register.csv | real check |
 | test_req_data.py::test_sr_10_ac1_job_log_shows_a_successful_daily_run | SR-10-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive | SR-10-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_sr_11_ac1_a_test_fails_any_displayed_excerpt_longer | SR-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -726,7 +726,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_data.py::test_th_11_ac1_at_least_6_prior_seasonal_differences_8 | TH-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_12_ac1_differences_above_1_listed | TH-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_13_ac1_reported_no_pass_mark | TH-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_th_14_ac1_zero | TH-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_th_14_ac1_zero | TH-14-AC1 | src/earnings/source_register.csv | real check |
 | test_req_data.py::test_th_15_ac1_0 | TH-15-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields | TX-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged | TX-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
@@ -909,8 +909,8 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the | IG-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_ingestion_and_preparation.py::test_ig_12_ac1_tests_pass_with_the_network_disabled | IG-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin | IG-12-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history | IG-13-AC1 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review | IG-13-AC2 | none yet | not tested (BLOCKED) |
+| test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history | IG-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review | IG-13-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason | IG-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05 | IG-14-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_ingestion_and_preparation.py::test_ig_15_ac1_fixture_with_a_call_before_the_filing | IG-15-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1149,7 +1149,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_sc_02_ac1_adr_records_streamlit_as_accepted | SC-02-AC1 | docs/adr/0002-streamlit-frontend.md | real check |
 | test_req_project_wide.py::test_sc_02_ac2_only_one_frontend_framework_is_in_the_repository | SC-02-AC2 | requirements-pending.txt, requirements.txt | real check |
 | test_req_project_wide.py::test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check | SC-06-AC1 | docs/adr | expected failure (requirement not met yet) |
-| test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | SC-07-AC1 | docs/adr | expected failure (requirement not met yet) |
+| test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | SC-07-AC1 | docs/adr | real check |
 | test_req_project_wide.py::test_eq_01_ci_runs_the_tests_on_every_pull_request | EQ-01 | .github/workflows/ci.yml | real check |
 | test_req_project_wide.py::test_eq_02_ci_runs_lint_format_and_type_checks | EQ-02 | .github/workflows/ci.yml, pyproject.toml | real check |
 | test_req_project_wide.py::test_eq_04_ac2_an_unpinned_dependency_fails_the_pin_check | EQ-04-AC2 | scripts/check_pins.py | real check |
@@ -1198,7 +1198,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_et_04_ac2_disclaimer_test_passes | ET-04-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_et_05_ac1_written_confirmation_of_the_tier_and_declaration | ET-05-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_project_wide.py::test_or_01_ac1_restore_test_log_exists | OR-01-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1 | src/earnings/source_register.csv | real check |
 | test_req_project_wide.py::test_or_02_ac2_budget_alert_exists_before_any_spend | OR-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_or_03_ac1_demo_service_account_has_no_write_rights | OR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_pd_01_ac1_capacity_check_is_recorded_at_each_milestone | PD-01-AC1 | none yet | not tested (NEEDS PERSON) |
@@ -1258,5 +1258,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | src/earnings/celery_app.py | test_sc_01_ac1_adr_records_celery_with_redis_as_accepted<br>test_celery_task_round_trip_through_redis_and_worker | SC-01, SC-01-AC1 |
 | src/earnings/config.py | test_missing_required_setting_raises<br>test_sec_user_agent_is_optional<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql | DB-01-AC1, SP-06 |
 | src/earnings/db.py | test_database_exception_is_reported_not_raised<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_postgres_accepts_a_query_with_the_app_credentials | DB-01-AC1, DP-01-AC1, NFR-04-AC1 |
+| src/earnings/source_register.csv | test_sr_01_ac1_register_has_one_row_per_dataset_each<br>test_sr_06_ac1_register_lists_a_fallback_per_dataset_and<br>test_sr_09_ac1_source_register_has_a_cost_column_and<br>test_th_14_ac1_zero<br>test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1, SR-01-AC1, SR-06-AC1, SR-09-AC1, TH-14-AC1 |
 | src/earnings/tasks.py | test_celery_task_round_trip_through_redis_and_worker | SC-01 |
 | tests/requirement_checks.lock | test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against | DO-03 |

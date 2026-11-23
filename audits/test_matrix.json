@@ -249,6 +249,22 @@
         "tests/test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials"
       ]
     },
+    "src/earnings/source_register.csv": {
+      "requirements": [
+        "OR-02-AC1",
+        "SR-01-AC1",
+        "SR-06-AC1",
+        "SR-09-AC1",
+        "TH-14-AC1"
+      ],
+      "tests": [
+        "tests/test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each",
+        "tests/test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and",
+        "tests/test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and",
+        "tests/test_req_data.py::test_th_14_ac1_zero",
+        "tests/test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every"
+      ]
+    },
     "src/earnings/tasks.py": {
       "requirements": [
         "SC-01"
@@ -8288,8 +8304,10 @@
       ]
     },
     "tests/test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "real check",
       "requirements": [
         "SR-01-AC1"
       ]
@@ -8337,8 +8355,10 @@
       ]
     },
     "tests/test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "expected failure (requirement not met yet)",
       "requirements": [
         "SR-06-AC1"
       ]
@@ -8365,8 +8385,10 @@
       ]
     },
     "tests/test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "real check",
       "requirements": [
         "SR-09-AC1"
       ]
@@ -8484,8 +8506,10 @@
       ]
     },
     "tests/test_req_data.py::test_th_14_ac1_zero": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "real check",
       "requirements": [
         "TH-14-AC1"
       ]
@@ -9776,14 +9800,14 @@
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-13-AC1"
       ]
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-13-AC2"
       ]
@@ -11789,8 +11813,10 @@
       ]
     },
     "tests/test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "code": [
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "real check",
       "requirements": [
         "OR-02-AC1"
       ]
@@ -11928,7 +11954,7 @@
       "code": [
         "docs/adr"
       ],
-      "kind": "expected failure (requirement not met yet)",
+      "kind": "real check",
       "requirements": [
         "SC-07-AC1"
       ]
