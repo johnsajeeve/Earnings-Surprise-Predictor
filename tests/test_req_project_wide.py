@@ -430,9 +430,7 @@ def test_eq_06_ac1_three_scripted_tests_pass():
 RUN_TWICE_TESTS = {
     "earnings.ping": None,  # holds no state
     "earnings.load_companies": "test_eq_07_load_companies_twice_leaves_the_same_rows",
-    "earnings.capture_consensus": (
-        "test_running_the_same_tasks_twice_gives_an_identical_table_hash"
-    ),
+    "earnings.capture_consensus": ("test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows"),
     "earnings.capture_catch_up": (
         "test_the_catch_up_task_retries_when_the_database_is_still_starting"
     ),

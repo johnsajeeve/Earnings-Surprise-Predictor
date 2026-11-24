@@ -60,11 +60,13 @@
     },
     "docker-compose.yml": {
       "requirements": [
+        "DB-02",
         "DP-01-AC1",
         "EQ-04",
         "NFR-04-AC1"
       ],
       "tests": [
+        "tests/test_req_database.py::test_the_worker_service_does_not_receive_the_superuser_password",
         "tests/test_req_project_wide.py::test_eq_04_images_are_pinned_to_exact_tags",
         "tests/test_stack_integration.py::test_health_reports_all_services_ok",
         "tests/test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials"
@@ -300,6 +302,7 @@
       "tests": [
         "tests/test_config.py::test_missing_required_setting_raises",
         "tests/test_config.py::test_sec_user_agent_is_optional",
+        "tests/test_config.py::test_the_superuser_settings_are_optional_so_a_service_can_run_without_them",
         "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_health_unit.py::test_sec_user_agent_unset_is_reported_false",
         "tests/test_health_unit.py::test_sec_user_agent_value_is_never_returned",
@@ -310,6 +313,7 @@
     },
     "src/earnings/consensus.py": {
       "requirements": [
+        "EQ-07",
         "IG-01-AC1",
         "IG-06",
         "SR-07-AC1",
@@ -320,6 +324,7 @@
       "tests": [
         "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try",
         "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
+        "tests/test_consensus_capture.py::test_a_stack_that_never_captured_reports_a_gap_from_the_start_day",
         "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
         "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
         "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row",
@@ -327,6 +332,7 @@
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
         "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers",
+        "tests/test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows",
         "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same",
         "tests/test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call",
         "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash"
@@ -372,6 +378,7 @@
         "tests/test_financials.py::test_older_submission_pages_are_read_like_the_recent_block",
         "tests/test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes",
         "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it",
+        "tests/test_financials.py::test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version",
         "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
       ]
     },
@@ -411,6 +418,7 @@
         "DB-02-AC1",
         "DB-03",
         "DB-03-AC2",
+        "DB-16",
         "PL-05-AC1"
       ],
       "tests": [
@@ -419,6 +427,7 @@
         "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden",
         "tests/test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled",
         "tests/test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database",
+        "tests/test_req_database.py::test_the_functions_that_drop_or_empty_a_database_refuse_a_project_database_name",
         "tests/test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44",
         "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on"
       ]
@@ -441,6 +450,7 @@
         "DB-10-AC2",
         "DB-11",
         "FD-02-AC1",
+        "FD-03",
         "FD-03-AC1",
         "IG-02-AC1",
         "IG-03-AC1",
@@ -460,6 +470,7 @@
         "tests/test_financials.py::test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d",
         "tests/test_financials.py::test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value",
         "tests/test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date",
+        "tests/test_financials.py::test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version",
         "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row",
         "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row",
         "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations",
@@ -590,6 +601,7 @@
         "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
+        "tests/test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows",
         "tests/test_consensus_capture.py::test_the_catch_up_task_retries_when_the_database_is_still_starting",
         "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash",
@@ -617,16 +629,23 @@
         "IG-13",
         "IG-13-AC1",
         "IG-13-AC2",
+        "IG-21",
         "IM-01",
+        "IM-01-AC1",
         "IM-02",
-        "IM-03-AC1"
+        "IM-03-AC1",
+        "TH-05-AC1"
       ],
       "tests": [
+        "tests/test_universe.py::test_a_company_that_joined_after_the_end_of_2024_is_never_current",
+        "tests/test_universe.py::test_a_removal_reason_that_names_another_company_is_marked_not_passed_on_as_this_ones",
         "tests/test_universe.py::test_a_ticker_that_the_sec_gives_to_another_company_is_not_accepted",
         "tests/test_universe.py::test_company_counts_count_each_company_once_and_explain_share_classes",
+        "tests/test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500",
         "tests/test_universe.py::test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list",
         "tests/test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule",
         "tests/test_universe.py::test_ten_known_renames_resolve_to_one_company",
+        "tests/test_universe.py::test_the_selection_uses_the_values_approved_in_decision_c_47",
         "tests/test_universe.py::test_touching_and_overlapping_spells_merge_into_one_period",
         "tests/test_universe.py::test_two_renames_on_one_day_are_not_guessed",
         "tests/test_universe.py::test_year_end_counts_on_the_real_membership_file"
@@ -669,6 +688,15 @@
       ],
       "tests": [
         "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
+      ]
+    },
+    "tests/fixtures/ticker_cik_map.csv": {
+      "requirements": [
+        "IM-01-AC1",
+        "TH-05-AC1"
+      ],
+      "tests": [
+        "tests/test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500"
       ]
     },
     "tests/requirement_checks.lock": {
@@ -1598,8 +1626,10 @@
       ],
       "document": "database-requirements.md",
       "id_level_tests": [
+        "tests/test_config.py::test_the_superuser_settings_are_optional_so_a_service_can_run_without_them",
         "tests/test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden",
-        "tests/test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database"
+        "tests/test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database",
+        "tests/test_req_database.py::test_the_worker_service_does_not_receive_the_superuser_password"
       ]
     },
     "DB-03": {
@@ -1844,7 +1874,9 @@
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_req_database.py::test_the_functions_that_drop_or_empty_a_database_refuse_a_project_database_name"
+      ]
     },
     "DB-17": {
       "checks": [
@@ -2563,6 +2595,7 @@
       ],
       "document": "project-wide-requirements.md",
       "id_level_tests": [
+        "tests/test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows"
       ]
     },
@@ -3079,7 +3112,8 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
-        "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it"
+        "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it",
+        "tests/test_financials.py::test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version"
       ]
     },
     "FD-02": {
@@ -3108,7 +3142,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_financials.py::test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version"
+      ]
     },
     "FD-04": {
       "checks": [
@@ -4736,7 +4772,9 @@
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_universe.py::test_the_selection_uses_the_values_approved_in_decision_c_47"
+      ]
     },
     "IG-22": {
       "checks": [
@@ -4758,6 +4796,7 @@
           "fingerprint": "70d0fb633443",
           "ref": "IM-01-AC1",
           "tests": [
+            "tests/test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500",
             "tests/test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500"
           ],
           "text": "At sampled year-ends, company count matches the published count within 5, and differences are explained."
@@ -4790,6 +4829,8 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_universe.py::test_a_company_that_joined_after_the_end_of_2024_is_never_current",
+        "tests/test_universe.py::test_a_removal_reason_that_names_another_company_is_marked_not_passed_on_as_this_ones",
         "tests/test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule"
       ]
     },
@@ -6665,6 +6706,7 @@
       "id_level_tests": [
         "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try",
         "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
+        "tests/test_consensus_capture.py::test_a_stack_that_never_captured_reports_a_gap_from_the_start_day",
         "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
         "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row",
         "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
@@ -6672,6 +6714,7 @@
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
         "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
         "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers",
+        "tests/test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows",
         "tests/test_consensus_capture.py::test_the_catch_up_task_retries_when_the_database_is_still_starting",
         "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails"
@@ -7365,6 +7408,7 @@
           "fingerprint": "d18077775a30",
           "ref": "TH-05-AC1",
           "tests": [
+            "tests/test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500",
             "tests/test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500"
           ],
           "text": "Within 5 of published count"
@@ -8197,6 +8241,15 @@
         "SP-06"
       ]
     },
+    "tests/test_config.py::test_the_superuser_settings_are_optional_so_a_service_can_run_without_them": {
+      "code": [
+        "src/earnings/config.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-02"
+      ]
+    },
     "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try": {
       "code": [
         "src/earnings/consensus.py"
@@ -8214,6 +8267,15 @@
       "kind": "real check",
       "requirements": [
         "IG-06",
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_a_stack_that_never_captured_reports_a_gap_from_the_start_day": {
+      "code": [
+        "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
         "SR-10"
       ]
     },
@@ -8300,6 +8362,17 @@
       ],
       "kind": "real check",
       "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "EQ-07",
         "SR-10"
       ]
     },
@@ -8543,6 +8616,15 @@
         "FD-01"
       ]
     },
+    "tests/test_financials.py::test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FD-01"
+      ]
+    },
     "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it": {
       "code": [
         "src/earnings/financials.py"
@@ -8550,6 +8632,15 @@
       "kind": "real check",
       "requirements": [
         "LB-03"
+      ]
+    },
+    "tests/test_financials.py::test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FD-03"
       ]
     },
     "tests/test_health_unit.py::test_all_ok_returns_200": {
@@ -9789,6 +9880,15 @@
         "DB-02"
       ]
     },
+    "tests/test_req_database.py::test_the_functions_that_drop_or_empty_a_database_refuse_a_project_database_name": {
+      "code": [
+        "src/earnings/migrate.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-16"
+      ]
+    },
     "tests/test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44": {
       "code": [
         "src/earnings/db.py",
@@ -9797,6 +9897,15 @@
       "kind": "real check",
       "requirements": [
         "DB-03"
+      ]
+    },
+    "tests/test_req_database.py::test_the_worker_service_does_not_receive_the_superuser_password": {
+      "code": [
+        "docker-compose.yml"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-02"
       ]
     },
     "tests/test_req_deployment_and_operations.py::test_dp_01_ac2_timed_run_is_recorded": {
@@ -13040,6 +13149,24 @@
         "DB-10"
       ]
     },
+    "tests/test_universe.py::test_a_company_that_joined_after_the_end_of_2024_is_never_current": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-02"
+      ]
+    },
+    "tests/test_universe.py::test_a_removal_reason_that_names_another_company_is_marked_not_passed_on_as_this_ones": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-02"
+      ]
+    },
     "tests/test_universe.py::test_a_ticker_that_the_sec_gives_to_another_company_is_not_accepted": {
       "code": [
         "src/earnings/universe.py"
@@ -13056,6 +13183,17 @@
       "kind": "real check",
       "requirements": [
         "IM-01"
+      ]
+    },
+    "tests/test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500": {
+      "code": [
+        "src/earnings/universe.py",
+        "tests/fixtures/ticker_cik_map.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IM-01-AC1",
+        "TH-05-AC1"
       ]
     },
     "tests/test_universe.py::test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list": {
@@ -13136,6 +13274,15 @@
       "kind": "real check",
       "requirements": [
         "IG-21-AC1"
+      ]
+    },
+    "tests/test_universe.py::test_the_selection_uses_the_values_approved_in_decision_c_47": {
+      "code": [
+        "src/earnings/universe.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-21"
       ]
     },
     "tests/test_universe.py::test_the_stored_source_files_parse_offline": {

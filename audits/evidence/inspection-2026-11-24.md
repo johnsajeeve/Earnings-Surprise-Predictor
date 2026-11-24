@@ -1,6 +1,6 @@
-# Inspection of Waves 0.1 to 1.4, 24 November 2026
+# Inspection of Waves 0.1 to 1.4, 24 November 2026 (refreshed after the second independent audit)
 
-Generated from `audits/test_matrix.json` and `audits/plan_coverage.txt` by a short script run on 24 November 2026 after the Wave 1.4 build. It states what the tests show. It is not an audit result: PASS needs the independent audit.
+Generated from `audits/test_matrix.json` and `audits/plan_coverage.txt` by a short script. It states what the tests show. It is not an audit result: PASS needs the independent audit (`phase-0-independent.md`, `phase-1-independent.md`).
 
 A check counts as real when a test that names it runs and passes. Requirements with no acceptance check (needs, goals, conflicts, gates) are not listed.
 

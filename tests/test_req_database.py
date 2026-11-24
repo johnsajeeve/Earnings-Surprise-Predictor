@@ -262,6 +262,33 @@ def test_db_15_ac1_size_report_exists():
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
 
 
+@pytest.mark.req("DB-16")
+@pytest.mark.code("src/earnings/migrate.py")
+def test_the_functions_that_drop_or_empty_a_database_refuse_a_project_database_name():
+    from earnings import migrate
+
+    for name in (project_database(), "postgres", "production"):
+        with pytest.raises(RuntimeError):
+            migrate.drop_database(name)
+        with pytest.raises(RuntimeError):
+            migrate.truncate_all(name)
+
+
+@pytest.mark.req("DB-02")
+@pytest.mark.code("docker-compose.yml")
+def test_the_worker_service_does_not_receive_the_superuser_password():
+    import yaml
+
+    from requirement_support import repo_path
+
+    compose = yaml.safe_load(repo_path("docker-compose.yml").read_text("utf-8"))["services"]
+    for forbidden in ("POSTGRES_PASSWORD", "POSTGRES_USER"):
+        assert forbidden not in compose["worker"]["environment"]
+    assert (
+        "POSTGRES_PASSWORD" in compose["migrate"]["environment"]
+    )  # only the migration step needs it
+
+
 @pytest.mark.req("DB-16-AC1")
 @pytest.mark.code("tests/db_support.py", "tests/conftest.py")
 def test_db_16_ac1_the_test_configuration_refuses_to_start_against():

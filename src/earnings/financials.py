@@ -429,7 +429,8 @@ def load_financials(engine: Engine, company_id: str) -> dict[str, int]:
             counts["eps"] += conn.execute(
                 text(
                     "INSERT INTO eps_history (company_id, period_start, period_end, period_kind, "
-                    "fiscal_year, fiscal_period, eps_diluted, derived, form, accession, filed_at, "
+                    "filing_fiscal_year, filing_fiscal_period, eps_diluted, derived, form, "
+                    "accession, filed_at, "
                     "payload_id) VALUES (:c, :s, :e, :k, :fy, :fp, :v, :d, :f, :a, :fi, :p) "
                     "ON CONFLICT ON CONSTRAINT eps_history_one_version DO NOTHING"
                 ),
@@ -441,7 +442,7 @@ def load_financials(engine: Engine, company_id: str) -> dict[str, int]:
             counts["fundamentals"] += conn.execute(
                 text(
                     "INSERT INTO fundamentals_filing (company_id, period_start, period_end, "
-                    "fiscal_year, fiscal_period, revenue, revenue_tag, gross_profit, "
+                    "filing_fiscal_year, filing_fiscal_period, revenue, revenue_tag, gross_profit, "
                     "operating_income, derived, form, accession, filed_at, payload_id) VALUES "
                     "(:c, :s, :e, :fy, :fp, :rev, :tag, :gp, :oi, :d, :f, :a, :fi, :p) "
                     "ON CONFLICT ON CONSTRAINT fundamentals_one_version DO NOTHING"

@@ -56,7 +56,7 @@ At the end of each phase, in this order:
 | Phase | Mechanical | Independent audit | John spot-check | Result |
 |---|---|---|---|---|
 | P0 | run (every wave commit) | run 23 Nov 2026, see audits/evidence/phase-0-independent.md | not run | PARTIAL |
-| P1 | not run | not run | not run | NOT STARTED |
+| P1 (Waves 1.1 to 1.4 so far) | run on every wave commit | run 24 Nov 2026, see audits/evidence/phase-1-independent.md | not run | PARTIAL |
 | P2 | not run | not run | not run | NOT STARTED |
 | P3 | not run | not run | not run | NOT STARTED |
 | P4 | not run | not run | not run | NOT STARTED |
@@ -89,8 +89,11 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-17 | 23 Nov 2026 | Data IM-02, Wikipedia | Removal reasons are the source's wording and can describe the paired event | OPEN, stated limit |
 | DR-18 | 24 Nov 2026 | Product Section 11, migration 0005 | `eps_history` and `fundamentals_filing` have columns beyond the Section 11 field lists | OPEN. Needs John's approval and a Section 11 update |
 | DR-19 | 24 Nov 2026 | Data LB-02, SEC company facts | Dimensioned facts are missing from the API, so Visa and Danaher have no EPS and a few companies have two quarters | OPEN, stated limit. A fallback source is not built |
+| DR-20 | 24 Nov 2026 | `fja05680/sp500`, Data IM-03 | The membership file can carry a company's current ticker for years when it used another (Dr Pepper Snapple as KDP from 2008), so a lookup by the old ticker finds nothing | OPEN, stated limit of the source |
+| DR-21 | 24 Nov 2026 | git history, Project-Wide SP-06, decision C-10 | John's email address is the Author header of one commit made through the GitHub website. It is not file content | OPEN. Needs John (leave, or use a no-reply address from now on) |
+| DR-22 | 24 Nov 2026 | Data SR-10 | The capture list holds 10 companies captured before the universe existed; 9 are outside the 100-company list | OPEN, in D-47 (h) |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
-| DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords and the superuser password are in every service's environment | OPEN, accepted for local use. Cloud must give each service only its own secret (DP-06) |
+| DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords were in every service's environment, with the superuser password | PARTLY FIXED 24 Nov 2026: the worker no longer gets the superuser password. The api service keeps it because the CI tests run inside it (a CI change John has not approved). Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
 
 ## 6. Corrections to my own earlier statements

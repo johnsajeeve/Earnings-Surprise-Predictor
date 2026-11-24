@@ -333,3 +333,38 @@ def test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task(test_db, mo
         summary = tasks.capture_consensus.apply().get()
     assert summary["gaps"] == 1
     assert "consensus capture gap: 2026-11-24 to 2026-12-01 (8 days)" in caplog.text
+
+
+@pytest.mark.req("SR-10")
+@pytest.mark.code("src/earnings/consensus.py")
+def test_a_stack_that_never_captured_reports_a_gap_from_the_start_day(test_db):
+    from earnings.db import get_engine
+
+    engine = get_engine("worker")
+    day = START.date()
+    assert consensus.gaps(engine, today=day + timedelta(days=3)) == []  # days 0, 1, 2 are not a gap
+    (gap,) = consensus.gaps(engine, today=day + timedelta(days=5))
+    assert (gap.first_missing, gap.last_missing, gap.days) == (day, day + timedelta(days=4), 5)
+
+
+@pytest.mark.req("SR-10", "EQ-07")
+@pytest.mark.code("src/earnings/tasks.py", "src/earnings/consensus.py")
+def test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows(test_db, monkeypatch):
+    """The task itself, not only capture_all. SYNTHETIC universe and the recorded response."""
+    from earnings import tasks
+    from earnings.db import get_engine
+
+    real = consensus.capture_all
+    now = START + timedelta(days=3, hours=22)
+    monkeypatch.setattr(consensus, "load_universe", lambda: UNIVERSE)
+    monkeypatch.setattr(consensus, "PAUSE_SECONDS", 0.0)
+    monkeypatch.setattr(
+        consensus,
+        "capture_all",
+        lambda engine, companies, **k: real(engine, companies, fetch=_fetch, now=now),
+    )
+    first = tasks.capture_consensus.apply().get()
+    rows = _snapshots(get_engine("api"))
+    second = tasks.capture_consensus.apply().get()
+    assert (first["captured"], second["captured"], second["already_captured"]) == (1, 0, 1)
+    assert _snapshots(get_engine("api")) == rows

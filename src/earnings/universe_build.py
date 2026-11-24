@@ -133,6 +133,11 @@ def build(engine: Engine, out_dir: Path) -> dict[str, object]:
                 "note": f"{group}: {note}",
             }  # fmt: skip
         )
+    with (out_dir / "ticker_cik_map.csv").open("w", newline="", encoding="utf-8") as fh:
+        map_writer = csv.writer(fh, lineterminator="\n")
+        map_writer.writerow(["ticker", "cik", "method"])
+        for ticker, r in sorted(resolved.items()):
+            map_writer.writerow([ticker, r.cik, r.method])
     with (out_dir / "review_list.csv").open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, ["ticker", "method", "name", "ciks", "note"], lineterminator="\n")
         w.writeheader()
@@ -144,7 +149,7 @@ def build(engine: Engine, out_dir: Path) -> dict[str, object]:
         "companies": len(companies),
         "companies_by_status": {
             k: sum(1 for c in companies.values() if c.status == k)
-            for k in ("current", "removed", "out-of-window")
+            for k in ("current", "removed", "later", "out-of-window")
         },
         "selected_current": len(selection.current),
         "selected_removed": len(selection.removed),

@@ -152,10 +152,13 @@ def test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file(test_db)
     assert first["companies"] + full["companies"] == 100  # the 5 already there are not repeated
     with get_engine("api").connect() as conn:
         count = conn.execute(text("SELECT count(*) FROM company")).scalar_one()
-        open_periods = conn.execute(
-            text("SELECT count(*) FROM index_membership WHERE valid_to IS NULL")
+        in_index_at_end_of_2024 = conn.execute(
+            text(
+                "SELECT count(DISTINCT company_id) FROM index_membership "
+                "WHERE valid_from <= '2024-12-31' AND (valid_to IS NULL OR valid_to > '2024-12-31')"
+            )
         ).scalar_one()
-    assert (count, open_periods) == (100, 80)
+    assert (count, in_index_at_end_of_2024) == (100, 80)  # decision C-47
     assert load(engine, LIST) == {"companies": 0, "ticker_spells": 0, "membership_periods": 0}
 
 
@@ -209,6 +212,83 @@ def test_the_real_year_end_company_counts_are_within_five_of_500():
 
 def _company(cik, name, spells):
     return u.Company(cik, name, {t: [m.Spell(t, a, b)] for t, a, b in spells})
+
+
+@pytest.mark.req("IG-21")
+@pytest.mark.code("src/earnings/universe.py")
+def test_the_selection_uses_the_values_approved_in_decision_c_47():
+    assert (u.SEED, u.N_CURRENT, u.N_REMOVED) == (2031, 80, 20)
+    assert (u.FIRST_YEAR, u.LAST_YEAR) == (2015, 2024)
+
+
+@pytest.mark.req("IM-02")
+@pytest.mark.code("src/earnings/universe.py")
+def test_a_company_that_joined_after_the_end_of_2024_is_never_current():
+    """SYNTHETIC spells. Found by the Phase 1 audit: four companies joined in 2025 or 2026."""
+    late = _company("1", "LATE CO", [("LATE", date(2026, 3, 23), None)])
+    steady = _company("2", "STEADY CO", [("STDY", date(2001, 1, 1), None)])
+    renamed = _company(
+        "3",
+        "RENAMED",
+        [("OLD", date(2001, 1, 1), date(2020, 1, 1)), ("NEW", date(2020, 1, 1), None)],
+    )
+    gone = _company("4", "GONE", [("GONE", date(2001, 1, 1), date(2019, 6, 1))])
+    readded = _company(
+        "5", "READDED", [("RD", date(2001, 1, 1), date(2019, 6, 1)), ("RD", date(2026, 1, 1), None)]
+    )
+    assert [c.status for c in (late, steady, renamed, gone, readded)] == [
+        "later",
+        "current",
+        "current",
+        "removed",
+        "later",
+    ]
+
+
+@pytest.mark.req("IM-02")
+@pytest.mark.code("src/earnings/universe.py")
+def test_a_removal_reason_that_names_another_company_is_marked_not_passed_on_as_this_ones():
+    from earnings.membership import Change
+
+    co = _company("9", "Brighthouse Financial, Inc.", [("BHF", date(2017, 8, 7), date(2019, 4, 2))])
+    day = date(2019, 4, 2)
+    other = Change(
+        day,
+        "DOW",
+        "Dow Inc.",
+        "BHF",
+        "Brighthouse Financial",
+        "DowDuPont completed the corporate spin-off of Dow Inc.",
+    )
+    own = Change(
+        day, "XYZ", "X", "BHF", "Brighthouse Financial", "Brighthouse Financial was acquired."
+    )
+    general = Change(
+        day, "XYZ", "X", "BHF", "Brighthouse Financial", "Market capitalization changes."
+    )
+    blank = Change(day, "XYZ", "X", "BHF", "Brighthouse Financial", "")
+    assert u.removal_reason(co, [other])[1].startswith("not stated for this company")
+    assert u.removal_reason(co, [own])[1] == "Brighthouse Financial was acquired."
+    assert u.removal_reason(co, [general])[1] == "Market capitalization changes."
+    assert u.removal_reason(co, [blank])[1] == "the source gives no reason"
+
+
+@pytest.mark.req("IM-01-AC1", "TH-05-AC1")
+@pytest.mark.code("tests/fixtures/ticker_cik_map.csv", "src/earnings/universe.py")
+def test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500():
+    """Recomputed here from two real fixtures, not read from a report: the full membership file and
+    the ticker to CIK map the matcher produced."""
+    spells = m.parse_membership_spells((FX / "sp500_ticker_start_end_full.csv").read_bytes())
+    mapping = {
+        r["ticker"]: u.Resolution(r["ticker"], r["cik"], r["method"], "")
+        for r in csv.DictReader((FX / "ticker_cik_map.csv").open(encoding="utf-8"))
+    }
+    counts = u.year_end_company_counts(spells, mapping)
+    assert set(counts) == set(range(2015, 2025))
+    for year, row in counts.items():
+        assert abs(row["companies"] - 500) <= 5, (year, row)
+        assert row["tickers"] - row["companies"] == row["second_share_classes"]
+    assert max(r["tickers"] for r in counts.values()) == 506  # 2016 is 6 over 500 as tickers
 
 
 @pytest.mark.req("IM-02")

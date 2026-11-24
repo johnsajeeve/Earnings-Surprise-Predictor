@@ -7,6 +7,7 @@ filing-history check in `build` use the network.
 
 import csv
 import random
+import re
 from collections import defaultdict
 from collections.abc import Callable
 from dataclasses import dataclass, field
@@ -50,10 +51,21 @@ class Company:
 
     @property
     def status(self) -> str:
-        end = self.last_end
-        if end is None:
+        """current: in the index on 31 December 2024; removed: left it during 2015 to 2024.
+
+        A company that joined after 31 December 2024 is 'later' and is never selected (decision
+        C-47 asks for companies in the index at the end of 2024).
+        """
+        if any(
+            s.start <= WINDOW_END and (s.end is None or s.end > WINDOW_END)
+            for ss in self.spells.values()
+            for s in ss
+        ):
             return "current"
-        return "removed" if WINDOW_START <= end <= WINDOW_END else "out-of-window"
+        if any(s.end is None for ss in self.spells.values() for s in ss):
+            return "later"
+        end = self.last_end
+        return "removed" if end and WINDOW_START <= end <= WINDOW_END else "out-of-window"
 
 
 def _names_by_ticker(changes: list[Change]) -> dict[str, list[str]]:
@@ -233,7 +245,40 @@ def removal_reason(company: Company, changes: list[Change]) -> tuple[date | None
             gap = abs((c.effective - end).days)
             if gap <= REASON_TOLERANCE_DAYS and (best is None or gap < best[0]):
                 best = (gap, c)
-    return end, best[1].reason if best else ""
+    if best is None:
+        return end, ""
+    return end, _reason_text(best[1], company)
+
+
+_GENERIC_WORDS = {"GROUP", "HOLDINGS", "HOLDING", "INTERNATIONAL", "FINANCIAL", "COMPANIES", "AND"}
+
+
+def _reason_text(change: Change, company: Company) -> str:
+    """The source's reason, marked when it names a different company.
+
+    Some rows give the reason for the company that was added (found by the Phase 1 audit). A
+    reason is kept as written when it names this company or its ticker, or names nobody at all
+    (for example "Market capitalization changes."). A reason that names another company is kept
+    but says so, so it is not read as the reason for this one.
+    """
+    text = change.reason.strip()
+    if not text:
+        return "the source gives no reason"
+    own = {
+        w
+        for n in (change.removed_name, company.name)
+        for w in normalise_name(n).split()
+        if len(w) >= 3 and w not in _GENERIC_WORDS
+    }
+    words = set(normalise_name(text).split())
+    tickers = set(company.spells) | {change.removed}
+    if own & words or any(re.search(rf"\b{re.escape(t)}\b", text) for t in tickers):
+        return text
+    # capitalised words after the first are the names of other companies, people or places
+    proper = [w for w in re.findall(r"\b[A-Z][A-Za-z&.\-']+", text)[1:] if w.lower() not in {"the"}]
+    if not proper:
+        return text  # a general statement such as "Market capitalization changes."
+    return f"not stated for this company; the source row reads: {text}"
 
 
 @dataclass

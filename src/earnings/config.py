@@ -11,8 +11,6 @@ class Settings(BaseSettings):
 
     # Required. Docker Compose sets these. The app fails at start-up if one is missing.
     postgres_host: str
-    postgres_user: str
-    postgres_password: str
     postgres_db: str
     celery_broker_url: str
     celery_result_backend: str
@@ -22,6 +20,11 @@ class Settings(BaseSettings):
     db_migrator_password: str
     db_worker_password: str
     db_api_password: str
+
+    # The superuser. Only the migration step and the test suite set these; the worker does not
+    # have them, and the running application never uses them.
+    postgres_user: str = ""
+    postgres_password: str = ""
 
     # Port inside the Docker network. The host port in .env is a different setting.
     postgres_internal_port: int = 5432
@@ -54,19 +57,6 @@ class Settings(BaseSettings):
             host=self.postgres_host,
             port=self.postgres_internal_port,
             database=database or self.postgres_db,
-        )
-
-    @property
-    def database_url(self) -> URL:
-        # Built from parts, not a string, so a password containing @ : / # ? is escaped
-        # correctly (audit finding F-04).
-        return URL.create(
-            "postgresql+psycopg",
-            username=self.postgres_user,
-            password=self.postgres_password,
-            host=self.postgres_host,
-            port=self.postgres_internal_port,
-            database=self.postgres_db,
         )
 
 

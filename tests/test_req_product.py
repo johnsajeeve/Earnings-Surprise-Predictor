@@ -973,13 +973,15 @@ EXPECTED_SCHEMA = {
         "run_id",
     ],
     "eps_history": [
-        "eps_id", "company_id", "period_start", "period_end", "period_kind", "fiscal_year",
-        "fiscal_period", "eps_diluted", "derived", "basis", "form", "accession", "filed_at",
+        "eps_id", "company_id", "period_start", "period_end", "period_kind",
+        "filing_fiscal_year", "filing_fiscal_period", "eps_diluted", "derived", "basis", "form",
+        "accession", "filed_at",
         "payload_id",
     ],
     "fundamentals_filing": [
-        "fundamentals_id", "company_id", "period_start", "period_end", "fiscal_year",
-        "fiscal_period", "revenue", "revenue_tag", "gross_profit", "operating_income", "derived",
+        "fundamentals_id", "company_id", "period_start", "period_end",
+        "filing_fiscal_year", "filing_fiscal_period", "revenue", "revenue_tag", "gross_profit",
+        "operating_income", "derived",
         "form", "accession", "filed_at", "payload_id",
     ],
     "estimate_snapshot": [

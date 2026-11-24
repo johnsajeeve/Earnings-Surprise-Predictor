@@ -4,13 +4,14 @@
  "tickers_not_resolved": 431,
  "companies": 742,
  "companies_by_status": {
-  "current": 499,
+  "current": 494,
   "removed": 144,
-  "out-of-window": 99
+  "later": 31,
+  "out-of-window": 73
  },
  "selected_current": 80,
  "selected_removed": 20,
- "excluded_by_rule": 9,
+ "excluded_by_rule": 6,
  "year_end_ticker_counts": {
   "2015": 502,
   "2016": 506,

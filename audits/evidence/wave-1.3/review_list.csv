@@ -784,112 +784,109 @@ MMC,rename-adjacent,"MARSH & MCLENNAN COMPANIES, INC.",0000062709,same day as MR
 BK,rename-adjacent,Bank of New York Mellon Corp,0001390777,same day as BNY on 2026-05-21
 EQR,rename-adjacent,VIVMARK RESIDENTIAL,0000906107,same day as VMRK on 2026-08-18
 MWV,rename-adjacent,Smurfit Westrock plc,0002005951,same day as WRK on 2015-07-02
-EL,selected,ESTEE LAUDER COMPANIES INC,0001001250,current
-NTRS,selected,NORTHERN TRUST CORP,0000073124,current
-HAL,selected,HALLIBURTON CO,0000045012,current
-DG,selected,DOLLAR GENERAL CORP,0000029534,current
-CAH,selected,CARDINAL HEALTH INC,0000721371,current
-AMZN,selected,AMAZON COM INC,0001018724,current
-PCAR,selected,PACCAR INC,0000075362,current
-BLDR,selected,"Builders FirstSource, Inc.",0001316835,current
-PHM,selected,PULTEGROUP INC/MI/,0000822416,current
-DHI,selected,HORTON D R INC /DE/,0000882184,current
-MNST,selected,Monster Beverage Corp,0000865752,current
-CRH,selected,CRH PUBLIC LTD CO,0000849395,current
-CHK;EXE,selected,EXPAND ENERGY Corp,0000895126,current
-KDP,selected,Keurig Dr Pepper Inc.,0001418135,current
-MMC;MRSH,selected,"MARSH & MCLENNAN COMPANIES, INC.",0000062709,current
-BDX,selected,BECTON DICKINSON & CO,0000010795,current
-KHC,selected,Kraft Heinz Co,0001637459,current
-FANG,selected,"Diamondback Energy, Inc.",0001539838,current
-KEY,selected,KEYCORP /NEW/,0000091576,current
-PSX,selected,Phillips 66,0001534701,current
-VRT,selected,Vertiv Holdings Co,0001674101,current
-KMB,selected,KIMBERLY CLARK CORP,0000055785,current
-GEHC,selected,GE HealthCare Technologies Inc.,0001932393,current
-OTIS,selected,Otis Worldwide Corp,0001781335,current
-EXPE,selected,"Expedia Group, Inc.",0001324424,current
-ROP,selected,ROPER TECHNOLOGIES INC,0000882835,current
-TMUS,selected,"T-Mobile US, Inc.",0001283699,current
-AXP,selected,AMERICAN EXPRESS CO,0000004962,current
-TRV,selected,"TRAVELERS COMPANIES, INC.",0000086312,current
-LH,selected,LABCORP HOLDINGS INC.,0000920148,current
-MOS,selected,MOSAIC CO,0001285785,current
-NRG,selected,"NRG ENERGY, INC.",0001013871,current
-DHR,selected,DANAHER CORP /DE/,0000313616,current
-V,selected,VISA INC.,0001403161,current
-ABC;COR,selected,"Cencora, Inc.",0001140859,current
-EXPD,selected,EXPEDITORS INTERNATIONAL OF WASHINGTON INC,0000746515,current
-APO,selected,"Apollo Global Management, Inc.",0001858681,current
-ACGL,selected,ARCH CAPITAL GROUP LTD.,0000947484,current
-ON,selected,ON SEMICONDUCTOR CORP,0001097864,current
-TROW,selected,PRICE T ROWE GROUP INC,0001113169,current
-CMS,selected,CMS ENERGY CORP,0000811156,current
-CSX,selected,CSX CORP,0000277948,current
-ROST,selected,"ROSS STORES, INC.",0000745732,current
-DAL,selected,"DELTA AIR LINES, INC.",0000027904,current
-PM,selected,Philip Morris International Inc.,0001413329,current
-NVR,selected,NVR INC,0000906163,current
-SWKS,selected,"SKYWORKS SOLUTIONS, INC.",0000004127,current
-WEC,selected,"WEC ENERGY GROUP, INC.",0000783325,current
-AMD,selected,ADVANCED MICRO DEVICES INC,0000002488,current
-CRWD,selected,"CrowdStrike Holdings, Inc.",0001535527,current
-A,selected,"AGILENT TECHNOLOGIES, INC.",0001090872,current
-WDAY,selected,"Workday, Inc.",0001327811,current
-HD,selected,"HOME DEPOT, INC.",0000354950,current
-PYPL,selected,"PayPal Holdings, Inc.",0001633917,current
-AME,selected,AMETEK INC/,0001037868,current
-HST,selected,"HOST HOTELS & RESORTS, INC.",0001070750,current
-DVN,selected,DEVON ENERGY CORP/DE,0001090012,current
-CHTR,selected,"CHARTER COMMUNICATIONS, INC. /MO/",0001091667,current
-XYL,selected,Xylem Inc.,0001524472,current
-GLW,selected,CORNING INC /NY,0000024741,current
-CINF,selected,CINCINNATI FINANCIAL CORP,0000020286,current
+IRM,selected,IRON MOUNTAIN INC,0001020569,current
+KEYS,selected,"Keysight Technologies, Inc.",0001601046,current
+CMI,selected,CUMMINS INC,0000026172,current
+ADBE,selected,ADOBE INC.,0000796343,current
+GD,selected,GENERAL DYNAMICS CORP,0000040533,current
+VMC,selected,Vulcan Materials CO,0001396009,current
 SYF,selected,Synchrony Financial,0001601712,current
-BRO,selected,"BROWN & BROWN, INC.",0000079282,current
-ADI,selected,ANALOG DEVICES INC,0000006281,current
-EXR,selected,Extra Space Storage Inc.,0001289490,current
-FITB,selected,FIFTH THIRD BANCORP,0000035527,current
-BALL;BLL,selected,BALL Corp,0000009389,current
-WMB,selected,"WILLIAMS COMPANIES, INC.",0000107263,current
-RL,selected,RALPH LAUREN CORP,0001037038,current
-SOLV,selected,Solventum Corp,0001964738,current
-ADM,selected,Archer-Daniels-Midland Co,0000007084,current
-NCLH,selected,Norwegian Cruise Line Holdings Ltd.,0001513761,current
-RDDT,selected,"Reddit, Inc.",0001713445,current
-XYZ,selected,"Block, Inc.",0001512673,current
-OMC,selected,OMNICOM GROUP INC.,0000029989,current
-ALLE,selected,Allegion plc,0001579241,current
-AMGN,selected,AMGEN INC,0000318154,current
-FTV,selected,Fortive Corp,0001659166,current
+HSIC,selected,HENRY SCHEIN INC,0001000228,current
+TECH,selected,BIO-TECHNE Corp,0000842023,current
+IEX,selected,IDEX CORP /DE/,0000832101,current
+O,selected,REALTY INCOME CORP,0000726728,current
+GEN;NLOK,selected,Gen Digital Inc.,0000849399,current
+BAX,selected,BAXTER INTERNATIONAL INC,0000010456,current
+DISCA;WBD,selected,"Discovery, Inc.",0001437107,current
+AMP,selected,AMERIPRISE FINANCIAL INC,0000820027,current
+TRMB,selected,TRIMBLE INC.,0000864749,current
+HII,selected,"HUNTINGTON INGALLS INDUSTRIES, INC.",0001501585,current
+CPRT,selected,COPART INC,0000900075,current
+FAST,selected,FASTENAL CO,0000815556,current
+IQV,selected,IQVIA HOLDINGS INC.,0001478242,current
+PM,selected,Philip Morris International Inc.,0001413329,current
 PKG,selected,PACKAGING CORP OF AMERICA,0000075677,current
-USB,selected,US BANCORP \DE\,0000036104,current
+SYY,selected,SYSCO CORP,0000096021,current
+MSCI,selected,MSCI Inc.,0001408198,current
+NTAP,selected,"NetApp, Inc.",0001002047,current
+PEP,selected,PEPSICO INC,0000077476,current
+IBM,selected,INTERNATIONAL BUSINESS MACHINES CORP,0000051143,current
+FB;META,selected,"Meta Platforms, Inc.",0001326801,current
+AEP,selected,AMERICAN ELECTRIC POWER CO INC,0000004904,current
+VRSK,selected,"Verisk Analytics, Inc.",0001442145,current
+LH,selected,LABCORP HOLDINGS INC.,0000920148,current
+DVN,selected,DEVON ENERGY CORP/DE,0001090012,current
+TEL,selected,TE Connectivity plc,0001385157,current
+COO,selected,"COOPER COMPANIES, INC.",0000711404,current
+COF,selected,CAPITAL ONE FINANCIAL CORP,0000927628,current
+CBOE,selected,"Cboe Global Markets, Inc.",0001374310,current
+PNW,selected,PINNACLE WEST CAPITAL CORP,0000764622,current
+BRO,selected,"BROWN & BROWN, INC.",0000079282,current
+DHR,selected,DANAHER CORP /DE/,0000313616,current
+GLW,selected,CORNING INC /NY,0000024741,current
+CMCSA,selected,COMCAST CORP,0001166691,current
+SWKS,selected,"SKYWORKS SOLUTIONS, INC.",0000004127,current
+XEL,selected,XCEL ENERGY INC,0000072903,current
+CFG,selected,CITIZENS FINANCIAL GROUP INC/RI,0000759944,current
+AMD,selected,ADVANCED MICRO DEVICES INC,0000002488,current
+SLB,selected,SLB LIMITED/NV,0000087347,current
+WFC,selected,WELLS FARGO & COMPANY/MN,0000072971,current
+DLR,selected,"DIGITAL REALTY TRUST, INC.",0001297996,current
+EBAY,selected,EBAY INC,0001065088,current
+STT,selected,STATE STREET CORP,0000093751,current
+SBAC,selected,SBA COMMUNICATIONS CORP,0001034054,current
+WAT,selected,WATERS CORP /DE/,0001000697,current
+KMB,selected,KIMBERLY CLARK CORP,0000055785,current
+TRGP,selected,Targa Resources Corp.,0001389170,current
+CAT,selected,CATERPILLAR INC,0000018230,current
+PH,selected,Parker-Hannifin Corp,0000076334,current
+BAC,selected,BANK OF AMERICA CORP /DE/,0000070858,current
+ORCL,selected,ORACLE CORP,0001341439,current
+HIG,selected,"HARTFORD INSURANCE GROUP, INC.",0000874766,current
+KMX,selected,CARMAX INC,0001170010,current
+HLT,selected,Hilton Worldwide Holdings Inc.,0001585689,current
+T,selected,AT&T INC.,0000732717,current
+EFX,selected,EQUIFAX INC,0000033185,current
+AVY,selected,Avery Dennison Corp,0000008818,current
+RCL,selected,ROYAL CARIBBEAN CRUISES LTD,0000884887,current
+KLAC,selected,KLA CORP,0000319201,current
+STE,selected,STERIS plc,0001757898,current
+AMAT,selected,APPLIED MATERIALS INC /DE,0000006951,current
+FDX,selected,FEDEX CORP,0001048911,current
+DECK,selected,DECKERS OUTDOOR CORP,0000910521,current
+ANSS,selected,Ansys,0001013462,current
+DAL,selected,"DELTA AIR LINES, INC.",0000027904,current
+NCLH,selected,Norwegian Cruise Line Holdings Ltd.,0001513761,current
+CSX,selected,CSX CORP,0000277948,current
+ICE,selected,"Intercontinental Exchange, Inc.",0001571949,current
+WBA,selected,Walgreens Boots Alliance,0001618921,current
+TJX,selected,TJX COMPANIES INC /DE/,0000109198,current
+EQT,selected,EQT Corp,0000033213,current
+AXON,selected,"AXON ENTERPRISE, INC.",0001069183,current
+A,selected,"AGILENT TECHNOLOGIES, INC.",0001090872,current
 HSP,selected,Hospira,0001274057,removed
-TE,selected,TECO Energy,0000350563,removed
-DNB,selected,Dun & Bradstreet,0000030419,removed
-PDCO,selected,Patterson Companies,0000891024,removed
+GMCR,selected,Keurig Green Mountain,0000909954,removed
+WFM,selected,Whole Foods Market,0000865436,removed
+CSRA,selected,CSRA,0001646383,removed
 BHF,selected,"Brighthouse Financial, Inc.",0001685040,removed
 JWN,selected,Nordstrom,0000072333,removed
 HFC,selected,HollyFrontier,0000048039,removed
-TWTR,selected,Twitter,0001418091,removed
-ATVI,selected,Activision Blizzard,0000718877,removed
-BBWI;LB,selected,"Bath & Body Works, Inc.",0000701985,removed
-STJ,selected,St Jude Medical,0000203077,removed
-INFO,selected,IHS Markit,0001598014,removed
-GMCR,selected,Keurig Green Mountain,0000909954,removed
-XRX,selected,Xerox,0000108772,removed
-WFM,selected,Whole Foods Market,0000865436,removed
-FLR,selected,FLUOR CORP,0001124198,removed
-TIF,selected,Tiffany & Co,0000098246,removed
+PBCT,selected,People's United Financial,0001378946,removed
 SIVB,selected,SVB Financial Group,0000719739,removed
+BBWI;LB,selected,"Bath & Body Works, Inc.",0000701985,removed
+PCP,selected,Precision Castparts Corporation,0000079958,removed
+STJ,selected,St Jude Medical,0000203077,removed
+DNB,selected,Dun & Bradstreet,0000030419,removed
+ATVI,selected,Activision Blizzard,0000718877,removed
+CPRI,selected,Capri Holdings Ltd,0001530721,removed
+PLL,selected,Pall Corporation,0000075829,removed
+NOV,selected,NOV Inc.,0001021860,removed
 LNC,selected,LINCOLN NATIONAL CORP,0000059558,removed
 FLIR,selected,FLIR Systems,0000354908,removed
-HOT,excluded,Starwood Hotels and Resorts,0000048595,removed: last SEC filing 2013-03-21 is before 2015-01-01: an older registrant
-WCG,excluded,WellCare,0001804830,removed: first SEC filing 2020-05-12 is after 2018-09-17: the CIK is a successor
-LO,excluded,Lorillard Tobacco Company,0000862178,removed: the SEC holds no XBRL company facts for this CIK
-FTI,excluded,TechnipFMC plc,0001681459,removed: first SEC filing 2016-08-10 is after 2015-01-01: the CIK is a successor
-SEE,excluded,Sealed Air,0000088204,removed: last SEC filing 2014-01-30 is before 2015-01-01: an older registrant
+QEP,selected,QEP Resources,0001108827,removed
 MON,excluded,Monsanto,0000067686,removed: last SEC filing 2003-04-18 is before 2015-01-01: an older registrant
-XOM,excluded,ExxonMobil Holdings Corp,0002115436,current: first SEC filing 2026-07-01 is after 2015-01-01: the CIK is a successor
-DIS,excluded,Walt Disney Co,0001744489,current: first SEC filing 2018-06-25 is after 2015-01-01: the CIK is a successor
-BHGE;BKR,excluded,Baker Hughes Co,0001701605,current: first SEC filing 2017-03-29 is after 2015-01-01: the CIK is a successor
+JEC,excluded,Jacobs Engineering Group,0000878737,removed: last SEC filing 2008-09-08 is before 2015-01-01: an older registrant
+HOT,excluded,Starwood Hotels and Resorts,0000048595,removed: last SEC filing 2013-03-21 is before 2015-01-01: an older registrant
+SEE,excluded,Sealed Air,0000088204,removed: last SEC filing 2014-01-30 is before 2015-01-01: an older registrant
+DD,excluded,"DuPont de Nemours, Inc.",0001666700,current: first SEC filing 2016-03-01 is after 2015-01-01: the CIK is a successor
+MKTX,excluded,MarketAxess,0001052461,current: the SEC holds no XBRL company facts for this CIK

@@ -69,3 +69,7 @@ Real data, from `report.json` and the loaded database:
 ## Measured values
 
 - Hours for this wave: about 8. Acceptance checks moved to a real result: DB-04-AC1, IM-01-AC1, IM-02-AC1, IM-02-AC2, IM-03-AC1, IG-13-AC1, IG-13-AC2, IG-21-AC1, TH-05-AC1 (9).
+
+## Update, 24 November 2026, after the second independent audit
+
+The 100-company list was selected again. The first build treated any open membership as "current", so four companies that joined the index in 2025 or 2026 had been selected, against decision C-47. `current` now means in the index on 31 December 2024. Because a seeded draw changes completely when its pool changes, 72 of the 100 companies are different. Current figures: 100 companies (80 in the index at the end of 2024, 20 removed with a date and a source reason, every year 2015 to 2024 covered), 494 current, 144 removed, 31 later and 73 out of window among the 742 matched companies, and 6 companies excluded by the CIK rules. The year-end company counts did not change (they come from the whole membership file). Removal reasons that name another company are marked. A ticker to CIK map is now stored (`ticker_cik_map.csv`) and used by a test that recomputes the year-end counts.

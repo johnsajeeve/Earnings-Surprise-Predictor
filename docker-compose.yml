@@ -4,14 +4,12 @@
 # Stop:   docker compose down        (add -v to also delete the database volume)
 # Image versions are pinned to exact versions (Project-Wide EQ-04).
 
-x-app-env: &app-env
+x-common-env: &common-env
   # The database URL is built in code from these parts, so a password with special characters is safe.
   POSTGRES_HOST: db
-  POSTGRES_USER: ${POSTGRES_USER:-earnings}
-  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env first}
   POSTGRES_DB: ${POSTGRES_DB:-earnings}
-  # Passwords of the application roles (Database DB-02, decision C-44). The superuser above only
-  # creates the roles and the database. The services run as earnings_worker and earnings_api.
+  # Passwords of the application roles (Database DB-02, decision C-44). The services run as
+  # earnings_worker and earnings_api. The superuser password is NOT here: see x-app-env.
   DB_MIGRATOR_PASSWORD: ${DB_MIGRATOR_PASSWORD:?Copy .env.example to .env first}
   DB_WORKER_PASSWORD: ${DB_WORKER_PASSWORD:?Copy .env.example to .env first}
   DB_API_PASSWORD: ${DB_API_PASSWORD:?Copy .env.example to .env first}
@@ -20,6 +18,14 @@ x-app-env: &app-env
   CELERY_RESULT_BACKEND: redis://redis:6379/1
   # Passed through from your shell. Empty if unset. Never written to a file in the repo.
   SEC_USER_AGENT: ${SEC_USER_AGENT:-}
+
+# The superuser only creates the roles and the database. The `migrate` step needs it. The `api`
+# service keeps it because the CI test job runs the tests inside that service and the tests build a
+# test database. The worker, which runs the queued tasks, does not get it (Phase 1 audit finding).
+x-app-env: &app-env
+  <<: *common-env
+  POSTGRES_USER: ${POSTGRES_USER:-earnings}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env first}
 
 services:
   db:
@@ -66,7 +72,7 @@ services:
     build: .
     # -B runs the scheduler inside the worker (decision C-44). Its schedule file is written to /tmp.
     command: celery -A earnings.celery_app worker -B -s /tmp/celerybeat-schedule --loglevel=info --concurrency=2
-    environment: *app-env
+    environment: *common-env
     depends_on:
       db:
         condition: service_healthy

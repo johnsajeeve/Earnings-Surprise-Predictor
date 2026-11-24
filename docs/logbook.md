@@ -340,6 +340,14 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: prices wait for John's table approval (Wave 1.8); values are not yet checked against the filings (Wave 1.7); the columns of the two new tables extend Product Section 11 (DR-18).
 - Work by Claude. Decisions by John.
 
+### 24 Nov 2026: second independent audit (Waves 0.1 to 1.4) and the fixes
+
+- Asked by John: finish Wave 1.4, inspect everything built against the requirements and tests, commit and push, then move on. A second fresh agent audited the work in an isolated clone (`audits/evidence/phase-1-independent.md`).
+- What it found, and what was done: my selection of the 100 companies broke decision C-47, because four companies that joined the index in 2025 or 2026 had been chosen as "in the index at 31 December 2024" (my error; fixed, the list was re-drawn, the tables rebuilt from the stored payloads, and the new companies fetched); some removal reasons described the company that was added (now marked); the superuser password was in every container (the worker no longer has it and an unused superuser URL is gone; the api service keeps it for the CI test job); the fiscal-period columns described the filing, not the period (renamed); and several tests were weaker than they looked (the count test recomputed nothing, the guards that drop test databases were untested, the approved selection values and the start-day gap were not pinned). It also found 4 mutations missed out of 41; each now has a test that fails under it.
+- Not fixed, stated: the rules I added in Waves 1.3 and 1.4 that were never approved are listed as D-47 for John; the membership file can carry a current ticker for years when another was used (DR-20); John's email address is the Author header of one commit made through the GitHub website (DR-21); the Section 12 text prints the gap quartiles as magnitudes and needs John to approve a correction.
+- Verified: full-repository pytest 154 passed, 3 expected failures, 0 failed; CI-style 133 passed; ruff, format and mypy pass. The real-data coverage is better with the corrected list: 94 companies have pre-2015 EPS and 79 of them have the 10 quarters LB-02 needs.
+- Work by Claude, audit by an independent agent. Decisions by John.
+
 ## Waiting on John
 
 Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.
@@ -352,6 +360,9 @@ Decisions and actions only John can take, as of 24 November 2026. Each has a req
 - **D-18, transcript source and demo design:** the Hugging Face set says MIT and "research and educational use only" and names no origin. Needed before Wave 1.5.
 
 **Needs a decision, work can continue**
+- **D-47, rules I built that you have not approved:** the rename rule, the selection checks, the Q4 and cumulative derivations, the revenue tag order, the table columns, how reasons that name another company are stored, and the capture list. List and reasons are in the decision log. A second independent audit found these were not recorded as decisions.
+- **DR-21:** your email address is the Author of one commit made through the GitHub website, so it is visible in the public history. Leave it, or use a no-reply address from now on. Changing history is your call.
+- **IG-16 wording:** the Section 12 text shows the gap quartiles as 1,008, 180 and 59 minutes, which are magnitudes of negative values (the filing came first). Approve a corrected sentence.
 - **DR-18 (schema detail):** the columns of `eps_history` and `fundamentals_filing` extend Product Section 11. Approve and I update Section 11.
 - **DR-16:** confirm the rename rule (a ticker that ends the day another starts, with no index change recorded by Wikipedia, is the same company). All 21 links were read by hand. Read the review list in `audits/evidence/wave-1.3/review_list.csv`, which is the quickest way to catch wrong matches.
 - **DR-14:** add a nullable `source_version` column to `raw_payload` (Data SR-04 asks for it).

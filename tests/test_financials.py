@@ -180,6 +180,61 @@ def test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value(test_db):
     assert "SalesRevenueNet" in tags  # Apple's tag in these years; derived rows say "derived"
 
 
+@pytest.mark.req("FD-01")
+@pytest.mark.code("src/earnings/financials.py")
+def test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version(
+    test_db,
+):
+    """Not just NOT NULL: the dates and the versions are compared with the payload itself."""
+    from earnings.db import get_engine
+
+    _loaded(test_db)
+    payload = {
+        (f.start, f.end, f.accession): f.filed
+        for f in fin.extract_facts(FACTS, fin.EPS_TAG)
+        if f.kind
+    }
+    with get_engine("api").connect() as conn:
+        rows = conn.execute(
+            text(
+                "SELECT period_start, period_end, accession, filed_at "
+                "FROM eps_history WHERE NOT derived"
+            )
+        ).all()
+    assert {(s, e, a): f for s, e, a, f in rows} == payload  # every fact, with its own filing date
+    versions = {}
+    for s, e, _, f in rows:
+        versions.setdefault((s, e), set()).add(f)
+    assert any(len(v) > 1 for v in versions.values())  # a period reported in several filings
+
+
+@pytest.mark.req("FD-03")
+@pytest.mark.code("src/earnings/migrations/versions")
+def test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version(test_db):
+    from sqlalchemy.exc import IntegrityError
+
+    from earnings.db import get_engine
+
+    worker, _ = _loaded(test_db)
+    insert = text(
+        "INSERT INTO fundamentals_filing (company_id, period_start, period_end, revenue, derived, "
+        "accession, filed_at) VALUES (:c, '2030-01-01', '2030-03-31', :r, :d, :a, :f)"
+    )
+    row = {"c": AAPL, "r": 1, "d": False, "a": "SYNTHETIC-A", "f": date(2030, 5, 1)}
+    with worker.begin() as conn:
+        conn.execute(insert, row)
+        conn.execute(insert, {**row, "a": "SYNTHETIC-B", "f": date(2030, 6, 1)})  # a later filing
+        conn.execute(insert, {**row, "d": True})  # a derived row of the same filing is separate
+    with pytest.raises(IntegrityError):
+        with worker.begin() as conn:
+            conn.execute(insert, row)  # the same company, period, flag and filing again
+    with get_engine("api").connect() as conn:
+        count = conn.execute(
+            text("SELECT count(*) FROM fundamentals_filing WHERE period_start = '2030-01-01'")
+        ).scalar_one()
+    assert count == 3
+
+
 @pytest.mark.req("DB-11-AC1")
 @pytest.mark.code("src/earnings/financials.py", "src/earnings/rawstore.py")
 def test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes(test_db):

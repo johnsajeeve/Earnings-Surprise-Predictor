@@ -32,6 +32,8 @@ _MIGRATIONS = Path(__file__).parent / "migrations"
 
 def _admin(database: str) -> psycopg.Connection:
     s = get_settings()
+    if not s.postgres_password:
+        raise RuntimeError("the superuser password is not set: this step needs POSTGRES_PASSWORD")
     return psycopg.connect(
         host=s.postgres_host,
         port=s.postgres_internal_port,

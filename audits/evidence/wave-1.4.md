@@ -64,3 +64,7 @@ Real data, 100 companies (117 requests for the first full run, 2 more for three 
 
 - Hours for this wave: about 10 over two days, including the matching fixes it exposed. Acceptance checks moved to a real result: AE-04-AC1, AE-03-AC1, FD-01-AC1, FD-02-AC1, FD-03-AC1, IG-15-AC1, DB-11-AC1, IG-16-AC1 and EQ-07-AC1 (9).
 - Backfill duration: about 1 minute for 117 requests plus parsing.
+
+## Update, 24 November 2026, after the second independent audit
+
+The tables were rebuilt from the stored payloads for the corrected 100-company list (a rebuild test on real data). Current figures: 17,830 EPS rows (626 derived) and 15,736 fundamentals rows; 98 of 100 companies have EPS (Danaher and PepsiCo have none in the SEC data); 94 have quarterly EPS ending by 2014-09-30 and 79 of them have 10 or more; revenue for 97, gross profit for 56 and operating income for 84 companies; 512 of 7,093 EPS periods carry more than one value. The fiscal-year and fiscal-period columns were renamed `filing_fiscal_year` and `filing_fiscal_period`, because they describe the filing and not the period (migration 0006). The consensus snapshots carry the source's own basis (gaap or normalized) while the EPS history is GAAP: reconciling them is the basis test VL-07 in Wave 1.7.
