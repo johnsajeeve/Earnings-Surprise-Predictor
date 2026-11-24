@@ -71,9 +71,13 @@ def test_the_worker_role_cannot_update_or_delete_an_append_only_table(test_db, t
     from earnings.db import get_engine
 
     engine = get_engine("worker")
-    column = {"estimate_snapshot": "source", "raw_payload": "source", "dead_letter": "task_name"}[
-        table
-    ]
+    column = {
+        "estimate_snapshot": "source",
+        "raw_payload": "source",
+        "dead_letter": "task_name",
+        "eps_history": "accession",
+        "fundamentals_filing": "accession",
+    }[table]
     assert _error(engine, f"UPDATE {table} SET {column} = 'x'") == "InsufficientPrivilege"
     assert _error(engine, f"DELETE FROM {table}") == "InsufficientPrivilege"
 

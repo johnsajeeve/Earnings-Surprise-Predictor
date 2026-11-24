@@ -329,15 +329,40 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: 431 of 1,209 tickers have no CIK (62 of the 230 removed ones); the rename rule is beyond the written method and needs John's confirmation (DR-16); removal reasons are Wikipedia's wording; the list was not checked company by company by a person.
 - Work by Claude. Decisions by John.
 
+### 24 Nov 2026: Wave 1.4 finished, inspection of Waves 0.1 to 1.4
+
+- Asked by John: finish what was left of Wave 1.4, inspect everything built so far against the requirements and their tests, then commit, push and move on.
+- Wave 1.4 (financial data): EPS history and fundamentals stored as every version a filing reported, append-only, with as-of and first-filed reads (a filing dated on or after the prediction date is not visible); derived quarters flagged, using the year minus the nine-month figure so a share split does not break them; earnings-release 8-K parsing and the earlier-of-call-and-filing cutoff; backfill of the 100 companies (15,834 EPS rows, 14,555 fundamentals rows). A rebuild from the stored payload gives identical table hashes.
+- Real data findings: Apple's fiscal 2014 Q1 EPS was first filed at 14.50 and restated to 2.07 after the split; 98 of 100 companies have EPS, and 67 have the 10 pre-2015 quarters LB-02 needs; Visa and Danaher have none in SEC's API. The company selection was found to contain two old registrants with the same name and one company with no SEC facts; the check was tightened and three companies were replaced.
+- Found on 24 Nov: the worker's start-up catch-up failed after a restart because PostgreSQL was still recovering (now a retried task), and 3 of 89 captures failed on Yahoo timeouts (now one more attempt). The second capture day exists (24 Nov, from the catch-up); the 22:30 UTC schedule has still not been seen firing. The SEC bulk files were refreshed between 21 and 24 Nov.
+- Inspection (`audits/evidence/inspection-2026-11-24.md`, generated from the matrix): in Waves 0.1 to 1.4, 42 checks are real, 2 are expected failures and 12 are not tested. Checks that could not be tested in the wave they were assigned to (transcripts, events, the demo bundle) were moved to the waves that can test them. New tests: every registered task must have a run-twice test (EQ-07), the Section 12 spike result (IG-16), no table keyed on a ticker (DB-04).
+- Verified: full-repository pytest 145 passed, 3 expected failures, 0 failed; CI-style 124 passed; ruff, format and mypy pass; faults in the as-of read and the derivation made 4 tests fail.
+- Limits: prices wait for John's table approval (Wave 1.8); values are not yet checked against the filings (Wave 1.7); the columns of the two new tables extend Product Section 11 (DR-18).
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
-- Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).
-- D-34: approve the negation and forward-guidance definitions.
-- D-35 to D-46 (D-35 now also needs a view on the CC BY-NC-SA licence of the ProsusAI/finbert weights): FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
-- DR-16: confirm the rename-adjacent matching rule and read the review list (`audits/evidence/wave-1.3/review_list.csv`).
-- DR-14: add a nullable `source_version` column to `raw_payload` (Data SR-04 asks for it).
-- DR-10, DR-06, DR-08 and the ProsusAI/finbert licence (D-35): see the audit file's drift register.
-- D-46: note in the next supervisor meeting action list that Professor Goodacre has no objection to the time-series label (C-25 closed D-01 on John's word; SC-07 and SS-04 ask for it in writing).
-- D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.
-- D-29: the exact submission date.
+Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.
+
+**Blocks the next waves**
+- **Price tables (Wave 1.8, PX-01 to PX-03):** approve a daily price table and a dated split and dividend factor table. Product Section 11 lists neither. Without them prices cannot be stored. Removed companies will have no yfinance prices.
+- **D-45, run times for three more scheduled jobs:** the daily transcript check, the daily 8-K Item 2.02 check and the daily data gates (IG-05). The capture job is set at 22:30 UTC.
+- **D-35, FinBERT checkpoint:** needed before Wave 2.1. `ProsusAI/finbert` weights are CC BY-NC-SA 4.0 (non-commercial, share-alike). Accept it or name another.
+- **D-34 and D-36, feature rules:** negation, forward guidance, trajectory, question count and the rest (needed before Wave 2.2).
+- **D-18, transcript source and demo design:** the Hugging Face set says MIT and "research and educational use only" and names no origin. Needed before Wave 1.5.
+
+**Needs a decision, work can continue**
+- **DR-18 (schema detail):** the columns of `eps_history` and `fundamentals_filing` extend Product Section 11. Approve and I update Section 11.
+- **DR-16:** confirm the rename rule (a ticker that ends the day another starts, with no index change recorded by Wikipedia, is the same company). All 21 links were read by hand. Read the review list in `audits/evidence/wave-1.3/review_list.csv`, which is the quickest way to catch wrong matches.
+- **DR-14:** add a nullable `source_version` column to `raw_payload` (Data SR-04 asks for it).
+- **DR-10:** name a fallback source for the 8-K announcement time, or accept a stated scope limit (SR-06).
+- **DR-19:** accept that Visa and Danaher have no EPS history in the SEC data and some companies have gaps, or ask for a fallback source (yfinance earnings dates).
+- **DR-08:** whether to add a CI job for the 20 checks that read documents and skip in the CI test job.
+- **D-46:** record in the next supervisor meeting that Professor Goodacre agrees to the time-series label (C-25, SC-07, SS-04 ask for it in writing).
+- **Spot-check:** pick five requirements of Waves 0.1 to 1.4 and check them against the evidence. This is the last step to close the Phase 0 gate.
+- **FMP free key:** only if you want the optional second consensus-source test.
+
+**Planning, still open**
+- D-03 drop order and D-26 re-tagging the data requirements; D-29 the exact submission date; D-42, D-43, D-37, D-39 and D-27 (provider and budget) before Waves 3, 4, 5, 6; D-16 the ethics application (apply in December); D-21 the library enquiry; D-09 the independent reviewer; D-15 the cloud spend ceiling.
+- Feasibility review I-12 and I-13, D-25 (assessment requirements), D-40 and D-46 (approve the eight component requirement documents).
 - Two small SSOT document map edits still unapproved: the prefix GATE on the data row, and a row for this log book.

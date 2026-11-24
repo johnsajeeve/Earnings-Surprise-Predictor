@@ -10,6 +10,7 @@
 import csv
 import json
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
 from sqlalchemy import Engine, text
@@ -17,6 +18,7 @@ from sqlalchemy import Engine, text
 from earnings import membership as m
 from earnings import universe as u
 from earnings.clients.edgar import SOURCE as EDGAR_SOURCE
+from earnings.clients.edgar import EdgarClient, SourceError
 from earnings.clients.public import PublicClient
 from earnings.db import get_engine
 from earnings.identifiers import canonical_cik
@@ -56,6 +58,44 @@ def _stored(engine: Engine, source: str, url: str) -> bytes:
     return body
 
 
+def make_covers(engine: Engine, client: EdgarClient) -> Callable[[u.Company], tuple[bool, str]]:
+    """The check a company must pass to be selected (decision C-47 and Wave 1.4).
+
+    Its CIK must have started filing before the company joined the index (otherwise it is a
+    successor, the XOM case), must still have been filing during the company's index years
+    (otherwise it is an older registrant of the same name, found with Sealed Air), and the SEC
+    must hold XBRL company facts for it (without them no EPS history can be built).
+    """
+
+    def fetch(url: str) -> bytes:
+        body = latest_payload(engine, EDGAR_SOURCE, url)
+        if body is None:
+            raw = client.get(url)
+            store_payload(engine, raw)
+            body = raw.body
+        return body
+
+    def covers(company: u.Company) -> tuple[bool, str]:
+        needed = max(company.first_start, u.WINDOW_START)
+        submissions = fetch(SUBMISSIONS_URL.format(cik=company.cik))
+        first, last = m.earliest_filing_date(submissions), m.latest_filing_date(submissions)
+        if first is None or first > needed:
+            return False, f"first SEC filing {first} is after {needed}: the CIK is a successor"
+        if last is None or last < needed:
+            return False, f"last SEC filing {last} is before {needed}: an older registrant"
+        try:
+            fetch(m_facts_url(company.cik))
+        except SourceError:
+            return False, "the SEC holds no XBRL company facts for this CIK"
+        return True, ""
+
+    return covers
+
+
+def m_facts_url(cik: str) -> str:
+    return f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json"
+
+
 def build(engine: Engine, out_dir: Path) -> dict[str, object]:
     spells = m.parse_membership_spells(_stored(engine, m.MEMBERSHIP_SOURCE, m.MEMBERSHIP_URL))
     changes = m.parse_wikipedia_history(_stored(engine, m.WIKIPEDIA_SOURCE, m.WIKIPEDIA_URL))
@@ -66,20 +106,7 @@ def build(engine: Engine, out_dir: Path) -> dict[str, object]:
 
     from earnings.tasks import edgar_client
 
-    client = edgar_client()
-
-    def covers(company: u.Company) -> tuple[bool, str]:
-        url = SUBMISSIONS_URL.format(cik=company.cik)
-        body = latest_payload(engine, EDGAR_SOURCE, url)
-        if body is None:
-            raw = client.get(url)
-            store_payload(engine, raw)
-            body = raw.body
-        first = m.earliest_filing_date(body)
-        needed = max(company.first_start, u.WINDOW_START)
-        if first is None or first > needed:
-            return False, f"first SEC filing {first} is after {needed}: the CIK is a successor"
-        return True, ""
+    covers = make_covers(engine, edgar_client())
 
     selection = u.select_universe(companies, covers)
     out_dir.mkdir(parents=True, exist_ok=True)

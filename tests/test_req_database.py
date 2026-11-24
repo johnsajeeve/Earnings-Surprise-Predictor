@@ -230,12 +230,6 @@ def test_db_07_ac1_schema_query_finds_no_timestamp_without_zone(test_db_name):
     assert bad == []
 
 
-@pytest.mark.req("DB-11-AC1")
-def test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table():
-    """DB-11-AC1: Rebuild from stored payloads gives identical table hashes (Data DV-08)."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("DB-12-AC1")
 def test_db_12_ac1_insert_of_a_featurevector_without_a_feature():
     """DB-12-AC1: Insert of a FeatureVector without a feature-set version fails."""
@@ -294,6 +288,20 @@ def test_db_04_company_id_is_one_canonical_cik_form(test_db):
     assert (
         _try("migrator", test_db, "INSERT INTO company VALUES ('320193', 'x')") == "CheckViolation"
     )
+
+
+@pytest.mark.req("DB-04")
+@pytest.mark.code("src/earnings/migrations/versions")
+def test_no_table_uses_a_ticker_as_its_key(test_db_name):
+    """The ticker is an attribute of ticker_history, never a primary key or a lone unique key."""
+    with _admin(test_db_name) as conn:
+        keys = conn.execute(
+            "SELECT t.relname, a.attname FROM pg_index i JOIN pg_class t ON t.oid = i.indrelid "
+            "JOIN pg_attribute a ON a.attrelid = t.oid AND a.attnum = ANY (i.indkey) "
+            "WHERE i.indisunique AND t.relnamespace = 'public'::regnamespace AND "
+            "a.attname = 'ticker' AND i.indnatts = 1 AND NOT i.indisexclusion"
+        ).fetchall()
+    assert keys == []  # no unique or primary key made of a ticker column alone
 
 
 @pytest.mark.req("DB-05")

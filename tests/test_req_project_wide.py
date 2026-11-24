@@ -425,10 +425,46 @@ def test_eq_06_ac1_three_scripted_tests_pass():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
+# Each registered task and the test that runs it twice and compares state (EQ-07). A new task
+# that is not listed here fails the test below, so no task can be added without one.
+RUN_TWICE_TESTS = {
+    "earnings.ping": None,  # holds no state
+    "earnings.load_companies": "test_eq_07_load_companies_twice_leaves_the_same_rows",
+    "earnings.capture_consensus": (
+        "test_running_the_same_tasks_twice_gives_an_identical_table_hash"
+    ),
+    "earnings.capture_catch_up": (
+        "test_the_catch_up_task_retries_when_the_database_is_still_starting"
+    ),
+    "earnings.fetch_company_facts": (
+        "test_fetching_the_same_payload_twice_leaves_an_identical_table_hash"
+    ),
+}
+
+
 @pytest.mark.req("EQ-07-AC1")
-def test_eq_07_ac1_test_runs_each_task_twice_and_compares():
+@pytest.mark.code("src/earnings/tasks.py", "tests/test_ingestion_framework.py")
+def test_eq_07_ac1_every_registered_task_has_a_run_twice_test():
     """EQ-07-AC1: Test runs each task twice and compares state."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    import importlib
+
+    from earnings import tasks  # noqa: F401  (importing registers the tasks)
+    from earnings.celery_app import celery_app
+
+    registered = {n for n in celery_app.tasks if n.startswith("earnings.")}
+    assert registered == set(RUN_TWICE_TESTS), "a task has no run-twice test (or one was removed)"
+    sources = {
+        name: importlib.import_module(name).__dict__
+        for name in (
+            "test_req_project_wide",
+            "test_ingestion_framework",
+            "test_edgar_client",
+            "test_consensus_capture",
+        )
+    }
+    for task, test in RUN_TWICE_TESTS.items():
+        if test is not None:
+            assert any(test in namespace for namespace in sources.values()), (task, test)
 
 
 @pytest.mark.req("EQ-07")

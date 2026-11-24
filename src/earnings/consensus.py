@@ -89,6 +89,26 @@ def capture_all(
     if now is not None and now.tzinfo is None:
         raise ValueError("capture time must carry a time zone")
     result = CaptureResult()
+    pending = list(companies)
+    for attempt in (1, 2):  # a second pass for companies whose first attempt failed (timeouts)
+        retry: list[tuple[str, str, str]] = []
+        _capture_pass(engine, pending, fetch, now, pause, result, retry, last=attempt == 2)
+        if not retry:
+            break
+        pending = retry
+    return result
+
+
+def _capture_pass(
+    engine: Engine,
+    companies: list[tuple[str, str, str]],
+    fetch: Fetch,
+    now: datetime | None,
+    pause: float,
+    result: CaptureResult,
+    retry: list[tuple[str, str, str]],
+    last: bool,
+) -> None:
     for ticker, company_id, name in companies:
         try:
             data = fetch(ticker)
@@ -99,7 +119,10 @@ def capture_all(
                 raise ValueError("source returned no mean estimate")
         except Exception as exc:  # noqa: BLE001  one failing company must not stop the others
             log.error("capture failed for %s: %s: %s", ticker, type(exc).__name__, exc)
-            result.failed.append(ticker)
+            if last:
+                result.failed.append(ticker)
+            else:
+                retry.append((ticker, company_id, name))
             continue
         moment = now or datetime.now(UTC)  # stamped when the answer arrived, not when the run began
         with engine.begin() as conn:
@@ -138,7 +161,6 @@ def capture_all(
             result.already_captured += 1
         if pause:
             time.sleep(pause)
-    return result
 
 
 def _capture_days(engine: Engine) -> list[date]:

@@ -87,6 +87,8 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-15 | 23 Nov 2026 | Data SR-08, Phase 0 audit finding 3 | The database enforces only a lower bound on `captured_at`; the worker could insert a future time. The code stamps real time | OPEN, accepted: a check against now() would break tests that use fixed dates |
 | DR-16 | 23 Nov 2026 | Ingestion IG-13 | The rename-adjacent rule (same-day end and start with no recorded index change) is not among the matching methods IG-13 names | OPEN. Needs John to confirm the method; all 21 links were read by hand |
 | DR-17 | 23 Nov 2026 | Data IM-02, Wikipedia | Removal reasons are the source's wording and can describe the paired event | OPEN, stated limit |
+| DR-18 | 24 Nov 2026 | Product Section 11, migration 0005 | `eps_history` and `fundamentals_filing` have columns beyond the Section 11 field lists | OPEN. Needs John's approval and a Section 11 update |
+| DR-19 | 24 Nov 2026 | Data LB-02, SEC company facts | Dimensioned facts are missing from the API, so Visa and Danaher have no EPS and a few companies have two quarters | OPEN, stated limit. A fallback source is not built |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords and the superuser password are in every service's environment | OPEN, accepted for local use. Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -115,10 +117,11 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W1.1 | Task framework and client rules | PARTIAL | audits/evidence/wave-1.1.md |
 | W1.2 | Storage rules | PARTIAL | audits/evidence/wave-1.2.md |
 | W1.3 | Universe and identifiers | PARTIAL | audits/evidence/wave-1.3.md |
-| W1.4 | Financial data | NOT STARTED | - |
+| W1.4 | Financial data | PARTIAL | audits/evidence/wave-1.4.md |
 | W1.5 | Transcripts and preparation | NOT STARTED | - |
 | W1.6 | Events, label and validation | NOT STARTED | - |
 | W1.7 | Dataset validation and sign-off | NOT STARTED | - |
+| W1.8 | Prices | NOT STARTED | - |
 | W2.1 | Sentences and FinBERT | NOT STARTED | - |
 | W2.2 | Linguistic features | NOT STARTED | - |
 | W2.3 | Tabular features | NOT STARTED | - |
@@ -155,8 +158,9 @@ Checks that need a later moment or later data. Anyone continuing the work runs t
 | Check | Earliest | Command | What a pass looks like | Belongs to |
 |---|---|---|---|---|
 | The scheduled 22:30 UTC capture fires by itself | after 2026-11-23 22:30 UTC | `docker compose exec -T api python -m earnings.consensus`, and `docker compose logs worker | grep "Scheduler: Sending due task"` | at least 2 capture days listed, no gap, a beat line for `capture-consensus` | Wave 0.3 (SR-10-AC1) |
-| SEC bulk files refreshed nightly (second observation) | 2026-11-24 | HEAD request to `companyfacts.zip` and `submissions.zip` under `https://www.sec.gov/Archives/edgar/daily-index/`, compare Last-Modified with 2026-11-21 05:08 and 05:15 GMT | a later Last-Modified on both | Wave 0.1 (IG-09) |
+| SEC bulk files refreshed nightly (second observation: done 24 Nov, refreshed; every night not shown) | 2026-11-24 | HEAD request to `companyfacts.zip` and `submissions.zip` under `https://www.sec.gov/Archives/edgar/daily-index/`, compare Last-Modified with 2026-11-21 05:08 and 05:15 GMT | a later Last-Modified on both | Wave 0.1 (IG-09) |
 | Capture has run on 4 or more days without a gap over 3 days | 2026-11-27 | `python -m earnings.consensus` | no GAP line | Wave 0.3 (SR-10-AC2), VL-10 needs 4 weeks |
+| The 22:30 UTC schedule fires on its own (not seen yet: the day-2 snapshots came from the start-up catch-up at 01:24 UTC) | after 22:30 UTC on any day the stack is running | `docker compose logs worker | grep "Scheduler: Sending due task"` and `python -m earnings.consensus` | a beat line for `capture-consensus` and a capture run started at about 22:30 | Wave 0.3 (SR-10-AC1) |
 | Retry waits are real (30, 60, 120 s before jitter) | any time | inject a failing task into the running worker and read the worker log | three retries at roughly those intervals, one dead letter | Wave 1.1 (IG-02) |
 
 ## 9. Audit health check, 23 November 2026

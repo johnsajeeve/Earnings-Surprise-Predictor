@@ -104,6 +104,14 @@
         "tests/test_req_project_wide.py::test_do_05_ac1_the_id_checker_reports_no_duplicate_definition"
       ]
     },
+    "docs/requirements/data-requirements.md": {
+      "requirements": [
+        "IG-16-AC1"
+      ],
+      "tests": [
+        "tests/test_req_ingestion_and_preparation.py::test_ig_16_ac1_the_spike_result_is_in_data_section_12"
+      ]
+    },
     "docs/tools/check_requirements.py": {
       "requirements": [
         "DO-05-AC1",
@@ -231,6 +239,14 @@
         "tests/test_req_project_wide.py::test_sp_05_ac1_the_request_log_holds_only_the_allowed_fields"
       ]
     },
+    "src/earnings/backfill.py": {
+      "requirements": [
+        "IG-09"
+      ],
+      "tests": [
+        "tests/test_financials.py::test_backfill_counts_requests_skips_stored_payloads_and_reads_only_pages_that_can_matter"
+      ]
+    },
     "src/earnings/capture_universe.csv": {
       "requirements": [
         "SR-10"
@@ -302,6 +318,7 @@
         "SR-10"
       ],
       "tests": [
+        "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try",
         "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
         "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
@@ -331,6 +348,31 @@
         "tests/test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials"
+      ]
+    },
+    "src/earnings/financials.py": {
+      "requirements": [
+        "AE-03-AC1",
+        "AE-04-AC1",
+        "DB-11-AC1",
+        "FD-01",
+        "FD-01-AC1",
+        "FD-03-AC1",
+        "IG-15",
+        "IG-15-AC1",
+        "LB-03"
+      ],
+      "tests": [
+        "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff",
+        "tests/test_financials.py::test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none",
+        "tests/test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures",
+        "tests/test_financials.py::test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up",
+        "tests/test_financials.py::test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value",
+        "tests/test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date",
+        "tests/test_financials.py::test_older_submission_pages_are_read_like_the_recent_block",
+        "tests/test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes",
+        "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it",
+        "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
       ]
     },
     "src/earnings/identifiers.py": {
@@ -383,6 +425,8 @@
     },
     "src/earnings/migrations/versions": {
       "requirements": [
+        "AE-04",
+        "AE-04-AC1",
         "DB-01-AC2",
         "DB-04",
         "DB-04-AC1",
@@ -396,6 +440,8 @@
         "DB-10-AC1",
         "DB-10-AC2",
         "DB-11",
+        "FD-02-AC1",
+        "FD-03-AC1",
         "IG-02-AC1",
         "IG-03-AC1",
         "IG-13-AC1",
@@ -411,12 +457,16 @@
         "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role",
         "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same",
         "tests/test_edgar_client.py::test_raw_payloads_are_insert_only_and_the_length_is_checked",
+        "tests/test_financials.py::test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d",
+        "tests/test_financials.py::test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value",
+        "tests/test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date",
         "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row",
         "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row",
         "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations",
         "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form",
         "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database",
         "tests/test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone",
+        "tests/test_req_database.py::test_no_table_uses_a_ticker_as_its_key",
         "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on",
         "tests/test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period",
         "tests/test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned",
@@ -442,6 +492,7 @@
     "src/earnings/rawstore.py": {
       "requirements": [
         "DB-11",
+        "DB-11-AC1",
         "IG-01",
         "IG-10",
         "SR-04-AC1"
@@ -449,6 +500,7 @@
       "tests": [
         "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
         "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash",
+        "tests/test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes",
         "tests/test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded"
       ]
     },
@@ -524,6 +576,7 @@
     "src/earnings/tasks.py": {
       "requirements": [
         "EQ-07",
+        "EQ-07-AC1",
         "IG-01",
         "IG-01-AC1",
         "IG-03",
@@ -537,11 +590,13 @@
         "tests/test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent",
         "tests/test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture",
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
+        "tests/test_consensus_capture.py::test_the_catch_up_task_retries_when_the_database_is_still_starting",
         "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash",
         "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis",
         "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails",
         "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash",
+        "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
       ]
@@ -623,6 +678,14 @@
       "tests": [
         "tests/test_req_project_wide.py::test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against"
       ]
+    },
+    "tests/test_ingestion_framework.py": {
+      "requirements": [
+        "EQ-07-AC1"
+      ],
+      "tests": [
+        "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test"
+      ]
     }
   },
   "requirements": {
@@ -660,7 +723,7 @@
           "fingerprint": "dbeb5c043a20",
           "ref": "AE-03-AC1",
           "tests": [
-            "tests/test_req_data.py::test_ae_03_ac1_basis_field_is_populated_and_has_one"
+            "tests/test_financials.py::test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value"
           ],
           "text": "Basis field is populated and has one value per dataset."
         },
@@ -682,13 +745,15 @@
           "fingerprint": "af2afa6eb4fe",
           "ref": "AE-04-AC1",
           "tests": [
-            "tests/test_req_data.py::test_ae_04_ac1_after_a_simulated_correction_the_first_reported"
+            "tests/test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date"
           ],
           "text": "After a simulated correction, the first-reported value is unchanged."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_financials.py::test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value"
+      ]
     },
     "AG-01": {
       "checks": [
@@ -1574,7 +1639,8 @@
       ],
       "document": "database-requirements.md",
       "id_level_tests": [
-        "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form"
+        "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form",
+        "tests/test_req_database.py::test_no_table_uses_a_ticker_as_its_key"
       ]
     },
     "DB-05": {
@@ -1691,7 +1757,7 @@
           "fingerprint": "924b81e649e6",
           "ref": "DB-11-AC1",
           "tests": [
-            "tests/test_req_database.py::test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table"
+            "tests/test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes"
           ],
           "text": "Rebuild from stored payloads gives identical table hashes (Data DV-08)."
         }
@@ -2490,7 +2556,7 @@
           "fingerprint": "eed1f3ef4b29",
           "ref": "EQ-07-AC1",
           "tests": [
-            "tests/test_req_project_wide.py::test_eq_07_ac1_test_runs_each_task_twice_and_compares"
+            "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test"
           ],
           "text": "Test runs each task twice and compares state."
         }
@@ -2998,7 +3064,7 @@
           "fingerprint": "7bbf225cddf6",
           "ref": "FD-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_fd_01_ac1_every_row_has_a_filing_date"
+            "tests/test_financials.py::test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value"
           ],
           "text": "Every row has a filing date."
         },
@@ -3012,7 +3078,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it"
+      ]
     },
     "FD-02": {
       "checks": [
@@ -3020,7 +3088,7 @@
           "fingerprint": "e2cc6df31af2",
           "ref": "FD-02-AC1",
           "tests": [
-            "tests/test_req_data.py::test_fd_02_ac1_test_with_a_planted_filing_dated_d"
+            "tests/test_financials.py::test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d"
           ],
           "text": "Test with a planted filing dated D or later shows it is excluded."
         }
@@ -3034,7 +3102,7 @@
           "fingerprint": "e759082516f0",
           "ref": "FD-03-AC1",
           "tests": [
-            "tests/test_req_data.py::test_fd_03_ac1_after_a_simulated_restatement_a_prediction_before"
+            "tests/test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date"
           ],
           "text": "After a simulated restatement, a prediction before the restatement date is unchanged."
         }
@@ -4429,13 +4497,15 @@
           "fingerprint": "ff58e9bf6dc7",
           "ref": "IG-09-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses_the_bulk"
           ],
           "text": "Backfill of the 100-company subset uses the bulk files, and the request count is recorded."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_financials.py::test_backfill_counts_requests_skips_stored_payloads_and_reads_only_pages_that_can_matter"
+      ]
     },
     "IG-10": {
       "checks": [
@@ -4549,13 +4619,16 @@
           "fingerprint": "87f61dedd0cc",
           "ref": "IG-15-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_15_ac1_fixture_with_a_call_before_the_filing"
+            "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff"
           ],
           "text": "Fixture with a call before the filing and one after both give the earlier time as the cutoff."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_financials.py::test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none",
+        "tests/test_financials.py::test_older_submission_pages_are_read_like_the_recent_block"
+      ]
     },
     "IG-16": {
       "checks": [
@@ -4563,7 +4636,7 @@
           "fingerprint": "fb7ec513106c",
           "ref": "IG-16-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_16_ac1_spike_result_is_in_data_section_12"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_16_ac1_the_spike_result_is_in_data_section_12"
           ],
           "text": "Spike result is in Data Section 12."
         }
@@ -4791,7 +4864,11 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures",
+        "tests/test_financials.py::test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up",
+        "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
+      ]
     },
     "LB-04": {
       "checks": [
@@ -6586,6 +6663,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try",
         "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored",
         "tests/test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row",
@@ -6594,6 +6672,7 @@
         "tests/test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc",
         "tests/test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported",
         "tests/test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers",
+        "tests/test_consensus_capture.py::test_the_catch_up_task_retries_when_the_database_is_still_starting",
         "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails"
       ]
@@ -8118,6 +8197,15 @@
         "SP-06"
       ]
     },
+    "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try": {
+      "code": [
+        "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
     "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task": {
       "code": [
         "src/earnings/consensus.py",
@@ -8209,6 +8297,15 @@
       "code": [
         "src/earnings/capture_universe.csv",
         "src/earnings/consensus.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "SR-10"
+      ]
+    },
+    "tests/test_consensus_capture.py::test_the_catch_up_task_retries_when_the_database_is_still_starting": {
+      "code": [
+        "src/earnings/tasks.py"
       ],
       "kind": "real check",
       "requirements": [
@@ -8332,6 +8429,127 @@
       "kind": "real check",
       "requirements": [
         "IG-08-AC1"
+      ]
+    },
+    "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-15-AC1"
+      ]
+    },
+    "tests/test_financials.py::test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FD-02-AC1"
+      ]
+    },
+    "tests/test_financials.py::test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-15"
+      ]
+    },
+    "tests/test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-03"
+      ]
+    },
+    "tests/test_financials.py::test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "AE-04"
+      ]
+    },
+    "tests/test_financials.py::test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-03"
+      ]
+    },
+    "tests/test_financials.py::test_backfill_counts_requests_skips_stored_payloads_and_reads_only_pages_that_can_matter": {
+      "code": [
+        "src/earnings/backfill.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-09"
+      ]
+    },
+    "tests/test_financials.py::test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "AE-03-AC1",
+        "FD-01-AC1"
+      ]
+    },
+    "tests/test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date": {
+      "code": [
+        "src/earnings/financials.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "AE-04-AC1",
+        "FD-03-AC1"
+      ]
+    },
+    "tests/test_financials.py::test_older_submission_pages_are_read_like_the_recent_block": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-15"
+      ]
+    },
+    "tests/test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes": {
+      "code": [
+        "src/earnings/financials.py",
+        "src/earnings/rawstore.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-11-AC1"
+      ]
+    },
+    "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FD-01"
+      ]
+    },
+    "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-03"
       ]
     },
     "tests/test_health_unit.py::test_all_ok_returns_200": {
@@ -8711,25 +8929,11 @@
         "AE-02-AC1"
       ]
     },
-    "tests/test_req_data.py::test_ae_03_ac1_basis_field_is_populated_and_has_one": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "AE-03-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_ae_03_ac2_test_in_vl_07": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "AE-03-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_ae_04_ac1_after_a_simulated_correction_the_first_reported": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "AE-04-AC1"
       ]
     },
     "tests/test_req_data.py::test_ce_01_ac1_zero_rows_where_capture_time_is_on": {
@@ -8868,32 +9072,11 @@
         "SR-01"
       ]
     },
-    "tests/test_req_data.py::test_fd_01_ac1_every_row_has_a_filing_date": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FD-01-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_fd_01_ac2_a_sample_of_20_values_matches_the": {
       "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+      "kind": "not tested (NEEDS MEASUREMENT)",
       "requirements": [
         "FD-01-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_fd_02_ac1_test_with_a_planted_filing_dated_d": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FD-02-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_fd_03_ac1_after_a_simulated_restatement_a_prediction_before": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FD-03-AC1"
       ]
     },
     "tests/test_req_data.py::test_fd_04_ac1_mapping_test_passes_on_the_five_non": {
@@ -9536,13 +9719,6 @@
         "DB-07-AC1"
       ]
     },
-    "tests/test_req_database.py::test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-11-AC1"
-      ]
-    },
     "tests/test_req_database.py::test_db_12_ac1_insert_of_a_featurevector_without_a_feature": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -9593,6 +9769,15 @@
       "kind": "not tested (BLOCKED)",
       "requirements": [
         "DB-17-AC1"
+      ]
+    },
+    "tests/test_req_database.py::test_no_table_uses_a_ticker_as_its_key": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-04"
       ]
     },
     "tests/test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database": {
@@ -10447,9 +10632,9 @@
         "IG-07-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses": {
+    "tests/test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses_the_bulk": {
       "code": [],
-      "kind": "not tested (NEEDS MEASUREMENT)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-09-AC1"
       ]
@@ -10496,16 +10681,11 @@
         "IG-14-AC2"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_15_ac1_fixture_with_a_call_before_the_filing": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-15-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_16_ac1_spike_result_is_in_data_section_12": {
-      "code": [],
-      "kind": "not tested (NEEDS MEASUREMENT)",
+    "tests/test_req_ingestion_and_preparation.py::test_ig_16_ac1_the_spike_result_is_in_data_section_12": {
+      "code": [
+        "docs/requirements/data-requirements.md"
+      ],
+      "kind": "real check",
       "requirements": [
         "IG-16-AC1"
       ]
@@ -12384,9 +12564,12 @@
         "EQ-06-AC1"
       ]
     },
-    "tests/test_req_project_wide.py::test_eq_07_ac1_test_runs_each_task_twice_and_compares": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
+    "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test": {
+      "code": [
+        "src/earnings/tasks.py",
+        "tests/test_ingestion_framework.py"
+      ],
+      "kind": "real check",
       "requirements": [
         "EQ-07-AC1"
       ]

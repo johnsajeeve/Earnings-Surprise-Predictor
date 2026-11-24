@@ -80,7 +80,7 @@ company_id,name,status,removal_date,removal_reason
 0000075677,PACKAGING CORP OF AMERICA,current,,
 0000036104,US BANCORP \DE\,current,,
 0001274057,Hospira,removed,2015-09-03,Hospira was acquired.
-0000048595,Starwood Hotels and Resorts,removed,2016-09-23,MAR acquired Starwood Hotels
+0000350563,TECO Energy,removed,2016-07-01,TECO Energy was acquired by EMA.
 0000030419,Dun & Bradstreet,removed,2017-04-05,Gartner acquired CEB.
 0000891024,Patterson Companies,removed,2018-03-19,Market capitalization changes.
 0001685040,"Brighthouse Financial, Inc.",removed,2019-04-02,DowDuPont completed the corporate spin-off of Dow Inc.
@@ -90,12 +90,12 @@ company_id,name,status,removal_date,removal_reason
 0000718877,Activision Blizzard,removed,2023-10-18,Acquisition of Activision Blizzard by Microsoft.
 0000701985,"Bath & Body Works, Inc.",removed,2024-10-01,Market capitalization changes.
 0000203077,St Jude Medical,removed,2017-01-05,Abbott Laboratories acquired St. Jude Medical.
-0000350563,TECO Energy,removed,2016-07-01,TECO Energy was acquired by EMA.
 0001598014,IHS Markit,removed,2022-03-02,S&P Global acquired IHS Markit.
-0000862178,Lorillard Tobacco Company,removed,2015-06-12,Lorillard was acquired.
 0000909954,Keurig Green Mountain,removed,2016-03-03,JAB Holding Company acquired Keurig Green Mountain.
 0000108772,Xerox,removed,2021-03-22,Market capitalization changes.
 0000865436,Whole Foods Market,removed,2017-08-28,Amazon acquired Whole Foods Market.
 0001124198,FLUOR CORP,removed,2019-06-03,DowDuPont completed the corporate spin-off of Corteva.
 0000098246,Tiffany & Co,removed,2021-01-07,LVMH Moet Hennessy-Louis Vuitton SE acquired Tiffany & Co.
-0000088204,Sealed Air,removed,2023-12-18,Market capitalization changes.
+0000719739,SVB Financial Group,removed,2023-03-15,"The FDIC placed SVB's main subsidiary, Silicon Valley Bank, into receivership."
+0000059558,LINCOLN NATIONAL CORP,removed,2023-09-18,Market capitalization changes.
+0000354908,FLIR Systems,removed,2021-05-14,Teledyne Technologies acquired FLIR Systems.

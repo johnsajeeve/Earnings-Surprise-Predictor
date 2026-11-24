@@ -187,7 +187,7 @@ Notation: requirement IDs cite the owner document (README index). "D-nn" are ope
 **Exit gate:** spike evidence files exist and the source register is written; D-19, D-32 and the consensus source are decided; the database foundation passes its tests; the capture job has produced real snapshots on at least two separate days; independent audit of Waves 0.1 to 0.3.
 **Estimate:** 30 hours in three waves (12, 8, 10).
 
-**Wave 0.1. Baseline, source register and spikes** (SR-01, SR-05, SR-06, SR-09, TH-14; SC-07; IG-16; Data Section 12, C-12; IG-09; EQ-01, EQ-04 re-verified)
+**Wave 0.1. Baseline, source register and spikes** (SR-01, SR-05, SR-06, SR-09, TH-14; the ADR check SC-07-AC1; IG-16; Data Section 12, C-12; IG-09; EQ-01, EQ-04 re-verified)
 - Step 0.1.1 **Regression baseline.** Bring the stack up from a clean state and run the full test suite with the command in `.github/workflows/ci.yml`. Record pass, skip and fail counts and each skip reason in `audits/evidence/wave-0.1-baseline.md`. This is the anchor every later regression run is compared with. Nothing changes if it fails: it is reported as found.
 - Step 0.1.2 **Spike plan.** For each spike below, write the question, the data to use and the pass rule into the evidence file before running it.
 - Step 0.1.3 **Spike A, announcement time (IG-16).** For 50 events, compare the call time with the 8-K Item 2.02 acceptance time. Decides the T0 cutoff rule (C-17). Needs the SEC contact variable set (C-10). Throwaway script, not committed to `src/`.
@@ -227,7 +227,7 @@ Notation: requirement IDs cite the owner document (README index). "D-nn" are ope
 **Entry gate:** P0 exit gate.
 **Exit gate:** the M1 demonstration; GATE-1 to GATE-5 evaluated on real data and reported with their results, including any shortfall (LB-06, VL-06, TX-04); independent audit of IG, DB and Data requirements in scope.
 
-**Wave 1.1. Task framework and client rules** (IG-01 to IG-08, IG-10, IG-12)
+**Wave 1.1. Task framework and client rules** (IG-01 to IG-05, IG-07, IG-08; PL-01, PL-02; EQ-07). Plan change of 24 November 2026, after inspecting which checks each wave can really test: IG-10 and IG-12 move to Wave 1.5 (they cover every client, and the transcript and Alpha Vantage clients are built there), FR-13 and NFR-03 to 1.5 (they need transcripts), IG-06 and SC-07 to 1.6 (they need events and a training set), SR-07 to 7.4 (its second check needs the demo bundle).
 - Step 1.1.1 Task base: idempotent, run record (IG-01, IG-03, EQ-07).
 - Step 1.1.2 Retry with backoff and jitter, dead letter (IG-02).
 - Step 1.1.3 Redis redelivery timeout (IG-04).
@@ -241,13 +241,15 @@ Notation: requirement IDs cite the owner document (README index). "D-nn" are ope
 - Step 1.2.1 Append-only by privilege and a registry of append-only tables, with a check that the registry and the database agree (DB-08). Step 1.2.2 One documented as-of function pattern, the first instance on `estimate_snapshot`, strictly before the date (DB-09). Step 1.2.3 Half-open validity ranges with overlap refused by the database: the `btree_gist` extension by migration, and the `ticker_history` and `index_membership` tables of Product Section 11 (DB-10). Step 1.2.4 A hash check of every stored raw payload (SR-04).
 - Test: the worker's UPDATE and DELETE fail on every registered table; a planted version dated D is not returned for date D; an overlapping membership insert fails and a boundary date resolves to one period; a tampered payload is found by the hash check.
 
-**Wave 1.3. Universe and identifiers** (IG-13, IG-21; Data IM-01 to IM-03; DB-04 join test across ten known ticker changes; TH-05, TH-06)
+**Wave 1.3. Universe and identifiers** (IG-13, IG-21; Data IM-01 to IM-03; DB-04 join test across ten known ticker changes; TH-05)
 - Step 1.3.1 Build the membership table from the D-32 source. Step 1.3.2 CIK as `company_id`, ticker matching, name matching with a logged review list (C-19). Step 1.3.3 Company list as a parameter, 100 companies with about 20 removed from the index (C-18).
 - Test: IM-01 and IM-02 checks against real data; removed companies present (survivorship).
 
-**Wave 1.4. Financial data** (Data AE, FD, PX, SR-09; IG-09, IG-15)
-- Step 1.4.1 EDGAR EPS facts with filing dates. Step 1.4.2 Fundamentals (revenue, margins). Step 1.4.3 8-K Item 2.02 acceptance times as the announcement time (IG-15). Step 1.4.4 Prices from yfinance with the free-source limits. Step 1.4.5 Bulk backfill if the spike allowed it (IG-09, Should).
-- Test: recorded responses for logic; a measured comparison of stored EPS with a hand-checked sample on one basis (AE-02).
+**Wave 1.4. Financial data** (AE-04; FD-01 to FD-03; IG-09, IG-15; DB-11; AE-03-AC1). Plan change of 23 and 24 November 2026: AE-03 (its second check is the basis test VL-07) and TH-06 (the survivorship gap, VL-05) move to Wave 1.7; AE-01 moves to Wave 1.6 (an event is needed to hold the document and dates), AE-02, FD-04 and TH-12 to Wave 1.7 (they need press-release values, the five non-calendar companies and the 200-event sample), and prices (PX-01 to PX-03) to a new Wave 1.8, because price tables are not in Product Section 11 and need John's approval.
+- Step 1.4.1 EPS history and fundamentals as append-only versions with as-of functions (AE-04, FD-01 to FD-03). Step 1.4.2 Derived quarters, flagged: fourth quarter from the year, and quarters from cumulative figures (LB-03). Step 1.4.3 Earnings-release 8-K parsing and the T0 cutoff, earlier of call time and acceptance time (IG-15). Step 1.4.4 Backfill of the 100 companies with the request count recorded (IG-09). Step 1.4.5 A rebuild of the tables from stored payloads gives identical hashes (DB-11).
+- Test: a simulated correction leaves the first-filed value; a planted filing dated D or later is excluded; call before and after the filing both give the earlier time; the rebuild hash is identical.
+
+**Wave 1.8. Prices** (PX-01 to PX-03). Not started. Needs John's approval of price tables (daily bars and dated split and dividend factors), which Product Section 11 does not list. Removed companies have no yfinance prices, so coverage will be reported.
 
 **Wave 1.5. Transcripts and preparation** (IG-11, IG-14, IG-17 to IG-19; Data TX)
 - Step 1.5.1 Hugging Face snapshot with revision recorded (IG-11). Step 1.5.2 Link transcript to company, quarter and announcement (IG-14). Step 1.5.3 Cleaning that removes only non-speech artefacts (IG-17). Step 1.5.4 Prepared remarks and Q&A boundary by the written rule (IG-18, D-45). Step 1.5.5 Fixed stage order (IG-19).

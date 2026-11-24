@@ -232,23 +232,75 @@ def test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on(monkeypatch
     from earnings import tasks
     from earnings.config import get_settings
 
-    sent = []
-    monkeypatch.setattr(
-        tasks, "capture_consensus", type("T", (), {"delay": lambda s: sent.append(1)})()
-    )
-    monkeypatch.setattr(consensus, "missing_today", lambda engine: True)
-    monkeypatch.setattr(tasks, "get_engine", lambda role: object())
+    queued = []
+    fake = type("T", (), {"delay": lambda self: queued.append(1)})()
+    monkeypatch.setattr(tasks, "capture_catch_up", fake)
 
     monkeypatch.delenv("CAPTURE_CATCH_UP", raising=False)
     get_settings.cache_clear()
-    tasks.catch_up_capture()
-    assert sent == []  # off by default: a test or CI stack makes no outside call
+    tasks.queue_catch_up()
+    assert queued == []  # off by default: a test or CI stack makes no outside call
 
     monkeypatch.setenv("CAPTURE_CATCH_UP", "true")
     get_settings.cache_clear()
-    tasks.catch_up_capture()
-    assert sent == [1]
+    tasks.queue_catch_up()
+    assert queued == [1]
     get_settings.cache_clear()
+
+
+@pytest.mark.req("SR-10")
+@pytest.mark.code("src/earnings/tasks.py")
+def test_the_catch_up_task_retries_when_the_database_is_still_starting(test_db, monkeypatch):
+    """The failure seen on 24 Nov 2026: the worker came up while PostgreSQL was still recovering."""
+    import psycopg
+    from sqlalchemy.exc import OperationalError
+
+    from earnings import tasks
+
+    sent, attempts = [], []
+
+    def flaky(engine, today=None):
+        attempts.append(1)
+        if len(attempts) < 3:
+            raise OperationalError(
+                "SELECT", {}, psycopg.OperationalError("the database system is starting up")
+            )
+        return True
+
+    monkeypatch.setattr(consensus, "missing_today", flaky)
+    monkeypatch.setattr(tasks.capture_consensus, "delay", lambda: sent.append(1))
+    result = tasks.capture_catch_up.apply()
+    assert (
+        result.get() is True and len(attempts) == 3 and sent == [1]
+    )  # two failures, then it works
+    monkeypatch.setattr(consensus, "missing_today", lambda engine, today=None: False)
+    assert tasks.capture_catch_up.apply().get() is False and sent == [
+        1
+    ]  # nothing missing: no capture
+
+
+@pytest.mark.req("SR-10")
+@pytest.mark.code("src/earnings/consensus.py")
+def test_a_company_whose_first_attempt_times_out_gets_one_more_try(test_db):
+    from earnings.db import get_engine
+
+    calls = []
+
+    def flaky(ticker):
+        calls.append(ticker)
+        if len(calls) == 1:
+            raise TimeoutError("synthetic timeout")
+        return RECORDED_AAPL
+
+    result = consensus.capture_all(
+        get_engine("worker"), UNIVERSE, fetch=flaky, now=START + timedelta(days=1)
+    )
+    assert (result.captured, result.failed, calls) == (1, [], ["AAPL", "AAPL"])
+    result = consensus.capture_all(
+        get_engine("worker"), [("MSFT", "0000789019", "SYNTHETIC")], fetch=lambda t: 1 / 0,
+        now=START + timedelta(days=2),
+    )  # fmt: skip
+    assert result.failed == ["MSFT"]  # two failures in a row are reported
 
 
 @pytest.mark.req("SR-10", "IG-06")

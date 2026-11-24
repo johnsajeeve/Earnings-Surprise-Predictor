@@ -865,7 +865,7 @@ FTV,selected,Fortive Corp,0001659166,current
 PKG,selected,PACKAGING CORP OF AMERICA,0000075677,current
 USB,selected,US BANCORP \DE\,0000036104,current
 HSP,selected,Hospira,0001274057,removed
-HOT,selected,Starwood Hotels and Resorts,0000048595,removed
+TE,selected,TECO Energy,0000350563,removed
 DNB,selected,Dun & Bradstreet,0000030419,removed
 PDCO,selected,Patterson Companies,0000891024,removed
 BHF,selected,"Brighthouse Financial, Inc.",0001685040,removed
@@ -875,17 +875,21 @@ TWTR,selected,Twitter,0001418091,removed
 ATVI,selected,Activision Blizzard,0000718877,removed
 BBWI;LB,selected,"Bath & Body Works, Inc.",0000701985,removed
 STJ,selected,St Jude Medical,0000203077,removed
-TE,selected,TECO Energy,0000350563,removed
 INFO,selected,IHS Markit,0001598014,removed
-LO,selected,Lorillard Tobacco Company,0000862178,removed
 GMCR,selected,Keurig Green Mountain,0000909954,removed
 XRX,selected,Xerox,0000108772,removed
 WFM,selected,Whole Foods Market,0000865436,removed
 FLR,selected,FLUOR CORP,0001124198,removed
 TIF,selected,Tiffany & Co,0000098246,removed
-SEE,selected,Sealed Air,0000088204,removed
+SIVB,selected,SVB Financial Group,0000719739,removed
+LNC,selected,LINCOLN NATIONAL CORP,0000059558,removed
+FLIR,selected,FLIR Systems,0000354908,removed
+HOT,excluded,Starwood Hotels and Resorts,0000048595,removed: last SEC filing 2013-03-21 is before 2015-01-01: an older registrant
 WCG,excluded,WellCare,0001804830,removed: first SEC filing 2020-05-12 is after 2018-09-17: the CIK is a successor
+LO,excluded,Lorillard Tobacco Company,0000862178,removed: the SEC holds no XBRL company facts for this CIK
 FTI,excluded,TechnipFMC plc,0001681459,removed: first SEC filing 2016-08-10 is after 2015-01-01: the CIK is a successor
+SEE,excluded,Sealed Air,0000088204,removed: last SEC filing 2014-01-30 is before 2015-01-01: an older registrant
+MON,excluded,Monsanto,0000067686,removed: last SEC filing 2003-04-18 is before 2015-01-01: an older registrant
 XOM,excluded,ExxonMobil Holdings Corp,0002115436,current: first SEC filing 2026-07-01 is after 2015-01-01: the CIK is a successor
 DIS,excluded,Walt Disney Co,0001744489,current: first SEC filing 2018-06-25 is after 2015-01-01: the CIK is a successor
 BHGE;BKR,excluded,Baker Hughes Co,0001701605,current: first SEC filing 2017-03-29 is after 2015-01-01: the CIK is a successor

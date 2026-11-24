@@ -972,6 +972,16 @@ EXPECTED_SCHEMA = {
         "dead_letter_id", "task_name", "args_hash", "error_class", "failed_at", "attempt_count",
         "run_id",
     ],
+    "eps_history": [
+        "eps_id", "company_id", "period_start", "period_end", "period_kind", "fiscal_year",
+        "fiscal_period", "eps_diluted", "derived", "basis", "form", "accession", "filed_at",
+        "payload_id",
+    ],
+    "fundamentals_filing": [
+        "fundamentals_id", "company_id", "period_start", "period_end", "fiscal_year",
+        "fiscal_period", "revenue", "revenue_tag", "gross_profit", "operating_income", "derived",
+        "form", "accession", "filed_at", "payload_id",
+    ],
     "estimate_snapshot": [
         "snapshot_id", "company_id", "event_id", "mean_estimate", "low_estimate", "high_estimate",
         "std_estimate", "estimate_count", "eps_basis", "period_label", "source", "source_version",
@@ -1044,6 +1054,8 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
             "raw_payload",
             "ticker_history",
             "index_membership",
+            "eps_history",
+            "fundamentals_filing",
         }
         assert columns == ["company_id", "name"]
         # Every column of every table, in order, and the same schema as the deployed database.

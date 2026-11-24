@@ -126,3 +126,9 @@ def earliest_filing_date(submissions: bytes) -> date | None:
     dates = [d for d in data["recent"].get("filingDate", [])]
     dates += [f["filingFrom"] for f in data.get("files", []) if f.get("filingFrom")]
     return min(date.fromisoformat(d) for d in dates) if dates else None
+
+
+def latest_filing_date(submissions: bytes) -> date | None:
+    """The date of the most recent filing a CIK has made, from its EDGAR submissions payload."""
+    dates = json.loads(submissions)["filings"]["recent"].get("filingDate", [])
+    return max(date.fromisoformat(d) for d in dates) if dates else None

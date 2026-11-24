@@ -8,7 +8,7 @@ code is built (Deterministic_audit.md, Phase D).
 
 import pytest
 
-from requirement_support import not_tested
+from requirement_support import not_tested, repo_path
 
 
 # Placeholders written by scripts/requirement_tests.py scaffold. Replace the call to
@@ -17,6 +17,19 @@ from requirement_support import not_tested
 def test_ig_01_ac2_killing_a_worker_mid_task_and_restarting():
     """IG-01-AC2: Killing a worker mid-task and restarting gives the row count of a clean run."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+
+
+@pytest.mark.req("IG-16-AC1")
+@pytest.mark.code("docs/requirements/data-requirements.md")
+def test_ig_16_ac1_the_spike_result_is_in_data_section_12():
+    """IG-16-AC1: Spike result is in Data Section 12."""
+    section = repo_path("docs/requirements/data-requirements.md").read_text("utf-8")
+    section = section[section.index("## 12. Week-One Experiments") : section.index("## 13.")]
+    paragraph = section[section.index("**Call time against 8-K acceptance time (IG-16)") :]
+    paragraph = paragraph.split("\n\n")[0]
+    assert (
+        "50-event sample" in paragraph and "median" in paragraph and "acceptance time" in paragraph
+    )
 
 
 @pytest.mark.req("IG-04-AC1")
@@ -39,6 +52,17 @@ def test_ig_07_ac1_test_with_a_mocked_clock_shows_no_more():
     no more than 25 Alpha Vantage requests in a day.
     """
     not_tested("NOT IMPLEMENTED", "the Alpha Vantage client and its counter wait for a key (C-45)")
+
+
+@pytest.mark.req("IG-09-AC1")
+def test_ig_09_ac1_backfill_of_the_100_company_subset_uses_the_bulk():
+    """IG-09-AC1: Backfill of the 100-company subset uses the bulk files, and the request count
+    is recorded.
+    """
+    not_tested(
+        "NOT IMPLEMENTED",
+        "bulk files not used: 117 requests for 100 companies is far below the limit (Wave 1.4)",
+    )
 
 
 @pytest.mark.req("IG-10-AC1")
@@ -65,14 +89,6 @@ def test_ig_05_ac1_the_schedule_file_lists_each_job_with():
     not_tested("BLOCKED", "waits for open decision D-45")
 
 
-@pytest.mark.req("IG-09-AC1")
-def test_ig_09_ac1_backfill_of_the_100_company_subset_uses():
-    """IG-09-AC1: Backfill of the 100-company subset uses the bulk files, and the request
-    count is recorded.
-    """
-    not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
-
-
 @pytest.mark.req("IG-11-AC1")
 def test_ig_11_ac1_load_report_shows_the_revision_and_the():
     """IG-11-AC1: Load report shows the revision and the number of empty rows rejected."""
@@ -89,20 +105,6 @@ def test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason():
 def test_ig_14_ac2_duplicate_fixture_follows_tx_05():
     """IG-14-AC2: Duplicate fixture follows TX-05."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-15-AC1")
-def test_ig_15_ac1_fixture_with_a_call_before_the_filing():
-    """IG-15-AC1: Fixture with a call before the filing and one after both give the earlier
-    time as the cutoff.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("IG-16-AC1")
-def test_ig_16_ac1_spike_result_is_in_data_section_12():
-    """IG-16-AC1: Spike result is in Data Section 12."""
-    not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
 
 
 @pytest.mark.req("IG-17-AC1")

@@ -118,15 +118,25 @@ def fetch_company_facts(self: IdempotentTask, cik: str) -> dict[str, Any]:
         return {"company_id": company_id, "bytes": len(raw.body), "stored": stored}
 
 
+@celery_app.task(name="earnings.capture_catch_up", base=IdempotentTask)
+def capture_catch_up() -> bool:
+    """Capture now if today has no snapshot yet. Retried like any task (Ingestion IG-02).
+
+    After a restart the worker can come up before PostgreSQL has finished recovering, so the first
+    attempt may fail; the retries (30, 60, 120 seconds) cover that. Returns whether it queued a
+    capture.
+    """
+    if consensus.missing_today(get_engine("worker")):
+        log.info("no consensus snapshot yet today, capturing now")
+        capture_consensus.delay()
+        return True
+    return False
+
+
 @worker_ready.connect
-def catch_up_capture(**_: Any) -> None:
-    """When the worker starts after the scheduled time, capture now if today has no snapshot."""
-    try:
-        if not get_settings().capture_catch_up:
-            log.info("capture catch-up is off (CAPTURE_CATCH_UP)")
-            return
-        if consensus.missing_today(get_engine("worker")):
-            log.info("no consensus snapshot yet today, capturing now")
-            capture_consensus.delay()
-    except Exception:  # noqa: BLE001  a start-up check must never stop the worker
-        log.exception("capture catch-up check failed")
+def queue_catch_up(**_: Any) -> None:
+    """At worker start, queue the catch-up check if the setting allows it (decision C-46)."""
+    if not get_settings().capture_catch_up:
+        log.info("capture catch-up is off (CAPTURE_CATCH_UP)")
+        return
+    capture_catch_up.delay()

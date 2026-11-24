@@ -29,21 +29,9 @@ def test_ae_02_ac1_at_least_98_agreement_on_a_sample():
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
 
 
-@pytest.mark.req("AE-03-AC1")
-def test_ae_03_ac1_basis_field_is_populated_and_has_one():
-    """AE-03-AC1: Basis field is populated and has one value per dataset."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("AE-03-AC2")
 def test_ae_03_ac2_test_in_vl_07():
     """AE-03-AC2: Test in VL-07."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("AE-04-AC1")
-def test_ae_04_ac1_after_a_simulated_correction_the_first_reported():
-    """AE-04-AC1: After a simulated correction, the first-reported value is unchanged."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
@@ -155,30 +143,10 @@ def test_dv_08_ac1_table_hashes_match_between_two_runs():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("FD-01-AC1")
-def test_fd_01_ac1_every_row_has_a_filing_date():
-    """FD-01-AC1: Every row has a filing date."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("FD-01-AC2")
 def test_fd_01_ac2_a_sample_of_20_values_matches_the():
     """FD-01-AC2: A sample of 20 values matches the filing."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FD-02-AC1")
-def test_fd_02_ac1_test_with_a_planted_filing_dated_d():
-    """FD-02-AC1: Test with a planted filing dated D or later shows it is excluded."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FD-03-AC1")
-def test_fd_03_ac1_after_a_simulated_restatement_a_prediction_before():
-    """FD-03-AC1: After a simulated restatement, a prediction before the restatement date is
-    unchanged.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    not_tested("NEEDS MEASUREMENT", "a hand check of 20 values against the filings (Wave 1.7)")
 
 
 @pytest.mark.req("FD-04-AC1")
