@@ -383,7 +383,7 @@ This is a record of what was done and when, with the commit messages. It is not 
 
 ### 25 Nov 2026: Wave 1.6 closed out, Wave 1.7 brief written
 
-- Wave 1.6 leftovers closed (FR-14-AC1, IG-22 on five companies, PL-04, DB-13, LB-02-AC2, CE-05-AC2, SC-07-AC2); real checks now 100 of 597. Still open in 1.6: AE-01, IG-06, NFR-09, TH-15. Full tests 184 passed, 0 failed.
+- Wave 1.6 leftovers closed (FR-14-AC1, IG-22 on five companies, PL-04, DB-13, LB-02-AC2, CE-05-AC2, SC-07-AC2); real checks now 101 of 597. Still open in 1.6: AE-01, IG-06, NFR-09, TH-15. Full tests 184 passed, 0 failed.
 - Wave 1.7 brief written (`audits/evidence/wave-1.7-task-brief.md`); no build yet, John sees it first. It has seven points for John (sample sizes D-26, reviewer D-09, trading calendar, wave order for the survivorship check, canary list, extreme-value reviewer, the five non-calendar companies).
 - Work by Claude.
 
