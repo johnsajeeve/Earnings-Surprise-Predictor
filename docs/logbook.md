@@ -369,6 +369,11 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Needs John: label the 50 calls in `audits/evidence/wave-1.5/boundary_review_sheet.md` (kept local, not in git); the first one looks wrong to me (DR-23). D-45 run time for the daily transcript check. D-47 item (i).
 - Work by Claude, not independently audited yet.
 
+### 25 Nov 2026: Wave 1.6 task brief written
+
+- Wave 1.5 committed (`3bd426a`) and pushed. Leftovers of 1.5 are listed at the end of the brief. Brief for Wave 1.6 (events and time-series SUE) is `audits/evidence/wave-1.6-task-brief.md`; no build work started because drift control 2 says John sees the brief first. Three points need John: event table columns, what one event is, and where split factors come from (LB-05).
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.
@@ -381,6 +386,7 @@ Decisions and actions only John can take, as of 24 November 2026. Each has a req
 - **D-18, transcript source and demo design:** the Hugging Face set says MIT and "research and educational use only" and names no origin. Needed before Wave 1.5.
 
 **Needs a decision, work can continue**
+- **Wave 1.6 task brief:** read `audits/evidence/wave-1.6-task-brief.md` and approve it or change it (three points).
 - **Boundary review (TX-03, IG-18, TH-02):** label the 50 calls in `audits/evidence/wave-1.5/boundary_review_sheet.md` (write `correct` or `wrong` after each arrow) and give the sheet back. 95% or more must be correct.
 - **D-47, rules I built that you have not approved:** the rename rule, the selection checks, the Q4 and cumulative derivations, the revenue tag order, the table columns, how reasons that name another company are stored, and the capture list. List and reasons are in the decision log. A second independent audit found these were not recorded as decisions.
 - **DR-21:** your email address is the Author of one commit made through the GitHub website, so it is visible in the public history. Leave it, or use a no-reply address from now on. Changing history is your call.
