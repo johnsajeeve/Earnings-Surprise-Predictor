@@ -1001,6 +1001,13 @@ EXPECTED_SCHEMA = {
         "body",
     ],
     "ticker_history": ["ticker_history_id", "company_id", "ticker", "valid_from", "valid_to"],
+    "transcript": [
+        "transcript_id", "company_id", "ticker", "fiscal_year", "fiscal_quarter", "call_date",
+        "call_at", "source", "source_ref", "payload_id", "release_accession",
+        "release_accepted_at", "raw_text", "raw_hash", "cleaned_text", "cleaning_rules_version",
+        "turns", "segmentation_status", "boundary_turn", "status",
+    ],
+    "transcript_section": ["section_id", "transcript_id", "kind", "text"],
 }  # fmt: skip
 
 
@@ -1058,6 +1065,8 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
             "index_membership",
             "eps_history",
             "fundamentals_filing",
+            "transcript",
+            "transcript_section",
         }
         assert columns == ["company_id", "name"]
         # Every column of every table, in order, and the same schema as the deployed database.

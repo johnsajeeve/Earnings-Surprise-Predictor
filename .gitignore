@@ -35,3 +35,4 @@ Thumbs.db
 
 # Proposal PDF and planning notes stay local; the repository is public (decision C-21)
 docs/source/
+audits/evidence/wave-1.5/boundary_review_sheet.md

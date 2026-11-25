@@ -92,6 +92,8 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-20 | 24 Nov 2026 | `fja05680/sp500`, Data IM-03 | The membership file can carry a company's current ticker for years when it used another (Dr Pepper Snapple as KDP from 2008), so a lookup by the old ticker finds nothing | OPEN, stated limit of the source |
 | DR-21 | 24 Nov 2026 | git history, Project-Wide SP-06, decision C-10 | John's email address is the Author header of one commit made through the GitHub website. It is not file content | OPEN. Needs John (leave, or use a no-reply address from now on) |
 | DR-22 | 24 Nov 2026 | Data SR-10 | The capture list holds 10 companies captured before the universe existed; 9 are outside the 100-company list | OPEN, in D-47 (h) |
+| DR-23 | 25 Nov 2026 | Data TX-03, Ingestion IG-18, decision C-48 | The approved boundary rule can mark the wrong turn when the opening operator turn speaks of a question session and the transcript starts with two list turns (sample item 1, Caterpillar 2017-10-24: boundary at turn 2, the opening announcement). The rule is not changed; John's 50 labels measure it (TH-02, 95%) | OPEN, waits for John's labels |
+| DR-24 | 25 Nov 2026 | Data TX-07, SR-03 | 7 of the 100 companies have no transcript in the Hugging Face set (CSRA, Dun & Bradstreet, Hospira, Keurig Green Mountain, Precision Castparts, St Jude Medical, Whole Foods Market); 138 calls have no 8-K Item 2.02 within 3 days; 3,183 calls loaded (about 66% of 12 years x 4 x 100) | OPEN, coverage gaps reported, nothing filled |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords were in every service's environment, with the superuser password | PARTLY FIXED 24 Nov 2026: the worker no longer gets the superuser password. The api service keeps it because the CI tests run inside it (a CI change John has not approved). Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -121,7 +123,7 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W1.2 | Storage rules | PARTIAL | audits/evidence/wave-1.2.md |
 | W1.3 | Universe and identifiers | PARTIAL | audits/evidence/wave-1.3.md |
 | W1.4 | Financial data | PARTIAL | audits/evidence/wave-1.4.md |
-| W1.5 | Transcripts and preparation | NOT STARTED | - |
+| W1.5 | Transcripts and preparation | PARTIAL | audits/evidence/wave-1.5.md |
 | W1.6 | Events, label and validation | NOT STARTED | - |
 | W1.7 | Dataset validation and sign-off | NOT STARTED | - |
 | W1.8 | Prices | NOT STARTED | - |

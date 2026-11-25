@@ -33,3 +33,5 @@ yfinance==1.8.0
 # dependency of yfinance; declared here because the code imports it directly.
 requests==2.34.2
 
+# Reads the Hugging Face transcript file in batches (Ingestion IG-11). Added on 24 Nov 2026, decision C-48.
+pyarrow==26.0.1

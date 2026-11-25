@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     postgres_user: str = ""
     postgres_password: str = ""
 
+    # Where large downloaded source files live (the `data` volume in docker-compose.yml).
+    data_dir: str = "/data"
+
     # Port inside the Docker network. The host port in .env is a different setting.
     postgres_internal_port: int = 5432
 

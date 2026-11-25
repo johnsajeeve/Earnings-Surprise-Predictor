@@ -11,6 +11,8 @@ WORKDIR /app
 
 # Run as a normal user, not root.
 RUN useradd --create-home --uid 1000 app
+# A volume mounted here (docker-compose.yml, `data`) starts with this owner.
+RUN mkdir /data && chown app /data
 
 # Layer 1: the build fails here if any requirement line is not pinned with == (EQ-04).
 COPY scripts/check_pins.py ./scripts/check_pins.py

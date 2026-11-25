@@ -291,6 +291,14 @@
         "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row"
       ]
     },
+    "src/earnings/clients/huggingface.py": {
+      "requirements": [
+        "IG-11"
+      ],
+      "tests": [
+        "tests/test_transcripts.py::test_the_download_is_refused_when_the_size_or_checksum_does_not_match"
+      ]
+    },
     "src/earnings/config.py": {
       "requirements": [
         "DB-01-AC1",
@@ -452,15 +460,21 @@
         "FD-02-AC1",
         "FD-03",
         "FD-03-AC1",
+        "FR-13-AC1",
         "IG-02-AC1",
         "IG-03-AC1",
+        "IG-11-AC1",
         "IG-13-AC1",
+        "IG-14-AC2",
         "IM-03-AC1",
         "PL-01-AC1",
         "PL-02-AC1",
         "PL-05-AC1",
+        "PL-06",
         "SR-08",
-        "SR-08-AC1"
+        "SR-08-AC1",
+        "TX-01-AC1",
+        "TX-05-AC1"
       ],
       "tests": [
         "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
@@ -486,6 +500,8 @@
         "tests/test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period",
         "tests/test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table",
         "tests/test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company",
+        "tests/test_transcripts.py::test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash",
+        "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release",
         "tests/test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history"
       ]
     },
@@ -611,6 +627,44 @@
         "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
+      ]
+    },
+    "src/earnings/transcripts.py": {
+      "requirements": [
+        "ER-07-AC1",
+        "ER-07-AC2",
+        "FR-13-AC1",
+        "FR-13-AC2",
+        "FR-15-AC1",
+        "FR-15-AC2",
+        "IG-10-AC1",
+        "IG-11-AC1",
+        "IG-14-AC1",
+        "IG-14-AC2",
+        "IG-17-AC1",
+        "IG-17-AC2",
+        "IG-18",
+        "IG-18-AC2",
+        "PL-06-AC1",
+        "TX-01-AC2",
+        "TX-02-AC1",
+        "TX-05-AC1",
+        "TX-06-AC1"
+      ],
+      "tests": [
+        "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation",
+        "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason",
+        "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles",
+        "tests/test_transcripts.py::test_a_load_that_fails_halfway_and_is_run_again_gives_the_row_count_of_a_clean_run",
+        "tests/test_transcripts.py::test_a_stored_payload_is_parsed_with_the_network_disabled",
+        "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role",
+        "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release",
+        "tests/test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed",
+        "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section",
+        "tests/test_transcripts.py::test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question",
+        "tests/test_transcripts.py::test_the_cleaning_rules_have_a_version_and_only_touch_characters_and_spaces",
+        "tests/test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning",
+        "tests/test_transcripts.py::test_the_review_sheet_draws_the_same_calls_every_time_and_shows_the_boundary"
       ]
     },
     "src/earnings/universe.csv": {
@@ -2765,7 +2819,8 @@
           "fingerprint": "77dbebe4951c",
           "ref": "ER-07-AC1",
           "tests": [
-            "tests/test_req_product.py::test_er_07_ac1_user_sees_q_a_analysis_unavailable_for"
+            "tests/test_req_product.py::test_er_07_ac1_user_sees_q_a_analysis_unavailable_for",
+            "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles"
           ],
           "text": "User sees \"Q&A analysis unavailable for this call.\""
         },
@@ -2773,7 +2828,8 @@
           "fingerprint": "123cbb020266",
           "ref": "ER-07-AC2",
           "tests": [
-            "tests/test_req_product.py::test_er_07_ac2_system_stores_q_a_features_as_unavailable"
+            "tests/test_req_product.py::test_er_07_ac2_system_stores_q_a_features_as_unavailable",
+            "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
           ],
           "text": "System: Stores Q&A features as unavailable."
         }
@@ -3966,7 +4022,8 @@
           "fingerprint": "5a56a7847cea",
           "ref": "FR-13-AC1",
           "tests": [
-            "tests/test_req_product.py::test_fr_13_ac1_given_the_same_transcript_is_ingested_twice"
+            "tests/test_req_product.py::test_fr_13_ac1_given_the_same_transcript_is_ingested_twice",
+            "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Given the same transcript is ingested twice, then exactly one transcript row exists for it."
         },
@@ -3974,7 +4031,8 @@
           "fingerprint": "7cfb6db90c4b",
           "ref": "FR-13-AC2",
           "tests": [
-            "tests/test_req_product.py::test_fr_13_ac2_given_an_ingestion_job_fails_halfway_and"
+            "tests/test_req_product.py::test_fr_13_ac2_given_an_ingestion_job_fails_halfway_and",
+            "tests/test_transcripts.py::test_a_load_that_fails_halfway_and_is_run_again_gives_the_row_count_of_a_clean_run"
           ],
           "text": "Given an ingestion job fails halfway and is re-run, then the final row count equals the count of a clean run."
         }
@@ -4010,7 +4068,8 @@
           "fingerprint": "04f66b07eb98",
           "ref": "FR-15-AC1",
           "tests": [
-            "tests/test_req_product.py::test_fr_15_ac1_given_a_transcript_with_a_recognised_q"
+            "tests/test_req_product.py::test_fr_15_ac1_given_a_transcript_with_a_recognised_q",
+            "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
           ],
           "text": "Given a transcript with a recognised Q&A marker, then prepared and Q&A sections are stored separately."
         },
@@ -4018,7 +4077,8 @@
           "fingerprint": "77fc197bcd67",
           "ref": "FR-15-AC2",
           "tests": [
-            "tests/test_req_product.py::test_fr_15_ac2_given_no_q_a_marker_is_found"
+            "tests/test_req_product.py::test_fr_15_ac2_given_no_q_a_marker_is_found",
+            "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
           ],
           "text": "Given no Q&A marker is found, then the event is flagged \"Segmentation failed\" and the Q&A features are stored as unavailable, not as zero."
         }
@@ -4549,7 +4609,8 @@
           "fingerprint": "66351d22295e",
           "ref": "IG-10-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the",
+            "tests/test_transcripts.py::test_a_stored_payload_is_parsed_with_the_network_disabled"
           ],
           "text": "Parsing runs from stored payloads with the network disabled."
         }
@@ -4566,13 +4627,16 @@
           "fingerprint": "80034aba52e1",
           "ref": "IG-11-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the",
+            "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Load report shows the revision and the number of empty rows rejected."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_transcripts.py::test_the_download_is_refused_when_the_size_or_checksum_does_not_match"
+      ]
     },
     "IG-12": {
       "checks": [
@@ -4588,7 +4652,8 @@
           "fingerprint": "524197fe2ddc",
           "ref": "IG-12-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin",
+            "tests/test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_which_rows_are_real"
           ],
           "text": "Fixtures state their origin."
         }
@@ -4633,7 +4698,8 @@
           "fingerprint": "26e969ea0585",
           "ref": "IG-14-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason",
+            "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason"
           ],
           "text": "Unlinked fixture is rejected with a reason."
         },
@@ -4641,7 +4707,8 @@
           "fingerprint": "8c3a096df73e",
           "ref": "IG-14-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05",
+            "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Duplicate fixture follows TX-05."
         }
@@ -4686,7 +4753,8 @@
           "fingerprint": "be9f2109f8a8",
           "ref": "IG-17-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac1_hash_of_raw_text_is_identical_before"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac1_hash_of_raw_text_is_identical_before",
+            "tests/test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning"
           ],
           "text": "Hash of raw text is identical before and after cleaning."
         },
@@ -4694,7 +4762,8 @@
           "fingerprint": "e6360ebd8761",
           "ref": "IG-17-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac2_rule_list_has_a_version"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac2_rule_list_has_a_version",
+            "tests/test_transcripts.py::test_the_cleaning_rules_have_a_version_and_only_touch_characters_and_spaces"
           ],
           "text": "Rule list has a version."
         }
@@ -4716,13 +4785,17 @@
           "fingerprint": "593b6f9108df",
           "ref": "IG-18-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_18_ac2_a_call_with_no_marker_is_flagged"
+            "tests/test_req_ingestion_and_preparation.py::test_ig_18_ac2_a_call_with_no_marker_is_flagged",
+            "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles"
           ],
           "text": "A call with no marker is flagged."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_transcripts.py::test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question",
+        "tests/test_transcripts.py::test_the_review_sheet_draws_the_same_calls_every_time_and_shows_the_boundary"
+      ]
     },
     "IG-19": {
       "checks": [
@@ -5914,13 +5987,16 @@
           "fingerprint": "be9f2109f8a8",
           "ref": "PL-06-AC1",
           "tests": [
-            "tests/test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before"
+            "tests/test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before",
+            "tests/test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning"
           ],
           "text": "Hash of raw text is identical before and after cleaning."
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_transcripts.py::test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash"
+      ]
     },
     "PX-01": {
       "checks": [
@@ -7633,7 +7709,8 @@
           "fingerprint": "15cd3c5a0a8d",
           "ref": "TX-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields"
+            "tests/test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields",
+            "tests/test_transcripts.py::test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash"
           ],
           "text": "100% of rows have all three fields."
         },
@@ -7641,7 +7718,8 @@
           "fingerprint": "5cc51c034c05",
           "ref": "TX-01-AC2",
           "tests": [
-            "tests/test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged"
+            "tests/test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged",
+            "tests/test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed"
           ],
           "text": "Rows missing one are rejected and logged."
         }
@@ -7655,7 +7733,8 @@
           "fingerprint": "d0e63beaee73",
           "ref": "TX-02-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_02_ac1_violations_are_zero_or_each_violation_is"
+            "tests/test_req_data.py::test_tx_02_ac1_violations_are_zero_or_each_violation_is",
+            "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation"
           ],
           "text": "Violations are zero, or each violation is listed with a reason."
         }
@@ -7697,7 +7776,8 @@
           "fingerprint": "a94d40e75af8",
           "ref": "TX-05-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_05_ac1_given_two_transcripts_for_one_event_the"
+            "tests/test_req_data.py::test_tx_05_ac1_given_two_transcripts_for_one_event_the",
+            "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Given two transcripts for one event, the earlier is kept."
         },
@@ -7719,7 +7799,9 @@
           "fingerprint": "670328d42afc",
           "ref": "TX-06-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_06_ac1_sample_of_20_transcripts_has_labels_on"
+            "tests/test_req_data.py::test_tx_06_ac1_sample_of_20_transcripts_has_labels_on",
+            "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role",
+            "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
           ],
           "text": "Sample of 20 transcripts has labels on every turn."
         }
@@ -13147,6 +13229,158 @@
       "kind": "real check",
       "requirements": [
         "DB-10"
+      ]
+    },
+    "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "TX-02-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-14-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "ER-07-AC1",
+        "IG-18-AC2"
+      ]
+    },
+    "tests/test_transcripts.py::test_a_load_that_fails_halfway_and_is_run_again_gives_the_row_count_of_a_clean_run": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-13-AC2"
+      ]
+    },
+    "tests/test_transcripts.py::test_a_stored_payload_is_parsed_with_the_network_disabled": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-10-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PL-06",
+        "TX-01-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "TX-06-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-13-AC1",
+        "IG-11-AC1",
+        "IG-14-AC2",
+        "TX-05-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "TX-01-AC2"
+      ]
+    },
+    "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "ER-07-AC2",
+        "FR-15-AC1",
+        "FR-15-AC2",
+        "TX-06-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-18"
+      ]
+    },
+    "tests/test_transcripts.py::test_the_cleaning_rules_have_a_version_and_only_touch_characters_and_spaces": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-17-AC2"
+      ]
+    },
+    "tests/test_transcripts.py::test_the_download_is_refused_when_the_size_or_checksum_does_not_match": {
+      "code": [
+        "src/earnings/clients/huggingface.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-11"
+      ]
+    },
+    "tests/test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-17-AC1",
+        "PL-06-AC1"
+      ]
+    },
+    "tests/test_transcripts.py::test_the_review_sheet_draws_the_same_calls_every_time_and_shows_the_boundary": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-18"
+      ]
+    },
+    "tests/test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_which_rows_are_real": {
+      "code": [],
+      "kind": "real check",
+      "requirements": [
+        "IG-12-AC2"
       ]
     },
     "tests/test_universe.py::test_a_company_that_joined_after_the_end_of_2024_is_never_current": {

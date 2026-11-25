@@ -348,6 +348,27 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Verified: full-repository pytest 154 passed, 3 expected failures, 0 failed; CI-style 133 passed; ruff, format and mypy pass. The real-data coverage is better with the corrected list: 94 companies have pre-2015 EPS and 79 of them have the 10 quarters LB-02 needs.
 - Work by Claude, audit by an independent agent. Decisions by John.
 
+### 25 Nov 2026: Wave 1.5 (transcripts) resumed, Docker stopped
+
+- Asked by John: finish what was left of the previous session. State at the start: the Hugging Face file was downloaded in full (1,824,805,388 bytes, 33,362 calls, size checked; the checksum check ran inside the download function), and the module, client, migration 0007 and a first test draft were written but never run.
+- Blocked: Docker Desktop was not running (the engine pipe was missing; I could not find its executable to start it). Everything that needs the stack is therefore NOT RUN: the real-data scan, migration 0007, all tests, ruff, mypy, the 100-company load and the review sheet.
+- Done without Docker: schema test expectations for the two new tables (`tests/test_req_product.py`), the transcript tests corrected for the loader date window (the Apple release fixture is 2025 and later), a stray import and the longest lines in `src/earnings/transcripts.py` tidied, the ledger row W1.5 set to IN PROGRESS, D-47 item (i) added for the new columns and rules, evidence file `audits/evidence/wave-1.5.md` started with every claim marked NOT RUN.
+- Still missing: the real-row excerpt fixture `tests/fixtures/hf_transcript_excerpts.json` (needs the scan), so `tests/test_transcripts.py` cannot pass yet.
+- Work by Claude. Decisions by John.
+
+### 25 Nov 2026: audit of Waves 0.1 to 1.5 (static)
+
+- Asked by John: audit what is implemented, check requirements and tests, and keep the gaps as items to add later today. Result in `audits/evidence/audit-2026-11-25.md`. Docker was down, so no test was run: only the host consistency checks (all pass) and a read of the test matrix.
+- Result: 61 of 597 acceptance checks have a real test; waves 1.2 and 1.3 have no open checks, 0.1 to 0.3, 1.1 and 1.4 have 1 to 5 each, and Wave 1.5 has 28 open (code not run yet). The generated traceability file is stale as a status record (17 assessed). Ten items to finish later today are listed in the audit file.
+- Work by Claude, not independent.
+
+### 25 Nov 2026: Wave 1.5 (transcripts) built and run
+
+- Docker came back. Rebuilt the stack, applied migration 0007, scanned the 33,362 real calls, cut a real-excerpt fixture, fixed the tests and lint, ran 10 mutation checks (2 survived at first, tests added, all killed), loaded the 100 companies, ran it twice (same counts), drew the 50-call review sheet.
+- Results: full tests 170 passed, 0 failed; CI-style 149 passed; ruff, format, mypy clean. 3,183 calls loaded, 138 unlinked, 27 with no boundary, 7 companies with no transcript (list in the evidence file).
+- Needs John: label the 50 calls in `audits/evidence/wave-1.5/boundary_review_sheet.md` (kept local, not in git); the first one looks wrong to me (DR-23). D-45 run time for the daily transcript check. D-47 item (i).
+- Work by Claude, not independently audited yet.
+
 ## Waiting on John
 
 Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.
@@ -360,6 +381,7 @@ Decisions and actions only John can take, as of 24 November 2026. Each has a req
 - **D-18, transcript source and demo design:** the Hugging Face set says MIT and "research and educational use only" and names no origin. Needed before Wave 1.5.
 
 **Needs a decision, work can continue**
+- **Boundary review (TX-03, IG-18, TH-02):** label the 50 calls in `audits/evidence/wave-1.5/boundary_review_sheet.md` (write `correct` or `wrong` after each arrow) and give the sheet back. 95% or more must be correct.
 - **D-47, rules I built that you have not approved:** the rename rule, the selection checks, the Q4 and cumulative derivations, the revenue tag order, the table columns, how reasons that name another company are stored, and the capture list. List and reasons are in the decision log. A second independent audit found these were not recorded as decisions.
 - **DR-21:** your email address is the Author of one commit made through the GitHub website, so it is visible in the public history. Leave it, or use a no-reply address from now on. Changing history is your call.
 - **IG-16 wording:** the Section 12 text shows the gap quartiles as 1,008, 180 and 59 minutes, which are magnitudes of negative values (the filing came first). Approve a corrected sentence.
