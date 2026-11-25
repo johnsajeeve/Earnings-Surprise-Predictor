@@ -289,3 +289,42 @@ def test_a_new_snapshot_is_a_new_row_and_the_earlier_one_is_unchanged(engines):
         after = conn.execute(text("SELECT * FROM estimate_snapshot ORDER BY captured_at")).all()
     assert len(after) == 2 and after[0] == before[0]  # the earlier row is exactly as it was
     assert float(after[1].mean_estimate) == 1.7
+
+
+@pytest.mark.req("PL-04-AC1", "DB-13-AC1", "DB-13-AC2")
+@pytest.mark.code("src/earnings/events.py")
+def test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only(
+    engines, monkeypatch
+):
+    worker, api = engines
+    _eps(worker, CO)  # 13 quarters: enough
+    _eps(worker, CO2, count=9)  # SYNTHETIC fixture with insufficient history
+    announce = ENDS[12] + timedelta(days=25)
+    for i, cid in enumerate((CO, CO2)):
+        _transcript(worker, cid, i, announce, f"rel-{i}")
+    _fake_releases(
+        monkeypatch, {CO: [_release(announce, "rel-0")], CO2: [_release(announce, "rel-1")]}
+    )
+    real, calls = label.compute_sue, []
+
+    def failing(versions, day):
+        calls.append(1)
+        if len(calls) == 2:
+            raise RuntimeError("injected failure in the middle of the build")
+        return real(versions, day)
+
+    monkeypatch.setattr(label, "compute_sue", failing)
+    with pytest.raises(RuntimeError):
+        ev.build_events(worker)
+    with api.connect() as conn:  # the first event is whole, the failed one left nothing behind
+        assert conn.execute(text("SELECT count(*) FROM earnings_event")).scalar_one() == 1
+    monkeypatch.setattr(label, "compute_sue", real)
+    ev.build_events(worker)
+    ev.build_events(worker)  # a second run changes nothing
+    with api.connect() as conn:
+        rows = conn.execute(
+            text("SELECT company_id, sue, sue_reason FROM earnings_event ORDER BY company_id")
+        ).all()
+    assert len(rows) == 2
+    assert rows[0][1] is not None and rows[1][1] is None
+    assert rows[1][2] == "fewer than 6 prior seasonal differences"  # the logged reason

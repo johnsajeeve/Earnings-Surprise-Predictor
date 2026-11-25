@@ -73,7 +73,7 @@ def test_sue_matches_a_hand_calculation_to_four_decimals():
     assert result.information_date == versions[-2].filed  # latest EPS used, not the label value
 
 
-@pytest.mark.req("LB-02-AC1", "TH-11-AC1")
+@pytest.mark.req("LB-02-AC1", "LB-02-AC2", "TH-11-AC1")
 @pytest.mark.code("src/earnings/label.py")
 def test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity():
     c = _series()
@@ -162,7 +162,7 @@ def test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014():
     assert splits[0].known_from == date(2014, 7, 23) and splits[0].periods >= 2
 
 
-@pytest.mark.req("CE-05-AC1")
+@pytest.mark.req("CE-05-AC2", "SC-07-AC2")
 @pytest.mark.code("src/earnings/label.py")
 def test_a_training_set_with_two_label_routes_fails():
     assert label.assert_one_route(["time-series", "time-series"]) == "time-series"

@@ -369,17 +369,21 @@
         "CE-05-AC1",
         "DB-06",
         "DB-09",
+        "DB-13-AC1",
+        "DB-13-AC2",
         "DB-15-AC1",
         "FR-02-AC1",
         "FR-02-AC2",
         "FR-14-AC2",
         "IG-22-AC1",
         "LB-04-AC1",
+        "PL-04-AC1",
         "TX-07"
       ],
       "tests": [
         "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input",
         "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
+        "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
         "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing",
         "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
         "tests/test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart"
@@ -423,13 +427,15 @@
     },
     "src/earnings/label.py": {
       "requirements": [
-        "CE-05-AC1",
+        "CE-05-AC2",
         "DB-09",
         "IG-20-AC1",
         "LB-01-AC1",
         "LB-02-AC1",
+        "LB-02-AC2",
         "LB-04-AC1",
         "LB-05-AC1",
+        "SC-07-AC2",
         "TH-11-AC1"
       ],
       "tests": [
@@ -1662,7 +1668,6 @@
           "tests": [
             "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
             "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route",
-            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
             "tests/test_req_data.py::test_ce_05_ac1_dataset_version_has_a_label_route_value"
           ],
           "text": "Dataset version has a label_route value."
@@ -1671,6 +1676,7 @@
           "fingerprint": "31ac1195d87a",
           "ref": "CE-05-AC2",
           "tests": [
+            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
             "tests/test_req_data.py::test_ce_05_ac2_a_test_fails_if_events_with_different"
           ],
           "text": "A test fails if events with different routes are in one training set."
@@ -1932,6 +1938,7 @@
           "fingerprint": "b431d2cfe695",
           "ref": "DB-13-AC1",
           "tests": [
+            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
             "tests/test_req_database.py::test_db_13_ac1_fault_injected_mid_event_leaves_no_rows"
           ],
           "text": "Fault injected mid-event leaves no rows for that event."
@@ -1940,6 +1947,7 @@
           "fingerprint": "529e9566adbe",
           "ref": "DB-13-AC2",
           "tests": [
+            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
             "tests/test_req_database.py::test_db_13_ac2_re_running_a_stage_leaves_the_row"
           ],
           "text": "Re-running a stage leaves the row count unchanged."
@@ -5019,6 +5027,7 @@
           "fingerprint": "d209c6e5dbaa",
           "ref": "LB-02-AC2",
           "tests": [
+            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
             "tests/test_req_data.py::test_lb_02_ac2_zero_variance_fixture_returns_unavailable"
           ],
           "text": "Zero-variance fixture returns unavailable."
@@ -6032,6 +6041,7 @@
           "fingerprint": "614fda020da7",
           "ref": "PL-04-AC1",
           "tests": [
+            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
             "tests/test_req_product.py::test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected"
           ],
           "text": "Fixture with insufficient EPS history is rejected with the logged reason."
@@ -6237,6 +6247,7 @@
           "fingerprint": "2132217967f2",
           "ref": "SC-07-AC2",
           "tests": [
+            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
             "tests/test_req_project_wide.py::test_sc_07_ac2_a_test_fails_if_events_with_different"
           ],
           "text": "A test fails if events with different label routes are in one training set (Data CE-05)."
@@ -8694,6 +8705,17 @@
         "FR-02-AC2"
       ]
     },
+    "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only": {
+      "code": [
+        "src/earnings/events.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-13-AC1",
+        "DB-13-AC2",
+        "PL-04-AC1"
+      ]
+    },
     "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing": {
       "code": [
         "src/earnings/events.py"
@@ -9062,7 +9084,8 @@
       ],
       "kind": "real check",
       "requirements": [
-        "CE-05-AC1"
+        "CE-05-AC2",
+        "SC-07-AC2"
       ]
     },
     "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals": {
@@ -9092,6 +9115,7 @@
       "kind": "real check",
       "requirements": [
         "LB-02-AC1",
+        "LB-02-AC2",
         "TH-11-AC1"
       ]
     },

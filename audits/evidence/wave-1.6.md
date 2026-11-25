@@ -40,6 +40,10 @@ One real defect was found by a test and fixed: with floating point arithmetic a 
 | DB-06 | PARTIAL | Missing dates and bad route refused. The probability range check has no table yet (predictions, Phase 3) |
 | DB-15 | PASS locally | Size report with measured and estimated apart |
 | TH-11 | PASS locally | Window 8, minimum 6 |
+| PL-04 | PASS locally | Fixture with 9 quarters gets no label and the stored reason `fewer than 6 prior seasonal differences` |
+| DB-13 | PASS locally | A failure injected in the middle of the build leaves only whole events; a rerun gives the clean-run count and a third run changes nothing |
+| LB-02-AC2, CE-05-AC2, SC-07-AC2 | PASS locally | Zero-variance fixture is unavailable; two routes in one set raise |
+| AE-01, IG-06, NFR-09 | NOT TESTED | AE-01 needs the EPS filing date of the quarter itself (stored as the label's own filing, not yet a column); IG-06 needs the capture-gap flag on events; NFR-09 needs a 100-company timing run |
 | TH-15 | NOT TESTED | Null-rate gate is DV-02, Wave 1.7 |
 
 Not an independent audit. Open for John: D-47 (j) to (l), DR-25, DR-26.
