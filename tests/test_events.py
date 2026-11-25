@@ -224,7 +224,13 @@ def test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing(engi
     days1 = [date(2020, 2, 4), date(2020, 5, 5), date(2020, 8, 4), date(2020, 11, 3)]
     days2 = [date(2021, 2, 2), date(2021, 5, 4), date(2021, 8, 3)]
     with worker.begin() as conn:
-        for cid, name, end in ((CO, "Stays", None), (CO2, "Leaves", date(2021, 6, 1))):
+        for cid, name, end in (
+            (CO, "Stays", None),
+            (CO2, "Leaves", date(2021, 6, 1)),
+            ("0000000003", "Third", None),
+            ("0000000004", "Fourth", None),
+            ("0000000005", "Fifth", None),
+        ):
             conn.execute(text("INSERT INTO company VALUES (:c, :n)"), {"c": cid, "n": name})
             conn.execute(
                 text("INSERT INTO index_membership (company_id, valid_from, valid_to) "
@@ -233,7 +239,13 @@ def test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing(engi
             )  # fmt: skip
     releases = {CO: [_release(d, f"s{i}") for i, d in enumerate(days1)],
                 CO2: [_release(d, f"l{i}") for i, d in enumerate(days2)]}  # fmt: skip
+    days3 = [date(2022, 2, 1), date(2022, 5, 3), date(2022, 8, 2), date(2022, 11, 1)]
+    for cid in ("0000000003", "0000000004", "0000000005"):  # SYNTHETIC: 4 releases each in 2022
+        releases[cid] = [_release(d, f"{cid}-{i}") for i, d in enumerate(days3)]
     _fake_releases(monkeypatch, releases)
+    for cid, count in (("0000000003", 4), ("0000000004", 0), ("0000000005", 2)):
+        for i in range(count):
+            _transcript(worker, cid, i, days3[i], f"{cid}-{i}")
     for n, (cid, i) in enumerate([(CO, 0), (CO, 1), (CO, 3), (CO2, 0)]):  # 4 of 7 have transcripts
         _transcript(
             worker, cid, n, (days1 if cid == CO else days2)[i], f"{'s' if cid == CO else 'l'}{i}"
@@ -243,7 +255,9 @@ def test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing(engi
     assert groups["2020 still in the index"] == {"releases": 4, "with_transcript": 3}
     assert groups["2021 left the index"] == {"releases": 2, "with_transcript": 1}
     # the third 2021 release (3 August) is after the company left on 1 June: not a target event
-    assert report["missing_count"] == 2
+    # five companies: 2022 has 3 x 4 = 12 releases and 4 + 0 + 2 = 6 transcripts
+    assert groups["2022 still in the index"] == {"releases": 12, "with_transcript": 6}
+    assert report["missing_count"] == 2 + 6
 
 
 @pytest.mark.req("DB-15-AC1")
@@ -255,3 +269,23 @@ def test_the_size_report_keeps_measured_and_estimated_figures_apart(engines):
     assert report["estimated"]["database_bytes"] == int(report["measured"]["database_bytes"] * 5)
     assert "ESTIMATE" in report["estimated"]["method"]
     assert "estimated" not in report["measured"]
+
+
+@pytest.mark.req("FR-14-AC1")
+@pytest.mark.code("src/earnings/migrations/versions")
+def test_a_new_snapshot_is_a_new_row_and_the_earlier_one_is_unchanged(engines):
+    worker, _ = engines
+    _eps(worker, CO, count=1)
+    first = datetime(2027, 3, 1, 21, 0, tzinfo=UTC)  # SYNTHETIC capture times
+    insert = (
+        "INSERT INTO estimate_snapshot (company_id, mean_estimate, period_label, source, "
+        "source_version, captured_at, raw_payload) VALUES "
+        "(:c, :m, '0q', 'synthetic-test', 'x', :t, '{}')"
+    )
+    with worker.begin() as conn:
+        conn.execute(text(insert), {"c": CO, "m": 1.5, "t": first})
+        before = conn.execute(text("SELECT * FROM estimate_snapshot")).all()
+        conn.execute(text(insert), {"c": CO, "m": 1.7, "t": first + timedelta(days=1)})
+        after = conn.execute(text("SELECT * FROM estimate_snapshot ORDER BY captured_at")).all()
+    assert len(after) == 2 and after[0] == before[0]  # the earlier row is exactly as it was
+    assert float(after[1].mean_estimate) == 1.7

@@ -34,9 +34,9 @@ One real defect was found by a test and fixed: with floating point arithmetic a 
 | LB-05 | PARTIAL | Passes with inferred splits (D-47 k), real Apple split detected. The dated split factors from the price source (PX-01) are not built; waits for John's price tables |
 | CE-05 | PARTIAL | Route stored, constraint, mixed set raises. No dataset-version table exists yet to hold the route (Wave 2.4) |
 | FR-02 | PASS locally | Three dates non-null or incomplete; late transcript excluded |
-| FR-14 | PARTIAL | AC2 passes (snapshot on or after D not used). AC1 test (a new snapshot leaves the earlier unchanged) still a placeholder |
+| FR-14 | PASS locally | AC1 (a new snapshot is a new row, the earlier one unchanged) and AC2 (snapshot on or after D not used) both tested |
 | IG-20 | PARTIAL | The date gate fails on a planted input dated at D. The planted-future tests for the whole pipeline are Waves 1.7 and 2.4 |
-| IG-22 | PARTIAL | Hand count on 2 synthetic companies, not 5; real report produced |
+| IG-22 | PASS locally | Hand count on 5 synthetic companies matches; real report produced (coverage by year, removed companies apart, every missing release listed) |
 | DB-06 | PARTIAL | Missing dates and bad route refused. The probability range check has no table yet (predictions, Phase 3) |
 | DB-15 | PASS locally | Size report with measured and estimated apart |
 | TH-11 | PASS locally | Window 8, minimum 6 |
