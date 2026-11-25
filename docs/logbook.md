@@ -381,6 +381,12 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Needs John: D-47 (j) sample standard deviation, (k) inferred splits until the price tables are approved, (l) event columns; DR-25 and DR-26.
 - Work by Claude, not independently audited yet.
 
+### 25 Nov 2026: Wave 1.6 closed out, Wave 1.7 brief written
+
+- Wave 1.6 leftovers closed (FR-14-AC1, IG-22 on five companies, PL-04, DB-13, LB-02-AC2, CE-05-AC2, SC-07-AC2); real checks now 100 of 597. Still open in 1.6: AE-01, IG-06, NFR-09, TH-15. Full tests 184 passed, 0 failed.
+- Wave 1.7 brief written (`audits/evidence/wave-1.7-task-brief.md`); no build yet, John sees it first. It has seven points for John (sample sizes D-26, reviewer D-09, trading calendar, wave order for the survivorship check, canary list, extreme-value reviewer, the five non-calendar companies).
+- Work by Claude.
+
 ## Waiting on John
 
 Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.
@@ -393,6 +399,7 @@ Decisions and actions only John can take, as of 24 November 2026. Each has a req
 - **D-18, transcript source and demo design:** the Hugging Face set says MIT and "research and educational use only" and names no origin. Needed before Wave 1.5.
 
 **Needs a decision, work can continue**
+- **Wave 1.7 task brief:** read `audits/evidence/wave-1.7-task-brief.md`; seven points (D-26 sample sizes, D-09 reviewer, trading calendar, survivorship check order, canary list, extreme-value reviewer, the five non-calendar companies).
 - **Wave 1.6 task brief:** read `audits/evidence/wave-1.6-task-brief.md` and approve it or change it (three points).
 - **Boundary review (TX-03, IG-18, TH-02):** label the 50 calls in `audits/evidence/wave-1.5/boundary_review_sheet.md` (write `correct` or `wrong` after each arrow) and give the sheet back. 95% or more must be correct.
 - **D-47, rules I built that you have not approved:** the rename rule, the selection checks, the Q4 and cumulative derivations, the revenue tag order, the table columns, how reasons that name another company are stored, and the capture list. List and reasons are in the decision log. A second independent audit found these were not recorded as decisions.
