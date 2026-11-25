@@ -1,0 +1,101 @@
+{
+ "by_year_and_group": {
+  "2013 left the index": {
+   "releases": 65,
+   "with_transcript": 30
+  },
+  "2013 still in the index": {
+   "releases": 172,
+   "with_transcript": 146
+  },
+  "2014 left the index": {
+   "releases": 68,
+   "with_transcript": 28
+  },
+  "2014 still in the index": {
+   "releases": 184,
+   "with_transcript": 163
+  },
+  "2015 left the index": {
+   "releases": 65,
+   "with_transcript": 26
+  },
+  "2015 still in the index": {
+   "releases": 210,
+   "with_transcript": 187
+  },
+  "2016 left the index": {
+   "releases": 61,
+   "with_transcript": 32
+  },
+  "2016 still in the index": {
+   "releases": 227,
+   "with_transcript": 203
+  },
+  "2017 left the index": {
+   "releases": 61,
+   "with_transcript": 34
+  },
+  "2017 still in the index": {
+   "releases": 235,
+   "with_transcript": 215
+  },
+  "2018 left the index": {
+   "releases": 69,
+   "with_transcript": 44
+  },
+  "2018 still in the index": {
+   "releases": 272,
+   "with_transcript": 245
+  },
+  "2019 left the index": {
+   "releases": 61,
+   "with_transcript": 45
+  },
+  "2019 still in the index": {
+   "releases": 276,
+   "with_transcript": 252
+  },
+  "2020 left the index": {
+   "releases": 57,
+   "with_transcript": 44
+  },
+  "2020 still in the index": {
+   "releases": 295,
+   "with_transcript": 253
+  },
+  "2021 left the index": {
+   "releases": 51,
+   "with_transcript": 32
+  },
+  "2021 still in the index": {
+   "releases": 293,
+   "with_transcript": 265
+  },
+  "2022 left the index": {
+   "releases": 37,
+   "with_transcript": 28
+  },
+  "2022 still in the index": {
+   "releases": 300,
+   "with_transcript": 280
+  },
+  "2023 left the index": {
+   "releases": 38,
+   "with_transcript": 23
+  },
+  "2023 still in the index": {
+   "releases": 297,
+   "with_transcript": 292
+  },
+  "2024 left the index": {
+   "releases": 28,
+   "with_transcript": 23
+  },
+  "2024 still in the index": {
+   "releases": 308,
+   "with_transcript": 293
+  }
+ },
+ "missing_count": 547
+}

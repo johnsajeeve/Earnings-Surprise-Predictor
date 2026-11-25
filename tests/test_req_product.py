@@ -984,6 +984,12 @@ EXPECTED_SCHEMA = {
         "operating_income", "derived",
         "form", "accession", "filed_at", "payload_id",
     ],
+    "earnings_event": [
+        "event_id", "company_id", "transcript_id", "period_end", "fiscal_period",
+        "transcript_date", "information_date", "announcement_date", "announcement_time_utc",
+        "release_accession", "eps_basis", "label_route", "sue", "sue_reason", "differences_used",
+        "splits_applied", "incomplete", "status", "exclusion_reason",
+    ],
     "estimate_snapshot": [
         "snapshot_id", "company_id", "event_id", "mean_estimate", "low_estimate", "high_estimate",
         "std_estimate", "estimate_count", "eps_basis", "period_label", "source", "source_version",
@@ -1067,6 +1073,7 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
             "fundamentals_filing",
             "transcript",
             "transcript_section",
+            "earnings_event",
         }
         assert columns == ["company_id", "name"]
         # Every column of every table, in order, and the same schema as the deployed database.

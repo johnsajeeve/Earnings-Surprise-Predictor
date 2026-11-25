@@ -374,6 +374,13 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Wave 1.5 committed (`3bd426a`) and pushed. Leftovers of 1.5 are listed at the end of the brief. Brief for Wave 1.6 (events and time-series SUE) is `audits/evidence/wave-1.6-task-brief.md`; no build work started because drift control 2 says John sees the brief first. Three points need John: event table columns, what one event is, and where split factors come from (LB-05).
 - Work by Claude. Decisions by John.
 
+### 25 Nov 2026: Wave 1.6 (events and time-series SUE) built and run
+
+- Brief approved by John. Built the SUE (`label.py`), the event table (migration 0008) and the build, snapshot, coverage and size functions (`events.py`). 12 new label and event tests, 13 mutation checks (all killed after one added test). Full tests 182 passed, CI-style 161 passed, 0 failed; lint and types clean.
+- Real result: the label is available for 2,619 of 3,183 events (82%); the rest lack EPS data (DR-26). Transcripts exist for 91% of releases of companies still in the index and 59% of companies that left it (DR-25). Database 677 MB measured, about 3.6 GB estimated for 500 companies.
+- Needs John: D-47 (j) sample standard deviation, (k) inferred splits until the price tables are approved, (l) event columns; DR-25 and DR-26.
+- Work by Claude, not independently audited yet.
+
 ## Waiting on John
 
 Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.

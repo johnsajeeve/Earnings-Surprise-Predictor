@@ -364,6 +364,27 @@
         "tests/test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials"
       ]
     },
+    "src/earnings/events.py": {
+      "requirements": [
+        "CE-05-AC1",
+        "DB-06",
+        "DB-09",
+        "DB-15-AC1",
+        "FR-02-AC1",
+        "FR-02-AC2",
+        "FR-14-AC2",
+        "IG-22-AC1",
+        "LB-04-AC1",
+        "TX-07"
+      ],
+      "tests": [
+        "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input",
+        "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
+        "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing",
+        "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
+        "tests/test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart"
+      ]
+    },
     "src/earnings/financials.py": {
       "requirements": [
         "AE-03-AC1",
@@ -374,7 +395,8 @@
         "FD-03-AC1",
         "IG-15",
         "IG-15-AC1",
-        "LB-03"
+        "LB-03",
+        "LB-05-AC1"
       ],
       "tests": [
         "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff",
@@ -387,7 +409,8 @@
         "tests/test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes",
         "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it",
         "tests/test_financials.py::test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version",
-        "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
+        "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it",
+        "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014"
       ]
     },
     "src/earnings/identifiers.py": {
@@ -396,6 +419,27 @@
       ],
       "tests": [
         "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form"
+      ]
+    },
+    "src/earnings/label.py": {
+      "requirements": [
+        "CE-05-AC1",
+        "DB-09",
+        "IG-20-AC1",
+        "LB-01-AC1",
+        "LB-02-AC1",
+        "LB-04-AC1",
+        "LB-05-AC1",
+        "TH-11-AC1"
+      ],
+      "tests": [
+        "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
+        "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
+        "tests/test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series",
+        "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
+        "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals",
+        "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014",
+        "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity"
       ]
     },
     "src/earnings/limits.py": {
@@ -444,10 +488,13 @@
       "requirements": [
         "AE-04",
         "AE-04-AC1",
+        "CE-05-AC1",
         "DB-01-AC2",
         "DB-04",
         "DB-04-AC1",
         "DB-05",
+        "DB-06",
+        "DB-06-AC1",
         "DB-07-AC1",
         "DB-08",
         "DB-08-AC1",
@@ -460,6 +507,8 @@
         "FD-02-AC1",
         "FD-03",
         "FD-03-AC1",
+        "FR-02-AC1",
+        "FR-02-AC2",
         "FR-13-AC1",
         "IG-02-AC1",
         "IG-03-AC1",
@@ -481,6 +530,8 @@
         "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role",
         "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same",
         "tests/test_edgar_client.py::test_raw_payloads_are_insert_only_and_the_length_is_checked",
+        "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
+        "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route",
         "tests/test_financials.py::test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d",
         "tests/test_financials.py::test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value",
         "tests/test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date",
@@ -1607,6 +1658,9 @@
           "fingerprint": "aa8e468ea0de",
           "ref": "CE-05-AC1",
           "tests": [
+            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
+            "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route",
+            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
             "tests/test_req_data.py::test_ce_05_ac1_dataset_version_has_a_label_route_value"
           ],
           "text": "Dataset version has a label_route value."
@@ -1749,13 +1803,16 @@
           "fingerprint": "1da7d438cbc2",
           "ref": "DB-06-AC1",
           "tests": [
+            "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route",
             "tests/test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability"
           ],
           "text": "Insert of an out-of-range probability fails."
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded"
+      ]
     },
     "DB-07": {
       "checks": [
@@ -1808,6 +1865,7 @@
       ],
       "document": "database-requirements.md",
       "id_level_tests": [
+        "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
         "tests/test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period"
       ]
     },
@@ -1908,6 +1966,7 @@
           "fingerprint": "1333b5197f76",
           "ref": "DB-15-AC1",
           "tests": [
+            "tests/test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart",
             "tests/test_req_database.py::test_db_15_ac1_size_report_exists"
           ],
           "text": "Size report exists."
@@ -3788,6 +3847,7 @@
           "fingerprint": "0f96cee7f960",
           "ref": "FR-02-AC1",
           "tests": [
+            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
             "tests/test_req_product.py::test_fr_02_ac1_given_any_event_in_the_database_when"
           ],
           "text": "Given any event in the database, when its record is read, then all three date fields are present and non-null, or the event is marked incomplete. The label route is stored beside them."
@@ -3796,6 +3856,7 @@
           "fingerprint": "54ac651b4964",
           "ref": "FR-02-AC2",
           "tests": [
+            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
             "tests/test_req_product.py::test_fr_02_ac2_given_a_transcript_dated_after_its_announcement"
           ],
           "text": "Given a transcript dated after its announcement by more than the window in Data TX-02, then the event is flagged for review and excluded from training."
@@ -4054,6 +4115,7 @@
           "fingerprint": "6ec941bce255",
           "ref": "FR-14-AC2",
           "tests": [
+            "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input",
             "tests/test_req_product.py::test_fr_14_ac2_given_a_prediction_for_an_event_announced"
           ],
           "text": "Given a prediction for an event announced on date D, then any snapshot captured on or after D is excluded from its inputs."
@@ -4825,6 +4887,7 @@
           "fingerprint": "91c145200dcc",
           "ref": "IG-20-AC1",
           "tests": [
+            "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
             "tests/test_req_ingestion_and_preparation.py::test_ig_20_ac1_a_planted_record_dated_after_its_cutoff"
           ],
           "text": "A planted record dated after its cutoff makes the test fail."
@@ -4855,6 +4918,7 @@
           "fingerprint": "e614bffbb1d0",
           "ref": "IG-22-AC1",
           "tests": [
+            "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing",
             "tests/test_req_ingestion_and_preparation.py::test_ig_22_ac1_report_exists_after_a_run_and_matches"
           ],
           "text": "Report exists after a run and matches a hand count on 5 companies."
@@ -4928,6 +4992,7 @@
           "fingerprint": "52b68790905d",
           "ref": "LB-01-AC1",
           "tests": [
+            "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals",
             "tests/test_req_data.py::test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue"
           ],
           "text": "Fixture company with a hand-calculated SUE matches to four decimal places."
@@ -4942,6 +5007,7 @@
           "fingerprint": "9accb5fb6217",
           "ref": "LB-02-AC1",
           "tests": [
+            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
             "tests/test_req_data.py::test_lb_02_ac1_exclusion_count_reported_per_year"
           ],
           "text": "Exclusion count reported per year."
@@ -4990,6 +5056,8 @@
           "fingerprint": "710fd7cf75e2",
           "ref": "LB-04-AC1",
           "tests": [
+            "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
+            "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
             "tests/test_req_data.py::test_lb_04_ac1_test_with_a_planted_restatement_filed_after"
           ],
           "text": "Test with a planted restatement filed after D shows the original value is used."
@@ -5004,6 +5072,8 @@
           "fingerprint": "9a3ee20dca10",
           "ref": "LB-05-AC1",
           "tests": [
+            "tests/test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series",
+            "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014",
             "tests/test_req_data.py::test_lb_05_ac1_test_on_a_company_with_a_split"
           ],
           "text": "Test on a company with a split inside the window gives the same SUE as the unsplit series."
@@ -7569,6 +7639,8 @@
           "fingerprint": "5cb616d5f9fc",
           "ref": "TH-11-AC1",
           "tests": [
+            "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals",
+            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
             "tests/test_req_data.py::test_th_11_ac1_at_least_6_prior_seasonal_differences_8"
           ],
           "text": "At least 6 prior seasonal differences, 8-difference window"
@@ -7821,7 +7893,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing"
+      ]
     },
     "UI-01": {
       "checks": [
@@ -8586,6 +8660,68 @@
         "IG-08-AC1"
       ]
     },
+    "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input": {
+      "code": [
+        "src/earnings/events.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-14-AC2"
+      ]
+    },
+    "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded": {
+      "code": [
+        "src/earnings/events.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "CE-05-AC1",
+        "DB-06",
+        "FR-02-AC1",
+        "FR-02-AC2"
+      ]
+    },
+    "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing": {
+      "code": [
+        "src/earnings/events.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-22-AC1",
+        "TX-07"
+      ]
+    },
+    "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "CE-05-AC1",
+        "DB-06-AC1"
+      ]
+    },
+    "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement": {
+      "code": [
+        "src/earnings/events.py",
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-09",
+        "LB-04-AC1"
+      ]
+    },
+    "tests/test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart": {
+      "code": [
+        "src/earnings/events.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DB-15-AC1"
+      ]
+    },
     "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff": {
       "code": [
         "src/earnings/financials.py"
@@ -8887,6 +9023,64 @@
       "kind": "real check",
       "requirements": [
         "IG-04"
+      ]
+    },
+    "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-20-AC1",
+        "LB-04-AC1"
+      ]
+    },
+    "tests/test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-05-AC1"
+      ]
+    },
+    "tests/test_label.py::test_a_training_set_with_two_label_routes_fails": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "CE-05-AC1"
+      ]
+    },
+    "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-01-AC1",
+        "TH-11-AC1"
+      ]
+    },
+    "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014": {
+      "code": [
+        "src/earnings/financials.py",
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-05-AC1"
+      ]
+    },
+    "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-02-AC1",
+        "TH-11-AC1"
       ]
     },
     "tests/test_req_api_and_serving.py::test_sv_01_ac1_the_api_code_imports_no_model_package": {

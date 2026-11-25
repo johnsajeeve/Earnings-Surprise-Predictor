@@ -1,0 +1,198 @@
+{
+ "coverage": {
+  "by_year_and_group": {
+   "2013 left the index": {
+    "releases": 65,
+    "with_transcript": 30
+   },
+   "2013 still in the index": {
+    "releases": 172,
+    "with_transcript": 146
+   },
+   "2014 left the index": {
+    "releases": 68,
+    "with_transcript": 28
+   },
+   "2014 still in the index": {
+    "releases": 184,
+    "with_transcript": 163
+   },
+   "2015 left the index": {
+    "releases": 65,
+    "with_transcript": 26
+   },
+   "2015 still in the index": {
+    "releases": 210,
+    "with_transcript": 187
+   },
+   "2016 left the index": {
+    "releases": 61,
+    "with_transcript": 32
+   },
+   "2016 still in the index": {
+    "releases": 227,
+    "with_transcript": 203
+   },
+   "2017 left the index": {
+    "releases": 61,
+    "with_transcript": 34
+   },
+   "2017 still in the index": {
+    "releases": 235,
+    "with_transcript": 215
+   },
+   "2018 left the index": {
+    "releases": 69,
+    "with_transcript": 44
+   },
+   "2018 still in the index": {
+    "releases": 272,
+    "with_transcript": 245
+   },
+   "2019 left the index": {
+    "releases": 61,
+    "with_transcript": 45
+   },
+   "2019 still in the index": {
+    "releases": 276,
+    "with_transcript": 252
+   },
+   "2020 left the index": {
+    "releases": 57,
+    "with_transcript": 44
+   },
+   "2020 still in the index": {
+    "releases": 295,
+    "with_transcript": 253
+   },
+   "2021 left the index": {
+    "releases": 51,
+    "with_transcript": 32
+   },
+   "2021 still in the index": {
+    "releases": 293,
+    "with_transcript": 265
+   },
+   "2022 left the index": {
+    "releases": 37,
+    "with_transcript": 28
+   },
+   "2022 still in the index": {
+    "releases": 300,
+    "with_transcript": 280
+   },
+   "2023 left the index": {
+    "releases": 38,
+    "with_transcript": 23
+   },
+   "2023 still in the index": {
+    "releases": 297,
+    "with_transcript": 292
+   },
+   "2024 left the index": {
+    "releases": 28,
+    "with_transcript": 23
+   },
+   "2024 still in the index": {
+    "releases": 308,
+    "with_transcript": 293
+   }
+  },
+  "missing_count": 547
+ },
+ "label_exclusions": {
+  "2013": {
+   "fewer than 6 prior seasonal differences": 14,
+   "label ok": 130,
+   "no quarter ended within the reporting window": 20,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2014": {
+   "fewer than 6 prior seasonal differences": 18,
+   "label ok": 144,
+   "no quarter ended within the reporting window": 17,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2015": {
+   "fewer than 6 prior seasonal differences": 16,
+   "label ok": 169,
+   "no quarter ended within the reporting window": 16,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2016": {
+   "fewer than 6 prior seasonal differences": 18,
+   "label ok": 190,
+   "no quarter ended within the reporting window": 15,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2017": {
+   "fewer than 6 prior seasonal differences": 14,
+   "label ok": 206,
+   "no quarter ended within the reporting window": 17,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2018": {
+   "fewer than 6 prior seasonal differences": 17,
+   "label ok": 239,
+   "no quarter ended within the reporting window": 21,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2019": {
+   "fewer than 6 prior seasonal differences": 13,
+   "label ok": 252,
+   "no quarter ended within the reporting window": 20,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2020": {
+   "fewer than 6 prior seasonal differences": 13,
+   "label ok": 254,
+   "no quarter ended within the reporting window": 18,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2021": {
+   "fewer than 6 prior seasonal differences": 16,
+   "label ok": 250,
+   "no quarter ended within the reporting window": 19,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2022": {
+   "fewer than 6 prior seasonal differences": 12,
+   "label ok": 260,
+   "no quarter ended within the reporting window": 24,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2023": {
+   "fewer than 6 prior seasonal differences": 15,
+   "label ok": 263,
+   "no quarter ended within the reporting window": 25,
+   "no quarterly EPS stored for this company": 12
+  },
+  "2024": {
+   "fewer than 6 prior seasonal differences": 12,
+   "label ok": 262,
+   "no quarter ended within the reporting window": 31,
+   "no quarterly EPS stored for this company": 11
+  }
+ },
+ "size": {
+  "measured": {
+   "companies": 93,
+   "database_bytes": 677092375,
+   "largest_tables_bytes": {
+    "raw_payload": 305315840,
+    "transcript": 263700480,
+    "transcript_section": 87703552,
+    "eps_history": 5029888,
+    "fundamentals_filing": 4751360,
+    "earnings_event": 1032192,
+    "estimate_snapshot": 253952,
+    "ingestion_run": 180224
+   }
+  },
+  "estimated": {
+   "companies": 500,
+   "database_bytes": 3640281586,
+   "method": "measured size times 5.4 (company ratio); ESTIMATE, not measured"
+  }
+ }
+}
