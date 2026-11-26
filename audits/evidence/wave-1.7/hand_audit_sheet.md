@@ -2,602 +2,602 @@
 
 For each event, open the two filings and check: the quarter's diluted EPS, the announcement date, and that the EPS filing date is as stored. Write `ok` or `error: what` after the arrow. The error rate must be at most 2% (TH-08).
 
-## 1. CATERPILLAR INC, quarter ended 2021-03-31 (event 253)
-- Stored: diluted EPS 2.77, announcement 2021-04-29, SUE 0.894368 from 8 prior differences
-- Earnings release (8-K 0000018230-21-000145): https://www.sec.gov/Archives/edgar/data/18230/000001823021000145/
-- EPS first filed in 0000018230-21-000151: https://www.sec.gov/Archives/edgar/data/18230/000001823021000151/
+## 1. CATERPILLAR INC, quarter ended 2020-06-30 (event 55607)
+- Stored: diluted EPS 0.84, announcement 2020-07-31, SUE -1.281302 from 8 prior differences
+- Earnings release (8-K 0000018230-20-000210): https://www.sec.gov/Archives/edgar/data/18230/000001823020000210/
+- EPS first filed in 0000018230-20-000214: https://www.sec.gov/Archives/edgar/data/18230/000001823020000214/
 - Verdict -> 
 
-## 2. Hilton Worldwide Holdings Inc., quarter ended 2022-06-30 (event 3039)
-- Stored: diluted EPS 1.32, announcement 2022-07-27, SUE 0.533875 from 8 prior differences
-- Earnings release (8-K 0001585689-22-000136): https://www.sec.gov/Archives/edgar/data/1585689/000158568922000136/
-- EPS first filed in 0001585689-22-000137: https://www.sec.gov/Archives/edgar/data/1585689/000158568922000137/
+## 2. COMCAST CORP, quarter ended 2018-03-31 (event 57974)
+- Stored: diluted EPS 0.66, announcement 2018-04-25, SUE 0.139699 from 8 prior differences
+- Earnings release (8-K 0001104659-18-026361): https://www.sec.gov/Archives/edgar/data/1166691/000110465918026361/
+- EPS first filed in 0001166691-18-000010: https://www.sec.gov/Archives/edgar/data/1166691/000116669118000010/
 - Verdict -> 
 
-## 3. IQVIA HOLDINGS INC., quarter ended 2024-03-31 (event 2902)
-- Stored: diluted EPS 1.56, announcement 2024-05-02, SUE 0.056843 from 8 prior differences
-- Earnings release (8-K 0001193125-24-128463): https://www.sec.gov/Archives/edgar/data/1478242/000119312524128463/
-- EPS first filed in 0001478242-24-000068: https://www.sec.gov/Archives/edgar/data/1478242/000147824224000068/
+## 3. DEVON ENERGY CORP/DE, quarter ended 2014-12-31 (event 57855)
+- Stored: diluted EPS -1.01, announcement 2015-02-17, SUE -0.564522 from 8 prior differences
+- Earnings release (8-K 0000950123-15-003326): https://www.sec.gov/Archives/edgar/data/1090012/000095012315003326/
+- EPS first filed in 0001193125-15-056497: https://www.sec.gov/Archives/edgar/data/1090012/000119312515056497/
 - Verdict -> 
 
-## 4. Capri Holdings Ltd, quarter ended 2018-09-29 (event 2980)
-- Stored: diluted EPS 0.91, announcement 2018-11-07, SUE -0.823516 from 8 prior differences
-- Earnings release (8-K 0001530721-18-000111): https://www.sec.gov/Archives/edgar/data/1530721/000153072118000111/
-- EPS first filed in 0001530721-18-000113: https://www.sec.gov/Archives/edgar/data/1530721/000153072118000113/
+## 4. COMCAST CORP, quarter ended 2021-06-30 (event 57938)
+- Stored: diluted EPS 0.8, announcement 2021-07-29, SUE 0.790962 from 8 prior differences
+- Earnings release (8-K 0001166691-21-000027): https://www.sec.gov/Archives/edgar/data/1166691/000116669121000027/
+- EPS first filed in 0001166691-21-000029: https://www.sec.gov/Archives/edgar/data/1166691/000116669121000029/
 - Verdict -> 
 
-## 5. NetApp, Inc., quarter ended 2022-07-29 (event 2082)
-- Stored: diluted EPS 0.96, announcement 2022-08-24, SUE 0.186858 from 8 prior differences
-- Earnings release (8-K 0000950170-22-017731): https://www.sec.gov/Archives/edgar/data/1002047/000095017022017731/
-- EPS first filed in 0000950170-22-017904: https://www.sec.gov/Archives/edgar/data/1002047/000095017022017904/
+## 5. BIO-TECHNE Corp, quarter ended 2020-12-31 (event 57154)
+- Stored: diluted EPS 1.15, announcement 2021-02-02, SUE -1.699099 from 8 prior differences
+- Earnings release (8-K 0001437749-21-001705): https://www.sec.gov/Archives/edgar/data/842023/000143774921001705/
+- EPS first filed in 0001437749-21-002157: https://www.sec.gov/Archives/edgar/data/842023/000143774921002157/
 - Verdict -> 
 
-## 6. SKYWORKS SOLUTIONS, INC., quarter ended 2019-03-29 (event 58)
-- Stored: diluted EPS 1.23, announcement 2019-05-02, SUE -0.448429 from 8 prior differences
-- Earnings release (8-K 0000004127-19-000020): https://www.sec.gov/Archives/edgar/data/4127/000000412719000020/
-- EPS first filed in 0000004127-19-000022: https://www.sec.gov/Archives/edgar/data/4127/000000412719000022/
+## 6. SKYWORKS SOLUTIONS, INC., quarter ended 2018-09-28 (event 55410)
+- Stored: diluted EPS 1.58, announcement 2018-11-08, SUE 0.149294 from 8 prior differences
+- Earnings release (8-K 0000004127-18-000036): https://www.sec.gov/Archives/edgar/data/4127/000000412718000036/
+- EPS first filed in 0000004127-18-000046: https://www.sec.gov/Archives/edgar/data/4127/000000412718000046/
 - Verdict -> 
 
-## 7. BANK OF AMERICA CORP /DE/, quarter ended 2014-06-30 (event 682)
-- Stored: diluted EPS 0.19, announcement 2014-07-16, SUE -0.275013 from 8 prior differences
-- Earnings release (8-K 0000070858-14-000079): https://www.sec.gov/Archives/edgar/data/70858/000007085814000079/
-- EPS first filed in 0000070858-14-000088: https://www.sec.gov/Archives/edgar/data/70858/000007085814000088/
+## 7. KIMBERLY CLARK CORP, quarter ended 2017-12-31 (event 55967)
+- Stored: diluted EPS 1.74, announcement 2018-01-23, SUE 0.396160 from 8 prior differences
+- Earnings release (8-K 0000055785-18-000005): https://www.sec.gov/Archives/edgar/data/55785/000005578518000005/
+- EPS first filed in 0000055785-18-000014: https://www.sec.gov/Archives/edgar/data/55785/000005578518000014/
 - Verdict -> 
 
-## 8. Philip Morris International Inc., quarter ended 2021-12-31 (event 2794)
-- Stored: diluted EPS 1.35, announcement 2022-02-10, SUE 0.352626 from 8 prior differences
-- Earnings release (8-K 0001413329-22-000007): https://www.sec.gov/Archives/edgar/data/1413329/000141332922000007/
-- EPS first filed in 0001413329-22-000011: https://www.sec.gov/Archives/edgar/data/1413329/000141332922000011/
+## 8. EBAY INC, quarter ended 2020-12-31 (event 57770)
+- Stored: diluted EPS 1.21, announcement 2021-02-03, SUE 0.311594 from 8 prior differences
+- Earnings release (8-K 0001065088-21-000004): https://www.sec.gov/Archives/edgar/data/1065088/000106508821000004/
+- EPS first filed in 0001065088-21-000006: https://www.sec.gov/Archives/edgar/data/1065088/000106508821000006/
 - Verdict -> 
 
-## 9. AMERICAN ELECTRIC POWER CO INC, quarter ended 2024-03-31 (event 78)
-- Stored: diluted EPS 1.9, announcement 2024-04-30, SUE 3.214173 from 8 prior differences
-- Earnings release (8-K 0000004904-24-000045): https://www.sec.gov/Archives/edgar/data/4904/000000490424000045/
-- EPS first filed in 0000004904-24-000046: https://www.sec.gov/Archives/edgar/data/4904/000000490424000046/
+## 9. AMERICAN ELECTRIC POWER CO INC, quarter ended 2022-03-31 (event 55430)
+- Stored: diluted EPS 1.41, announcement 2022-04-28, SUE 1.277858 from 8 prior differences
+- Earnings release (8-K 0000004904-22-000052): https://www.sec.gov/Archives/edgar/data/4904/000000490422000052/
+- EPS first filed in 0000004904-22-000053: https://www.sec.gov/Archives/edgar/data/4904/000000490422000053/
 - Verdict -> 
 
-## 10. HENRY SCHEIN INC, quarter ended 2023-04-01 (event 1995)
-- Stored: diluted EPS 0.91, announcement 2023-05-09, SUE -0.761565 from 8 prior differences
-- Earnings release (8-K 0001000228-23-000024): https://www.sec.gov/Archives/edgar/data/1000228/000100022823000024/
-- EPS first filed in 0001000228-23-000026: https://www.sec.gov/Archives/edgar/data/1000228/000100022823000026/
+## 10. AMERIPRISE FINANCIAL INC, quarter ended 2024-09-30 (event 57081)
+- Stored: diluted EPS 5, announcement 2024-10-23, SUE -0.990772 from 8 prior differences
+- Earnings release (8-K 0000820027-24-000084): https://www.sec.gov/Archives/edgar/data/820027/000082002724000084/
+- EPS first filed in 0000820027-24-000094: https://www.sec.gov/Archives/edgar/data/820027/000082002724000094/
 - Verdict -> 
 
-## 11. CAPITAL ONE FINANCIAL CORP, quarter ended 2021-03-31 (event 1939)
-- Stored: diluted EPS 7.03, announcement 2021-04-27, SUE 3.086403 from 8 prior differences
-- Earnings release (8-K 0000927628-21-000158): https://www.sec.gov/Archives/edgar/data/927628/000092762821000158/
-- EPS first filed in 0000927628-21-000175: https://www.sec.gov/Archives/edgar/data/927628/000092762821000175/
+## 11. FASTENAL CO, quarter ended 2022-03-31 (event 57028)
+- Stored: diluted EPS 0.47, announcement 2022-04-13, SUE 4.356954 from 8 prior differences
+- Earnings release (8-K 0000815556-22-000017): https://www.sec.gov/Archives/edgar/data/815556/000081555622000017/
+- EPS first filed in 0000815556-22-000020: https://www.sec.gov/Archives/edgar/data/815556/000081555622000020/
 - Verdict -> 
 
-## 12. CORNING INC /NY, quarter ended 2014-03-31 (event 341)
-- Stored: diluted EPS 0.2, announcement 2014-04-28, SUE -0.838772 from 8 prior differences
-- Earnings release (8-K 0000024741-14-000019): https://www.sec.gov/Archives/edgar/data/24741/000002474114000019/
-- EPS first filed in 0000024741-14-000022: https://www.sec.gov/Archives/edgar/data/24741/000002474114000022/
-- Verdict -> 
-
-## 13. Capri Holdings Ltd, quarter ended 2016-04-02 (event 2969)
-- Stored: diluted EPS 0.99, announcement 2016-06-01, SUE 0.594389 from 8 prior differences
-- Earnings release (8-K 0001530721-16-000088): https://www.sec.gov/Archives/edgar/data/1530721/000153072116000088/
-- EPS first filed in 0001530721-16-000090: https://www.sec.gov/Archives/edgar/data/1530721/000153072116000090/
-- Verdict -> 
-
-## 14. APPLIED MATERIALS INC /DE, quarter ended 2022-01-30 (event 119)
-- Stored: diluted EPS 2, announcement 2022-02-16, SUE 2.715024 from 8 prior differences
-- Earnings release (8-K 0000006951-22-000005): https://www.sec.gov/Archives/edgar/data/6951/000000695122000005/
-- EPS first filed in 0000006951-22-000011: https://www.sec.gov/Archives/edgar/data/6951/000000695122000011/
-- Verdict -> 
-
-## 15. IRON MOUNTAIN INC, quarter ended 2015-12-31 (event 2159)
-- Stored: diluted EPS 0.03, announcement 2016-02-25, SUE -0.045975 from 8 prior differences
-- Earnings release (8-K 0001104659-16-099729): https://www.sec.gov/Archives/edgar/data/1020569/000110465916099729/
-- EPS first filed in 0001020569-16-000013: https://www.sec.gov/Archives/edgar/data/1020569/000102056916000013/
-- Verdict -> 
-
-## 16. CORNING INC /NY, quarter ended 2014-09-30 (event 339)
-- Stored: diluted EPS 0.72, announcement 2014-10-28, SUE 2.501411 from 8 prior differences
-- Earnings release (8-K 0000024741-14-000050): https://www.sec.gov/Archives/edgar/data/24741/000002474114000050/
-- EPS first filed in 0000024741-14-000054: https://www.sec.gov/Archives/edgar/data/24741/000002474114000054/
-- Verdict -> 
-
-## 17. CARMAX INC, quarter ended 2022-11-30 (event 2510)
-- Stored: diluted EPS 0.24, announcement 2022-12-22, SUE -1.228036 from 8 prior differences
-- Earnings release (8-K 0001170010-22-000102): https://www.sec.gov/Archives/edgar/data/1170010/000117001022000102/
-- EPS first filed in 0001170010-23-000006: https://www.sec.gov/Archives/edgar/data/1170010/000117001023000006/
-- Verdict -> 
-
-## 18. DELTA AIR LINES, INC., quarter ended 2015-06-30 (event 400)
-- Stored: diluted EPS 1.83, announcement 2015-07-15, SUE 0.160159 from 8 prior differences
-- Earnings release (8-K 0001019687-15-002754): https://www.sec.gov/Archives/edgar/data/27904/000101968715002754/
-- EPS first filed in 0000027904-15-000010: https://www.sec.gov/Archives/edgar/data/27904/000002790415000010/
-- Verdict -> 
-
-## 19. WATERS CORP /DE/, quarter ended 2019-12-31 (event 2063)
-- Stored: diluted EPS 3.12, announcement 2020-02-04, SUE 0.183007 from 8 prior differences
-- Earnings release (8-K 0001193125-20-023442): https://www.sec.gov/Archives/edgar/data/1000697/000119312520023442/
-- EPS first filed in 0001193125-20-048303: https://www.sec.gov/Archives/edgar/data/1000697/000119312520048303/
-- Verdict -> 
-
-## 20. WELLS FARGO & COMPANY/MN, quarter ended 2022-12-31 (event 787)
-- Stored: diluted EPS 0.67, announcement 2023-01-13, SUE -0.808509 from 8 prior differences
-- Earnings release (8-K 0000072971-23-000003): https://www.sec.gov/Archives/edgar/data/72971/000007297123000003/
-- EPS first filed in 0000072971-23-000071: https://www.sec.gov/Archives/edgar/data/72971/000007297123000071/
-- Verdict -> 
-
-## 21. STATE STREET CORP, quarter ended 2018-06-30 (event 1053)
-- Stored: diluted EPS 1.88, announcement 2018-07-20, SUE 1.001842 from 8 prior differences
-- Earnings release (8-K 0000093751-18-000432): https://www.sec.gov/Archives/edgar/data/93751/000009375118000432/
-- EPS first filed in 0000093751-18-000439: https://www.sec.gov/Archives/edgar/data/93751/000009375118000439/
-- Verdict -> 
-
-## 22. XCEL ENERGY INC, quarter ended 2016-06-30 (event 765)
-- Stored: diluted EPS 0.39, announcement 2016-08-02, SUE 0.000000 from 8 prior differences
-- Earnings release (8-K 0000072903-16-000154): https://www.sec.gov/Archives/edgar/data/72903/000007290316000154/
-- EPS first filed in 0000072903-16-000157: https://www.sec.gov/Archives/edgar/data/72903/000007290316000157/
-- Verdict -> 
-
-## 23. WELLS FARGO & COMPANY/MN, quarter ended 2021-12-31 (event 783)
-- Stored: diluted EPS 1.38, announcement 2022-01-14, SUE 0.573787 from 8 prior differences
-- Earnings release (8-K 0000072971-22-000003): https://www.sec.gov/Archives/edgar/data/72971/000007297122000003/
-- EPS first filed in 0000072971-22-000096: https://www.sec.gov/Archives/edgar/data/72971/000007297122000096/
-- Verdict -> 
-
-## 24. Philip Morris International Inc., quarter ended 2022-09-30 (event 2799)
-- Stored: diluted EPS 1.34, announcement 2022-10-20, SUE -1.514488 from 8 prior differences
-- Earnings release (8-K 0001413329-22-000109): https://www.sec.gov/Archives/edgar/data/1413329/000141332922000109/
-- EPS first filed in 0001413329-22-000114: https://www.sec.gov/Archives/edgar/data/1413329/000141332922000114/
-- Verdict -> 
-
-## 25. WELLS FARGO & COMPANY/MN, quarter ended 2016-09-30 (event 805)
-- Stored: diluted EPS 1.03, announcement 2016-10-14, SUE -0.683130 from 8 prior differences
-- Earnings release (8-K 0000072971-16-001300): https://www.sec.gov/Archives/edgar/data/72971/000007297116001300/
-- EPS first filed in 0000072971-16-001340: https://www.sec.gov/Archives/edgar/data/72971/000007297116001340/
-- Verdict -> 
-
-## 26. TJX COMPANIES INC /DE/, quarter ended 2015-05-02 (event 1141)
-- Stored: diluted EPS 0.69, announcement 2015-05-19, SUE 0.607617 from 8 prior differences
-- Earnings release (8-K 0001157523-15-001835): https://www.sec.gov/Archives/edgar/data/109198/000115752315001835/
-- EPS first filed in 0001193125-15-206466: https://www.sec.gov/Archives/edgar/data/109198/000119312515206466/
-- Verdict -> 
-
-## 27. IRON MOUNTAIN INC, quarter ended 2013-03-31 (event 2183)
-- Stored: diluted EPS 0.1, announcement 2013-05-01, SUE -0.341548 from 8 prior differences
-- Earnings release (8-K 0001157523-13-002188): https://www.sec.gov/Archives/edgar/data/1020569/000115752313002188/
-- EPS first filed in 0001047469-13-005389: https://www.sec.gov/Archives/edgar/data/1020569/000104746913005389/
-- Verdict -> 
-
-## 28. NetApp, Inc., quarter ended 2023-01-27 (event 2080)
-- Stored: diluted EPS 0.3, announcement 2023-02-22, SUE -0.904531 from 8 prior differences
-- Earnings release (8-K 0000950170-23-003745): https://www.sec.gov/Archives/edgar/data/1002047/000095017023003745/
-- EPS first filed in 0000950170-23-005545: https://www.sec.gov/Archives/edgar/data/1002047/000095017023005545/
-- Verdict -> 
-
-## 29. CORNING INC /NY, quarter ended 2019-06-30 (event 332)
+## 12. CORNING INC /NY, quarter ended 2019-06-30 (event 55691)
 - Stored: diluted EPS 0.09, announcement 2019-07-30, SUE -0.432711 from 8 prior differences
 - Earnings release (8-K 0000024741-19-000048): https://www.sec.gov/Archives/edgar/data/24741/000002474119000048/
 - EPS first filed in 0000024741-19-000052: https://www.sec.gov/Archives/edgar/data/24741/000002474119000052/
 - Verdict -> 
 
-## 30. Nordstrom, quarter ended 2013-05-04 (event 707)
-- Stored: diluted EPS 0.73, announcement 2013-05-16, SUE 0.307822 from 8 prior differences
-- Earnings release (8-K 0001193125-13-224218): https://www.sec.gov/Archives/edgar/data/72333/000119312513224218/
-- EPS first filed in 0000072333-13-000096: https://www.sec.gov/Archives/edgar/data/72333/000007233313000096/
+## 13. AGILENT TECHNOLOGIES, INC., quarter ended 2016-01-31 (event 57922)
+- Stored: diluted EPS 0.37, announcement 2016-02-16, SUE 0.581482 from 8 prior differences
+- Earnings release (8-K 0001090872-16-000054): https://www.sec.gov/Archives/edgar/data/1090872/000109087216000054/
+- EPS first filed in 0001090872-16-000056: https://www.sec.gov/Archives/edgar/data/1090872/000109087216000056/
 - Verdict -> 
 
-## 31. TE Connectivity plc, quarter ended 2020-12-25 (event 2700)
-- Stored: diluted EPS 1.14, announcement 2021-01-27, SUE 0.622963 from 8 prior differences
-- Earnings release (8-K 0001558370-21-000408): https://www.sec.gov/Archives/edgar/data/1385157/000155837021000408/
-- EPS first filed in 0001558370-21-000486: https://www.sec.gov/Archives/edgar/data/1385157/000155837021000486/
+## 14. APPLIED MATERIALS INC /DE, quarter ended 2021-10-31 (event 55471)
+- Stored: diluted EPS 1.88, announcement 2021-11-18, SUE 1.927566 from 8 prior differences
+- Earnings release (8-K 0000006951-21-000038): https://www.sec.gov/Archives/edgar/data/6951/000000695121000038/
+- EPS first filed in 0000006951-21-000043: https://www.sec.gov/Archives/edgar/data/6951/000000695121000043/
 - Verdict -> 
 
-## 32. CAPITAL ONE FINANCIAL CORP, quarter ended 2016-03-31 (event 1963)
-- Stored: diluted EPS 1.84, announcement 2016-04-26, SUE -0.613322 from 8 prior differences
-- Earnings release (8-K 0000927628-16-000155): https://www.sec.gov/Archives/edgar/data/927628/000092762816000155/
-- EPS first filed in 0000927628-16-000160: https://www.sec.gov/Archives/edgar/data/927628/000092762816000160/
+## 15. ORACLE CORP, quarter ended 2019-05-31 (event 58147)
+- Stored: diluted EPS 1.04, announcement 2019-06-19, SUE 0.276120 from 8 prior differences
+- Earnings release (8-K 0001564590-19-022864): https://www.sec.gov/Archives/edgar/data/1341439/000156459019022864/
+- EPS first filed in 0001564590-19-023119: https://www.sec.gov/Archives/edgar/data/1341439/000156459019023119/
 - Verdict -> 
 
-## 33. Verisk Analytics, Inc., quarter ended 2016-06-30 (event 2870)
-- Stored: diluted EPS 1.53, announcement 2016-08-02, SUE 3.311453 from 8 prior differences
-- Earnings release (8-K 0001442145-16-000080): https://www.sec.gov/Archives/edgar/data/1442145/000144214516000080/
-- EPS first filed in 0001442145-16-000081: https://www.sec.gov/Archives/edgar/data/1442145/000144214516000081/
+## 16. HARTFORD INSURANCE GROUP, INC., quarter ended 2014-09-30 (event 57239)
+- Stored: diluted EPS 0.86, announcement 2014-10-27, SUE 0.310750 from 8 prior differences
+- Earnings release (8-K 0000874766-14-000047): https://www.sec.gov/Archives/edgar/data/874766/000087476614000047/
+- EPS first filed in 0000874766-14-000048: https://www.sec.gov/Archives/edgar/data/874766/000087476614000048/
 - Verdict -> 
 
-## 34. WELLS FARGO & COMPANY/MN, quarter ended 2014-12-31 (event 798)
-- Stored: diluted EPS 1.02, announcement 2015-01-14, SUE 0.337717 from 8 prior differences
-- Earnings release (8-K 0000072971-15-000024): https://www.sec.gov/Archives/edgar/data/72971/000007297115000024/
-- EPS first filed in 0000072971-15-000449: https://www.sec.gov/Archives/edgar/data/72971/000007297115000449/
+## 17. Vulcan Materials CO, quarter ended 2018-09-30 (event 58304)
+- Stored: diluted EPS 1.34, announcement 2018-10-30, SUE 0.949333 from 8 prior differences
+- Earnings release (8-K 0001144204-18-056194): https://www.sec.gov/Archives/edgar/data/1396009/000114420418056194/
+- EPS first filed in 0001396009-18-000045: https://www.sec.gov/Archives/edgar/data/1396009/000139600918000045/
 - Verdict -> 
 
-## 35. PINNACLE WEST CAPITAL CORP, quarter ended 2020-12-31 (event 1523)
-- Stored: diluted EPS -0.18, announcement 2021-02-24, SUE -3.591849 from 8 prior differences
-- Earnings release (8-K 0000764622-21-000012): https://www.sec.gov/Archives/edgar/data/764622/000076462221000012/
-- EPS first filed in 0000764622-21-000013: https://www.sec.gov/Archives/edgar/data/764622/000076462221000013/
+## 18. CORNING INC /NY, quarter ended 2019-12-31 (event 55689)
+- Stored: diluted EPS 0.04, announcement 2020-01-29, SUE -0.143971 from 8 prior differences
+- Earnings release (8-K 0000024741-20-000009): https://www.sec.gov/Archives/edgar/data/24741/000002474120000009/
+- EPS first filed in 0000024741-20-000014: https://www.sec.gov/Archives/edgar/data/24741/000002474120000014/
 - Verdict -> 
 
-## 36. GENERAL DYNAMICS CORP, quarter ended 2016-04-03 (event 502)
-- Stored: diluted EPS 2.3, announcement 2016-04-27, SUE 0.524439 from 8 prior differences
-- Earnings release (8-K 0000040533-16-000063): https://www.sec.gov/Archives/edgar/data/40533/000004053316000063/
-- EPS first filed in 0000040533-16-000065: https://www.sec.gov/Archives/edgar/data/40533/000004053316000065/
+## 19. WATERS CORP /DE/, quarter ended 2022-10-01 (event 57496)
+- Stored: diluted EPS 2.6, announcement 2022-11-01, SUE 0.000000 from 8 prior differences
+- Earnings release (8-K 0001193125-22-274470): https://www.sec.gov/Archives/edgar/data/1000697/000119312522274470/
+- EPS first filed in 0001193125-22-276585: https://www.sec.gov/Archives/edgar/data/1000697/000119312522276585/
 - Verdict -> 
 
-## 37. SLB LIMITED/NV, quarter ended 2018-06-30 (event 1005)
-- Stored: diluted EPS 0.31, announcement 2018-07-20, SUE 0.289553 from 8 prior differences
-- Earnings release (8-K 0001193125-18-221884): https://www.sec.gov/Archives/edgar/data/87347/000119312518221884/
-- EPS first filed in 0001564590-18-017379: https://www.sec.gov/Archives/edgar/data/87347/000156459018017379/
+## 20. DELTA AIR LINES, INC., quarter ended 2023-03-31 (event 55747)
+- Stored: diluted EPS -0.57, announcement 2023-04-13, SUE 0.192954 from 8 prior differences
+- Earnings release (8-K 0001683168-23-002326): https://www.sec.gov/Archives/edgar/data/27904/000168316823002326/
+- EPS first filed in 0000027904-23-000006: https://www.sec.gov/Archives/edgar/data/27904/000002790423000006/
 - Verdict -> 
 
-## 38. WATERS CORP /DE/, quarter ended 2022-07-02 (event 2029)
-- Stored: diluted EPS 2.72, announcement 2022-08-02, SUE 0.056698 from 8 prior differences
-- Earnings release (8-K 0001193125-22-209348): https://www.sec.gov/Archives/edgar/data/1000697/000119312522209348/
-- EPS first filed in 0001193125-22-212596: https://www.sec.gov/Archives/edgar/data/1000697/000119312522212596/
+## 21. BIO-TECHNE Corp, quarter ended 2022-06-30 (event 57135)
+- Stored: diluted EPS 1.51, announcement 2022-08-04, SUE 1.107222 from 8 prior differences
+- Earnings release (8-K 0001558370-22-012028): https://www.sec.gov/Archives/edgar/data/842023/000155837022012028/
+- EPS first filed in 0001558370-22-013935: https://www.sec.gov/Archives/edgar/data/842023/000155837022013935/
 - Verdict -> 
 
-## 39. ADVANCED MICRO DEVICES INC, quarter ended 2022-12-31 (event 5)
+## 22. Nordstrom, quarter ended 2015-08-01 (event 56075)
+- Stored: diluted EPS 1.09, announcement 2015-08-13, SUE 1.822921 from 8 prior differences
+- Earnings release (8-K 0000072333-15-000123): https://www.sec.gov/Archives/edgar/data/72333/000007233315000123/
+- EPS first filed in 0000072333-15-000131: https://www.sec.gov/Archives/edgar/data/72333/000007233315000131/
+- Verdict -> 
+
+## 23. PEPSICO INC, quarter ended 2022-06-11 (event 56276)
+- Stored: diluted EPS 1.03, announcement 2022-07-11, SUE -0.971833 from 8 prior differences
+- Earnings release (8-K 0000077476-22-000045): https://www.sec.gov/Archives/edgar/data/77476/000007747622000045/
+- EPS first filed in 0000077476-22-000043: https://www.sec.gov/Archives/edgar/data/77476/000007747622000043/
+- Verdict -> 
+
+## 24. BANK OF AMERICA CORP /DE/, quarter ended 2019-09-30 (event 56053)
+- Stored: diluted EPS 0.56, announcement 2019-10-16, SUE -0.531066 from 8 prior differences
+- Earnings release (8-K 0000070858-19-000053): https://www.sec.gov/Archives/edgar/data/70858/000007085819000053/
+- EPS first filed in 0000070858-19-000057: https://www.sec.gov/Archives/edgar/data/70858/000007085819000057/
+- Verdict -> 
+
+## 25. Nordstrom, quarter ended 2014-08-02 (event 56071)
+- Stored: diluted EPS 0.95, announcement 2014-08-14, SUE 0.164727 from 8 prior differences
+- Earnings release (8-K 0000072333-14-000129): https://www.sec.gov/Archives/edgar/data/72333/000007233314000129/
+- EPS first filed in 0000072333-14-000140: https://www.sec.gov/Archives/edgar/data/72333/000007233314000140/
+- Verdict -> 
+
+## 26. EBAY INC, quarter ended 2021-09-30 (event 57775)
+- Stored: diluted EPS 0.4, announcement 2021-10-27, SUE -0.098410 from 8 prior differences
+- Earnings release (8-K 0001065088-21-000037): https://www.sec.gov/Archives/edgar/data/1065088/000106508821000037/
+- EPS first filed in 0001065088-21-000040: https://www.sec.gov/Archives/edgar/data/1065088/000106508821000040/
+- Verdict -> 
+
+## 27. Nordstrom, quarter ended 2020-05-02 (event 56093)
+- Stored: diluted EPS -3.33, announcement 2020-05-28, SUE -10.450027 from 8 prior differences
+- Earnings release (8-K 0000072333-20-000112): https://www.sec.gov/Archives/edgar/data/72333/000007233320000112/
+- EPS first filed in 0000072333-20-000142: https://www.sec.gov/Archives/edgar/data/72333/000007233320000142/
+- Verdict -> 
+
+## 28. SLB LIMITED/NV, quarter ended 2021-03-31 (event 56365)
+- Stored: diluted EPS 0.21, announcement 2021-04-23, SUE 1.118471 from 8 prior differences
+- Earnings release (8-K 0001193125-21-127802): https://www.sec.gov/Archives/edgar/data/87347/000119312521127802/
+- EPS first filed in 0001564590-21-021157: https://www.sec.gov/Archives/edgar/data/87347/000156459021021157/
+- Verdict -> 
+
+## 29. ROYAL CARIBBEAN CRUISES LTD, quarter ended 2023-09-30 (event 57274)
+- Stored: diluted EPS 3.65, announcement 2023-10-26, SUE 1.746747 from 8 prior differences
+- Earnings release (8-K 0000884887-23-000054): https://www.sec.gov/Archives/edgar/data/884887/000088488723000054/
+- EPS first filed in 0000884887-23-000056: https://www.sec.gov/Archives/edgar/data/884887/000088488723000056/
+- Verdict -> 
+
+## 30. BIO-TECHNE Corp, quarter ended 2021-06-30 (event 57152)
+- Stored: diluted EPS 0.36, announcement 2021-08-05, SUE -0.865975 from 8 prior differences
+- Earnings release (8-K 0001437749-21-018609): https://www.sec.gov/Archives/edgar/data/842023/000143774921018609/
+- EPS first filed in 0001437749-21-020980: https://www.sec.gov/Archives/edgar/data/842023/000143774921020980/
+- Verdict -> 
+
+## 31. CORNING INC /NY, quarter ended 2016-09-30 (event 55682)
+- Stored: diluted EPS 0.26, announcement 2016-10-25, SUE 0.152918 from 8 prior differences
+- Earnings release (8-K 0000024741-16-000113): https://www.sec.gov/Archives/edgar/data/24741/000002474116000113/
+- EPS first filed in 0000024741-16-000118: https://www.sec.gov/Archives/edgar/data/24741/000002474116000118/
+- Verdict -> 
+
+## 32. LINCOLN NATIONAL CORP, quarter ended 2016-12-31 (event 55994)
+- Stored: diluted EPS 0.82, announcement 2017-02-01, SUE -0.593465 from 8 prior differences
+- Earnings release (8-K 0000059558-17-000007): https://www.sec.gov/Archives/edgar/data/59558/000005955817000007/
+- EPS first filed in 0000059558-17-000012: https://www.sec.gov/Archives/edgar/data/59558/000005955817000012/
+- Verdict -> 
+
+## 33. NOV Inc., quarter ended 2018-12-31 (event 57677)
+- Stored: diluted EPS 0.03, announcement 2019-02-06, SUE 0.053237 from 8 prior differences
+- Earnings release (8-K 0001564590-19-002195): https://www.sec.gov/Archives/edgar/data/1021860/000156459019002195/
+- EPS first filed in 0001564590-19-002967: https://www.sec.gov/Archives/edgar/data/1021860/000156459019002967/
+- Verdict -> 
+
+## 34. FASTENAL CO, quarter ended 2015-03-31 (event 57048)
+- Stored: diluted EPS 0.43, announcement 2015-04-14, SUE 2.594373 from 8 prior differences
+- Earnings release (8-K 0000815556-15-000029): https://www.sec.gov/Archives/edgar/data/815556/000081555615000029/
+- EPS first filed in 0000815556-15-000031: https://www.sec.gov/Archives/edgar/data/815556/000081555615000031/
+- Verdict -> 
+
+## 35. AXON ENTERPRISE, INC., quarter ended 2022-12-31 (event 57833)
+- Stored: diluted EPS 0.40, announcement 2023-02-28, SUE 0.648943 from 8 prior differences
+- Earnings release (8-K 0001069183-23-000004): https://www.sec.gov/Archives/edgar/data/1069183/000106918323000004/
+- EPS first filed in 0001558370-23-002413: https://www.sec.gov/Archives/edgar/data/1069183/000155837023002413/
+- Verdict -> 
+
+## 36. Nordstrom, quarter ended 2018-11-03 (event 56086)
+- Stored: diluted EPS 0.39, announcement 2018-11-15, SUE -0.772605 from 8 prior differences
+- Earnings release (8-K 0000072333-18-000153): https://www.sec.gov/Archives/edgar/data/72333/000007233318000153/
+- EPS first filed in 0000072333-18-000181: https://www.sec.gov/Archives/edgar/data/72333/000007233318000181/
+- Verdict -> 
+
+## 37. DANAHER CORP /DE/, quarter ended 2013-03-29 (event 56619)
+- Stored: diluted EPS 0.98, announcement 2013-04-17, SUE 0.636610 from 8 prior differences
+- Earnings release (8-K 0001193125-13-159064): https://www.sec.gov/Archives/edgar/data/313616/000119312513159064/
+- EPS first filed in 0000313616-13-000048: https://www.sec.gov/Archives/edgar/data/313616/000031361613000048/
+- Verdict -> 
+
+## 38. EQT Corp, quarter ended 2024-09-30 (event 55825)
+- Stored: diluted EPS -0.54, announcement 2024-10-29, SUE -0.170595 from 8 prior differences
+- Earnings release (8-K 0000033213-24-000042): https://www.sec.gov/Archives/edgar/data/33213/000003321324000042/
+- EPS first filed in 0000033213-24-000047: https://www.sec.gov/Archives/edgar/data/33213/000003321324000047/
+- Verdict -> 
+
+## 39. Parker-Hannifin Corp, quarter ended 2024-03-31 (event 56236)
+- Stored: diluted EPS 5.56, announcement 2024-05-02, SUE 0.446628 from 8 prior differences
+- Earnings release (8-K 0000076334-24-000017): https://www.sec.gov/Archives/edgar/data/76334/000007633424000017/
+- EPS first filed in 0000076334-24-000020: https://www.sec.gov/Archives/edgar/data/76334/000007633424000020/
+- Verdict -> 
+
+## 40. IDEX CORP /DE/, quarter ended 2021-12-31 (event 57116)
+- Stored: diluted EPS 1.55, announcement 2022-02-02, SUE 0.837859 from 8 prior differences
+- Earnings release (8-K 0000832101-22-000002): https://www.sec.gov/Archives/edgar/data/832101/000083210122000002/
+- EPS first filed in 0000832101-22-000008: https://www.sec.gov/Archives/edgar/data/832101/000083210122000008/
+- Verdict -> 
+
+## 41. ADVANCED MICRO DEVICES INC, quarter ended 2022-12-31 (event 55356)
 - Stored: diluted EPS 0.00, announcement 2023-01-31, SUE -1.184146 from 8 prior differences
 - Earnings release (8-K 0000002488-23-000007): https://www.sec.gov/Archives/edgar/data/2488/000000248823000007/
 - EPS first filed in 0000002488-23-000047: https://www.sec.gov/Archives/edgar/data/2488/000000248823000047/
 - Verdict -> 
 
-## 40. SKYWORKS SOLUTIONS, INC., quarter ended 2017-06-30 (event 49)
-- Stored: diluted EPS 1.32, announcement 2017-07-20, SUE 0.944125 from 8 prior differences
-- Earnings release (8-K 0000004127-17-000025): https://www.sec.gov/Archives/edgar/data/4127/000000412717000025/
-- EPS first filed in 0000004127-17-000027: https://www.sec.gov/Archives/edgar/data/4127/000000412717000027/
+## 42. SKYWORKS SOLUTIONS, INC., quarter ended 2015-04-03 (event 55401)
+- Stored: diluted EPS 0.85, announcement 2015-04-30, SUE 2.608109 from 8 prior differences
+- Earnings release (8-K 0000004127-15-000010): https://www.sec.gov/Archives/edgar/data/4127/000000412715000010/
+- EPS first filed in 0000004127-15-000012: https://www.sec.gov/Archives/edgar/data/4127/000000412715000012/
 - Verdict -> 
 
-## 41. ROYAL CARIBBEAN CRUISES LTD, quarter ended 2023-12-31 (event 1830)
-- Stored: diluted EPS 1.07, announcement 2024-02-01, SUE 1.642703 from 8 prior differences
-- Earnings release (8-K 0000884887-24-000003): https://www.sec.gov/Archives/edgar/data/884887/000088488724000003/
-- EPS first filed in 0000884887-24-000075: https://www.sec.gov/Archives/edgar/data/884887/000088488724000075/
+## 43. ORACLE CORP, quarter ended 2016-11-30 (event 58141)
+- Stored: diluted EPS 0.48, announcement 2016-12-15, SUE -0.417461 from 8 prior differences
+- Earnings release (8-K 0001193125-16-794455): https://www.sec.gov/Archives/edgar/data/1341439/000119312516794455/
+- EPS first filed in 0001193125-16-797253: https://www.sec.gov/Archives/edgar/data/1341439/000119312516797253/
 - Verdict -> 
 
-## 42. TE Connectivity plc, quarter ended 2020-03-27 (event 2695)
-- Stored: diluted EPS -1.37, announcement 2020-04-28, SUE -1.332458 from 8 prior differences
-- Earnings release (8-K 0001558370-20-004418): https://www.sec.gov/Archives/edgar/data/1385157/000155837020004418/
-- EPS first filed in 0001558370-20-005005: https://www.sec.gov/Archives/edgar/data/1385157/000155837020005005/
+## 44. PINNACLE WEST CAPITAL CORP, quarter ended 2020-12-31 (event 56921)
+- Stored: diluted EPS -0.18, announcement 2021-02-24, SUE -3.591849 from 8 prior differences
+- Earnings release (8-K 0000764622-21-000012): https://www.sec.gov/Archives/edgar/data/764622/000076462221000012/
+- EPS first filed in 0000764622-21-000013: https://www.sec.gov/Archives/edgar/data/764622/000076462221000013/
 - Verdict -> 
 
-## 43. COMCAST CORP, quarter ended 2016-12-31 (event 2482)
-- Stored: diluted EPS 0.95, announcement 2017-01-26, SUE 1.636803 from 8 prior differences
-- Earnings release (8-K 0001104659-17-004122): https://www.sec.gov/Archives/edgar/data/1166691/000110465917004122/
-- EPS first filed in 0001193125-17-030512: https://www.sec.gov/Archives/edgar/data/1166691/000119312517030512/
+## 45. NOV Inc., quarter ended 2016-03-31 (event 57672)
+- Stored: diluted EPS -0.32, announcement 2016-04-28, SUE -0.571904 from 8 prior differences
+- Earnings release (8-K 0001193125-16-561100): https://www.sec.gov/Archives/edgar/data/1021860/000119312516561100/
+- EPS first filed in 0001193125-16-579802: https://www.sec.gov/Archives/edgar/data/1021860/000119312516579802/
 - Verdict -> 
 
-## 44. AGILENT TECHNOLOGIES, INC., quarter ended 2019-10-31 (event 2429)
-- Stored: diluted EPS 0.63, announcement 2019-11-25, SUE 0.026923 from 8 prior differences
-- Earnings release (8-K 0001090872-19-000020): https://www.sec.gov/Archives/edgar/data/1090872/000109087219000020/
-- EPS first filed in 0001090872-19-000022: https://www.sec.gov/Archives/edgar/data/1090872/000109087219000022/
+## 46. HENRY SCHEIN INC, quarter ended 2015-09-26 (event 57468)
+- Stored: diluted EPS 1.52, announcement 2015-11-04, SUE 3.812933 from 8 prior differences
+- Earnings release (8-K 0001000228-15-000033): https://www.sec.gov/Archives/edgar/data/1000228/000100022815000033/
+- EPS first filed in 0001000228-15-000035: https://www.sec.gov/Archives/edgar/data/1000228/000100022815000035/
 - Verdict -> 
 
-## 45. AT&T INC., quarter ended 2018-06-30 (event 1486)
-- Stored: diluted EPS 0.81, announcement 2018-07-24, SUE 0.186763 from 8 prior differences
-- Earnings release (8-K 0000732717-18-000055): https://www.sec.gov/Archives/edgar/data/732717/000073271718000055/
-- EPS first filed in 0001193125-18-236782: https://www.sec.gov/Archives/edgar/data/732717/000119312518236782/
+## 47. CAPITAL ONE FINANCIAL CORP, quarter ended 2014-12-31 (event 57420)
+- Stored: diluted EPS 1.73, announcement 2015-01-22, SUE 0.376265 from 8 prior differences
+- Earnings release (8-K 0000927628-15-000012): https://www.sec.gov/Archives/edgar/data/927628/000092762815000012/
+- EPS first filed in 0000927628-15-000026: https://www.sec.gov/Archives/edgar/data/927628/000092762815000026/
 - Verdict -> 
 
-## 46. ORACLE CORP, quarter ended 2016-02-29 (event 2616)
-- Stored: diluted EPS 0.5, announcement 2016-03-15, SUE -0.854036 from 8 prior differences
-- Earnings release (8-K 0001193125-16-505164): https://www.sec.gov/Archives/edgar/data/1341439/000119312516505164/
-- EPS first filed in 0001193125-16-510333: https://www.sec.gov/Archives/edgar/data/1341439/000119312516510333/
+## 48. CSX CORP, quarter ended 2019-09-30 (event 56586)
+- Stored: diluted EPS 1.08, announcement 2019-10-16, SUE 0.014449 from 8 prior differences
+- Earnings release (8-K 0000277948-19-000045): https://www.sec.gov/Archives/edgar/data/277948/000027794819000045/
+- EPS first filed in 0000277948-19-000047: https://www.sec.gov/Archives/edgar/data/277948/000027794819000047/
 - Verdict -> 
 
-## 47. BAXTER INTERNATIONAL INC, quarter ended 2019-09-30 (event 238)
-- Stored: diluted EPS 0.71, announcement 2019-10-24, SUE -0.719750 from 8 prior differences
-- Earnings release (8-K 0001193125-19-273068): https://www.sec.gov/Archives/edgar/data/10456/000119312519273068/
-- EPS first filed in 0001628280-20-003692: https://www.sec.gov/Archives/edgar/data/10456/000162828020003692/
+## 49. IRON MOUNTAIN INC, quarter ended 2024-09-30 (event 57624)
+- Stored: diluted EPS -0.11, announcement 2024-11-06, SUE -1.172106 from 8 prior differences
+- Earnings release (8-K 0001020569-24-000253): https://www.sec.gov/Archives/edgar/data/1020569/000102056924000253/
+- EPS first filed in 0001020569-24-000255: https://www.sec.gov/Archives/edgar/data/1020569/000102056924000255/
 - Verdict -> 
 
-## 48. Vulcan Materials CO, quarter ended 2020-06-30 (event 2723)
-- Stored: diluted EPS 1.58, announcement 2020-08-04, SUE 0.157880 from 8 prior differences
-- Earnings release (8-K 0001104659-20-089950): https://www.sec.gov/Archives/edgar/data/1396009/000110465920089950/
-- EPS first filed in 0001396009-20-000040: https://www.sec.gov/Archives/edgar/data/1396009/000139600920000040/
+## 50. BAXTER INTERNATIONAL INC, quarter ended 2018-09-30 (event 55590)
+- Stored: diluted EPS 1, announcement 2018-10-31, SUE 0.270388 from 8 prior differences
+- Earnings release (8-K 0001193125-18-312933): https://www.sec.gov/Archives/edgar/data/10456/000119312518312933/
+- EPS first filed in 0001564590-18-026904: https://www.sec.gov/Archives/edgar/data/10456/000156459018026904/
 - Verdict -> 
 
-## 49. HARTFORD INSURANCE GROUP, INC., quarter ended 2019-12-31 (event 1814)
-- Stored: diluted EPS 1.49, announcement 2020-02-03, SUE 0.171385 from 8 prior differences
-- Earnings release (8-K 0000874766-20-000006): https://www.sec.gov/Archives/edgar/data/874766/000087476620000006/
-- EPS first filed in 0000874766-20-000020: https://www.sec.gov/Archives/edgar/data/874766/000087476620000020/
+## 51. SBA COMMUNICATIONS CORP, quarter ended 2022-09-30 (event 57700)
+- Stored: diluted EPS 0.91, announcement 2022-10-31, SUE 0.551605 from 8 prior differences
+- Earnings release (8-K 0001193125-22-273903): https://www.sec.gov/Archives/edgar/data/1034054/000119312522273903/
+- EPS first filed in 0001034054-22-000008: https://www.sec.gov/Archives/edgar/data/1034054/000103405422000008/
 - Verdict -> 
 
-## 50. IRON MOUNTAIN INC, quarter ended 2016-09-30 (event 2164)
-- Stored: diluted EPS 0.03, announcement 2016-11-01, SUE -0.193534 from 8 prior differences
-- Earnings release (8-K 0001104659-16-153488): https://www.sec.gov/Archives/edgar/data/1020569/000110465916153488/
-- EPS first filed in 0001020569-16-000022: https://www.sec.gov/Archives/edgar/data/1020569/000102056916000022/
+## 52. CITIZENS FINANCIAL GROUP INC/RI, quarter ended 2024-09-30 (event 56905)
+- Stored: diluted EPS 0.77, announcement 2024-10-16, SUE -0.214379 from 8 prior differences
+- Earnings release (8-K 0000759944-24-000170): https://www.sec.gov/Archives/edgar/data/759944/000075994424000170/
+- EPS first filed in 0000759944-24-000176: https://www.sec.gov/Archives/edgar/data/759944/000075994424000176/
 - Verdict -> 
 
-## 51. SBA COMMUNICATIONS CORP, quarter ended 2024-06-30 (event 2240)
-- Stored: diluted EPS 1.51, announcement 2024-07-29, SUE -0.528747 from 8 prior differences
-- Earnings release (8-K 0001193125-24-187567): https://www.sec.gov/Archives/edgar/data/1034054/000119312524187567/
-- EPS first filed in 0001034054-24-000009: https://www.sec.gov/Archives/edgar/data/1034054/000103405424000009/
+## 53. Philip Morris International Inc., quarter ended 2019-06-30 (event 58382)
+- Stored: diluted EPS 1.49, announcement 2019-07-18, SUE 0.196845 from 8 prior differences
+- Earnings release (8-K 0001413329-19-000051): https://www.sec.gov/Archives/edgar/data/1413329/000141332919000051/
+- EPS first filed in 0001413329-19-000055: https://www.sec.gov/Archives/edgar/data/1413329/000141332919000055/
 - Verdict -> 
 
-## 52. Ansys, quarter ended 2020-06-30 (event 2117)
-- Stored: diluted EPS 1.11, announcement 2020-08-05, SUE -0.364376 from 8 prior differences
-- Earnings release (8-K 0001013462-20-000027): https://www.sec.gov/Archives/edgar/data/1013462/000101346220000027/
-- EPS first filed in 0001013462-20-000028: https://www.sec.gov/Archives/edgar/data/1013462/000101346220000028/
+## 54. Keysight Technologies, Inc., quarter ended 2018-04-30 (event 58675)
+- Stored: diluted EPS 0.34, announcement 2018-05-30, SUE 0.150597 from 8 prior differences
+- Earnings release (8-K 0001601046-18-000012): https://www.sec.gov/Archives/edgar/data/1601046/000160104618000012/
+- EPS first filed in 0001601046-18-000017: https://www.sec.gov/Archives/edgar/data/1601046/000160104618000017/
 - Verdict -> 
 
-## 53. Activision Blizzard, quarter ended 2021-09-30 (event 1389)
-- Stored: diluted EPS 0.82, announcement 2021-11-02, SUE 0.166959 from 8 prior differences
-- Earnings release (8-K 0001104659-21-133016): https://www.sec.gov/Archives/edgar/data/718877/000110465921133016/
-- EPS first filed in 0001628280-21-021200: https://www.sec.gov/Archives/edgar/data/718877/000162828021021200/
+## 55. HARTFORD INSURANCE GROUP, INC., quarter ended 2018-06-30 (event 57255)
+- Stored: diluted EPS 1.6, announcement 2018-07-26, SUE 0.481508 from 8 prior differences
+- Earnings release (8-K 0000874766-18-000039): https://www.sec.gov/Archives/edgar/data/874766/000087476618000039/
+- EPS first filed in 0000874766-18-000040: https://www.sec.gov/Archives/edgar/data/874766/000087476618000040/
 - Verdict -> 
 
-## 54. AMERICAN ELECTRIC POWER CO INC, quarter ended 2019-09-30 (event 105)
-- Stored: diluted EPS 1.48, announcement 2019-10-24, SUE 0.325957 from 8 prior differences
-- Earnings release (8-K 0000004904-19-000046): https://www.sec.gov/Archives/edgar/data/4904/000000490419000046/
-- EPS first filed in 0000004904-19-000050: https://www.sec.gov/Archives/edgar/data/4904/000000490419000050/
+## 56. DECKERS OUTDOOR CORP, quarter ended 2024-03-31 (event 57333)
+- Stored: diluted EPS 4.95, announcement 2024-05-23, SUE 0.942876 from 8 prior differences
+- Earnings release (8-K 0000910521-24-000015): https://www.sec.gov/Archives/edgar/data/910521/000091052124000015/
+- EPS first filed in 0000910521-24-000017: https://www.sec.gov/Archives/edgar/data/910521/000091052124000017/
 - Verdict -> 
 
-## 55. IQVIA HOLDINGS INC., quarter ended 2017-12-31 (event 2903)
-- Stored: diluted EPS 5.02, announcement 2018-02-14, SUE 14.980375 from 8 prior differences
-- Earnings release (8-K 0001157523-18-000314): https://www.sec.gov/Archives/edgar/data/1478242/000115752318000314/
-- EPS first filed in 0001564590-18-002340: https://www.sec.gov/Archives/edgar/data/1478242/000156459018002340/
+## 57. TRIMBLE INC., quarter ended 2021-04-02 (event 57200)
+- Stored: diluted EPS 0.45, announcement 2021-05-05, SUE 0.610934 from 8 prior differences
+- Earnings release (8-K 0000864749-21-000047): https://www.sec.gov/Archives/edgar/data/864749/000086474921000047/
+- EPS first filed in 0000864749-21-000050: https://www.sec.gov/Archives/edgar/data/864749/000086474921000050/
 - Verdict -> 
 
-## 56. CARMAX INC, quarter ended 2021-08-31 (event 2507)
-- Stored: diluted EPS 1.72, announcement 2021-09-30, SUE -0.061674 from 8 prior differences
-- Earnings release (8-K 0001170010-21-000176): https://www.sec.gov/Archives/edgar/data/1170010/000117001021000176/
-- EPS first filed in 0001170010-21-000179: https://www.sec.gov/Archives/edgar/data/1170010/000117001021000179/
+## 58. TJX COMPANIES INC /DE/, quarter ended 2023-01-28 (event 56514)
+- Stored: diluted EPS 0.89, announcement 2023-02-22, SUE 0.205833 from 8 prior differences
+- Earnings release (8-K 0001157523-23-000327): https://www.sec.gov/Archives/edgar/data/109198/000115752323000327/
+- EPS first filed in 0000109198-23-000004: https://www.sec.gov/Archives/edgar/data/109198/000010919823000004/
 - Verdict -> 
 
-## 57. Synchrony Financial, quarter ended 2015-12-31 (event 3103)
-- Stored: diluted EPS 0.65, announcement 2016-01-22, SUE 0.064556 from 7 prior differences
-- Earnings release (8-K 0001601712-16-000064): https://www.sec.gov/Archives/edgar/data/1601712/000160171216000064/
-- EPS first filed in 0001601712-16-000069: https://www.sec.gov/Archives/edgar/data/1601712/000160171216000069/
+## 59. AMERICAN ELECTRIC POWER CO INC, quarter ended 2018-06-30 (event 55457)
+- Stored: diluted EPS 1.07, announcement 2018-07-25, SUE 0.217932 from 8 prior differences
+- Earnings release (8-K 0000004904-18-000032): https://www.sec.gov/Archives/edgar/data/4904/000000490418000032/
+- EPS first filed in 0000004904-18-000039: https://www.sec.gov/Archives/edgar/data/4904/000000490418000039/
 - Verdict -> 
 
-## 58. HARTFORD INSURANCE GROUP, INC., quarter ended 2018-03-31 (event 1813)
-- Stored: diluted EPS 1.64, announcement 2018-04-26, SUE 0.183561 from 8 prior differences
-- Earnings release (8-K 0000874766-18-000022): https://www.sec.gov/Archives/edgar/data/874766/000087476618000022/
-- EPS first filed in 0000874766-18-000023: https://www.sec.gov/Archives/edgar/data/874766/000087476618000023/
+## 60. DEVON ENERGY CORP/DE, quarter ended 2014-09-30 (event 57856)
+- Stored: diluted EPS 2.47, announcement 2014-11-04, SUE 0.453666 from 8 prior differences
+- Earnings release (8-K 0001193125-14-396282): https://www.sec.gov/Archives/edgar/data/1090012/000119312514396282/
+- EPS first filed in 0001193125-14-397861: https://www.sec.gov/Archives/edgar/data/1090012/000119312514397861/
 - Verdict -> 
 
-## 59. CITIZENS FINANCIAL GROUP INC/RI, quarter ended 2024-03-31 (event 1509)
-- Stored: diluted EPS 0.65, announcement 2024-04-17, SUE -0.806970 from 8 prior differences
-- Earnings release (8-K 0000759944-24-000060): https://www.sec.gov/Archives/edgar/data/759944/000075994424000060/
-- EPS first filed in 0000759944-24-000090: https://www.sec.gov/Archives/edgar/data/759944/000075994424000090/
+## 61. ORACLE CORP, quarter ended 2021-08-31 (event 58114)
+- Stored: diluted EPS 0.86, announcement 2021-09-13, SUE 0.456231 from 8 prior differences
+- Earnings release (8-K 0001564590-21-047736): https://www.sec.gov/Archives/edgar/data/1341439/000156459021047736/
+- EPS first filed in 0001564590-21-047772: https://www.sec.gov/Archives/edgar/data/1341439/000156459021047772/
 - Verdict -> 
 
-## 60. WELLS FARGO & COMPANY/MN, quarter ended 2020-03-31 (event 782)
-- Stored: diluted EPS 0.01, announcement 2020-04-14, SUE -3.917387 from 8 prior differences
-- Earnings release (8-K 0000072971-20-000230): https://www.sec.gov/Archives/edgar/data/72971/000007297120000230/
-- EPS first filed in 0000072971-20-000236: https://www.sec.gov/Archives/edgar/data/72971/000007297120000236/
+## 62. WATERS CORP /DE/, quarter ended 2021-07-03 (event 57493)
+- Stored: diluted EPS 2.69, announcement 2021-08-03, SUE 1.120951 from 8 prior differences
+- Earnings release (8-K 0001193125-21-233987): https://www.sec.gov/Archives/edgar/data/1000697/000119312521233987/
+- EPS first filed in 0001193125-21-237166: https://www.sec.gov/Archives/edgar/data/1000697/000119312521237166/
 - Verdict -> 
 
-## 61. FLIR Systems, quarter ended 2018-03-31 (event 1317)
-- Stored: diluted EPS 0.28, announcement 2018-04-25, SUE -0.091209 from 8 prior differences
-- Earnings release (8-K 0000354908-18-000021): https://www.sec.gov/Archives/edgar/data/354908/000035490818000021/
-- EPS first filed in 0000354908-18-000062: https://www.sec.gov/Archives/edgar/data/354908/000035490818000062/
+## 63. DIGITAL REALTY TRUST, INC., quarter ended 2024-06-30 (event 58038)
+- Stored: diluted EPS 0.2, announcement 2024-07-25, SUE -0.108745 from 8 prior differences
+- Earnings release (8-K 0001558370-24-010180): https://www.sec.gov/Archives/edgar/data/1297996/000155837024010180/
+- EPS first filed in 0001558370-24-010734: https://www.sec.gov/Archives/edgar/data/1297996/000155837024010734/
 - Verdict -> 
 
-## 62. INTERNATIONAL BUSINESS MACHINES CORP, quarter ended 2015-03-31 (event 557)
-- Stored: diluted EPS 2.35, announcement 2015-04-20, SUE 0.041074 from 8 prior differences
-- Earnings release (8-K 0001104659-15-028716): https://www.sec.gov/Archives/edgar/data/51143/000110465915028716/
-- EPS first filed in 0000051143-15-000003: https://www.sec.gov/Archives/edgar/data/51143/000005114315000003/
+## 64. CITIZENS FINANCIAL GROUP INC/RI, quarter ended 2023-03-31 (event 56904)
+- Stored: diluted EPS 1, announcement 2023-04-19, SUE 0.102406 from 8 prior differences
+- Earnings release (8-K 0000759944-23-000058): https://www.sec.gov/Archives/edgar/data/759944/000075994423000058/
+- EPS first filed in 0000759944-23-000084: https://www.sec.gov/Archives/edgar/data/759944/000075994423000084/
 - Verdict -> 
 
-## 63. GENERAL DYNAMICS CORP, quarter ended 2014-09-28 (event 490)
-- Stored: diluted EPS 2.06, announcement 2014-10-22, SUE 0.054702 from 8 prior differences
-- Earnings release (8-K 0000040533-14-000024): https://www.sec.gov/Archives/edgar/data/40533/000004053314000024/
-- EPS first filed in 0000040533-14-000025: https://www.sec.gov/Archives/edgar/data/40533/000004053314000025/
+## 65. DANAHER CORP /DE/, quarter ended 2022-12-31 (event 56605)
+- Stored: diluted EPS 2.99, announcement 2023-01-23, SUE 1.018898 from 8 prior differences
+- Earnings release (8-K 0000313616-23-000006): https://www.sec.gov/Archives/edgar/data/313616/000031361623000006/
+- EPS first filed in 0000313616-23-000087: https://www.sec.gov/Archives/edgar/data/313616/000031361623000087/
 - Verdict -> 
 
-## 64. FLIR Systems, quarter ended 2020-06-30 (event 1323)
-- Stored: diluted EPS 0.47, announcement 2020-08-06, SUE 0.254150 from 8 prior differences
-- Earnings release (8-K 0001157523-20-001141): https://www.sec.gov/Archives/edgar/data/354908/000115752320001141/
-- EPS first filed in 0000354908-20-000085: https://www.sec.gov/Archives/edgar/data/354908/000035490820000085/
+## 66. Nordstrom, quarter ended 2014-11-01 (event 56070)
+- Stored: diluted EPS 0.73, announcement 2014-11-13, SUE 0.349768 from 8 prior differences
+- Earnings release (8-K 0000072333-14-000154): https://www.sec.gov/Archives/edgar/data/72333/000007233314000154/
+- EPS first filed in 0000072333-14-000158: https://www.sec.gov/Archives/edgar/data/72333/000007233314000158/
 - Verdict -> 
 
-## 65. ADOBE INC., quarter ended 2015-08-28 (event 1616)
-- Stored: diluted EPS 0.34, announcement 2015-09-17, SUE 1.638307 from 8 prior differences
-- Earnings release (8-K 0000796343-15-000186): https://www.sec.gov/Archives/edgar/data/796343/000079634315000186/
-- EPS first filed in 0000796343-15-000188: https://www.sec.gov/Archives/edgar/data/796343/000079634315000188/
+## 67. IQVIA HOLDINGS INC., quarter ended 2023-03-31 (event 58484)
+- Stored: diluted EPS 1.53, announcement 2023-04-27, SUE -0.307895 from 8 prior differences
+- Earnings release (8-K 0001157523-23-000632): https://www.sec.gov/Archives/edgar/data/1478242/000115752323000632/
+- EPS first filed in 0001478242-23-000061: https://www.sec.gov/Archives/edgar/data/1478242/000147824223000061/
 - Verdict -> 
 
-## 66. STATE STREET CORP, quarter ended 2019-09-30 (event 1056)
-- Stored: diluted EPS 1.42, announcement 2019-10-18, SUE -1.070438 from 8 prior differences
-- Earnings release (8-K 0000093751-19-000588): https://www.sec.gov/Archives/edgar/data/93751/000009375119000588/
-- EPS first filed in 0000093751-19-000595: https://www.sec.gov/Archives/edgar/data/93751/000009375119000595/
+## 68. STATE STREET CORP, quarter ended 2019-06-30 (event 56452)
+- Stored: diluted EPS 1.42, announcement 2019-07-19, SUE -1.227158 from 8 prior differences
+- Earnings release (8-K 0000093751-19-000501): https://www.sec.gov/Archives/edgar/data/93751/000009375119000501/
+- EPS first filed in 0000093751-19-000506: https://www.sec.gov/Archives/edgar/data/93751/000009375119000506/
 - Verdict -> 
 
-## 67. HARTFORD INSURANCE GROUP, INC., quarter ended 2024-09-30 (event 1787)
-- Stored: diluted EPS 2.56, announcement 2024-10-24, SUE 0.933544 from 8 prior differences
-- Earnings release (8-K 0000874766-24-000121): https://www.sec.gov/Archives/edgar/data/874766/000087476624000121/
-- EPS first filed in 0000874766-24-000122: https://www.sec.gov/Archives/edgar/data/874766/000087476624000122/
+## 69. INTERNATIONAL BUSINESS MACHINES CORP, quarter ended 2021-03-31 (event 55894)
+- Stored: diluted EPS 1.06, announcement 2021-04-19, SUE -0.188383 from 8 prior differences
+- Earnings release (8-K 0001558370-21-004470): https://www.sec.gov/Archives/edgar/data/51143/000155837021004470/
+- EPS first filed in 0001558370-21-004922: https://www.sec.gov/Archives/edgar/data/51143/000155837021004922/
 - Verdict -> 
 
-## 68. Verisk Analytics, Inc., quarter ended 2024-06-30 (event 2864)
-- Stored: diluted EPS 2.15, announcement 2024-07-31, SUE 0.676614 from 8 prior differences
-- Earnings release (8-K 0001437749-24-023984): https://www.sec.gov/Archives/edgar/data/1442145/000143774924023984/
-- EPS first filed in 0001437749-24-023985: https://www.sec.gov/Archives/edgar/data/1442145/000143774924023985/
+## 70. EQUIFAX INC, quarter ended 2016-09-30 (event 55812)
+- Stored: diluted EPS 1.09, announcement 2016-10-26, SUE 1.985403 from 8 prior differences
+- Earnings release (8-K 0000033185-16-000055): https://www.sec.gov/Archives/edgar/data/33185/000003318516000055/
+- EPS first filed in 0000033185-16-000058: https://www.sec.gov/Archives/edgar/data/33185/000003318516000058/
 - Verdict -> 
 
-## 69. NetApp, Inc., quarter ended 2018-01-26 (event 2104)
-- Stored: diluted EPS -1.89, announcement 2018-02-14, SUE -7.075132 from 8 prior differences
-- Earnings release (8-K 0001564590-18-002075): https://www.sec.gov/Archives/edgar/data/1002047/000156459018002075/
-- EPS first filed in 0001564590-18-002876: https://www.sec.gov/Archives/edgar/data/1002047/000156459018002876/
+## 71. SYSCO CORP, quarter ended 2021-07-03 (event 56458)
+- Stored: diluted EPS 0.29, announcement 2021-08-10, SUE 1.795802 from 8 prior differences
+- Earnings release (8-K 0001193125-21-241238): https://www.sec.gov/Archives/edgar/data/96021/000119312521241238/
+- EPS first filed in 0000096021-21-000093: https://www.sec.gov/Archives/edgar/data/96021/000009602121000093/
 - Verdict -> 
 
-## 70. Philip Morris International Inc., quarter ended 2023-06-30 (event 2803)
-- Stored: diluted EPS 1.01, announcement 2023-07-20, SUE -2.748984 from 8 prior differences
-- Earnings release (8-K 0001413329-23-000173): https://www.sec.gov/Archives/edgar/data/1413329/000141332923000173/
-- EPS first filed in 0001413329-23-000176: https://www.sec.gov/Archives/edgar/data/1413329/000141332923000176/
+## 72. FLIR Systems, quarter ended 2019-12-31 (event 56713)
+- Stored: diluted EPS 0.01, announcement 2020-02-27, SUE -1.354557 from 8 prior differences
+- Earnings release (8-K 0001157523-20-000275): https://www.sec.gov/Archives/edgar/data/354908/000115752320000275/
+- EPS first filed in 0000354908-20-000010: https://www.sec.gov/Archives/edgar/data/354908/000035490820000010/
 - Verdict -> 
 
-## 71. APPLIED MATERIALS INC /DE, quarter ended 2014-01-26 (event 133)
-- Stored: diluted EPS 0.21, announcement 2014-02-12, SUE 0.484443 from 8 prior differences
-- Earnings release (8-K 0000006951-14-000004): https://www.sec.gov/Archives/edgar/data/6951/000000695114000004/
-- EPS first filed in 0000006951-14-000037: https://www.sec.gov/Archives/edgar/data/6951/000000695114000037/
+## 73. PEPSICO INC, quarter ended 2023-09-09 (event 56279)
+- Stored: diluted EPS 2.24, announcement 2023-10-10, SUE 0.270800 from 8 prior differences
+- Earnings release (8-K 0000077476-23-000060): https://www.sec.gov/Archives/edgar/data/77476/000007747623000060/
+- EPS first filed in 0000077476-23-000058: https://www.sec.gov/Archives/edgar/data/77476/000007747623000058/
 - Verdict -> 
 
-## 72. Walgreens Boots Alliance, quarter ended 2022-11-30 (event 3135)
-- Stored: diluted EPS -4.31, announcement 2023-01-05, SUE -3.881082 from 8 prior differences
-- Earnings release (8-K 0001193125-23-001957): https://www.sec.gov/Archives/edgar/data/1618921/000119312523001957/
-- EPS first filed in 0001618921-23-000005: https://www.sec.gov/Archives/edgar/data/1618921/000161892123000005/
+## 74. AT&T INC., quarter ended 2019-12-31 (event 56890)
+- Stored: diluted EPS 0.33, announcement 2020-01-29, SUE -0.239120 from 8 prior differences
+- Earnings release (8-K 0000732717-20-000006): https://www.sec.gov/Archives/edgar/data/732717/000073271720000006/
+- EPS first filed in 0001562762-20-000064: https://www.sec.gov/Archives/edgar/data/732717/000156276220000064/
 - Verdict -> 
 
-## 73. LINCOLN NATIONAL CORP, quarter ended 2015-06-30 (event 631)
-- Stored: diluted EPS 1.35, announcement 2015-07-29, SUE -0.606894 from 8 prior differences
-- Earnings release (8-K 0000059558-15-000044): https://www.sec.gov/Archives/edgar/data/59558/000005955815000044/
-- EPS first filed in 0000059558-15-000046: https://www.sec.gov/Archives/edgar/data/59558/000005955815000046/
+## 75. AXON ENTERPRISE, INC., quarter ended 2020-06-30 (event 57827)
+- Stored: diluted EPS -0.51, announcement 2020-08-06, SUE -4.129437 from 8 prior differences
+- Earnings release (8-K 0001069183-20-000064): https://www.sec.gov/Archives/edgar/data/1069183/000106918320000064/
+- EPS first filed in 0001069183-20-000067: https://www.sec.gov/Archives/edgar/data/1069183/000106918320000067/
 - Verdict -> 
 
-## 74. APPLIED MATERIALS INC /DE, quarter ended 2021-01-31 (event 115)
-- Stored: diluted EPS 1.22, announcement 2021-02-18, SUE 0.616903 from 8 prior differences
-- Earnings release (8-K 0000006951-21-000005): https://www.sec.gov/Archives/edgar/data/6951/000000695121000005/
-- EPS first filed in 0000006951-21-000013: https://www.sec.gov/Archives/edgar/data/6951/000000695121000013/
+## 76. Walgreens Boots Alliance, quarter ended 2022-05-31 (event 58725)
+- Stored: diluted EPS 0.33, announcement 2022-06-30, SUE -0.432391 from 8 prior differences
+- Earnings release (8-K 0001193125-22-185566): https://www.sec.gov/Archives/edgar/data/1618921/000119312522185566/
+- EPS first filed in 0001618921-22-000040: https://www.sec.gov/Archives/edgar/data/1618921/000161892122000040/
 - Verdict -> 
 
-## 75. LINCOLN NATIONAL CORP, quarter ended 2013-12-31 (event 623)
-- Stored: diluted EPS 1.29, announcement 2014-02-05, SUE 0.104242 from 8 prior differences
-- Earnings release (8-K 0000059558-14-000002): https://www.sec.gov/Archives/edgar/data/59558/000005955814000002/
-- EPS first filed in 0000059558-14-000011: https://www.sec.gov/Archives/edgar/data/59558/000005955814000011/
+## 77. Gen Digital Inc., quarter ended 2016-04-01 (event 57180)
+- Stored: diluted EPS 3.06, announcement 2016-05-12, SUE 29.646483 from 8 prior differences
+- Earnings release (8-K 0001157523-16-005590): https://www.sec.gov/Archives/edgar/data/849399/000115752316005590/
+- EPS first filed in 0000849399-16-000022: https://www.sec.gov/Archives/edgar/data/849399/000084939916000022/
 - Verdict -> 
 
-## 76. WELLS FARGO & COMPANY/MN, quarter ended 2018-03-31 (event 819)
-- Stored: diluted EPS 0.96, announcement 2018-04-13, SUE -0.338841 from 8 prior differences
-- Earnings release (8-K 0000072971-18-000299): https://www.sec.gov/Archives/edgar/data/72971/000007297118000299/
-- EPS first filed in 0000072971-18-000324: https://www.sec.gov/Archives/edgar/data/72971/000007297118000324/
+## 78. EBAY INC, quarter ended 2022-09-30 (event 57779)
+- Stored: diluted EPS -0.13, announcement 2022-11-02, SUE -0.061853 from 8 prior differences
+- Earnings release (8-K 0001065088-22-000027): https://www.sec.gov/Archives/edgar/data/1065088/000106508822000027/
+- EPS first filed in 0001065088-22-000030: https://www.sec.gov/Archives/edgar/data/1065088/000106508822000030/
 - Verdict -> 
 
-## 77. CUMMINS INC, quarter ended 2020-12-31 (event 346)
-- Stored: diluted EPS 3.36, announcement 2021-02-04, SUE 0.563786 from 8 prior differences
-- Earnings release (8-K 0000026172-21-000007): https://www.sec.gov/Archives/edgar/data/26172/000002617221000007/
-- EPS first filed in 0000026172-21-000012: https://www.sec.gov/Archives/edgar/data/26172/000002617221000012/
+## 79. APPLIED MATERIALS INC /DE, quarter ended 2023-10-29 (event 55479)
+- Stored: diluted EPS 2.38, announcement 2023-11-16, SUE 1.647439 from 8 prior differences
+- Earnings release (8-K 0000006951-23-000035): https://www.sec.gov/Archives/edgar/data/6951/000000695123000035/
+- EPS first filed in 0000006951-23-000041: https://www.sec.gov/Archives/edgar/data/6951/000000695123000041/
 - Verdict -> 
 
-## 78. Philip Morris International Inc., quarter ended 2023-12-31 (event 2801)
-- Stored: diluted EPS 1.41, announcement 2024-02-08, SUE -0.662680 from 8 prior differences
-- Earnings release (8-K 0001413329-24-000012): https://www.sec.gov/Archives/edgar/data/1413329/000141332924000012/
-- EPS first filed in 0001413329-24-000013: https://www.sec.gov/Archives/edgar/data/1413329/000141332924000013/
+## 80. Meta Platforms, Inc., quarter ended 2024-03-31 (event 58065)
+- Stored: diluted EPS 4.71, announcement 2024-04-24, SUE 1.250236 from 8 prior differences
+- Earnings release (8-K 0001326801-24-000044): https://www.sec.gov/Archives/edgar/data/1326801/000132680124000044/
+- EPS first filed in 0001326801-24-000049: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000049/
 - Verdict -> 
 
-## 79. AT&T INC., quarter ended 2015-12-31 (event 1476)
-- Stored: diluted EPS 0.65, announcement 2016-01-26, SUE 1.303972 from 8 prior differences
-- Earnings release (8-K 0000732717-16-000138): https://www.sec.gov/Archives/edgar/data/732717/000073271716000138/
-- EPS first filed in 0000732717-16-000147: https://www.sec.gov/Archives/edgar/data/732717/000073271716000147/
+## 81. ORACLE CORP, quarter ended 2021-02-28 (event 58108)
+- Stored: diluted EPS 1.68, announcement 2021-03-10, SUE 1.499977 from 8 prior differences
+- Earnings release (8-K 0001564590-21-012058): https://www.sec.gov/Archives/edgar/data/1341439/000156459021012058/
+- EPS first filed in 0001564590-21-012539: https://www.sec.gov/Archives/edgar/data/1341439/000156459021012539/
 - Verdict -> 
 
-## 80. CAPITAL ONE FINANCIAL CORP, quarter ended 2015-06-30 (event 1978)
-- Stored: diluted EPS 1.5, announcement 2015-07-23, SUE -0.911289 from 8 prior differences
-- Earnings release (8-K 0000927628-15-000078): https://www.sec.gov/Archives/edgar/data/927628/000092762815000078/
-- EPS first filed in 0000927628-15-000083: https://www.sec.gov/Archives/edgar/data/927628/000092762815000083/
+## 82. INTERNATIONAL BUSINESS MACHINES CORP, quarter ended 2017-09-30 (event 55924)
+- Stored: diluted EPS 2.92, announcement 2017-10-17, SUE -0.048695 from 8 prior differences
+- Earnings release (8-K 0001104659-17-062532): https://www.sec.gov/Archives/edgar/data/51143/000110465917062532/
+- EPS first filed in 0001104659-17-064968: https://www.sec.gov/Archives/edgar/data/51143/000110465917064968/
 - Verdict -> 
 
-## 81. XCEL ENERGY INC, quarter ended 2015-06-30 (event 758)
-- Stored: diluted EPS 0.39, announcement 2015-07-29, SUE 0.000000 from 8 prior differences
-- Earnings release (8-K 0000072903-15-000069): https://www.sec.gov/Archives/edgar/data/72903/000007290315000069/
-- EPS first filed in 0000072903-15-000071: https://www.sec.gov/Archives/edgar/data/72903/000007290315000071/
+## 83. APPLIED MATERIALS INC /DE, quarter ended 2020-10-25 (event 55467)
+- Stored: diluted EPS 1.23, announcement 2020-11-12, SUE 1.232246 from 8 prior differences
+- Earnings release (8-K 0000006951-20-000041): https://www.sec.gov/Archives/edgar/data/6951/000000695120000041/
+- EPS first filed in 0000006951-20-000048: https://www.sec.gov/Archives/edgar/data/6951/000000695120000048/
 - Verdict -> 
 
-## 82. AMERICAN ELECTRIC POWER CO INC, quarter ended 2020-03-31 (event 63)
-- Stored: diluted EPS 1, announcement 2020-05-06, SUE -0.574744 from 8 prior differences
-- Earnings release (8-K 0000004904-20-000045): https://www.sec.gov/Archives/edgar/data/4904/000000490420000045/
-- EPS first filed in 0000004904-20-000046: https://www.sec.gov/Archives/edgar/data/4904/000000490420000046/
+## 84. INTERNATIONAL BUSINESS MACHINES CORP, quarter ended 2015-06-30 (event 55917)
+- Stored: diluted EPS 3.5, announcement 2015-07-20, SUE -0.424760 from 8 prior differences
+- Earnings release (8-K 0001104659-15-051905): https://www.sec.gov/Archives/edgar/data/51143/000110465915051905/
+- EPS first filed in 0000051143-15-000005: https://www.sec.gov/Archives/edgar/data/51143/000005114315000005/
 - Verdict -> 
 
-## 83. WATERS CORP /DE/, quarter ended 2020-12-31 (event 2019)
-- Stored: diluted EPS 3.49, announcement 2021-02-02, SUE 0.150974 from 8 prior differences
-- Earnings release (8-K 0001193125-21-025262): https://www.sec.gov/Archives/edgar/data/1000697/000119312521025262/
-- EPS first filed in 0001193125-21-054385: https://www.sec.gov/Archives/edgar/data/1000697/000119312521054385/
+## 85. Walgreens Boots Alliance, quarter ended 2023-08-31 (event 58728)
+- Stored: diluted EPS -0.21, announcement 2023-10-12, SUE 0.075772 from 8 prior differences
+- Earnings release (8-K 0001193125-23-254615): https://www.sec.gov/Archives/edgar/data/1618921/000119312523254615/
+- EPS first filed in 0001618921-23-000062: https://www.sec.gov/Archives/edgar/data/1618921/000161892123000062/
 - Verdict -> 
 
-## 84. SYSCO CORP, quarter ended 2014-03-29 (event 1081)
-- Stored: diluted EPS 0.31, announcement 2014-05-05, SUE -0.925820 from 8 prior differences
-- Earnings release (8-K 0001193125-14-181229): https://www.sec.gov/Archives/edgar/data/96021/000119312514181229/
-- EPS first filed in 0000096021-14-000027: https://www.sec.gov/Archives/edgar/data/96021/000009602114000027/
+## 86. XCEL ENERGY INC, quarter ended 2023-06-30 (event 56107)
+- Stored: diluted EPS 0.52, announcement 2023-07-26, SUE -1.616244 from 8 prior differences
+- Earnings release (8-K 0000072903-23-000110): https://www.sec.gov/Archives/edgar/data/72903/000007290323000110/
+- EPS first filed in 0000072903-23-000113: https://www.sec.gov/Archives/edgar/data/72903/000007290323000113/
 - Verdict -> 
 
-## 85. CSX CORP, quarter ended 2018-06-30 (event 1200)
-- Stored: diluted EPS 1.01, announcement 2018-07-17, SUE 0.317848 from 8 prior differences
-- Earnings release (8-K 0000277948-18-000038): https://www.sec.gov/Archives/edgar/data/277948/000027794818000038/
-- EPS first filed in 0000277948-18-000040: https://www.sec.gov/Archives/edgar/data/277948/000027794818000040/
+## 87. CORNING INC /NY, quarter ended 2018-06-30 (event 55695)
+- Stored: diluted EPS 0.78, announcement 2018-07-25, SUE 0.236199 from 8 prior differences
+- Earnings release (8-K 0000024741-18-000041): https://www.sec.gov/Archives/edgar/data/24741/000002474118000041/
+- EPS first filed in 0000024741-18-000045: https://www.sec.gov/Archives/edgar/data/24741/000002474118000045/
 - Verdict -> 
 
-## 86. CORNING INC /NY, quarter ended 2012-12-31 (event 313)
-- Stored: diluted EPS 0.1, announcement 2013-01-29, SUE -1.329344 from 8 prior differences
-- Earnings release (8-K 0000024741-13-000003): https://www.sec.gov/Archives/edgar/data/24741/000002474113000003/
-- EPS first filed in 0001308179-14-000032: https://www.sec.gov/Archives/edgar/data/24741/000130817914000032/
+## 88. Vulcan Materials CO, quarter ended 2021-06-30 (event 58274)
+- Stored: diluted EPS 1.46, announcement 2021-08-04, SUE -0.400892 from 8 prior differences
+- Earnings release (8-K 0001104659-21-099792): https://www.sec.gov/Archives/edgar/data/1396009/000110465921099792/
+- EPS first filed in 0001396009-21-000044: https://www.sec.gov/Archives/edgar/data/1396009/000139600921000044/
 - Verdict -> 
 
-## 87. AMERIPRISE FINANCIAL INC, quarter ended 2014-09-30 (event 1692)
-- Stored: diluted EPS 2.17, announcement 2014-10-28, SUE 0.628389 from 8 prior differences
-- Earnings release (8-K 0001104659-14-074381): https://www.sec.gov/Archives/edgar/data/820027/000110465914074381/
-- EPS first filed in 0000820027-14-000140: https://www.sec.gov/Archives/edgar/data/820027/000082002714000140/
+## 89. EBAY INC, quarter ended 2021-03-31 (event 57777)
+- Stored: diluted EPS 0.92, announcement 2021-04-28, SUE -2.597871 from 8 prior differences
+- Earnings release (8-K 0001065088-21-000009): https://www.sec.gov/Archives/edgar/data/1065088/000106508821000009/
+- EPS first filed in 0001065088-21-000012: https://www.sec.gov/Archives/edgar/data/1065088/000106508821000012/
 - Verdict -> 
 
-## 88. Walgreens Boots Alliance, quarter ended 2023-11-30 (event 3139)
-- Stored: diluted EPS -0.08, announcement 2024-01-04, SUE 1.187388 from 8 prior differences
-- Earnings release (8-K 0001193125-24-001901): https://www.sec.gov/Archives/edgar/data/1618921/000119312524001901/
-- EPS first filed in 0001618921-24-000004: https://www.sec.gov/Archives/edgar/data/1618921/000161892124000004/
+## 90. CSX CORP, quarter ended 2014-03-28 (event 56576)
+- Stored: diluted EPS 0.4, announcement 2014-04-15, SUE -1.914120 from 8 prior differences
+- Earnings release (8-K 0000277948-14-000014): https://www.sec.gov/Archives/edgar/data/277948/000027794814000014/
+- EPS first filed in 0000277948-14-000018: https://www.sec.gov/Archives/edgar/data/277948/000027794814000018/
 - Verdict -> 
 
-## 89. LABCORP HOLDINGS INC., quarter ended 2024-09-30 (event 1903)
-- Stored: diluted EPS 2, announcement 2024-10-24, SUE -0.065099 from 8 prior differences
-- Earnings release (8-K 0000920148-24-000115): https://www.sec.gov/Archives/edgar/data/920148/000092014824000115/
-- EPS first filed in 0000920148-24-000118: https://www.sec.gov/Archives/edgar/data/920148/000092014824000118/
+## 91. Philip Morris International Inc., quarter ended 2024-09-30 (event 58352)
+- Stored: diluted EPS 1.97, announcement 2024-10-22, SUE 2.203435 from 8 prior differences
+- Earnings release (8-K 0001413329-24-000167): https://www.sec.gov/Archives/edgar/data/1413329/000141332924000167/
+- EPS first filed in 0001413329-24-000172: https://www.sec.gov/Archives/edgar/data/1413329/000141332924000172/
 - Verdict -> 
 
-## 90. AT&T INC., quarter ended 2012-12-31 (event 1467)
-- Stored: diluted EPS -0.68, announcement 2013-01-24, SUE 0.679688 from 8 prior differences
-- Earnings release (8-K 0000732717-13-000007): https://www.sec.gov/Archives/edgar/data/732717/000073271713000007/
-- EPS first filed in 0000732717-13-000017: https://www.sec.gov/Archives/edgar/data/732717/000073271713000017/
+## 92. FASTENAL CO, quarter ended 2019-06-30 (event 57063)
+- Stored: diluted EPS 0.36, announcement 2019-07-11, SUE -0.315735 from 8 prior differences
+- Earnings release (8-K 0000815556-19-000044): https://www.sec.gov/Archives/edgar/data/815556/000081555619000044/
+- EPS first filed in 0000815556-19-000048: https://www.sec.gov/Archives/edgar/data/815556/000081555619000048/
 - Verdict -> 
 
-## 91. Nordstrom, quarter ended 2015-01-31 (event 708)
-- Stored: diluted EPS 1.32, announcement 2015-02-19, SUE -0.442065 from 8 prior differences
-- Earnings release (8-K 0000072333-15-000012): https://www.sec.gov/Archives/edgar/data/72333/000007233315000012/
-- EPS first filed in 0000072333-15-000041: https://www.sec.gov/Archives/edgar/data/72333/000007233315000041/
+## 93. BANK OF AMERICA CORP /DE/, quarter ended 2016-03-31 (event 56047)
+- Stored: diluted EPS 0.21, announcement 2016-04-14, SUE -0.246098 from 8 prior differences
+- Earnings release (8-K 0000070858-16-000153): https://www.sec.gov/Archives/edgar/data/70858/000007085816000153/
+- EPS first filed in 0000070858-16-000166: https://www.sec.gov/Archives/edgar/data/70858/000007085816000166/
 - Verdict -> 
 
-## 92. Activision Blizzard, quarter ended 2020-09-30 (event 1386)
-- Stored: diluted EPS 0.78, announcement 2020-10-29, SUE 0.888905 from 8 prior differences
-- Earnings release (8-K 0001104659-20-119526): https://www.sec.gov/Archives/edgar/data/718877/000110465920119526/
-- EPS first filed in 0001628280-20-015105: https://www.sec.gov/Archives/edgar/data/718877/000162828020015105/
+## 94. SKYWORKS SOLUTIONS, INC., quarter ended 2019-06-28 (event 55415)
+- Stored: diluted EPS 0.83, announcement 2019-08-07, SUE -1.186166 from 8 prior differences
+- Earnings release (8-K 0000004127-19-000036): https://www.sec.gov/Archives/edgar/data/4127/000000412719000036/
+- EPS first filed in 0000004127-19-000041: https://www.sec.gov/Archives/edgar/data/4127/000000412719000041/
 - Verdict -> 
 
-## 93. COOPER COMPANIES, INC., quarter ended 2024-04-30 (event 1353)
-- Stored: diluted EPS 0.44, announcement 2024-05-30, SUE 0.266148 from 8 prior differences
-- Earnings release (8-K 0000711404-24-000038): https://www.sec.gov/Archives/edgar/data/711404/000071140424000038/
-- EPS first filed in 0000711404-24-000043: https://www.sec.gov/Archives/edgar/data/711404/000071140424000043/
+## 95. AMERIPRISE FINANCIAL INC, quarter ended 2018-06-30 (event 57106)
+- Stored: diluted EPS 3.1, announcement 2018-07-24, SUE 0.556007 from 8 prior differences
+- Earnings release (8-K 0000820027-18-000046): https://www.sec.gov/Archives/edgar/data/820027/000082002718000046/
+- EPS first filed in 0000820027-18-000055: https://www.sec.gov/Archives/edgar/data/820027/000082002718000055/
 - Verdict -> 
 
-## 94. XCEL ENERGY INC, quarter ended 2021-03-31 (event 739)
-- Stored: diluted EPS 0.67, announcement 2021-04-28, SUE 1.428838 from 8 prior differences
-- Earnings release (8-K 0000072903-21-000026): https://www.sec.gov/Archives/edgar/data/72903/000007290321000026/
-- EPS first filed in 0000072903-21-000030: https://www.sec.gov/Archives/edgar/data/72903/000007290321000030/
+## 96. PEPSICO INC, quarter ended 2017-06-17 (event 56304)
+- Stored: diluted EPS 1.46, announcement 2017-07-11, SUE 0.143912 from 8 prior differences
+- Earnings release (8-K 0000077476-17-000030): https://www.sec.gov/Archives/edgar/data/77476/000007747617000030/
+- EPS first filed in 0000077476-17-000033: https://www.sec.gov/Archives/edgar/data/77476/000007747617000033/
 - Verdict -> 
 
-## 95. SKYWORKS SOLUTIONS, INC., quarter ended 2020-06-26 (event 23)
-- Stored: diluted EPS 0.77, announcement 2020-07-23, SUE -0.103696 from 8 prior differences
-- Earnings release (8-K 0000004127-20-000044): https://www.sec.gov/Archives/edgar/data/4127/000000412720000044/
-- EPS first filed in 0000004127-20-000046: https://www.sec.gov/Archives/edgar/data/4127/000000412720000046/
+## 97. STATE STREET CORP, quarter ended 2023-12-31 (event 56418)
+- Stored: diluted EPS 0.61, announcement 2024-01-19, SUE -4.306923 from 8 prior differences
+- Earnings release (8-K 0000093751-24-000022): https://www.sec.gov/Archives/edgar/data/93751/000009375124000022/
+- EPS first filed in 0000093751-24-000498: https://www.sec.gov/Archives/edgar/data/93751/000009375124000498/
 - Verdict -> 
 
-## 96. PINNACLE WEST CAPITAL CORP, quarter ended 2019-06-30 (event 1569)
-- Stored: diluted EPS 1.28, announcement 2019-08-08, SUE -0.851697 from 8 prior differences
-- Earnings release (8-K 0000764622-19-000072): https://www.sec.gov/Archives/edgar/data/764622/000076462219000072/
-- EPS first filed in 0000764622-19-000073: https://www.sec.gov/Archives/edgar/data/764622/000076462219000073/
+## 98. CORNING INC /NY, quarter ended 2023-06-30 (event 55667)
+- Stored: diluted EPS 0.33, announcement 2023-07-25, SUE -0.624255 from 8 prior differences
+- Earnings release (8-K 0001437749-23-020585): https://www.sec.gov/Archives/edgar/data/24741/000143774923020585/
+- EPS first filed in 0001437749-23-020854: https://www.sec.gov/Archives/edgar/data/24741/000143774923020854/
 - Verdict -> 
 
-## 97. DEVON ENERGY CORP/DE, quarter ended 2016-06-30 (event 2383)
-- Stored: diluted EPS -3.04, announcement 2016-08-02, SUE 0.679859 from 8 prior differences
-- Earnings release (8-K 0001193125-16-668378): https://www.sec.gov/Archives/edgar/data/1090012/000119312516668378/
-- EPS first filed in 0001564590-16-022255: https://www.sec.gov/Archives/edgar/data/1090012/000156459016022255/
+## 99. Activision Blizzard, quarter ended 2019-09-30 (event 56780)
+- Stored: diluted EPS 0.26, announcement 2019-11-07, SUE -0.108485 from 8 prior differences
+- Earnings release (8-K 0001104659-19-061117): https://www.sec.gov/Archives/edgar/data/718877/000110465919061117/
+- EPS first filed in 0000718877-19-000021: https://www.sec.gov/Archives/edgar/data/718877/000071887719000021/
 - Verdict -> 
 
-## 98. Synchrony Financial, quarter ended 2022-12-31 (event 3092)
-- Stored: diluted EPS 1.29, announcement 2023-01-23, SUE -0.217237 from 8 prior differences
-- Earnings release (8-K 0001601712-23-000023): https://www.sec.gov/Archives/edgar/data/1601712/000160171223000023/
-- EPS first filed in 0001601712-23-000037: https://www.sec.gov/Archives/edgar/data/1601712/000160171223000037/
-- Verdict -> 
-
-## 99. Parker-Hannifin Corp, quarter ended 2022-06-30 (event 865)
-- Stored: diluted EPS 0.99, announcement 2022-08-04, SUE -2.622106 from 8 prior differences
-- Earnings release (8-K 0000076334-22-000030): https://www.sec.gov/Archives/edgar/data/76334/000007633422000030/
-- EPS first filed in 0000076334-22-000034: https://www.sec.gov/Archives/edgar/data/76334/000007633422000034/
-- Verdict -> 
-
-## 100. BANK OF AMERICA CORP /DE/, quarter ended 2022-03-31 (event 672)
-- Stored: diluted EPS 0.8, announcement 2022-04-18, SUE -0.160067 from 8 prior differences
-- Earnings release (8-K 0000070858-22-000079): https://www.sec.gov/Archives/edgar/data/70858/000007085822000079/
-- EPS first filed in 0000070858-22-000088: https://www.sec.gov/Archives/edgar/data/70858/000007085822000088/
+## 100. Meta Platforms, Inc., quarter ended 2020-03-31 (event 58069)
+- Stored: diluted EPS 1.71, announcement 2020-04-29, SUE 1.332667 from 8 prior differences
+- Earnings release (8-K 0001326801-20-000046): https://www.sec.gov/Archives/edgar/data/1326801/000132680120000046/
+- EPS first filed in 0001326801-20-000048: https://www.sec.gov/Archives/edgar/data/1326801/000132680120000048/
 - Verdict -> 

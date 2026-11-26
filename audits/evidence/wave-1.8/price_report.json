@@ -124,8 +124,15 @@
    }
   }
  },
+ "th_06": {
+  "index": "RSP",
+  "years": 12,
+  "mean_gap": 0.03293315860942553,
+  "threshold": 0.02,
+  "investigate": true
+ },
  "price_windows": {
-  "events_checked": 2947,
+  "events_checked": 3159,
   "violations": 0
  }
 }

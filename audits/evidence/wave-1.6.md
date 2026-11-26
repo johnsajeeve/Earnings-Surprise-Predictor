@@ -51,3 +51,7 @@ Not an independent audit. Open for John: D-47 (j) to (l), DR-25, DR-26.
 ## Correction, 26 November 2026
 
 The LB-05 result and the real-data counts above are superseded. The split method was wrong and eight other defects were found (`bug-review-2026-11-26.md`, DR-31). Corrected: labelled 2,617; LB-05 is PARTIAL (DR-32). The report files in `wave-1.6/` were regenerated.
+
+## Correction, 26 November 2026, after the independent audit
+
+The independent audit failed this wave as committed. Several results above are wrong or came from faulty parsing; see `independent-audit-2026-11-26.md` (DR-35) for the findings, the fixes and the corrected numbers. Where this file explains a gap by the SEC data, that explanation is withdrawn.

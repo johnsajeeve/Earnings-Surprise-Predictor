@@ -247,7 +247,7 @@ def test_every_labelled_event_has_its_document_announcement_date_and_eps_filing(
     assert val.event_documents(engine)["no_eps_filing"] == 1
 
 
-@pytest.mark.req("LB-03-AC2", "TH-12-AC1")
+@pytest.mark.req("LB-03-AC2", "TH-12")
 @pytest.mark.code("src/earnings/pressrelease.py")
 def test_the_derived_quarter_comparison_lists_every_difference_above_one_percent():
     def record(stored, press):  # SYNTHETIC comparison records

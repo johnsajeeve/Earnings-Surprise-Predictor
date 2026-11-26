@@ -40,3 +40,7 @@ Requirements: IG-10, IG-11, IG-12, IG-14, IG-17, IG-18, IG-19, FR-13, FR-15, NFR
 | TX-07 | gap reported | 7 companies, DR-24 |
 
 Not an independent audit. A fresh-agent audit of this wave is still to be done.
+
+## Correction, 26 November 2026, after the independent audit
+
+The independent audit failed this wave as committed. Several results above are wrong or came from faulty parsing; see `independent-audit-2026-11-26.md` (DR-35) for the findings, the fixes and the corrected numbers. Where this file explains a gap by the SEC data, that explanation is withdrawn.

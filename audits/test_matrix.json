@@ -394,9 +394,10 @@
     },
     "src/earnings/events.py": {
       "requirements": [
+        "AE-01",
         "CE-01-AC1",
         "CE-02-AC1",
-        "CE-05-AC1",
+        "CE-05",
         "DB-06",
         "DB-09",
         "DB-13-AC1",
@@ -406,18 +407,24 @@
         "FR-02",
         "FR-02-AC1",
         "FR-02-AC2",
+        "FR-14",
         "FR-14-AC2",
         "IG-01-AC2",
+        "IG-15",
         "IG-19-AC1",
         "IG-22-AC1",
         "LB-04-AC1",
         "LB-05-AC1",
         "PL-04-AC1",
+        "PX-02",
+        "TX-01",
         "TX-07",
         "VL-01-AC1",
         "VL-01-AC2"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices",
+        "tests/test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing",
         "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input",
         "tests/test_events.py::test_an_event_whose_eps_was_filed_before_the_release_is_excluded_from_training",
         "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
@@ -436,6 +443,7 @@
     "src/earnings/financials.py": {
       "requirements": [
         "AE-03-AC1",
+        "AE-04",
         "AE-04-AC1",
         "DB-11-AC1",
         "DV-07-AC1",
@@ -443,13 +451,24 @@
         "FD-01-AC1",
         "FD-03-AC1",
         "FR-02",
+        "IG-10",
         "IG-15",
         "IG-15-AC1",
+        "LB-02",
         "LB-03",
         "LB-03-AC1",
-        "LB-04"
+        "LB-04",
+        "LB-05",
+        "PL-04",
+        "PX-01",
+        "VL-05"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier",
+        "tests/test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis",
+        "tests/test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label",
+        "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins",
+        "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first",
         "tests/test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session",
         "tests/test_events.py::test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day",
         "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff",
@@ -476,21 +495,35 @@
     },
     "src/earnings/label.py": {
       "requirements": [
+        "AE-03",
+        "CE-01",
         "CE-05-AC2",
         "DB-09",
+        "DV-02",
+        "DV-03",
         "DV-04",
+        "DV-06",
+        "IG-20",
         "IG-20-AC1",
         "LB-01",
         "LB-01-AC1",
         "LB-02-AC1",
         "LB-02-AC2",
+        "LB-04",
         "LB-04-AC1",
         "LB-05",
         "LB-05-AC1",
         "SC-07-AC2",
-        "TH-11-AC1"
+        "TH-11-AC1",
+        "VL-01"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_a_quarter_refiled_with_a_shifted_end_date_is_still_the_same_quarter",
+        "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters",
+        "tests/test_audit_fixes.py::test_a_sixteen_week_fourth_quarter_is_a_quarter",
+        "tests/test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label",
+        "tests/test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label",
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault",
         "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
         "tests/test_label.py::test_a_label_whose_inputs_hold_a_scale_error_is_marked",
         "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
@@ -549,16 +582,16 @@
     },
     "src/earnings/migrations/versions": {
       "requirements": [
+        "AE-01",
         "AE-04",
         "AE-04-AC1",
         "CE-02-AC2",
-        "CE-05-AC1",
+        "CE-05",
         "DB-01-AC2",
         "DB-04",
         "DB-04-AC1",
         "DB-05",
         "DB-06",
-        "DB-06-AC1",
         "DB-07-AC1",
         "DB-08",
         "DB-08-AC1",
@@ -568,7 +601,7 @@
         "DB-10-AC1",
         "DB-10-AC2",
         "DB-11",
-        "DB-14-AC1",
+        "DB-14",
         "DV-03-AC1",
         "FD-02-AC1",
         "FD-03",
@@ -587,15 +620,17 @@
         "PL-02-AC1",
         "PL-05-AC1",
         "PL-06",
-        "PX-01-AC1",
+        "PX-01",
         "PX-02-AC1",
         "SR-08",
         "SR-08-AC1",
+        "TX-01",
         "TX-01-AC1",
         "TX-05-AC1",
         "TX-05-AC2"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing",
         "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
         "tests/test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role",
         "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same",
@@ -644,10 +679,10 @@
     },
     "src/earnings/pressrelease.py": {
       "requirements": [
-        "AE-02-AC1",
+        "AE-02",
         "IG-10-AC1",
         "LB-03-AC2",
-        "TH-12-AC1"
+        "TH-12"
       ],
       "tests": [
         "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent",
@@ -662,14 +697,20 @@
       "requirements": [
         "DV-05",
         "FE-24",
+        "FR-14",
+        "IG-15",
         "IG-19-AC1",
+        "LB-05",
         "PX-01",
-        "PX-01-AC1",
+        "PX-02",
         "PX-02-AC1",
         "PX-03-AC1",
         "VL-05"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices",
+        "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins",
+        "tests/test_audit_fixes.py::test_the_price_window_check_fails_when_a_read_lets_the_announcement_day_through",
         "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
         "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows",
         "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window",
@@ -811,7 +852,7 @@
     },
     "src/earnings/transcripts.py": {
       "requirements": [
-        "ER-07-AC1",
+        "ER-07",
         "ER-07-AC2",
         "FR-13-AC1",
         "FR-13-AC2",
@@ -819,6 +860,7 @@
         "FR-15-AC2",
         "IG-10-AC1",
         "IG-11-AC1",
+        "IG-14",
         "IG-14-AC1",
         "IG-14-AC2",
         "IG-17-AC1",
@@ -826,14 +868,18 @@
         "IG-18",
         "IG-18-AC2",
         "IG-19-AC1",
+        "IM-03",
         "PL-06-AC1",
+        "TX-01",
         "TX-01-AC2",
         "TX-02",
         "TX-02-AC1",
+        "TX-04",
         "TX-05-AC1",
-        "TX-06-AC1"
+        "TX-06"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched",
         "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
         "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation",
         "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason",
@@ -854,8 +900,8 @@
     "src/earnings/universe.csv": {
       "requirements": [
         "IG-21-AC1",
-        "IM-02-AC1",
-        "IM-02-AC2"
+        "IM-02",
+        "IM-02-AC1"
       ],
       "tests": [
         "tests/test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason",
@@ -904,15 +950,18 @@
     "src/earnings/validation.py": {
       "requirements": [
         "AE-01-AC1",
+        "AE-03",
         "AE-03-AC1",
+        "CE-01",
         "CE-01-AC1",
         "CE-02-AC1",
         "DV-01",
         "DV-01-AC1",
+        "DV-02",
         "DV-02-AC1",
+        "DV-03",
         "DV-03-AC1",
         "DV-04",
-        "DV-04-AC1",
         "DV-05-AC1",
         "DV-06-AC1",
         "DV-08-AC1",
@@ -921,6 +970,7 @@
         "IG-05",
         "IG-06",
         "IG-06-AC1",
+        "IG-20",
         "SR-10-AC2",
         "TH-01-AC1",
         "TH-06-AC1",
@@ -928,13 +978,15 @@
         "TX-04-AC1",
         "TX-05-AC2",
         "TX-07-AC1",
+        "VL-01",
         "VL-01-AC1",
         "VL-01-AC2",
         "VL-05-AC1",
         "VL-05-AC2",
-        "VL-09-AC1"
+        "VL-09"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault",
         "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged",
         "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation",
         "tests/test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing",
@@ -1015,14 +1067,15 @@
           "fingerprint": "fb4b2f747639",
           "ref": "AE-01-AC1",
           "tests": [
-            "tests/test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing",
-            "tests/test_req_data.py::test_ae_01_ac1_every_event_has_a_document_identifier_an"
+            "tests/test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing"
           ],
           "text": "Every event has a document identifier, an announcement date and an EPS filing date."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing"
+      ]
     },
     "AE-02": {
       "checks": [
@@ -1030,18 +1083,19 @@
           "fingerprint": "67029a648cb3",
           "ref": "AE-02-AC1",
           "tests": [
-            "tests/test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy",
-            "tests/test_pressrelease.py::test_adjusted_rows_negatives_and_cut_tables_are_handled",
-            "tests/test_pressrelease.py::test_agreement_is_within_half_a_percent_of_the_stored_value",
-            "tests/test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome",
-            "tests/test_pressrelease.py::test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter",
             "tests/test_req_data.py::test_ae_02_ac1_at_least_98_agreement_on_a_sample"
           ],
           "text": "At least 98% agreement on a sample of 200 events."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy",
+        "tests/test_pressrelease.py::test_adjusted_rows_negatives_and_cut_tables_are_handled",
+        "tests/test_pressrelease.py::test_agreement_is_within_half_a_percent_of_the_stored_value",
+        "tests/test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome",
+        "tests/test_pressrelease.py::test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter"
+      ]
     },
     "AE-03": {
       "checks": [
@@ -1064,7 +1118,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault"
+      ]
     },
     "AE-04": {
       "checks": [
@@ -1079,6 +1135,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier",
         "tests/test_financials.py::test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value"
       ]
     },
@@ -1788,14 +1845,15 @@
           "fingerprint": "a66985239aa1",
           "ref": "CE-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_ce_01_ac1_zero_rows_where_capture_time_is_on",
             "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event"
           ],
           "text": "Zero rows where capture time is on or after announcement."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault"
+      ]
     },
     "CE-02": {
       "checks": [
@@ -1803,7 +1861,6 @@
           "fingerprint": "cde920b6f3ef",
           "ref": "CE-02-AC1",
           "tests": [
-            "tests/test_req_data.py::test_ce_02_ac1_test_vl_01_passes",
             "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event"
           ],
           "text": "Test VL-01 passes."
@@ -1812,8 +1869,7 @@
           "fingerprint": "3fb2e66d44f4",
           "ref": "CE-02-AC2",
           "tests": [
-            "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
-            "tests/test_req_data.py::test_ce_02_ac2_sr_08_test_passes"
+            "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected"
           ],
           "text": "SR-08 test passes."
         }
@@ -1855,8 +1911,6 @@
           "fingerprint": "aa8e468ea0de",
           "ref": "CE-05-AC1",
           "tests": [
-            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
-            "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route",
             "tests/test_req_data.py::test_ce_05_ac1_dataset_version_has_a_label_route_value"
           ],
           "text": "Dataset version has a label_route value."
@@ -1865,14 +1919,16 @@
           "fingerprint": "31ac1195d87a",
           "ref": "CE-05-AC2",
           "tests": [
-            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
-            "tests/test_req_data.py::test_ce_05_ac2_a_test_fails_if_events_with_different"
+            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails"
           ],
           "text": "A test fails if events with different routes are in one training set."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
+        "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route"
+      ]
     },
     "CE-06": {
       "checks": [
@@ -2000,7 +2056,6 @@
           "fingerprint": "1da7d438cbc2",
           "ref": "DB-06-AC1",
           "tests": [
-            "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route",
             "tests/test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability"
           ],
           "text": "Insert of an out-of-range probability fails."
@@ -2008,7 +2063,8 @@
       ],
       "document": "database-requirements.md",
       "id_level_tests": [
-        "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded"
+        "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
+        "tests/test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route"
       ]
     },
     "DB-07": {
@@ -2127,8 +2183,7 @@
           "fingerprint": "b431d2cfe695",
           "ref": "DB-13-AC1",
           "tests": [
-            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
-            "tests/test_req_database.py::test_db_13_ac1_fault_injected_mid_event_leaves_no_rows"
+            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only"
           ],
           "text": "Fault injected mid-event leaves no rows for that event."
         },
@@ -2136,8 +2191,7 @@
           "fingerprint": "529e9566adbe",
           "ref": "DB-13-AC2",
           "tests": [
-            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
-            "tests/test_req_database.py::test_db_13_ac2_re_running_a_stage_leaves_the_row"
+            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only"
           ],
           "text": "Re-running a stage leaves the row count unchanged."
         }
@@ -2151,14 +2205,15 @@
           "fingerprint": "c41d812d12fd",
           "ref": "DB-14-AC1",
           "tests": [
-            "tests/test_req_database.py::test_db_14_ac1_explain_output_for_each_named_query_is",
-            "tests/test_validation.py::test_the_plans_of_the_ticker_and_event_lookups_use_an_index"
+            "tests/test_req_database.py::test_db_14_ac1_explain_output_for_each_named_query_is"
           ],
           "text": "`EXPLAIN` output for each named query is stored and shows an index scan on the loaded 100-company data."
         }
       ],
       "document": "database-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_validation.py::test_the_plans_of_the_ticker_and_event_lookups_use_an_index"
+      ]
     },
     "DB-15": {
       "checks": [
@@ -2542,7 +2597,6 @@
           "fingerprint": "fd8ffc0a15eb",
           "ref": "DV-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_dv_01_ac1_quarantine_count_is_reported_per_run",
             "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged"
           ],
           "text": "Quarantine count is reported per run."
@@ -2559,7 +2613,6 @@
           "fingerprint": "66645b8ea273",
           "ref": "DV-02-AC1",
           "tests": [
-            "tests/test_req_data.py::test_dv_02_ac1_the_three_date_fields_have_zero_nulls",
             "tests/test_validation.py::test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_counted_apart"
           ],
           "text": "The three date fields have zero nulls."
@@ -2574,7 +2627,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault"
+      ]
     },
     "DV-03": {
       "checks": [
@@ -2582,14 +2637,15 @@
           "fingerprint": "658c1efa6dc2",
           "ref": "DV-03-AC1",
           "tests": [
-            "tests/test_req_data.py::test_dv_03_ac1_uniqueness_check_passes_on_every_load",
             "tests/test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date"
           ],
           "text": "Uniqueness check passes on every load."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault"
+      ]
     },
     "DV-04": {
       "checks": [
@@ -2597,8 +2653,7 @@
           "fingerprint": "24d32192b751",
           "ref": "DV-04-AC1",
           "tests": [
-            "tests/test_req_data.py::test_dv_04_ac1_flagged_rows_have_a_reviewer_note_before",
-            "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged"
+            "tests/test_req_data.py::test_dv_04_ac1_flagged_rows_have_a_reviewer_note_before"
           ],
           "text": "Flagged rows have a reviewer note before the dataset is signed off."
         }
@@ -2606,7 +2661,8 @@
       "document": "data-requirements.md",
       "id_level_tests": [
         "tests/test_label.py::test_a_label_whose_inputs_hold_a_scale_error_is_marked",
-        "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones"
+        "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones",
+        "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged"
       ]
     },
     "DV-05": {
@@ -2615,7 +2671,6 @@
           "fingerprint": "01f1b097463f",
           "ref": "DV-05-AC1",
           "tests": [
-            "tests/test_req_data.py::test_dv_05_ac1_date_order_test_on_every_load_reports",
             "tests/test_validation.py::test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart"
           ],
           "text": "Date-order test on every load reports zero violations."
@@ -2623,6 +2678,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_the_price_window_check_fails_when_a_read_lets_the_announcement_day_through",
         "tests/test_prices.py::test_the_price_windows_of_an_event_do_not_overlap_the_announcement"
       ]
     },
@@ -2632,14 +2688,16 @@
           "fingerprint": "b354565d743f",
           "ref": "DV-06-AC1",
           "tests": [
-            "tests/test_req_data.py::test_dv_06_ac1_mapping_test_passes_on_five_known_non",
             "tests/test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies"
           ],
           "text": "Mapping test passes on five known non-calendar companies."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters",
+        "tests/test_audit_fixes.py::test_a_sixteen_week_fourth_quarter_is_a_quarter"
+      ]
     },
     "DV-07": {
       "checks": [
@@ -2650,8 +2708,7 @@
             "tests/test_calendar.py::test_a_timestamp_without_a_time_zone_is_refused",
             "tests/test_calendar.py::test_known_exchange_holidays_and_open_days",
             "tests/test_calendar.py::test_pre_open_and_after_close_releases_map_to_the_right_session",
-            "tests/test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session",
-            "tests/test_req_data.py::test_dv_07_ac1_test_covers_a_pre_open_and_an"
+            "tests/test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session"
           ],
           "text": "Test covers a pre-open and an after-close release, both mapped correctly."
         }
@@ -2665,7 +2722,6 @@
           "fingerprint": "e88b523f7072",
           "ref": "DV-08-AC1",
           "tests": [
-            "tests/test_req_data.py::test_dv_08_ac1_table_hashes_match_between_two_runs",
             "tests/test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash"
           ],
           "text": "Table hashes match between two runs."
@@ -3099,8 +3155,7 @@
           "fingerprint": "77dbebe4951c",
           "ref": "ER-07-AC1",
           "tests": [
-            "tests/test_req_product.py::test_er_07_ac1_user_sees_q_a_analysis_unavailable_for",
-            "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles"
+            "tests/test_req_product.py::test_er_07_ac1_user_sees_q_a_analysis_unavailable_for"
           ],
           "text": "User sees \"Q&A analysis unavailable for this call.\""
         },
@@ -3108,14 +3163,15 @@
           "fingerprint": "123cbb020266",
           "ref": "ER-07-AC2",
           "tests": [
-            "tests/test_req_product.py::test_er_07_ac2_system_stores_q_a_features_as_unavailable",
             "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
           ],
           "text": "System: Stores Q&A features as unavailable."
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles"
+      ]
     },
     "ER-08": {
       "checks": [
@@ -3488,7 +3544,6 @@
           "fingerprint": "42293a525178",
           "ref": "FD-04-AC1",
           "tests": [
-            "tests/test_req_data.py::test_fd_04_ac1_mapping_test_passes_on_the_five_non",
             "tests/test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies"
           ],
           "text": "Mapping test passes on the five non-calendar companies used in DV-06."
@@ -4071,8 +4126,7 @@
           "fingerprint": "0f96cee7f960",
           "ref": "FR-02-AC1",
           "tests": [
-            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
-            "tests/test_req_product.py::test_fr_02_ac1_given_any_event_in_the_database_when"
+            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded"
           ],
           "text": "Given any event in the database, when its record is read, then all three date fields are present and non-null, or the event is marked incomplete. The label route is stored beside them."
         },
@@ -4080,8 +4134,7 @@
           "fingerprint": "54ac651b4964",
           "ref": "FR-02-AC2",
           "tests": [
-            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
-            "tests/test_req_product.py::test_fr_02_ac2_given_a_transcript_dated_after_its_announcement"
+            "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded"
           ],
           "text": "Given a transcript dated after its announcement by more than the window in Data TX-02, then the event is flagged for review and excluded from training."
         }
@@ -4310,7 +4363,6 @@
           "fingerprint": "5a56a7847cea",
           "ref": "FR-13-AC1",
           "tests": [
-            "tests/test_req_product.py::test_fr_13_ac1_given_the_same_transcript_is_ingested_twice",
             "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Given the same transcript is ingested twice, then exactly one transcript row exists for it."
@@ -4319,7 +4371,6 @@
           "fingerprint": "7cfb6db90c4b",
           "ref": "FR-13-AC2",
           "tests": [
-            "tests/test_req_product.py::test_fr_13_ac2_given_an_ingestion_job_fails_halfway_and",
             "tests/test_transcripts.py::test_a_load_that_fails_halfway_and_is_run_again_gives_the_row_count_of_a_clean_run"
           ],
           "text": "Given an ingestion job fails halfway and is re-run, then the final row count equals the count of a clean run."
@@ -4334,8 +4385,7 @@
           "fingerprint": "700f1587a28a",
           "ref": "FR-14-AC1",
           "tests": [
-            "tests/test_events.py::test_a_new_snapshot_is_a_new_row_and_the_earlier_one_is_unchanged",
-            "tests/test_req_product.py::test_fr_14_ac1_given_a_new_consensus_estimate_arrives_for"
+            "tests/test_events.py::test_a_new_snapshot_is_a_new_row_and_the_earlier_one_is_unchanged"
           ],
           "text": "Given a new consensus estimate arrives for an event, then a new snapshot row is added with its capture timestamp and the earlier snapshot is unchanged."
         },
@@ -4343,14 +4393,15 @@
           "fingerprint": "6ec941bce255",
           "ref": "FR-14-AC2",
           "tests": [
-            "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input",
-            "tests/test_req_product.py::test_fr_14_ac2_given_a_prediction_for_an_event_announced"
+            "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input"
           ],
           "text": "Given a prediction for an event announced on date D, then any snapshot captured on or after D is excluded from its inputs."
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices"
+      ]
     },
     "FR-15": {
       "checks": [
@@ -4358,7 +4409,6 @@
           "fingerprint": "04f66b07eb98",
           "ref": "FR-15-AC1",
           "tests": [
-            "tests/test_req_product.py::test_fr_15_ac1_given_a_transcript_with_a_recognised_q",
             "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
           ],
           "text": "Given a transcript with a recognised Q&A marker, then prepared and Q&A sections are stored separately."
@@ -4367,7 +4417,6 @@
           "fingerprint": "77fc197bcd67",
           "ref": "FR-15-AC2",
           "tests": [
-            "tests/test_req_product.py::test_fr_15_ac2_given_no_q_a_marker_is_found",
             "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
           ],
           "text": "Given no Q&A marker is found, then the event is flagged \"Segmentation failed\" and the Q&A features are stored as unavailable, not as zero."
@@ -4712,7 +4761,6 @@
           "fingerprint": "2e259b4a6db3",
           "ref": "GS-02-AC1",
           "tests": [
-            "tests/test_req_data.py::test_gs_02_ac1_data_card_exists_for_every_dataset_version",
             "tests/test_validation.py::test_the_data_card_states_coverage_sources_gaps_and_that_it_is_not_signed_off"
           ],
           "text": "Data card exists for every dataset version."
@@ -4735,8 +4783,7 @@
           "fingerprint": "ec6937f5f7ed",
           "ref": "IG-01-AC2",
           "tests": [
-            "tests/test_gaps.py::test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_01_ac2_killing_a_worker_mid_task_and_restarting"
+            "tests/test_gaps.py::test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run"
           ],
           "text": "Killing a worker mid-task and restarting gives the row count of a clean run."
         }
@@ -4810,8 +4857,7 @@
           "fingerprint": "7caa6237eb6e",
           "ref": "IG-05-AC1",
           "tests": [
-            "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_05_ac1_the_schedule_file_lists_each_job_with"
+            "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times"
           ],
           "text": "The schedule file lists each job with its time."
         },
@@ -4838,8 +4884,7 @@
           "fingerprint": "9398f929c9f1",
           "ref": "IG-06-AC1",
           "tests": [
-            "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and_the"
+            "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged"
           ],
           "text": "Simulated 4-day gap is reported and the affected events carry the flag."
         }
@@ -4908,7 +4953,6 @@
           "ref": "IG-10-AC1",
           "tests": [
             "tests/test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the",
             "tests/test_transcripts.py::test_a_stored_payload_is_parsed_with_the_network_disabled"
           ],
           "text": "Parsing runs from stored payloads with the network disabled."
@@ -4916,6 +4960,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first",
         "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
         "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
       ]
@@ -4926,7 +4971,6 @@
           "fingerprint": "80034aba52e1",
           "ref": "IG-11-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the",
             "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Load report shows the revision and the number of empty rows rejected."
@@ -4943,8 +4987,7 @@
           "fingerprint": "0b44fd2e05a5",
           "ref": "IG-12-AC1",
           "tests": [
-            "tests/test_gaps.py::test_the_whole_test_run_has_no_outside_network",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_12_ac1_tests_pass_with_the_network_disabled"
+            "tests/test_gaps.py::test_the_whole_test_run_has_no_outside_network"
           ],
           "text": "Tests pass with the network disabled."
         },
@@ -4952,7 +4995,6 @@
           "fingerprint": "524197fe2ddc",
           "ref": "IG-12-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin",
             "tests/test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_which_rows_are_real"
           ],
           "text": "Fixtures state their origin."
@@ -4998,7 +5040,6 @@
           "fingerprint": "26e969ea0585",
           "ref": "IG-14-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason",
             "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason"
           ],
           "text": "Unlinked fixture is rejected with a reason."
@@ -5007,14 +5048,15 @@
           "fingerprint": "8c3a096df73e",
           "ref": "IG-14-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05",
             "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Duplicate fixture follows TX-05."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched"
+      ]
     },
     "IG-15": {
       "checks": [
@@ -5029,6 +5071,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices",
         "tests/test_financials.py::test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none",
         "tests/test_financials.py::test_older_submission_pages_are_read_like_the_recent_block"
       ]
@@ -5053,7 +5096,6 @@
           "fingerprint": "be9f2109f8a8",
           "ref": "IG-17-AC1",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac1_hash_of_raw_text_is_identical_before",
             "tests/test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning"
           ],
           "text": "Hash of raw text is identical before and after cleaning."
@@ -5062,7 +5104,6 @@
           "fingerprint": "e6360ebd8761",
           "ref": "IG-17-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac2_rule_list_has_a_version",
             "tests/test_transcripts.py::test_the_cleaning_rules_have_a_version_and_only_touch_characters_and_spaces"
           ],
           "text": "Rule list has a version."
@@ -5085,7 +5126,6 @@
           "fingerprint": "593b6f9108df",
           "ref": "IG-18-AC2",
           "tests": [
-            "tests/test_req_ingestion_and_preparation.py::test_ig_18_ac2_a_call_with_no_marker_is_flagged",
             "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles"
           ],
           "text": "A call with no marker is flagged."
@@ -5103,8 +5143,7 @@
           "fingerprint": "d13701d6c539",
           "ref": "IG-19-AC1",
           "tests": [
-            "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_19_ac1_re_running_any_stage_leaves_table_hashes"
+            "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table"
           ],
           "text": "Re-running any stage leaves table hashes unchanged."
         },
@@ -5126,14 +5165,15 @@
           "fingerprint": "91c145200dcc",
           "ref": "IG-20-AC1",
           "tests": [
-            "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_20_ac1_a_planted_record_dated_after_its_cutoff"
+            "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label"
           ],
           "text": "A planted record dated after its cutoff makes the test fail."
         }
       ],
       "document": "ingestion-and-preparation-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault"
+      ]
     },
     "IG-21": {
       "checks": [
@@ -5157,8 +5197,7 @@
           "fingerprint": "e614bffbb1d0",
           "ref": "IG-22-AC1",
           "tests": [
-            "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing",
-            "tests/test_req_ingestion_and_preparation.py::test_ig_22_ac1_report_exists_after_a_run_and_matches"
+            "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing"
           ],
           "text": "Report exists after a run and matches a hand count on 5 companies."
         }
@@ -5198,7 +5237,7 @@
           "fingerprint": "1477383f9bd6",
           "ref": "IM-02-AC2",
           "tests": [
-            "tests/test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason"
+            "tests/test_req_data.py::test_im_02_ac2_each_removed_company_record_has_its_date_and_reason"
           ],
           "text": "Each record has a removal date and reason."
         }
@@ -5207,6 +5246,7 @@
       "id_level_tests": [
         "tests/test_universe.py::test_a_company_that_joined_after_the_end_of_2024_is_never_current",
         "tests/test_universe.py::test_a_removal_reason_that_names_another_company_is_marked_not_passed_on_as_this_ones",
+        "tests/test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason",
         "tests/test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule"
       ]
     },
@@ -5223,7 +5263,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched"
+      ]
     },
     "LB-01": {
       "checks": [
@@ -5231,14 +5273,16 @@
           "fingerprint": "52b68790905d",
           "ref": "LB-01-AC1",
           "tests": [
-            "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals",
-            "tests/test_req_data.py::test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue"
+            "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals"
           ],
           "text": "Fixture company with a hand-calculated SUE matches to four decimal places."
         }
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters",
+        "tests/test_audit_fixes.py::test_a_sixteen_week_fourth_quarter_is_a_quarter",
+        "tests/test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label",
         "tests/test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead"
       ]
     },
@@ -5248,8 +5292,7 @@
           "fingerprint": "9accb5fb6217",
           "ref": "LB-02-AC1",
           "tests": [
-            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
-            "tests/test_req_data.py::test_lb_02_ac1_exclusion_count_reported_per_year"
+            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity"
           ],
           "text": "Exclusion count reported per year."
         },
@@ -5257,14 +5300,15 @@
           "fingerprint": "d209c6e5dbaa",
           "ref": "LB-02-AC2",
           "tests": [
-            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
-            "tests/test_req_data.py::test_lb_02_ac2_zero_variance_fixture_returns_unavailable"
+            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity"
           ],
           "text": "Zero-variance fixture returns unavailable."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first"
+      ]
     },
     "LB-03": {
       "checks": [
@@ -5272,8 +5316,7 @@
           "fingerprint": "a1f7dff36b54",
           "ref": "LB-03-AC1",
           "tests": [
-            "tests/test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures",
-            "tests/test_req_data.py::test_lb_03_ac1_derived_values_are_flagged"
+            "tests/test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures"
           ],
           "text": "Derived values are flagged."
         },
@@ -5281,14 +5324,15 @@
           "fingerprint": "53bc45473894",
           "ref": "LB-03-AC2",
           "tests": [
-            "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent",
-            "tests/test_req_data.py::test_lb_03_ac2_sample_comparison_is_reported_with_differences_above"
+            "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent"
           ],
           "text": "Sample comparison is reported, with differences above 1% listed."
         }
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier",
+        "tests/test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis",
         "tests/test_financials.py::test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up",
         "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
       ]
@@ -5301,14 +5345,16 @@
           "tests": [
             "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
             "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
-            "tests/test_label.py::test_a_quarter_refiled_with_a_shifted_start_date_is_still_the_same_quarter",
-            "tests/test_req_data.py::test_lb_04_ac1_test_with_a_planted_restatement_filed_after"
+            "tests/test_label.py::test_a_quarter_refiled_with_a_shifted_start_date_is_still_the_same_quarter"
           ],
           "text": "Test with a planted restatement filed after D shows the original value is used."
         }
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier",
+        "tests/test_audit_fixes.py::test_a_quarter_refiled_with_a_shifted_end_date_is_still_the_same_quarter",
+        "tests/test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label",
         "tests/test_financials.py::test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure"
       ]
     },
@@ -5320,14 +5366,16 @@
           "tests": [
             "tests/test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series",
             "tests/test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each",
-            "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios",
-            "tests/test_req_data.py::test_lb_05_ac1_test_on_a_company_with_a_split"
+            "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios"
           ],
           "text": "Test on a company with a split inside the window gives the same SUE as the unsplit series."
         }
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis",
+        "tests/test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label",
+        "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins",
         "tests/test_label.py::test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged"
       ]
     },
@@ -5987,8 +6035,7 @@
           "fingerprint": "4718e36e3331",
           "ref": "NFR-03-AC1",
           "tests": [
-            "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times",
-            "tests/test_req_product.py::test_nfr_03_ac1_check_runs_every_24_hours"
+            "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times"
           ],
           "text": "Check runs every 24 hours"
         }
@@ -6281,14 +6328,15 @@
           "fingerprint": "614fda020da7",
           "ref": "PL-04-AC1",
           "tests": [
-            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
-            "tests/test_req_product.py::test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected"
+            "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only"
           ],
           "text": "Fixture with insufficient EPS history is rejected with the logged reason."
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first"
+      ]
     },
     "PL-05": {
       "checks": [
@@ -6310,7 +6358,6 @@
           "fingerprint": "be9f2109f8a8",
           "ref": "PL-06-AC1",
           "tests": [
-            "tests/test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before",
             "tests/test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning"
           ],
           "text": "Hash of raw text is identical before and after cleaning."
@@ -6327,7 +6374,6 @@
           "fingerprint": "f3b1c23bb371",
           "ref": "PX-01-AC1",
           "tests": [
-            "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing",
             "tests/test_req_data.py::test_px_01_ac1_20_sampled_announcement_day_closes_match_a"
           ],
           "text": "20 sampled announcement-day closes match a second source."
@@ -6335,10 +6381,12 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins",
         "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows",
         "tests/test_prices.py::test_a_reused_ticker_is_refused_at_loading_and_stores_no_price",
         "tests/test_prices.py::test_a_series_that_does_not_cover_the_events_is_refused",
         "tests/test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once",
+        "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing",
         "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_the_real_apple_answer",
         "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall"
       ]
@@ -6349,14 +6397,16 @@
           "fingerprint": "c6b0189db776",
           "ref": "PX-02-AC1",
           "tests": [
-            "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window",
-            "tests/test_req_data.py::test_px_02_ac1_test_with_a_planted_future_price_shows"
+            "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window"
           ],
           "text": "Test with a planted future price shows it is excluded."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices",
+        "tests/test_audit_fixes.py::test_the_price_window_check_fails_when_a_read_lets_the_announcement_day_through"
+      ]
     },
     "PX-03": {
       "checks": [
@@ -6364,8 +6414,7 @@
           "fingerprint": "eb2776e30a12",
           "ref": "PX-03-AC1",
           "tests": [
-            "tests/test_prices.py::test_a_series_that_mixes_adjusted_and_raw_prices_fails",
-            "tests/test_req_data.py::test_px_03_ac1_series_type_check_fails_any_series_containing"
+            "tests/test_prices.py::test_a_series_that_mixes_adjusted_and_raw_prices_fails"
           ],
           "text": "Series-type check fails any series containing both."
         }
@@ -6497,8 +6546,7 @@
           "fingerprint": "2132217967f2",
           "ref": "SC-07-AC2",
           "tests": [
-            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
-            "tests/test_req_project_wide.py::test_sc_07_ac2_a_test_fails_if_events_with_different"
+            "tests/test_label.py::test_a_training_set_with_two_label_routes_fails"
           ],
           "text": "A test fails if events with different label routes are in one training set (Data CE-05)."
         }
@@ -7763,7 +7811,6 @@
           "fingerprint": "5f345a6ad7ec",
           "ref": "TH-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_th_01_ac1_at_least_90",
             "tests/test_validation.py::test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold"
           ],
           "text": "At least 90%"
@@ -7835,8 +7882,7 @@
           "fingerprint": "d02a023dab4f",
           "ref": "TH-06-AC1",
           "tests": [
-            "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation",
-            "tests/test_req_data.py::test_th_06_ac1_to_be_set_after_the_first_comparison"
+            "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation"
           ],
           "text": "To be set after the first comparison run"
         }
@@ -7907,8 +7953,7 @@
           "ref": "TH-11-AC1",
           "tests": [
             "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals",
-            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
-            "tests/test_req_data.py::test_th_11_ac1_at_least_6_prior_seasonal_differences_8"
+            "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity"
           ],
           "text": "At least 6 prior seasonal differences, 8-difference window"
         }
@@ -7922,15 +7967,16 @@
           "fingerprint": "36e74346ea34",
           "ref": "TH-12-AC1",
           "tests": [
-            "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent",
-            "tests/test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome",
             "tests/test_req_data.py::test_th_12_ac1_differences_above_1_listed"
           ],
           "text": "Differences above 1% listed"
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent",
+        "tests/test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome"
+      ]
     },
     "TH-13": {
       "checks": [
@@ -7966,7 +8012,6 @@
           "fingerprint": "d9a847a1a79a",
           "ref": "TH-15-AC1",
           "tests": [
-            "tests/test_req_data.py::test_th_15_ac1_0",
             "tests/test_validation.py::test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_counted_apart"
           ],
           "text": "0%"
@@ -8051,7 +8096,6 @@
           "fingerprint": "15cd3c5a0a8d",
           "ref": "TX-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields",
             "tests/test_transcripts.py::test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash"
           ],
           "text": "100% of rows have all three fields."
@@ -8060,14 +8104,16 @@
           "fingerprint": "5cc51c034c05",
           "ref": "TX-01-AC2",
           "tests": [
-            "tests/test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged",
             "tests/test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed"
           ],
           "text": "Rows missing one are rejected and logged."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched",
+        "tests/test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing"
+      ]
     },
     "TX-02": {
       "checks": [
@@ -8075,7 +8121,6 @@
           "fingerprint": "d0e63beaee73",
           "ref": "TX-02-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_02_ac1_violations_are_zero_or_each_violation_is",
             "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation"
           ],
           "text": "Violations are zero, or each violation is listed with a reason."
@@ -8113,7 +8158,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched"
+      ]
     },
     "TX-05": {
       "checks": [
@@ -8121,7 +8168,6 @@
           "fingerprint": "a94d40e75af8",
           "ref": "TX-05-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_05_ac1_given_two_transcripts_for_one_event_the",
             "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release"
           ],
           "text": "Given two transcripts for one event, the earlier is kept."
@@ -8130,7 +8176,6 @@
           "fingerprint": "03652563f237",
           "ref": "TX-05-AC2",
           "tests": [
-            "tests/test_req_data.py::test_tx_05_ac2_dv_03_passes",
             "tests/test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date"
           ],
           "text": "DV-03 passes."
@@ -8145,15 +8190,16 @@
           "fingerprint": "670328d42afc",
           "ref": "TX-06-AC1",
           "tests": [
-            "tests/test_req_data.py::test_tx_06_ac1_sample_of_20_transcripts_has_labels_on",
-            "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role",
-            "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
+            "tests/test_req_data.py::test_tx_06_ac1_sample_of_20_transcripts_has_labels_on"
           ],
           "text": "Sample of 20 transcripts has labels on every turn."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role",
+        "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
+      ]
     },
     "TX-07": {
       "checks": [
@@ -8418,7 +8464,6 @@
           "fingerprint": "9ca57e51c4e2",
           "ref": "VL-01-AC1",
           "tests": [
-            "tests/test_req_data.py::test_vl_01_ac1_the_pipeline_excludes_it",
             "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event"
           ],
           "text": "The pipeline excludes it."
@@ -8427,14 +8472,15 @@
           "fingerprint": "123fa1468d17",
           "ref": "VL-01-AC2",
           "tests": [
-            "tests/test_req_data.py::test_vl_01_ac2_any_leaked_row_fails_the_build",
             "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event"
           ],
           "text": "Any leaked row fails the build."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault"
+      ]
     },
     "VL-02": {
       "checks": [
@@ -8509,6 +8555,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins",
         "tests/test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once",
         "tests/test_prices.py::test_the_equal_weight_universe_uses_only_the_members_of_the_day",
         "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall"
@@ -8570,14 +8617,15 @@
           "fingerprint": "c617f6a065c3",
           "ref": "VL-09-AC1",
           "tests": [
-            "tests/test_req_data.py::test_vl_09_ac1_error_rate_at_or_below_2",
-            "tests/test_validation.py::test_the_hand_audit_sheet_draws_the_same_events_every_time_without_repeats"
+            "tests/test_req_data.py::test_vl_09_ac1_error_rate_at_or_below_2"
           ],
           "text": "Error rate at or below 2%."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_validation.py::test_the_hand_audit_sheet_draws_the_same_events_every_time_without_repeats"
+      ]
     },
     "VL-10": {
       "checks": [
@@ -8663,6 +8711,159 @@
     }
   },
   "tests": {
+    "tests/test_audit_fixes.py::test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices": {
+      "code": [
+        "src/earnings/events.py",
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-14",
+        "IG-15",
+        "PX-02"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-14",
+        "IM-03",
+        "TX-01",
+        "TX-04"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "AE-04",
+        "LB-03",
+        "LB-04"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-03",
+        "LB-05"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_quarter_refiled_with_a_shifted_end_date_is_still_the_same_quarter": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-04"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-06",
+        "LB-01"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_sixteen_week_fourth_quarter_is_a_quarter": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-06",
+        "LB-01"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-01",
+        "LB-04"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing": {
+      "code": [
+        "src/earnings/events.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "AE-01",
+        "TX-01"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label": {
+      "code": [
+        "src/earnings/financials.py",
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-05"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault": {
+      "code": [
+        "src/earnings/label.py",
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "AE-03",
+        "CE-01",
+        "DV-02",
+        "DV-03",
+        "IG-20",
+        "VL-01"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins": {
+      "code": [
+        "src/earnings/financials.py",
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-05",
+        "PX-01",
+        "VL-05"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-10",
+        "LB-02",
+        "PL-04"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_the_price_window_check_fails_when_a_read_lets_the_announcement_day_through": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-05",
+        "PX-02"
+      ]
+    },
     "tests/test_calendar.py::test_a_timestamp_without_a_time_zone_is_refused": {
       "code": [
         "src/earnings/calendar.py"
@@ -9016,7 +9217,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "CE-05-AC1",
+        "CE-05",
         "DB-06",
         "FR-02-AC1",
         "FR-02-AC2"
@@ -9059,8 +9260,8 @@
       ],
       "kind": "real check",
       "requirements": [
-        "CE-05-AC1",
-        "DB-06-AC1"
+        "CE-05",
+        "DB-06"
       ]
     },
     "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement": {
@@ -9300,7 +9501,7 @@
       "kind": "real check",
       "requirements": [
         "LB-03-AC2",
-        "TH-12-AC1"
+        "TH-12"
       ]
     },
     "tests/test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new": {
@@ -9627,7 +9828,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "AE-02-AC1",
+        "AE-02",
         "IG-10-AC1"
       ]
     },
@@ -9637,7 +9838,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "AE-02-AC1"
+        "AE-02"
       ]
     },
     "tests/test_pressrelease.py::test_agreement_is_within_half_a_percent_of_the_stored_value": {
@@ -9646,7 +9847,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "AE-02-AC1"
+        "AE-02"
       ]
     },
     "tests/test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome": {
@@ -9655,8 +9856,8 @@
       ],
       "kind": "real check",
       "requirements": [
-        "AE-02-AC1",
-        "TH-12-AC1"
+        "AE-02",
+        "TH-12"
       ]
     },
     "tests/test_pressrelease.py::test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter": {
@@ -9665,7 +9866,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "AE-02-AC1"
+        "AE-02"
       ]
     },
     "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows": {
@@ -9732,7 +9933,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "PX-01-AC1"
+        "PX-01"
       ]
     },
     "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios": {
@@ -9981,13 +10182,6 @@
         "SV-16-AC2"
       ]
     },
-    "tests/test_req_data.py::test_ae_01_ac1_every_event_has_a_document_identifier_an": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "AE-01-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_ae_02_ac1_at_least_98_agreement_on_a_sample": {
       "code": [],
       "kind": "not tested (NEEDS MEASUREMENT)",
@@ -10000,27 +10194,6 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "AE-03-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_ce_01_ac1_zero_rows_where_capture_time_is_on": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "CE-01-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_ce_02_ac1_test_vl_01_passes": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "CE-02-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_ce_02_ac2_sr_08_test_passes": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "CE-02-AC2"
       ]
     },
     "tests/test_req_data.py::test_ce_03_ac1_basis_test_vl_07_passes": {
@@ -10044,13 +10217,6 @@
         "CE-05-AC1"
       ]
     },
-    "tests/test_req_data.py::test_ce_05_ac2_a_test_fails_if_events_with_different": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "CE-05-AC2"
-      ]
-    },
     "tests/test_req_data.py::test_ce_06_ac1_test_a_planted_forecast_dated_d_or": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -10065,20 +10231,6 @@
         "CE-06-AC2"
       ]
     },
-    "tests/test_req_data.py::test_dv_01_ac1_quarantine_count_is_reported_per_run": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DV-01-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_dv_02_ac1_the_three_date_fields_have_zero_nulls": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DV-02-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_dv_02_ac2_other_fields_are_within_the_thresholds_in": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -10086,46 +10238,11 @@
         "DV-02-AC2"
       ]
     },
-    "tests/test_req_data.py::test_dv_03_ac1_uniqueness_check_passes_on_every_load": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DV-03-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_dv_04_ac1_flagged_rows_have_a_reviewer_note_before": {
       "code": [],
       "kind": "not tested (NEEDS PERSON)",
       "requirements": [
         "DV-04-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_dv_05_ac1_date_order_test_on_every_load_reports": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DV-05-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_dv_06_ac1_mapping_test_passes_on_five_known_non": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DV-06-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_dv_07_ac1_test_covers_a_pre_open_and_an": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DV-07-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_dv_08_ac1_table_hashes_match_between_two_runs": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DV-08-AC1"
       ]
     },
     "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row": {
@@ -10145,13 +10262,6 @@
         "FD-01-AC2"
       ]
     },
-    "tests/test_req_data.py::test_fd_04_ac1_mapping_test_passes_on_the_five_non": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FD-04-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_gs_01_ac1_sign_off_exists_before_the_dataset_is": {
       "code": [],
       "kind": "not tested (NEEDS PERSON)",
@@ -10159,60 +10269,11 @@
         "GS-01-AC1"
       ]
     },
-    "tests/test_req_data.py::test_gs_02_ac1_data_card_exists_for_every_dataset_version": {
+    "tests/test_req_data.py::test_im_02_ac2_each_removed_company_record_has_its_date_and_reason": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
-        "GS-02-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "LB-01-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_lb_02_ac1_exclusion_count_reported_per_year": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "LB-02-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_lb_02_ac2_zero_variance_fixture_returns_unavailable": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "LB-02-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_lb_03_ac1_derived_values_are_flagged": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "LB-03-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_lb_03_ac2_sample_comparison_is_reported_with_differences_above": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "LB-03-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_lb_04_ac1_test_with_a_planted_restatement_filed_after": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "LB-04-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_lb_05_ac1_test_on_a_company_with_a_split": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "LB-05-AC1"
+        "IM-02-AC2"
       ]
     },
     "tests/test_req_data.py::test_lb_06_ac1_frozen_threshold_record_exists": {
@@ -10255,20 +10316,6 @@
       "kind": "not tested (NEEDS MEASUREMENT)",
       "requirements": [
         "PX-01-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_px_02_ac1_test_with_a_planted_future_price_shows": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "PX-02-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_px_03_ac1_series_type_check_fails_any_series_containing": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "PX-03-AC1"
       ]
     },
     "tests/test_req_data.py::test_sec_01_ac1_test_vl_11_a_company_reclassified_in": {
@@ -10375,13 +10422,6 @@
         "SR-11-AC1"
       ]
     },
-    "tests/test_req_data.py::test_th_01_ac1_at_least_90": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TH-01-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_th_02_ac1_at_least_95": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -10401,13 +10441,6 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "TH-04-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_th_06_ac1_to_be_set_after_the_first_comparison": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TH-06-AC1"
       ]
     },
     "tests/test_req_data.py::test_th_07_ac1_10": {
@@ -10438,13 +10471,6 @@
         "TH-10-AC1"
       ]
     },
-    "tests/test_req_data.py::test_th_11_ac1_at_least_6_prior_seasonal_differences_8": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TH-11-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_th_12_ac1_differences_above_1_listed": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -10468,34 +10494,6 @@
         "TH-14-AC1"
       ]
     },
-    "tests/test_req_data.py::test_th_15_ac1_0": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TH-15-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TX-01-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TX-01-AC2"
-      ]
-    },
-    "tests/test_req_data.py::test_tx_02_ac1_violations_are_zero_or_each_violation_is": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TX-02-AC1"
-      ]
-    },
     "tests/test_req_data.py::test_tx_03_ac1_on_a_hand_labelled_sample_of_50": {
       "code": [],
       "kind": "not tested (NEEDS MEASUREMENT)",
@@ -10510,20 +10508,6 @@
         "TX-04-AC1"
       ]
     },
-    "tests/test_req_data.py::test_tx_05_ac1_given_two_transcripts_for_one_event_the": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TX-05-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_tx_05_ac2_dv_03_passes": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "TX-05-AC2"
-      ]
-    },
     "tests/test_req_data.py::test_tx_06_ac1_sample_of_20_transcripts_has_labels_on": {
       "code": [],
       "kind": "not tested (NEEDS MEASUREMENT)",
@@ -10536,20 +10520,6 @@
       "kind": "not tested (NEEDS MEASUREMENT)",
       "requirements": [
         "TX-07-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_vl_01_ac1_the_pipeline_excludes_it": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "VL-01-AC1"
-      ]
-    },
-    "tests/test_req_data.py::test_vl_01_ac2_any_leaked_row_fails_the_build": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "VL-01-AC2"
       ]
     },
     "tests/test_req_data.py::test_vl_02_ac1_rebuilt_vectors_match_stored_vectors": {
@@ -10790,20 +10760,6 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "DB-12-AC1"
-      ]
-    },
-    "tests/test_req_database.py::test_db_13_ac1_fault_injected_mid_event_leaves_no_rows": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-13-AC1"
-      ]
-    },
-    "tests/test_req_database.py::test_db_13_ac2_re_running_a_stage_leaves_the_row": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "DB-13-AC2"
       ]
     },
     "tests/test_req_database.py::test_db_14_ac1_explain_output_for_each_named_query_is": {
@@ -11681,32 +11637,11 @@
         "UX-11-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_01_ac2_killing_a_worker_mid_task_and_restarting": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-01-AC2"
-      ]
-    },
     "tests/test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company_run": {
       "code": [],
       "kind": "not tested (NEEDS MEASUREMENT)",
       "requirements": [
         "IG-04-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_05_ac1_the_schedule_file_lists_each_job_with": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-05-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and_the": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-06-AC1"
       ]
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no_more": {
@@ -11723,48 +11658,6 @@
         "IG-09-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-10-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-11-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_12_ac1_tests_pass_with_the_network_disabled": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-12-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-12-AC2"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-14-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-14-AC2"
-      ]
-    },
     "tests/test_req_ingestion_and_preparation.py::test_ig_16_ac1_the_spike_result_is_in_data_section_12": {
       "code": [
         "docs/requirements/data-requirements.md"
@@ -11774,20 +11667,6 @@
         "IG-16-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac1_hash_of_raw_text_is_identical_before": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-17-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_17_ac2_rule_list_has_a_version": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-17-AC2"
-      ]
-    },
     "tests/test_req_ingestion_and_preparation.py::test_ig_18_ac1_on_50_hand_labelled_calls_at_least": {
       "code": [],
       "kind": "not tested (NEEDS PERSON)",
@@ -11795,39 +11674,11 @@
         "IG-18-AC1"
       ]
     },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_18_ac2_a_call_with_no_marker_is_flagged": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-18-AC2"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_19_ac1_re_running_any_stage_leaves_table_hashes": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-19-AC1"
-      ]
-    },
     "tests/test_req_ingestion_and_preparation.py::test_ig_19_ac2_the_label_stage_run_without_a_freeze": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-19-AC2"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_20_ac1_a_planted_record_dated_after_its_cutoff": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-20-AC1"
-      ]
-    },
-    "tests/test_req_ingestion_and_preparation.py::test_ig_22_ac1_report_exists_after_a_run_and_matches": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "IG-22-AC1"
       ]
     },
     "tests/test_req_modelling_and_evaluation.py::test_md_01_ac1_fixture_prediction_has_three_probabilities_summing_to": {
@@ -12264,13 +12115,6 @@
         "ER-07-AC1"
       ]
     },
-    "tests/test_req_product.py::test_er_07_ac2_system_stores_q_a_features_as_unavailable": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "ER-07-AC2"
-      ]
-    },
     "tests/test_req_product.py::test_er_08_ac1_user_sees_insufficient_peers_in_the_sector": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -12425,20 +12269,6 @@
         "FR-01-AC3"
       ]
     },
-    "tests/test_req_product.py::test_fr_02_ac1_given_any_event_in_the_database_when": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-02-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_fr_02_ac2_given_a_transcript_dated_after_its_announcement": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-02-AC2"
-      ]
-    },
     "tests/test_req_product.py::test_fr_03_ac1_given_the_training_pipeline_runs_when_any": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -12570,48 +12400,6 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FR-12-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_fr_13_ac1_given_the_same_transcript_is_ingested_twice": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-13-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_fr_13_ac2_given_an_ingestion_job_fails_halfway_and": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-13-AC2"
-      ]
-    },
-    "tests/test_req_product.py::test_fr_14_ac1_given_a_new_consensus_estimate_arrives_for": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-14-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_fr_14_ac2_given_a_prediction_for_an_event_announced": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-14-AC2"
-      ]
-    },
-    "tests/test_req_product.py::test_fr_15_ac1_given_a_transcript_with_a_recognised_q": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-15-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_fr_15_ac2_given_no_q_a_marker_is_found": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "FR-15-AC2"
       ]
     },
     "tests/test_req_product.py::test_fr_16_ac1_given_a_transcript_is_already_scored_with": {
@@ -12908,13 +12696,6 @@
         "NFR-02-AC1"
       ]
     },
-    "tests/test_req_product.py::test_nfr_03_ac1_check_runs_every_24_hours": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "NFR-03-AC1"
-      ]
-    },
     "tests/test_req_product.py::test_nfr_07_ac1_automated_check_passes": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -12966,13 +12747,6 @@
         "PL-03-AC1"
       ]
     },
-    "tests/test_req_product.py::test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "PL-04-AC1"
-      ]
-    },
     "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on": {
       "code": [
         "src/earnings/migrate.py",
@@ -12981,13 +12755,6 @@
       "kind": "real check",
       "requirements": [
         "PL-05-AC1"
-      ]
-    },
-    "tests/test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "PL-06-AC1"
       ]
     },
     "tests/test_req_product.py::test_scr_01_ac1_input_field_submit_autocomplete_if_ui_01": {
@@ -13888,13 +13655,6 @@
         "SC-07-AC1"
       ]
     },
-    "tests/test_req_project_wide.py::test_sc_07_ac2_a_test_fails_if_events_with_different": {
-      "code": [],
-      "kind": "not tested (NOT IMPLEMENTED)",
-      "requirements": [
-        "SC-07-AC2"
-      ]
-    },
     "tests/test_req_project_wide.py::test_sp_01_ac1_loader_test_with_a_pickle_file_fails": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -14148,7 +13908,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "ER-07-AC1",
+        "ER-07",
         "IG-18-AC2"
       ]
     },
@@ -14186,7 +13946,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "TX-06-AC1"
+        "TX-06"
       ]
     },
     "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release": {
@@ -14230,7 +13990,7 @@
         "ER-07-AC2",
         "FR-15-AC1",
         "FR-15-AC2",
-        "TX-06-AC1"
+        "TX-06"
       ]
     },
     "tests/test_transcripts.py::test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question": {
@@ -14369,8 +14129,8 @@
       ],
       "kind": "real check",
       "requirements": [
-        "IM-02-AC1",
-        "IM-02-AC2"
+        "IM-02",
+        "IM-02-AC1"
       ]
     },
     "tests/test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule": {
@@ -14518,7 +14278,7 @@
       "kind": "real check",
       "requirements": [
         "DV-01-AC1",
-        "DV-04-AC1"
+        "DV-04"
       ]
     },
     "tests/test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies": {
@@ -14566,7 +14326,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "VL-09-AC1"
+        "VL-09"
       ]
     },
     "tests/test_validation.py::test_the_plans_of_the_ticker_and_event_lookups_use_an_index": {
@@ -14575,7 +14335,7 @@
       ],
       "kind": "real check",
       "requirements": [
-        "DB-14-AC1"
+        "DB-14"
       ]
     },
     "tests/test_validation.py::test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_counted_apart": {

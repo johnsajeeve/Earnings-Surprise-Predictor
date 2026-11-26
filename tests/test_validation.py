@@ -136,7 +136,7 @@ def test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apa
     assert len(order["information_not_before_announcement"]) == 2  # real errors
 
 
-@pytest.mark.req("DV-01-AC1", "DV-04-AC1")
+@pytest.mark.req("DV-01-AC1", "DV-04")
 @pytest.mark.code("src/earnings/validation.py")
 def test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged(engines):
     worker, api = engines
@@ -275,7 +275,7 @@ def test_the_dataset_has_one_eps_basis(engines):
     assert val.basis_values(worker) == ["gaap-diluted"]
 
 
-@pytest.mark.req("DB-14-AC1")
+@pytest.mark.req("DB-14")
 @pytest.mark.code("src/earnings/migrations/versions")
 def test_the_plans_of_the_ticker_and_event_lookups_use_an_index(engines):
     worker, _ = engines
@@ -305,7 +305,7 @@ def test_the_plans_of_the_ticker_and_event_lookups_use_an_index(engines):
     assert "Index" in event and "Seq Scan" not in event
 
 
-@pytest.mark.req("VL-09-AC1")
+@pytest.mark.req("VL-09")
 @pytest.mark.code("src/earnings/validation.py")
 def test_the_hand_audit_sheet_draws_the_same_events_every_time_without_repeats(engines, tmp_path):
     worker, _ = engines

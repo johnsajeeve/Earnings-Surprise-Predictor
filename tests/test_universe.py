@@ -162,7 +162,7 @@ def test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file(test_db)
     assert load(engine, LIST) == {"companies": 0, "ticker_spells": 0, "membership_periods": 0}
 
 
-@pytest.mark.req("IM-02-AC1", "IM-02-AC2")
+@pytest.mark.req("IM-02-AC1", "IM-02")
 @pytest.mark.code("src/earnings/universe.csv")
 def test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason():
     rows = list(csv.DictReader(LIST.open(encoding="utf-8")))

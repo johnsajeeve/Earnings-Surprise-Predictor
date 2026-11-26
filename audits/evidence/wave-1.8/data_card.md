@@ -1,7 +1,7 @@
-# Data card: dataset version wave-1.8-2026-11-26
+# Data card: dataset version audit-fixes-2026-11-26
 
 ## Coverage
-- Events: 3183 (2565 usable as labelled rows)
+- Events: 3431 (3130 usable as labelled rows)
 - Companies: 93
 - Announcement dates: 2013-01-16 to 2024-12-19
 - Label route: time-series; EPS basis: gaap-diluted
@@ -27,13 +27,12 @@
 - Prices: raw closes rebuilt from the yfinance close and its split list; dated factors apart.
 
 ## Known gaps
-- 143 events: no quarterly EPS stored for the company (DR-26)
-- 249 events: the announced quarter is not in the stored EPS
-- 174 events: fewer than 6 prior seasonal differences
-- Transcript coverage 2015 to 2024: 86.9% against 90% (TX-04); results cover the covered events
-- 17 of 100 companies have no price history (mostly removed companies); their price features are unavailable
-- 24 labels built on a wrongly scaled EPS value are excluded from training (DR-27)
-- Second-source check of closing prices not run: no second price source key yet (PX-01)
+- 3,431 events, 3,196 with a label; 103 fewer than 6 prior differences, 69 no quarter in the reporting window, 52 announced quarter first filed over 100 days late, 11 unknown share basis
+- 69 events excluded from training, including 32 built on a wrongly scaled EPS value
+- Transcript coverage 2015 to 2024: 89.0% against 90% (TX-04); results cover the covered events
+- 7 companies have no transcript; 17 of 100 have no price history
+- Second-source check of closing prices not run (PX-01)
+- 51 labels (PepsiCo, State Street) have no outside recomputation
 
 ## Sign-off
 - Not signed off: no reviewer who did not build the dataset has been named (Data GS-01, decision D-09).

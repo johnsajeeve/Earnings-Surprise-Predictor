@@ -52,3 +52,7 @@ Of the companies later removed from the index that were members in a given year,
 Data licence: yfinance data is for development and research only (source register). No price is committed except a nine-day Apple excerpt used by the tests, and it must not go into the demo bundle.
 
 Not an independent audit.
+
+## Correction, 26 November 2026, after the independent audit
+
+The independent audit failed this wave as committed. Several results above are wrong or came from faulty parsing; see `independent-audit-2026-11-26.md` (DR-35) for the findings, the fixes and the corrected numbers. Where this file explains a gap by the SEC data, that explanation is withdrawn.

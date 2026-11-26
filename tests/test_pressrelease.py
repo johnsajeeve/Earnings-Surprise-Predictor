@@ -21,7 +21,7 @@ AAPL = "0000320193"
 ACC = "0000320193-25-000007"
 
 
-@pytest.mark.req("AE-02-AC1")
+@pytest.mark.req("AE-02")
 @pytest.mark.code("src/earnings/pressrelease.py")
 def test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter():
     found = pr.parse_diluted_eps(pr.html_rows(TABLE))
@@ -30,7 +30,7 @@ def test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter():
     assert pr.exhibit_names(INDEX) == ["a8-kex991q1202512282024.htm"]
 
 
-@pytest.mark.req("AE-02-AC1")
+@pytest.mark.req("AE-02")
 @pytest.mark.code("src/earnings/pressrelease.py")
 def test_adjusted_rows_negatives_and_cut_tables_are_handled():
     adjusted_first = [  # SYNTHETIC rows
@@ -57,7 +57,7 @@ def test_adjusted_rows_negatives_and_cut_tables_are_handled():
     assert pr.parse_diluted_eps([["Non-GAAP diluted earnings per share", "1.00"]]) is None
 
 
-@pytest.mark.req("AE-02-AC1")
+@pytest.mark.req("AE-02")
 @pytest.mark.code("src/earnings/pressrelease.py")
 def test_agreement_is_within_half_a_percent_of_the_stored_value():
     d = Decimal
@@ -82,7 +82,7 @@ class _Client:
         return RawResponse("sec-edgar", url, 200, "text/html", self.pages[url], datetime.now(UTC))
 
 
-@pytest.mark.req("AE-02-AC1", "IG-10-AC1")
+@pytest.mark.req("AE-02", "IG-10-AC1")
 @pytest.mark.code("src/earnings/pressrelease.py")
 def test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy(test_db):
     from earnings.db import get_engine
@@ -102,7 +102,7 @@ def test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy(test
     assert missing is None and why == "filing index not found"
 
 
-@pytest.mark.req("AE-02-AC1", "TH-12-AC1")
+@pytest.mark.req("AE-02", "TH-12")
 @pytest.mark.code("src/earnings/pressrelease.py")
 def test_events_are_compared_and_the_summary_counts_every_outcome(test_db):
     from earnings.db import get_engine

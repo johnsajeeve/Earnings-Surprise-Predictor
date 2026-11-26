@@ -15,6 +15,7 @@ from typing import Any
 
 from sqlalchemy import Engine, text
 
+from earnings import calendar as cal
 from earnings import financials as fin
 from earnings import label
 from earnings import transcripts as tr
@@ -30,33 +31,17 @@ def _versions(engine: Engine, company_id: str) -> list[label.EpsVersion]:
     with engine.connect() as conn:
         rows = conn.execute(
             text(
-                "SELECT period_start, period_end, eps_diluted, filed_at, derived FROM eps_history "
+                "SELECT period_start, period_end, eps_diluted, filed_at, derived, accession "
+                "FROM eps_history "
                 "WHERE company_id = :c AND period_kind = 'quarter'"
             ),
             {"c": company_id},
         ).all()
-    return [label.EpsVersion(r[0], r[1], r[2], r[3], r[4]) for r in rows]
+    return [label.EpsVersion(r[0], r[1], r[2], r[3], r[4], r[5]) for r in rows]
 
 
 def _splits(engine: Engine, company_id: str) -> list[label.Split]:
-    """The dated share splits for a company (LB-05, decision C-49): from the price source's stored
-    factors where the company has prices, otherwise from the split tag in its SEC facts."""
-    with engine.connect() as conn:
-        priced = conn.execute(
-            text("SELECT EXISTS (SELECT 1 FROM price_daily WHERE company_id = :c)"),
-            {"c": company_id},
-        ).scalar_one()
-        if priced:
-            rows = conn.execute(
-                text(
-                    "SELECT DISTINCT ON (ex_date) ex_date, value FROM adjustment_factor "
-                    "WHERE company_id = :c AND kind = 'split' ORDER BY ex_date, captured_at DESC"
-                ),
-                {"c": company_id},
-            ).all()
-            return [label.Split(r[1], r[0]) for r in rows if label.is_share_split(r[1])]
-    found = fin._payload(engine, fin.FACTS_URL.format(cik=company_id))
-    return [] if found is None else label.splits_from_facts(found[1])
+    return fin.company_splits(engine, company_id)
 
 
 def build_events(engine: Engine, company_ids: list[str] | None = None) -> dict[str, Any]:
@@ -143,9 +128,13 @@ def _write_event(engine, cid, tid, call_date, release, versions, splits, fy, fq,
                 "INSERT INTO earnings_event (company_id, transcript_id, period_end, fiscal_period, "
                 "transcript_date, information_date, announcement_date, announcement_time_utc, "
                 "release_accession, eps_basis, label_route, sue, sue_reason, differences_used, "
-                "splits_applied, incomplete, status, exclusion_reason) VALUES (:c, :t, :pe, :fp, "
+                "splits_applied, incomplete, status, exclusion_reason, eps_accession, "
+                "eps_filed_at) "
+                "VALUES (:c, :t, :pe, :fp, "
                 ":td, :idate, :ad, :at, :acc, :basis, :route, :sue, :reason, :n, :sp, :inc, :st, "
-                ":ex) ON CONFLICT (transcript_id) DO UPDATE SET period_end = EXCLUDED.period_end, "
+                ":ex, :eacc, :efiled) ON CONFLICT (transcript_id) DO UPDATE SET "
+                "eps_accession = EXCLUDED.eps_accession, eps_filed_at = EXCLUDED.eps_filed_at, "
+                "period_end = EXCLUDED.period_end, "
                 "fiscal_period = EXCLUDED.fiscal_period, "
                 "transcript_date = EXCLUDED.transcript_date, "
                 "information_date = EXCLUDED.information_date, "
@@ -165,18 +154,60 @@ def _write_event(engine, cid, tid, call_date, release, versions, splits, fy, fq,
                 "route": label.ROUTE_TIME_SERIES, "sue": result.sue, "reason": reason,
                 "n": result.differences, "sp": result.splits_applied, "inc": incomplete,
                 "st": "excluded" if exclusion else "included", "ex": exclusion,
+                "eacc": result.target_accession or None, "efiled": result.target_filed,
             },
         )  # fmt: skip
 
 
-def event_snapshots(engine: Engine, event_id: int) -> list[dict[str, Any]]:
-    """Consensus snapshots an event may use: captured before its announcement date, that is before
-    that day began in New York. A capture earlier on the day itself is not used (FR-14)."""
+def cutoffs(engine: Engine, event_id: int | None = None) -> list[tuple[int, date]]:
+    """(event, session of its prediction cutoff). The cutoff is the earlier of the call time and
+    the 8-K acceptance time (C-17). A call with no usable time on an earlier day than the filing
+    counts from the start of that day. The session is the trading day the cutoff counts for."""
     with engine.connect() as conn:
-        company, day = conn.execute(
-            text("SELECT company_id, announcement_date FROM earnings_event WHERE event_id = :e"),
+        rows = conn.execute(
+            text(
+                "SELECT e.event_id, e.announcement_time_utc, t.call_at, e.transcript_date, "
+                "e.announcement_date FROM earnings_event e JOIN transcript t USING "
+                "(transcript_id) WHERE e.announcement_time_utc IS NOT NULL "
+                "AND (CAST(:e AS bigint) IS NULL OR e.event_id = :e) ORDER BY e.event_id"
+            ),
+            {"e": event_id},
+        ).all()
+    out = []
+    for found, accepted, call_at, call_day, announced in rows:
+        moment = fin.t0_cutoff(call_at, accepted)
+        assert moment is not None
+        if call_at is None and call_day is not None and call_day < announced:
+            moment = min(moment, start_of_day(call_day))
+        out.append((found, cal.trading_day_for(moment)))
+    return out
+
+
+def cutoff_day(engine: Engine, event_id: int) -> date:
+    """The day from which nothing may be used: the earlier of the announcement date and the New
+    York day of the call."""
+    with engine.connect() as conn:
+        announced, call_day, call_at = conn.execute(
+            text(
+                "SELECT e.announcement_date, e.transcript_date, t.call_at FROM earnings_event e "
+                "JOIN transcript t USING (transcript_id) WHERE e.event_id = :e"
+            ),
             {"e": event_id},
         ).one()
+    days = [announced, call_day]
+    if call_at is not None:
+        days.append(call_at.astimezone(fin.EASTERN).date())
+    return min(d for d in days if d is not None)
+
+
+def event_snapshots(engine: Engine, event_id: int) -> list[dict[str, Any]]:
+    """Consensus snapshots an event may use: captured before the day of its cutoff began in New
+    York, so nothing from the announcement date or from an earlier call's day (FR-14, C-17)."""
+    day = cutoff_day(engine, event_id)
+    with engine.connect() as conn:
+        company = conn.execute(
+            text("SELECT company_id FROM earnings_event WHERE event_id = :e"), {"e": event_id}
+        ).scalar_one()
         found = conn.execute(
             text("SELECT * FROM estimate_snapshot_as_of(:c, :t)"),
             {"c": company, "t": start_of_day(day)},

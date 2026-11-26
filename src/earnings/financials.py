@@ -7,6 +7,7 @@ so the first-filed value and any restatement are both kept (the tables are appen
 
 import json
 from collections import defaultdict
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import UTC, date, datetime, timedelta
 from decimal import Decimal
@@ -14,6 +15,7 @@ from zoneinfo import ZoneInfo
 
 from sqlalchemy import Engine, text
 
+from earnings import label
 from earnings.clients.edgar import SOURCE as EDGAR_SOURCE
 from earnings.runlog import run_record
 
@@ -22,6 +24,7 @@ SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
 SUBMISSIONS_PAGE_URL = "https://data.sec.gov/submissions/{name}"
 
 EPS_TAG = "EarningsPerShareDiluted"
+EPS_UNIT, MONEY_UNIT = "USD/shares", "USD"
 # The first tag that a company reports for a period is used, in this order (decision in the
 # evidence file of Wave 1.4). The tag that was used is stored.
 REVENUE_TAGS = (
@@ -57,12 +60,17 @@ class Fact:
 
 
 def extract_facts(payload: bytes, tag: str) -> list[Fact]:
-    """The facts of one us-gaap tag from a company-facts payload (the first unit it reports)."""
+    """The facts of one us-gaap tag from a company-facts payload, in the unit the tag is measured
+    in: dollars per share for EPS, dollars for the rest. A payload may list other units first. A
+    tag that is present without the expected unit raises: it is never read as empty."""
     node = json.loads(payload)["facts"].get("us-gaap", {}).get(tag)
     if not node:
         return []
+    unit = EPS_UNIT if tag == EPS_TAG else MONEY_UNIT
+    if unit not in node["units"]:
+        raise ValueError(f"{tag} has no {unit} values, only {sorted(node['units'])}")
     out = []
-    for unit_rows in node["units"].values():
+    for unit_rows in (node["units"][unit],):
         for f in unit_rows:
             if "start" not in f:  # a point-in-time fact, not a period
                 continue
@@ -79,7 +87,6 @@ def extract_facts(payload: bytes, tag: str) -> list[Fact]:
                     f.get("fp"),
                 )  # fmt: skip
             )
-        break
     return out
 
 
@@ -118,7 +125,9 @@ def _fills_year_before_q4(quarters: list[Fact], year: Fact) -> bool:
     return 60 <= (year.end - quarters[-1].end).days <= 125
 
 
-def derive_fourth_quarters(facts: list[Fact]) -> list[tuple[Fact, date, Decimal]]:
+def derive_fourth_quarters(
+    facts: list[Fact], splits: "Sequence[label.Split]" = ()
+) -> list[tuple[Fact, date, Decimal]]:
     """Fourth quarter = the year minus the three quarters inside it, on first-filed values.
 
     Returns (the year fact, the quarter start, the derived value). A year is skipped unless
@@ -136,7 +145,8 @@ def derive_fourth_quarters(facts: list[Fact]) -> list[tuple[Fact, date, Decimal]
         if len(inside) != 3 or not _fills_year_before_q4(inside, year):
             continue
         q4_start = inside[-1].end + timedelta(days=1)
-        out.append((year, q4_start, year.value - sum((q.value for q in inside), Decimal(0))))
+        three = sum((on_basis(q, year.filed, splits) for q in inside), Decimal(0))
+        out.append((year, q4_start, year.value - three))
     return out
 
 
@@ -160,7 +170,24 @@ class DerivedQuarter:
     fiscal_period: str
 
 
-def derive_from_cumulative(facts: list[Fact]) -> list[DerivedQuarter]:
+def reported_by(direct: list[tuple[date, date]], end: date, filed: date) -> bool:
+    """Whether the quarter ending near `end` had been reported on its own by `filed`."""
+    return any(abs((end - e).days) <= 3 and f <= filed for e, f in direct)
+
+
+def on_basis(fact: Fact, filed: date, splits: "Sequence[label.Split]") -> Decimal:
+    """The value of an earlier filing on the share basis of a filing made on `filed` (LB-03,
+    LB-05): divided by every split that took effect between the two."""
+    value = fact.value
+    for s in splits:
+        if not s.ambiguous and fact.filed < s.effective <= filed:
+            value /= s.ratio
+    return value.quantize(Decimal("0.0001")) if value != fact.value else value
+
+
+def derive_from_cumulative(
+    facts: list[Fact], splits: "Sequence[label.Split]" = ()
+) -> list[DerivedQuarter]:
     """A quarter that is not reported on its own is the difference of two cumulative figures.
 
     Many companies tag only year-to-date amounts in their 10-Qs. Q2 is the six-month figure minus
@@ -170,7 +197,7 @@ def derive_from_cumulative(facts: list[Fact]) -> list[DerivedQuarter]:
     own is never replaced.
     """
     first = _first_filed(facts)
-    direct_ends = {f.end for f in first.values() if f.kind == "quarter"}
+    direct = [(f.end, f.filed) for f in first.values() if f.kind == "quarter"]
     by_start: dict[date, dict[int, Fact]] = defaultdict(dict)
     for f in first.values():
         months = _months(f)
@@ -178,28 +205,30 @@ def derive_from_cumulative(facts: list[Fact]) -> list[DerivedQuarter]:
             by_start[f.start].setdefault(months, f)
     out = []
     for classes in by_start.values():
-        for lo, hi, label in ((3, 6, "Q2"), (6, 9, "Q3"), (9, 12, "Q4")):
+        for lo, hi, quarter_name in ((3, 6, "Q2"), (6, 9, "Q3"), (9, 12, "Q4")):
             a, b = classes.get(lo), classes.get(hi)
             if not a or not b:
                 continue
-            if any(abs((b.end - e).days) <= 3 for e in direct_ends):
-                continue  # this quarter is reported on its own
+            if reported_by(direct, b.end, max(a.filed, b.filed)):
+                continue  # this quarter was reported on its own no later than it could be derived
             out.append(
                 DerivedQuarter(
                     a.end + timedelta(days=1),
                     b.end,
-                    b.value - a.value,
+                    b.value - on_basis(a, b.filed, splits),
                     max(a.filed, b.filed),
                     b.form,
                     b.accession,
                     b.fiscal_year,
-                    label,
+                    quarter_name,
                 )  # fmt: skip
             )
     return out
 
 
-def derived_quarters(facts: list[Fact]) -> list[DerivedQuarter]:
+def derived_quarters(
+    facts: list[Fact], splits: "Sequence[label.Split]" = ()
+) -> list[DerivedQuarter]:
     """All derived quarters of one tag: cumulative differences first, the three-quarter sum after.
 
     The fourth quarter is the year minus the nine-month figure when that exists, because both are
@@ -207,9 +236,9 @@ def derived_quarters(facts: list[Fact]) -> list[DerivedQuarter]:
     and post-split values (found with Apple, whose 7-for-1 split was in June 2014). The sum is
     only used for a year that the cumulative method does not cover.
     """
-    out = derive_from_cumulative(facts)
+    out = derive_from_cumulative(facts, splits)
     covered = [d.end for d in out]
-    for year, q4_start, value in derive_fourth_quarters(facts):
+    for year, q4_start, value in derive_fourth_quarters(facts, splits):
         if not any(abs((year.end - e).days) <= 3 for e in covered):
             out.append(
                 DerivedQuarter(
@@ -226,7 +255,11 @@ def derived_quarters(facts: list[Fact]) -> list[DerivedQuarter]:
     return out
 
 
-def eps_rows(payload: bytes) -> list[EpsRow]:
+def eps_rows(payload: bytes, splits: "Sequence[label.Split] | None" = None) -> list[EpsRow]:
+    """Every EPS version of a payload, with derived quarters. `splits` puts the two figures of a
+    derivation on one share basis; without it the payload's own split tag is used."""
+    if splits is None:
+        splits = label.splits_from_facts(payload)
     facts = extract_facts(payload, EPS_TAG)
     rows = [
         EpsRow(
@@ -244,9 +277,9 @@ def eps_rows(payload: bytes) -> list[EpsRow]:
         for f in facts
         if f.kind
     ]
-    covered = {r.period_end for r in rows if r.period_kind == "quarter"}
-    for d in derived_quarters(facts):
-        if not any(abs((d.end - e).days) <= 3 for e in covered):
+    direct = [(r.period_end, r.filed) for r in rows if r.period_kind == "quarter"]
+    for d in derived_quarters(facts, splits):
+        if not reported_by(direct, d.end, d.filed):
             rows.append(
                 EpsRow(
                     d.start,
@@ -314,11 +347,11 @@ def fundamentals_rows(payload: bytes) -> list[FundamentalsRow]:
                 any_fact.filed,
             )  # fmt: skip
         )
-    direct_ends = {r.period_end for r in rows}
+    direct = [(r.period_end, r.filed) for r in rows]
     derived: dict[tuple[date, date, str], dict[str, object]] = {}
     for name, metric_facts in metrics.items():
         for dq in derived_quarters(metric_facts):
-            if any(abs((dq.end - e).days) <= 3 for e in direct_ends):
+            if reported_by(direct, dq.end, dq.filed):
                 continue  # this quarter is reported on its own for some metric
             cell = derived.setdefault((dq.start, dq.end, dq.accession), {"quarter": dq})
             cell[name] = dq.value
@@ -417,6 +450,33 @@ def _payload(engine: Engine, url: str) -> tuple[int, bytes] | None:
     return None if row is None else (int(row[0]), bytes(row[1]))
 
 
+def company_splits(engine: Engine, company_id: str) -> list[label.Split]:
+    """The dated share splits of a company (LB-05, decision C-49): from the price source's stored
+    factors where the company has prices, otherwise from the split tag in its SEC facts. A price
+    ratio that shrinks the share count but is not a plain reverse split is kept as `ambiguous`:
+    labels whose window it falls in cannot be put on one basis."""
+    with engine.connect() as conn:
+        priced = conn.execute(
+            text("SELECT EXISTS (SELECT 1 FROM price_daily WHERE company_id = :c)"),
+            {"c": company_id},
+        ).scalar_one()
+        if priced:
+            rows = conn.execute(
+                text(
+                    "SELECT DISTINCT ON (ex_date) ex_date, value FROM adjustment_factor "
+                    "WHERE company_id = :c AND kind = 'split' ORDER BY ex_date, captured_at DESC"
+                ),
+                {"c": company_id},
+            ).all()
+            return [
+                label.Split(r[1], r[0], ambiguous=label.is_unknown_basis(r[1]))
+                for r in rows
+                if label.is_share_split(r[1]) or label.is_unknown_basis(r[1])
+            ]
+    found = _payload(engine, FACTS_URL.format(cik=company_id))
+    return [] if found is None else label.splits_from_facts(found[1])
+
+
 def load_financials(engine: Engine, company_id: str) -> dict[str, int]:
     """Parse the stored company-facts payload and write EPS and fundamentals rows.
 
@@ -428,7 +488,7 @@ def load_financials(engine: Engine, company_id: str) -> dict[str, int]:
     payload_id, body = found
     counts = {"eps": 0, "fundamentals": 0}
     with run_record(engine, "load-financials", EDGAR_SOURCE) as run, engine.begin() as conn:
-        eps = eps_rows(body)
+        eps = eps_rows(body, company_splits(engine, company_id))
         fund = fundamentals_rows(body)
         run.rows_read = len(eps) + len(fund)
         for r in eps:

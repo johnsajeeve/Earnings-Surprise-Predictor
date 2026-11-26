@@ -220,12 +220,6 @@ def test_er_07_ac1_user_sees_q_a_analysis_unavailable_for():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("ER-07-AC2")
-def test_er_07_ac2_system_stores_q_a_features_as_unavailable():
-    """ER-07-AC2: System: Stores Q&A features as unavailable."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("ER-08-AC1")
 def test_er_08_ac1_user_sees_insufficient_peers_in_the_sector():
     """ER-08-AC1: User sees "Insufficient peers" in the sector section."""
@@ -363,23 +357,6 @@ def test_fr_01_ac2_given_the_same_ticker_submitted_twice_without():
 def test_fr_01_ac3_given_a_ticker_with_no_earlier_transcript():
     """FR-01-AC3: Given a ticker with no earlier transcript (a cold-start ticker), then the
     card shows "No transcript available for this ticker" and no class.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-02-AC1")
-def test_fr_02_ac1_given_any_event_in_the_database_when():
-    """FR-02-AC1: Given any event in the database, when its record is read, then all three
-    date fields are present and non-null, or the event is marked incomplete. The label route
-    is stored beside them.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-02-AC2")
-def test_fr_02_ac2_given_a_transcript_dated_after_its_announcement():
-    """FR-02-AC2: Given a transcript dated after its announcement by more than the window in
-    Data TX-02, then the event is flagged for review and excluded from training.
     """
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
@@ -544,54 +521,6 @@ def test_fr_11_ac1_given_a_prediction_is_stored_then_both():
 @pytest.mark.req("FR-12-AC1")
 def test_fr_12_ac1_srs_01_to_srs_14_pass():
     """FR-12-AC1: SRS-01 to SRS-14 pass."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-13-AC1")
-def test_fr_13_ac1_given_the_same_transcript_is_ingested_twice():
-    """FR-13-AC1: Given the same transcript is ingested twice, then exactly one transcript
-    row exists for it.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-13-AC2")
-def test_fr_13_ac2_given_an_ingestion_job_fails_halfway_and():
-    """FR-13-AC2: Given an ingestion job fails halfway and is re-run, then the final row
-    count equals the count of a clean run.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-14-AC1")
-def test_fr_14_ac1_given_a_new_consensus_estimate_arrives_for():
-    """FR-14-AC1: Given a new consensus estimate arrives for an event, then a new snapshot
-    row is added with its capture timestamp and the earlier snapshot is unchanged.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-14-AC2")
-def test_fr_14_ac2_given_a_prediction_for_an_event_announced():
-    """FR-14-AC2: Given a prediction for an event announced on date D, then any snapshot
-    captured on or after D is excluded from its inputs.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-15-AC1")
-def test_fr_15_ac1_given_a_transcript_with_a_recognised_q():
-    """FR-15-AC1: Given a transcript with a recognised Q&A marker, then prepared and Q&A
-    sections are stored separately.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("FR-15-AC2")
-def test_fr_15_ac2_given_no_q_a_marker_is_found():
-    """FR-15-AC2: Given no Q&A marker is found, then the event is flagged "Segmentation
-    failed" and the Q&A features are stored as unavailable, not as zero.
-    """
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
@@ -917,12 +846,6 @@ def test_nfr_02_ac1_under_10_s_or_returned_as_pending():
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
 
 
-@pytest.mark.req("NFR-03-AC1")
-def test_nfr_03_ac1_check_runs_every_24_hours():
-    """NFR-03-AC1: Check runs every 24 hours"""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("NFR-07-AC1")
 def test_nfr_07_ac1_automated_check_passes():
     """NFR-07-AC1: Automated check passes"""
@@ -959,12 +882,6 @@ def test_pl_03_ac1_health_response_lists_the_date_for_a():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("PL-04-AC1")
-def test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected():
-    """PL-04-AC1: Fixture with insufficient EPS history is rejected with the logged reason."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 EXPECTED_SCHEMA = {
     "alembic_version": ["version_num"],
     "company": ["company_id", "name"],
@@ -988,7 +905,8 @@ EXPECTED_SCHEMA = {
         "event_id", "company_id", "transcript_id", "period_end", "fiscal_period",
         "transcript_date", "information_date", "announcement_date", "announcement_time_utc",
         "release_accession", "eps_basis", "label_route", "sue", "sue_reason", "differences_used",
-        "splits_applied", "incomplete", "status", "exclusion_reason",
+        "splits_applied", "incomplete", "status", "exclusion_reason", "eps_accession",
+        "eps_filed_at",
     ],
     "estimate_snapshot": [
         "snapshot_id", "company_id", "event_id", "mean_estimate", "low_estimate", "high_estimate",
@@ -1023,7 +941,7 @@ EXPECTED_SCHEMA = {
         "transcript_id", "company_id", "ticker", "fiscal_year", "fiscal_quarter", "call_date",
         "call_at", "source", "source_ref", "payload_id", "release_accession",
         "release_accepted_at", "raw_text", "raw_hash", "cleaned_text", "cleaning_rules_version",
-        "turns", "segmentation_status", "boundary_turn", "status",
+        "turns", "segmentation_status", "boundary_turn", "status", "call_type",
     ],
     "transcript_section": ["section_id", "transcript_id", "kind", "text"],
 }  # fmt: skip
@@ -1102,12 +1020,6 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
         engine.dispose()
     finally:
         migrate.drop_database(name)
-
-
-@pytest.mark.req("PL-06-AC1")
-def test_pl_06_ac1_hash_of_raw_text_is_identical_before():
-    """PL-06-AC1: Hash of raw text is identical before and after cleaning."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("SCR-01-AC1")

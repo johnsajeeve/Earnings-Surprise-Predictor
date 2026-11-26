@@ -29,10 +29,15 @@ ROUTE_TIME_SERIES = "time-series"
 EPS_BASIS = "gaap-diluted"
 MAX_DIFFERENCES = 8  # TH-11: window of 8 seasonal differences
 MIN_DIFFERENCES = 6  # TH-11: at least 6 are needed (10 quarters of history)
-QUARTER_GAP = range(70, 116)  # days between the ends of consecutive fiscal quarters
+QUARTER_LENGTH = range(80, 121)  # up to a 16-week fourth quarter (PepsiCo: 111 days)
+QUARTER_GAP = range(70, 121)  # days between quarter ends; 119 in a 53-week year with a 16-week Q4
 MAX_REPORT_LAG_DAYS = 100  # the announced quarter ended at most this long before D (seen: 77)
 SPLIT_TAG = "StockholdersEquityNoteStockSplitConversionRatio1"
 SPLIT_MAX_RATIO = 100
+UNKNOWN_BASIS_BELOW = Decimal("0.8")  # a price ratio this small shrank the share count
+# two filings whose quarter ends are this close report the same quarter (quarters are ~91 apart)
+SAME_QUARTER_DAYS = 20
+MAX_TARGET_FILING_DAYS = 100  # the announced quarter's EPS must be first filed this soon after D
 SAME_SPLIT_DAYS = 400
 ALREADY_PUBLIC_DAYS = 10
 # EPS of more than this size, in a company whose typical EPS is far smaller, is a scale error
@@ -55,12 +60,14 @@ class EpsVersion:
     value: Decimal
     filed: date
     derived: bool = False
+    accession: str = ""
 
 
 @dataclass(frozen=True)
 class Split:
     ratio: Decimal  # old basis value divided by new basis value, for example 7 for a 7-for-1 split
     effective: date  # the day the split took effect, as the company reported it
+    ambiguous: bool = False  # a share-count change whose ratio mixes in a price adjustment
 
 
 @dataclass(frozen=True)
@@ -73,15 +80,17 @@ class SueResult:
     splits_applied: int = 0
     target_filed: date | None = None  # first filing of the announced quarter's EPS
     scale_suspect: bool = False  # an input is out of scale with the company's other values
+    target_accession: str = ""  # the filing that first reported the announced quarter (AE-01)
 
 
 def first_filed(versions: list[EpsVersion]) -> dict[date, EpsVersion]:
-    """One row per quarter, named by its end date: the earliest filing, a directly reported value
-    before a derived one. Filings sometimes report the same quarter with a start date shifted by a
-    day or a week, so the start date does not identify a quarter."""
+    """One row per quarter, named by the end date of its first filing: the earliest filing, a
+    directly reported value before a derived one filed the same day. Filings report the same
+    quarter with a start or end date shifted by a few days, so dates that close are one quarter."""
     out: dict[date, EpsVersion] = {}
-    for v in sorted(versions, key=lambda v: (v.filed, v.derived)):
-        out.setdefault(v.period_end, v)
+    for v in sorted(versions, key=lambda v: (v.filed, v.derived, v.period_end)):
+        if not any(abs((v.period_end - e).days) <= SAME_QUARTER_DAYS for e in out):
+            out[v.period_end] = v
     return out
 
 
@@ -116,12 +125,18 @@ def is_share_split(ratio: Decimal) -> bool:
     return False
 
 
+def is_unknown_basis(ratio: Decimal) -> bool:
+    """A price ratio that shrank the share count and is not a plain reverse split, such as
+    Hilton's 0.4873 (a reverse split mixed with spin-offs). EPS cannot be restated from it."""
+    return 0 < ratio < UNKNOWN_BASIS_BELOW and not is_share_split(ratio)
+
+
 def adjusted_value(v: EpsVersion, splits: Sequence[Split]) -> tuple[Decimal, int]:
     """The value on the share basis of `splits`, and how many splits were applied: a value first
     filed before a split took effect is on the old basis."""
     value, applied = v.value, 0
     for s in splits:
-        if v.filed < s.effective:
+        if not s.ambiguous and v.filed < s.effective:
             value /= s.ratio
             applied += 1
     return value, applied
@@ -151,7 +166,7 @@ def compute_sue(
     versions: list[EpsVersion], announcement: date, splits: Sequence[Split] = ()
 ) -> SueResult:
     """Data LB-01, LB-02, LB-04, LB-05 for one event announced on `announcement`."""
-    quarters = [v for v in versions if (v.period_end - v.period_start).days in range(80, 101)]
+    quarters = [v for v in versions if (v.period_end - v.period_start).days in QUARTER_LENGTH]
     if not quarters:
         return SueResult(None, None, "no quarterly EPS stored for this company", 0, None)
     everything = first_filed(quarters)  # includes values filed after D: only the label may use them
@@ -163,13 +178,20 @@ def compute_sue(
         return SueResult(None, None, "no quarter ended within the reporting window", 0, None)
     q_end = max(target_ends)
     q_first = everything[q_end]
+    if (q_first.filed - announcement).days > MAX_TARGET_FILING_DAYS:
+        return SueResult(
+            None, None,
+            "the announced quarter's EPS was first filed more than 100 days after the announcement",
+            0, None,
+        )  # fmt: skip
     if (announcement - q_first.filed).days > ALREADY_PUBLIC_DAYS:
         return SueResult(None, None, "the announced quarter is not in the stored EPS", 0, None)
     history = {
         v.period_end: v
         for v in first_filed([v for v in quarters if v.filed < announcement]).values()
     }
-    known_splits = [s for s in splits if s.effective < announcement]  # known before D (LB-05)
+    known = [s for s in splits if s.effective < announcement]  # known before D (LB-05)
+    known_splits = [s for s in known if not s.ambiguous]
     chain = _chain({**history, q_end: q_first}, q_end)
     if len(chain) < 5:
         return SueResult(q_end, None, "fewer than 6 prior seasonal differences", 0, None)
@@ -190,6 +212,9 @@ def compute_sue(
     if len(diffs) < MIN_DIFFERENCES:
         return SueResult(q_end, None, "fewer than 6 prior seasonal differences", len(diffs), None)
     cur, prev = val(chain[0])[0], val(chain[4])[0]
+    oldest = min(history[e].filed for e in set(used))
+    if any(s.ambiguous and s.effective > oldest for s in known):
+        return SueResult(q_end, None, "the share basis in the window is unknown", len(diffs), None)
     info = max(history[e].filed for e in set(used))
     typical = median(abs(v.value) for v in everything.values())
     raw = [abs(q_first.value if e == q_end else history[e].value) for e in {chain[0], *used}]
@@ -200,11 +225,12 @@ def compute_sue(
         return SueResult(
             q_end, None, "standard deviation of the differences is zero", len(diffs), info,
             target_filed=q_first.filed, scale_suspect=suspect,
+            target_accession=q_first.accession,
         )  # fmt: skip
     sue = ((cur - prev) / sd).quantize(Decimal("0.000001"))
     return SueResult(
         q_end, sue, None, len(diffs), info, applied, target_filed=q_first.filed,
-        scale_suspect=suspect,
+        scale_suspect=suspect, target_accession=q_first.accession,
     )  # fmt: skip
 
 

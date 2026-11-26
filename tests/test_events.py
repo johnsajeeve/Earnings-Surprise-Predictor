@@ -91,7 +91,7 @@ def _fake_releases(monkeypatch, per_company):
     monkeypatch.setattr(tr, "_releases_for", lambda engine, cid: per_company.get(cid, []))
 
 
-@pytest.mark.req("FR-02-AC1", "FR-02-AC2", "CE-05-AC1", "DB-06")
+@pytest.mark.req("FR-02-AC1", "FR-02-AC2", "CE-05", "DB-06")
 @pytest.mark.code("src/earnings/events.py", "src/earnings/migrations/versions")
 def test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded(
     engines, monkeypatch
@@ -129,7 +129,7 @@ def test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded(
         assert conn.execute(text("SELECT count(*) FROM earnings_event")).scalar_one() == 3
 
 
-@pytest.mark.req("DB-06-AC1", "CE-05-AC1")
+@pytest.mark.req("DB-06", "CE-05")
 @pytest.mark.code("src/earnings/migrations/versions")
 def test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route(engines):
     from sqlalchemy.exc import DBAPIError
@@ -202,7 +202,10 @@ def test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input(engine
     at = datetime(2027, 3, 1, 21, 0, tzinfo=UTC)  # SYNTHETIC announcement moment
     with worker.begin() as conn:
         conn.execute(
-            text("UPDATE earnings_event SET announcement_time_utc = :t, announcement_date = :d"),
+            text(
+                "UPDATE earnings_event SET announcement_time_utc = :t, announcement_date = :d, "
+                "transcript_date = :d"
+            ),
             {"t": at, "d": at.date()},
         )
         for hours, mean, period in (

@@ -72,7 +72,7 @@ def test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_ment
     assert tr.find_boundary(_turns(("Ann", "a"), ("Bob", "b"), ("Cara", "c"))) is None
 
 
-@pytest.mark.req("ER-07-AC1", "IG-18-AC2")
+@pytest.mark.req("ER-07", "IG-18-AC2")
 @pytest.mark.code("src/earnings/transcripts.py")
 def test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles():
     row = ROWS["no_operator_turn"]
@@ -87,7 +87,7 @@ def test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles
     }  # no analyst or management guess
 
 
-@pytest.mark.req("TX-06-AC1")
+@pytest.mark.req("TX-06")
 @pytest.mark.code("src/earnings/transcripts.py")
 def test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role():
     row = ROWS["boundary_after_four_turns"]
@@ -389,7 +389,7 @@ def _fixture_row(case, symbol, stamp):
     return {**ROWS[case], "symbol": symbol, "date": stamp, "year": 2026, "quarter": 3}
 
 
-@pytest.mark.req("FR-15-AC1", "FR-15-AC2", "ER-07-AC2", "TX-06-AC1")
+@pytest.mark.req("FR-15-AC1", "FR-15-AC2", "ER-07-AC2", "TX-06")
 @pytest.mark.code("src/earnings/transcripts.py")
 def test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section(
     test_db, tmp_path, monkeypatch

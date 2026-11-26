@@ -4,6 +4,7 @@ kinds cannot be joined (PX-03)."""
 
 import json
 import time
+from bisect import bisect_left
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -13,7 +14,6 @@ from typing import Any
 
 from sqlalchemy import Engine, text
 
-from earnings import calendar as cal
 from earnings.clients import yahoo
 from earnings.label import is_share_split
 from earnings.rawstore import latest_payload, store_payload
@@ -24,9 +24,6 @@ CENT = Decimal("0.0001")
 # A series is refused when it misses more than this share of the company's announcement dates:
 # a ticker can be reused by another company after a delisting.
 MIN_EVENT_COVERAGE = 0.9
-# A dividend above this share of the previous close, on the day of a spin-off ratio, is the spin-off
-# itself listed a second time by the source (found with Danaher, 5 July 2016; drift DR-34)
-SPIN_OFF_DIVIDEND = Decimal("0.05")
 # A dividend above this share of the previous close, on the day of a spin-off ratio, is the spin-off
 # itself listed a second time by the source (found with Danaher, 5 July 2016; drift DR-34)
 SPIN_OFF_DIVIDEND = Decimal("0.05")
@@ -275,18 +272,12 @@ def survivorship_report(engine: Engine) -> dict[str, Any]:
     series = {}
     for company in sorted(priced & set(spells)):
         with engine.connect() as conn:
-            splits: dict[date, Decimal] = dict(
-                conn.execute(
-                    text("SELECT ex_date, value FROM adjustment_factor WHERE company_id = :c "
-                         "AND kind = 'split'"), {"c": company},
-                ).all()
-            )  # fmt: skip
-            dividends: dict[date, Decimal] = dict(
-                conn.execute(
-                    text("SELECT ex_date, value FROM adjustment_factor WHERE company_id = :c "
-                         "AND kind = 'dividend'"), {"c": company},
-                ).all()
-            )  # fmt: skip
+            factors = conn.execute(
+                text("SELECT kind, ex_date, value FROM adjustment_factor_as_of(:c, '2100-01-01')"),
+                {"c": company},
+            ).all()
+        splits: dict[date, Decimal] = {d: v for k, d, v in factors if k == "split"}
+        dividends: dict[date, Decimal] = {d: v for k, d, v in factors if k == "dividend"}
         raw = momentum_window(engine, company, date(2100, 1, 1))
         series[company] = total_return(raw, splits, dividends)
     universe, sizes = equal_weight_levels(series, spells)
@@ -313,31 +304,53 @@ def survivorship_report(engine: Engine) -> dict[str, Any]:
     return out
 
 
+def session_of_cutoff(engine: Engine, event_id: int) -> date:
+    """The session that splits an event's price windows: momentum before it, outcomes from it."""
+    from earnings.events import cutoffs
+
+    return cutoffs(engine, event_id)[0][1]
+
+
 def price_window_violations(engine: Engine) -> dict[str, int]:
-    """DV-05, price window: for events with prices, every momentum day is before the announcement
-    session and every outcome day is on or after it."""
+    """DV-05, price window. For each event with prices, what the two window reads return is
+    compared with what the stored prices say they should return for the session of the event's
+    cutoff: every day before it in the first, every other day in the second. A read that lets a
+    day through the boundary, or loses one, is a violation."""
+    from earnings.events import cutoffs
+
     with engine.connect() as conn:
-        events = conn.execute(
-            text(
-                "SELECT company_id, announcement_time_utc FROM earnings_event WHERE company_id IN "
-                "(SELECT DISTINCT company_id FROM price_daily) "
-                "AND announcement_time_utc IS NOT NULL"
-            )
-        ).all()
-        bad = checked = 0
-        for company, moment in events:
-            session = cal.trading_day_for(moment)
+        companies: dict[int, str] = dict(
+            conn.execute(text("SELECT event_id, company_id FROM earnings_event")).all()
+        )
+        stored: dict[str, list[date]] = {}
+        for company, day in conn.execute(
+            text("SELECT DISTINCT company_id, price_date FROM price_daily ORDER BY 1, 2")
+        ):
+            stored.setdefault(company, []).append(day)
+        checked = bad = 0
+        for event_id, session in cutoffs(engine):
+            company = companies[event_id]
+            if company not in stored:
+                continue
             row = conn.execute(
                 text(
                     "SELECT (SELECT max(price_date) FROM price_daily_before(:c, :s)), "
-                    "(SELECT min(price_date) FROM price_daily_from(:c, :s))"
+                    "(SELECT count(*) FROM price_daily_before(:c, :s)), "
+                    "(SELECT min(price_date) FROM price_daily_from(:c, :s)), "
+                    "(SELECT count(*) FROM price_daily_from(:c, :s))"
                 ),
                 {"c": company, "s": session},
             ).one()
-            checked += 1
-            bad += (row[0] is not None and row[0] >= session) or (
-                row[1] is not None and row[1] < session
+            days = stored[company]
+            before = bisect_left(days, session)
+            expected = (
+                days[before - 1] if before else None,
+                before,
+                days[before] if before < len(days) else None,
+                len(days) - before,
             )
+            checked += 1
+            bad += tuple(row) != expected
     return {"events_checked": checked, "violations": bad}
 
 

@@ -68,3 +68,7 @@ Real data, 100 companies (117 requests for the first full run, 2 more for three 
 ## Update, 24 November 2026, after the second independent audit
 
 The tables were rebuilt from the stored payloads for the corrected 100-company list (a rebuild test on real data). Current figures: 17,830 EPS rows (626 derived) and 15,736 fundamentals rows; 98 of 100 companies have EPS (Danaher and PepsiCo have none in the SEC data); 94 have quarterly EPS ending by 2014-09-30 and 79 of them have 10 or more; revenue for 97, gross profit for 56 and operating income for 84 companies; 512 of 7,093 EPS periods carry more than one value. The fiscal-year and fiscal-period columns were renamed `filing_fiscal_year` and `filing_fiscal_period`, because they describe the filing and not the period (migration 0006). The consensus snapshots carry the source's own basis (gaap or normalized) while the EPS history is GAAP: reconciling them is the basis test VL-07 in Wave 1.7.
+
+## Correction, 26 November 2026, after the independent audit
+
+The independent audit failed this wave as committed. Several results above are wrong or came from faulty parsing; see `independent-audit-2026-11-26.md` (DR-35) for the findings, the fixes and the corrected numbers. Where this file explains a gap by the SEC data, that explanation is withdrawn.

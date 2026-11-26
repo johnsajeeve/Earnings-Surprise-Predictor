@@ -413,17 +413,30 @@ This is a record of what was done and when, with the commit messages. It is not 
 - The first CI run of the Wave 1.8 commit failed the DB-03 check: 13 server connections against a limit of 12. Cause, confirmed with a probe: the test fixture forgot its connection pools without closing them, so connections from earlier tests stayed open. The fixture now closes them. The check and its limit are unchanged.
 - Work by Claude.
 
+### 26 Nov 2026: independent audit (FAIL) and the fixes
+
+- Asked by John: a fresh audit, every requirement and test covered, and the recommended answers applied to what needed approval, apart from the API key.
+- Delegated approvals recorded (C-53 to C-59). Three daily jobs, capture-gap flags and missing checks built.
+- A fresh agent audited commit c5a9801 and failed it. Confirmed and fixed: the parser skipped all EPS for 11 companies; derived quarters mixed share bases; later filings could replace first-filed values; renamed companies' calls were dropped; the prediction cutoff was not applied; several checks could not fail. Two PepsiCo faults found while fixing. Labelled events rose from 2,617 to 3,196; usable 3,130.
+- What I told John earlier and was false: that some companies had no EPS in the SEC data. DR-19 and DR-26 withdrawn.
+- The auditor's recomputation agrees with 3,132 labels; all 13 differences traced to its own limits. 51 labels have no outside check. The fixes have not been re-audited.
+- Needs John: D-48; the items under Waiting on John.
+- Work by Claude; audit by an independent agent.
+
 ## Waiting on John
 
-As of 26 November 2026. The full list with a recommendation for each item is `audits/evidence/decisions-2026-11-26.md`; what is left of it is below.
+As of 26 November 2026, after the independent audit.
 
-**Next**
-- **TH-06, survivorship threshold:** read the Wave 1.8 survivorship table and set it, before the validation set is read.
-- **Tiingo free key:** add it to `.env` (never paste it in chat). It would give the second price source (PX-01) and may cover removed companies (not verified).
-- **Hand labels:** 50 calls (`audits/evidence/wave-1.5/boundary_review_sheet.md`) and 100 events (`audits/evidence/wave-1.7/hand_audit_sheet.md`).
-- **Reviewer (D-09):** a person who did not build the data, for the dataset sign-off (GS-01).
-- **Before Wave 2:** D-35 (FinBERT checkpoint), D-36, D-34, D-45 run times. My recommendations are in section D of the decisions file.
+**Decide**
+- **D-48:** values I built without approval (price coverage 90%, spin-off 5%, scale-error limits, 100-day filing limit and others). Recommended: approve all.
 
-**Still to approve (they change a document):** the Product Section 11 columns of the event, EPS and fundamentals tables (C4), and the IG-16 sentence in Data Section 12 (C6).
+**Add**
+- **Tiingo free key** in `.env` (never in chat): the second price source (PX-01) and possibly prices for removed companies (not verified).
 
-**Only you:** DR-16 (read `wave-1.3/review_list.csv`), DR-21 (private email on GitHub), the Phase 0 spot-check of five requirements, D-16 ethics (apply in December), D-29 submission date, the supervisor's written agreement to the time-series label (C-25, SC-07, SS-04), D-03, D-40, the two SSOT map edits, and the older planning items in the decisions file (section E).
+**Only you can do these**
+- **Hand labels:** 50 calls (`audits/evidence/wave-1.5/boundary_review_sheet.md`) and 100 events (`audits/evidence/wave-1.7/hand_audit_sheet.md`). Both were redrawn from the rebuilt data.
+- **Reviewer (D-09):** a person who did not build the data (GS-01); also reviewer notes on the flagged extreme labels (DV-04).
+- **Supervisor:** written agreement to the time-series label (C-25, SC-07, SS-04).
+- D-16 ethics (apply in December), D-29 submission date, D-40 and D-46 (read and approve the component requirement documents), D-03, D-17, D-21, the planning items D-02 to D-08 and D-14, DR-21 (private email on GitHub), the Phase 0 spot-check, and the two SSOT map edits. I will show the exact SSOT wording when you want to make them.
+
+**Later, before their waves:** D-37, D-39, D-42, D-43, D-27 and D-15 (provider and spending).

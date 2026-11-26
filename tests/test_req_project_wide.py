@@ -634,14 +634,6 @@ def test_sc_05_ac1_no_rouge_or_bertscore_threshold_exists_in():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("SC-07-AC2")
-def test_sc_07_ac2_a_test_fails_if_events_with_different():
-    """SC-07-AC2: A test fails if events with different label routes are in one training set
-    (Data CE-05).
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("SP-01-AC1")
 def test_sp_01_ac1_loader_test_with_a_pickle_file_fails():
     """SP-01-AC1: Loader test with a pickle file fails as expected."""

@@ -1,7 +1,7 @@
-# Data card: dataset version wave-1.7-2026-11-26
+# Data card: dataset version audit-fixes-2026-11-26
 
 ## Coverage
-- Events: 3183 (2589 usable as labelled rows)
+- Events: 3431 (3130 usable as labelled rows)
 - Companies: 93
 - Announcement dates: 2013-01-16 to 2024-12-19
 - Label route: time-series; EPS basis: gaap-diluted
@@ -23,16 +23,16 @@
 - Sections: prepared remarks and Q&A split by the boundary rule of decision C-48.
 - EPS: diluted EPS from XBRL; fourth quarter derived as the year minus nine months and flagged.
 - Label: time-series SUE (Data LB-01) from first-filed history; sample standard deviation.
-- Split basis: the dated split ratios companies report to the SEC; companies without the tag are not adjusted until the price source's factors are stored.
+- Split basis: the price source's dated share-split ratios for companies with prices, otherwise the SEC split-ratio tag.
+- Prices: raw closes rebuilt from the yfinance close and its split list; dated factors apart.
 
 ## Known gaps
-- 143 of 3,183 events: no quarterly EPS stored for the company (DR-26)
-- 249 events: the announced quarter is not in the stored EPS
-- 174 events: fewer than 6 prior seasonal differences
-- Transcript coverage 2015 to 2024 is 86.9% (target 90%): 90.6% still in the index, 58.6% of companies that left it (DR-25)
-- 7 companies have no transcript in the source set
-- 24 labels use a source EPS with a scale error and are quarantined (DR-27)
-- Splits are adjusted only where the company reports the SEC split-ratio tag (DR-32)
+- 3,431 events, 3,196 with a label; 103 fewer than 6 prior differences, 69 no quarter in the reporting window, 52 announced quarter first filed over 100 days late, 11 unknown share basis
+- 69 events excluded from training, including 32 built on a wrongly scaled EPS value
+- Transcript coverage 2015 to 2024: 89.0% against 90% (TX-04); results cover the covered events
+- 7 companies have no transcript; 17 of 100 have no price history
+- Second-source check of closing prices not run (PX-01)
+- 51 labels (PepsiCo, State Street) have no outside recomputation
 
 ## Sign-off
 - Not signed off: no reviewer who did not build the dataset has been named (Data GS-01, decision D-09).

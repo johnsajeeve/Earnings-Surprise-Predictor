@@ -2,15 +2,15 @@
  "revision": "f3ded372da8d18dc6ad98955c4558e34b5fe6d45",
  "sha256": "9a305a1c4cbf6c4b0b9c8b98b242ea3de4dbe0ad43937dc54b56418629a17b31",
  "rows_in_file": 33362,
- "other_companies": 28639,
+ "other_companies": 28372,
  "outside_dates": 1400,
  "rejected": {
-  "no earnings release filed within 3 days of the call": 138
+  "no earnings release filed within 3 days of the call": 157
  },
- "loaded": 3183,
+ "loaded": 3431,
  "duplicates": 2,
- "segmentation_failed": 27,
- "call_before_release": 11,
- "call_late": 24,
+ "segmentation_failed": 38,
+ "call_before_release": 13,
+ "call_late": 31,
  "placeholder_times": 20
 }

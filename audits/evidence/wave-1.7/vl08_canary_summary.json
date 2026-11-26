@@ -1,5 +1,21 @@
 {
  "sampled": 20,
+ "differences_above_1pct": [
+  {
+   "company_id": "0000051143",
+   "period_end": "2024-09-30",
+   "stored": "-0.36",
+   "press": "-0.34",
+   "relative_difference": 0.0556
+  },
+  {
+   "company_id": "0001413329",
+   "period_end": "2024-09-30",
+   "stored": "1.97",
+   "press": "6.20",
+   "relative_difference": 2.1472
+  }
+ ],
  "counts": {
   "agree": 13,
   "other column": 2,

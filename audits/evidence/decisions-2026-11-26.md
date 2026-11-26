@@ -69,3 +69,7 @@ For John. A recommendation is not an approval: nothing here is decided until you
 ## Where a recommendation would change a requirement or document
 
 A1 (two entities added to Product Section 11), B5 (DV-05 wording), C4 (Section 11 update), C6 (Section 12 sentence), and B6 only if you choose to halve. Nothing else changes requirement text.
+
+## Correction, after the independent audit
+
+**B9 was wrong.** It said some companies have no EPS in the SEC data. For most of them the data is there and my parser skipped it. Your approval of B9 rested on my statement; it no longer means anything and is withdrawn (DR-35). New open decision: D-48 in the decision log.

@@ -55,7 +55,7 @@ def test_the_raw_close_is_rebuilt_from_the_real_apple_answer():
     assert paid[date(2014, 5, 8)] > Decimal("3")  # the raw dividend before the split
 
 
-@pytest.mark.req("PX-01-AC1")
+@pytest.mark.req("PX-01")
 @pytest.mark.code("src/earnings/prices.py", "src/earnings/migrations/versions")
 def test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing(engine):
     first = prices.store_prices(engine, AAPL, "AAPL", APPLE)

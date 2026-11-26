@@ -1,5 +1,315 @@
 {
  "coverage": {
+  "shortfall_by_company_and_year": {
+   "ADVANCED MICRO DEVICES INC": {
+    "2017": 1,
+    "2018": 2,
+    "2019": 4,
+    "2020": 2,
+    "2021": 3,
+    "2022": 1
+   },
+   "AT&T INC.": {
+    "2019": 1,
+    "2021": 1,
+    "2022": 1
+   },
+   "Activision Blizzard": {
+    "2022": 4,
+    "2023": 3
+   },
+   "Ansys": {
+    "2017": 1,
+    "2018": 1,
+    "2020": 1,
+    "2021": 1,
+    "2024": 5
+   },
+   "Avery Dennison Corp": {
+    "2022": 1
+   },
+   "BANK OF AMERICA CORP /DE/": {
+    "2024": 1
+   },
+   "BAXTER INTERNATIONAL INC": {
+    "2020": 3,
+    "2021": 2
+   },
+   "BROWN & BROWN, INC.": {
+    "2024": 1
+   },
+   "Bath & Body Works, Inc.": {
+    "2015": 7,
+    "2016": 8,
+    "2017": 9,
+    "2018": 9,
+    "2019": 6,
+    "2020": 6,
+    "2021": 7,
+    "2022": 1,
+    "2023": 2
+   },
+   "Brighthouse Financial, Inc.": {
+    "2017": 2
+   },
+   "CATERPILLAR INC": {
+    "2018": 1,
+    "2024": 1
+   },
+   "CITIZENS FINANCIAL GROUP INC/RI": {
+    "2019": 2,
+    "2020": 4,
+    "2021": 2
+   },
+   "COMCAST CORP": {
+    "2019": 1
+   },
+   "COPART INC": {
+    "2022": 2
+   },
+   "CORNING INC /NY": {
+    "2024": 1
+   },
+   "CSRA": {
+    "2016": 3,
+    "2017": 3,
+    "2018": 1
+   },
+   "CSX CORP": {
+    "2015": 1
+   },
+   "CUMMINS INC": {
+    "2015": 1,
+    "2016": 1,
+    "2017": 2,
+    "2018": 2,
+    "2019": 2,
+    "2020": 2,
+    "2021": 1,
+    "2022": 1
+   },
+   "Capri Holdings Ltd": {
+    "2018": 1,
+    "2020": 1
+   },
+   "Cboe Global Markets, Inc.": {
+    "2017": 1,
+    "2020": 1
+   },
+   "DANAHER CORP /DE/": {
+    "2015": 1,
+    "2016": 1,
+    "2017": 1,
+    "2018": 1,
+    "2019": 1,
+    "2020": 2,
+    "2021": 1,
+    "2022": 1,
+    "2023": 2,
+    "2024": 2
+   },
+   "DELTA AIR LINES, INC.": {
+    "2018": 1
+   },
+   "DEVON ENERGY CORP/DE": {
+    "2015": 1,
+    "2016": 1,
+    "2018": 1,
+    "2020": 1
+   },
+   "DIGITAL REALTY TRUST, INC.": {
+    "2016": 2,
+    "2018": 1,
+    "2019": 1
+   },
+   "Discovery, Inc.": {
+    "2017": 1,
+    "2018": 1,
+    "2022": 1
+   },
+   "EBAY INC": {
+    "2015": 1,
+    "2024": 1
+   },
+   "EQT Corp": {
+    "2015": 5,
+    "2016": 4,
+    "2017": 4,
+    "2018": 4,
+    "2022": 2,
+    "2023": 7,
+    "2024": 4
+   },
+   "EQUIFAX INC": {
+    "2016": 2,
+    "2017": 2,
+    "2019": 1,
+    "2020": 1,
+    "2021": 2
+   },
+   "FEDEX CORP": {
+    "2015": 2,
+    "2018": 1,
+    "2022": 1,
+    "2024": 1
+   },
+   "FLIR Systems": {
+    "2020": 1,
+    "2021": 3
+   },
+   "Gen Digital Inc.": {
+    "2021": 1,
+    "2023": 1
+   },
+   "HARTFORD INSURANCE GROUP, INC.": {
+    "2015": 1,
+    "2017": 1,
+    "2018": 1,
+    "2019": 1,
+    "2020": 1,
+    "2021": 1,
+    "2023": 1
+   },
+   "HENRY SCHEIN INC": {
+    "2018": 1
+   },
+   "HUNTINGTON INGALLS INDUSTRIES, INC.": {
+    "2018": 1
+   },
+   "Hilton Worldwide Holdings Inc.": {
+    "2018": 1,
+    "2020": 1,
+    "2021": 1
+   },
+   "HollyFrontier": {
+    "2020": 2
+   },
+   "Hospira": {
+    "2015": 3
+   },
+   "INTERNATIONAL BUSINESS MACHINES CORP": {
+    "2015": 4,
+    "2016": 3,
+    "2020": 1,
+    "2021": 1
+   },
+   "Intercontinental Exchange, Inc.": {
+    "2022": 1
+   },
+   "KLA CORP": {
+    "2015": 2,
+    "2016": 4
+   },
+   "Keurig Green Mountain": {
+    "2015": 4
+   },
+   "LABCORP HOLDINGS INC.": {
+    "2016": 1,
+    "2018": 1,
+    "2019": 1
+   },
+   "LINCOLN NATIONAL CORP": {
+    "2023": 3
+   },
+   "MSCI Inc.": {
+    "2021": 1
+   },
+   "NOV Inc.": {
+    "2018": 1,
+    "2019": 1,
+    "2021": 2
+   },
+   "NetApp, Inc.": {
+    "2019": 1
+   },
+   "Norwegian Cruise Line Holdings Ltd.": {
+    "2020": 3,
+    "2022": 3,
+    "2023": 1
+   },
+   "ORACLE CORP": {
+    "2022": 1
+   },
+   "Pall Corporation": {
+    "2015": 1
+   },
+   "People's United Financial": {
+    "2017": 1,
+    "2018": 1,
+    "2021": 3,
+    "2022": 1
+   },
+   "Philip Morris International Inc.": {
+    "2022": 1
+   },
+   "Precision Castparts Corporation": {
+    "2015": 5
+   },
+   "REALTY INCOME CORP": {
+    "2017": 2,
+    "2020": 3,
+    "2021": 1
+   },
+   "ROYAL CARIBBEAN CRUISES LTD": {
+    "2020": 3
+   },
+   "SKYWORKS SOLUTIONS, INC.": {
+    "2019": 1,
+    "2020": 1
+   },
+   "SLB LIMITED/NV": {
+    "2019": 1
+   },
+   "STATE STREET CORP": {
+    "2015": 1,
+    "2017": 1,
+    "2019": 1,
+    "2020": 1
+   },
+   "STERIS plc": {
+    "2021": 1
+   },
+   "SYSCO CORP": {
+    "2017": 1
+   },
+   "St Jude Medical": {
+    "2015": 5,
+    "2016": 6
+   },
+   "TE Connectivity plc": {
+    "2015": 5,
+    "2016": 4,
+    "2017": 4,
+    "2018": 5,
+    "2019": 5,
+    "2024": 1
+   },
+   "TRIMBLE INC.": {
+    "2024": 2
+   },
+   "Vulcan Materials CO": {
+    "2018": 1,
+    "2020": 1
+   },
+   "WATERS CORP /DE/": {
+    "2020": 1
+   },
+   "WELLS FARGO & COMPANY/MN": {
+    "2016": 1,
+    "2018": 3
+   },
+   "Walgreens Boots Alliance": {
+    "2021": 1
+   },
+   "Whole Foods Market": {
+    "2015": 4,
+    "2016": 4,
+    "2017": 3
+   },
+   "XCEL ENERGY INC": {
+    "2018": 1
+   }
+  },
   "by_year_and_group": {
    "2013 left the index": {
     "releases": 52,
@@ -7,7 +317,7 @@
    },
    "2013 still in the index": {
     "releases": 185,
-    "with_transcript": 151
+    "with_transcript": 155
    },
    "2014 left the index": {
     "releases": 60,
@@ -15,7 +325,7 @@
    },
    "2014 still in the index": {
     "releases": 192,
-    "with_transcript": 167
+    "with_transcript": 175
    },
    "2015 left the index": {
     "releases": 56,
@@ -23,7 +333,7 @@
    },
    "2015 still in the index": {
     "releases": 219,
-    "with_transcript": 191
+    "with_transcript": 199
    },
    "2016 left the index": {
     "releases": 53,
@@ -31,7 +341,7 @@
    },
    "2016 still in the index": {
     "releases": 235,
-    "with_transcript": 207
+    "with_transcript": 215
    },
    "2017 left the index": {
     "releases": 49,
@@ -39,7 +349,7 @@
    },
    "2017 still in the index": {
     "releases": 247,
-    "with_transcript": 222
+    "with_transcript": 229
    },
    "2018 left the index": {
     "releases": 50,
@@ -47,7 +357,7 @@
    },
    "2018 still in the index": {
     "releases": 291,
-    "with_transcript": 256
+    "with_transcript": 264
    },
    "2019 left the index": {
     "releases": 44,
@@ -55,7 +365,7 @@
    },
    "2019 still in the index": {
     "releases": 293,
-    "with_transcript": 260
+    "with_transcript": 269
    },
    "2020 left the index": {
     "releases": 40,
@@ -63,7 +373,7 @@
    },
    "2020 still in the index": {
     "releases": 312,
-    "with_transcript": 267
+    "with_transcript": 279
    },
    "2021 left the index": {
     "releases": 34,
@@ -71,7 +381,7 @@
    },
    "2021 still in the index": {
     "releases": 310,
-    "with_transcript": 278
+    "with_transcript": 289
    },
    "2022 left the index": {
     "releases": 20,
@@ -79,7 +389,7 @@
    },
    "2022 still in the index": {
     "releases": 317,
-    "with_transcript": 296
+    "with_transcript": 302
    },
    "2023 left the index": {
     "releases": 22,
@@ -98,100 +408,102 @@
     "with_transcript": 309
    }
   },
-  "missing_count": 547
+  "missing_count": 466
  },
  "label_exclusions": {
   "2013": {
-   "fewer than 6 prior seasonal differences": 14,
-   "label ok": 130,
-   "no quarter ended within the reporting window": 20,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 13,
+   "label ok": 176,
+   "no quarter ended within the reporting window": 4,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 1
   },
   "2014": {
-   "fewer than 6 prior seasonal differences": 18,
-   "label ok": 144,
-   "no quarter ended within the reporting window": 17,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 10,
+   "label ok": 195,
+   "no quarter ended within the reporting window": 1,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 6
   },
   "2015": {
-   "fewer than 6 prior seasonal differences": 15,
-   "label ok": 169,
-   "no quarter ended within the reporting window": 17,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 13,
+   "label ok": 221,
+   "no quarter ended within the reporting window": 5,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 2
   },
   "2016": {
-   "fewer than 6 prior seasonal differences": 17,
-   "label ok": 190,
-   "no quarter ended within the reporting window": 16,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 8,
+   "label ok": 242,
+   "no quarter ended within the reporting window": 7,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 4
   },
   "2017": {
-   "fewer than 6 prior seasonal differences": 14,
-   "label ok": 206,
-   "no quarter ended within the reporting window": 17,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 7,
+   "label ok": 253,
+   "no quarter ended within the reporting window": 6,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 5,
+   "the share basis in the window is unknown": 3
   },
   "2018": {
-   "fewer than 6 prior seasonal differences": 17,
-   "label ok": 237,
-   "no quarter ended within the reporting window": 23,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 9,
+   "label ok": 274,
+   "no quarter ended within the reporting window": 12,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 11,
+   "the share basis in the window is unknown": 4
   },
   "2019": {
-   "fewer than 6 prior seasonal differences": 11,
-   "label ok": 252,
-   "no quarter ended within the reporting window": 22,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 12,
+   "label ok": 289,
+   "no quarter ended within the reporting window": 10,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 6,
+   "the share basis in the window is unknown": 4
   },
   "2020": {
-   "fewer than 6 prior seasonal differences": 12,
-   "label ok": 254,
-   "no quarter ended within the reporting window": 19,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 9,
+   "label ok": 308,
+   "no quarter ended within the reporting window": 7,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 6
   },
   "2021": {
-   "fewer than 6 prior seasonal differences": 16,
-   "label ok": 250,
-   "no quarter ended within the reporting window": 19,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 11,
+   "label ok": 303,
+   "no quarter ended within the reporting window": 5,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 7
   },
   "2022": {
-   "fewer than 6 prior seasonal differences": 12,
-   "label ok": 260,
-   "no quarter ended within the reporting window": 24,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 7,
+   "label ok": 312,
+   "no quarter ended within the reporting window": 4,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 2
   },
   "2023": {
-   "fewer than 6 prior seasonal differences": 15,
-   "label ok": 263,
-   "no quarter ended within the reporting window": 25,
-   "no quarterly EPS stored for this company": 12
+   "fewer than 6 prior seasonal differences": 3,
+   "label ok": 313,
+   "no quarter ended within the reporting window": 4
   },
   "2024": {
-   "fewer than 6 prior seasonal differences": 12,
-   "label ok": 262,
-   "no quarter ended within the reporting window": 31,
-   "no quarterly EPS stored for this company": 11
+   "fewer than 6 prior seasonal differences": 1,
+   "label ok": 310,
+   "no quarter ended within the reporting window": 4,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 2
   }
  },
  "size": {
   "measured": {
    "companies": 93,
-   "database_bytes": 793721879,
+   "database_bytes": 856128535,
    "largest_tables_bytes": {
-    "raw_payload": 335634432,
-    "transcript": 263700480,
-    "transcript_section": 87703552,
+    "raw_payload": 364560384,
+    "transcript": 284721152,
+    "transcript_section": 94724096,
     "price_daily": 83517440,
-    "eps_history": 5029888,
-    "fundamentals_filing": 4751360,
+    "eps_history": 7733248,
+    "fundamentals_filing": 7233536,
     "adjustment_factor": 2056192,
-    "earnings_event": 1212416
+    "earnings_event": 1327104
    }
   },
   "estimated": {
    "companies": 500,
-   "database_bytes": 4267321930,
+   "database_bytes": 4602841586,
    "method": "measured size times 5.4 (company ratio); ESTIMATE, not measured"
   }
  }

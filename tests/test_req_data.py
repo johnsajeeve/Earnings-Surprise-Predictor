@@ -12,15 +12,8 @@ import pytest
 
 from requirement_support import not_tested, source_register
 
-
 # Placeholders written by scripts/requirement_tests.py scaffold. Replace the call to
 # not_tested() with a real check when the code this test exercises is built.
-@pytest.mark.req("AE-01-AC1")
-def test_ae_01_ac1_every_event_has_a_document_identifier_an():
-    """AE-01-AC1: Every event has a document identifier, an announcement date and an EPS
-    filing date.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("AE-02-AC1")
@@ -32,24 +25,6 @@ def test_ae_02_ac1_at_least_98_agreement_on_a_sample():
 @pytest.mark.req("AE-03-AC2")
 def test_ae_03_ac2_test_in_vl_07():
     """AE-03-AC2: Test in VL-07."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("CE-01-AC1")
-def test_ce_01_ac1_zero_rows_where_capture_time_is_on():
-    """CE-01-AC1: Zero rows where capture time is on or after announcement."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("CE-02-AC1")
-def test_ce_02_ac1_test_vl_01_passes():
-    """CE-02-AC1: Test VL-01 passes."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("CE-02-AC2")
-def test_ce_02_ac2_sr_08_test_passes():
-    """CE-02-AC2: SR-08 test passes."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
@@ -71,12 +46,6 @@ def test_ce_05_ac1_dataset_version_has_a_label_route_value():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("CE-05-AC2")
-def test_ce_05_ac2_a_test_fails_if_events_with_different():
-    """CE-05-AC2: A test fails if events with different routes are in one training set."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("CE-06-AC1")
 def test_ce_06_ac1_test_a_planted_forecast_dated_d_or():
     """CE-06-AC1: Test: a planted forecast dated D or later is excluded."""
@@ -89,27 +58,9 @@ def test_ce_06_ac2_report_shows_the_age_distribution_of_consensus():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("DV-01-AC1")
-def test_dv_01_ac1_quarantine_count_is_reported_per_run():
-    """DV-01-AC1: Quarantine count is reported per run."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DV-02-AC1")
-def test_dv_02_ac1_the_three_date_fields_have_zero_nulls():
-    """DV-02-AC1: The three date fields have zero nulls."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("DV-02-AC2")
 def test_dv_02_ac2_other_fields_are_within_the_thresholds_in():
     """DV-02-AC2: Other fields are within the thresholds in Section 11."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DV-03-AC1")
-def test_dv_03_ac1_uniqueness_check_passes_on_every_load():
-    """DV-03-AC1: Uniqueness check passes on every load."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
@@ -119,96 +70,16 @@ def test_dv_04_ac1_flagged_rows_have_a_reviewer_note_before():
     not_tested("NEEDS PERSON", "needs a sign-off, review or approval by a person")
 
 
-@pytest.mark.req("DV-05-AC1")
-def test_dv_05_ac1_date_order_test_on_every_load_reports():
-    """DV-05-AC1: Date-order test on every load reports zero violations."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DV-06-AC1")
-def test_dv_06_ac1_mapping_test_passes_on_five_known_non():
-    """DV-06-AC1: Mapping test passes on five known non-calendar companies."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DV-07-AC1")
-def test_dv_07_ac1_test_covers_a_pre_open_and_an():
-    """DV-07-AC1: Test covers a pre-open and an after-close release, both mapped correctly."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DV-08-AC1")
-def test_dv_08_ac1_table_hashes_match_between_two_runs():
-    """DV-08-AC1: Table hashes match between two runs."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("FD-01-AC2")
 def test_fd_01_ac2_a_sample_of_20_values_matches_the():
     """FD-01-AC2: A sample of 20 values matches the filing."""
     not_tested("NEEDS MEASUREMENT", "a hand check of 20 values against the filings (Wave 1.7)")
 
 
-@pytest.mark.req("FD-04-AC1")
-def test_fd_04_ac1_mapping_test_passes_on_the_five_non():
-    """FD-04-AC1: Mapping test passes on the five non-calendar companies used in DV-06."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("GS-01-AC1")
 def test_gs_01_ac1_sign_off_exists_before_the_dataset_is():
     """GS-01-AC1: Sign-off exists before the dataset is used in training."""
     not_tested("NEEDS PERSON", "needs a sign-off, review or approval by a person")
-
-
-@pytest.mark.req("GS-02-AC1")
-def test_gs_02_ac1_data_card_exists_for_every_dataset_version():
-    """GS-02-AC1: Data card exists for every dataset version."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("LB-01-AC1")
-def test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue():
-    """LB-01-AC1: Fixture company with a hand-calculated SUE matches to four decimal places."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("LB-02-AC1")
-def test_lb_02_ac1_exclusion_count_reported_per_year():
-    """LB-02-AC1: Exclusion count reported per year."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("LB-02-AC2")
-def test_lb_02_ac2_zero_variance_fixture_returns_unavailable():
-    """LB-02-AC2: Zero-variance fixture returns unavailable."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("LB-03-AC1")
-def test_lb_03_ac1_derived_values_are_flagged():
-    """LB-03-AC1: Derived values are flagged."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("LB-03-AC2")
-def test_lb_03_ac2_sample_comparison_is_reported_with_differences_above():
-    """LB-03-AC2: Sample comparison is reported, with differences above 1% listed."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("LB-04-AC1")
-def test_lb_04_ac1_test_with_a_planted_restatement_filed_after():
-    """LB-04-AC1: Test with a planted restatement filed after D shows the original value is used."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("LB-05-AC1")
-def test_lb_05_ac1_test_on_a_company_with_a_split():
-    """LB-05-AC1: Test on a company with a split inside the window gives the same SUE as the
-    unsplit series.
-    """
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("LB-06-AC1")
@@ -245,18 +116,6 @@ def test_lb_08_ac1_report_exists_with_all_three_measures_and():
 def test_px_01_ac1_20_sampled_announcement_day_closes_match_a():
     """PX-01-AC1: 20 sampled announcement-day closes match a second source."""
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
-
-
-@pytest.mark.req("PX-02-AC1")
-def test_px_02_ac1_test_with_a_planted_future_price_shows():
-    """PX-02-AC1: Test with a planted future price shows it is excluded."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("PX-03-AC1")
-def test_px_03_ac1_series_type_check_fails_any_series_containing():
-    """PX-03-AC1: Series-type check fails any series containing both."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("SEC-01-AC1")
@@ -389,12 +248,6 @@ def test_sr_11_ac1_a_test_fails_any_displayed_excerpt_longer():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("TH-01-AC1")
-def test_th_01_ac1_at_least_90():
-    """TH-01-AC1: At least 90%"""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("TH-02-AC1")
 def test_th_02_ac1_at_least_95():
     """TH-02-AC1: At least 95%"""
@@ -410,12 +263,6 @@ def test_th_03_ac1_at_least_98_within_0_5():
 @pytest.mark.req("TH-04-AC1")
 def test_th_04_ac1_3():
     """TH-04-AC1: 3"""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("TH-06-AC1")
-def test_th_06_ac1_to_be_set_after_the_first_comparison():
-    """TH-06-AC1: To be set after the first comparison run"""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
@@ -443,12 +290,6 @@ def test_th_10_ac1_28_of_30_events_agree_within_1():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("TH-11-AC1")
-def test_th_11_ac1_at_least_6_prior_seasonal_differences_8():
-    """TH-11-AC1: At least 6 prior seasonal differences, 8-difference window"""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("TH-12-AC1")
 def test_th_12_ac1_differences_above_1_listed():
     """TH-12-AC1: Differences above 1% listed"""
@@ -469,30 +310,6 @@ def test_th_14_ac1_zero():
     assert sum(float(r["cost_usd_per_month"]) for r in primary) == 0
 
 
-@pytest.mark.req("TH-15-AC1")
-def test_th_15_ac1_0():
-    """TH-15-AC1: 0%"""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("TX-01-AC1")
-def test_tx_01_ac1_100_of_rows_have_all_three_fields():
-    """TX-01-AC1: 100% of rows have all three fields."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("TX-01-AC2")
-def test_tx_01_ac2_rows_missing_one_are_rejected_and_logged():
-    """TX-01-AC2: Rows missing one are rejected and logged."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("TX-02-AC1")
-def test_tx_02_ac1_violations_are_zero_or_each_violation_is():
-    """TX-02-AC1: Violations are zero, or each violation is listed with a reason."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("TX-03-AC1")
 def test_tx_03_ac1_on_a_hand_labelled_sample_of_50():
     """TX-03-AC1: On a hand-labelled sample of 50 transcripts, at least 95% of boundaries
@@ -507,18 +324,6 @@ def test_tx_04_ac1_coverage_report_lists_every_missing_company_and():
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
 
 
-@pytest.mark.req("TX-05-AC1")
-def test_tx_05_ac1_given_two_transcripts_for_one_event_the():
-    """TX-05-AC1: Given two transcripts for one event, the earlier is kept."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("TX-05-AC2")
-def test_tx_05_ac2_dv_03_passes():
-    """TX-05-AC2: DV-03 passes."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("TX-06-AC1")
 def test_tx_06_ac1_sample_of_20_transcripts_has_labels_on():
     """TX-06-AC1: Sample of 20 transcripts has labels on every turn."""
@@ -531,18 +336,6 @@ def test_tx_07_ac1_coverage_table_by_year_survivor_status_and():
     sector exists.
     """
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
-
-
-@pytest.mark.req("VL-01-AC1")
-def test_vl_01_ac1_the_pipeline_excludes_it():
-    """VL-01-AC1: The pipeline excludes it."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("VL-01-AC2")
-def test_vl_01_ac2_any_leaked_row_fails_the_build():
-    """VL-01-AC2: Any leaked row fails the build."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
 @pytest.mark.req("VL-02-AC1")
@@ -669,3 +462,12 @@ def test_vl_12_ac1_at_least_28_of_30_estimates_agree():
 def test_vl_12_ac2_otherwise_the_source_cannot_build_the_label():
     """VL-12-AC2: Otherwise the source cannot build the label."""
     not_tested("NEEDS MEASUREMENT", "needs a measured run on real data or hardware")
+
+
+@pytest.mark.req("IM-02-AC2")
+def test_im_02_ac2_each_removed_company_record_has_its_date_and_reason():
+    """IM-02-AC2: Each record has a removal date and reason."""
+    not_tested(
+        "NOT IMPLEMENTED",
+        "no last trading date is stored; one removed company has no reason (audit, 26 Nov)",
+    )

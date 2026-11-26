@@ -236,18 +236,6 @@ def test_db_12_ac1_insert_of_a_featurevector_without_a_feature():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
-@pytest.mark.req("DB-13-AC1")
-def test_db_13_ac1_fault_injected_mid_event_leaves_no_rows():
-    """DB-13-AC1: Fault injected mid-event leaves no rows for that event."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("DB-13-AC2")
-def test_db_13_ac2_re_running_a_stage_leaves_the_row():
-    """DB-13-AC2: Re-running a stage leaves the row count unchanged."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
 @pytest.mark.req("DB-14-AC1")
 def test_db_14_ac1_explain_output_for_each_named_query_is():
     """DB-14-AC1: `EXPLAIN` output for each named query is stored and shows an index scan on

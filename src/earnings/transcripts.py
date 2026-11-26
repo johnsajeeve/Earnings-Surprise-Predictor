@@ -271,12 +271,18 @@ def _ticker_map(
 
 
 def _company_for(ticker_map: dict, symbol: str, day: date) -> str | None:
+    """The company that used the ticker on the day. The transcript source files old calls under a
+    company's current ticker, so when nothing matches the day, a ticker that is the current one of
+    exactly one listed company is matched to it. The call must still link to that company's own
+    earnings release within three days, which a reused ticker would not."""
     from earnings.membership import ticker_key
 
-    for cid, start, end in ticker_map.get(ticker_key(symbol), []):
+    spans = ticker_map.get(ticker_key(symbol), [])
+    for cid, start, end in spans:
         if start <= day and (end is None or day < end):
             return cid
-    return None
+    current = {cid for cid, _, end in spans if end is None}
+    return current.pop() if len(current) == 1 else None
 
 
 def load_transcripts(
