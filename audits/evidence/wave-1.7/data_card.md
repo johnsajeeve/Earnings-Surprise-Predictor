@@ -1,7 +1,7 @@
-# Data card: dataset version wave-1.7-2026-11-25
+# Data card: dataset version wave-1.7-2026-11-26
 
 ## Coverage
-- Events: 3183 (2598 usable as labelled rows)
+- Events: 3183 (2589 usable as labelled rows)
 - Companies: 93
 - Announcement dates: 2013-01-16 to 2024-12-19
 - Label route: time-series; EPS basis: gaap-diluted
@@ -23,15 +23,16 @@
 - Sections: prepared remarks and Q&A split by the boundary rule of decision C-48.
 - EPS: diluted EPS from XBRL; fourth quarter derived as the year minus nine months and flagged.
 - Label: time-series SUE (Data LB-01) from first-filed history; sample standard deviation.
-- Split basis: inferred from re-reported quarters until the price tables are approved (D-47 k).
+- Split basis: the dated split ratios companies report to the SEC; companies without the tag are not adjusted until the price source's factors are stored.
 
 ## Known gaps
 - 143 of 3,183 events: no quarterly EPS stored for the company (DR-26)
-- 243 events: no quarter of the period in the stored EPS
-- 178 events: fewer than 6 prior seasonal differences
-- Transcripts exist for 91% of releases of companies still in the index and 59% of companies that left it (DR-25)
+- 249 events: the announced quarter is not in the stored EPS
+- 174 events: fewer than 6 prior seasonal differences
+- Transcript coverage 2015 to 2024 is 86.9% (target 90%): 90.6% still in the index, 58.6% of companies that left it (DR-25)
 - 7 companies have no transcript in the source set
-- 2 events have a scale error in the source EPS (DR-27)
+- 24 labels use a source EPS with a scale error and are quarantined (DR-27)
+- Splits are adjusted only where the company reports the SEC split-ratio tag (DR-32)
 
 ## Sign-off
 - Not signed off: no reviewer who did not build the dataset has been named (Data GS-01, decision D-09).

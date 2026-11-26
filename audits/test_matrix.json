@@ -251,13 +251,15 @@
     },
     "src/earnings/calendar.py": {
       "requirements": [
-        "DV-07-AC1"
+        "DV-07-AC1",
+        "TX-02"
       ],
       "tests": [
         "tests/test_calendar.py::test_a_timestamp_without_a_time_zone_is_refused",
         "tests/test_calendar.py::test_known_exchange_holidays_and_open_days",
         "tests/test_calendar.py::test_pre_open_and_after_close_releases_map_to_the_right_session",
-        "tests/test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session"
+        "tests/test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session",
+        "tests/test_transcripts.py::test_one_trading_day_is_counted_with_exchange_holidays"
       ]
     },
     "src/earnings/capture_universe.csv": {
@@ -394,6 +396,7 @@
         "DB-13-AC2",
         "DB-15-AC1",
         "DV-08-AC1",
+        "FR-02",
         "FR-02-AC1",
         "FR-02-AC2",
         "FR-14-AC2",
@@ -406,8 +409,10 @@
       ],
       "tests": [
         "tests/test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input",
+        "tests/test_events.py::test_an_event_whose_eps_was_filed_before_the_release_is_excluded_from_training",
         "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded",
         "tests/test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only",
+        "tests/test_events.py::test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day",
         "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing",
         "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
         "tests/test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart",
@@ -424,15 +429,18 @@
         "FD-01",
         "FD-01-AC1",
         "FD-03-AC1",
+        "FR-02",
         "IG-15",
         "IG-15-AC1",
         "LB-03",
         "LB-03-AC1",
-        "LB-05-AC1"
+        "LB-04"
       ],
       "tests": [
         "tests/test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session",
+        "tests/test_events.py::test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day",
         "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff",
+        "tests/test_financials.py::test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure",
         "tests/test_financials.py::test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none",
         "tests/test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures",
         "tests/test_financials.py::test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up",
@@ -442,8 +450,7 @@
         "tests/test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes",
         "tests/test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it",
         "tests/test_financials.py::test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version",
-        "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it",
-        "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014"
+        "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
       ]
     },
     "src/earnings/identifiers.py": {
@@ -458,24 +465,30 @@
       "requirements": [
         "CE-05-AC2",
         "DB-09",
+        "DV-04",
         "IG-20-AC1",
+        "LB-01",
         "LB-01-AC1",
         "LB-02-AC1",
         "LB-02-AC2",
         "LB-04-AC1",
+        "LB-05",
         "LB-05-AC1",
         "SC-07-AC2",
         "TH-11-AC1"
       ],
       "tests": [
         "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
+        "tests/test_label.py::test_a_label_whose_inputs_hold_a_scale_error_is_marked",
         "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
         "tests/test_label.py::test_a_quarter_refiled_with_a_shifted_start_date_is_still_the_same_quarter",
         "tests/test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series",
         "tests/test_label.py::test_a_training_set_with_two_label_routes_fails",
+        "tests/test_label.py::test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged",
         "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals",
-        "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014",
-        "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity"
+        "tests/test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each",
+        "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
+        "tests/test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead"
       ]
     },
     "src/earnings/limits.py": {
@@ -755,6 +768,7 @@
         "IG-18-AC2",
         "PL-06-AC1",
         "TX-01-AC2",
+        "TX-02",
         "TX-02-AC1",
         "TX-05-AC1",
         "TX-06-AC1"
@@ -767,6 +781,7 @@
         "tests/test_transcripts.py::test_a_stored_payload_is_parsed_with_the_network_disabled",
         "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role",
         "tests/test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release",
+        "tests/test_transcripts.py::test_one_trading_day_is_counted_with_exchange_holidays",
         "tests/test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed",
         "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section",
         "tests/test_transcripts.py::test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question",
@@ -830,9 +845,11 @@
         "AE-03-AC1",
         "CE-01-AC1",
         "CE-02-AC1",
+        "DV-01",
         "DV-01-AC1",
         "DV-02-AC1",
         "DV-03-AC1",
+        "DV-04",
         "DV-04-AC1",
         "DV-05-AC1",
         "DV-06-AC1",
@@ -852,6 +869,7 @@
         "tests/test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date",
         "tests/test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash",
         "tests/test_validation.py::test_date_order_violations_are_listed_and_a_call_before_the_release_is_a_stated_conflict",
+        "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones",
         "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_threshold",
         "tests/test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies",
         "tests/test_validation.py::test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold",
@@ -2452,7 +2470,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones"
+      ]
     },
     "DV-02": {
       "checks": [
@@ -2505,7 +2525,10 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_label.py::test_a_label_whose_inputs_hold_a_scale_error_is_marked",
+        "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones"
+      ]
     },
     "DV-05": {
       "checks": [
@@ -3978,7 +4001,10 @@
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_events.py::test_an_event_whose_eps_was_filed_before_the_release_is_excluded_from_training",
+        "tests/test_events.py::test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day"
+      ]
     },
     "FR-03": {
       "checks": [
@@ -5117,7 +5143,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead"
+      ]
     },
     "LB-02": {
       "checks": [
@@ -5184,7 +5212,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_financials.py::test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure"
+      ]
     },
     "LB-05": {
       "checks": [
@@ -5193,14 +5223,16 @@
           "ref": "LB-05-AC1",
           "tests": [
             "tests/test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series",
-            "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014",
+            "tests/test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each",
             "tests/test_req_data.py::test_lb_05_ac1_test_on_a_company_with_a_split"
           ],
           "text": "Test on a company with a split inside the window gives the same SUE as the unsplit series."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_label.py::test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged"
+      ]
     },
     "LB-06": {
       "checks": [
@@ -7937,7 +7969,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_transcripts.py::test_one_trading_day_is_counted_with_exchange_holidays"
+      ]
     },
     "TX-03": {
       "checks": [
@@ -8846,6 +8880,15 @@
         "FR-14-AC2"
       ]
     },
+    "tests/test_events.py::test_an_event_whose_eps_was_filed_before_the_release_is_excluded_from_training": {
+      "code": [
+        "src/earnings/events.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-02"
+      ]
+    },
     "tests/test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded": {
       "code": [
         "src/earnings/events.py",
@@ -8868,6 +8911,16 @@
         "DB-13-AC1",
         "DB-13-AC2",
         "PL-04-AC1"
+      ]
+    },
+    "tests/test_events.py::test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day": {
+      "code": [
+        "src/earnings/events.py",
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-02"
       ]
     },
     "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing": {
@@ -8926,6 +8979,15 @@
       "kind": "real check",
       "requirements": [
         "FD-02-AC1"
+      ]
+    },
+    "tests/test_financials.py::test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-04"
       ]
     },
     "tests/test_financials.py::test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none": {
@@ -9213,6 +9275,15 @@
         "IG-04"
       ]
     },
+    "tests/test_label.py::test_a_label_whose_inputs_hold_a_scale_error_is_marked": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-04"
+      ]
+    },
     "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label": {
       "code": [
         "src/earnings/label.py"
@@ -9251,6 +9322,15 @@
         "SC-07-AC2"
       ]
     },
+    "tests/test_label.py::test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-05"
+      ]
+    },
     "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals": {
       "code": [
         "src/earnings/label.py"
@@ -9261,9 +9341,8 @@
         "TH-11-AC1"
       ]
     },
-    "tests/test_label.py::test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014": {
+    "tests/test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each": {
       "code": [
-        "src/earnings/financials.py",
         "src/earnings/label.py"
       ],
       "kind": "real check",
@@ -9280,6 +9359,15 @@
         "LB-02-AC1",
         "LB-02-AC2",
         "TH-11-AC1"
+      ]
+    },
+    "tests/test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-01"
       ]
     },
     "tests/test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy": {
@@ -13749,6 +13837,16 @@
         "TX-05-AC1"
       ]
     },
+    "tests/test_transcripts.py::test_one_trading_day_is_counted_with_exchange_holidays": {
+      "code": [
+        "src/earnings/calendar.py",
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "TX-02"
+      ]
+    },
     "tests/test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed": {
       "code": [
         "src/earnings/transcripts.py"
@@ -14036,6 +14134,16 @@
       "kind": "real check",
       "requirements": [
         "DV-05-AC1"
+      ]
+    },
+    "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones": {
+      "code": [
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-01",
+        "DV-04"
       ]
     },
     "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_threshold": {

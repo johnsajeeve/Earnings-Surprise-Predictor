@@ -159,6 +159,35 @@ def test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_th
     assert third["quarantine_by_reason"]["sue above one million in size"] == 1
 
 
+@pytest.mark.req("DV-01", "DV-04")
+@pytest.mark.code("src/earnings/validation.py")
+def test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones(
+    engines, monkeypatch
+):
+    worker, api = engines
+    _eps(worker, CO)
+    with worker.begin() as conn:  # SYNTHETIC: a company whose history holds one scaled quarter
+        conn.execute(
+            text(
+                "INSERT INTO eps_history (company_id, period_start, period_end, period_kind, "
+                "eps_diluted, accession, filed_at) VALUES (:c, :s, :e, 'quarter', 1500000, "
+                "'scaled', :f)"
+            ),
+            {"c": CO, "s": ENDS[7] - timedelta(days=90), "e": ENDS[7],
+             "f": ENDS[7] + timedelta(days=20)},
+        )  # fmt: skip
+    ann = ENDS[12] + timedelta(days=25)
+    second = ann + timedelta(days=2)
+    _transcript(worker, CO, 1, ann, "rel-1")
+    _transcript(worker, CO, 2, second, "rel-2")  # two flagged events: each is counted once
+    _fake_releases(monkeypatch, {CO: [_release(ann, "rel-1"), _release(second, "rel-2")]})
+    ev.build_events(worker)
+    report = val.run_checks(worker)
+    assert report["quarantine_by_reason"]["label inputs hold a scale error in the source EPS"] == 2
+    with api.connect() as conn:  # flagged, and the label itself is left as computed
+        assert conn.execute(text("SELECT count(*) FROM earnings_event")).scalar_one() == 2
+
+
 @pytest.mark.req("DV-08-AC1")
 @pytest.mark.code("src/earnings/validation.py", "src/earnings/events.py")
 def test_building_events_twice_from_the_same_rows_gives_the_same_table_hash(
@@ -220,7 +249,8 @@ def test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold(engines):
             "2020 left the index": {"releases": 50, "with_transcript": 25},
         }
     }
-    gate = val.coverage_gate(cov)
+    cov["by_year_and_group"]["2014 still in the index"] = {"releases": 900, "with_transcript": 0}
+    gate = val.coverage_gate(cov)  # TX-04: the target events are 2015 to 2024, so 2014 is outside
     assert gate["share"] == pytest.approx(120 / 150) and gate["met"] is False
     assert gate["threshold"] == 0.90  # the miss is stated, the threshold is not moved
     assert gate["by_group"]["left the index"]["share"] == 0.5

@@ -1,15 +1,16 @@
 {
- "quarantined_this_run": 0,
- "quarantine_candidates": 26,
+ "quarantined_this_run": 57,
+ "quarantine_candidates": 57,
  "quarantine_by_reason": {
-  "flagged for review": 24,
-  "sue above one million in size": 2
+  "flagged for review": 32,
+  "sue above one million in size": 1,
+  "label inputs hold a scale error in the source EPS": 24
  },
  "duplicate_events": 0,
  "null_rates": {
   "events": 3183,
-  "usable_events": 2598,
-  "incomplete_events": 564,
+  "usable_events": 2589,
+  "incomplete_events": 566,
   "nulls_in_usable_events": {
    "transcript_date": 0,
    "information_date": 0,
@@ -22,28 +23,28 @@
   }
  },
  "information_not_before_announcement": 0,
- "call_before_announcement": 11,
+ "call_before_announcement": 8,
  "snapshots_on_or_after_announcement": 0,
  "eps_basis_values": [
   "gaap-diluted"
  ],
- "events_hash": "67e4132a7e9b828db18adcbd551e8f2865655381b55162e93dde90fcc7330d41",
+ "events_hash": "078b702d3413edb056d156a9f7174647a535819e2a512aa1967e6c56818ddeed",
  "coverage_gate": {
-  "target_events": 3730,
-  "with_transcript": 3183,
-  "share": 0.8533512064343164,
+  "target_events": 3241,
+  "with_transcript": 2816,
+  "share": 0.8688676334464671,
   "threshold": 0.9,
   "met": false,
   "by_group": {
    "left the index": {
-    "events": 661,
-    "with_transcript": 389,
-    "share": 0.5885022692889561
+    "events": 379,
+    "with_transcript": 222,
+    "share": 0.5857519788918206
    },
    "still in the index": {
-    "events": 3069,
-    "with_transcript": 2794,
-    "share": 0.910394265232975
+    "events": 2862,
+    "with_transcript": 2594,
+    "share": 0.9063591893780573
    }
   }
  }

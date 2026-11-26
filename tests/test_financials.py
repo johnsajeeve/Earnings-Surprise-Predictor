@@ -429,3 +429,21 @@ def test_backfill_counts_requests_skips_stored_payloads_and_reads_only_pages_tha
     assert first == 3 and len(session.calls) == 3
     assert not any("000.json" in c for c in session.calls)  # the page ending in 2010 is skipped
     assert backfill.fetch_company_payloads(engine, client, AAPL) == 0  # stored: nothing refetched
+
+
+@pytest.mark.req("LB-04")
+@pytest.mark.code("src/earnings/financials.py")
+def test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure():
+    def fact(start, end, value, filed, accn):  # SYNTHETIC facts
+        return fin.Fact(
+            fin.EPS_TAG, date.fromisoformat(start), date.fromisoformat(end), Decimal(value),
+            date.fromisoformat(filed), "10-Q", accn, 2020, "Q",
+        )  # fmt: skip
+
+    facts = [
+        fact("2020-01-01", "2020-06-30", "3.0", "2020-07-30", "a1"),  # six months
+        fact("2020-01-01", "2020-09-30", "5.0", "2020-10-30", "a2"),  # nine months, first filed
+        fact("2020-01-01", "2020-09-29", "9.0", "2021-10-30", "a3"),  # refiled, end a day earlier
+    ]
+    q3 = [d for d in fin.derive_from_cumulative(facts) if d.fiscal_period == "Q3"]
+    assert [(d.value, d.filed) for d in q3] == [(Decimal("2.0"), date(2020, 10, 30))]

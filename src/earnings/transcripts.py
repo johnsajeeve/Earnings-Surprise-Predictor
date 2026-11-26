@@ -17,6 +17,7 @@ from typing import Any
 
 from sqlalchemy import Engine, text
 
+from earnings import calendar as cal
 from earnings import financials as fin
 from earnings.clients import huggingface as hf
 from earnings.clients.edgar import SOURCE as EDGAR_SOURCE
@@ -179,12 +180,12 @@ def link_release(call: date, releases: list[fin.Release]) -> fin.Release | None:
 
 
 def trading_days_between(start: date, end: date) -> int:
-    """Weekdays from `start` to `end` (negative if end is earlier). Holidays are not known."""
+    """Exchange sessions after `start` up to `end` (negative if end is earlier)."""
     step = 1 if end >= start else -1
     days, cursor = 0, start
     while cursor != end:
         cursor += timedelta(days=step)
-        if cursor.weekday() < 5:
+        if cal.is_trading_day(cursor):
             days += step
     return days
 
@@ -192,8 +193,8 @@ def trading_days_between(start: date, end: date) -> int:
 def date_check(call: date, release: fin.Release) -> str | None:
     """Data TX-02. A call before the release is allowed (the cutoff is the earlier of the two,
     decision C-17) and is noted. A call more than one trading day after it is a violation."""
-    gap = trading_days_between(release.filed, call)
-    if gap < 0:
+    gap = trading_days_between(release.announced, call)
+    if call < release.announced:
         return "call dated before the release (allowed, C-17)"
     if gap > 1:
         return f"call dated {gap} trading days after the release"

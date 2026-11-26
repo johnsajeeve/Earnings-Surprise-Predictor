@@ -74,7 +74,10 @@ def _transcript(engine, company, n, call_date, accession):
 
 
 def _release(day, accession):
-    return fin.Release(accession, day, datetime.combine(day, datetime.min.time(), UTC), "2.02")
+    # accepted at 21:00 UTC, which is the same day in New York (16:00 or 17:00)
+    return fin.Release(
+        accession, day, datetime(day.year, day.month, day.day, 21, tzinfo=UTC), "2.02"
+    )
 
 
 @pytest.fixture
@@ -198,10 +201,13 @@ def test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input(engine
     # snapshots exist only from the capture start (2026), so move this event's announcement there
     at = datetime(2027, 3, 1, 21, 0, tzinfo=UTC)  # SYNTHETIC announcement moment
     with worker.begin() as conn:
-        conn.execute(text("UPDATE earnings_event SET announcement_time_utc = :t"), {"t": at})
+        conn.execute(
+            text("UPDATE earnings_event SET announcement_time_utc = :t, announcement_date = :d"),
+            {"t": at, "d": at.date()},
+        )
         for hours, mean, period in (
-            (-30, 1.0, "a"),
-            (-2, 2.0, "b"),
+            (-30, 1.0, "a"),  # the day before: usable
+            (-2, 2.0, "b"),  # the announcement day, before the release: NOT usable (FR-14)
             (0, 3.0, "c"),
             (2, 4.0, "d"),
         ):
@@ -215,7 +221,7 @@ def test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input(engine
             )
         event_id = conn.execute(text("SELECT event_id FROM earnings_event")).scalar_one()
     used = ev.event_snapshots(worker, event_id)
-    assert sorted(float(s["mean_estimate"]) for s in used) == [1.0, 2.0]  # none on or after D
+    assert [float(s["mean_estimate"]) for s in used] == [1.0]  # nothing captured on or after D
 
 
 @pytest.mark.req("IG-22-AC1", "TX-07")
@@ -308,11 +314,11 @@ def test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_who
     )
     real, calls = label.compute_sue, []
 
-    def failing(versions, day):
+    def failing(versions, day, splits=()):
         calls.append(1)
         if len(calls) == 2:
             raise RuntimeError("injected failure in the middle of the build")
-        return real(versions, day)
+        return real(versions, day, splits)
 
     monkeypatch.setattr(label, "compute_sue", failing)
     with pytest.raises(RuntimeError):
@@ -329,3 +335,41 @@ def test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_who
     assert len(rows) == 2
     assert rows[0][1] is not None and rows[1][1] is None
     assert rows[1][2] == "fewer than 6 prior seasonal differences"  # the logged reason
+
+
+@pytest.mark.req("FR-02")
+@pytest.mark.code("src/earnings/events.py", "src/earnings/financials.py")
+def test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day(
+    engines, monkeypatch
+):
+    worker, api = engines
+    _eps(worker, CO)
+    day = ENDS[12] + timedelta(days=25)
+    # SEC dates a filing accepted after 17:30 with the next business day. SYNTHETIC release:
+    # accepted at 18:00 New York time on `day`, filing date the day after
+    accepted = datetime(day.year, day.month, day.day, 22, tzinfo=UTC)
+    release = fin.Release("rel-1", day + timedelta(days=1), accepted, "2.02")
+    assert release.announced == day
+    _transcript(worker, CO, 1, day, "rel-1")
+    _fake_releases(monkeypatch, {CO: [release]})
+    ev.build_events(worker)
+    with api.connect() as conn:
+        row = conn.execute(text("SELECT announcement_date, status FROM earnings_event")).one()
+    assert row[0] == day and row[1] == "included"
+
+
+@pytest.mark.req("FR-02")
+@pytest.mark.code("src/earnings/events.py")
+def test_an_event_whose_eps_was_filed_before_the_release_is_excluded_from_training(
+    engines, monkeypatch
+):
+    worker, api = engines
+    _eps(worker, CO)  # the quarter ENDS[12] is first filed 30 days after it ends
+    day = ENDS[12] + timedelta(days=33)  # the release comes three days after that filing
+    _transcript(worker, CO, 1, day, "rel-1")
+    _fake_releases(monkeypatch, {CO: [_release(day, "rel-1")]})
+    ev.build_events(worker)
+    with api.connect() as conn:
+        row = conn.execute(text("SELECT status, exclusion_reason, sue FROM earnings_event")).one()
+    assert row[0] == "excluded" and "EPS was filed before the earnings release" in row[1]
+    assert row[2] is not None

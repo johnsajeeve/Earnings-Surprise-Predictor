@@ -1,11 +1,11 @@
 {
  "sampled": 200,
  "counts": {
-  "agree": 83,
-  "not parsed": 95,
-  "differ": 19,
-  "other column": 3
+  "agree": 90,
+  "not parsed": 91,
+  "differ": 17,
+  "other column": 2
  },
- "agree_of_sampled": 0.415,
- "agree_of_parsed": 0.7904761904761904
+ "agree_of_sampled": 0.45,
+ "agree_of_parsed": 0.8256880733944955
 }

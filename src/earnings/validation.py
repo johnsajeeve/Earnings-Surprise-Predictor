@@ -13,13 +13,21 @@ from typing import Any
 
 from sqlalchemy import Engine, text
 
-from earnings.label import EPS_BASIS, ROUTE_TIME_SERIES
+from earnings.events import (
+    _splits,
+    _versions,
+    coverage_report,
+    event_snapshots,
+    start_of_day,
+)
+from earnings.label import EPS_BASIS, ROUTE_TIME_SERIES, compute_sue
 
 DATE_FIELDS = ("transcript_date", "information_date", "announcement_date")
 # A label this large cannot come from a real surprise: two events show a scale error in the source
 # (quarterly EPS in thousands). This is my own flag, not the DV-04 threshold, which is still pending
 # (decision D-47, item m). The event stays in its table; the quarantine row is for review.
 SCALE_ERROR_SUE = 1e6
+TARGET_YEARS = range(2015, 2025)
 
 
 def calendar_quarter(start: date, end: date) -> tuple[int, int]:
@@ -134,15 +142,21 @@ def date_order_violations(engine: Engine) -> dict[str, list[tuple[Any, ...]]]:
 
 
 def capture_after_announcement(engine: Engine) -> int:
-    """CE-01: snapshots an event may use that were captured on or after its announcement."""
+    """CE-01, FR-14: snapshots an event may use that were captured on or after its announcement
+    date."""
     with engine.connect() as conn:
-        return conn.execute(
-            text(
-                "SELECT count(*) FROM earnings_event e CROSS JOIN LATERAL "
-                "estimate_snapshot_as_of(e.company_id, e.announcement_time_utc) s "
-                "WHERE s.captured_at >= e.announcement_time_utc"
-            )
-        ).scalar_one()
+        events = conn.execute(text("SELECT event_id FROM earnings_event")).scalars().all()
+        cutoffs: dict[int, date] = dict(
+            conn.execute(text("SELECT event_id, announcement_date FROM earnings_event")).all()
+        )
+        have = conn.execute(text("SELECT count(*) FROM estimate_snapshot")).scalar_one()
+    if not have:
+        return 0
+    return sum(
+        snapshot["captured_at"] >= start_of_day(cutoffs[e])
+        for e in events
+        for snapshot in event_snapshots(engine, e)
+    )
 
 
 def basis_values(engine: Engine) -> list[str]:
@@ -214,9 +228,33 @@ def schema_failures(engine: Engine) -> list[tuple[int, str]]:
     return bad
 
 
+def scale_suspect_events(engine: Engine) -> list[int]:
+    """Events whose label uses an EPS value far out of scale with the company's other values, found
+    by computing each label again from the stored facts (DV-04, DR-27). Flagged, never changed."""
+    with engine.connect() as conn:
+        rows = conn.execute(
+            text(
+                "SELECT event_id, company_id, announcement_date FROM earnings_event "
+                "WHERE sue IS NOT NULL ORDER BY company_id, event_id"
+            )
+        ).all()
+    found, cache = [], {}
+    for event_id, company, day in rows:
+        if company not in cache:
+            cache[company] = (_versions(engine, company), _splits(engine, company))
+        versions, splits = cache[company]
+        if compute_sue(versions, day, splits).scale_suspect:
+            found.append(event_id)
+    return found
+
+
 def run_checks(engine: Engine) -> dict[str, Any]:
     """All the event checks. Failing rows go to quarantine and are counted per reason."""
     failures = schema_failures(engine)
+    failures += [
+        (e, "label inputs hold a scale error in the source EPS")
+        for e in scale_suspect_events(engine)
+    ]
     new = sum(quarantine_row(engine, "earnings_event", str(k), why) for k, why in failures)
     per_reason: dict[str, int] = defaultdict(int)
     for _, why in failures:
@@ -256,7 +294,9 @@ def coverage_gate(coverage: dict[str, Any], threshold: float = 0.90) -> dict[str
     two groups apart (TX-07). The threshold is the requirement's 90%; a miss is reported."""
     totals = {"left the index": [0, 0], "still in the index": [0, 0]}
     for key, v in coverage["by_year_and_group"].items():
-        group = key.split(" ", 1)[1]
+        year, group = key.split(" ", 1)
+        if int(year) not in TARGET_YEARS:  # TX-04: the 2015 to 2024 events
+            continue
         totals[group][0] += v.get("releases", 0)
         totals[group][1] += v.get("with_transcript", 0)
     releases = sum(t[0] for t in totals.values())
@@ -323,7 +363,6 @@ def audit_sheet(engine: Engine, n: int, seed: int, out: Path) -> list[int]:
 def main(argv: list[str]) -> int:
     """python -m earnings.validation OUT_FILE: run the event checks and write the numbers."""
     from earnings.db import get_engine
-    from earnings.events import coverage_report
 
     if len(argv) > 2 and argv[1] == "audit-sheet":
         ids = audit_sheet(get_engine("worker"), 100, 2036, Path(argv[2]))

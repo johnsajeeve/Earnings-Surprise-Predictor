@@ -174,8 +174,8 @@ def derive_from_cumulative(facts: list[Fact]) -> list[DerivedQuarter]:
     by_start: dict[date, dict[int, Fact]] = defaultdict(dict)
     for f in first.values():
         months = _months(f)
-        if months:
-            by_start[f.start][months] = f
+        if months:  # `first` is in filing order: the first filing of a cumulative figure is kept
+            by_start[f.start].setdefault(months, f)
     out = []
     for classes in by_start.values():
         for lo, hi, label in ((3, 6, "Q2"), (6, 9, "Q3"), (9, 12, "Q4")):
@@ -354,6 +354,12 @@ class Release:
     filed: date
     accepted_utc: datetime
     items: str
+
+    @property
+    def announced(self) -> date:
+        """The New York day the release became public. The SEC filing date is the next business
+        day for a filing accepted after 17:30, so it is not the announcement date (FR-02)."""
+        return self.accepted_utc.astimezone(EASTERN).date()
 
 
 def parse_earnings_releases(payloads: list[bytes]) -> list[Release]:

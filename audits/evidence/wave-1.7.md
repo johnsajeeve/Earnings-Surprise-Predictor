@@ -64,3 +64,7 @@ VL-08: 13 of 20 match. The other 7 are not checked by hand. The class half of VL
 | GATE-1, GATE-2, GATE-3, GATE-5 | **not passed** | GATE-1: transcript coverage and EPS agreement unmet. GATE-3: survivorship blocked. GATE-5: hand audit and sign-off open |
 
 Not an independent audit. The P1 gate is not passed.
+
+## Correction, 26 November 2026, after the bug review
+
+See `bug-review-2026-11-26.md`. Corrected figures: TX-04 coverage 2015 to 2024 is 86.9% (2,816 of 3,241; still in the index 90.6%, left 58.6%), still NOT MET. Call before the release: 8. Quarantine: 32 flagged, 24 scale error, 1 above one million. AE-02 sample: 90 agree, 17 differ, 2 other column, 91 not parsed (still NOT MET). LB-03: 8 agree, 3 differ, 1 other column, 8 not parsed. Canary: 13 of 20. The hand audit sheet was redrawn (no verdicts had been written). The files in `wave-1.7/` hold the new numbers. Full tests 214 passed, CI-style 193 passed.

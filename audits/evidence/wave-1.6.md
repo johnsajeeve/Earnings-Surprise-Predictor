@@ -47,3 +47,7 @@ One real defect was found by a test and fixed: with floating point arithmetic a 
 | TH-15 | NOT TESTED | Null-rate gate is DV-02, Wave 1.7 |
 
 Not an independent audit. Open for John: D-47 (j) to (l), DR-25, DR-26.
+
+## Correction, 26 November 2026
+
+The LB-05 result and the real-data counts above are superseded. The split method was wrong and eight other defects were found (`bug-review-2026-11-26.md`, DR-31). Corrected: labelled 2,617; LB-05 is PARTIAL (DR-32). The report files in `wave-1.6/` were regenerated.

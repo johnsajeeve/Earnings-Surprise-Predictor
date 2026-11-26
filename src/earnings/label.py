@@ -5,14 +5,21 @@ SUE for an event in quarter q announced on D is (EPS(q) - EPS(q-4)) divided by t
 deviation of the previous seasonal differences. The history uses only first-filed values filed
 strictly before D, put on the share basis known at D. Pure functions: no database, no network.
 
-Choices made here and not fixed by the requirement text (decision D-47, items j and k):
+Split factors are the dated ratios companies report in their SEC filings (the XBRL tag
+StockholdersEquityNoteStockSplitConversionRatio1), as the approved Wave 1.6 brief says. A company
+that does not report the tag gets no adjustment, and Data LB-05 is not met for its splits until the
+price source's factors are stored (Data PX-01).
+
+Choices made here and not fixed by the requirement text (decision D-47, items j, k and p):
 - the standard deviation is the sample standard deviation (n - 1);
-- a split is inferred from the data: two or more quarters of one company re-reported by a later
-  filing with the same ratio (at least 20% away from 1, within 2% of each other). The ratio applies
-  to every quarter first filed before that later filing. Split tables from the price source
-  (Data PX-01) replace this when John approves them.
+- a ratio counts as a share split only if it is a whole or half number above 1 and at most 100;
+  the same ratio reported with effective dates within 400 days is one split;
+- the announced quarter must not have been filed more than 10 days before the announcement. If the
+  latest quarter in the data is older than that, the announced quarter is missing.
 """
 
+import json
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
@@ -23,9 +30,14 @@ EPS_BASIS = "gaap-diluted"
 MAX_DIFFERENCES = 8  # TH-11: window of 8 seasonal differences
 MIN_DIFFERENCES = 6  # TH-11: at least 6 are needed (10 quarters of history)
 QUARTER_GAP = range(70, 116)  # days between the ends of consecutive fiscal quarters
-MAX_REPORT_LAG_DAYS = 130  # the quarter being announced ended at most this long before D
-SPLIT_MIN_DISTANCE = 0.20
-SPLIT_TOLERANCE = 0.02
+MAX_REPORT_LAG_DAYS = 100  # the announced quarter ended at most this long before D (seen: 77)
+SPLIT_TAG = "StockholdersEquityNoteStockSplitConversionRatio1"
+SPLIT_MAX_RATIO = 100
+SAME_SPLIT_DAYS = 400
+ALREADY_PUBLIC_DAYS = 10
+# EPS of more than this size, in a company whose typical EPS is far smaller, is a scale error
+SCALE_LIMIT = 1000
+SCALE_TYPICAL = 100
 
 
 class LookaheadError(Exception):
@@ -47,9 +59,8 @@ class EpsVersion:
 
 @dataclass(frozen=True)
 class Split:
-    ratio: float  # old basis value divided by new basis value, for example 7 for a 7-for-1 split
-    known_from: date  # the first filing that re-reported quarters on the new basis
-    periods: int
+    ratio: Decimal  # old basis value divided by new basis value, for example 7 for a 7-for-1 split
+    effective: date  # the day the split took effect, as the company reported it
 
 
 @dataclass(frozen=True)
@@ -60,6 +71,8 @@ class SueResult:
     differences: int
     information_date: date | None  # filing date of the latest EPS used (Product FR-02, LB-04)
     splits_applied: int = 0
+    target_filed: date | None = None  # first filing of the announced quarter's EPS
+    scale_suspect: bool = False  # an input is out of scale with the company's other values
 
 
 def first_filed(versions: list[EpsVersion]) -> dict[date, EpsVersion]:
@@ -72,43 +85,33 @@ def first_filed(versions: list[EpsVersion]) -> dict[date, EpsVersion]:
     return out
 
 
-def detect_splits(versions: list[EpsVersion], before: date) -> list[Split]:
-    """Splits known before `before`, found from quarters that a later filing re-reported on a new
-    share basis (LB-05). A restatement of one quarter is not enough: two quarters must agree."""
-    known = [v for v in versions if v.filed < before]
-    firsts = first_filed(known)
-    candidates: list[tuple[float, date, date]] = []
-    for v in known:
-        base = firsts[v.period_end]
-        if v is base or v.value == 0 or base.value == 0 or v.filed <= base.filed:
+def splits_from_facts(payload: bytes) -> list[Split]:
+    """The dated share splits a company reports in its SEC company facts (LB-05). Share conversions
+    at a listing and nonsense values are dropped; a split repeated across filings is one split."""
+    node = json.loads(payload).get("facts", {}).get("us-gaap", {}).get(SPLIT_TAG)
+    if not node:
+        return []
+    found: list[tuple[date, Decimal]] = []
+    for unit_rows in node["units"].values():
+        for f in unit_rows:
+            ratio = Decimal(str(f["val"]))
+            if 1 < ratio <= SPLIT_MAX_RATIO and (ratio * 2) % 1 == 0:
+                found.append((date.fromisoformat(f["end"]), ratio.normalize()))
+    out: list[Split] = []
+    for effective, ratio in sorted(found):
+        if any(s.ratio == ratio and (effective - s.effective).days <= SAME_SPLIT_DAYS for s in out):
             continue
-        ratio = float(base.value / v.value)
-        if ratio > 0 and abs(ratio - 1) >= SPLIT_MIN_DISTANCE:
-            candidates.append((ratio, v.filed, v.period_end))
-    groups: list[list[tuple[float, date, date]]] = []
-    for cand in sorted(candidates):
-        for group in groups:
-            if abs(cand[0] / group[0][0] - 1) <= SPLIT_TOLERANCE:
-                group.append(cand)
-                break
-        else:
-            groups.append([cand])
-    splits = []
-    for group in groups:
-        periods = {c[2] for c in group}
-        if len(periods) >= 2:
-            splits.append(
-                Split(median(c[0] for c in group), min(c[1] for c in group), len(periods))
-            )
-    return sorted(splits, key=lambda s: s.known_from)
+        out.append(Split(ratio, effective))
+    return out
 
 
-def adjusted_value(v: EpsVersion, splits: list[Split]) -> tuple[Decimal, int]:
-    """The value on the share basis known at D, and how many splits were applied."""
+def adjusted_value(v: EpsVersion, splits: Sequence[Split]) -> tuple[Decimal, int]:
+    """The value on the share basis of `splits`, and how many splits were applied: a value first
+    filed before a split took effect is on the old basis."""
     value, applied = v.value, 0
     for s in splits:
-        if v.filed < s.known_from:
-            value /= Decimal(str(round(s.ratio, 6)))
+        if v.filed < s.effective:
+            value /= s.ratio
             applied += 1
     return value, applied
 
@@ -133,7 +136,9 @@ def _chain(known: dict[date, EpsVersion], start_end: date) -> list[date]:
     return ends
 
 
-def compute_sue(versions: list[EpsVersion], announcement: date) -> SueResult:
+def compute_sue(
+    versions: list[EpsVersion], announcement: date, splits: Sequence[Split] = ()
+) -> SueResult:
     """Data LB-01, LB-02, LB-04, LB-05 for one event announced on `announcement`."""
     quarters = [v for v in versions if (v.period_end - v.period_start).days in range(80, 101)]
     if not quarters:
@@ -147,18 +152,20 @@ def compute_sue(versions: list[EpsVersion], announcement: date) -> SueResult:
         return SueResult(None, None, "no quarter ended within the reporting window", 0, None)
     q_end = max(target_ends)
     q_first = everything[q_end]
+    if (announcement - q_first.filed).days > ALREADY_PUBLIC_DAYS:
+        return SueResult(None, None, "the announced quarter is not in the stored EPS", 0, None)
     history = {
         v.period_end: v
         for v in first_filed([v for v in quarters if v.filed < announcement]).values()
     }
-    splits = detect_splits(quarters, announcement)
+    known_splits = [s for s in splits if s.effective < announcement]  # known before D (LB-05)
     chain = _chain({**history, q_end: q_first}, q_end)
     if len(chain) < 5:
         return SueResult(q_end, None, "fewer than 6 prior seasonal differences", 0, None)
 
     def val(end: date) -> tuple[Decimal, int]:
         v = q_first if end == q_end else history[end]
-        return adjusted_value(v, splits)
+        return adjusted_value(v, known_splits)
 
     diffs, applied, used = [], 0, [chain[4]]
     for k in range(1, MAX_DIFFERENCES + 1):
@@ -173,14 +180,21 @@ def compute_sue(versions: list[EpsVersion], announcement: date) -> SueResult:
         return SueResult(q_end, None, "fewer than 6 prior seasonal differences", len(diffs), None)
     cur, prev = val(chain[0])[0], val(chain[4])[0]
     info = max(history[e].filed for e in set(used))
+    typical = median(abs(v.value) for v in everything.values())
+    raw = [abs(q_first.value if e == q_end else history[e].value) for e in {chain[0], *used}]
+    suspect = bool(max(raw) > SCALE_LIMIT and typical <= SCALE_TYPICAL)
     assert_inputs_before([history[e].filed for e in set(used)], announcement)
     sd = stdev(diffs)
     if sd == 0:
         return SueResult(
-            q_end, None, "standard deviation of the differences is zero", len(diffs), info
-        )
+            q_end, None, "standard deviation of the differences is zero", len(diffs), info,
+            target_filed=q_first.filed, scale_suspect=suspect,
+        )  # fmt: skip
     sue = ((cur - prev) / sd).quantize(Decimal("0.000001"))
-    return SueResult(q_end, sue, None, len(diffs), info, applied)
+    return SueResult(
+        q_end, sue, None, len(diffs), info, applied, target_filed=q_first.filed,
+        scale_suspect=suspect,
+    )  # fmt: skip
 
 
 def assert_one_route(routes: list[str]) -> str:

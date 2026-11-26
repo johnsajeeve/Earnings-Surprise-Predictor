@@ -483,3 +483,13 @@ def test_the_transcript_fixture_states_its_origin_and_which_rows_are_real():
     assert EXCERPTS["source"] == "kurry/sp500_earnings_transcripts"
     assert EXCERPTS["revision"] == hf.REVISION
     assert "REAL rows" in EXCERPTS["note"]
+
+
+@pytest.mark.req("TX-02")
+@pytest.mark.code("src/earnings/transcripts.py", "src/earnings/calendar.py")
+def test_one_trading_day_is_counted_with_exchange_holidays():
+    # SYNTHETIC release on Friday 12 January 2024; Monday 15 January was an exchange holiday
+    release = fin.Release("a", date(2024, 1, 12), datetime(2024, 1, 12, 13, tzinfo=UTC), "2.02")
+    assert tr.trading_days_between(date(2024, 1, 12), date(2024, 1, 16)) == 1
+    assert tr.date_check(date(2024, 1, 16), release) is None
+    assert "2 trading days after" in tr.date_check(date(2024, 1, 17), release)

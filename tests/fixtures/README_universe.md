@@ -19,3 +19,4 @@ All files are REAL data, retrieved on 23 November 2026 by the project's own clie
 | `hf_transcript_excerpts.json` | Hugging Face `kurry/sp500_earnings_transcripts`, revision `f3ded372da8d18dc6ad98955c4558e34b5fe6d45`; REAL rows (Apple 2025-01-30 and 2025-05-01, Abbott 2020-07-15, Conagra 2024-12-19, DayForce 2022-02-10) | Texts cut to 400 characters, turns after the boundary cut; operator turns whole; the empty-text row is real |
 | `aapl_8k_index.json` | SEC filing index of Apple 8-K 0000320193-25-000007, retrieved 25 November 2026 by the project's client | nothing |
 | `aapl_press_release_table.html` | The same filing's exhibit 99.1, retrieved 25 November 2026 | the one table that holds the diluted EPS row |
+| `aapl_split_ratio_tag.json` | SEC company facts for Apple Inc., stored payload of the project database, retrieved by the project client in November 2026 | only the tag StockholdersEquityNoteStockSplitConversionRatio1 |

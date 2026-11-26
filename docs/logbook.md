@@ -395,6 +395,12 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Results: full tests 206 passed, CI-style 185 passed, 0 failed. Transcript coverage 85.3% against 90% (NOT MET). Automatic EPS comparison cannot show AE-02 (DR-28). Two labels are wrong because of a source scale error (DR-27). The P1 gate is not passed; the reasons are in the evidence file.
 - Work by Claude, not independently audited yet.
 
+### 26 Nov 2026: bug review, nine defects fixed
+
+- Asked by John: a thorough bug check before Wave 1.8. Found and fixed nine defects, most affecting the training label: split handling (not what the approved brief allowed), wrong quarter when data was missing, announcement date, consensus cutoff, coverage window, holidays, one derivation rule, the reach of the scale error, and a loop I duplicated while fixing. 144 labels changed value, 19 changed sign. Full tests 214 passed. Details: `audits/evidence/bug-review-2026-11-26.md`. The earlier Wave 1.6 and 1.7 numbers I reported are superseded.
+- Still open: splits for companies without the SEC tag (DR-32).
+- Work by Claude, not independently audited.
+
 ## Waiting on John
 
 Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.
@@ -410,7 +416,7 @@ Decisions and actions only John can take, as of 24 November 2026. Each has a req
 - **Hand audit (VL-09):** check the 100 events in `audits/evidence/wave-1.7/hand_audit_sheet.md`; write `ok` or `error: what` after each arrow.
 - **DR-27:** two events with a source scale error: exclude them, correct them from a later filing, or keep them flagged?
 - **DR-28:** the EPS agreement check (AE-02) needs either more parser work or a person to check the sample.
-- **TX-04 miss:** coverage is 85.3% against 90%. Decide whether to look for a second transcript source or report results as covering the covered events (the requirement's own rule).
+- **TX-04 miss:** coverage is 86.9% against 90% (corrected 26 Nov). Decide whether to look for a second transcript source or report results as covering the covered events (the requirement's own rule).
 - **DR-29:** approve a wording change to DV-05 for calls before the 8-K, or say they are violations.
 - **D-09:** name the independent reviewer (GS-01).
 - **Wave 1.7 task brief:** read `audits/evidence/wave-1.7-task-brief.md`; seven points (D-26 sample sizes, D-09 reviewer, trading calendar, survivorship check order, canary list, extreme-value reviewer, the five non-calendar companies).

@@ -9,12 +9,13 @@ stored rows, so running it again gives the same table.
 import csv
 import json
 from collections import defaultdict
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
 from sqlalchemy import Engine, text
 
+from earnings import financials as fin
 from earnings import label
 from earnings import transcripts as tr
 from earnings.runlog import run_record
@@ -37,10 +38,22 @@ def _versions(engine: Engine, company_id: str) -> list[label.EpsVersion]:
     return [label.EpsVersion(r[0], r[1], r[2], r[3], r[4]) for r in rows]
 
 
+def _splits(engine: Engine, company_id: str) -> list[label.Split]:
+    """The dated split factors in the company's stored SEC facts (LB-05)."""
+    found = fin._payload(engine, fin.FACTS_URL.format(cik=company_id))
+    return [] if found is None else label.splits_from_facts(found[1])
+
+
 def build_events(engine: Engine, company_ids: list[str] | None = None) -> dict[str, Any]:
     """Create or refresh the event row of every kept transcript. Returns counts per outcome."""
-    report: dict[str, Any] = {"events": 0, "sue_ok": 0, "sue_unavailable": defaultdict(int),
-                              "excluded_late_transcript": 0, "incomplete": 0}  # fmt: skip
+    report: dict[str, Any] = {
+        "events": 0,
+        "sue_ok": 0,
+        "sue_unavailable": defaultdict(int),
+        "excluded": 0,
+        "incomplete": 0,
+        "scale_suspect": [],
+    }
     with engine.connect() as conn:
         companies = [
             r[0]
@@ -52,6 +65,7 @@ def build_events(engine: Engine, company_ids: list[str] | None = None) -> dict[s
     with run_record(engine, "build-events", "derived") as run:
         for cid in companies:
             versions = _versions(engine, cid)
+            splits = _splits(engine, cid)
             releases = {r.accession: r for r in tr._releases_for(engine, cid)}
             with engine.connect() as conn:
                 transcripts = conn.execute(
@@ -64,25 +78,37 @@ def build_events(engine: Engine, company_ids: list[str] | None = None) -> dict[s
                 ).all()
             for tid, call_date, accession, fy, fq in transcripts:
                 _write_event(
-                    engine, cid, tid, call_date, releases.get(accession), versions, fy, fq, report
+                    engine,
+                    cid,
+                    tid,
+                    call_date,
+                    releases.get(accession),
+                    versions,
+                    splits,
+                    fy,
+                    fq,
+                    report,
                 )
             run.rows_written = report["events"]
     report["sue_unavailable"] = dict(report["sue_unavailable"])
     return report
 
 
-def _write_event(engine, cid, tid, call_date, release, versions, fy, fq, report):  # type: ignore[no-untyped-def]
-    announcement = release.filed if release else None
+def _write_event(engine, cid, tid, call_date, release, versions, splits, fy, fq, report):  # type: ignore[no-untyped-def]
+    announcement = release.announced if release else None
     result = (
-        label.compute_sue(versions, announcement)
+        label.compute_sue(versions, announcement, splits)
         if announcement
         else label.SueResult(None, None, "release not found", 0, None)
     )
-    exclusion = None
+    reasons = []
     if release is not None:
-        gap = tr.trading_days_between(release.filed, call_date)
+        gap = tr.trading_days_between(release.announced, call_date)
         if gap > 1:
-            exclusion = f"transcript dated {gap} trading days after the announcement"
+            reasons.append(f"transcript dated {gap} trading days after the announcement")
+        if result.target_filed is not None and result.target_filed < release.announced:
+            reasons.append("the quarter's EPS was filed before the earnings release")
+    exclusion = "; ".join(reasons) or None
     reason = result.reason if result.sue is None else None
     incomplete = result.information_date is None or announcement is None
     report["events"] += 1
@@ -90,7 +116,9 @@ def _write_event(engine, cid, tid, call_date, release, versions, fy, fq, report)
         report["sue_ok"] += 1
     else:
         report["sue_unavailable"][reason] += 1
-    report["excluded_late_transcript"] += exclusion is not None
+    report["excluded"] += exclusion is not None
+    if result.scale_suspect:
+        report["scale_suspect"].append(tid)
     report["incomplete"] += incomplete
     with engine.begin() as conn:
         conn.execute(
@@ -125,18 +153,22 @@ def _write_event(engine, cid, tid, call_date, release, versions, fy, fq, report)
 
 
 def event_snapshots(engine: Engine, event_id: int) -> list[dict[str, Any]]:
-    """Consensus snapshots an event may use: captured strictly before its announcement (FR-14)."""
+    """Consensus snapshots an event may use: captured before its announcement date, that is before
+    that day began in New York. A capture earlier on the day itself is not used (FR-14)."""
     with engine.connect() as conn:
-        row = conn.execute(
-            text(
-                "SELECT company_id, announcement_time_utc FROM earnings_event WHERE event_id = :e"
-            ),
+        company, day = conn.execute(
+            text("SELECT company_id, announcement_date FROM earnings_event WHERE event_id = :e"),
             {"e": event_id},
         ).one()
         found = conn.execute(
-            text("SELECT * FROM estimate_snapshot_as_of(:c, :t)"), {"c": row[0], "t": row[1]}
+            text("SELECT * FROM estimate_snapshot_as_of(:c, :t)"),
+            {"c": company, "t": start_of_day(day)},
         ).mappings()
         return [dict(r) for r in found]
+
+
+def start_of_day(day: date) -> datetime:
+    return datetime.combine(day, datetime.min.time(), fin.EASTERN)
 
 
 def exclusion_report(engine: Engine) -> dict[str, dict[str, int]]:
@@ -179,19 +211,22 @@ def coverage_report(engine: Engine, out_dir: Path | None = None) -> dict[str, An
             )
         }
     for cid, name in companies:
-        left = any(end is not None and end <= date(2024, 12, 31) for _, end in spells[cid])
+        left = any(
+            end is not None and date(2015, 1, 1) <= end <= date(2024, 12, 31)
+            for _, end in spells[cid]
+        )
         group = "left the index" if left else "still in the index"
         for r in tr._releases_for(engine, cid):
-            if not (tr.FIRST_CALL_DATE <= r.filed <= tr.LAST_CALL_DATE):
+            if not (tr.FIRST_CALL_DATE <= r.announced <= tr.LAST_CALL_DATE):
                 continue
-            if not any(s <= r.filed and (e is None or r.filed < e) for s, e in spells[cid]):
+            if not any(s <= r.announced and (e is None or r.announced < e) for s, e in spells[cid]):
                 continue
-            key = f"{r.filed.year} {group}"
+            key = f"{r.announced.year} {group}"
             by_year[key]["releases"] += 1
             if (cid, r.accession) in linked:
                 by_year[key]["with_transcript"] += 1
             else:
-                missing.append({"company_id": cid, "name": name, "release_filed": str(r.filed)})
+                missing.append({"company_id": cid, "name": name, "release_filed": str(r.announced)})
     report = {
         "by_year_and_group": {k: dict(v) for k, v in sorted(by_year.items())},
         "missing_count": len(missing),

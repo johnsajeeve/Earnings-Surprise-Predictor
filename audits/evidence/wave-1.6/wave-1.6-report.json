@@ -2,100 +2,100 @@
  "coverage": {
   "by_year_and_group": {
    "2013 left the index": {
-    "releases": 65,
-    "with_transcript": 30
+    "releases": 52,
+    "with_transcript": 25
    },
    "2013 still in the index": {
-    "releases": 172,
-    "with_transcript": 146
+    "releases": 185,
+    "with_transcript": 151
    },
    "2014 left the index": {
-    "releases": 68,
-    "with_transcript": 28
+    "releases": 60,
+    "with_transcript": 24
    },
    "2014 still in the index": {
-    "releases": 184,
-    "with_transcript": 163
+    "releases": 192,
+    "with_transcript": 167
    },
    "2015 left the index": {
-    "releases": 65,
-    "with_transcript": 26
+    "releases": 56,
+    "with_transcript": 22
    },
    "2015 still in the index": {
-    "releases": 210,
-    "with_transcript": 187
+    "releases": 219,
+    "with_transcript": 191
    },
    "2016 left the index": {
-    "releases": 61,
-    "with_transcript": 32
-   },
-   "2016 still in the index": {
-    "releases": 227,
-    "with_transcript": 203
-   },
-   "2017 left the index": {
-    "releases": 61,
-    "with_transcript": 34
-   },
-   "2017 still in the index": {
-    "releases": 235,
-    "with_transcript": 215
-   },
-   "2018 left the index": {
-    "releases": 69,
-    "with_transcript": 44
-   },
-   "2018 still in the index": {
-    "releases": 272,
-    "with_transcript": 245
-   },
-   "2019 left the index": {
-    "releases": 61,
-    "with_transcript": 45
-   },
-   "2019 still in the index": {
-    "releases": 276,
-    "with_transcript": 252
-   },
-   "2020 left the index": {
-    "releases": 57,
-    "with_transcript": 44
-   },
-   "2020 still in the index": {
-    "releases": 295,
-    "with_transcript": 253
-   },
-   "2021 left the index": {
-    "releases": 51,
-    "with_transcript": 32
-   },
-   "2021 still in the index": {
-    "releases": 293,
-    "with_transcript": 265
-   },
-   "2022 left the index": {
-    "releases": 37,
+    "releases": 53,
     "with_transcript": 28
    },
+   "2016 still in the index": {
+    "releases": 235,
+    "with_transcript": 207
+   },
+   "2017 left the index": {
+    "releases": 49,
+    "with_transcript": 27
+   },
+   "2017 still in the index": {
+    "releases": 247,
+    "with_transcript": 222
+   },
+   "2018 left the index": {
+    "releases": 50,
+    "with_transcript": 33
+   },
+   "2018 still in the index": {
+    "releases": 291,
+    "with_transcript": 256
+   },
+   "2019 left the index": {
+    "releases": 44,
+    "with_transcript": 37
+   },
+   "2019 still in the index": {
+    "releases": 293,
+    "with_transcript": 260
+   },
+   "2020 left the index": {
+    "releases": 40,
+    "with_transcript": 30
+   },
+   "2020 still in the index": {
+    "releases": 312,
+    "with_transcript": 267
+   },
+   "2021 left the index": {
+    "releases": 34,
+    "with_transcript": 19
+   },
+   "2021 still in the index": {
+    "releases": 310,
+    "with_transcript": 278
+   },
+   "2022 left the index": {
+    "releases": 20,
+    "with_transcript": 12
+   },
    "2022 still in the index": {
-    "releases": 300,
-    "with_transcript": 280
+    "releases": 317,
+    "with_transcript": 296
    },
    "2023 left the index": {
-    "releases": 38,
-    "with_transcript": 23
+    "releases": 22,
+    "with_transcript": 7
    },
    "2023 still in the index": {
-    "releases": 297,
-    "with_transcript": 292
+    "releases": 313,
+    "with_transcript": 308
    },
    "2024 left the index": {
-    "releases": 28,
-    "with_transcript": 23
+    "releases": 11,
+    "with_transcript": 7
    },
    "2024 still in the index": {
-    "releases": 308,
-    "with_transcript": 293
+    "releases": 325,
+    "with_transcript": 309
    }
   },
   "missing_count": 547
@@ -114,15 +114,15 @@
    "no quarterly EPS stored for this company": 12
   },
   "2015": {
-   "fewer than 6 prior seasonal differences": 16,
+   "fewer than 6 prior seasonal differences": 15,
    "label ok": 169,
-   "no quarter ended within the reporting window": 16,
+   "no quarter ended within the reporting window": 17,
    "no quarterly EPS stored for this company": 12
   },
   "2016": {
-   "fewer than 6 prior seasonal differences": 18,
+   "fewer than 6 prior seasonal differences": 17,
    "label ok": 190,
-   "no quarter ended within the reporting window": 15,
+   "no quarter ended within the reporting window": 16,
    "no quarterly EPS stored for this company": 12
   },
   "2017": {
@@ -133,20 +133,20 @@
   },
   "2018": {
    "fewer than 6 prior seasonal differences": 17,
-   "label ok": 239,
-   "no quarter ended within the reporting window": 21,
+   "label ok": 237,
+   "no quarter ended within the reporting window": 23,
    "no quarterly EPS stored for this company": 12
   },
   "2019": {
-   "fewer than 6 prior seasonal differences": 13,
+   "fewer than 6 prior seasonal differences": 11,
    "label ok": 252,
-   "no quarter ended within the reporting window": 20,
+   "no quarter ended within the reporting window": 22,
    "no quarterly EPS stored for this company": 12
   },
   "2020": {
-   "fewer than 6 prior seasonal differences": 13,
+   "fewer than 6 prior seasonal differences": 12,
    "label ok": 254,
-   "no quarter ended within the reporting window": 18,
+   "no quarter ended within the reporting window": 19,
    "no quarterly EPS stored for this company": 12
   },
   "2021": {
@@ -177,21 +177,21 @@
  "size": {
   "measured": {
    "companies": 93,
-   "database_bytes": 677092375,
+   "database_bytes": 691944471,
    "largest_tables_bytes": {
-    "raw_payload": 305315840,
+    "raw_payload": 319619072,
     "transcript": 263700480,
     "transcript_section": 87703552,
     "eps_history": 5029888,
     "fundamentals_filing": 4751360,
-    "earnings_event": 1032192,
-    "estimate_snapshot": 253952,
+    "earnings_event": 1204224,
+    "estimate_snapshot": 368640,
     "ingestion_run": 180224
    }
   },
   "estimated": {
    "companies": 500,
-   "database_bytes": 3640281586,
+   "database_bytes": 3720131564,
    "method": "measured size times 5.4 (company ratio); ESTIMATE, not measured"
   }
  }

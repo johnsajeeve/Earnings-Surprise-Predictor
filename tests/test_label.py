@@ -4,13 +4,13 @@ Series built by hand in these tests are SYNTHETIC and say so. The Apple split ch
 company facts of tests/fixtures/aapl_companyfacts_2012_2015.json.
 """
 
+import json
 from datetime import date, timedelta
 from decimal import Decimal
 from pathlib import Path
 
 import pytest
 
-from earnings import financials as fin
 from earnings import label
 
 FX = Path(__file__).parent / "fixtures"
@@ -89,6 +89,9 @@ def test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infi
         _versions(c), ENDS[-1] + timedelta(days=200)
     )  # D far after the quarter
     assert stale.sue is None and "reporting window" in stale.reason
+    # the real Realty Income case: the latest quarter in the data ended 121 days before D
+    late = label.compute_sue(_versions(c), ENDS[-1] + timedelta(days=121))
+    assert late.sue is None and "reporting window" in late.reason
     assert "no quarterly EPS" in label.compute_sue([], d).reason  # data missing, not a short window
     gap = _versions(c)
     del gap[5]  # a missing quarter breaks the run of consecutive quarters
@@ -125,41 +128,90 @@ def test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series():
     c = _series()
     d = _announcement(c)
     unsplit = label.compute_sue(_versions(c), d)
-    # SYNTHETIC 7-for-1 split: the 9 oldest quarters were first filed on the old basis (7 times the
-    # new value); a later filing re-reports two of them on the new basis
+    # SYNTHETIC 7-for-1 split: values first filed before it are 7 times the new basis
     versions = _versions(c)
-    split_filed = ENDS[-5] + timedelta(days=30)
-    old = [v for v in versions if v.period_end <= ENDS[-6]]
-    new = [v for v in versions if v.period_end > ENDS[-6]]
-    scaled = [label.EpsVersion(v.period_start, v.period_end, v.value * 7, v.filed) for v in old]
-    restated = [
-        label.EpsVersion(v.period_start, v.period_end, v.value, split_filed) for v in old[-2:]
+    effective = ENDS[-5] + timedelta(days=45)
+    scaled = [
+        label.EpsVersion(v.period_start, v.period_end, v.value * 7, v.filed)
+        if v.filed < effective
+        else v
+        for v in versions
     ]
-    result = label.compute_sue([*scaled, *new, *restated], d)
+    split = label.Split(Decimal("7"), effective)
+    result = label.compute_sue(scaled, d, [split])
     assert result.sue is not None and abs(float(result.sue - unsplit.sue)) < 1e-4
     assert result.splits_applied > 0
-    # without the re-reported quarters no split is known, and the surprise is false
-    naive = label.compute_sue([*scaled, *new], d)
+    # without the dated factor the surprise is false
+    naive = label.compute_sue(scaled, d)
     assert naive.sue is None or abs(float(naive.sue - unsplit.sue)) > 0.5
-    # one restated quarter alone is a restatement, not a split
-    single = label.compute_sue([*scaled, *new, restated[0]], d)
-    assert label.detect_splits([*scaled, *new, restated[0]], d) == []
-    assert single.splits_applied == 0
+    # a factor that takes effect on or after D is not known at D and is not applied
+    for later in (d, d + timedelta(days=1)):
+        assert label.compute_sue(versions, d, [label.Split(Decimal("7"), later)]).sue == unsplit.sue
 
 
 @pytest.mark.req("LB-05-AC1")
-@pytest.mark.code("src/earnings/label.py", "src/earnings/financials.py")
-def test_the_real_apple_facts_show_the_seven_for_one_split_of_june_2014():
-    rows = fin.eps_rows((FX / "aapl_companyfacts_2012_2015.json").read_bytes())
-    versions = [
-        label.EpsVersion(r.period_start, r.period_end, r.eps, r.filed, r.derived)
-        for r in rows
-        if r.period_kind == "quarter"
+@pytest.mark.code("src/earnings/label.py")
+def test_the_real_apple_data_gives_the_two_dated_split_factors_once_each():
+    splits = label.splits_from_facts((FX / "aapl_split_ratio_tag.json").read_bytes())
+    # the tag repeats each split in several filings; each is applied once
+    assert splits == [
+        label.Split(Decimal("7"), date(2014, 6, 6)),
+        label.Split(Decimal("4"), date(2020, 8, 28)),
     ]
-    assert label.detect_splits(versions, date(2014, 7, 23)) == []  # not known before it was filed
-    splits = label.detect_splits(versions, date(2016, 1, 1))
-    assert [round(s.ratio, 2) for s in splits] == [7.0]
-    assert splits[0].known_from == date(2014, 7, 23) and splits[0].periods >= 2
+
+
+def _tag(*facts):  # SYNTHETIC company facts holding only the split-ratio tag
+    rows = [{"end": e, "val": v, "filed": f} for e, v, f in facts]
+    return json.dumps({"facts": {"us-gaap": {label.SPLIT_TAG: {"units": {"pure": rows}}}}}).encode()
+
+
+@pytest.mark.req("LB-05")
+@pytest.mark.code("src/earnings/label.py")
+def test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged():
+    # Shapes seen in the real data: two end dates for one split, a share conversion at a listing
+    # (5262.3512, 165582), a pre-listing ratio (3.8) and a nonsense value (10000)
+    payload = _tag(
+        ("2012-01-17", 2, "2014-04-01"), ("2012-01-28", 2, "2014-04-01"),
+        ("2018-10-22", 2, "2018-12-04"), ("2019-02-02", 2, "2019-04-03"),
+        ("2014-06-30", 5262.3512, "2014-09-05"), ("2014-08-22", 165582, "2014-11-14"),
+        ("2011-12-20", 3.8, "2014-05-28"), ("2026-06-11", 10000, "2026-08-06"),
+        ("2015-05-01", 1.5, "2015-08-01"),
+    )  # fmt: skip
+    assert [(str(s.ratio), str(s.effective)) for s in label.splits_from_facts(payload)] == [
+        ("2", "2012-01-17"), ("1.5", "2015-05-01"), ("2", "2018-10-22")
+    ]  # fmt: skip
+    assert label.splits_from_facts(b'{"facts": {"us-gaap": {}}}') == []
+
+
+@pytest.mark.req("LB-01")
+@pytest.mark.code("src/earnings/label.py")
+def test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead():
+    c = _series()
+    d = _announcement(c)
+    versions = _versions(c)[:-1]  # the quarter being announced is not in the data
+    # five days after quarter end: the previous quarter is still inside the reporting window
+    result = label.compute_sue(versions, ENDS[-1] + timedelta(days=5))
+    assert result.sue is None and result.reason == "the announced quarter is not in the stored EPS"
+    # filed a few days before the release: still the announced quarter, and its filing is reported
+    c_full = _versions(c)
+    early = label.EpsVersion(
+        c_full[-1].period_start, c_full[-1].period_end, c_full[-1].value, d - timedelta(days=3)
+    )
+    found = label.compute_sue([*c_full[:-1], early], d)
+    assert found.sue is not None and found.target_filed == d - timedelta(days=3)
+
+
+@pytest.mark.req("DV-04")
+@pytest.mark.code("src/earnings/label.py")
+def test_a_label_whose_inputs_hold_a_scale_error_is_marked():
+    c = _series()
+    d = _announcement(c)
+    assert label.compute_sue(_versions(c), d).scale_suspect is False
+    bad = _versions(c)
+    bad[-6] = label.EpsVersion(  # SYNTHETIC: one quarter filed in thousandths of a unit too large
+        bad[-6].period_start, bad[-6].period_end, bad[-6].value * 1_000_000, bad[-6].filed
+    )
+    assert label.compute_sue(bad, d).scale_suspect is True
 
 
 @pytest.mark.req("CE-05-AC2", "SC-07-AC2")
