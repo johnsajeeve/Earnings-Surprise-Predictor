@@ -423,12 +423,14 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Needs John: D-48; the items under Waiting on John.
 - Work by Claude; audit by an independent agent.
 
+### 26 Nov 2026: D-48 approved; second audit requested
+
+- John approved all eight values of D-48 (decision C-60) and asked for a second fresh audit of the fixes.
+- Work by Claude. Decision by John.
+
 ## Waiting on John
 
 As of 26 November 2026, after the independent audit.
-
-**Decide**
-- **D-48:** values I built without approval (price coverage 90%, spin-off 5%, scale-error limits, 100-day filing limit and others). Recommended: approve all.
 
 **Add**
 - **Tiingo free key** in `.env` (never in chat): the second price source (PX-01) and possibly prices for removed companies (not verified).
