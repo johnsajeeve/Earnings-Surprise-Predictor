@@ -286,6 +286,15 @@
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
       ]
     },
+    "src/earnings/clients": {
+      "requirements": [
+        "LC-07-AC1",
+        "SR-01"
+      ],
+      "tests": [
+        "tests/test_licensing.py::test_every_source_name_in_the_code_has_a_register_row"
+      ]
+    },
     "src/earnings/clients/edgar.py": {
       "requirements": [
         "IG-07",
@@ -538,6 +547,33 @@
         "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios"
       ]
     },
+    "src/earnings/licensing.py": {
+      "requirements": [
+        "DP-13",
+        "LC-01-AC1",
+        "LC-02-AC1",
+        "LC-03-AC1",
+        "LC-04-AC1",
+        "LC-05-AC1",
+        "LC-07-AC1",
+        "LC-08-AC1",
+        "LC-10-AC1",
+        "LC-11-AC1",
+        "SR-01",
+        "SR-03"
+      ],
+      "tests": [
+        "tests/test_licensing.py::test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused",
+        "tests/test_licensing.py::test_a_licence_check_older_than_ninety_days_is_listed_as_stale",
+        "tests/test_licensing.py::test_every_locked_package_and_container_image_has_a_licence_row",
+        "tests/test_licensing.py::test_every_row_uses_a_listed_class_and_only_two_data_classes_may_be_deployed",
+        "tests/test_licensing.py::test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found",
+        "tests/test_licensing.py::test_every_source_name_in_the_code_has_a_register_row",
+        "tests/test_licensing.py::test_the_committed_notices_are_the_ones_the_registers_produce",
+        "tests/test_licensing.py::test_the_gap_in_dataset_licences_is_exactly_the_one_recorded",
+        "tests/test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded"
+      ]
+    },
     "src/earnings/limits.py": {
       "requirements": [
         "IG-07"
@@ -760,12 +796,15 @@
         "IG-05",
         "IG-05-AC1",
         "IG-05-AC2",
+        "LC-08-AC1",
         "NFR-03-AC1"
       ],
       "tests": [
         "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times",
         "tests/test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run",
-        "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task"
+        "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task",
+        "tests/test_licensing.py::test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found",
+        "tests/test_licensing.py::test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation"
       ]
     },
     "src/earnings/schema.py": {
@@ -782,6 +821,7 @@
     },
     "src/earnings/source_register.csv": {
       "requirements": [
+        "LC-03-AC1",
         "OR-02-AC1",
         "SR-01",
         "SR-01-AC1",
@@ -790,6 +830,8 @@
         "TH-14-AC1"
       ],
       "tests": [
+        "tests/test_licensing.py::test_every_dataset_the_project_imports_may_be_deployed",
+        "tests/test_licensing.py::test_the_gap_in_dataset_licences_is_exactly_the_one_recorded",
         "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row",
         "tests/test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each",
         "tests/test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and",
@@ -848,6 +890,20 @@
         "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
+      ]
+    },
+    "src/earnings/third_party_register.csv": {
+      "requirements": [
+        "FE-05",
+        "LC-01-AC1",
+        "LC-09-AC1",
+        "LC-11-AC1"
+      ],
+      "tests": [
+        "tests/test_licensing.py::test_every_library_and_image_in_use_may_be_used_in_a_deployed_system",
+        "tests/test_licensing.py::test_every_locked_package_and_container_image_has_a_licence_row",
+        "tests/test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data",
+        "tests/test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded"
       ]
     },
     "src/earnings/transcripts.py": {
@@ -1036,6 +1092,16 @@
       ],
       "tests": [
         "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
+      ]
+    },
+    "tests/fixtures/fixture_sources.csv": {
+      "requirements": [
+        "DP-10",
+        "LC-06-AC1"
+      ],
+      "tests": [
+        "tests/test_licensing.py::test_every_committed_fixture_says_which_dataset_it_comes_from",
+        "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed"
       ]
     },
     "tests/fixtures/ticker_cik_map.csv": {
@@ -2515,7 +2581,9 @@
         }
       ],
       "document": "deployment-and-operations-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed"
+      ]
     },
     "DP-11": {
       "checks": [
@@ -2557,7 +2625,9 @@
         }
       ],
       "document": "deployment-and-operations-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_licensing.py::test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused"
+      ]
     },
     "DP-14": {
       "checks": [
@@ -2590,6 +2660,76 @@
             "tests/test_req_deployment_and_operations.py::test_dp_15_ac1_adr_0003_names_how_the_worker_runs"
           ],
           "text": "ADR 0003 names how the worker runs."
+        }
+      ],
+      "document": "deployment-and-operations-requirements.md",
+      "id_level_tests": []
+    },
+    "DP-16": {
+      "checks": [
+        {
+          "fingerprint": "67b4b0d1bd1e",
+          "ref": "DP-16-AC1",
+          "tests": [
+            "tests/test_req_deployment_and_operations.py::test_dp_16_ac1_placeholder"
+          ],
+          "text": "Every hosted component has a row with its host, limits, source page, date and datasets."
+        }
+      ],
+      "document": "deployment-and-operations-requirements.md",
+      "id_level_tests": []
+    },
+    "DP-17": {
+      "checks": [
+        {
+          "fingerprint": "c3cdd6c2bdf1",
+          "ref": "DP-17-AC1",
+          "tests": [
+            "tests/test_req_deployment_and_operations.py::test_dp_17_ac1_placeholder"
+          ],
+          "text": "A terms record with a date exists for every host in the deployment profile."
+        }
+      ],
+      "document": "deployment-and-operations-requirements.md",
+      "id_level_tests": []
+    },
+    "DP-18": {
+      "checks": [
+        {
+          "fingerprint": "dc9f4bb7fcfa",
+          "ref": "DP-18-AC1",
+          "tests": [
+            "tests/test_req_deployment_and_operations.py::test_dp_18_ac1_placeholder"
+          ],
+          "text": "An export that would include a dataset that may not be deployed fails."
+        }
+      ],
+      "document": "deployment-and-operations-requirements.md",
+      "id_level_tests": []
+    },
+    "DP-19": {
+      "checks": [
+        {
+          "fingerprint": "0d6cac8f9566",
+          "ref": "DP-19-AC1",
+          "tests": [
+            "tests/test_req_deployment_and_operations.py::test_dp_19_ac1_placeholder"
+          ],
+          "text": "A scan of each image to be deployed finds none of them."
+        }
+      ],
+      "document": "deployment-and-operations-requirements.md",
+      "id_level_tests": []
+    },
+    "DP-20": {
+      "checks": [
+        {
+          "fingerprint": "dcfd48250531",
+          "ref": "DP-20-AC1",
+          "tests": [
+            "tests/test_req_deployment_and_operations.py::test_dp_20_ac1_placeholder"
+          ],
+          "text": "With the setting on, the prediction endpoints return the unavailable state and health reports it."
         }
       ],
       "document": "deployment-and-operations-requirements.md",
@@ -3642,7 +3782,9 @@
         }
       ],
       "document": "feature-engineering-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data"
+      ]
     },
     "FE-06": {
       "checks": [
@@ -5445,6 +5587,164 @@
       "document": "data-requirements.md",
       "id_level_tests": []
     },
+    "LC-01": {
+      "checks": [
+        {
+          "fingerprint": "1b07bc0d9815",
+          "ref": "LC-01-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_locked_package_and_container_image_has_a_licence_row"
+          ],
+          "text": "A pinned package or an image with no register row fails the test."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-02": {
+      "checks": [
+        {
+          "fingerprint": "bf90dc08bd15",
+          "ref": "LC-02-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_row_uses_a_listed_class_and_only_two_data_classes_may_be_deployed"
+          ],
+          "text": "A register row with a class outside the list fails the test."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-03": {
+      "checks": [
+        {
+          "fingerprint": "32aa8cc33924",
+          "ref": "LC-03-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_dataset_the_project_imports_may_be_deployed",
+            "tests/test_licensing.py::test_the_gap_in_dataset_licences_is_exactly_the_one_recorded"
+          ],
+          "text": "No dataset in the source register has a class that may not be deployed."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-04": {
+      "checks": [
+        {
+          "fingerprint": "9caa7adc4fe3",
+          "ref": "LC-04-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused"
+          ],
+          "text": "A manifest naming a restricted, unclear, share-alike or unregistered dataset is refused."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-05": {
+      "checks": [
+        {
+          "fingerprint": "8d39602b7231",
+          "ref": "LC-05-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_the_committed_notices_are_the_ones_the_registers_produce"
+          ],
+          "text": "The committed notices file equals the generated one."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-06": {
+      "checks": [
+        {
+          "fingerprint": "2b9f5c5879ba",
+          "ref": "LC-06-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_committed_fixture_says_which_dataset_it_comes_from",
+            "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed"
+          ],
+          "text": "No committed fixture holds real text or values from a source that may not be deployed."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-07": {
+      "checks": [
+        {
+          "fingerprint": "126fc65ff3b3",
+          "ref": "LC-07-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_source_name_in_the_code_has_a_register_row"
+          ],
+          "text": "A source name in a client module with no register entry fails the test."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-08": {
+      "checks": [
+        {
+          "fingerprint": "70aac4f5174a",
+          "ref": "LC-08-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found",
+            "tests/test_licensing.py::test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation"
+          ],
+          "text": "No scheduled job uses a source whose terms bar automated collection."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-09": {
+      "checks": [
+        {
+          "fingerprint": "31e606baa57b",
+          "ref": "LC-09-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data"
+          ],
+          "text": "Every model row names the licence of its training data."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-10": {
+      "checks": [
+        {
+          "fingerprint": "0a3d2e9b950c",
+          "ref": "LC-10-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_a_licence_check_older_than_ninety_days_is_listed_as_stale"
+          ],
+          "text": "A row checked more than 90 days before the date given is listed as stale."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
+    "LC-11": {
+      "checks": [
+        {
+          "fingerprint": "125555a8ceab",
+          "ref": "LC-11-AC1",
+          "tests": [
+            "tests/test_licensing.py::test_every_library_and_image_in_use_may_be_used_in_a_deployed_system",
+            "tests/test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded"
+          ],
+          "text": "No library or image in use has any other class."
+        }
+      ],
+      "document": "licensing-requirements.md",
+      "id_level_tests": []
+    },
     "MD-01": {
       "checks": [
         {
@@ -5850,6 +6150,62 @@
             "tests/test_req_modelling_and_evaluation.py::test_md_23_ac1_altered_artefact_makes_the_endpoint_return_503"
           ],
           "text": "Altered artefact makes the endpoint return 503 with the Section 12 message."
+        }
+      ],
+      "document": "modelling-and-evaluation-requirements.md",
+      "id_level_tests": []
+    },
+    "MD-24": {
+      "checks": [
+        {
+          "fingerprint": "84b32dc1b464",
+          "ref": "MD-24-AC1",
+          "tests": [
+            "tests/test_req_modelling_and_evaluation.py::test_md_24_ac1_placeholder"
+          ],
+          "text": "The card has sections for direct use, out-of-scope use, and limitations each with a recommendation."
+        }
+      ],
+      "document": "modelling-and-evaluation-requirements.md",
+      "id_level_tests": []
+    },
+    "MD-25": {
+      "checks": [
+        {
+          "fingerprint": "1a3089e5a65e",
+          "ref": "MD-25-AC1",
+          "tests": [
+            "tests/test_req_modelling_and_evaluation.py::test_md_25_ac1_placeholder"
+          ],
+          "text": "The report has all three breakdowns with counts, and no rate for a group under 30 events."
+        }
+      ],
+      "document": "modelling-and-evaluation-requirements.md",
+      "id_level_tests": []
+    },
+    "MD-26": {
+      "checks": [
+        {
+          "fingerprint": "3dcb0aa36de1",
+          "ref": "MD-26-AC1",
+          "tests": [
+            "tests/test_req_modelling_and_evaluation.py::test_md_26_ac1_placeholder"
+          ],
+          "text": "A figure missing any of these fails the report check."
+        }
+      ],
+      "document": "modelling-and-evaluation-requirements.md",
+      "id_level_tests": []
+    },
+    "MD-27": {
+      "checks": [
+        {
+          "fingerprint": "4240befad35c",
+          "ref": "MD-27-AC1",
+          "tests": [
+            "tests/test_req_modelling_and_evaluation.py::test_md_27_ac1_placeholder"
+          ],
+          "text": "The report has a not-measured section with at least the coverage and survivorship gaps."
         }
       ],
       "document": "modelling-and-evaluation-requirements.md",
@@ -7007,6 +7363,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_licensing.py::test_every_source_name_in_the_code_has_a_register_row",
         "tests/test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row"
       ]
     },
@@ -7052,7 +7409,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_licensing.py::test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused"
+      ]
     },
     "SR-04": {
       "checks": [
@@ -8466,6 +8825,34 @@
       "document": "frontend-requirements.md",
       "id_level_tests": []
     },
+    "UX-12": {
+      "checks": [
+        {
+          "fingerprint": "15e68f80026d",
+          "ref": "UX-12-AC1",
+          "tests": [
+            "tests/test_req_frontend.py::test_ux_12_ac1_placeholder"
+          ],
+          "text": "A fixture company with missing data and a removed company each show their notes on the card."
+        }
+      ],
+      "document": "frontend-requirements.md",
+      "id_level_tests": []
+    },
+    "UX-13": {
+      "checks": [
+        {
+          "fingerprint": "369a465fb680",
+          "ref": "UX-13-AC1",
+          "tests": [
+            "tests/test_req_frontend.py::test_ux_13_ac1_placeholder"
+          ],
+          "text": "The link is on the prediction card and the page it opens asks for no personal data."
+        }
+      ],
+      "document": "frontend-requirements.md",
+      "id_level_tests": []
+    },
     "VL-01": {
       "checks": [
         {
@@ -9841,6 +10228,151 @@
         "LB-01"
       ]
     },
+    "tests/test_licensing.py::test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused": {
+      "code": [
+        "src/earnings/licensing.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DP-13",
+        "LC-04-AC1",
+        "SR-03"
+      ]
+    },
+    "tests/test_licensing.py::test_a_licence_check_older_than_ninety_days_is_listed_as_stale": {
+      "code": [
+        "src/earnings/licensing.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-10-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_committed_fixture_says_which_dataset_it_comes_from": {
+      "code": [
+        "tests/fixtures/fixture_sources.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-06-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_dataset_the_project_imports_may_be_deployed": {
+      "code": [
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "expected failure (requirement not met yet)",
+      "requirements": [
+        "LC-03-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_library_and_image_in_use_may_be_used_in_a_deployed_system": {
+      "code": [
+        "src/earnings/third_party_register.csv"
+      ],
+      "kind": "expected failure (requirement not met yet)",
+      "requirements": [
+        "LC-11-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_locked_package_and_container_image_has_a_licence_row": {
+      "code": [
+        "src/earnings/licensing.py",
+        "src/earnings/third_party_register.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-01-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data": {
+      "code": [
+        "src/earnings/third_party_register.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-05",
+        "LC-09-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_row_uses_a_listed_class_and_only_two_data_classes_may_be_deployed": {
+      "code": [
+        "src/earnings/licensing.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-02-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found": {
+      "code": [
+        "src/earnings/licensing.py",
+        "src/earnings/schedule.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-08-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_every_source_name_in_the_code_has_a_register_row": {
+      "code": [
+        "src/earnings/clients",
+        "src/earnings/licensing.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-07-AC1",
+        "SR-01"
+      ]
+    },
+    "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed": {
+      "code": [
+        "tests/fixtures/fixture_sources.csv"
+      ],
+      "kind": "expected failure (requirement not met yet)",
+      "requirements": [
+        "DP-10",
+        "LC-06-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation": {
+      "code": [
+        "src/earnings/schedule.py"
+      ],
+      "kind": "expected failure (requirement not met yet)",
+      "requirements": [
+        "LC-08-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_the_committed_notices_are_the_ones_the_registers_produce": {
+      "code": [
+        "src/earnings/licensing.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-05-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_the_gap_in_dataset_licences_is_exactly_the_one_recorded": {
+      "code": [
+        "src/earnings/licensing.py",
+        "src/earnings/source_register.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-03-AC1"
+      ]
+    },
+    "tests/test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded": {
+      "code": [
+        "src/earnings/licensing.py",
+        "src/earnings/third_party_register.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LC-11-AC1"
+      ]
+    },
     "tests/test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy": {
       "code": [
         "src/earnings/pressrelease.py"
@@ -11005,6 +11537,41 @@
         "DP-15-AC1"
       ]
     },
+    "tests/test_req_deployment_and_operations.py::test_dp_16_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "DP-16-AC1"
+      ]
+    },
+    "tests/test_req_deployment_and_operations.py::test_dp_17_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "DP-17-AC1"
+      ]
+    },
+    "tests/test_req_deployment_and_operations.py::test_dp_18_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "DP-18-AC1"
+      ]
+    },
+    "tests/test_req_deployment_and_operations.py::test_dp_19_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "DP-19-AC1"
+      ]
+    },
+    "tests/test_req_deployment_and_operations.py::test_dp_20_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "DP-20-AC1"
+      ]
+    },
     "tests/test_req_explanation_agent.py::test_ag_01_ac1_trace_of_a_run_shows_the_order": {
       "code": [],
       "kind": "not tested (NOT IMPLEMENTED)",
@@ -11656,6 +12223,20 @@
         "UX-11-AC1"
       ]
     },
+    "tests/test_req_frontend.py::test_ux_12_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "UX-12-AC1"
+      ]
+    },
+    "tests/test_req_frontend.py::test_ux_13_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "UX-13-AC1"
+      ]
+    },
     "tests/test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company_run": {
       "code": [],
       "kind": "not tested (NEEDS MEASUREMENT)",
@@ -11936,6 +12517,34 @@
       "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "MD-23-AC1"
+      ]
+    },
+    "tests/test_req_modelling_and_evaluation.py::test_md_24_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "MD-24-AC1"
+      ]
+    },
+    "tests/test_req_modelling_and_evaluation.py::test_md_25_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "MD-25-AC1"
+      ]
+    },
+    "tests/test_req_modelling_and_evaluation.py::test_md_26_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "MD-26-AC1"
+      ]
+    },
+    "tests/test_req_modelling_and_evaluation.py::test_md_27_ac1_placeholder": {
+      "code": [],
+      "kind": "not tested (NOT IMPLEMENTED)",
+      "requirements": [
+        "MD-27-AC1"
       ]
     },
     "tests/test_req_product.py::test_api_03_ac1_contract_test_checks_the_shape_for_404": {

@@ -428,9 +428,24 @@ This is a record of what was done and when, with the commit messages. It is not 
 - John approved all eight values of D-48 (decision C-60) and asked for a second fresh audit of the fixes.
 - Work by Claude. Decision by John.
 
+### 26 Nov 2026: second audit (FAIL), and licensing and deployment requirements
+
+- John approved D-48 and asked for a second audit, then for licence research, deployment requirements, a licence on all imported data, improvements from comparable documentation, and tests.
+- Second audit: FAIL (`audits/evidence/independent-audit-second-2026-11-26.md`). Verified and open: calls of other companies are attached to labelled events (DR-37). Fixed: releases could be lost once the daily filing check ran (e0ad085).
+- Licences read from the pages themselves. **Not all data is permissive, and no permissive replacement was found for transcripts or prices.** Yahoo's terms bar automated access, which two parts of the project use (DR-38). New draft document `docs/requirements/licensing-requirements.md` (LC-01 to LC-11), DP-16 to DP-20, MD-24 to MD-27, UX-12 and UX-13; registers of datasets, packages, images and models; generated notices. LC-03, LC-06, LC-08 and LC-11 are not met and have strict expected-failure tests. Placeholders for features not built.
+- Needs John: D-49, DR-37, D-48 (h), D-11 and D-12, the D-34 lists, and the SSOT row for the new document (wording given in chat; not edited).
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 As of 26 November 2026, after the independent audit.
+
+**Urgent**
+- **D-49 (b):** the daily consensus capture (22:30 UTC) and the price load use yfinance; Yahoo's terms bar automated access without permission. Stop, ask Yahoo, or accept the risk.
+- **DR-37:** other companies' calls are in the event data. Do not use it for features or training.
+- **Re-confirm:** D-48 (h), and D-11, D-12 and the D-34 phrase lists (the second audit says my delegated approvals went too far).
+
+**Decide:** the rest of D-49 (draft licence, hosting and improvement requirements).
 
 **Add**
 - **Tiingo free key** in `.env` (never in chat): the second price source (PX-01) and possibly prices for removed companies (not verified).

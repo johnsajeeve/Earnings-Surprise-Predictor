@@ -21,7 +21,8 @@ FILES = {"market": "market-requirements.md", "product": "product-requirements.md
          "feature": "feature-engineering-requirements.md", "agent": "explanation-agent-requirements.md",
          "database": "database-requirements.md", "frontend": "frontend-requirements.md",
          "ingestion": "ingestion-and-preparation-requirements.md", "modelling": "modelling-and-evaluation-requirements.md",
-         "serving": "api-and-serving-requirements.md", "deployment": "deployment-and-operations-requirements.md"}
+         "serving": "api-and-serving-requirements.md", "deployment": "deployment-and-operations-requirements.md",
+         "licensing": "licensing-requirements.md"}
 OWNER = {
     "market": {"N"},
     "product": {"PG", "NG", "ST", "FR", "SRS", "EX", "NFR", "API", "PL", "ML", "TR", "MR", "UI", "ER", "EP", "SCR", "SM"},
@@ -35,6 +36,7 @@ OWNER = {
     "modelling": {"MD"},
     "serving": {"SV"},
     "deployment": {"DP"},
+    "licensing": {"LC"},
 }
 WITHDRAWN = ({f"MFR-{i:02d}" for i in range(1, 20)} | {f"MNFR-{i:02d}" for i in range(1, 8)} |
               {f"DR-{i:02d}" for i in range(1, 11)} |
@@ -43,7 +45,7 @@ WITHDRAWN = ({f"MFR-{i:02d}" for i in range(1, 20)} | {f"MNFR-{i:02d}" for i in 
 CITE = {"Product": "product", "Data": "data", "Project-Wide": "project-wide", "Market": "market",
         "Feature Engineering": "feature", "Explanation Agent": "agent", "Database": "database",
         "Frontend": "frontend", "Ingestion and Preparation": "ingestion", "Modelling and Evaluation": "modelling",
-        "API and Serving": "serving", "Deployment and Operations": "deployment"}
+        "API and Serving": "serving", "Deployment and Operations": "deployment", "Licensing": "licensing"}
 
 
 def read(path):

@@ -1,0 +1,15 @@
+file,dataset_id,content
+aapl_8k_index.json,announcement_times,real
+aapl_companyfacts_2012_2015.json,eps_actuals,real
+aapl_press_release_table.html,eps_actuals,real
+aapl_split_ratio_tag.json,eps_actuals,real
+aapl_submissions_8k_sample.json,announcement_times,real
+aapl_yahoo_prices_june_2014.json,prices_yfinance,real
+cik_lookup_sample.txt,company_identifiers,real
+edgar_companyfacts_aapl_trimmed.json,eps_actuals,real
+hf_transcript_excerpts.json,transcripts_hf,real
+membership_sample.csv,index_membership,real
+sec_tickers_sample.json,company_identifiers,real
+sp500_ticker_start_end_full.csv,index_membership,real
+ticker_cik_map.csv,company_identifiers,real
+wikipedia_history_sample.json,removal_names_reasons,real

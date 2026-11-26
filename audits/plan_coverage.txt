@@ -288,3 +288,10 @@ DP-08 7.3
 DP-09 4.2
 DP-10 7.2
 DP-11..DP-15 7.4
+
+# Licensing, hosting compliance and documentation improvements, added 26 November 2026 (draft)
+LC-01..LC-11 7.2
+DP-16..DP-19 7.4
+DP-20 7.3
+MD-24..MD-27 3.4
+UX-12..UX-13 6.1

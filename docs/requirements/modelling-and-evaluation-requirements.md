@@ -79,9 +79,24 @@ Cost of B: with a middle band, the in-line class can dominate. FinCall-Surprise'
 | MD-22 | Must | A Celery task scores each event once its features exist, for each prediction point, and stores the Prediction with class, probabilities, calibrated confidence, the top SHAP values (MD-12), the model version and the feature-set version. A lookup reads this stored result and does not score a new transcript live. | Event with features gets one stored prediction per point. A second run adds none. | Decision C-15; Product FR-01, FR-11; Database DB-05 |
 | MD-23 | Must | The API refuses to serve a prediction whose model artefact is missing or fails its checksum, and answers with the Section 12 message. Scoring itself needs the artefact only in the scoring job. | Altered artefact makes the endpoint return 503 with the Section 12 message. | Product ML-03, Section 12 |
 
+## 6A. Documentation and reporting improvements (DRAFT, added 26 November 2026, awaiting approval)
+
+These come from reading how comparable products and model documentation standards present a model (Section 8A). All are extensions to the proposal and can be dropped (Project-Wide SS-04).
+
+| ID | Priority | Requirement | Acceptance check | Traces to |
+|---|---|---|---|---|
+| MD-24 | Should | The model card (Product MR-02) also states the direct use, the uses that are out of scope, and each limitation as a likely failure with what the reader should do about it. | The card has sections for direct use, out-of-scope use, and limitations each with a recommendation. | Hugging Face annotated model card |
+| MD-25 | Should | Test results are also broken down by test year, by whether the company was later removed from the index, and by confidence band, each with its number of events. A group under 30 events is shown with its count and no rate. | The report has all three breakdowns with counts, and no rate for a group under 30 events. | Hugging Face annotated model card (disaggregated evaluation); Data IM-02 |
+| MD-26 | Must | Every accuracy figure shown in a report, the dashboard or the API is given with its period, number of events, label definition, an interval, and the baselines measured on the same events. | A figure missing any of these fails the report check. | Product FR-06, FR-23; comparison with a vendor article that states an accuracy with none of these |
+| MD-27 | Should | The evaluation report lists the risks and properties that were not measured. | The report has a not-measured section with at least the coverage and survivorship gaps. | NIST AI RMF Measure 1.1 and 2.5 |
+
 ## 7. Pending items
 
 Choices that need John are in decision D-42: the three-class recommendation (Section 2), the class used for SHAP and direction labels (MD-13), the calibration method (MD-11), the search space and trial count (MD-05), the number of resamples (MD-17) and the multiple-testing method (MD-19). The pretraining cutoff is D-22. The T1 reporting rule is Product FR-29 (decision C-27).
+
+## 8A. Evidence read for Section 6A (26 November 2026)
+
+The Hugging Face annotated model card; the NIST AI RMF core (version 1.0, which the page says is being revised); the LSEG StarMine SmartEstimates product page, which gives method points and no accuracy figures; a 2019 Lipper Alpha article stating that StarMine's signal gives the direction of a surprise "70% of the time", with no sample, period or method. The StarMine help site did not resolve and the Zacks education page served a bot check, so neither was read. The Federal Reserve's SR 26-2 (April 2026) supersedes SR 11-7, which Product MR-01 to MR-06 cite; the letter says it is most relevant to banks with over 30 billion dollars in assets, and its attached guidance could not be read.
 
 ## 8. Evidence read
 
