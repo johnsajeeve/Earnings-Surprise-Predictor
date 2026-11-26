@@ -366,7 +366,11 @@ def main(argv: list[str]) -> int:
             store_payload(engine, yahoo.response(symbol, yahoo.fetch_payload(symbol)))
         (out / "price_load_report.json").write_text(json.dumps(report, indent=1), "utf-8")
     else:
-        report = {"survivorship": survivorship_report(engine),
+        from earnings.validation import survivorship_flag
+
+        survivorship = survivorship_report(engine)
+        report = {"survivorship": survivorship,
+                  "th_06": survivorship_flag(survivorship["years"]),
                   "price_windows": price_window_violations(engine)}  # fmt: skip
         (out / "price_report.json").write_text(json.dumps(report, indent=1, default=str), "utf-8")
     print(json.dumps(report, indent=1, default=str))

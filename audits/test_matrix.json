@@ -306,9 +306,12 @@
     },
     "src/earnings/clients/huggingface.py": {
       "requirements": [
-        "IG-11"
+        "EQ-07",
+        "IG-11",
+        "NFR-03"
       ],
       "tests": [
+        "tests/test_gaps.py::test_the_transcript_check_run_twice_changes_no_data",
         "tests/test_transcripts.py::test_the_download_is_refused_when_the_size_or_checksum_does_not_match"
       ]
     },
@@ -334,13 +337,16 @@
     },
     "src/earnings/consensus.py": {
       "requirements": [
+        "CE-02-AC2",
         "EQ-07",
         "IG-01-AC1",
         "IG-06",
+        "IG-06-AC1",
         "SR-07-AC1",
         "SR-08",
         "SR-08-AC1",
-        "SR-10"
+        "SR-10",
+        "SR-10-AC2"
       ],
       "tests": [
         "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try",
@@ -356,6 +362,7 @@
         "tests/test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows",
         "tests/test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same",
         "tests/test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call",
+        "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged",
         "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash"
       ]
     },
@@ -400,6 +407,8 @@
         "FR-02-AC1",
         "FR-02-AC2",
         "FR-14-AC2",
+        "IG-01-AC2",
+        "IG-19-AC1",
         "IG-22-AC1",
         "LB-04-AC1",
         "LB-05-AC1",
@@ -417,6 +426,8 @@
         "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing",
         "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
         "tests/test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart",
+        "tests/test_gaps.py::test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run",
+        "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
         "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios",
         "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event",
         "tests/test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash"
@@ -540,6 +551,7 @@
       "requirements": [
         "AE-04",
         "AE-04-AC1",
+        "CE-02-AC2",
         "CE-05-AC1",
         "DB-01-AC2",
         "DB-04",
@@ -634,9 +646,11 @@
       "requirements": [
         "AE-02-AC1",
         "IG-10-AC1",
+        "LB-03-AC2",
         "TH-12-AC1"
       ],
       "tests": [
+        "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent",
         "tests/test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy",
         "tests/test_pressrelease.py::test_adjusted_rows_negatives_and_cut_tables_are_handled",
         "tests/test_pressrelease.py::test_agreement_is_within_half_a_percent_of_the_stored_value",
@@ -648,6 +662,7 @@
       "requirements": [
         "DV-05",
         "FE-24",
+        "IG-19-AC1",
         "PX-01",
         "PX-01-AC1",
         "PX-02-AC1",
@@ -655,6 +670,7 @@
         "VL-05"
       ],
       "tests": [
+        "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
         "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows",
         "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window",
         "tests/test_prices.py::test_a_reused_ticker_is_refused_at_loading_and_stores_no_price",
@@ -701,9 +717,12 @@
     "src/earnings/schedule.py": {
       "requirements": [
         "IG-05",
-        "IG-05-AC2"
+        "IG-05-AC1",
+        "IG-05-AC2",
+        "NFR-03-AC1"
       ],
       "tests": [
+        "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times",
         "tests/test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run",
         "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task"
       ]
@@ -759,8 +778,12 @@
         "IG-01",
         "IG-01-AC1",
         "IG-03",
+        "IG-05",
+        "IG-05-AC1",
         "IG-06",
         "IG-07",
+        "NFR-03",
+        "NFR-03-AC1",
         "SC-01",
         "SR-10"
       ],
@@ -774,6 +797,11 @@
         "tests/test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on",
         "tests/test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash",
         "tests/test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis",
+        "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
+        "tests/test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new",
+        "tests/test_gaps.py::test_the_filing_check_stores_each_list_and_counts_only_new_earnings_releases",
+        "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times",
+        "tests/test_gaps.py::test_the_transcript_check_run_twice_changes_no_data",
         "tests/test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails",
         "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash",
         "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test",
@@ -797,6 +825,7 @@
         "IG-17-AC2",
         "IG-18",
         "IG-18-AC2",
+        "IG-19-AC1",
         "PL-06-AC1",
         "TX-01-AC2",
         "TX-02",
@@ -805,6 +834,7 @@
         "TX-06-AC1"
       ],
       "tests": [
+        "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
         "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation",
         "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason",
         "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles",
@@ -873,6 +903,7 @@
     },
     "src/earnings/validation.py": {
       "requirements": [
+        "AE-01-AC1",
         "AE-03-AC1",
         "CE-01-AC1",
         "CE-02-AC1",
@@ -885,17 +916,30 @@
         "DV-05-AC1",
         "DV-06-AC1",
         "DV-08-AC1",
+        "EQ-07",
         "FD-04-AC1",
+        "IG-05",
+        "IG-06",
+        "IG-06-AC1",
+        "SR-10-AC2",
         "TH-01-AC1",
+        "TH-06-AC1",
         "TH-15-AC1",
         "TX-04-AC1",
         "TX-05-AC2",
         "TX-07-AC1",
         "VL-01-AC1",
         "VL-01-AC2",
+        "VL-05-AC1",
+        "VL-05-AC2",
         "VL-09-AC1"
       ],
       "tests": [
+        "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged",
+        "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation",
+        "tests/test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing",
+        "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
+        "tests/test_gaps.py::test_the_threshold_in_the_code_is_the_one_recorded_in_the_decision_log",
         "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event",
         "tests/test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date",
         "tests/test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash",
@@ -911,9 +955,11 @@
     },
     "tests/conftest.py": {
       "requirements": [
-        "DB-16-AC1"
+        "DB-16-AC1",
+        "IG-12-AC1"
       ],
       "tests": [
+        "tests/test_gaps.py::test_the_whole_test_run_has_no_outside_network",
         "tests/test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against"
       ]
     },
@@ -969,6 +1015,7 @@
           "fingerprint": "fb4b2f747639",
           "ref": "AE-01-AC1",
           "tests": [
+            "tests/test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing",
             "tests/test_req_data.py::test_ae_01_ac1_every_event_has_a_document_identifier_an"
           ],
           "text": "Every event has a document identifier, an announcement date and an EPS filing date."
@@ -1765,6 +1812,7 @@
           "fingerprint": "3fb2e66d44f4",
           "ref": "CE-02-AC2",
           "tests": [
+            "tests/test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected",
             "tests/test_req_data.py::test_ce_02_ac2_sr_08_test_passes"
           ],
           "text": "SR-08 test passes."
@@ -2879,6 +2927,9 @@
       "document": "project-wide-requirements.md",
       "id_level_tests": [
         "tests/test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows",
+        "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
+        "tests/test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new",
+        "tests/test_gaps.py::test_the_transcript_check_run_twice_changes_no_data",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows"
       ]
     },
@@ -4684,6 +4735,7 @@
           "fingerprint": "ec6937f5f7ed",
           "ref": "IG-01-AC2",
           "tests": [
+            "tests/test_gaps.py::test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run",
             "tests/test_req_ingestion_and_preparation.py::test_ig_01_ac2_killing_a_worker_mid_task_and_restarting"
           ],
           "text": "Killing a worker mid-task and restarting gives the row count of a clean run."
@@ -4758,6 +4810,7 @@
           "fingerprint": "7caa6237eb6e",
           "ref": "IG-05-AC1",
           "tests": [
+            "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times",
             "tests/test_req_ingestion_and_preparation.py::test_ig_05_ac1_the_schedule_file_lists_each_job_with"
           ],
           "text": "The schedule file lists each job with its time."
@@ -4773,6 +4826,9 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
+        "tests/test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new",
+        "tests/test_gaps.py::test_the_filing_check_stores_each_list_and_counts_only_new_earnings_releases",
         "tests/test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task"
       ]
     },
@@ -4782,6 +4838,7 @@
           "fingerprint": "9398f929c9f1",
           "ref": "IG-06-AC1",
           "tests": [
+            "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged",
             "tests/test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and_the"
           ],
           "text": "Simulated 4-day gap is reported and the affected events carry the flag."
@@ -4790,6 +4847,7 @@
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
         "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
+        "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
         "tests/test_ingestion_framework.py::test_a_job_with_no_success_for_more_than_three_days_is_reported"
       ]
     },
@@ -4885,6 +4943,7 @@
           "fingerprint": "0b44fd2e05a5",
           "ref": "IG-12-AC1",
           "tests": [
+            "tests/test_gaps.py::test_the_whole_test_run_has_no_outside_network",
             "tests/test_req_ingestion_and_preparation.py::test_ig_12_ac1_tests_pass_with_the_network_disabled"
           ],
           "text": "Tests pass with the network disabled."
@@ -5044,6 +5103,7 @@
           "fingerprint": "d13701d6c539",
           "ref": "IG-19-AC1",
           "tests": [
+            "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
             "tests/test_req_ingestion_and_preparation.py::test_ig_19_ac1_re_running_any_stage_leaves_table_hashes"
           ],
           "text": "Re-running any stage leaves table hashes unchanged."
@@ -5221,6 +5281,7 @@
           "fingerprint": "53bc45473894",
           "ref": "LB-03-AC2",
           "tests": [
+            "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent",
             "tests/test_req_data.py::test_lb_03_ac2_sample_comparison_is_reported_with_differences_above"
           ],
           "text": "Sample comparison is reported, with differences above 1% listed."
@@ -5926,13 +5987,16 @@
           "fingerprint": "4718e36e3331",
           "ref": "NFR-03-AC1",
           "tests": [
+            "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times",
             "tests/test_req_product.py::test_nfr_03_ac1_check_runs_every_24_hours"
           ],
           "text": "Check runs every 24 hours"
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_gaps.py::test_the_transcript_check_run_twice_changes_no_data"
+      ]
     },
     "NFR-04": {
       "checks": [
@@ -7043,6 +7107,7 @@
           "fingerprint": "38c8241fdd26",
           "ref": "SR-10-AC2",
           "tests": [
+            "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged",
             "tests/test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive"
           ],
           "text": "A gap of more than 3 consecutive days is reported and the affected events are flagged."
@@ -7770,6 +7835,7 @@
           "fingerprint": "d02a023dab4f",
           "ref": "TH-06-AC1",
           "tests": [
+            "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation",
             "tests/test_req_data.py::test_th_06_ac1_to_be_set_after_the_first_comparison"
           ],
           "text": "To be set after the first comparison run"
@@ -7856,6 +7922,7 @@
           "fingerprint": "36e74346ea34",
           "ref": "TH-12-AC1",
           "tests": [
+            "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent",
             "tests/test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome",
             "tests/test_req_data.py::test_th_12_ac1_differences_above_1_listed"
           ],
@@ -8425,6 +8492,7 @@
           "fingerprint": "fe4f49b44987",
           "ref": "VL-05-AC1",
           "tests": [
+            "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation",
             "tests/test_req_data.py::test_vl_05_ac1_a_persistent_gap_above_a_threshold_set"
           ],
           "text": "A persistent gap above a threshold set in Section 11 is investigated and recorded."
@@ -8433,6 +8501,7 @@
           "fingerprint": "4fbb076d889d",
           "ref": "VL-05-AC2",
           "tests": [
+            "tests/test_gaps.py::test_the_threshold_in_the_code_is_the_one_recorded_in_the_decision_log",
             "tests/test_req_data.py::test_vl_05_ac2_th_06_is_set_from_the_first"
           ],
           "text": "TH-06 is set from the first comparison run and recorded in the decision log before the validation set is read."
@@ -8694,6 +8763,7 @@
       ],
       "kind": "real check",
       "requirements": [
+        "CE-02-AC2",
         "SR-08-AC1"
       ]
     },
@@ -9159,6 +9229,137 @@
       "kind": "real check",
       "requirements": [
         "FD-03"
+      ]
+    },
+    "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged": {
+      "code": [
+        "src/earnings/consensus.py",
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-06-AC1",
+        "SR-10-AC2"
+      ]
+    },
+    "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation": {
+      "code": [
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "TH-06-AC1",
+        "VL-05-AC1"
+      ]
+    },
+    "tests/test_gaps.py::test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run": {
+      "code": [
+        "src/earnings/events.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-01-AC2"
+      ]
+    },
+    "tests/test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing": {
+      "code": [
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "AE-01-AC1"
+      ]
+    },
+    "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table": {
+      "code": [
+        "src/earnings/events.py",
+        "src/earnings/prices.py",
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-19-AC1"
+      ]
+    },
+    "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows": {
+      "code": [
+        "src/earnings/tasks.py",
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "EQ-07",
+        "IG-05",
+        "IG-06"
+      ]
+    },
+    "tests/test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent": {
+      "code": [
+        "src/earnings/pressrelease.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-03-AC2",
+        "TH-12-AC1"
+      ]
+    },
+    "tests/test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new": {
+      "code": [
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "EQ-07",
+        "IG-05"
+      ]
+    },
+    "tests/test_gaps.py::test_the_filing_check_stores_each_list_and_counts_only_new_earnings_releases": {
+      "code": [
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-05"
+      ]
+    },
+    "tests/test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times": {
+      "code": [
+        "src/earnings/schedule.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-05-AC1",
+        "NFR-03-AC1"
+      ]
+    },
+    "tests/test_gaps.py::test_the_threshold_in_the_code_is_the_one_recorded_in_the_decision_log": {
+      "code": [
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "VL-05-AC2"
+      ]
+    },
+    "tests/test_gaps.py::test_the_transcript_check_run_twice_changes_no_data": {
+      "code": [
+        "src/earnings/clients/huggingface.py",
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "EQ-07",
+        "NFR-03"
+      ]
+    },
+    "tests/test_gaps.py::test_the_whole_test_run_has_no_outside_network": {
+      "code": [
+        "tests/conftest.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-12-AC1"
       ]
     },
     "tests/test_health_unit.py::test_all_ok_returns_200": {
@@ -11104,7 +11305,7 @@
     },
     "tests/test_req_feature_engineering.py::test_fe_02_ac1_a_fixture_call_with_a_safe_harbour": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-02-AC1"
       ]
@@ -11125,14 +11326,14 @@
     },
     "tests/test_req_feature_engineering.py::test_fe_05_ac1_score_rows_have_a_non_null_model": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-05-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_05_ac2_register_entry_exists": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-05-AC2"
       ]
@@ -11160,14 +11361,14 @@
     },
     "tests/test_req_feature_engineering.py::test_fe_08_ac1_hand_calculated_fixture_matches": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-08-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_08_ac2_fixture_with_3_sentences_is_unavailable": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-08-AC2"
       ]
@@ -11181,14 +11382,14 @@
     },
     "tests/test_req_feature_engineering.py::test_fe_10_ac1_fixture_sentences_with_known_hedge_counts_match": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-10-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_10_ac2_list_version_is_in_the_feature_set": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-10-AC2"
       ]
@@ -11202,35 +11403,35 @@
     },
     "tests/test_req_feature_engineering.py::test_fe_12_ac1_fixture_with_a_known_word_count": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-12-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_13_ac1_fixture_sentences_with_known_negation_counts_match": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-13-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_14_ac1_fixture_with_4_flagged_of_20_gives": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-14-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_15_ac1_fixture_q_a_with_5_questions_gives": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-15-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_16_ac1_fixture_matches_a_hand_calculation": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-16-AC1"
       ]
@@ -11251,14 +11452,14 @@
     },
     "tests/test_req_feature_engineering.py::test_fe_18_ac1_hand_calculated_fixture_matches": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-18-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_19_ac1_fixture_matches": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-19-AC1"
       ]
@@ -11272,28 +11473,28 @@
     },
     "tests/test_req_feature_engineering.py::test_fe_21_ac1_fixture_with_rising_sues_gives_a_positive": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-21-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_21_ac2_fixture_with_three_prior_values_is_unavailable": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-21-AC2"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_22_ac1_fixture_matches": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-22-AC1"
       ]
     },
     "tests/test_req_feature_engineering.py::test_fe_22_ac2_a_planted_future_price_has_no_effect": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "FE-22-AC2"
       ]
@@ -11496,7 +11697,7 @@
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_05_ac1_the_schedule_file_lists_each_job_with": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-05-AC1"
       ]
@@ -11589,14 +11790,14 @@
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_18_ac1_on_50_hand_labelled_calls_at_least": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NEEDS PERSON)",
       "requirements": [
         "IG-18-AC1"
       ]
     },
     "tests/test_req_ingestion_and_preparation.py::test_ig_18_ac2_a_call_with_no_marker_is_flagged": {
       "code": [],
-      "kind": "not tested (BLOCKED)",
+      "kind": "not tested (NOT IMPLEMENTED)",
       "requirements": [
         "IG-18-AC2"
       ]

@@ -7,12 +7,13 @@ Every check returns numbers. A check that misses its threshold says so; no thres
 import hashlib
 import json
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
 from sqlalchemy import Engine, text
 
+from earnings import consensus
 from earnings.events import (
     _splits,
     _versions,
@@ -26,6 +27,11 @@ DATE_FIELDS = ("transcript_date", "information_date", "announcement_date")
 # A label this large cannot come from a real surprise: two events show a scale error in the source
 # (quarterly EPS in thousands). This is my own flag, not the DV-04 threshold, which is still pending
 # (decision D-47, item m). The event stays in its table; the quarantine row is for review.
+# TH-06, set from the first comparison run (decision C-57): the mean yearly gap against the
+# equal-weighted index, in either direction, above which the survivorship check is investigated
+SURVIVORSHIP_THRESHOLD = 0.02
+SURVIVORSHIP_INDEX = "RSP"
+GAP_REASON = "announced during a consensus capture gap"
 SCALE_ERROR_SUE = 1e6
 # DV-04: a label above this size is flagged for a person to review, never removed (decision C-51)
 EXTREME_SUE = 10.0
@@ -251,6 +257,59 @@ def scale_suspect_events(engine: Engine) -> list[int]:
     return found
 
 
+def capture_gap_events(engine: Engine, today: date | None = None) -> list[int]:
+    """Events announced during a gap in the consensus capture, or on the day after it ends: the
+    snapshot before their announcement may be missing (SR-10, IG-06)."""
+    found: set[int] = set()
+    for gap in consensus.gaps(engine, today):
+        with engine.connect() as conn:
+            found.update(
+                conn.execute(
+                    text(
+                        "SELECT event_id FROM earnings_event WHERE announcement_date "
+                        "BETWEEN :a AND :b"
+                    ),
+                    {"a": gap.first_missing, "b": gap.last_missing + timedelta(days=1)},
+                ).scalars()
+            )
+    return sorted(found)
+
+
+def event_documents(engine: Engine) -> dict[str, int]:
+    """AE-01: each labelled event has a document identifier, an announcement date and a filing date
+    for the quarter's EPS. Counts what is missing."""
+    with engine.connect() as conn:
+        row = conn.execute(
+            text(
+                "SELECT count(*), count(*) FILTER (WHERE release_accession = ''), "
+                "count(*) FILTER (WHERE announcement_date IS NULL), "
+                "count(*) FILTER (WHERE NOT EXISTS (SELECT 1 FROM eps_history h WHERE "
+                "h.company_id = e.company_id AND h.period_end = e.period_end "
+                "AND h.filed_at IS NOT NULL AND h.accession <> '')) "
+                "FROM earnings_event e WHERE sue IS NOT NULL"
+            )
+        ).one()
+    keys = ("labelled_events", "no_document", "no_announcement_date", "no_eps_filing")
+    return dict(zip(keys, row, strict=True))
+
+
+def survivorship_flag(
+    years: dict[Any, dict[str, Any]], threshold: float = SURVIVORSHIP_THRESHOLD
+) -> dict[str, Any]:
+    """VL-05 with TH-06: the mean yearly gap against the equal-weighted index, and whether it is
+    large enough to be investigated."""
+    gaps = [r[f"gap_vs_{SURVIVORSHIP_INDEX}"] for r in years.values()
+            if r.get(f"gap_vs_{SURVIVORSHIP_INDEX}") is not None]  # fmt: skip
+    mean = sum(gaps) / len(gaps) if gaps else None
+    return {
+        "index": SURVIVORSHIP_INDEX,
+        "years": len(gaps),
+        "mean_gap": mean,
+        "threshold": threshold,
+        "investigate": mean is not None and abs(mean) > threshold,
+    }
+
+
 def run_checks(engine: Engine) -> dict[str, Any]:
     """All the event checks. Failing rows go to quarantine and are counted per reason."""
     failures = schema_failures(engine)
@@ -262,6 +321,7 @@ def run_checks(engine: Engine) -> dict[str, Any]:
         (e, "extreme label, above 10 in size: for review (DV-04)")
         for e, _, _ in extreme_events(engine)
     ]
+    failures += [(e, GAP_REASON) for e in capture_gap_events(engine)]
     new = sum(quarantine_row(engine, "earnings_event", str(k), why) for k, why in failures)
     with engine.begin() as conn:  # the decision on the scale errors is the reviewer note
         conn.execute(
@@ -284,6 +344,7 @@ def run_checks(engine: Engine) -> dict[str, Any]:
         "information_not_before_announcement": len(order["information_not_before_announcement"]),
         "call_before_announcement": len(order["call_before_announcement"]),
         "snapshots_on_or_after_announcement": capture_after_announcement(engine),
+        "event_documents": event_documents(engine),
         "eps_basis_values": basis_values(engine),
         "events_hash": events_hash(engine),
     }

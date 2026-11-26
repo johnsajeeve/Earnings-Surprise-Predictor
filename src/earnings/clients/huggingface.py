@@ -79,3 +79,18 @@ def manifest_payload(info: dict[str, Any]) -> RawResponse:
     """The manifest as a stored payload: the revision and checksum of the snapshot on record."""
     body = json.dumps({k: v for k, v in info.items() if k != "downloaded_now"}, sort_keys=True)
     return RawResponse(SOURCE, URL, 200, "application/json", body.encode(), datetime.now(UTC))
+
+
+API_URL = f"https://huggingface.co/api/datasets/{DATASET}"
+
+
+def latest_revision(session: Any | None = None) -> str:
+    """The newest revision of the dataset, from the public API. Nothing about the project goes."""
+    if session is None:
+        import requests
+
+        session = requests.Session()
+    response = session.get(API_URL, headers={"User-Agent": "earnings-research"}, timeout=30)
+    if response.status_code != 200:
+        raise SourceError(f"the dataset API returned status {response.status_code}")
+    return str(response.json()["sha"])

@@ -63,7 +63,7 @@ For John. A recommendation is not an approval: nothing here is decided until you
 ## E. Later, or yours alone
 
 - **Later, before their waves:** D-42 (before Wave 3), D-43 (before 4), D-37 and D-27 (before 5), D-39 (before 6), D-15 and D-44 (before any cloud spend). I will research each then, so the facts are current.
-- **YOU, with dates that matter:** D-16 ethics application (December), D-29 exact submission date, D-46 written agreement from your supervisor to the time-series label, D-03 drop order, D-40 approval of the component documents, D-17, D-21, D-24, D-25, the spot-check of five requirements, and the two SSOT map edits. D-02, D-04 to D-08, D-11, D-12 and D-14 are older planning confirmations for the next supervisor meeting.
+- **YOU, with dates that matter:** D-16 ethics application (December), D-29 exact submission date, written agreement from your supervisor to the time-series label (C-25, SC-07, SS-04; I earlier called this D-46 by mistake), D-03 drop order, D-40 approval of the component documents, D-17, D-21, D-24, D-25, the spot-check of five requirements, and the two SSOT map edits. D-02, D-04 to D-08, D-11, D-12 and D-14 are older planning confirmations for the next supervisor meeting.
 - **Optional:** FMP key; D-41 additions (leave them out unless you want one).
 
 ## Where a recommendation would change a requirement or document

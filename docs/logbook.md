@@ -426,4 +426,4 @@ As of 26 November 2026. The full list with a recommendation for each item is `au
 
 **Still to approve (they change a document):** the Product Section 11 columns of the event, EPS and fundamentals tables (C4), and the IG-16 sentence in Data Section 12 (C6).
 
-**Only you:** DR-16 (read `wave-1.3/review_list.csv`), DR-21 (private email on GitHub), the Phase 0 spot-check of five requirements, D-16 ethics (apply in December), D-29 submission date, D-46 supervisor agreement, D-03, D-40, the two SSOT map edits, and the older planning items in the decisions file (section E).
+**Only you:** DR-16 (read `wave-1.3/review_list.csv`), DR-21 (private email on GitHub), the Phase 0 spot-check of five requirements, D-16 ethics (apply in December), D-29 submission date, the supervisor's written agreement to the time-series label (C-25, SC-07, SS-04), D-03, D-40, the two SSOT map edits, and the older planning items in the decisions file (section E).

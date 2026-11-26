@@ -1,14 +1,17 @@
 """Celery tasks. Ingestion and feature tasks are added here in later steps."""
 
 import logging
+from pathlib import Path
 from typing import Any
 
 import redis
 from celery.signals import worker_ready
 from sqlalchemy import text
 
-from earnings import consensus
+from earnings import consensus, universe, validation
+from earnings import financials as fin
 from earnings.celery_app import celery_app
+from earnings.clients import huggingface
 from earnings.clients.edgar import (
     MAX_REQUESTS_PER_SECOND,
     EdgarClient,
@@ -20,8 +23,9 @@ from earnings.config import get_settings
 from earnings.db import get_engine
 from earnings.identifiers import canonical_cik
 from earnings.limits import RedisSlidingWindowLimiter
-from earnings.rawstore import store_payload
-from earnings.runlog import run_record
+from earnings.rawstore import latest_payload, store_payload
+from earnings.runlog import late_jobs, run_record
+from earnings.schedule import JOBS
 from earnings.tasking import IdempotentTask
 
 log = logging.getLogger(__name__)
@@ -131,6 +135,75 @@ def capture_catch_up() -> bool:
         capture_consensus.delay()
         return True
     return False
+
+
+def new_releases(engine: Any, client: Any, companies: list[str]) -> dict[str, Any]:
+    """Fetch each company's filing list, store it, and count the earnings releases (8-K Item 2.02)
+    that the previously stored list did not have. Loading them is a later, hand-started step."""
+    found: dict[str, list[str]] = {}
+    failed: list[str] = []
+    for company_id in companies:
+        url = fin.SUBMISSIONS_URL.format(cik=company_id)
+        before = latest_payload(engine, EDGAR_SOURCE, url)
+        try:
+            raw = client.get(url)
+        except Exception as exc:  # noqa: BLE001  one failing company must not stop the others
+            log.error("filing check failed for %s: %s", company_id, type(exc).__name__)
+            failed.append(company_id)
+            continue
+        store_payload(engine, raw)
+        if before is None:
+            continue  # nothing to compare with yet
+        old = {r.accession for r in fin.parse_earnings_releases([before])}
+        added = [
+            r.accession for r in fin.parse_earnings_releases([raw.body]) if r.accession not in old
+        ]
+        if added:
+            found[company_id] = added
+    return {"checked": len(companies) - len(failed), "new": found, "failed": failed}
+
+
+@celery_app.task(name="earnings.check_new_filings", base=IdempotentTask, bind=True)
+def check_new_filings(self: IdempotentTask) -> dict[str, Any]:
+    """The daily check for new 8-K Item 2.02 filings (Ingestion IG-05)."""
+    companies, _ = universe.read_list(Path(universe.__file__).parent / "universe.csv")
+    engine = get_engine("worker")
+    with run_record(engine, "check-8k", EDGAR_SOURCE, self.request.id) as run:
+        result = new_releases(engine, edgar_client(), [c["company_id"] for c in companies])
+        run.rows_read, run.rows_written = result["checked"], sum(map(len, result["new"].values()))
+        if companies and not result["checked"]:
+            raise RuntimeError("the filing check failed for every company")
+        log.info("filing check: %s", {k: v for k, v in result.items() if k != "failed"})
+        return result
+
+
+@celery_app.task(name="earnings.check_new_transcripts", base=IdempotentTask, bind=True)
+def check_new_transcripts(self: IdempotentTask) -> dict[str, Any]:
+    """The daily check for new transcripts (IG-05, NFR-03). The transcript set is a pinned
+    snapshot, so a new revision is reported for John and is not loaded by itself."""
+    engine = get_engine("worker")
+    with run_record(engine, "check-transcripts", huggingface.SOURCE, self.request.id) as run:
+        latest = huggingface.latest_revision()
+        changed = latest != huggingface.REVISION
+        run.rows_read = 1
+        if changed:
+            log.warning("the transcript set has a new revision %s (pinned %s)", latest,
+                        huggingface.REVISION)  # fmt: skip
+        return {"pinned": huggingface.REVISION, "latest": latest, "new_revision": changed}
+
+
+@celery_app.task(name="earnings.run_data_gates", base=IdempotentTask, bind=True)
+def run_data_gates(self: IdempotentTask) -> dict[str, Any]:
+    """The daily run of the data checks (IG-05), with the report of late jobs (IG-06)."""
+    engine = get_engine("worker")
+    with run_record(engine, "data-gates", "derived", self.request.id) as run:
+        report = validation.run_checks(engine)
+        report["late_jobs"] = late_jobs(engine, list(JOBS), since=consensus.CAPTURE_START)
+        run.rows_read = report["null_rates"]["events"]
+        run.rows_written = report["quarantined_this_run"]
+        if report["late_jobs"]:
+            log.warning("late scheduled jobs: %s", ", ".join(report["late_jobs"]))
+        return report
 
 
 @worker_ready.connect

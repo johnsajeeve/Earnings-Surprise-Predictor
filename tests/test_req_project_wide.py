@@ -428,6 +428,11 @@ def test_eq_06_ac1_three_scripted_tests_pass():
 # Each registered task and the test that runs it twice and compares state (EQ-07). A new task
 # that is not listed here fails the test below, so no task can be added without one.
 RUN_TWICE_TESTS = {
+    "earnings.check_new_filings": (
+        "test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new"
+    ),
+    "earnings.check_new_transcripts": "test_the_transcript_check_run_twice_changes_no_data",
+    "earnings.run_data_gates": "test_the_data_gates_run_twice_leave_the_same_rows",
     "earnings.ping": None,  # holds no state
     "earnings.load_companies": "test_eq_07_load_companies_twice_leaves_the_same_rows",
     "earnings.capture_consensus": ("test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows"),
@@ -458,6 +463,7 @@ def test_eq_07_ac1_every_registered_task_has_a_run_twice_test():
             "test_ingestion_framework",
             "test_edgar_client",
             "test_consensus_capture",
+            "test_gaps",
         )
     }
     for task, test in RUN_TWICE_TESTS.items():

@@ -77,7 +77,7 @@ def _insert(engine, **overrides):
         )
 
 
-@pytest.mark.req("SR-08-AC1")
+@pytest.mark.req("SR-08-AC1", "CE-02-AC2")
 @pytest.mark.code("src/earnings/migrations/versions", "src/earnings/consensus.py")
 def test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected(test_db):
     from earnings.db import get_engine

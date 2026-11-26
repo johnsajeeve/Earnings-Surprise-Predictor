@@ -86,7 +86,7 @@ def test_ig_12_ac2_fixtures_state_their_origin():
 @pytest.mark.req("IG-05-AC1")
 def test_ig_05_ac1_the_schedule_file_lists_each_job_with():
     """IG-05-AC1: The schedule file lists each job with its time."""
-    not_tested("BLOCKED", "waits for open decision D-45")
+    not_tested("NOT IMPLEMENTED", "covered by tests/test_gaps.py")
 
 
 @pytest.mark.req("IG-11-AC1")
@@ -122,13 +122,13 @@ def test_ig_17_ac2_rule_list_has_a_version():
 @pytest.mark.req("IG-18-AC1")
 def test_ig_18_ac1_on_50_hand_labelled_calls_at_least():
     """IG-18-AC1: On 50 hand-labelled calls at least 95% of boundaries are correct."""
-    not_tested("BLOCKED", "waits for open decision D-45")
+    not_tested("NEEDS PERSON", "the 50 calls are labelled by hand")
 
 
 @pytest.mark.req("IG-18-AC2")
 def test_ig_18_ac2_a_call_with_no_marker_is_flagged():
     """IG-18-AC2: A call with no marker is flagged."""
-    not_tested("BLOCKED", "waits for open decision D-45")
+    not_tested("NOT IMPLEMENTED", "covered by tests/test_transcripts.py")
 
 
 @pytest.mark.req("IG-19-AC1")

@@ -21,6 +21,7 @@ _LABEL = re.compile(r"diluted", re.IGNORECASE)
 _NOT_PER_SHARE = re.compile(r"shares|weighted|average|outstanding|dilutive|effect|number of", re.I)
 _PER_SHARE = re.compile(r"per\s+(common\s+)?share|eps|earnings|income|net", re.IGNORECASE)
 TOLERANCE = Decimal("0.005")  # AE-02: within 0.5%
+LISTED_DIFFERENCE = Decimal("0.01")  # TH-12: differences above 1% are listed
 
 
 @dataclass(frozen=True)
@@ -251,8 +252,21 @@ def summary(records: list[dict]) -> dict:
     for r in records:
         counts[r["result"]] = counts.get(r["result"], 0) + 1
     parsed = sum(counts.get(k, 0) for k in ("agree", "differ", "other column"))
+    above = []
+    for r in records:
+        if r["result"] == "differ" and Decimal(r["stored_eps"]):
+            gap = abs(Decimal(r["press_eps"]) - Decimal(r["stored_eps"])) / abs(
+                Decimal(r["stored_eps"])
+            )
+            if gap > LISTED_DIFFERENCE:
+                above.append(
+                    {"company_id": r.get("company_id"), "period_end": r.get("period_end"),
+                     "stored": r["stored_eps"], "press": r["press_eps"],
+                     "relative_difference": float(round(gap, 4))}
+                )  # fmt: skip
     return {
         "sampled": len(records),
+        "differences_above_1pct": above,
         "counts": counts,
         "agree_of_sampled": counts.get("agree", 0) / len(records) if records else 0.0,
         "agree_of_parsed": counts.get("agree", 0) / parsed if parsed else 0.0,

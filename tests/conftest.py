@@ -1,6 +1,9 @@
 """Pytest configuration shared by all tests."""
 
+import ipaddress
 import logging
+import os
+import socket
 
 import pytest
 
@@ -8,7 +11,30 @@ from db_support import assert_test_database, test_database_name
 from requirement_support import KINDS
 
 
+class ExternalNetworkBlocked(AssertionError):
+    """A test tried to reach a host outside the local stack (Ingestion IG-12)."""
+
+
+_connect = socket.socket.connect
+# Libraries that do not use Python sockets (yfinance's curl) are sent to a closed local port.
+_DEAD_PROXY = "http://127.0.0.1:9"
+_LOCAL_NAMES = "localhost,127.0.0.1,::1,db,redis,api,worker"
+
+
+def _guarded_connect(sock, address):
+    if isinstance(address, tuple):
+        info = ipaddress.ip_address(socket.gethostbyname(address[0]) if ":" not in address[0]
+                                    else address[0].split("%")[0])  # fmt: skip
+        if not (info.is_private or info.is_loopback):
+            raise ExternalNetworkBlocked(f"a test tried to connect to {address[0]}")
+    return _connect(sock, address)
+
+
 def pytest_configure(config):
+    socket.socket.connect = _guarded_connect
+    for name in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"):
+        os.environ[name] = _DEAD_PROXY
+    os.environ["NO_PROXY"] = os.environ["no_proxy"] = _LOCAL_NAMES
     # A marker names the requirement check a test exercises, for example
     # req("FR-01-AC2") or req("SP-06"). References are validated by
     # scripts/check_requirement_refs.py against audits/acceptance_index.md.

@@ -244,7 +244,12 @@ def coverage_report(engine: Engine, out_dir: Path | None = None) -> dict[str, An
                 by_year[key]["with_transcript"] += 1
             else:
                 missing.append({"company_id": cid, "name": name, "release_filed": str(r.announced)})
+    shortfall: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    for m in missing:
+        if int(m["release_filed"][:4]) >= 2015:  # TX-04: the target years
+            shortfall[m["name"]][m["release_filed"][:4]] += 1
     report = {
+        "shortfall_by_company_and_year": {k: dict(v) for k, v in sorted(shortfall.items())},
         "by_year_and_group": {k: dict(v) for k, v in sorted(by_year.items())},
         "missing_count": len(missing),
     }

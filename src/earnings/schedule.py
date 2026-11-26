@@ -1,9 +1,7 @@
 """Every scheduled job, with its time, in one place (Ingestion IG-05, decision C-45).
 
-A job that is not listed here does not run on a schedule. Times are UTC. Backfill is started by
-hand and is never listed. The other initial jobs of IG-05 (the daily check for new transcripts,
-the daily check for new 8-K Item 2.02 filings, the daily run of the data gates) are added in the
-step that builds each one, with the run time John approves under D-45.
+A job that is not listed here does not run on a schedule. Times are UTC and were approved by John
+(C-46 for the capture, C-56 for the other three). Backfill is started by hand and is never listed.
 """
 
 from typing import Any
@@ -15,6 +13,10 @@ JOBS: dict[str, dict[str, Any]] = {
     # After the US close in summer and winter. 22:30 UTC was approved by John on 23 Nov 2026 as the
     # D-45 run-time value for this job (decision C-46).
     "capture-consensus": {"task": "earnings.capture_consensus", "hour": 22, "minute": 30},
+    # EDGAR accepts filings until 22:00 Eastern, which is 02:00 or 03:00 UTC.
+    "check-8k": {"task": "earnings.check_new_filings", "hour": 3, "minute": 30},
+    "check-transcripts": {"task": "earnings.check_new_transcripts", "hour": 3, "minute": 45},
+    "data-gates": {"task": "earnings.run_data_gates", "hour": 4, "minute": 15},
 }
 
 
