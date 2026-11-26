@@ -1,0 +1,201 @@
+event_id,company_id,period_end,announcement_date,accession,stored_eps,derived,press_eps,row,result,note
+346,0000026172,2020-12-31,2021-02-04,0000026172-21-000007,3.36,False,3.36,Diluted | $ | 3.36 | $ | 1.97,agree,
+1853,0000884887,2018-03-31,2018-04-26,0000884887-18-000038,1.02,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1830,0000884887,2023-12-31,2024-02-01,0000884887-24-000003,1.07,True,1.06,Diluted | $ | 1.06 | $ | (1.96) | $ | 6.31 | $ | (8.45),differ,relative difference 0.0093
+2606,0001341439,2013-02-28,2013-03-20,0001193125-13-117200,0.52,False,0.52,Diluted,agree,
+2908,0001478242,2018-03-31,2018-05-02,0001157523-18-000924,0.32,False,0.32,Diluted | $ | 0.32 | $ | 0.43,agree,
+227,0000010456,2015-09-30,2015-10-27,0001193125-15-353956,0,False,0.00,Diluted,agree,
+2795,0001413329,2021-09-30,2021-10-19,0001413329-21-000086,1.55,False,5.77,Reported Diluted EPS | $5.77 | - | $5.82 | $ 5.16,differ,relative difference 2.7226
+558,0000051143,2016-12-31,2017-01-19,0001104659-17-003081,4.71,True,,,not parsed,no GAAP diluted EPS row found in the press release
+1605,0000796343,2017-06-02,2017-06-20,0000796343-17-000123,0.75,False,,,not parsed,no GAAP diluted EPS row found in the press release
+98,0000004904,2018-06-30,2018-07-25,0000004904-18-000032,1.07,False,,,not parsed,no GAAP diluted EPS row found in the press release
+977,0000087347,2023-06-30,2023-07-21,0001193125-23-190924,0.72,False,0.72,Diluted EPS – GAAP basis,agree,
+3058,0001585689,2019-03-31,2019-05-01,0001585689-19-000083,0.54,False,,,not parsed,no GAAP diluted EPS row found in the press release
+37,0000004127,2022-12-30,2023-02-06,0000004127-23-000008,1.93,False,1.93,Diluted | $ | 1.93 | $ | 2.40,agree,
+1794,0000874766,2013-03-31,2013-04-29,0000874766-13-000034,-0.58,False,-0.58,Net income (loss) available to common shareholders per diluted share,agree,
+989,0000087347,2014-06-30,2014-07-17,0001193125-14-271624,1.21,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1376,0000718877,2017-03-31,2017-05-04,0001104659-17-029887,0.56,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1108,0000109198,2019-11-02,2019-11-19,0001157523-19-002284,0.68,False,,,not parsed,no GAAP diluted EPS row found in the press release
+177,0000008818,2016-01-02,2016-02-03,0001104659-16-093381,0.62,False,,,not parsed,no GAAP diluted EPS row found in the press release
+805,0000072971,2016-09-30,2016-10-14,0000072971-16-001300,1.03,False,1.03,Diluted earnings per common share,agree,
+2505,0001170010,2022-02-28,2022-04-12,0001170010-22-000014,0.98,True,0.98,Net earnings per diluted share | $ | 0.98 | $ | 1.27 | (22.8) | % | $ | 6.97 | $ | 4.52 | 54.2 | %,agree,
+84,0000004904,2015-09-30,2015-10-22,0000004904-15-000044,1.06,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1003,0000087347,2018-12-31,2019-01-18,0001193125-19-012016,0.38,True,1.53,Diluted EPS (loss per share) - GAAP basis,differ,relative difference 3.0263
+59,0000004127,2018-12-28,2019-02-05,0000004127-19-000011,1.6,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2457,0001166691,2021-03-31,2021-04-29,0001166691-21-000018,0.71,False,0.71,Diluted earnings per common share attributable to Comcast Corporation shareholders,agree,
+2724,0001396009,2020-03-31,2020-05-06,0001104659-20-057193,0.45,False,0.45,Earnings from continuing operations per diluted share | $ | 0.45 | $ | 0.48 | $ | 4.64 | $ | 3.95,agree,
+1828,0000884887,2022-06-30,2022-07-28,0000884887-22-000023,-2.05,False,-2.05,Diluted | $ | (2.05) | $ | (5.29) | $ | (6.63) | $ | (9.96),agree,
+1897,0000920148,2022-06-30,2022-07-28,0000920148-22-000038,3.87,False,3.87,Diluted earnings per common share | $ | 3.87 | $ | 4.76 | $ | 9.11 | $ | 12.58,agree,
+29,0000004127,2021-01-01,2021-01-28,0000004127-21-000011,3.05,False,3.05,Diluted | $ | 3.05 | $ | 1.50,agree,
+2194,0001021860,2014-09-30,2014-10-30,0001193125-14-388319,1.62,False,,,not parsed,no GAAP diluted EPS row found in the press release
+123,0000006951,2023-01-29,2023-02-16,0000006951-23-000007,2.02,False,2.02,Diluted earnings per share | $ | 2.02 | $ | 2.00 | 1%,agree,
+1409,0000719739,2022-09-30,2022-10-20,0000719739-22-000077,7.21,False,7.21,Diluted earnings per common share | $ | 7.21 | $ | 5.60 | $ | 7.92 | $ | 6.22 | $ | 6.24 | $ | 20.73 | $ | 25.16,agree,
+887,0000076334,2014-12-31,2015-01-27,0000076334-15-000005,1.8,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2195,0001021860,2014-06-30,2014-07-29,0001193125-14-283498,1.44,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1540,0000764622,2024-06-30,2024-08-01,0000764622-24-000064,1.76,False,1.76,Net income attributable to common shareholders - diluted,agree,
+796,0000072971,2024-06-30,2024-07-12,0000072971-24-000170,1.33,False,1.33,Diluted earnings per common share | 1.33 | 1.25,agree,
+697,0000070858,2017-06-30,2017-07-18,0000070858-17-000033,0.46,False,0.87,Diluted earnings per common share,differ,relative difference 0.8913
+238,0000010456,2019-09-30,2019-10-24,0001193125-19-273068,0.71,False,,,not parsed,no GAAP diluted EPS row found in the press release
+60,0000004904,2020-12-31,2021-02-25,0000004904-21-000009,0.87,True,,,not parsed,no GAAP diluted EPS row found in the press release
+1077,0000096021,2023-12-30,2024-01-30,0000096021-24-000013,0.82,False,0.82,Diluted Earnings Per Share | $0.82 | NM | $1.81 | 52.1%,agree,
+1496,0000759944,2021-12-31,2022-01-19,0000759944-22-000003,1.17,True,1.17,Diluted earnings per share | $ | 1.17 | $ | 1.18 | $ | 0.99 | $ | (0.01) | (1) % | $ | 0.18 | 18 % | $ | 5.16 | $ | 2.22 | $ | 2.94,agree,
+2941,0001513761,2020-09-30,2020-11-09,0001171843-20-007813,-2.5,False,-2.50,Diluted | $ | (2.50 | ) | $ | 2.09 | $ | (13.55 | ) | $ | 3.73,agree,
+2579,0001326801,2023-03-31,2023-04-26,0001326801-23-000063,2.2,False,2.20,Diluted earnings per share (EPS) | $ | 2.20 | $ | 2.72 | (19)%,agree,
+3104,0001601712,2016-12-31,2017-01-20,0001601712-17-000021,0.7,False,,,not parsed,no GAAP diluted EPS row found in the press release
+421,0000033185,2020-03-31,2020-04-20,0000033185-20-000024,0.92,False,0.92,Diluted earnings per common share:,agree,
+557,0000051143,2015-03-31,2015-04-20,0001104659-15-028716,2.35,False,,,not parsed,no exhibit 99 file in the filing
+532,0000051143,2021-06-30,2021-07-19,0001558370-21-009005,1.47,False,,,not parsed,no GAAP diluted EPS row found in the press release
+517,0000048039,2018-06-30,2018-08-02,0000048039-18-000054,1.94,False,,,not parsed,no GAAP diluted EPS row found in the press release
+3082,0001601046,2019-04-30,2019-05-29,0001601046-19-000023,0.8,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1719,0000832101,2021-09-30,2021-10-27,0000832101-21-000058,1.51,False,1.51,Reported diluted EPS attributable to IDEX | $ | 1.51 | $ | 1.37 | $ | 4.33 | $ | 3.64,agree,
+1047,0000093751,2017-12-31,2018-01-23,0000093751-18-000006,0.89,True,0.89,Diluted earnings per share,agree,
+1591,0000796343,2013-11-29,2013-12-12,0000796343-13-000061,0.13,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1192,0000277948,2019-06-30,2019-07-16,0000277948-19-000035,1.08,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1759,0000864749,2021-07-02,2021-08-04,0000864749-21-000106,0.55,False,0.55,Diluted | $ | 0.55 | $ | 0.25 | $ | 1.00 | $ | 0.50,agree,
+2244,0001034054,2019-06-30,2019-07-29,0001193125-19-205448,0.28,False,0.28,Earnings per share - diluted,agree,
+2235,0001034054,2023-12-31,2024-02-26,0001193125-24-046183,1.01,False,1.01,Earnings per share - diluted,agree,
+790,0000072971,2022-03-31,2022-04-14,0000072971-22-000107,0.88,False,0.88,Diluted earnings per common share | 0.88 | 1.02,agree,
+1963,0000927628,2016-03-31,2016-04-26,0000927628-16-000155,1.84,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1543,0000764622,2013-12-31,2014-02-21,0001104659-14-012067,0.22,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2986,0001571949,2020-09-30,2020-10-29,0001104659-20-119255,0.71,False,2.83,Diluted | $ | 2.83 | $ | 2.62 | $ | 0.71 | $ | 0.94,other column,stored value is in another column
+270,0000018230,2014-12-31,2015-01-27,0001104659-15-004614,1.23,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1663,0000815556,2019-12-31,2020-01-17,0000815556-20-000003,0.31,False,,,not parsed,no GAAP diluted EPS row found in the press release
+124,0000006951,2024-10-27,2024-11-14,0000006951-24-000037,2.09,True,2.09,Diluted earnings per share | $ | 2.09 | $ | 2.38 | $ | 8.61 | $ | 8.11 | (12)% | 6%,agree,
+1813,0000874766,2018-03-31,2018-04-26,0000874766-18-000022,1.64,False,1.18,Income from continuing operations per diluted share2,differ,relative difference 0.2805
+51,0000004127,2016-12-30,2017-01-19,0000004127-17-000003,1.38,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1080,0000096021,2014-06-28,2014-08-11,0001193125-14-303942,0.43,False,0.43,Diluted earnings per share,agree,
+1729,0000832101,2023-03-31,2023-04-27,0000832101-23-000017,1.84,False,1.84,Diluted EPS attributable to IDEX | 1.84 | 1.83 | 0.01,agree,
+2500,0001170010,2019-05-31,2019-06-21,0001170010-19-000090,1.59,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1964,0000927628,2017-12-31,2018-01-23,0000927628-18-000017,-2.14,True,,,not parsed,no GAAP diluted EPS row found in the press release
+208,0000010456,2022-06-30,2022-07-28,0001628280-22-019638,0.5,False,0.50,Diluted | $ | 0.50 | $ | 0.59 | (15) | %,agree,
+417,0000027904,2018-03-31,2018-04-12,0001683168-18-000976,0.77,False,0.77,Diluted earnings per share | 0.77 | 0.77 | 0.74 | 0.71,agree,
+2696,0001385157,2019-12-27,2020-01-29,0001104659-20-007813,0.08,False,0.07,Diluted earnings per share:,differ,relative difference 0.1250
+2749,0001396009,2015-06-30,2015-08-04,0001144204-15-046164,0.36,False,0.37,Diluted earnings (loss) per share,differ,relative difference 0.0278
+2605,0001341439,2013-05-31,2013-06-20,0001193125-13-265781,0.80,True,0.80,Diluted,agree,
+100,0000004904,2013-12-31,2014-01-27,0001144204-14-004074,0.71,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2756,0001396009,2018-12-31,2019-02-14,0001144204-19-007543,0.93,False,0.93,Earnings from continuing operations per diluted share | $ | 0.93 | $ | 2.43 | $ | 3.87 | $ | 4.40,agree,
+2783,0001408198,2018-09-30,2018-11-01,0001157523-18-002247,1.36,False,1.36,Diluted EPS | $ | 1.36 | $ | 0.93 | $ | 1.28 | 46.2 | % | $ | 3.87 | $ | 2.61 | 48.3 | %,agree,
+2063,0001000697,2019-12-31,2020-02-04,0001193125-20-023442,3.12,False,3.12,Net income per diluted common share,agree,
+358,0000026172,2013-09-29,2013-10-29,0000026172-13-000018,1.9,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1539,0000764622,2024-09-30,2024-11-06,0000764622-24-000078,3.37,False,3.37,Net income attributable to common shareholders - diluted,agree,
+2919,0001501585,2021-06-30,2021-08-05,0001501585-21-000027,3.2,False,3.20,Diluted earnings per share | $ | 3.20 | $ | 1.30 | $ | 1.90 | 146.2 | % | $ | 6.87 | $ | 5.54 | $ | 1.33 | 24.0 | %,agree,
+1615,0000796343,2015-11-27,2015-12-10,0000796343-15-000215,0.44,False,,,not parsed,no GAAP diluted EPS row found in the press release
+897,0000076334,2018-03-31,2018-04-26,0000076334-18-000041,2.7,False,,,not parsed,no GAAP diluted EPS row found in the press release
+255,0000018230,2022-09-30,2022-10-27,0000018230-22-000216,3.87,False,3.87,Profit per common share — diluted 2,agree,
+3102,0001601712,2024-03-31,2024-04-24,0001601712-24-000159,3.14,False,,,not parsed,no GAAP diluted EPS row found in the press release
+420,0000033185,2020-06-30,2020-07-22,0000033185-20-000038,0.78,False,0.78,Diluted earnings per common share:,agree,
+223,0000010456,2014-09-30,2014-10-16,0001193125-14-373192,0.86,False,0.82,Diluted,differ,relative difference 0.0465
+1934,0000927628,2020-06-30,2020-07-21,0000927628-20-000231,-2.21,False,,,not parsed,no GAAP diluted EPS row found in the press release
+74,0000004904,2023-06-30,2023-07-27,0000004904-23-000103,1.01,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2573,0001326801,2022-12-31,2023-02-01,0001326801-23-000008,1.77,True,1.76,Diluted earnings per share (EPS) | $ | 1.76 | $ | 3.67 | (52) | % | $ | 8.59 | $ | 13.77 | (38) | %,differ,relative difference 0.0056
+510,0000040533,2017-04-02,2017-04-26,0000040533-17-000012,2.48,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1184,0000277948,2015-06-26,2015-07-14,0000277948-15-000030,0.56,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1849,0000884887,2016-03-31,2016-04-29,0000884887-16-000139,0.46,False,0.46,Diluted,agree,
+23,0000004127,2020-06-26,2020-07-23,0000004127-20-000044,0.77,False,0.77,Diluted | $ | 0.77 | $ | 0.83 | $ | 3.33 | $ | 3.67,agree,
+681,0000070858,2014-09-30,2014-10-15,0000070858-14-000124,-0.04,False,0.14,Diluted earnings (loss) (1),differ,relative difference 4.5000
+1946,0000927628,2023-06-30,2023-07-20,0000927628-23-000231,3.52,False,3.52,Diluted earnings per common share:(2),agree,
+1814,0000874766,2019-12-31,2020-02-03,0000874766-20-000006,1.49,False,1.49,Net income available to common stockholders per diluted share2,agree,
+304,0000024741,2022-06-30,2022-07-26,0001437749-22-017731,0.66,False,,,not parsed,no exhibit 99 file in the filing
+448,0000033185,2015-06-30,2015-07-22,0000033185-15-000014,0.92,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1002,0000087347,2017-03-31,2017-04-21,0001193125-17-131333,0.2,False,0.20,Diluted EPS (loss per share) (GAAP basis),agree,
+1145,0000109198,2016-04-30,2016-05-17,0001157523-16-005636,0.76,False,0.76,Diluted earnings per share | $ | 0.76 | $ | 0.69,agree,
+2982,0001530721,2019-12-28,2020-02-05,0001530721-20-000004,1.38,False,,,not parsed,no exhibit 99 file in the filing
+1516,0000759944,2017-06-30,2017-07-21,0001193125-17-232384,0.63,False,0.63,Diluted earnings per share,agree,
+2764,0001408198,2020-09-30,2020-10-27,0001157523-20-001349,2.16,False,,,not parsed,no GAAP diluted EPS row found in the press release
+328,0000024741,2017-06-30,2017-07-26,0000024741-17-000047,0.42,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2446,0001108827,2013-09-30,2013-11-06,0001445305-13-002756,0.21,False,0.15,Diluted after-tax adjustments to net income per share,differ,relative difference 0.2857
+2780,0001408198,2024-06-30,2024-07-23,0001408198-24-000129,3.37,False,3.37,Diluted EPS | $ | 3.37 | $ | 3.09 | 9.1 | % | $ | 6.59 | $ | 6.05 | 8.9 | %,agree,
+534,0000051143,2022-12-31,2023-01-25,0001558370-23-000529,2.99,True,,,not parsed,no GAAP diluted EPS row found in the press release
+3068,0001601046,2022-07-31,2022-08-17,0001601046-22-000063,1.87,False,1.87,Diluted | $ | 1.87 | $ | 1.36,agree,
+966,0000087347,2020-03-31,2020-04-17,0001193125-20-109899,-5.32,False,-5.32,Diluted EPS (loss per share) - GAAP basis,agree,
+1652,0000815556,2016-09-30,2016-10-11,0000815556-16-000119,0.44,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2357,0001090012,2020-03-31,2020-05-05,0001564590-20-021326,-4.82,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2015,0001000228,2019-12-28,2020-02-20,0001000228-20-000014,2.25,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2080,0001002047,2023-01-27,2023-02-22,0000950170-23-003745,0.3,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2700,0001385157,2020-12-25,2021-01-27,0001558370-21-000408,1.14,False,,,not parsed,no GAAP diluted EPS row found in the press release
+244,0000010456,2017-06-30,2017-07-26,0001193125-17-235668,0.48,False,0.48,Diluted,agree,
+2130,0001013462,2017-12-31,2018-02-21,0001171843-18-001285,0.60,True,0.61,Earnings per share – diluted:,differ,relative difference 0.0167
+883,0000076334,2013-12-31,2014-01-22,0000076334-14-000005,1.66,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1549,0000764622,2014-06-30,2014-07-31,0001104659-14-055232,1.19,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2835,0001413329,2019-06-30,2019-07-18,0001413329-19-000051,1.49,False,2.36,Reported Diluted EPS,differ,relative difference 0.5839
+2910,0001478242,2019-09-30,2019-10-30,0001157523-19-002131,0.29,False,,,not parsed,no GAAP diluted EPS row found in the press release
+3111,0001601712,2017-03-31,2017-04-28,0001601712-17-000054,0.61,False,,,not parsed,no GAAP diluted EPS row found in the press release
+103,0000004904,2013-03-31,2013-04-26,0001144204-13-024096,0.75,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2360,0001090012,2021-06-30,2021-08-03,0001193125-21-234972,0.38,False,0.38,Diluted net earnings (loss) per share,agree,
+2482,0001166691,2016-12-31,2017-01-26,0001104659-17-004122,0.95,False,0.79,Diluted earnings per common share attributable to Comcast Corporation shareholders,differ,relative difference 0.1684
+2059,0001000697,2018-12-31,2019-01-23,0001193125-19-014374,2.46,False,2.46,Net income (loss) per diluted common share,agree,
+45,0000004127,2016-07-01,2016-07-21,0000004127-16-000057,0.97,False,,,not parsed,no GAAP diluted EPS row found in the press release
+845,0000075677,2018-03-31,2018-04-25,0001564590-18-008913,1.48,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2497,0001170010,2020-02-29,2020-04-02,0001170010-20-000027,1.3,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1465,0000732717,2024-06-30,2024-07-24,0000732717-24-000050,0.49,False,,,not parsed,no GAAP diluted EPS row found in the press release
+769,0000072903,2017-06-30,2017-07-27,0000072903-17-000041,0.45,False,0.45,Diluted,agree,
+2729,0001396009,2022-12-31,2023-02-16,0001140361-23-007393,0.89,True,,,not parsed,no GAAP diluted EPS row found in the press release
+2905,0001478242,2018-12-31,2019-02-14,0001157523-19-000336,0.34,False,0.34,Diluted | $ | 0.34 | $ | 4.79 | $ | 1.24 | $ | 5.74,agree,
+2917,0001501585,2021-12-31,2022-02-10,0001501585-22-000004,2.98,True,2.99,Diluted earnings per share | $ | 2.99 | $ | 6.15 | $ | (3.16) | (51.4) | % | $ | 13.50 | $ | 17.14 | $ | (3.64) | (21.2) | %,agree,
+261,0000018230,2023-03-31,2023-04-27,0000018230-23-000017,3.74,False,3.74,Profit per common share — diluted 2,agree,
+1694,0000820027,2014-03-31,2014-04-28,0001104659-14-031270,2.01,False,49.1,Earnings per diluted share growth (from continuing operations),differ,relative difference 23.4279
+35,0000004127,2023-06-30,2023-08-07,0000004127-23-000024,1.22,False,1.22,Diluted | $ | 1.22 | $ | 1.66 | $ | 4.61 | $ | 5.93,agree,
+271,0000018230,2014-09-30,2014-10-23,0001104659-14-073213,1.63,False,,,not parsed,no GAAP diluted EPS row found in the press release
+114,0000006951,2021-05-02,2021-05-20,0000006951-21-000018,1.43,False,1.43,Diluted earnings per share | $ | 1.43 | $ | 0.82 | 74%,agree,
+2650,0001374310,2017-12-31,2018-02-09,0001558370-18-000549,2.4,False,2.26,Diluted earnings per share,differ,relative difference 0.0583
+497,0000040533,2015-07-05,2015-07-29,0000040533-15-000037,2.27,False,,,not parsed,no GAAP diluted EPS row found in the press release
+3114,0001601712,2018-06-30,2018-07-27,0001601712-18-000206,0.92,False,,,not parsed,no GAAP diluted EPS row found in the press release
+457,0000033185,2019-03-31,2019-05-10,0000033185-19-000014,-4.57,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2969,0001530721,2016-04-02,2016-06-01,0001530721-16-000088,0.99,True,,,not parsed,no GAAP diluted EPS row found in the press release
+392,0000027904,2013-12-31,2014-01-21,0001019687-14-000192,9.89,False,9.89,Diluted Earnings Per Share | $ | 9.89 | $ | 0.01 | $ | 12.29 | $ | 1.19,agree,
+3,0000002488,2021-09-25,2021-10-26,0000002488-21-000176,0.75,False,0.75,Diluted | $ | 0.75 | $ | 0.58 | $ | 0.32 | $ | 1.78 | $ | 0.59,agree,
+1675,0000820027,2022-12-31,2023-01-25,0000820027-23-000002,5.83,False,,,not parsed,no exhibit 99 file in the filing
+1470,0000732717,2013-06-30,2013-07-23,0000732717-13-000072,0.71,False,0.71,Diluted Earnings Per Share Attributable to AT&T,agree,
+1855,0000884887,2019-09-30,2019-10-30,0000884887-19-000044,4.2,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1060,0000096021,2020-03-28,2020-05-05,0001193125-20-133094,-0.01,False,-0.01,Diluted (Loss) Earnings Per Share,agree,
+788,0000072971,2022-09-30,2022-10-14,0000072971-22-000190,0.85,False,0.85,Diluted earnings per common share | 0.85 | 1.17,agree,
+3084,0001601712,2020-12-31,2021-01-29,0001601712-21-000034,1.23,True,,,not parsed,no GAAP diluted EPS row found in the press release
+2771,0001408198,2022-12-31,2023-01-31,0001157523-23-000122,2.67,True,,,not parsed,no GAAP diluted EPS row found in the press release
+1887,0000920148,2020-12-31,2021-02-11,0000920148-21-000012,9.57,True,9.54,Diluted earnings per common share | $ | 9.54 | $ | 2.32 | $ | 15.88 | $ | 8.35,agree,
+2772,0001408198,2022-09-30,2022-10-25,0001157523-22-001369,2.68,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1971,0000927628,2018-03-31,2018-04-24,0000927628-18-000164,2.62,False,,,not parsed,no GAAP diluted EPS row found in the press release
+835,0000075677,2023-03-31,2023-04-25,0000950170-23-014152,2.11,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1484,0000732717,2018-12-31,2019-01-30,0000732717-19-000006,0.66,False,,,not parsed,no GAAP diluted EPS row found in the press release
+321,0000024741,2015-03-31,2015-04-28,0000024741-15-000020,0.29,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1987,0001000228,2021-03-27,2021-05-04,0001000228-21-000033,1.16,False,,,not parsed,no GAAP diluted EPS row found in the press release
+691,0000070858,2019-12-31,2020-01-15,0000070858-20-000003,0.74,True,2.75,Diluted earnings per common share,differ,relative difference 2.7162
+1653,0000815556,2016-06-30,2016-07-12,0000815556-16-000110,0.45,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2948,0001513761,2022-12-31,2023-02-28,0001171843-23-001224,-1.15,True,-1.14,Diluted | $ | (1.14 | ) | $ | (4.01 | ) | $ | (5.41 | ) | $ | (12.33 | ),differ,relative difference 0.0087
+3130,0001618921,2022-02-28,2022-03-31,0001193125-22-090675,1.02,False,1.02,Diluted net earnings per common share - continuing operations (GAAP),agree,
+1676,0000820027,2022-09-30,2022-10-25,0000820027-22-000078,4.86,False,,,not parsed,no exhibit 99 file in the filing
+1902,0000920148,2023-03-31,2023-04-25,0000920148-23-000023,2.39,False,2.39,Diluted earnings per common share | $ | 2.39 | $ | 5.23,agree,
+105,0000004904,2019-09-30,2019-10-24,0000004904-19-000046,1.48,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2055,0001000697,2017-12-31,2018-01-23,0001193125-18-016682,-4.44,False,-4.44,Net (loss) income per diluted common share,agree,
+1,0000002488,2019-12-28,2020-01-28,0000002488-20-000006,0.15,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1575,0000796343,2021-12-03,2021-12-16,0000796343-21-000247,2.57,True,2.57,Diluted net income per share | $ | 2.57 | $ | 4.64 | $ | 10.02 | $ | 10.83,agree,
+1071,0000096021,2023-07-01,2023-08-01,0000096021-23-000087,1.44,False,1.44,Diluted Earnings Per Share | $1.44 | 45.5% | $3.47 | 31.4%,agree,
+340,0000024741,2014-06-30,2014-07-29,0000024741-14-000036,0.11,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1511,0000759944,2016-09-30,2016-10-21,0001193125-16-743246,0.56,False,0.56,Diluted earnings per share,agree,
+1948,0000927628,2024-09-30,2024-10-24,0000927628-24-000296,4.41,False,4.41,Diluted earnings per common share:(2),agree,
+3025,0001571949,2018-12-31,2019-02-07,0001144204-19-005443,1.07,False,3.43,Diluted | $ | 3.43 | $ | 4.25 | $ | 1.07 | $ | 2.09,other column,stored value is in another column
+3059,0001601046,2020-10-31,2020-11-18,0001601046-20-000087,1.15,True,,,not parsed,no GAAP diluted EPS row found in the press release
+216,0000010456,2024-03-31,2024-05-02,0001628280-24-019783,0.07,False,0.07,Diluted | $ | 0.07 | $ | 0.00 | NM,agree,
+2191,0001021860,2013-06-30,2013-07-30,0001193125-13-308659,1.24,False,1.24,Diluted,agree,
+3086,0001601712,2020-06-30,2020-07-21,0001601712-20-000198,0.06,False,,,not parsed,no GAAP diluted EPS row found in the press release
+777,0000072903,2019-06-30,2019-08-01,0000072903-19-000042,0.46,False,0.46,Diluted,agree,
+667,0000070858,2021-06-30,2021-07-14,0000070858-21-000079,1.03,False,1.90,Diluted earnings per common share | 1.90 | 0.77 | 1.03 | 0.86 | 0.59 | 0.51 | 0.37,other column,stored value is in another column
+1599,0000796343,2016-12-02,2016-12-15,0000796343-16-000409,0.8,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1999,0001000228,2015-12-26,2016-02-10,0001000228-16-000040,1.56,False,1.56,Diluted,agree,
+3079,0001601046,2018-10-31,2018-11-20,0001601046-18-000026,-0.60,True,,,not parsed,no GAAP diluted EPS row found in the press release
+268,0000018230,2013-06-30,2013-07-24,0001104659-13-056080,1.45,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2630,0001341439,2018-08-31,2018-09-17,0001564590-18-023209,0.57,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1298,0000354908,2014-12-31,2015-02-06,0000354908-15-000005,0.51,False,,,not parsed,no GAAP diluted EPS row found in the press release
+763,0000072903,2016-12-31,2017-02-02,0000072903-17-000003,0.45,False,0.45,Diluted,agree,
+2868,0001442145,2016-12-31,2017-02-21,0001442145-17-000009,0.64,True,,,not parsed,no GAAP diluted EPS row found in the press release
+2539,0001297996,2020-12-31,2021-02-11,0001558370-21-000923,0.16,False,,,not parsed,no GAAP diluted EPS row found in the press release
+26,0000004127,2021-10-01,2021-11-04,0000004127-21-000053,1.95,True,1.95,Diluted | $ | 1.95 | $ | 1.46 | $ | 8.97 | $ | 4.80,agree,
+862,0000076334,2021-03-31,2021-04-29,0000076334-21-000097,3.59,False,3.59,Diluted earnings per share | $ | 3.59 | $ | 2.83 | $ | 9.50 | $ | 7.01,agree,
+2425,0001090872,2017-10-31,2017-11-20,0001090872-17-000015,0.54,True,,,not parsed,no GAAP diluted EPS row found in the press release
+487,0000040533,2013-12-31,2014-01-22,0001193125-14-016779,1.40,True,-6.07,Diluted loss per share from continuing operations,differ,relative difference 5.3357
+179,0000008818,2015-07-04,2015-07-29,0001104659-15-054054,0.68,False,,,not parsed,no GAAP diluted EPS row found in the press release
+152,0000006951,2019-04-28,2019-05-16,0000006951-19-000014,0.7,False,,,not parsed,no GAAP diluted EPS row found in the press release
+2836,0001413329,2019-03-31,2019-04-18,0001413329-19-000029,0.87,False,0.87,Reported Diluted EPS,agree,
+2734,0001396009,2023-09-30,2023-10-26,0001140361-23-049589,2.07,False,,,not parsed,no GAAP diluted EPS row found in the press release
+1095,0000096021,2016-07-02,2016-08-15,0001193125-16-681376,0.38,False,0.38,Diluted Earnings Per Share,agree,
+670,0000070858,2022-09-30,2022-10-17,0000070858-22-000125,0.81,False,,,not parsed,no GAAP diluted EPS row found in the press release
+3097,0001601712,2023-09-30,2023-10-24,0001601712-23-000271,1.48,False,,,not parsed,no GAAP diluted EPS row found in the press release

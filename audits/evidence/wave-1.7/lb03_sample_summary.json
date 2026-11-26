@@ -1,0 +1,10 @@
+{
+ "sampled": 20,
+ "counts": {
+  "not parsed": 11,
+  "differ": 4,
+  "agree": 5
+ },
+ "agree_of_sampled": 0.25,
+ "agree_of_parsed": 0.5555555555555556
+}

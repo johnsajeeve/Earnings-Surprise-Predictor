@@ -168,3 +168,22 @@ def test_a_training_set_with_two_label_routes_fails():
     assert label.assert_one_route(["time-series", "time-series"]) == "time-series"
     with pytest.raises(label.MixedRouteError):
         label.assert_one_route(["time-series", "consensus"])
+
+
+@pytest.mark.req("LB-04-AC1")
+@pytest.mark.code("src/earnings/label.py")
+def test_a_quarter_refiled_with_a_shifted_start_date_is_still_the_same_quarter():
+    # REAL pattern seen in the data (TJX and Adobe): a later filing reports the same quarter end
+    # with a start date one day or one week different. The values here are SYNTHETIC.
+    c = _series()
+    d = _announcement(c)
+    base = _versions(c)
+    expected = label.compute_sue(base, d)
+    prev = base[-5]
+    shifted = label.EpsVersion(
+        prev.period_start + timedelta(days=1), prev.period_end, Decimal("9.99"),
+        prev.filed + timedelta(days=20),
+    )  # fmt: skip
+    result = label.compute_sue([*base, shifted], d)
+    assert result.sue == expected.sue  # the first-filed value, not the later one
+    assert len(label.first_filed([*base, shifted])) == len(base)  # one row per quarter end

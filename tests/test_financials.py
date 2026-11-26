@@ -275,7 +275,7 @@ def test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes(te
     assert state() == before
 
 
-@pytest.mark.req("LB-03")
+@pytest.mark.req("LB-03-AC1")
 @pytest.mark.code("src/earnings/financials.py")
 def test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures():
     """SYNTHETIC filing pattern (many companies tag only year-to-date amounts in 10-Qs)."""

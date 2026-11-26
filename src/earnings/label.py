@@ -62,11 +62,13 @@ class SueResult:
     splits_applied: int = 0
 
 
-def first_filed(versions: list[EpsVersion]) -> dict[tuple[date, date], EpsVersion]:
-    """One row per period: the earliest filing, a directly reported value before a derived one."""
-    out: dict[tuple[date, date], EpsVersion] = {}
+def first_filed(versions: list[EpsVersion]) -> dict[date, EpsVersion]:
+    """One row per quarter, named by its end date: the earliest filing, a directly reported value
+    before a derived one. Filings sometimes report the same quarter with a start date shifted by a
+    day or a week, so the start date does not identify a quarter."""
+    out: dict[date, EpsVersion] = {}
     for v in sorted(versions, key=lambda v: (v.filed, v.derived)):
-        out.setdefault((v.period_start, v.period_end), v)
+        out.setdefault(v.period_end, v)
     return out
 
 
@@ -75,15 +77,15 @@ def detect_splits(versions: list[EpsVersion], before: date) -> list[Split]:
     share basis (LB-05). A restatement of one quarter is not enough: two quarters must agree."""
     known = [v for v in versions if v.filed < before]
     firsts = first_filed(known)
-    candidates: list[tuple[float, date, tuple[date, date]]] = []
+    candidates: list[tuple[float, date, date]] = []
     for v in known:
-        base = firsts[(v.period_start, v.period_end)]
+        base = firsts[v.period_end]
         if v is base or v.value == 0 or base.value == 0 or v.filed <= base.filed:
             continue
         ratio = float(base.value / v.value)
         if ratio > 0 and abs(ratio - 1) >= SPLIT_MIN_DISTANCE:
-            candidates.append((ratio, v.filed, (v.period_start, v.period_end)))
-    groups: list[list[tuple[float, date, tuple[date, date]]]] = []
+            candidates.append((ratio, v.filed, v.period_end))
+    groups: list[list[tuple[float, date, date]]] = []
     for cand in sorted(candidates):
         for group in groups:
             if abs(cand[0] / group[0][0] - 1) <= SPLIT_TOLERANCE:
@@ -138,13 +140,13 @@ def compute_sue(versions: list[EpsVersion], announcement: date) -> SueResult:
         return SueResult(None, None, "no quarterly EPS stored for this company", 0, None)
     everything = first_filed(quarters)  # includes values filed after D: only the label may use them
     target_ends = [
-        e for (_, e) in everything if e < announcement
+        e for e in everything if e < announcement
         and (announcement - e).days <= MAX_REPORT_LAG_DAYS
     ]  # fmt: skip
     if not target_ends:
         return SueResult(None, None, "no quarter ended within the reporting window", 0, None)
     q_end = max(target_ends)
-    q_first = next(v for (_, e), v in everything.items() if e == q_end)
+    q_first = everything[q_end]
     history = {
         v.period_end: v
         for v in first_filed([v for v in quarters if v.filed < announcement]).values()

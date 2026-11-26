@@ -1,0 +1,11 @@
+{
+ "sampled": 20,
+ "counts": {
+  "agree": 13,
+  "other column": 2,
+  "not parsed": 3,
+  "differ": 2
+ },
+ "agree_of_sampled": 0.65,
+ "agree_of_parsed": 0.7647058823529411
+}

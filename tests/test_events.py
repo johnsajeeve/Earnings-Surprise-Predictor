@@ -100,7 +100,8 @@ def test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded(
     t_ok = _transcript(worker, CO, 1, announce, "rel-1")
     t_late = _transcript(worker, CO, 2, announce + timedelta(days=6), "rel-2")
     t_none = _transcript(worker, CO, 3, announce, "rel-3")
-    _fake_releases(monkeypatch, {CO: [_release(announce, "rel-1"), _release(announce, "rel-2")]})
+    second = announce + timedelta(days=1)  # one event per quarter and announcement date (DV-03)
+    _fake_releases(monkeypatch, {CO: [_release(announce, "rel-1"), _release(second, "rel-2")]})
     report = ev.build_events(worker)
     assert report["events"] == 3 and report["sue_ok"] == 2
     with api.connect() as conn:
@@ -180,7 +181,7 @@ def test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_resta
     versions = ev._versions(worker, CO)
     python_first = {
         e: v.value
-        for (_, e), v in label.first_filed([v for v in versions if v.filed < announce]).items()
+        for e, v in label.first_filed([v for v in versions if v.filed < announce]).items()
     }
     assert python_first == {k: v for k, v in first.items()}  # same rows as the SQL function
 

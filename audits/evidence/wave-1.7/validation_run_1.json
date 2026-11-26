@@ -1,0 +1,50 @@
+{
+ "quarantined_this_run": 0,
+ "quarantine_candidates": 26,
+ "quarantine_by_reason": {
+  "flagged for review": 24,
+  "sue above one million in size": 2
+ },
+ "duplicate_events": 0,
+ "null_rates": {
+  "events": 3183,
+  "usable_events": 2598,
+  "incomplete_events": 564,
+  "nulls_in_usable_events": {
+   "transcript_date": 0,
+   "information_date": 0,
+   "announcement_date": 0
+  },
+  "null_rate_usable": {
+   "transcript_date": 0.0,
+   "information_date": 0.0,
+   "announcement_date": 0.0
+  }
+ },
+ "information_not_before_announcement": 0,
+ "call_before_announcement": 11,
+ "snapshots_on_or_after_announcement": 0,
+ "eps_basis_values": [
+  "gaap-diluted"
+ ],
+ "events_hash": "67e4132a7e9b828db18adcbd551e8f2865655381b55162e93dde90fcc7330d41",
+ "coverage_gate": {
+  "target_events": 3730,
+  "with_transcript": 3183,
+  "share": 0.8533512064343164,
+  "threshold": 0.9,
+  "met": false,
+  "by_group": {
+   "left the index": {
+    "events": 661,
+    "with_transcript": 389,
+    "share": 0.5885022692889561
+   },
+   "still in the index": {
+    "events": 3069,
+    "with_transcript": 2794,
+    "share": 0.910394265232975
+   }
+  }
+ }
+}
