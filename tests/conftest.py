@@ -92,10 +92,18 @@ def test_db(test_db_name, monkeypatch):
     from earnings.config import get_settings
     from earnings.db import get_engine
 
+    def close_pools():
+        # Close the pools before forgetting them. A pool that is only forgotten keeps its server
+        # connections, which the connection-limit check (DB-03) then counts.
+        if get_engine.cache_info().currsize:
+            for role in ("api", "worker"):
+                get_engine(role).dispose()
+        get_engine.cache_clear()
+
     monkeypatch.setenv("POSTGRES_DB", test_db_name)
+    close_pools()  # before the settings change, so the pools of the old database are closed
     get_settings.cache_clear()
-    get_engine.cache_clear()
     migrate.truncate_all(test_db_name)
     yield test_db_name
-    get_engine.cache_clear()
+    close_pools()
     get_settings.cache_clear()

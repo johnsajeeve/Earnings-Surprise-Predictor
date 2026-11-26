@@ -408,6 +408,11 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Needs John: TH-06 (survivorship threshold); a free Tiingo key in `.env` for the second price source and the missing companies.
 - Work by Claude, not independently audited.
 
+### 26 Nov 2026: CI failure on the connection limit, fixed
+
+- The first CI run of the Wave 1.8 commit failed the DB-03 check: 13 server connections against a limit of 12. Cause, confirmed with a probe: the test fixture forgot its connection pools without closing them, so connections from earlier tests stayed open. The fixture now closes them. The check and its limit are unchanged.
+- Work by Claude.
+
 ## Waiting on John
 
 As of 26 November 2026. The full list with a recommendation for each item is `audits/evidence/decisions-2026-11-26.md`; what is left of it is below.
