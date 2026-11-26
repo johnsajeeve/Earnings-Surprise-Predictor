@@ -852,12 +852,15 @@
     },
     "src/earnings/transcripts.py": {
       "requirements": [
+        "DV-08",
         "ER-07",
         "ER-07-AC2",
         "FR-13-AC1",
         "FR-13-AC2",
         "FR-15-AC1",
         "FR-15-AC2",
+        "IG-05",
+        "IG-10",
         "IG-10-AC1",
         "IG-11-AC1",
         "IG-14",
@@ -880,6 +883,7 @@
       ],
       "tests": [
         "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched",
+        "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known",
         "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
         "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation",
         "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason",
@@ -2728,7 +2732,9 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known"
+      ]
     },
     "EP-01": {
       "checks": [
@@ -4872,6 +4878,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known",
         "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
         "tests/test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new",
         "tests/test_gaps.py::test_the_filing_check_stores_each_list_and_counts_only_new_earnings_releases",
@@ -4960,6 +4967,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known",
         "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first",
         "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
         "tests/test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network"
@@ -8763,6 +8771,17 @@
       "kind": "real check",
       "requirements": [
         "LB-04"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-08",
+        "IG-05",
+        "IG-10"
       ]
     },
     "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters": {

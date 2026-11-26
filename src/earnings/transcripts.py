@@ -243,16 +243,23 @@ def prepare(row: SourceRow, company_id: str, releases: list[fin.Release]) -> Pre
 
 
 def _releases_for(engine: Engine, company_id: str) -> list[fin.Release]:
+    """Every earnings release in any stored version of the company's filing lists. The SEC's main
+    list holds only recent filings, so a newer copy can lack ones an older copy had: all stored
+    versions are read, and a release seen twice is counted once, as last stored."""
     with engine.connect() as conn:
         rows = conn.execute(
             text(
-                "SELECT DISTINCT ON (url) body FROM raw_payload WHERE source = :s AND "
-                "(url = :main OR url LIKE :pages) ORDER BY url, retrieved_at DESC"
+                "SELECT body FROM raw_payload WHERE source = :s AND "
+                "(url = :main OR url LIKE :pages) ORDER BY retrieved_at, payload_id"
             ),
             {"s": EDGAR_SOURCE, "main": fin.SUBMISSIONS_URL.format(cik=company_id),
              "pages": f"https://data.sec.gov/submissions/CIK{company_id}-submissions-%"},
         ).all()  # fmt: skip
-    return fin.parse_earnings_releases([bytes(r[0]) for r in rows])
+    found: dict[str, fin.Release] = {}
+    for row in rows:
+        for release in fin.parse_earnings_releases([bytes(row[0])]):
+            found[release.accession] = release
+    return sorted(found.values(), key=lambda r: (r.accepted_utc, r.accession))
 
 
 def _ticker_map(

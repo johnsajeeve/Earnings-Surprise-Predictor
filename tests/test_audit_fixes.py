@@ -354,3 +354,32 @@ def test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_qu
     assert chain == ends  # all thirteen quarters, none lost at the long one
     broken = [ends[0], ends[0] - timedelta(days=182)]  # a missing quarter still breaks it
     assert label._chain({e: None for e in broken}, ends[0]) == [ends[0]]
+
+
+@pytest.mark.req("IG-05", "IG-10", "DV-08")
+@pytest.mark.code("src/earnings/transcripts.py")
+def test_a_release_that_rolls_off_the_newest_filing_list_is_still_known(test_db):
+    # found by the second audit: the daily check stores a newer list, and the older filings drop
+    # off it. Every stored version must count. SYNTHETIC lists
+    from earnings.clients.edgar import RawResponse
+    from earnings.db import get_engine
+    from earnings.rawstore import store_payload
+
+    engine = get_engine("worker")
+
+    def listing(accessions):
+        n = len(accessions)
+        return json.dumps({"filings": {"recent": {
+            "form": ["8-K"] * n, "items": ["2.02"] * n, "accessionNumber": accessions,
+            "filingDate": ["2024-05-02"] * n,
+            "acceptanceDateTime": ["2024-05-02T20:30:00.000Z"] * n}}}).encode()  # fmt: skip
+
+    url = fin.SUBMISSIONS_URL.format(cik=CO)
+    for day, accessions in ((1, ["old", "kept"]), (2, ["kept", "new"])):
+        stored_at = datetime(2026, 1, day, tzinfo=UTC)
+        body = listing(accessions)
+        store_payload(
+            engine, RawResponse("sec-edgar", url, 200, "application/json", body, stored_at)
+        )
+    found = [r.accession for r in tr._releases_for(engine, CO)]
+    assert sorted(found) == ["kept", "new", "old"]  # nothing lost, and "kept" only once
