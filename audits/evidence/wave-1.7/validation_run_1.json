@@ -1,15 +1,16 @@
 {
- "quarantined_this_run": 57,
- "quarantine_candidates": 57,
+ "quarantined_this_run": 115,
+ "quarantine_candidates": 115,
  "quarantine_by_reason": {
-  "flagged for review": 32,
+  "flagged for review": 56,
   "sue above one million in size": 1,
-  "label inputs hold a scale error in the source EPS": 24
+  "label inputs hold a scale error in the source EPS": 24,
+  "extreme label, above 10 in size": 34
  },
  "duplicate_events": 0,
  "null_rates": {
   "events": 3183,
-  "usable_events": 2589,
+  "usable_events": 2565,
   "incomplete_events": 566,
   "nulls_in_usable_events": {
    "transcript_date": 0,
@@ -28,7 +29,7 @@
  "eps_basis_values": [
   "gaap-diluted"
  ],
- "events_hash": "078b702d3413edb056d156a9f7174647a535819e2a512aa1967e6c56818ddeed",
+ "events_hash": "3bbac39921e7caad46f0d14ea35a56d3fd5a1728e9740fb80bb1e65a41c6b101",
  "coverage_gate": {
   "target_events": 3241,
   "with_transcript": 2816,

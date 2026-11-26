@@ -402,6 +402,7 @@
         "FR-14-AC2",
         "IG-22-AC1",
         "LB-04-AC1",
+        "LB-05-AC1",
         "PL-04-AC1",
         "TX-07",
         "VL-01-AC1",
@@ -416,6 +417,7 @@
         "tests/test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing",
         "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
         "tests/test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart",
+        "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios",
         "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event",
         "tests/test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash"
       ]
@@ -488,7 +490,8 @@
         "tests/test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals",
         "tests/test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each",
         "tests/test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity",
-        "tests/test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead"
+        "tests/test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead",
+        "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios"
       ]
     },
     "src/earnings/limits.py": {
@@ -572,6 +575,8 @@
         "PL-02-AC1",
         "PL-05-AC1",
         "PL-06",
+        "PX-01-AC1",
+        "PX-02-AC1",
         "SR-08",
         "SR-08-AC1",
         "TX-01-AC1",
@@ -592,6 +597,8 @@
         "tests/test_financials.py::test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version",
         "tests/test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row",
         "tests/test_ingestion_framework.py::test_each_run_produces_a_queryable_row",
+        "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window",
+        "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing",
         "tests/test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations",
         "tests/test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form",
         "tests/test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database",
@@ -635,6 +642,30 @@
         "tests/test_pressrelease.py::test_agreement_is_within_half_a_percent_of_the_stored_value",
         "tests/test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome",
         "tests/test_pressrelease.py::test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter"
+      ]
+    },
+    "src/earnings/prices.py": {
+      "requirements": [
+        "DV-05",
+        "FE-24",
+        "PX-01",
+        "PX-01-AC1",
+        "PX-02-AC1",
+        "PX-03-AC1",
+        "VL-05"
+      ],
+      "tests": [
+        "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows",
+        "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window",
+        "tests/test_prices.py::test_a_reused_ticker_is_refused_at_loading_and_stores_no_price",
+        "tests/test_prices.py::test_a_series_that_does_not_cover_the_events_is_refused",
+        "tests/test_prices.py::test_a_series_that_mixes_adjusted_and_raw_prices_fails",
+        "tests/test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once",
+        "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing",
+        "tests/test_prices.py::test_the_equal_weight_universe_uses_only_the_members_of_the_day",
+        "tests/test_prices.py::test_the_price_windows_of_an_event_do_not_overlap_the_announcement",
+        "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_the_real_apple_answer",
+        "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall"
       ]
     },
     "src/earnings/rawstore.py": {
@@ -868,9 +899,9 @@
         "tests/test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event",
         "tests/test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date",
         "tests/test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash",
-        "tests/test_validation.py::test_date_order_violations_are_listed_and_a_call_before_the_release_is_a_stated_conflict",
+        "tests/test_validation.py::test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart",
         "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones",
-        "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_threshold",
+        "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged",
         "tests/test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies",
         "tests/test_validation.py::test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold",
         "tests/test_validation.py::test_the_dataset_has_one_eps_basis",
@@ -2464,7 +2495,7 @@
           "ref": "DV-01-AC1",
           "tests": [
             "tests/test_req_data.py::test_dv_01_ac1_quarantine_count_is_reported_per_run",
-            "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_threshold"
+            "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged"
           ],
           "text": "Quarantine count is reported per run."
         }
@@ -2519,7 +2550,7 @@
           "ref": "DV-04-AC1",
           "tests": [
             "tests/test_req_data.py::test_dv_04_ac1_flagged_rows_have_a_reviewer_note_before",
-            "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_threshold"
+            "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged"
           ],
           "text": "Flagged rows have a reviewer note before the dataset is signed off."
         }
@@ -2537,13 +2568,15 @@
           "ref": "DV-05-AC1",
           "tests": [
             "tests/test_req_data.py::test_dv_05_ac1_date_order_test_on_every_load_reports",
-            "tests/test_validation.py::test_date_order_violations_are_listed_and_a_call_before_the_release_is_a_stated_conflict"
+            "tests/test_validation.py::test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart"
           ],
           "text": "Date-order test on every load reports zero violations."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_prices.py::test_the_price_windows_of_an_event_do_not_overlap_the_announcement"
+      ]
     },
     "DV-06": {
       "checks": [
@@ -3819,7 +3852,9 @@
         }
       ],
       "document": "feature-engineering-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows"
+      ]
     },
     "FE-25": {
       "checks": [
@@ -5224,6 +5259,7 @@
           "tests": [
             "tests/test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series",
             "tests/test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each",
+            "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios",
             "tests/test_req_data.py::test_lb_05_ac1_test_on_a_company_with_a_split"
           ],
           "text": "Test on a company with a split inside the window gives the same SUE as the unsplit series."
@@ -6227,13 +6263,21 @@
           "fingerprint": "f3b1c23bb371",
           "ref": "PX-01-AC1",
           "tests": [
+            "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing",
             "tests/test_req_data.py::test_px_01_ac1_20_sampled_announcement_day_closes_match_a"
           ],
           "text": "20 sampled announcement-day closes match a second source."
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows",
+        "tests/test_prices.py::test_a_reused_ticker_is_refused_at_loading_and_stores_no_price",
+        "tests/test_prices.py::test_a_series_that_does_not_cover_the_events_is_refused",
+        "tests/test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once",
+        "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_the_real_apple_answer",
+        "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall"
+      ]
     },
     "PX-02": {
       "checks": [
@@ -6241,6 +6285,7 @@
           "fingerprint": "c6b0189db776",
           "ref": "PX-02-AC1",
           "tests": [
+            "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window",
             "tests/test_req_data.py::test_px_02_ac1_test_with_a_planted_future_price_shows"
           ],
           "text": "Test with a planted future price shows it is excluded."
@@ -6255,6 +6300,7 @@
           "fingerprint": "eb2776e30a12",
           "ref": "PX-03-AC1",
           "tests": [
+            "tests/test_prices.py::test_a_series_that_mixes_adjusted_and_raw_prices_fails",
             "tests/test_req_data.py::test_px_03_ac1_series_type_check_fails_any_series_containing"
           ],
           "text": "Series-type check fails any series containing both."
@@ -8393,7 +8439,11 @@
         }
       ],
       "document": "data-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once",
+        "tests/test_prices.py::test_the_equal_weight_universe_uses_only_the_members_of_the_day",
+        "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall"
+      ]
     },
     "VL-06": {
       "checks": [
@@ -9415,6 +9465,120 @@
       "kind": "real check",
       "requirements": [
         "AE-02-AC1"
+      ]
+    },
+    "tests/test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-24",
+        "PX-01"
+      ]
+    },
+    "tests/test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-02-AC1"
+      ]
+    },
+    "tests/test_prices.py::test_a_reused_ticker_is_refused_at_loading_and_stores_no_price": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-01"
+      ]
+    },
+    "tests/test_prices.py::test_a_series_that_does_not_cover_the_events_is_refused": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-01"
+      ]
+    },
+    "tests/test_prices.py::test_a_series_that_mixes_adjusted_and_raw_prices_fails": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-03-AC1"
+      ]
+    },
+    "tests/test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-01",
+        "VL-05"
+      ]
+    },
+    "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing": {
+      "code": [
+        "src/earnings/migrations/versions",
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-01-AC1"
+      ]
+    },
+    "tests/test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios": {
+      "code": [
+        "src/earnings/events.py",
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-05-AC1"
+      ]
+    },
+    "tests/test_prices.py::test_the_equal_weight_universe_uses_only_the_members_of_the_day": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "VL-05"
+      ]
+    },
+    "tests/test_prices.py::test_the_price_windows_of_an_event_do_not_overlap_the_announcement": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-05"
+      ]
+    },
+    "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_the_real_apple_answer": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-01"
+      ]
+    },
+    "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall": {
+      "code": [
+        "src/earnings/prices.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "PX-01",
+        "VL-05"
       ]
     },
     "tests/test_req_api_and_serving.py::test_sv_01_ac1_the_api_code_imports_no_model_package": {
@@ -14127,7 +14291,7 @@
         "DV-08-AC1"
       ]
     },
-    "tests/test_validation.py::test_date_order_violations_are_listed_and_a_call_before_the_release_is_a_stated_conflict": {
+    "tests/test_validation.py::test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart": {
       "code": [
         "src/earnings/validation.py"
       ],
@@ -14146,7 +14310,7 @@
         "DV-04"
       ]
     },
-    "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_threshold": {
+    "tests/test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged": {
       "code": [
         "src/earnings/validation.py"
       ],

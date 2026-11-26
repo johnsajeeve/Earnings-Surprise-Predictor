@@ -401,41 +401,24 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Still open: splits for companies without the SEC tag (DR-32).
 - Work by Claude, not independently audited.
 
+### 26 Nov 2026: approvals, and Wave 1.8 (prices)
+
+- John approved: the two price tables and Product Section 11 rows (C-49), yfinance now with Tiingo later (C-50), all recommendations that change no requirement text (C-51, closes D-47), and the DV-05 rewording (C-52).
+- Done: DV-05 edited; scale-error labels excluded from training; extreme labels flagged above 10; `source_version` on stored payloads; a CI job that runs the tests with the whole repository (not required yet); migration 0010 and `prices.py`. Prices loaded for 83 of 100 companies. Labels now use the price source's dated splits. First survivorship comparison run. Found a source defect (a spin-off listed twice) and fixed the calculation.
+- Needs John: TH-06 (survivorship threshold); a free Tiingo key in `.env` for the second price source and the missing companies.
+- Work by Claude, not independently audited.
+
 ## Waiting on John
 
-Decisions and actions only John can take, as of 24 November 2026. Each has a requirement or decision reference. The blocking ones come first.
+As of 26 November 2026. The full list with a recommendation for each item is `audits/evidence/decisions-2026-11-26.md`; what is left of it is below.
 
-**Blocks the next waves**
-- **Price tables (Wave 1.8, PX-01 to PX-03):** approve a daily price table and a dated split and dividend factor table. Product Section 11 lists neither. Without them prices cannot be stored. Removed companies will have no yfinance prices.
-- **D-45, run times for three more scheduled jobs:** the daily transcript check, the daily 8-K Item 2.02 check and the daily data gates (IG-05). The capture job is set at 22:30 UTC.
-- **D-35, FinBERT checkpoint:** needed before Wave 2.1. `ProsusAI/finbert` weights are CC BY-NC-SA 4.0 (non-commercial, share-alike). Accept it or name another.
-- **D-34 and D-36, feature rules:** negation, forward guidance, trajectory, question count and the rest (needed before Wave 2.2).
-- **D-18, transcript source and demo design:** the Hugging Face set says MIT and "research and educational use only" and names no origin. Needed before Wave 1.5.
+**Next**
+- **TH-06, survivorship threshold:** read the Wave 1.8 survivorship table and set it, before the validation set is read.
+- **Tiingo free key:** add it to `.env` (never paste it in chat). It would give the second price source (PX-01) and may cover removed companies (not verified).
+- **Hand labels:** 50 calls (`audits/evidence/wave-1.5/boundary_review_sheet.md`) and 100 events (`audits/evidence/wave-1.7/hand_audit_sheet.md`).
+- **Reviewer (D-09):** a person who did not build the data, for the dataset sign-off (GS-01).
+- **Before Wave 2:** D-35 (FinBERT checkpoint), D-36, D-34, D-45 run times. My recommendations are in section D of the decisions file.
 
-**Needs a decision, work can continue**
-- **Hand audit (VL-09):** check the 100 events in `audits/evidence/wave-1.7/hand_audit_sheet.md`; write `ok` or `error: what` after each arrow.
-- **DR-27:** two events with a source scale error: exclude them, correct them from a later filing, or keep them flagged?
-- **DR-28:** the EPS agreement check (AE-02) needs either more parser work or a person to check the sample.
-- **TX-04 miss:** coverage is 86.9% against 90% (corrected 26 Nov). Decide whether to look for a second transcript source or report results as covering the covered events (the requirement's own rule).
-- **DR-29:** approve a wording change to DV-05 for calls before the 8-K, or say they are violations.
-- **D-09:** name the independent reviewer (GS-01).
-- **Wave 1.7 task brief:** read `audits/evidence/wave-1.7-task-brief.md`; seven points (D-26 sample sizes, D-09 reviewer, trading calendar, survivorship check order, canary list, extreme-value reviewer, the five non-calendar companies).
-- **Wave 1.6 task brief:** read `audits/evidence/wave-1.6-task-brief.md` and approve it or change it (three points).
-- **Boundary review (TX-03, IG-18, TH-02):** label the 50 calls in `audits/evidence/wave-1.5/boundary_review_sheet.md` (write `correct` or `wrong` after each arrow) and give the sheet back. 95% or more must be correct.
-- **D-47, rules I built that you have not approved:** the rename rule, the selection checks, the Q4 and cumulative derivations, the revenue tag order, the table columns, how reasons that name another company are stored, and the capture list. List and reasons are in the decision log. A second independent audit found these were not recorded as decisions.
-- **DR-21:** your email address is the Author of one commit made through the GitHub website, so it is visible in the public history. Leave it, or use a no-reply address from now on. Changing history is your call.
-- **IG-16 wording:** the Section 12 text shows the gap quartiles as 1,008, 180 and 59 minutes, which are magnitudes of negative values (the filing came first). Approve a corrected sentence.
-- **DR-18 (schema detail):** the columns of `eps_history` and `fundamentals_filing` extend Product Section 11. Approve and I update Section 11.
-- **DR-16:** confirm the rename rule (a ticker that ends the day another starts, with no index change recorded by Wikipedia, is the same company). All 21 links were read by hand. Read the review list in `audits/evidence/wave-1.3/review_list.csv`, which is the quickest way to catch wrong matches.
-- **DR-14:** add a nullable `source_version` column to `raw_payload` (Data SR-04 asks for it).
-- **DR-10:** name a fallback source for the 8-K announcement time, or accept a stated scope limit (SR-06).
-- **DR-19:** accept that Visa and Danaher have no EPS history in the SEC data and some companies have gaps, or ask for a fallback source (yfinance earnings dates).
-- **DR-08:** whether to add a CI job for the 20 checks that read documents and skip in the CI test job.
-- **D-46:** record in the next supervisor meeting that Professor Goodacre agrees to the time-series label (C-25, SC-07, SS-04 ask for it in writing).
-- **Spot-check:** pick five requirements of Waves 0.1 to 1.4 and check them against the evidence. This is the last step to close the Phase 0 gate.
-- **FMP free key:** only if you want the optional second consensus-source test.
+**Still to approve (they change a document):** the Product Section 11 columns of the event, EPS and fundamentals tables (C4), and the IG-16 sentence in Data Section 12 (C6).
 
-**Planning, still open**
-- D-03 drop order and D-26 re-tagging the data requirements; D-29 the exact submission date; D-42, D-43, D-37, D-39 and D-27 (provider and budget) before Waves 3, 4, 5, 6; D-16 the ethics application (apply in December); D-21 the library enquiry; D-09 the independent reviewer; D-15 the cloud spend ceiling.
-- Feasibility review I-12 and I-13, D-25 (assessment requirements), D-40 and D-46 (approve the eight component requirement documents).
-- Two small SSOT document map edits still unapproved: the prefix GATE on the data row, and a row for this log book.
+**Only you:** DR-16 (read `wave-1.3/review_list.csv`), DR-21 (private email on GitHub), the Phase 0 spot-check of five requirements, D-16 ethics (apply in December), D-29 submission date, D-46 supervisor agreement, D-03, D-40, the two SSOT map edits, and the older planning items in the decisions file (section E).

@@ -20,3 +20,4 @@ All files are REAL data, retrieved on 23 November 2026 by the project's own clie
 | `aapl_8k_index.json` | SEC filing index of Apple 8-K 0000320193-25-000007, retrieved 25 November 2026 by the project's client | nothing |
 | `aapl_press_release_table.html` | The same filing's exhibit 99.1, retrieved 25 November 2026 | the one table that holds the diluted EPS row |
 | `aapl_split_ratio_tag.json` | SEC company facts for Apple Inc., stored payload of the project database, retrieved by the project client in November 2026 | only the tag StockholdersEquityNoteStockSplitConversionRatio1 |
+| `aapl_yahoo_prices_june_2014.json` | yfinance daily history for AAPL, retrieved 26 November 2026 by the project client. Personal-use source: a small excerpt for tests | nine trading days; the full split list; 2014 dividends only |

@@ -14,7 +14,8 @@ def store_payload(engine: Engine, raw: RawResponse) -> bool:
             conn.execute(
                 text(
                     "INSERT INTO raw_payload (source, url, retrieved_at, sha256, content_type, "
-                    "byte_length, body) VALUES (:source, :url, :at, :sha, :ctype, :length, :body) "
+                    "byte_length, body, source_version) VALUES "
+                    "(:source, :url, :at, :sha, :ctype, :length, :body, :version) "
                     "ON CONFLICT (source, url, sha256) DO NOTHING"
                 ),
                 {
@@ -25,6 +26,7 @@ def store_payload(engine: Engine, raw: RawResponse) -> bool:
                     "ctype": raw.content_type,
                     "length": len(raw.body),
                     "body": raw.body,
+                    "version": raw.source_version,
                 },
             ).rowcount
         )

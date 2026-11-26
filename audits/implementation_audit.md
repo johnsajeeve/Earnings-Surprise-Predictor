@@ -98,10 +98,12 @@ Each row is something where code, a test, a document or the plan does not agree 
 | DR-26 | 25 Nov 2026 | Data LB-02, AE-02, DR-19 | The label is available for 2,619 of 3,183 events (82%). Unavailable: 243 no quarter of that period in the EPS data, 178 fewer than 6 prior differences, 143 no quarterly EPS stored for the company at all (the SEC tag differs) | OPEN, no fallback source chosen (DR-19) |
 | DR-27 | 26 Nov 2026 | Data DV-04, AE-04, LB-04 | Two 10-K filings give quarterly EPS in thousands (Intercontinental Exchange, Hartford); the first-filed value is then wrong by a factor of a million and two labels are about 1.8 and 1.1 million, and 24 labels in all use an inflated value (corrected 26 Nov). Quarantined, not removed or corrected | OPEN, John decides whether to exclude, correct from a later filing, or keep flagged |
 | DR-28 | 26 Nov 2026 | Data AE-02, LB-03, VL-08, TH-03 | The automatic press-release parser reads about half of the releases; AE-02 (98%) cannot be shown by it | OPEN, needs either a better parser or a person to check the sample |
-| DR-29 | 26 Nov 2026 | Data DV-05 against decision C-17 | DV-05 says the announcement is on or before the transcript; C-17 allows a call before the 8-K. 11 events | OPEN, a wording change to DV-05 needs John |
+| DR-29 | 26 Nov 2026 | Data DV-05 against decision C-17 | DV-05 says the announcement is on or before the transcript; C-17 allows a call before the 8-K. 11 events | CLOSED 26 Nov, DV-05 reworded (C-52) |
 | DR-30 | 26 Nov 2026 | Data LB-04, DV-06 | Found and fixed: a quarter re-filed with a shifted start date was treated as a second period and could replace the first-filed value. 47 company-quarters had the pattern; 15 labels changed | CLOSED, regression test added |
 | DR-31 | 26 Nov 2026 | Wave 1.6 brief point 3, Data LB-05 | I built split inference from filing ratios, which the approved brief did not allow ("from the EPS facts' own share-basis fields in the SEC data where present; otherwise BLOCKED"). It was wrong in many cases and my evidence file reported it as working. Nine defects in all, see `audits/evidence/bug-review-2026-11-26.md` | CLOSED for the defects listed, regression tests added |
-| DR-32 | 26 Nov 2026 | Data LB-05, PX-01 | Companies that do not report the SEC split tag, and reverse splits, are not adjusted | OPEN until the price source's dated factors are stored (Wave 1.8) |
+| DR-32 | 26 Nov 2026 | Data LB-05, PX-01 | Companies that do not report the SEC split tag, and reverse splits, are not adjusted | PARTLY CLOSED 26 Nov: price-source factors used for 83 companies; the other 17 still rely on the SEC tag |
+| DR-33 | 26 Nov 2026 | Data VL-05, IM-02 | 17 of 100 companies have no price history, 15 of them with nothing at the source; most removed companies are missing from price features and the survivorship check | OPEN, a second free source (Tiingo) waits for John's key |
+| DR-34 | 26 Nov 2026 | Data PX-01 | The price source lists a spin-off twice (price ratio and dividend), as with Danaher 2016. Counted once in total return when a dividend above 5% falls on a spin-off ratio day (my rule). The source's adjusted close is not a safe reference on such days | CLOSED for total return; the rule is mine |
 | DR-05 | 23 Nov 2026 | decision-log D-38, Database DB-03 | D-38 lists pool and time-out values as "not approved" but gives none | CLOSED 23 Nov 2026 by decision C-44 (values proposed and approved) |
 | DR-11 | 23 Nov 2026 | `docker-compose.yml`, Database DB-02 | All role passwords were in every service's environment, with the superuser password | PARTLY FIXED 24 Nov 2026: the worker no longer gets the superuser password. The api service keeps it because the CI tests run inside it (a CI change John has not approved). Cloud must give each service only its own secret (DP-06) |
 | DR-04 | 23 Nov 2026 | `requirements-pending.txt`, `requirements.txt` | Alembic (needed for PL-05) is pinned but not installed. Moving it is a dependency change | OPEN. Shown in the Wave 0.2 brief |
@@ -134,7 +136,7 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W1.5 | Transcripts and preparation | PARTIAL | audits/evidence/wave-1.5.md |
 | W1.6 | Events, label and validation | PARTIAL | audits/evidence/wave-1.6.md |
 | W1.7 | Dataset validation and sign-off | PARTIAL | audits/evidence/wave-1.7.md |
-| W1.8 | Prices | NOT STARTED | - |
+| W1.8 | Prices | PARTIAL | audits/evidence/wave-1.8.md |
 | W2.1 | Sentences and FinBERT | NOT STARTED | - |
 | W2.2 | Linguistic features | NOT STARTED | - |
 | W2.3 | Tabular features | NOT STARTED | - |

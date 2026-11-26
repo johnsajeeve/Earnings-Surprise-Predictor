@@ -1002,13 +1002,21 @@ EXPECTED_SCHEMA = {
         "run_id", "job_name", "source", "started_at", "ended_at", "status", "rows_read",
         "rows_written", "error_class", "task_id",
     ],
+    "adjustment_factor": [
+        "factor_id", "company_id", "ex_date", "kind", "value", "source", "source_version",
+        "captured_at", "payload_id",
+    ],
+    "price_daily": [
+        "price_id", "company_id", "ticker", "price_date", "close_raw", "volume", "source",
+        "source_version", "captured_at", "payload_id",
+    ],
     "quarantine": [
         "quarantine_id", "source_table", "row_key", "reason", "detail", "first_seen_at",
         "reviewer_note",
     ],
     "raw_payload": [
         "payload_id", "source", "url", "retrieved_at", "sha256", "content_type", "byte_length",
-        "body",
+        "body", "source_version",
     ],
     "ticker_history": ["ticker_history_id", "company_id", "ticker", "valid_from", "valid_to"],
     "transcript": [
@@ -1079,6 +1087,8 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
             "transcript_section",
             "earnings_event",
             "quarantine",
+            "price_daily",
+            "adjustment_factor",
         }
         assert columns == ["company_id", "name"]
         # Every column of every table, in order, and the same schema as the deployed database.

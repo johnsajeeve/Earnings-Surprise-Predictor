@@ -177,21 +177,21 @@
  "size": {
   "measured": {
    "companies": 93,
-   "database_bytes": 691944471,
+   "database_bytes": 793721879,
    "largest_tables_bytes": {
-    "raw_payload": 319619072,
+    "raw_payload": 335634432,
     "transcript": 263700480,
     "transcript_section": 87703552,
+    "price_daily": 83517440,
     "eps_history": 5029888,
     "fundamentals_filing": 4751360,
-    "earnings_event": 1204224,
-    "estimate_snapshot": 368640,
-    "ingestion_run": 180224
+    "adjustment_factor": 2056192,
+    "earnings_event": 1212416
    }
   },
   "estimated": {
    "companies": 500,
-   "database_bytes": 3720131564,
+   "database_bytes": 4267321930,
    "method": "measured size times 5.4 (company ratio); ESTIMATE, not measured"
   }
  }

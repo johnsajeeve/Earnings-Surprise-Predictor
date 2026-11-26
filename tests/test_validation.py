@@ -114,7 +114,7 @@ def test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_count
 
 @pytest.mark.req("DV-05-AC1")
 @pytest.mark.code("src/earnings/validation.py")
-def test_date_order_violations_are_listed_and_a_call_before_the_release_is_a_stated_conflict(
+def test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart(
     engines,
 ):
     worker, _ = engines
@@ -132,30 +132,30 @@ def test_date_order_violations_are_listed_and_a_call_before_the_release_is_a_sta
         worker, CO, 4, ann=date(2025, 2, 1), period_end=date(2024, 12, 31), info=date(2025, 2, 1)
     )
     order = val.date_order_violations(worker)
-    assert len(order["call_before_announcement"]) == 1  # C-17 allows it; DV-05 text does not
+    assert len(order["call_before_announcement"]) == 1  # the exception DV-05 names (C-17, C-52)
     assert len(order["information_not_before_announcement"]) == 2  # real errors
 
 
 @pytest.mark.req("DV-01-AC1", "DV-04-AC1")
 @pytest.mark.code("src/earnings/validation.py")
-def test_failing_rows_are_quarantined_once_and_kept_and_extreme_values_need_a_threshold(engines):
+def test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged(engines):
     worker, api = engines
     _eps(worker, CO, count=1)
     _event(worker, CO, 1, ann=date(2024, 5, 2), period_end=date(2024, 3, 31), sue="50")
     _event(worker, CO, 2, ann=date(2024, 8, 1), period_end=date(2024, 6, 30), status="excluded")
     first = val.run_checks(worker)
     second = val.run_checks(worker)
-    assert first["quarantined_this_run"] == 1 and second["quarantined_this_run"] == 0
+    assert first["quarantined_this_run"] == 2 and second["quarantined_this_run"] == 0
     with api.connect() as conn:
-        assert conn.execute(text("SELECT count(*) FROM quarantine")).scalar_one() == 1
+        assert conn.execute(text("SELECT count(*) FROM quarantine")).scalar_one() == 2
         assert conn.execute(text("SELECT count(*) FROM earnings_event")).scalar_one() == 2  # kept
     assert [e[2] for e in val.extreme_events(worker, 10.0)] == [50.0]
-    with pytest.raises(TypeError):
-        val.extreme_events(worker)  # type: ignore[call-arg]
+    assert val.EXTREME_SUE == 10.0 and [e[2] for e in val.extreme_events(worker)] == [50.0]
+    assert any("extreme label" in r for r in first["quarantine_by_reason"])  # flagged, kept
     # SYNTHETIC scale error of the kind found in the real data (DR-27): quarantined, not removed
     _event(worker, CO, 3, ann=date(2024, 11, 1), period_end=date(2024, 9, 30), sue="1828351.4")
     third = val.run_checks(worker)
-    assert third["quarantined_this_run"] == 1
+    assert third["quarantined_this_run"] == 2  # the scale error rule and the extreme-label flag
     assert third["quarantine_by_reason"]["sue above one million in size"] == 1
 
 
@@ -184,8 +184,14 @@ def test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones(
     ev.build_events(worker)
     report = val.run_checks(worker)
     assert report["quarantine_by_reason"]["label inputs hold a scale error in the source EPS"] == 2
-    with api.connect() as conn:  # flagged, and the label itself is left as computed
+    with api.connect() as conn:  # flagged and left out of training; the label stays as computed
         assert conn.execute(text("SELECT count(*) FROM earnings_event")).scalar_one() == 2
+        rows = conn.execute(text("SELECT status, exclusion_reason, sue FROM earnings_event")).all()
+        notes = conn.execute(
+            text("SELECT reviewer_note FROM quarantine WHERE reason LIKE 'label inputs%'")
+        ).scalars()
+        assert all(r[0] == "excluded" and "scale error" in r[1] and r[2] is not None for r in rows)
+        assert all("C-51" in n for n in notes)
 
 
 @pytest.mark.req("DV-08-AC1")

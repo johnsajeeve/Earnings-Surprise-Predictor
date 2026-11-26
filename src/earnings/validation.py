@@ -27,6 +27,9 @@ DATE_FIELDS = ("transcript_date", "information_date", "announcement_date")
 # (quarterly EPS in thousands). This is my own flag, not the DV-04 threshold, which is still pending
 # (decision D-47, item m). The event stays in its table; the quarantine row is for review.
 SCALE_ERROR_SUE = 1e6
+# DV-04: a label above this size is flagged for a person to review, never removed (decision C-51)
+EXTREME_SUE = 10.0
+SCALE_NOTE = "left out of training, no value changed: John, 26 November 2026 (decision C-51)"
 TARGET_YEARS = range(2015, 2025)
 
 
@@ -121,9 +124,9 @@ def null_rates(engine: Engine) -> dict[str, Any]:
 
 
 def date_order_violations(engine: Engine) -> dict[str, list[tuple[Any, ...]]]:
-    """DV-05: information date before the announcement, and the call not before the announcement.
-    A call dated before its release is allowed by decision C-17 and is listed as a conflict with the
-    wording of DV-05, not as an error."""
+    """DV-05 (reworded by decision C-52): the information date is before the announcement, and the
+    announcement is on or before the call, except a call that precedes the 8-K filing, which
+    decision C-17 allows and which is listed. The price-window part is in `earnings.prices`."""
     with engine.connect() as conn:
         info_late = conn.execute(
             text(
@@ -255,7 +258,19 @@ def run_checks(engine: Engine) -> dict[str, Any]:
         (e, "label inputs hold a scale error in the source EPS")
         for e in scale_suspect_events(engine)
     ]
+    failures += [
+        (e, "extreme label, above 10 in size: for review (DV-04)")
+        for e, _, _ in extreme_events(engine)
+    ]
     new = sum(quarantine_row(engine, "earnings_event", str(k), why) for k, why in failures)
+    with engine.begin() as conn:  # the decision on the scale errors is the reviewer note
+        conn.execute(
+            text(
+                "UPDATE quarantine SET reviewer_note = :n WHERE reviewer_note IS NULL "
+                "AND reason = 'label inputs hold a scale error in the source EPS'"
+            ),
+            {"n": SCALE_NOTE},
+        )
     per_reason: dict[str, int] = defaultdict(int)
     for _, why in failures:
         per_reason[why.split(":")[0]] += 1
@@ -274,8 +289,8 @@ def run_checks(engine: Engine) -> dict[str, Any]:
     }
 
 
-def extreme_events(engine: Engine, threshold: float) -> list[tuple[int, str, float]]:
-    """DV-04. The threshold has no default: the requirement does not state one (pending value)."""
+def extreme_events(engine: Engine, threshold: float = EXTREME_SUE) -> list[tuple[int, str, float]]:
+    """DV-04: labels above the approved size, largest first."""
     with engine.connect() as conn:
         return [
             (r[0], r[1], float(r[2]))

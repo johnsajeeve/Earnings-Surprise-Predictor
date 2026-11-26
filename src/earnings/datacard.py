@@ -12,8 +12,9 @@ TRANSFORMATIONS = [
     "Sections: prepared remarks and Q&A split by the boundary rule of decision C-48.",
     "EPS: diluted EPS from XBRL; fourth quarter derived as the year minus nine months and flagged.",
     "Label: time-series SUE (Data LB-01) from first-filed history; sample standard deviation.",
-    "Split basis: the dated split ratios companies report to the SEC; companies without the tag "
-    "are not adjusted until the price source's factors are stored.",
+    "Split basis: the price source's dated share-split ratios for companies with prices, "
+    "otherwise the SEC split-ratio tag.",
+    "Prices: raw closes rebuilt from the yfinance close and its split list; dated factors apart.",
 ]
 
 

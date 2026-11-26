@@ -565,6 +565,8 @@ Operations, security and engineering requirements are defined in the Project-Wid
 | FeatureVector | event_id, feature_set_version, features (JSON), computed_at | FR-24. Tabular, text and sector features in one row per event. |
 | SectorBenchmark | event_id, sector, gics_version, as_of_date, peer_event_ids (JSON), mean_sue, std_sue, peer_count, status | SRS-10. Stored with the as-of date so the no-lookahead rule can be checked. |
 | ModelVersion | model_version, trained_on_from, trained_on_to, training_event_count, metrics (JSON), artefact_path, checksum, seed, retrained_at | FR-11, FR-21, ML-01, ML-03. |
+| PriceDaily | price_id, company_id, ticker, price_date, close_raw, volume, source, source_version, captured_at, payload_id | Data PX-01 to PX-03 (decision C-49). The raw close only, never an adjusted one. Append-only. |
+| AdjustmentFactor | factor_id, company_id, ex_date, kind (split or dividend), value, source, source_version, captured_at, payload_id | Data PX-01, LB-05 (decision C-49). A split value is the share ratio and a dividend value is the cash amount per share, as the source reports it. Append-only. |
 | Prediction | prediction_id, event_id, model_version, feature_set_version, class, probabilities, confidence, input_as_of (JSON), created_at | FR-01, FR-11, FR-22. Realised outcome and realised sector score joined from EarningsEvent and SectorBenchmark. |
 | Explanation | explanation_id, prediction_id, features (JSON), citations (JSON), verification_status, job_status, prompt_version, llm_model_version, generation_settings (JSON), created_at | FR-04, FR-05, FR-19; Project-Wide AI-01. |
 | ClaimLabel | claim_id, explanation_id, claim_text, label, reason | EX-02. |

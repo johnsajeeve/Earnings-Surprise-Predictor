@@ -41,6 +41,7 @@ class RawResponse:
     content_type: str | None
     body: bytes
     retrieved_at: datetime
+    source_version: str | None = None  # Data SR-04, where the source states one
 
     @property
     def sha256(self) -> str:

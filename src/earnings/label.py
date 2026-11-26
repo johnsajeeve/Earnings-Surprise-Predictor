@@ -105,6 +105,17 @@ def splits_from_facts(payload: bytes) -> list[Split]:
     return out
 
 
+def is_share_split(ratio: Decimal) -> bool:
+    """A forward split in whole or half shares, or a reverse split of one for a whole number. The
+    price source also lists spin-off price ratios (for example 1.046), which leave EPS alone."""
+    if 1 < ratio <= SPLIT_MAX_RATIO:
+        return (ratio * 2) % 1 == 0
+    if 0 < ratio < 1:
+        whole = 1 / ratio
+        return 2 <= round(whole) <= SPLIT_MAX_RATIO and abs(whole - round(whole)) < Decimal("0.001")
+    return False
+
+
 def adjusted_value(v: EpsVersion, splits: Sequence[Split]) -> tuple[Decimal, int]:
     """The value on the share basis of `splits`, and how many splits were applied: a value first
     filed before a split took effect is on the old basis."""

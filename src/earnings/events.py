@@ -39,7 +39,22 @@ def _versions(engine: Engine, company_id: str) -> list[label.EpsVersion]:
 
 
 def _splits(engine: Engine, company_id: str) -> list[label.Split]:
-    """The dated split factors in the company's stored SEC facts (LB-05)."""
+    """The dated share splits for a company (LB-05, decision C-49): from the price source's stored
+    factors where the company has prices, otherwise from the split tag in its SEC facts."""
+    with engine.connect() as conn:
+        priced = conn.execute(
+            text("SELECT EXISTS (SELECT 1 FROM price_daily WHERE company_id = :c)"),
+            {"c": company_id},
+        ).scalar_one()
+        if priced:
+            rows = conn.execute(
+                text(
+                    "SELECT DISTINCT ON (ex_date) ex_date, value FROM adjustment_factor "
+                    "WHERE company_id = :c AND kind = 'split' ORDER BY ex_date, captured_at DESC"
+                ),
+                {"c": company_id},
+            ).all()
+            return [label.Split(r[1], r[0]) for r in rows if label.is_share_split(r[1])]
     found = fin._payload(engine, fin.FACTS_URL.format(cik=company_id))
     return [] if found is None else label.splits_from_facts(found[1])
 
@@ -108,6 +123,8 @@ def _write_event(engine, cid, tid, call_date, release, versions, splits, fy, fq,
             reasons.append(f"transcript dated {gap} trading days after the announcement")
         if result.target_filed is not None and result.target_filed < release.announced:
             reasons.append("the quarter's EPS was filed before the earnings release")
+    if result.scale_suspect:
+        reasons.append("an input EPS value has a scale error in the source (excluded, C-51)")
     exclusion = "; ".join(reasons) or None
     reason = result.reason if result.sue is None else None
     incomplete = result.information_date is None or announcement is None
