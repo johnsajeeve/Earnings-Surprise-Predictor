@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - run: python3 scripts/check_pins.py requirements.txt requirements.lock requirements-pending.txt requirements-dev.txt
+      - run: python3 scripts/check_pins.py requirements.txt requirements.lock requirements-worker.txt requirements-worker.lock requirements-pending.txt requirements-dev.txt
 
   lint-and-types:
     name: Lint, format, types (EQ-02)
@@ -43,6 +43,32 @@ jobs:
           docker compose run --rm --no-deps
           -v "$PWD/tests:/app/tests:ro"
           -v "$PWD/requirements-dev.txt:/app/requirements-dev.txt:ro"
+          api sh -c 'pip install --user -q -r requirements-dev.txt && python -m pytest -p no:cacheprovider tests'
+      # spaCy is in the worker image only (DP-03). The FinBERT weights are not downloaded here, so
+      # the two tests that need them are skipped and counted as not tested.
+      - run: >
+          docker compose run --rm --no-deps
+          -v "$PWD/tests:/app/tests:ro"
+          -v "$PWD/requirements-dev.txt:/app/requirements-dev.txt:ro"
+          worker sh -c 'pip install --user -q -r requirements-dev.txt && python -m pytest -p no:cacheprovider -rs tests/test_sentence_models.py'
+      - if: failure()
+        run: docker compose logs --no-color
+      - if: always()
+        run: docker compose down -v
+
+  # The tests above mount only tests/, so the checks that read documents, scripts and this workflow
+  # skip there. This job runs the suite with the whole repository (DR-08, decision C-51). It is not
+  # a required check yet.
+  document-tests:
+    name: Tests with the whole repository (DO-03, DO-05)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: cp .env.example .env
+      - run: docker compose up --build -d --wait --wait-timeout 300
+      - run: >
+          docker compose run --rm --no-deps
+          -v "$PWD:/repo:ro" -w /repo -e PYTHONPATH=/repo/src
           api sh -c 'pip install --user -q -r requirements-dev.txt && python -m pytest -p no:cacheprovider tests'
       - if: failure()
         run: docker compose logs --no-color
@@ -84,3 +110,6 @@ jobs:
           python-version: "3.12.16"
       - run: pip install -r requirements-dev.txt
       - run: pip-audit -r requirements.lock --no-deps --disable-pip
+      # the CPU build of PyTorch carries a local version label that the advisory database does not
+      # list, so it is checked under its release number
+      - run: sed 's/+cpu$//' requirements-worker.lock > /tmp/worker.lock && pip-audit -r /tmp/worker.lock --no-deps --disable-pip

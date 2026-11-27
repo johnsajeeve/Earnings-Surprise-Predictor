@@ -1,0 +1,20 @@
+import os, json, time, requests
+key=[l.split('=',1)[1].strip() for l in open('/mnt/c/Users/johns/Earnings-Surprise-Predictor/.env') if l.startswith('FINNHUB_API_KEY=')][0]
+H={"X-Finnhub-Token":key,"User-Agent":"earnings-project-check"}
+def get(path,**p):
+    r=requests.get("https://finnhub.io/api/v1"+path,params=p,headers=H,timeout=30)  # host is fixed: the key only goes to finnhub.io
+    try: body=r.json()
+    except Exception: body=r.text[:120]
+    return r.status_code, body, dict(r.headers)
+for t in ["AAPL","MSFT","JPM","KO","F"]:
+    s,b,h=get("/stock/eps-estimate",symbol=t,freq="quarterly")
+    if s==200 and isinstance(b,dict) and b.get("data"):
+        d=b["data"][0]; print(t,"eps-estimate",s,"periods",len(b["data"]),"fields",sorted(d.keys()),"first",{k:d[k] for k in d if k in("period","epsAvg","epsHigh","epsLow","numberAnalysts")})
+    else: print(t,"eps-estimate",s,str(b)[:140])
+    time.sleep(1.1)
+    s,b,h=get("/stock/earnings",symbol=t,limit=4)
+    if s==200 and isinstance(b,list) and b:
+        print(t,"earnings",s,"rows",len(b),"fields",sorted(b[0].keys()),"first",{k:b[0][k] for k in b[0] if k in("period","actual","estimate","surprise")})
+    else: print(t,"earnings",s,str(b)[:140])
+    time.sleep(1.1)
+print("rate-limit headers seen:",{k:v for k,v in h.items() if 'ratelimit' in k.lower() or 'limit' in k.lower()})

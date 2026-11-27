@@ -526,6 +526,8 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | UX-09-AC1 | A page test finds no transcript text beyond the cited sentences and none over the limit. |
 | UX-10-AC1 | Task script is on file and dated before the first session. |
 | UX-11-AC1 | Service starts from the README command and its health check passes. |
+| UX-12-AC1 | A fixture company with missing data and a removed company each show their notes on the card. |
+| UX-13-AC1 | The link is on the prediction card and the page it opens asks for no personal data. |
 
 ## Ingestion and Preparation (ingestion-and-preparation-requirements.md)
 
@@ -601,6 +603,10 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | MD-22-AC1 | Event with features gets one stored prediction per point. |
 | MD-22-AC2 | A second run adds none. |
 | MD-23-AC1 | Altered artefact makes the endpoint return 503 with the Section 12 message. |
+| MD-24-AC1 | The card has sections for direct use, out-of-scope use, and limitations each with a recommendation. |
+| MD-25-AC1 | The report has all three breakdowns with counts, and no rate for a group under 30 events. |
+| MD-26-AC1 | A figure missing any of these fails the report check. |
+| MD-27-AC1 | The report has a not-measured section with at least the coverage and survivorship gaps. |
 
 ## API and Serving (api-and-serving-requirements.md)
 
@@ -659,6 +665,27 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | DP-14-AC1 | Rollback is timed once. |
 | DP-14-AC2 | Service scales to zero in a test. |
 | DP-15-AC1 | ADR 0003 names how the worker runs. |
+| DP-16-AC1 | Every hosted component has a row with its host, limits, source page, date and datasets. |
+| DP-17-AC1 | A terms record with a date exists for every host in the deployment profile. |
+| DP-18-AC1 | An export that would include a dataset that may not be deployed fails. |
+| DP-19-AC1 | A scan of each image to be deployed finds none of them. |
+| DP-20-AC1 | With the setting on, the prediction endpoints return the unavailable state and health reports it. |
+
+## Licensing (licensing-requirements.md)
+
+| Reference | Check |
+|---|---|
+| LC-01-AC1 | A pinned package or an image with no register row fails the test. |
+| LC-02-AC1 | A register row with a class outside the list fails the test. |
+| LC-03-AC1 | No dataset in the source register has a class that may not be deployed. |
+| LC-04-AC1 | A manifest naming a restricted, unclear, share-alike or unregistered dataset is refused. |
+| LC-05-AC1 | The committed notices file equals the generated one. |
+| LC-06-AC1 | No committed fixture holds real data from a source that does not permit redistribution, and each share-alike excerpt carries its attribution and licence. |
+| LC-07-AC1 | A source name in a client module with no register entry fails the test. |
+| LC-08-AC1 | No scheduled job uses a source whose terms bar automated collection. |
+| LC-09-AC1 | Every model row names the licence of its training data. |
+| LC-10-AC1 | A row checked more than 90 days before the date given is listed as stale. |
+| LC-11-AC1 | No library or image in use has any other class. |
 
 ## Requirements with no check of their own
 

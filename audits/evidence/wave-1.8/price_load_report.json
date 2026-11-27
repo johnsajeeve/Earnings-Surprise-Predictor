@@ -1,0 +1,24 @@
+{
+ "loaded": 83,
+ "unavailable": {
+  "0001437107": "series covers only 0% of the events",
+  "0001013462": "series covers only 0% of the events",
+  "0001618921": "SourceError: yfinance returned no prices for WBA",
+  "0001274057": "SourceError: yfinance returned no prices for HSP",
+  "0000909954": "SourceError: yfinance returned no prices for GMCR",
+  "0000865436": "SourceError: yfinance returned no prices for WFM",
+  "0000072333": "SourceError: yfinance returned no prices for JWN",
+  "0000048039": "SourceError: yfinance returned no prices for HFC",
+  "0001378946": "SourceError: yfinance returned no prices for PBCT",
+  "0000719739": "SourceError: yfinance returned no prices for SIVB",
+  "0000079958": "SourceError: yfinance returned no prices for PCP",
+  "0000203077": "SourceError: yfinance returned no prices for STJ",
+  "0000030419": "SourceError: yfinance returned no prices for DNB",
+  "0000718877": "SourceError: yfinance returned no prices for ATVI",
+  "0000075829": "SourceError: yfinance returned no prices for PLL",
+  "0000354908": "SourceError: yfinance returned no prices for FLIR",
+  "0001108827": "SourceError: yfinance returned no prices for QEP"
+ },
+ "price_rows": 302718,
+ "factor_rows": 8411
+}

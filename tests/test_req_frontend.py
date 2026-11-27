@@ -91,3 +91,19 @@ def test_ux_10_ac1_task_script_is_on_file_and_dated():
 def test_ux_11_ac1_service_starts_from_the_readme_command_and():
     """UX-11-AC1: Service starts from the README command and its health check passes."""
     not_tested("BLOCKED", "waits for open decision D-28")
+
+
+@pytest.mark.req("UX-12-AC1")
+def test_ux_12_ac1_placeholder():
+    """UX-12-AC1: A fixture company with missing data and a removed company each show their
+    notes on the card.
+    """
+    not_tested("NOT IMPLEMENTED", "the dashboard is not built (Wave 6)")
+
+
+@pytest.mark.req("UX-13-AC1")
+def test_ux_13_ac1_placeholder():
+    """UX-13-AC1: The link is on the prediction card and the page it opens asks for no personal
+    data.
+    """
+    not_tested("NOT IMPLEMENTED", "the dashboard is not built (Wave 6)")

@@ -1,0 +1,13 @@
+# Draft wording for Data Section 12 (Spike results)
+
+This is **proposed** text for `docs/requirements/data-requirements.md` Section 12. It is not applied. Decision C-12 allows spike results to be written there, and drift control 4 says John approves the wording first. Evidence: wave-0.1-spikes.md. Written 23 November 2026.
+
+**Call time against 8-K acceptance time (IG-16), 23 November 2026.** The Hugging Face `date` field holds a time of day for 99.4% of rows (196 of 33,362 are 00:00:00 placeholders) and states no time zone. Read as US Eastern with daylight saving, the 8-K acceptance time came before the call in 45 of 47 matched events in a 50-event sample (seed 2027, 2015 to 2024), with a median gap of 180 minutes (quartiles 1,008, 180 and 59 minutes). Three of the 47 matches were more than 24 hours apart and were not checked. On 2,749 after-close events the gap was the same in summer and winter under that reading (35 minutes, call after filing) and 60 minutes different under fixed standard time, so the stamps are Eastern with daylight saving (decision C-42).
+
+**EDGAR diluted EPS depth (LB-02, LB-03, LB-04), 23 November 2026.** For 10 companies (AAPL, MSFT, JPM, XOM, KO, IBM, PFE, F, XLNX, ATVI), 9 had 10 or more contiguous quarters of diluted EPS before 30 September 2014 (22 to 29 quarters). XOM was the exception because the SEC ticker file maps it to a new holding-company CIK (2115436) whose history starts in 2025; its earlier history is under CIK 34088. Fourth-quarter EPS has no direct fact and must be derived. Each fact carries its filing date, so the first-filed value can be selected. 0 to 25 periods per company have a later changed value. The SEC bulk files exist (`companyfacts.zip` and `submissions.zip`, last modified 21 November 2026). Whether they refresh nightly needs a second observation.
+
+**Consensus from yfinance (SR-10), 23 November 2026.** For 5 tickers the current quarter returned mean, low, high and analyst count, with no standard deviation. The estimate basis differs by ticker (AAPL gaap, the other four normalized). Finnhub and FMP were not tested (no key).
+
+**Hugging Face transcripts and removed companies (TX-07), 23 November 2026.** The card says MIT and "For research and educational use only", with no origin named. Of 230 tickers whose last index stint ended in 2015 to 2024 (from `fja05680/sp500`), 126 (55%) have transcripts in the set. In a random sample of 20, 12 did and 8 did not (CA, CHK, ESV, LB, MON, SWN, TE, WFM).
+
+**FinBERT speed (FE-09), 23 November 2026.** With `ProsusAI/finbert` as an example (D-35 open) on 6 CPUs, 14.7 to 28.3 sentences a second depending on batching. About 469 sentences per transcript by a simple split gives 18 to 35 hours for 4,000 transcripts.

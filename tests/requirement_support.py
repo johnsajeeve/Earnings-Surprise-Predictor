@@ -43,3 +43,12 @@ def repo_path(relative: str) -> Path:
     if not path.exists():
         not_tested("NEEDS REPO", f"{relative} is not in this environment")
     return path
+
+
+def source_register() -> list[dict[str, str]]:
+    """The rows of the source register (Data SR-01), read from the file in the application image."""
+    import csv
+
+    path = ROOT / "src" / "earnings" / "source_register.csv"
+    with path.open(encoding="utf-8", newline="") as fh:
+        return list(csv.DictReader(fh))

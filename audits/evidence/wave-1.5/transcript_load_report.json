@@ -1,0 +1,17 @@
+{
+ "revision": "f3ded372da8d18dc6ad98955c4558e34b5fe6d45",
+ "sha256": "9a305a1c4cbf6c4b0b9c8b98b242ea3de4dbe0ad43937dc54b56418629a17b31",
+ "rows_in_file": 33362,
+ "other_companies": 28372,
+ "outside_dates": 1400,
+ "rejected": {
+  "no earnings release filed within 3 days of the call": 157,
+  "the call does not name the company and its managers are not the company's": 39
+ },
+ "loaded": 3394,
+ "duplicates": 0,
+ "segmentation_failed": 44,
+ "call_before_release": 7,
+ "call_late": 23,
+ "placeholder_times": 20
+}

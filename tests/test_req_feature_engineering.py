@@ -30,7 +30,7 @@ def test_fe_02_ac1_a_fixture_call_with_a_safe_harbour():
     """FE-02-AC1: A fixture call with a safe-harbour paragraph has the same hedge count with
     and without that paragraph.
     """
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-03-AC1")
@@ -50,13 +50,13 @@ def test_fe_04_ac1_fixture_without_roles_q_a_sentiment_delta():
 @pytest.mark.req("FE-05-AC1")
 def test_fe_05_ac1_score_rows_have_a_non_null_model():
     """FE-05-AC1: Score rows have a non-null model revision."""
-    not_tested("BLOCKED", "waits for open decision D-35")
+    not_tested("NOT IMPLEMENTED", "decided (D-35 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-05-AC2")
 def test_fe_05_ac2_register_entry_exists():
     """FE-05-AC2: Register entry exists."""
-    not_tested("BLOCKED", "waits for open decision D-35")
+    not_tested("NOT IMPLEMENTED", "decided (D-35 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-06-AC1")
@@ -80,13 +80,13 @@ def test_fe_07_ac1_hand_calculated_fixture_matches_to_four_decimals():
 @pytest.mark.req("FE-08-AC1")
 def test_fe_08_ac1_hand_calculated_fixture_matches():
     """FE-08-AC1: Hand-calculated fixture matches."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-08-AC2")
 def test_fe_08_ac2_fixture_with_3_sentences_is_unavailable():
     """FE-08-AC2: Fixture with 3 sentences is unavailable."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-09-AC1")
@@ -98,13 +98,13 @@ def test_fe_09_ac1_benchmark_record_exists_with_the_hardware_stated():
 @pytest.mark.req("FE-10-AC1")
 def test_fe_10_ac1_fixture_sentences_with_known_hedge_counts_match():
     """FE-10-AC1: Fixture sentences with known hedge counts match."""
-    not_tested("BLOCKED", "waits for open decision D-34")
+    not_tested("NOT IMPLEMENTED", "decided (D-34 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-10-AC2")
 def test_fe_10_ac2_list_version_is_in_the_feature_set():
     """FE-10-AC2: List version is in the feature-set version."""
-    not_tested("BLOCKED", "waits for open decision D-34")
+    not_tested("NOT IMPLEMENTED", "decided (D-34 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-11-AC1")
@@ -116,31 +116,31 @@ def test_fe_11_ac1_register_entry_exists():
 @pytest.mark.req("FE-12-AC1")
 def test_fe_12_ac1_fixture_with_a_known_word_count():
     """FE-12-AC1: Fixture with a known word count."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-13-AC1")
 def test_fe_13_ac1_fixture_sentences_with_known_negation_counts_match():
     """FE-13-AC1: Fixture sentences with known negation counts match."""
-    not_tested("BLOCKED", "waits for open decision D-34")
+    not_tested("NOT IMPLEMENTED", "decided (D-34 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-14-AC1")
 def test_fe_14_ac1_fixture_with_4_flagged_of_20_gives():
     """FE-14-AC1: Fixture with 4 flagged of 20 gives 0.2000."""
-    not_tested("BLOCKED", "waits for open decision D-34")
+    not_tested("NOT IMPLEMENTED", "decided (D-34 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-15-AC1")
 def test_fe_15_ac1_fixture_q_a_with_5_questions_gives():
     """FE-15-AC1: Fixture Q&A with 5 questions gives 5."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-16-AC1")
 def test_fe_16_ac1_fixture_matches_a_hand_calculation():
     """FE-16-AC1: Fixture matches a hand calculation."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-17-AC1")
@@ -158,13 +158,13 @@ def test_fe_17_ac2_fixture_with_no_analyst_turns_is_unavailable():
 @pytest.mark.req("FE-18-AC1")
 def test_fe_18_ac1_hand_calculated_fixture_matches():
     """FE-18-AC1: Hand-calculated fixture matches."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-19-AC1")
 def test_fe_19_ac1_fixture_matches():
     """FE-19-AC1: Fixture matches."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-20-AC1")
@@ -176,25 +176,25 @@ def test_fe_20_ac1_fixture_company_without_gross_profit_is_unavailable():
 @pytest.mark.req("FE-21-AC1")
 def test_fe_21_ac1_fixture_with_rising_sues_gives_a_positive():
     """FE-21-AC1: Fixture with rising SUEs gives a positive slope."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-21-AC2")
 def test_fe_21_ac2_fixture_with_three_prior_values_is_unavailable():
     """FE-21-AC2: Fixture with three prior values is unavailable."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-22-AC1")
 def test_fe_22_ac1_fixture_matches():
     """FE-22-AC1: Fixture matches."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-22-AC2")
 def test_fe_22_ac2_a_planted_future_price_has_no_effect():
     """FE-22-AC2: A planted future price has no effect (Data PX-02)."""
-    not_tested("BLOCKED", "waits for open decision D-36")
+    not_tested("NOT IMPLEMENTED", "decided (D-36 is closed); built with the features, Wave 2")
 
 
 @pytest.mark.req("FE-23-AC1")

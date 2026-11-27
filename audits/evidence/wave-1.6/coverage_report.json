@@ -1,0 +1,414 @@
+{
+ "shortfall_by_company_and_year": {
+  "ADVANCED MICRO DEVICES INC": {
+   "2017": 3,
+   "2018": 5,
+   "2019": 4,
+   "2020": 4,
+   "2021": 3,
+   "2022": 1
+  },
+  "AT&T INC.": {
+   "2019": 1,
+   "2021": 1,
+   "2022": 1
+  },
+  "Activision Blizzard": {
+   "2022": 4,
+   "2023": 3
+  },
+  "Ansys": {
+   "2017": 1,
+   "2018": 1,
+   "2020": 1,
+   "2021": 1,
+   "2024": 5
+  },
+  "Avery Dennison Corp": {
+   "2022": 1
+  },
+  "BANK OF AMERICA CORP /DE/": {
+   "2024": 1
+  },
+  "BAXTER INTERNATIONAL INC": {
+   "2020": 3,
+   "2021": 5
+  },
+  "BROWN & BROWN, INC.": {
+   "2024": 1
+  },
+  "Bath & Body Works, Inc.": {
+   "2015": 7,
+   "2016": 8,
+   "2017": 9,
+   "2018": 9,
+   "2019": 6,
+   "2020": 6,
+   "2021": 7,
+   "2022": 1,
+   "2023": 2
+  },
+  "Brighthouse Financial, Inc.": {
+   "2017": 2
+  },
+  "CATERPILLAR INC": {
+   "2018": 1,
+   "2024": 1
+  },
+  "CITIZENS FINANCIAL GROUP INC/RI": {
+   "2019": 2,
+   "2020": 4,
+   "2021": 2
+  },
+  "COMCAST CORP": {
+   "2019": 1
+  },
+  "COPART INC": {
+   "2022": 2
+  },
+  "CORNING INC /NY": {
+   "2024": 1
+  },
+  "CSRA": {
+   "2016": 3,
+   "2017": 3,
+   "2018": 1
+  },
+  "CSX CORP": {
+   "2015": 1
+  },
+  "CUMMINS INC": {
+   "2015": 3,
+   "2016": 4,
+   "2017": 2,
+   "2018": 3,
+   "2019": 2,
+   "2020": 3,
+   "2021": 3,
+   "2022": 2
+  },
+  "Capri Holdings Ltd": {
+   "2018": 1,
+   "2020": 1
+  },
+  "Cboe Global Markets, Inc.": {
+   "2017": 1,
+   "2020": 1
+  },
+  "DANAHER CORP /DE/": {
+   "2015": 1,
+   "2016": 1,
+   "2017": 1,
+   "2018": 1,
+   "2019": 1,
+   "2020": 2,
+   "2021": 1,
+   "2022": 1,
+   "2023": 2,
+   "2024": 2
+  },
+  "DELTA AIR LINES, INC.": {
+   "2018": 1
+  },
+  "DEVON ENERGY CORP/DE": {
+   "2015": 1,
+   "2016": 1,
+   "2018": 1,
+   "2020": 1
+  },
+  "DIGITAL REALTY TRUST, INC.": {
+   "2016": 2,
+   "2018": 1,
+   "2019": 1
+  },
+  "Discovery, Inc.": {
+   "2017": 1,
+   "2018": 1,
+   "2022": 1
+  },
+  "EBAY INC": {
+   "2015": 1,
+   "2024": 1
+  },
+  "EQT Corp": {
+   "2015": 5,
+   "2016": 4,
+   "2017": 4,
+   "2018": 4,
+   "2022": 2,
+   "2023": 7,
+   "2024": 4
+  },
+  "EQUIFAX INC": {
+   "2016": 2,
+   "2017": 2,
+   "2019": 1,
+   "2020": 1,
+   "2021": 2
+  },
+  "FEDEX CORP": {
+   "2015": 2,
+   "2018": 1,
+   "2022": 1,
+   "2024": 1
+  },
+  "FLIR Systems": {
+   "2020": 1,
+   "2021": 3
+  },
+  "Gen Digital Inc.": {
+   "2021": 1,
+   "2023": 1
+  },
+  "HARTFORD INSURANCE GROUP, INC.": {
+   "2015": 1,
+   "2017": 1,
+   "2018": 1,
+   "2019": 1,
+   "2020": 1,
+   "2021": 1,
+   "2023": 1
+  },
+  "HENRY SCHEIN INC": {
+   "2018": 1
+  },
+  "HUNTINGTON INGALLS INDUSTRIES, INC.": {
+   "2018": 1
+  },
+  "Hilton Worldwide Holdings Inc.": {
+   "2018": 1,
+   "2020": 1,
+   "2021": 1
+  },
+  "HollyFrontier": {
+   "2020": 2
+  },
+  "Hospira": {
+   "2015": 3
+  },
+  "INTERNATIONAL BUSINESS MACHINES CORP": {
+   "2015": 4,
+   "2016": 3,
+   "2020": 1,
+   "2021": 1
+  },
+  "Intercontinental Exchange, Inc.": {
+   "2022": 1
+  },
+  "KLA CORP": {
+   "2015": 2,
+   "2016": 4
+  },
+  "Keurig Green Mountain": {
+   "2015": 4
+  },
+  "LABCORP HOLDINGS INC.": {
+   "2016": 1,
+   "2018": 1,
+   "2019": 1
+  },
+  "LINCOLN NATIONAL CORP": {
+   "2023": 3
+  },
+  "MSCI Inc.": {
+   "2021": 1
+  },
+  "NOV Inc.": {
+   "2018": 1,
+   "2019": 1,
+   "2021": 2
+  },
+  "NetApp, Inc.": {
+   "2019": 1
+  },
+  "Norwegian Cruise Line Holdings Ltd.": {
+   "2020": 3,
+   "2022": 3,
+   "2023": 1
+  },
+  "ORACLE CORP": {
+   "2022": 1
+  },
+  "Pall Corporation": {
+   "2015": 1
+  },
+  "People's United Financial": {
+   "2017": 1,
+   "2018": 1,
+   "2021": 3,
+   "2022": 1
+  },
+  "Philip Morris International Inc.": {
+   "2022": 1
+  },
+  "Precision Castparts Corporation": {
+   "2015": 5
+  },
+  "REALTY INCOME CORP": {
+   "2017": 3,
+   "2018": 1,
+   "2019": 1,
+   "2020": 3,
+   "2021": 1
+  },
+  "ROYAL CARIBBEAN CRUISES LTD": {
+   "2020": 3
+  },
+  "SKYWORKS SOLUTIONS, INC.": {
+   "2019": 1,
+   "2020": 1
+  },
+  "SLB LIMITED/NV": {
+   "2019": 1
+  },
+  "STATE STREET CORP": {
+   "2015": 1,
+   "2017": 1,
+   "2019": 1,
+   "2020": 1
+  },
+  "STERIS plc": {
+   "2021": 1
+  },
+  "SYSCO CORP": {
+   "2017": 1
+  },
+  "St Jude Medical": {
+   "2015": 5,
+   "2016": 6
+  },
+  "TE Connectivity plc": {
+   "2015": 5,
+   "2016": 4,
+   "2017": 4,
+   "2018": 5,
+   "2019": 5,
+   "2024": 1
+  },
+  "TRIMBLE INC.": {
+   "2024": 2
+  },
+  "Vulcan Materials CO": {
+   "2018": 1,
+   "2019": 1,
+   "2020": 2
+  },
+  "WATERS CORP /DE/": {
+   "2020": 1
+  },
+  "WELLS FARGO & COMPANY/MN": {
+   "2016": 1,
+   "2018": 3
+  },
+  "Walgreens Boots Alliance": {
+   "2021": 1
+  },
+  "Whole Foods Market": {
+   "2015": 4,
+   "2016": 4,
+   "2017": 3
+  },
+  "XCEL ENERGY INC": {
+   "2018": 1
+  }
+ },
+ "by_year_and_group": {
+  "2013 left the index": {
+   "releases": 52,
+   "with_transcript": 25
+  },
+  "2013 still in the index": {
+   "releases": 185,
+   "with_transcript": 153
+  },
+  "2014 left the index": {
+   "releases": 60,
+   "with_transcript": 24
+  },
+  "2014 still in the index": {
+   "releases": 192,
+   "with_transcript": 172
+  },
+  "2015 left the index": {
+   "releases": 56,
+   "with_transcript": 22
+  },
+  "2015 still in the index": {
+   "releases": 219,
+   "with_transcript": 197
+  },
+  "2016 left the index": {
+   "releases": 53,
+   "with_transcript": 28
+  },
+  "2016 still in the index": {
+   "releases": 235,
+   "with_transcript": 212
+  },
+  "2017 left the index": {
+   "releases": 49,
+   "with_transcript": 27
+  },
+  "2017 still in the index": {
+   "releases": 247,
+   "with_transcript": 226
+  },
+  "2018 left the index": {
+   "releases": 50,
+   "with_transcript": 33
+  },
+  "2018 still in the index": {
+   "releases": 291,
+   "with_transcript": 259
+  },
+  "2019 left the index": {
+   "releases": 44,
+   "with_transcript": 37
+  },
+  "2019 still in the index": {
+   "releases": 293,
+   "with_transcript": 267
+  },
+  "2020 left the index": {
+   "releases": 40,
+   "with_transcript": 30
+  },
+  "2020 still in the index": {
+   "releases": 312,
+   "with_transcript": 275
+  },
+  "2021 left the index": {
+   "releases": 34,
+   "with_transcript": 19
+  },
+  "2021 still in the index": {
+   "releases": 310,
+   "with_transcript": 284
+  },
+  "2022 left the index": {
+   "releases": 20,
+   "with_transcript": 12
+  },
+  "2022 still in the index": {
+   "releases": 317,
+   "with_transcript": 301
+  },
+  "2023 left the index": {
+   "releases": 22,
+   "with_transcript": 7
+  },
+  "2023 still in the index": {
+   "releases": 313,
+   "with_transcript": 308
+  },
+  "2024 left the index": {
+   "releases": 11,
+   "with_transcript": 7
+  },
+  "2024 still in the index": {
+   "releases": 325,
+   "with_transcript": 309
+  }
+ },
+ "missing_count": 496
+}

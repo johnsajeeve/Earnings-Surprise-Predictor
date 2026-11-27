@@ -1,0 +1,159 @@
+{
+ "source": "synthetic",
+ "shaped_like": "kurry/sp500_earnings_transcripts",
+ "note": "SYNTHETIC. Every name and sentence is made up (decision C-62). The shape follows the source's columns. No text of any real call is held here.",
+ "rows": [
+  {
+   "case": "winter_call",
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
+   "year": 2025,
+   "quarter": 1,
+   "date": "2025-01-30 17:00:00",
+   "content": "Operator: Good afternoon, and welcome to the Northwind Widgets Fourth Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks.\nAda Byrne: Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results.\nCal Dorn: Demand for widgets was steady this quarter, and we may see some uncertainty in the second half.\nGil Hart: Revenue rose from the same quarter a year ago. Gross margin was about flat.\nOperator: Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox.\nEli Fox: Could you say more about orders in the second half?",
+   "structured_content": [
+    {
+     "speaker": "Operator",
+     "text": "Good afternoon, and welcome to the Northwind Widgets Fourth Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks."
+    },
+    {
+     "speaker": "Ada Byrne",
+     "text": "Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results."
+    },
+    {
+     "speaker": "Cal Dorn",
+     "text": "Demand for widgets was steady this quarter, and we may see some uncertainty in the second half."
+    },
+    {
+     "speaker": "Gil Hart",
+     "text": "Revenue rose from the same quarter a year ago. Gross margin was about flat."
+    },
+    {
+     "speaker": "Operator",
+     "text": "Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox."
+    },
+    {
+     "speaker": "Eli Fox",
+     "text": "Could you say more about orders in the second half?"
+    }
+   ],
+   "expected_boundary": 4
+  },
+  {
+   "case": "summer_call",
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
+   "year": 2025,
+   "quarter": 2,
+   "date": "2025-05-01 19:13:00",
+   "content": "Operator: Good afternoon, and welcome to the Northwind Widgets First Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks.\nAda Byrne: Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results.\nCal Dorn: Demand for widgets was steady this quarter, and we may see some uncertainty in the second half.\nGil Hart: Revenue rose from the same quarter a year ago. Gross margin was about flat.\nOperator: Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox.\nEli Fox: Could you say more about orders in the second half?",
+   "structured_content": [
+    {
+     "speaker": "Operator",
+     "text": "Good afternoon, and welcome to the Northwind Widgets First Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks."
+    },
+    {
+     "speaker": "Ada Byrne",
+     "text": "Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results."
+    },
+    {
+     "speaker": "Cal Dorn",
+     "text": "Demand for widgets was steady this quarter, and we may see some uncertainty in the second half."
+    },
+    {
+     "speaker": "Gil Hart",
+     "text": "Revenue rose from the same quarter a year ago. Gross margin was about flat."
+    },
+    {
+     "speaker": "Operator",
+     "text": "Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox."
+    },
+    {
+     "speaker": "Eli Fox",
+     "text": "Could you say more about orders in the second half?"
+    }
+   ],
+   "expected_boundary": 4
+  },
+  {
+   "case": "boundary_after_four_turns",
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
+   "year": 2020,
+   "quarter": 2,
+   "date": "2020-07-15 22:45:00",
+   "content": "Operator: Good afternoon, and welcome to the Northwind Widgets Second Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks.\nAda Byrne: Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results.\nCal Dorn: Demand for widgets was steady this quarter, and we may see some uncertainty in the second half.\nGil Hart: Revenue rose from the same quarter a year ago. Gross margin was about flat.\nOperator: Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox.\nEli Fox: Could you say more about orders in the second half?",
+   "structured_content": [
+    {
+     "speaker": "Operator",
+     "text": "Good afternoon, and welcome to the Northwind Widgets Second Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks."
+    },
+    {
+     "speaker": "Ada Byrne",
+     "text": "Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results."
+    },
+    {
+     "speaker": "Cal Dorn",
+     "text": "Demand for widgets was steady this quarter, and we may see some uncertainty in the second half."
+    },
+    {
+     "speaker": "Gil Hart",
+     "text": "Revenue rose from the same quarter a year ago. Gross margin was about flat."
+    },
+    {
+     "speaker": "Operator",
+     "text": "Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox."
+    },
+    {
+     "speaker": "Eli Fox",
+     "text": "Could you say more about orders in the second half?"
+    }
+   ],
+   "expected_boundary": 4
+  },
+  {
+   "case": "no_operator_turn",
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
+   "year": 2024,
+   "quarter": 3,
+   "date": "2024-12-19 09:00:00",
+   "content": "Ada Byrne: Welcome to the Northwind Widgets update.\nCal Dorn: Here are the figures.\nGil Hart: And the outlook.\nAda Byrne: That ends the update.",
+   "structured_content": [
+    {
+     "speaker": "Ada Byrne",
+     "text": "Welcome to the Northwind Widgets update."
+    },
+    {
+     "speaker": "Cal Dorn",
+     "text": "Here are the figures."
+    },
+    {
+     "speaker": "Gil Hart",
+     "text": "And the outlook."
+    },
+    {
+     "speaker": "Ada Byrne",
+     "text": "That ends the update."
+    }
+   ],
+   "expected_boundary": null
+  },
+  {
+   "case": "empty_text",
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
+   "year": 2022,
+   "quarter": 1,
+   "date": "2022-02-10 17:00:00",
+   "content": "",
+   "structured_content": [],
+   "expected_boundary": null
+  }
+ ]
+}

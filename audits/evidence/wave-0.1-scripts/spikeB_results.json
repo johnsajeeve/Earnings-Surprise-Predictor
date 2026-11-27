@@ -1,0 +1,102 @@
+{
+ "AAPL": {
+  "entity": "Apple Inc.",
+  "quarterly_periods_reported": 67,
+  "derived_q4": 6,
+  "earliest_quarter_end": "2008-06-28",
+  "quarters_to_2014_09_30": 25,
+  "contiguous_run_to_2014_09_30": 24,
+  "periods_in_more_than_one_filing": 113,
+  "periods_whose_value_changed": 25
+ },
+ "MSFT": {
+  "entity": "MICROSOFT CORP",
+  "quarterly_periods_reported": 71,
+  "derived_q4": 6,
+  "earliest_quarter_end": "2007-09-30",
+  "quarters_to_2014_09_30": 29,
+  "contiguous_run_to_2014_09_30": 29,
+  "periods_in_more_than_one_filing": 111,
+  "periods_whose_value_changed": 10
+ },
+ "JPM": {
+  "entity": "JPMORGAN CHASE & CO",
+  "quarterly_periods_reported": 56,
+  "derived_q4": 17,
+  "earliest_quarter_end": "2008-06-30",
+  "quarters_to_2014_09_30": 25,
+  "contiguous_run_to_2014_09_30": 23,
+  "periods_in_more_than_one_filing": 101,
+  "periods_whose_value_changed": 4
+ },
+ "XOM": {
+  "entity": "ExxonMobil Holdings Corporation",
+  "quarterly_periods_reported": 4,
+  "derived_q4": 0,
+  "earliest_quarter_end": "2025-06-30",
+  "quarters_to_2014_09_30": 0,
+  "contiguous_run_to_2014_09_30": 0,
+  "periods_in_more_than_one_filing": 0,
+  "periods_whose_value_changed": 0
+ },
+ "KO": {
+  "entity": "COCA COLA CO",
+  "quarterly_periods_reported": 55,
+  "derived_q4": 17,
+  "earliest_quarter_end": "2008-09-26",
+  "quarters_to_2014_09_30": 24,
+  "contiguous_run_to_2014_09_30": 23,
+  "periods_in_more_than_one_filing": 97,
+  "periods_whose_value_changed": 7
+ },
+ "IBM": {
+  "entity": "INTERNATIONAL BUSINESS MACHINES CORP",
+  "quarterly_periods_reported": 56,
+  "derived_q4": 17,
+  "earliest_quarter_end": "2008-06-30",
+  "quarters_to_2014_09_30": 25,
+  "contiguous_run_to_2014_09_30": 23,
+  "periods_in_more_than_one_filing": 101,
+  "periods_whose_value_changed": 0
+ },
+ "PFE": {
+  "entity": "PFIZER INC",
+  "quarterly_periods_reported": 56,
+  "derived_q4": 17,
+  "earliest_quarter_end": "2008-06-29",
+  "quarters_to_2014_09_30": 25,
+  "contiguous_run_to_2014_09_30": 23,
+  "periods_in_more_than_one_filing": 98,
+  "periods_whose_value_changed": 8
+ },
+ "F": {
+  "entity": "Ford Motor Co",
+  "quarterly_periods_reported": 56,
+  "derived_q4": 17,
+  "earliest_quarter_end": "2008-06-30",
+  "quarters_to_2014_09_30": 25,
+  "contiguous_run_to_2014_09_30": 23,
+  "periods_in_more_than_one_filing": 102,
+  "periods_whose_value_changed": 9
+ },
+ "XLNX": {
+  "entity": "XILINX, INC.",
+  "quarterly_periods_reported": 50,
+  "derived_q4": 1,
+  "earliest_quarter_end": "2009-06-27",
+  "quarters_to_2014_09_30": 22,
+  "contiguous_run_to_2014_09_30": 22,
+  "periods_in_more_than_one_filing": 75,
+  "periods_whose_value_changed": 8
+ },
+ "ATVI": {
+  "entity": "ACTIVISION BLIZZARD, INC.",
+  "quarterly_periods_reported": 57,
+  "derived_q4": 3,
+  "earliest_quarter_end": "2008-06-30",
+  "quarters_to_2014_09_30": 25,
+  "contiguous_run_to_2014_09_30": 23,
+  "periods_in_more_than_one_filing": 91,
+  "periods_whose_value_changed": 5
+ }
+}

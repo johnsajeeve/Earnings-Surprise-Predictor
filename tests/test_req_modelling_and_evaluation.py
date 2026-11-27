@@ -223,3 +223,33 @@ def test_md_22_ac2_a_second_run_adds_none():
 def test_md_23_ac1_altered_artefact_makes_the_endpoint_return_503():
     """MD-23-AC1: Altered artefact makes the endpoint return 503 with the Section 12 message."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+
+
+@pytest.mark.req("MD-24-AC1")
+def test_md_24_ac1_placeholder():
+    """MD-24-AC1: The card has sections for direct use, out-of-scope use, and limitations each
+    with a recommendation.
+    """
+    not_tested("NOT IMPLEMENTED", "no model card exists yet (Wave 3.5)")
+
+
+@pytest.mark.req("MD-25-AC1")
+def test_md_25_ac1_placeholder():
+    """MD-25-AC1: The report has all three breakdowns with counts, and no rate for a group
+    under 30 events.
+    """
+    not_tested("NOT IMPLEMENTED", "no evaluation report exists yet (Wave 3.4)")
+
+
+@pytest.mark.req("MD-26-AC1")
+def test_md_26_ac1_placeholder():
+    """MD-26-AC1: A figure missing any of these fails the report check."""
+    not_tested("NOT IMPLEMENTED", "no accuracy figure is produced yet (Wave 3.4)")
+
+
+@pytest.mark.req("MD-27-AC1")
+def test_md_27_ac1_placeholder():
+    """MD-27-AC1: The report has a not-measured section with at least the coverage and
+    survivorship gaps.
+    """
+    not_tested("NOT IMPLEMENTED", "no evaluation report exists yet (Wave 3.4)")

@@ -262,13 +262,224 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Limits: coverage cannot attribute code that runs at import time, and tests that only read files execute no project code, so declared and measured code differ for them. The measured report is not committed and has not run in CI. The CI change has not run on GitHub.
 - Work by Claude. Decisions by John.
 
+### 23 Nov 2026: implementation plan, audit ledger and Wave 0.1
+
+- Asked by John: an implementation plan in phases, waves and steps with the best lifecycle method and testing at every level, a deterministic audit file to stop drift and fabricated claims, and then to start building.
+- Done: `docs/implementation-plan.md` (plan-driven phases, weekly waves, test-first steps, three gates); `audits/implementation_audit.md` (accountability rules, gate commands, drift register, ledger); `audits/plan_coverage.txt` and `scripts/check_plan_coverage.py` (each of the 480 requirements mapped to one wave, each wave has a ledger row, a PASS needs an evidence file). Two gap reviews changed the plan: 95 uncited Must requirements, three missing waves, overlapping phases, class thresholds placed before the EDA, and checks mapped to waves that could not test them.
+- Wave 0.1 (in progress): regression baseline measured (25 passed and 599 skipped in the CI-style run, 42 passed and 580 skipped in the full-repository run, 0 failed). Spikes on real data: call time against 8-K time (call stamps are US Eastern with daylight saving, decision C-42), EDGAR EPS depth (9 of 10 companies), consensus from yfinance, removed-company transcript coverage (126 of 230), FinBERT speed (14.7 to 28.3 sentences a second). Source register (7 datasets, all primary entries cost zero) and ADR 0004 (label route). Five placeholder tests became real checks (SR-01, SR-09, TH-14, OR-02, SC-07); a planted bad register row made them fail.
+- Decisions by John: C-41 (plan approved, December target kept), C-42 (call-time zone), C-43 (register placement, ADR 0004, Section 12 wording, D-32 and D-19 closed).
+- Limits: SR-06 fails (no fallback for the announcement time, and no fallback tested). SC-07 is partial without the supervisor's written agreement. D-35 stays open: the weights of `ProsusAI/finbert` are CC BY-NC-SA 4.0. The stack was rebuilt over running containers, not from a clean volume. The second bulk-file observation, the Finnhub, FMP and Alpha Vantage spikes and the independent phase audit are not done.
+- Work by Claude. Decisions by John.
+
+### 23 Nov 2026: Wave 0.2, database foundation
+
+- Asked by John: start with whichever of Waves 0.2 and 0.3 is better. Wave 0.3 (forward consensus capture) loses data every day it waits, but it needs a migration, so the database slice came first. John approved (C-44): Alembic and yfinance as runtime dependencies, the role, pool and time-out values, a changed EstimateSnapshot, and embedded Celery beat.
+- Done: Alembic migrations (`earnings.migrate`, one-shot `migrate` compose service, migration 0001 company with the ten-digit CIK as key); roles `earnings_migrator`, `earnings_worker` (no delete) and `earnings_api` (read only), none a superuser; pools of 5 plus 5, statement time-outs 10, 120 and 300 s; a test database built from nothing each session; `load_companies` task, safe to run twice. D-38 narrowed to the tables not yet approved.
+- Verified: full-repository pytest 60 passed, 3 expected failures, 0 failed (47 passed before); CI-style run 42 passed, 0 failed; ruff, ruff format and mypy pass; planted faults in the role grants and a time-out made the role tests fail; no earlier passing test regressed.
+- Limits: DB-02 is partial (no agent role until Wave 5.1). DB-04 and DB-05 only cover the company table so far. The wave is not run on GitHub Actions and not audited independently. All role passwords are in every service's environment (acceptable locally).
+- Work by Claude. Decisions by John.
+
+### 23 Nov 2026: Wave 0.3, forward consensus capture
+
+- Asked by John: do Wave 0.3 first if it is better. It was the time-critical one, so Wave 0.2's database slice was built first and 0.3 followed straight after. John chose 22:30 UTC, with a catch-up capture when the worker starts and today has no snapshot.
+- Done: migration 0002 (`estimate_snapshot`, append-only for the worker role, nothing before 23 Nov 2026 00:00 UTC, one row per company, source, period and UTC day); `earnings.consensus` (capture, gap report, catch-up check); the `capture_consensus` task and the daily beat in the worker; a list of 10 companies. The first real capture ran by itself when the worker started: 10 of 10 companies stored, 12 seconds.
+- Verified: full-repository pytest 69 passed, 3 expected failures, 0 failed; CI-style 51 passed; ruff, format and mypy pass; planted faults in the migration made the SR-08 tests fail; no earlier passing test regressed.
+- Limits: the job has run on one day, so SR-10 stays partial until real runs on later days. The 22:30 run has not happened yet. Capture only runs while Docker and the PC are on. Ten companies only. XOM left out until the CIK question (DR-06) is settled.
+- Work by Claude. Decisions by John.
+
+### 23 Nov 2026: earlier-wave fixes, then Wave 1.1 (task framework and EDGAR client)
+
+- Asked by John: resolve the open issues of the earlier waves, then start Wave 1.1. John approved (C-45): three new tables (`ingestion_run`, `dead_letter`, `raw_payload`), the retry and queue values, deferring the Alpha Vantage client until a key exists, and requiring the sixth CI check.
+- Earlier waves: the question of five or six required checks was settled by reading the repository settings (five required, the sixth job was not); the sixth is now required. A clean clone built from an empty volume in a separate Compose project reaches healthy services and passes the CI-style tests (EQ-04). The project database was untouched.
+- Wave 1.1 done: retries (3, backoff from 30 s to 300 s, jitter) with a dead-letter table; run records for every task; late acknowledgement; a rate limiter shared through Redis (8 requests a second against the SEC limit of 10); an EDGAR client that refuses to send without the contact, sends it only to sec.gov hosts and never logs it; raw payloads stored as received and parsed offline; one schedule file; a late-job report. First real slice: five companies fetched through the queue, 25.9 MB stored.
+- Verified: full-repository pytest 94 passed, 3 expected failures, 0 failed (69 before); CI-style 76 passed; ruff, format and mypy pass; three injected faults made 7 tests fail; no earlier passing test regressed.
+- Limits: Wave 1.1 is partial. Alpha Vantage limit and counter deferred, the worker-kill test is for Wave 7.1, the other three scheduled jobs and the event flag come with their waves, and the retry waits were tested eagerly, not in real time. Not run on GitHub Actions.
+- Work by Claude. Decisions by John.
+
+### 23 Nov 2026: Finnhub, storage rules (Wave 1.2), branch pushed, Phase 0 audit started
+
+- Asked by John: place the Finnhub key in the file for keys, finish the leftovers of earlier waves, push the branch, start Wave 1.2, make sure the auditing works, and log it.
+- Key: stored in the git-ignored `.env` as `FINNHUB_API_KEY`, never printed. A scan of every tracked file and the whole git history found it nowhere. It is not passed into the containers, because no code uses it.
+- Finnhub spike (leftover of Wave 0.1): the free key gets 403 on the quarterly estimate endpoint (0 of 5 tickers) and `/stock/earnings` returns only the last 4 quarters, so it cannot be a forward consensus source and cannot pass VL-12's five-year test. Its terms allow personal use only and forbid redistribution. Recorded in the source register as optional, not adopted; the yfinance fallback is now recorded as failed.
+- Wave 1.2 done: the worker cannot update or delete any append-only table, with a test that the list and the database agree; an as-of read that returns only versions strictly before the date; half-open validity ranges with overlap refused by the database, for ticker history and index membership; a hash check of stored payloads (5 real payloads, 0 mismatches). While building it I found that the migration history table was writable by the worker and API roles, and closed that.
+- Plan change: DB-11-AC1 moved to Wave 1.4, DB-12 to 2.4, DB-13 to 1.6 and DB-14 to 1.7, because their checks need tables or data that come later. Coverage map and plan edited together and the coverage check passes.
+- Verified: full-repository pytest 105 passed, 3 expected failures, 0 failed (94 before); CI-style 87 passed; ruff, format and mypy pass; two off-by-one faults in the as-of read and the validity boundary made tests fail; no earlier passing test regressed.
+- Pushed `build/wave-0-1` to GitHub (CI runs only on a pull request, so nothing has run there yet).
+- Auditing: an independent agent audit of Phase 0 was started in an isolated clone, given only requirement IDs. A new section of the audit file lists the time-gated checks that cannot be run yet (the 22:30 UTC capture, the second look at the SEC bulk files, the real retry waits).
+- Limits: SR-04 lacks a source version column (DR-14, needs John). DB-08 and DB-09 cover only the tables that exist. The 22:30 UTC capture, the second capture day and the bulk-file check are still to happen.
+- Work by Claude. Decisions by John.
+
+### 23 Nov 2026: independent audit of Phase 0 and the fixes it led to
+
+- Asked by John: make sure the auditing works. A fresh agent audited Phase 0 (Waves 0.1 to 0.3) in an isolated clone with its own Docker project, given only the requirement IDs and the repository, not my evidence or claims. Its report is in `audits/evidence/phase-0-independent.md`.
+- What it found, with my response: the worker could change the migration history table (already closed in Wave 1.2, re-probed live); I had cited 22:30 UTC as approved when I had not recorded John's answer in the decision log (now C-46); the SR-06 test accepted "not tested" as a result (tightened); the connection pool test followed its own constants (approved values now pinned); the schema test only compared migrations with themselves (now every column and the deployed database); a freshly started stack called Yahoo with no off switch (now behind `CAPTURE_CATCH_UP`, off by default, on in John's `.env`); the application roles could connect to the `postgres` database (revoked); the capture task did not report gaps (now logs them); the start date was duplicated in the code and the migration (a test ties them).
+- Not fixed, stated: the database enforces only a lower bound on `captured_at` (DR-15); the register's Yahoo and Hugging Face facts are still "not read" or "unknown"; the source-version column (DR-14); the 20 repo-reading tests skipped in CI (DR-08).
+- Verified after the fixes: full-repository pytest 111 passed, 3 expected failures, 0 failed; CI-style 93 passed; ruff, format and mypy pass.
+- Result: Phase 0 is PARTIAL (the lower status of the auditor and me stands). John's own spot-check of five requirements has not happened.
+- Work by Claude, audit by an independent agent. Decisions by John.
+
+### 23 Nov 2026: pull request opened, Wave 1.3 (universe and identifiers)
+
+- Asked by John: open the pull request, start Wave 1.3, and never delete working branches that hold commits. Pull request #3 is open against `build/docker-skeleton` (it is stacked on the still-open #2); no branch was or will be deleted, and that rule is saved to memory.
+- John decided (C-47): companies whose CIK changed are excluded and logged (XOM, new Disney, Baker Hughes and others), Wikipedia's history table is a secondary source for names and removal reasons only, and the 100 companies are chosen with seed 2031 (80 current, 20 removed with at least one per year).
+- Done: four real source files stored as received; parsers that read them offline; exact-name matching with a review list; a rename rule for renamed tickers; the selection; a job that loads 5 or 100 companies from a list file, safe to repeat; 100 companies, their ticker histories and index membership loaded into the project database; the daily capture widened to 89 companies.
+- Found by checking the real data, not the tests: the first matcher accepted `BBT` as "Beacon Financial Corp" (a reused ticker) and linked two renames on one day wrongly, and the first rename rule linked 301 tickers, many wrongly. Each was fixed and the links were read by hand.
+- Results: the company count at each year-end is 499 to 503 against the nominal 500 (tickers 502 to 506, the difference is share classes); all ten known renames give one continuous history; every year has a removed company with a date and reason.
+- Verified: full-repository pytest 125 passed, 3 expected failures, 0 failed (111 before); CI-style 106 passed; ruff, format and mypy pass; faults in the matching rules made 4 tests fail; no earlier test regressed.
+- Limits: 431 of 1,209 tickers have no CIK (62 of the 230 removed ones); the rename rule is beyond the written method and needs John's confirmation (DR-16); removal reasons are Wikipedia's wording; the list was not checked company by company by a person.
+- Work by Claude. Decisions by John.
+
+### 24 Nov 2026: Wave 1.4 finished, inspection of Waves 0.1 to 1.4
+
+- Asked by John: finish what was left of Wave 1.4, inspect everything built so far against the requirements and their tests, then commit, push and move on.
+- Wave 1.4 (financial data): EPS history and fundamentals stored as every version a filing reported, append-only, with as-of and first-filed reads (a filing dated on or after the prediction date is not visible); derived quarters flagged, using the year minus the nine-month figure so a share split does not break them; earnings-release 8-K parsing and the earlier-of-call-and-filing cutoff; backfill of the 100 companies (15,834 EPS rows, 14,555 fundamentals rows). A rebuild from the stored payload gives identical table hashes.
+- Real data findings: Apple's fiscal 2014 Q1 EPS was first filed at 14.50 and restated to 2.07 after the split; 98 of 100 companies have EPS, and 67 have the 10 pre-2015 quarters LB-02 needs; Visa and Danaher have none in SEC's API. The company selection was found to contain two old registrants with the same name and one company with no SEC facts; the check was tightened and three companies were replaced.
+- Found on 24 Nov: the worker's start-up catch-up failed after a restart because PostgreSQL was still recovering (now a retried task), and 3 of 89 captures failed on Yahoo timeouts (now one more attempt). The second capture day exists (24 Nov, from the catch-up); the 22:30 UTC schedule has still not been seen firing. The SEC bulk files were refreshed between 21 and 24 Nov.
+- Inspection (`audits/evidence/inspection-2026-11-24.md`, generated from the matrix): in Waves 0.1 to 1.4, 42 checks are real, 2 are expected failures and 12 are not tested. Checks that could not be tested in the wave they were assigned to (transcripts, events, the demo bundle) were moved to the waves that can test them. New tests: every registered task must have a run-twice test (EQ-07), the Section 12 spike result (IG-16), no table keyed on a ticker (DB-04).
+- Verified: full-repository pytest 145 passed, 3 expected failures, 0 failed; CI-style 124 passed; ruff, format and mypy pass; faults in the as-of read and the derivation made 4 tests fail.
+- Limits: prices wait for John's table approval (Wave 1.8); values are not yet checked against the filings (Wave 1.7); the columns of the two new tables extend Product Section 11 (DR-18).
+- Work by Claude. Decisions by John.
+
+### 24 Nov 2026: second independent audit (Waves 0.1 to 1.4) and the fixes
+
+- Asked by John: finish Wave 1.4, inspect everything built against the requirements and tests, commit and push, then move on. A second fresh agent audited the work in an isolated clone (`audits/evidence/phase-1-independent.md`).
+- What it found, and what was done: my selection of the 100 companies broke decision C-47, because four companies that joined the index in 2025 or 2026 had been chosen as "in the index at 31 December 2024" (my error; fixed, the list was re-drawn, the tables rebuilt from the stored payloads, and the new companies fetched); some removal reasons described the company that was added (now marked); the superuser password was in every container (the worker no longer has it and an unused superuser URL is gone; the api service keeps it for the CI test job); the fiscal-period columns described the filing, not the period (renamed); and several tests were weaker than they looked (the count test recomputed nothing, the guards that drop test databases were untested, the approved selection values and the start-day gap were not pinned). It also found 4 mutations missed out of 41; each now has a test that fails under it.
+- Not fixed, stated: the rules I added in Waves 1.3 and 1.4 that were never approved are listed as D-47 for John; the membership file can carry a current ticker for years when another was used (DR-20); John's email address is the Author header of one commit made through the GitHub website (DR-21); the Section 12 text prints the gap quartiles as magnitudes and needs John to approve a correction.
+- Verified: full-repository pytest 154 passed, 3 expected failures, 0 failed; CI-style 133 passed; ruff, format and mypy pass. The real-data coverage is better with the corrected list: 94 companies have pre-2015 EPS and 79 of them have the 10 quarters LB-02 needs.
+- Work by Claude, audit by an independent agent. Decisions by John.
+
+### 25 Nov 2026: Wave 1.5 (transcripts) resumed, Docker stopped
+
+- Asked by John: finish what was left of the previous session. State at the start: the Hugging Face file was downloaded in full (1,824,805,388 bytes, 33,362 calls, size checked; the checksum check ran inside the download function), and the module, client, migration 0007 and a first test draft were written but never run.
+- Blocked: Docker Desktop was not running (the engine pipe was missing; I could not find its executable to start it). Everything that needs the stack is therefore NOT RUN: the real-data scan, migration 0007, all tests, ruff, mypy, the 100-company load and the review sheet.
+- Done without Docker: schema test expectations for the two new tables (`tests/test_req_product.py`), the transcript tests corrected for the loader date window (the Apple release fixture is 2025 and later), a stray import and the longest lines in `src/earnings/transcripts.py` tidied, the ledger row W1.5 set to IN PROGRESS, D-47 item (i) added for the new columns and rules, evidence file `audits/evidence/wave-1.5.md` started with every claim marked NOT RUN.
+- Still missing: the real-row excerpt fixture `tests/fixtures/hf_transcript_excerpts.json` (needs the scan), so `tests/test_transcripts.py` cannot pass yet.
+- Work by Claude. Decisions by John.
+
+### 25 Nov 2026: audit of Waves 0.1 to 1.5 (static)
+
+- Asked by John: audit what is implemented, check requirements and tests, and keep the gaps as items to add later today. Result in `audits/evidence/audit-2026-11-25.md`. Docker was down, so no test was run: only the host consistency checks (all pass) and a read of the test matrix.
+- Result: 61 of 597 acceptance checks have a real test; waves 1.2 and 1.3 have no open checks, 0.1 to 0.3, 1.1 and 1.4 have 1 to 5 each, and Wave 1.5 has 28 open (code not run yet). The generated traceability file is stale as a status record (17 assessed). Ten items to finish later today are listed in the audit file.
+- Work by Claude, not independent.
+
+### 25 Nov 2026: Wave 1.5 (transcripts) built and run
+
+- Docker came back. Rebuilt the stack, applied migration 0007, scanned the 33,362 real calls, cut a real-excerpt fixture, fixed the tests and lint, ran 10 mutation checks (2 survived at first, tests added, all killed), loaded the 100 companies, ran it twice (same counts), drew the 50-call review sheet.
+- Results: full tests 170 passed, 0 failed; CI-style 149 passed; ruff, format, mypy clean. 3,183 calls loaded, 138 unlinked, 27 with no boundary, 7 companies with no transcript (list in the evidence file).
+- Needs John: label the 50 calls in `audits/evidence/wave-1.5/boundary_review_sheet.md` (kept local, not in git); the first one looks wrong to me (DR-23). D-45 run time for the daily transcript check. D-47 item (i).
+- Work by Claude, not independently audited yet.
+
+### 25 Nov 2026: Wave 1.6 task brief written
+
+- Wave 1.5 committed (`3bd426a`) and pushed. Leftovers of 1.5 are listed at the end of the brief. Brief for Wave 1.6 (events and time-series SUE) is `audits/evidence/wave-1.6-task-brief.md`; no build work started because drift control 2 says John sees the brief first. Three points need John: event table columns, what one event is, and where split factors come from (LB-05).
+- Work by Claude. Decisions by John.
+
+### 25 Nov 2026: Wave 1.6 (events and time-series SUE) built and run
+
+- Brief approved by John. Built the SUE (`label.py`), the event table (migration 0008) and the build, snapshot, coverage and size functions (`events.py`). 12 new label and event tests, 13 mutation checks (all killed after one added test). Full tests 182 passed, CI-style 161 passed, 0 failed; lint and types clean.
+- Real result: the label is available for 2,619 of 3,183 events (82%); the rest lack EPS data (DR-26). Transcripts exist for 91% of releases of companies still in the index and 59% of companies that left it (DR-25). Database 677 MB measured, about 3.6 GB estimated for 500 companies.
+- Needs John: D-47 (j) sample standard deviation, (k) inferred splits until the price tables are approved, (l) event columns; DR-25 and DR-26.
+- Work by Claude, not independently audited yet.
+
+### 25 Nov 2026: Wave 1.6 closed out, Wave 1.7 brief written
+
+- Wave 1.6 leftovers closed (FR-14-AC1, IG-22 on five companies, PL-04, DB-13, LB-02-AC2, CE-05-AC2, SC-07-AC2); real checks now 101 of 597. Still open in 1.6: AE-01, IG-06, NFR-09, TH-15. Full tests 184 passed, 0 failed.
+- Wave 1.7 brief written (`audits/evidence/wave-1.7-task-brief.md`); no build yet, John sees it first. It has seven points for John (sample sizes D-26, reviewer D-09, trading calendar, wave order for the survivorship check, canary list, extreme-value reviewer, the five non-calendar companies).
+- Work by Claude.
+
+### 26 Nov 2026: Wave 1.7 (dataset validation) built and run
+
+- Asked by John: finish what was left from yesterday. The mutation run had been cut off; all source files were checked and unchanged. Survivors got boundary tests and are now all killed. The 20-release canary was run.
+- Built: NYSE calendar, validation checks, quarantine table (migration 0009), press release reader and three comparisons, data card, 100-event hand audit sheet.
+- Found and fixed a real defect: re-filed quarters with a shifted start date could replace first-filed EPS; 15 labels changed (DR-30). Also a leaked database connection in a test.
+- Results: full tests 206 passed, CI-style 185 passed, 0 failed. Transcript coverage 85.3% against 90% (NOT MET). Automatic EPS comparison cannot show AE-02 (DR-28). Two labels are wrong because of a source scale error (DR-27). The P1 gate is not passed; the reasons are in the evidence file.
+- Work by Claude, not independently audited yet.
+
+### 26 Nov 2026: bug review, nine defects fixed
+
+- Asked by John: a thorough bug check before Wave 1.8. Found and fixed nine defects, most affecting the training label: split handling (not what the approved brief allowed), wrong quarter when data was missing, announcement date, consensus cutoff, coverage window, holidays, one derivation rule, the reach of the scale error, and a loop I duplicated while fixing. 144 labels changed value, 19 changed sign. Full tests 214 passed. Details: `audits/evidence/bug-review-2026-11-26.md`. The earlier Wave 1.6 and 1.7 numbers I reported are superseded.
+- Still open: splits for companies without the SEC tag (DR-32).
+- Work by Claude, not independently audited.
+
+### 26 Nov 2026: approvals, and Wave 1.8 (prices)
+
+- John approved: the two price tables and Product Section 11 rows (C-49), yfinance now with Tiingo later (C-50), all recommendations that change no requirement text (C-51, closes D-47), and the DV-05 rewording (C-52).
+- Done: DV-05 edited; scale-error labels excluded from training; extreme labels flagged above 10; `source_version` on stored payloads; a CI job that runs the tests with the whole repository (not required yet); migration 0010 and `prices.py`. Prices loaded for 83 of 100 companies. Labels now use the price source's dated splits. First survivorship comparison run. Found a source defect (a spin-off listed twice) and fixed the calculation.
+- Needs John: TH-06 (survivorship threshold); a free Tiingo key in `.env` for the second price source and the missing companies.
+- Work by Claude, not independently audited.
+
+### 26 Nov 2026: CI failure on the connection limit, fixed
+
+- The first CI run of the Wave 1.8 commit failed the DB-03 check: 13 server connections against a limit of 12. Cause, confirmed with a probe: the test fixture forgot its connection pools without closing them, so connections from earlier tests stayed open. The fixture now closes them. The check and its limit are unchanged.
+- Work by Claude.
+
+### 26 Nov 2026: independent audit (FAIL) and the fixes
+
+- Asked by John: a fresh audit, every requirement and test covered, and the recommended answers applied to what needed approval, apart from the API key.
+- Delegated approvals recorded (C-53 to C-59). Three daily jobs, capture-gap flags and missing checks built.
+- A fresh agent audited commit c5a9801 and failed it. Confirmed and fixed: the parser skipped all EPS for 11 companies; derived quarters mixed share bases; later filings could replace first-filed values; renamed companies' calls were dropped; the prediction cutoff was not applied; several checks could not fail. Two PepsiCo faults found while fixing. Labelled events rose from 2,617 to 3,196; usable 3,130.
+- What I told John earlier and was false: that some companies had no EPS in the SEC data. DR-19 and DR-26 withdrawn.
+- The auditor's recomputation agrees with 3,132 labels; all 13 differences traced to its own limits. 51 labels have no outside check. The fixes have not been re-audited.
+- Needs John: D-48; the items under Waiting on John.
+- Work by Claude; audit by an independent agent.
+
+### 26 Nov 2026: D-48 approved; second audit requested
+
+- John approved all eight values of D-48 (decision C-60) and asked for a second fresh audit of the fixes.
+- Work by Claude. Decision by John.
+
+### 26 Nov 2026: second audit (FAIL), and licensing and deployment requirements
+
+- John approved D-48 and asked for a second audit, then for licence research, deployment requirements, a licence on all imported data, improvements from comparable documentation, and tests.
+- Second audit: FAIL (`audits/evidence/independent-audit-second-2026-11-26.md`). Verified and open: calls of other companies are attached to labelled events (DR-37). Fixed: releases could be lost once the daily filing check ran (e0ad085).
+- Licences read from the pages themselves. **Not all data is permissive, and no permissive replacement was found for transcripts or prices.** Yahoo's terms bar automated access, which two parts of the project use (DR-38). New draft document `docs/requirements/licensing-requirements.md` (LC-01 to LC-11), DP-16 to DP-20, MD-24 to MD-27, UX-12 and UX-13; registers of datasets, packages, images and models; generated notices. LC-03, LC-06, LC-08 and LC-11 are not met and have strict expected-failure tests. Placeholders for features not built.
+- Needs John: D-49, DR-37, D-48 (h), D-11 and D-12, the D-34 lists, and the SSOT row for the new document (wording given in chat; not edited).
+- Work by Claude. Decisions by John.
+
+### 27 Nov 2026: honest options applied; the wrong calls and the Q&A boundary fixed; Wave 2.1 brief
+
+- Asked by John: research the best honest option for all open questions, start the next wave, and say whether made-up test data would break the project.
+- Paused all Yahoo collection (C-61). Speaker check added (C-62): 39 wrong calls rejected. Found and fixed: in 1,007 calls the Q&A boundary sat on the opening announcement. Read the second EPS tag and fixed the hidden derivation; the second audit's expected values match. Tests now catch its 8 planted faults. Valkey replaces Redis (C-63). Transcript and price excerpts replaced by synthetic fixtures (C-64). Research basis for the transcripts recorded, with its limits (C-65). Not done on John's behalf: draft requirement approval, the SSOT row; D-11 and D-12 reopened (C-66).
+- Data now: 3,394 transcripts and events, 3,228 labelled, 3,168 usable, 1,859 of them 2015 to 2021. Coverage 88.2% (target 90%).
+- Wave 2.1: brief written, nothing built. Needs John: the new dependencies and the safe-harbour rule.
+- Not re-audited by a fresh agent. Work by Claude.
+
+### 27 Nov 2026: approvals for Wave 2.1; what replaces Yahoo
+
+- John approved the Wave 2.1 packages, the safe-harbour rule and the SSOT licensing row (C-67). The row was added with the wording shown.
+- Asked by John: what to do about Yahoo. Finnhub's free earnings calendar, not tested before, returns upcoming estimates (`audits/evidence/finnhub-calendar-check-2026-11-27.md`); my earlier "not usable" was too broad. Its terms need written approval to share derived results. New open decision D-50. Nothing is collected from either source.
+- Work by Claude. Decisions by John.
+
+### 27 Nov 2026: Wave 2.1 built; scoring of all calls started
+
+- Built: sentence splitting, the safe-harbour rule as approved, FinBERT scoring with a pinned model, table `transcript_sentence`, a separate worker image. No existing package version changed.
+- All 1,675,517 sentences of 3,394 calls match their cleaned text. The rule removes far too much on four calls (D-51); not changed without John.
+- 10 real calls scored at 36.6 sentences a second; about 12.7 hours projected for all. Full scoring started as a background container (`earnings-scoring`); it continues where it left off if stopped.
+- Wave 2.1 is PARTIAL (`audits/evidence/wave-2.1.md`). Not audited by a fresh agent. Work by Claude.
+
+### 27 Nov 2026: four approvals applied (C-68); reminder to email
+
+- John approved the secret-scan exception, the safe-harbour limit, leaving participant lists out of text measures, and the new sentence columns (C-68). Applied; calls already scored were re-marked without rescoring; full scoring restarted.
+- John asked to be reminded to email Finnhub later; draft saved in `docs/finnhub-enquiry-draft.md`.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
-- Feasibility review I-12 and I-13: name the independent reviewer (D-09), start the ethics application (D-16), and give the values for the 41 requirements that cite open decisions (`audits/pending_values.md`). Also whether the SSOT sentence on the corpus (S&P 500, 4,000 to 5,000 events) should be reconciled with the 100-company subset (C-35).
-- D-34: approve the negation and forward-guidance definitions.
-- D-35 to D-46: FinBERT checkpoint, the exact feature rules, agent values, database and frontend values, approval of the four new documents, and any of the removed candidates you want back.
-- D-46: note in the next supervisor meeting action list that Professor Goodacre has no objection to the time-series label (C-25 closed D-01 on John's word; SC-07 and SS-04 ask for it in writing).
-- D-32 (membership source).
-- D-03 and D-26 (drop order, re-tagging the Must data requirements), needed before week 3.
-- D-29: the exact submission date.
-- Two small SSOT document map edits still unapproved: the prefix GATE on the data row, and a row for this log book.
+As of 27 November 2026.
+
+**Reminder (asked by you):** email Finnhub, using `docs/finnhub-enquiry-draft.md`.
+
+**Before Wave 2.2 code:** the D-34 phrase lists and the Wave 2.2 brief. Verdicts on `audits/evidence/wave-2.1/safe_harbour_examples.md` when you can.
+
+**Soon (by mid-December):** D-50, what replaces Yahoo: send the Finnhub question, and register for WRDS and read the CRSP terms.
+
+**Only you can do these**
+- Confirm the section 29A research basis for the transcripts with the University library's copyright team (C-65). Ask the transcript publisher where the text comes from. If you want Yahoo collection back, ask Yahoo for permission.
+- Hand labels: 50 calls and 100 events (both redrawn on 27 November).
+- A reviewer who did not build the data (D-09); reviewer notes on extreme labels (DV-04).
+- Supervisor: written agreement to the time-series label; D-11, D-12.
+- D-49 (a): approve or change the draft requirements.
+- D-16 ethics, D-29 submission date, D-40, D-46, D-03, D-17, D-21, D-02 to D-08, D-14, DR-21, the Phase 0 spot-check.
+- Tiingo key if you want a second price source: read its terms yourself first, because its terms page refused my request.
+
+**Later:** D-37, D-39, D-42, D-43, D-27, D-15.

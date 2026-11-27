@@ -14,7 +14,7 @@ import sys
 
 import pytest
 
-from requirement_support import ROOT, not_tested, repo_path
+from requirement_support import ROOT, not_tested, repo_path, source_register
 
 
 def _ci() -> str:
@@ -62,10 +62,9 @@ def test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check():
 
 
 @pytest.mark.req("SC-07-AC1")
-@pytest.mark.xfail(strict=True, reason="NOT SATISFIED: no ADR records the label route yet")
 @pytest.mark.code("docs/adr")
 def test_sc_07_ac1_an_adr_records_the_label_route():
-    needed = ("label route", "time-series")
+    needed = ("label route", "time-series", "status:", "accepted", "supervisor")
     assert any(all(word in text for word in needed) for text in _adr_texts())
 
 
@@ -104,7 +103,8 @@ def test_eq_04_ac2_an_unpinned_dependency_fails_the_pin_check(tmp_path):
 def test_eq_04_the_dependency_files_in_the_repository_are_pinned():
     script = repo_path("scripts/check_pins.py")
     files = [repo_path("requirements.txt"), repo_path("requirements.lock")]
-    for name in ("requirements-pending.txt", "requirements-dev.txt"):
+    for name in ("requirements-worker.txt", "requirements-worker.lock",
+                 "requirements-pending.txt", "requirements-dev.txt"):  # fmt: skip
         if (ROOT / name).exists():
             files.append(ROOT / name)
     result = subprocess.run(
@@ -426,10 +426,73 @@ def test_eq_06_ac1_three_scripted_tests_pass():
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 
+# Each registered task and the test that runs it twice and compares state (EQ-07). A new task
+# that is not listed here fails the test below, so no task can be added without one.
+RUN_TWICE_TESTS = {
+    "earnings.check_new_filings": (
+        "test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new"
+    ),
+    "earnings.check_new_transcripts": "test_the_transcript_check_run_twice_changes_no_data",
+    "earnings.run_data_gates": "test_the_data_gates_run_twice_leave_the_same_rows",
+    "earnings.ping": None,  # holds no state
+    "earnings.load_companies": "test_eq_07_load_companies_twice_leaves_the_same_rows",
+    "earnings.capture_consensus": ("test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows"),
+    "earnings.capture_catch_up": (
+        "test_the_catch_up_task_retries_when_the_database_is_still_starting"
+    ),
+    "earnings.fetch_company_facts": (
+        "test_fetching_the_same_payload_twice_leaves_an_identical_table_hash"
+    ),
+    "earnings.score_transcript": "test_the_scoring_task_run_twice_leaves_the_same_rows",
+}
+
+
 @pytest.mark.req("EQ-07-AC1")
-def test_eq_07_ac1_test_runs_each_task_twice_and_compares():
+@pytest.mark.code("src/earnings/tasks.py", "tests/test_ingestion_framework.py")
+def test_eq_07_ac1_every_registered_task_has_a_run_twice_test():
     """EQ-07-AC1: Test runs each task twice and compares state."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    import importlib
+
+    from earnings import tasks  # noqa: F401  (importing registers the tasks)
+    from earnings.celery_app import celery_app
+
+    registered = {n for n in celery_app.tasks if n.startswith("earnings.")}
+    assert registered == set(RUN_TWICE_TESTS), "a task has no run-twice test (or one was removed)"
+    sources = {
+        name: importlib.import_module(name).__dict__
+        for name in (
+            "test_req_project_wide",
+            "test_ingestion_framework",
+            "test_edgar_client",
+            "test_consensus_capture",
+            "test_gaps",
+            "test_sentence_scores",
+        )
+    }
+    for task, test in RUN_TWICE_TESTS.items():
+        if test is not None:
+            assert any(test in namespace for namespace in sources.values()), (task, test)
+
+
+@pytest.mark.req("EQ-07")
+@pytest.mark.code("src/earnings/tasks.py", "src/earnings/db.py")
+def test_eq_07_load_companies_twice_leaves_the_same_rows(test_db):
+    """First task only (load_companies). Each later task adds its own run-twice test."""
+    from sqlalchemy import text
+
+    from earnings.db import get_engine
+    from earnings.tasks import load_companies
+
+    synthetic = [["320193", "SYNTHETIC one"], ["789019", "SYNTHETIC two"]]
+
+    def snapshot():
+        with get_engine("api").connect() as conn:
+            return conn.execute(text("SELECT company_id, name FROM company ORDER BY 1")).all()
+
+    assert load_companies(synthetic) == 2
+    first = snapshot()
+    assert load_companies(synthetic) == 2
+    assert snapshot() == first == [("0000320193", "SYNTHETIC one"), ("0000789019", "SYNTHETIC two")]
 
 
 @pytest.mark.req("EQ-09-AC1")
@@ -489,9 +552,11 @@ def test_or_01_ac1_restore_test_log_exists():
 
 
 @pytest.mark.req("OR-02-AC1")
+@pytest.mark.code("src/earnings/source_register.csv")
 def test_or_02_ac1_source_register_shows_zero_cost_for_every():
     """OR-02-AC1: Source register shows zero cost for every primary-route source."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+    primary = [r for r in source_register() if r["route"] == "primary"]
+    assert primary and all(float(r["cost_usd_per_month"]) == 0 for r in primary)
 
 
 @pytest.mark.req("OR-02-AC2")
@@ -569,14 +634,6 @@ def test_sc_04_ac2_the_evaluation_job_refuses_synthetic_input():
 @pytest.mark.req("SC-05-AC1")
 def test_sc_05_ac1_no_rouge_or_bertscore_threshold_exists_in():
     """SC-05-AC1: No ROUGE or BERTScore threshold exists in the evaluation harness."""
-    not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
-
-
-@pytest.mark.req("SC-07-AC2")
-def test_sc_07_ac2_a_test_fails_if_events_with_different():
-    """SC-07-AC2: A test fails if events with different label routes are in one training set
-    (Data CE-05).
-    """
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
 
 

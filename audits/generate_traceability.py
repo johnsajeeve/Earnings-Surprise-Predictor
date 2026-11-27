@@ -45,6 +45,7 @@ DOCS = [
     ("modelling", "modelling-and-evaluation-requirements.md", "Modelling and Evaluation"),
     ("serving", "api-and-serving-requirements.md", "API and Serving"),
     ("deployment", "deployment-and-operations-requirements.md", "Deployment and Operations"),
+    ("licensing", "licensing-requirements.md", "Licensing"),
 ]
 PRIORITY = re.compile(r"^(Must if built|Must|Should|Could|Won't)\b")
 NOT_ASSESSED = "Not assessed in this audit (scope: Docker skeleton). No evidence either way."
@@ -258,7 +259,7 @@ def main():
         "",
         "## Summary",
         "",
-        f"- Requirements found in the twelve documents: {total} (market {len(per_doc['market'])}, product {len(per_doc['product'])}, data {len(per_doc['data'])}, project-wide {len(per_doc['project-wide'])}, feature engineering {len(per_doc['feature'])}, explanation agent {len(per_doc['agent'])}, database {len(per_doc['database'])}, frontend {len(per_doc['frontend'])}, ingestion and preparation {len(per_doc['ingestion'])}, modelling and evaluation {len(per_doc['modelling'])}, API and serving {len(per_doc['serving'])}, deployment and operations {len(per_doc['deployment'])}).",
+        f"- Requirements found in the thirteen documents: {total} (market {len(per_doc['market'])}, product {len(per_doc['product'])}, data {len(per_doc['data'])}, project-wide {len(per_doc['project-wide'])}, feature engineering {len(per_doc['feature'])}, explanation agent {len(per_doc['agent'])}, database {len(per_doc['database'])}, frontend {len(per_doc['frontend'])}, ingestion and preparation {len(per_doc['ingestion'])}, modelling and evaluation {len(per_doc['modelling'])}, API and serving {len(per_doc['serving'])}, deployment and operations {len(per_doc['deployment'])}, licensing {len(per_doc['licensing'])}).",
         f"- Assessed in this audit: {len(ASSESSED)}. "
         + ", ".join(
             f"{k} {assessed_counts[k]}"

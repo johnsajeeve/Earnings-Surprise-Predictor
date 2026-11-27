@@ -1,0 +1,18 @@
+import json, time, platform, os, torch, transformers
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+name="ProsusAI/finbert"
+t0=time.time(); tok=AutoTokenizer.from_pretrained(name); m=AutoModelForSequenceClassification.from_pretrained(name).eval(); load=time.time()-t0
+sents=json.load(open("/fb/sentences.json"))
+print("torch",torch.__version__,"transformers",transformers.__version__,"threads",torch.get_num_threads(),"cpus",os.cpu_count(),"model load s",round(load,1),flush=True)
+print("labels",m.config.id2label)
+def run(bs, sort):
+    data=sorted(sents,key=len) if sort else sents
+    t=time.time()
+    with torch.inference_mode():
+        for i in range(0,len(data),bs):
+            b=tok(data[i:i+bs],padding=True,truncation=True,max_length=512,return_tensors="pt")
+            m(**b).logits.softmax(-1)
+    dt=time.time()-t; return dt
+run(8,False)  # warm-up, not counted
+for bs,sort in [(16,False),(32,False),(32,True)]:
+    dt=run(bs,sort); print(f"batch {bs} sorted_by_length={sort}: {len(sents)/dt:.1f} sentences/s ({dt:.1f}s for {len(sents)})",flush=True)

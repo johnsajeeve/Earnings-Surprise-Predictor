@@ -1,0 +1,33 @@
+{
+ "sampled": 20,
+ "differences_above_1pct": [
+  {
+   "company_id": "0001013462",
+   "period_end": "2017-12-31",
+   "stored": "0.60",
+   "press": "0.61",
+   "relative_difference": 0.0167
+  },
+  {
+   "company_id": "0001048911",
+   "period_end": "2022-05-31",
+   "stored": "2.16",
+   "press": "2.13",
+   "relative_difference": 0.0139
+  },
+  {
+   "company_id": "0001166691",
+   "period_end": "2022-12-31",
+   "stored": "0.69",
+   "press": "0.70",
+   "relative_difference": 0.0145
+  }
+ ],
+ "counts": {
+  "differ": 3,
+  "not parsed": 9,
+  "agree": 8
+ },
+ "agree_of_sampled": 0.4,
+ "agree_of_parsed": 0.7272727272727273
+}

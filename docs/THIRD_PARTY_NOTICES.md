@@ -1,0 +1,126 @@
+# Third-party notices
+
+Built from the registers by `python -m earnings.licensing notices`. Do not edit by hand.
+A licence class records what the source's pages said when checked. It is not legal advice.
+
+## Data
+- **Actual diluted EPS and EPS history**: SEC EDGAR XBRL company facts API (data.sec.gov). Class: public-information. Public SEC data. Anyone can download it free. Fair access: 10 requests per second, declared User-Agent required.
+- **8-K Item 2.02 acceptance times**: SEC EDGAR submissions API (data.sec.gov). Class: public-information. Public SEC data. Anyone can download it free. Fair access: 10 requests per second, declared User-Agent required.
+- **Revenue, gross profit, operating income**: SEC EDGAR XBRL company facts API (data.sec.gov). Class: public-information. Public SEC data. Anyone can download it free. Fair access: 10 requests per second, declared User-Agent required.
+- **Historical earnings call transcripts 2005 to 2025**: Hugging Face dataset kurry/sp500_earnings_transcripts, revision f3ded372da8d18dc6ad98955c4558e34b5fe6d45. Class: unclear. MIT in the card metadata. The card also says For research and educational use only. It names no origin for the text.
+- **Forward consensus snapshots (current values only)**: yfinance 1.8.0, reading Yahoo Finance. Class: restricted. yfinance is Apache-2.0. Its README says the data is intended for research and educational purposes and personal use only, and refers to Yahoo's terms of use, which were not read.
+- **S&P 500 membership with dated additions and removals**: GitHub fja05680/sp500, file sp500_ticker_start_end.csv, commit a2430f2af0c79ddf0748e91de11bdeb1616ab5a7. Class: permissive. MIT License (GitHub licence API and the LICENSE file, Copyright 2019-2020 Farrell J. Aultman)
+- **Daily prices, for momentum and outcome returns**: yfinance 1.8.0, reading Yahoo Finance. Class: restricted. yfinance is Apache-2.0. Its README says the data is intended for research and educational purposes and personal use only, and refers to Yahoo's terms of use, which were not read.
+- **Past quarterly actual, estimate and surprise (last 4 quarters only)**: Finnhub free API key, endpoint /stock/earnings. Class: restricted. Finnhub terms of service: all plans are for personal use only, and data or derived results may not be redistributed or shared with anyone without Finnhub's written approval.
+- **Ticker to CIK map and company name to CIK lookup**: SEC EDGAR files company_tickers.json and Archives/edgar/cik-lookup-data.txt. Class: public-information. Public SEC data. Anyone can download it free. Fair access: 10 requests per second, declared User-Agent required.
+- **Names and reasons for companies added to or removed from the S&P 500**: Wikipedia page Historical components of the S&P 500 (MediaWiki API, action=parse). Class: share-alike. CC BY-SA 4.0 (Wikipedia text licence). Reuse needs attribution and share-alike.
+
+## Software, models and word lists
+- alembic 1.20.1 (python-package): MIT
+- amqp 5.4.2 (python-package): BSD
+- annotated-doc 0.0.6 (python-package): MIT
+- annotated-types 0.8.0 (python-package): MIT
+- anyio 4.16.0 (python-package): MIT
+- beautifulsoup4 4.15.0 (python-package): MIT
+- billiard 4.3.2 (python-package): BSD
+- celery 5.7.0 (python-package): BSD-3-Clause
+- certifi 2026.11.20 (python-package): MPL-2.0
+- cffi 2.1.1 (python-package): MIT-0
+- charset-normalizer 3.5.3 (python-package): MIT
+- click 8.5.1 (python-package): BSD-3-Clause
+- click-didyoumean 0.3.1 (python-package): MIT
+- click-plugins 1.1.1.2 (python-package): BSD
+- click-repl 0.4.1 (python-package): MIT
+- curl_cffi 0.17.0 (python-package): MIT
+- fastapi 0.163.1 (python-package): MIT
+- h11 0.16.0 (python-package): MIT
+- httptools 0.9.0 (python-package): MIT
+- idna 3.20 (python-package): BSD-3-Clause
+- kombu 5.7.0 (python-package): BSD-3-Clause
+- lxml 6.1.3 (python-package): BSD-3-Clause
+- Mako 1.4.3 (python-package): MIT
+- MarkupSafe 3.0.4 (python-package): BSD-3-Clause
+- numpy 2.5.5 (python-package): BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0
+- opentelemetry-api 1.45.2 (python-package): Apache-2.0
+- packaging 26.3 (python-package): Apache-2.0 OR BSD-2-Clause
+- pandas 3.1.1 (python-package): BSD-3-Clause
+- peewee 4.5.3 (python-package): MIT
+- platformdirs 4.14.8 (python-package): MIT
+- prompt_toolkit 3.0.53 (python-package): BSD
+- protobuf 7.36.2 (python-package): BSD-3-Clause
+- psycopg 3.3.9 (python-package): LGPL-3.0-only
+- psycopg-binary 3.3.9 (python-package): LGPL-3.0-only
+- pyarrow 26.0.1 (python-package): Apache-2.0
+- pycparser 3.12 (python-package): BSD-3-Clause
+- pydantic 2.14.3 (python-package): MIT
+- pydantic-settings 2.16.3 (python-package): MIT
+- pydantic_core 2.50.4 (python-package): MIT
+- python-dateutil 2.9.0.post0 (python-package): BSD OR Apache-2.0
+- python-dotenv 1.2.4 (python-package): BSD-3-Clause
+- pytz 2026.6 (python-package): MIT
+- PyYAML 6.0.3 (python-package): MIT
+- redis 8.1.0 (python-package): MIT
+- requests 2.34.2 (python-package): Apache-2.0
+- six 1.17.0 (python-package): MIT
+- soupsieve 4.1.3 (python-package): MIT
+- SQLAlchemy 2.1.9 (python-package): MIT
+- starlette 1.10.0 (python-package): BSD-3-Clause
+- typing-inspection 0.4.5 (python-package): MIT
+- typing_extensions 4.16.0 (python-package): PSF-2.0
+- tzlocal 5.4.5 (python-package): MIT
+- urllib3 2.8.0 (python-package): MIT
+- uvicorn 0.54.0 (python-package): BSD-3-Clause
+- uvloop 0.23.0 (python-package): Apache-2.0 OR MIT
+- vine 5.1.0 (python-package): BSD
+- watchfiles 1.3.0 (python-package): MIT
+- wcwidth 0.9.4 (python-package): MIT
+- websockets 17.4 (python-package): BSD-3-Clause
+- yfinance 1.8.0 (python-package): Apache-2.0
+- Jinja2 3.1.6 (python-package): BSD
+- Pygments 2.21.0 (python-package): BSD-2-Clause
+- blis 1.3.4 (python-package): BSD
+- catalogue 2.0.10 (python-package): MIT
+- cloudpathlib 0.26.0 (python-package): MIT
+- confection 1.3.4 (python-package): MIT
+- cymem 2.0.16 (python-package): MIT
+- filelock 4.3.1 (python-package): MIT
+- fsspec 2026.9.0 (python-package): BSD-3-Clause
+- hf-xet 1.8.0 (python-package): Apache-2.0
+- httpcore 1.0.9 (python-package): BSD-3-Clause
+- httpcore2 2.16.2 (python-package): BSD-3-Clause
+- httpx 0.29.0 (python-package): BSD-3-Clause
+- httpx2 2.16.2 (python-package): BSD-3-Clause
+- huggingface_hub 2.5.0 (python-package): Apache-2.0
+- markdown-it-py 4.3.0 (python-package): MIT
+- mdurl 0.1.2 (python-package): MIT
+- mpmath 1.3.0 (python-package): BSD
+- murmurhash 1.0.16 (python-package): MIT
+- networkx 3.7 (python-package): BSD-3-Clause
+- preshed 3.0.15 (python-package): MIT
+- regex 2026.11.25 (python-package): Apache-2.0 AND CNRI-Python
+- rich 15.0.0 (python-package): MIT
+- safetensors 0.8.0 (python-package): Apache-2.0
+- setuptools 84.2.1 (python-package): MIT
+- shellingham 1.5.4 (python-package): ISC
+- smart_open 10.0.0 (python-package): MIT
+- spacy 3.8.18 (python-package): MIT
+- spacy-legacy 3.0.12 (python-package): MIT
+- spacy-loggers 1.0.5 (python-package): MIT
+- srsly 2.5.6 (python-package): MIT
+- sympy 1.14.0 (python-package): BSD
+- thinc 8.3.14 (python-package): MIT
+- tokenizers 0.23.3 (python-package): Apache-2.0
+- torch 2.15.0+cpu (python-package): Apache-2.0 AND Apache-2.0 WITH LLVM-exception AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND ISC AND MIT AND Zlib
+- tqdm 4.70.1 (python-package): MPL-2.0 AND MIT
+- transformers 5.24.1 (python-package): Apache-2.0
+- truststore 0.10.5 (python-package): MIT
+- typer 0.29.3 (python-package): MIT
+- wasabi 1.1.3 (python-package): MIT
+- weasel 1.0.1 (python-package): MIT
+- wrapt 2.5.2 (python-package): BSD-2-Clause
+- postgres 16.16 (container-image): PostgreSQL Licence
+- valkey/valkey 8.1.12-alpine (container-image): BSD-3-Clause
+- python 3.12.16-slim (container-image): PSF-2.0 with Debian packages under their own licences
+- ProsusAI/finbert 0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031 (model): CC BY-NC-SA 4.0
+- en_core_web_sm 3.8.0 (model): MIT
+- Loughran-McDonald master dictionary not yet downloaded (word-list): free for academic research; commercial licence from the authors

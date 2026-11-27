@@ -1,0 +1,109 @@
+component,kind,version,licence,licence_class,training_data_licence,used,evidence,checked_on,note
+alembic,python-package,1.20.1,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+amqp,python-package,5.4.2,BSD,permissive,,yes,installed package metadata in the project image,2026-11-26,
+annotated-doc,python-package,0.0.6,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+annotated-types,python-package,0.8.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+anyio,python-package,4.16.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+beautifulsoup4,python-package,4.15.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+billiard,python-package,4.3.2,BSD,permissive,,yes,installed package metadata in the project image,2026-11-26,
+celery,python-package,5.7.0,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+certifi,python-package,2026.11.20,MPL-2.0,weak-copyleft,,yes,installed package metadata in the project image,2026-11-26,
+cffi,python-package,2.1.1,MIT-0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+charset-normalizer,python-package,3.5.3,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+click,python-package,8.5.1,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+click-didyoumean,python-package,0.3.1,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+click-plugins,python-package,1.1.1.2,BSD,permissive,,yes,installed package metadata in the project image,2026-11-26,
+click-repl,python-package,0.4.1,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+curl_cffi,python-package,0.17.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+fastapi,python-package,0.163.1,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+h11,python-package,0.16.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+httptools,python-package,0.9.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+idna,python-package,3.20,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+kombu,python-package,5.7.0,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+lxml,python-package,6.1.3,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+Mako,python-package,1.4.3,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+MarkupSafe,python-package,3.0.4,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+numpy,python-package,2.5.5,BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+opentelemetry-api,python-package,1.45.2,Apache-2.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+packaging,python-package,26.3,Apache-2.0 OR BSD-2-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+pandas,python-package,3.1.1,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+peewee,python-package,4.5.3,MIT,permissive,,yes,installed package licence file,2026-11-26,
+platformdirs,python-package,4.14.8,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+prompt_toolkit,python-package,3.0.53,BSD,permissive,,yes,installed package metadata in the project image,2026-11-26,
+protobuf,python-package,7.36.2,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+psycopg,python-package,3.3.9,LGPL-3.0-only,weak-copyleft,,yes,installed package metadata in the project image,2026-11-26,
+psycopg-binary,python-package,3.3.9,LGPL-3.0-only,weak-copyleft,,yes,installed package metadata in the project image,2026-11-26,
+pyarrow,python-package,26.0.1,Apache-2.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+pycparser,python-package,3.12,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+pydantic,python-package,2.14.3,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+pydantic-settings,python-package,2.16.3,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+pydantic_core,python-package,2.50.4,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+python-dateutil,python-package,2.9.0.post0,BSD OR Apache-2.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+python-dotenv,python-package,1.2.4,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+pytz,python-package,2026.6,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+PyYAML,python-package,6.0.3,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+redis,python-package,8.1.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+requests,python-package,2.34.2,Apache-2.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+six,python-package,1.17.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+soupsieve,python-package,4.1.3,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+SQLAlchemy,python-package,2.1.9,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+starlette,python-package,1.10.0,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+typing-inspection,python-package,0.4.5,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+typing_extensions,python-package,4.16.0,PSF-2.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+tzlocal,python-package,5.4.5,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+urllib3,python-package,2.8.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+uvicorn,python-package,0.54.0,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+uvloop,python-package,0.23.0,Apache-2.0 OR MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+vine,python-package,5.1.0,BSD,permissive,,yes,installed package metadata in the project image,2026-11-26,
+watchfiles,python-package,1.3.0,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+wcwidth,python-package,0.9.4,MIT,permissive,,yes,installed package metadata in the project image,2026-11-26,
+websockets,python-package,17.4,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
+yfinance,python-package,1.8.0,Apache-2.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
+Jinja2,python-package,3.1.6,BSD,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+Pygments,python-package,2.21.0,BSD-2-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+blis,python-package,1.3.4,BSD,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+catalogue,python-package,2.0.10,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+cloudpathlib,python-package,0.26.0,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+confection,python-package,1.3.4,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+cymem,python-package,2.0.16,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+filelock,python-package,4.3.1,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+fsspec,python-package,2026.9.0,BSD-3-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+hf-xet,python-package,1.8.0,Apache-2.0,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+httpcore,python-package,1.0.9,BSD-3-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+httpcore2,python-package,2.16.2,BSD-3-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+httpx,python-package,0.29.0,BSD-3-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+httpx2,python-package,2.16.2,BSD-3-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+huggingface_hub,python-package,2.5.0,Apache-2.0,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+markdown-it-py,python-package,4.3.0,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+mdurl,python-package,0.1.2,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+mpmath,python-package,1.3.0,BSD,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+murmurhash,python-package,1.0.16,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+networkx,python-package,3.7,BSD-3-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+preshed,python-package,3.0.15,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+regex,python-package,2026.11.25,Apache-2.0 AND CNRI-Python,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+rich,python-package,15.0.0,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+safetensors,python-package,0.8.0,Apache-2.0,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+setuptools,python-package,84.2.1,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+shellingham,python-package,1.5.4,ISC,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+smart_open,python-package,10.0.0,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+spacy,python-package,3.8.18,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+spacy-legacy,python-package,3.0.12,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+spacy-loggers,python-package,1.0.5,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+srsly,python-package,2.5.6,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+sympy,python-package,1.14.0,BSD,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+thinc,python-package,8.3.14,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+tokenizers,python-package,0.23.3,Apache-2.0,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+torch,python-package,2.15.0+cpu,Apache-2.0 AND Apache-2.0 WITH LLVM-exception AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND ISC AND MIT AND Zlib,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+tqdm,python-package,4.70.1,MPL-2.0 AND MIT,weak-copyleft,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+transformers,python-package,5.24.1,Apache-2.0,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+truststore,python-package,0.10.5,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+typer,python-package,0.29.3,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+wasabi,python-package,1.1.3,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+weasel,python-package,1.0.1,MIT,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+wrapt,python-package,2.5.2,BSD-2-Clause,permissive,,yes,installed package metadata in a build of the worker image,2026-11-27,worker image only
+postgres,container-image,16.16,PostgreSQL Licence,permissive,,yes,"not fetched: stated from knowledge, to be read before deployment",2026-11-26,unverified
+valkey/valkey,container-image,8.1.12-alpine,BSD-3-Clause,permissive,,yes,https://github.com/valkey-io/valkey,2026-11-27,"replaces redis 7.4.12 (RSALv2 or SSPLv1), decision C-63"
+python,container-image,3.12.16-slim,PSF-2.0 with Debian packages under their own licences,unclear,,yes,not fetched: stated from knowledge; the image bundles many licences,2026-11-26,unverified
+ProsusAI/finbert,model,0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031,CC BY-NC-SA 4.0,non-commercial,Financial PhraseBank CC BY-NC-SA 3.0; Reuters TRC2 under NIST access terms,"yes (Wave 2.1, C-67): downloaded to the data volume, never committed",https://huggingface.co/ProsusAI/finbert,2026-11-26,
+en_core_web_sm,model,3.8.0,MIT,permissive,"OntoNotes 5 (a licensed LDC corpus), WordNet 3.0 and ClearNLP conversion data, as the model card lists them","yes (Wave 2.1, C-67)",https://huggingface.co/spacy/en_core_web_sm,2026-11-27,"installed in the worker image from the release file, checked by SHA-256"
+Loughran-McDonald master dictionary,word-list,not yet downloaded,free for academic research; commercial licence from the authors,restricted,,"approved, not yet imported (C-14)",https://sraf.nd.edu/loughranmcdonald-master-dictionary/,2026-11-26,

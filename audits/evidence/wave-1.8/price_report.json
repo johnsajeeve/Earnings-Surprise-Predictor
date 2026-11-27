@@ -1,0 +1,138 @@
+{
+ "survivorship": {
+  "companies_with_prices": 83,
+  "years": {
+   "2013": {
+    "universe_return": 0.3459913714319669,
+    "average_companies": 50,
+    "later_removed_members": 14,
+    "later_removed_with_prices": 4,
+    "^SP500TR": 0.32388487342020067,
+    "gap_vs_^SP500TR": 0.02210649801176623,
+    "RSP": 0.35535052465441014,
+    "gap_vs_RSP": -0.00935915322244324
+   },
+   "2014": {
+    "universe_return": 0.17731150223723827,
+    "average_companies": 51,
+    "later_removed_members": 15,
+    "later_removed_with_prices": 4,
+    "^SP500TR": 0.13688356712127955,
+    "gap_vs_^SP500TR": 0.04042793511595871,
+    "RSP": 0.14062838240772885,
+    "gap_vs_RSP": 0.03668311982950942
+   },
+   "2015": {
+    "universe_return": -0.02769817605281611,
+    "average_companies": 55,
+    "later_removed_members": 17,
+    "later_removed_with_prices": 5,
+    "^SP500TR": 0.013837652644362363,
+    "gap_vs_^SP500TR": -0.04153582869717847,
+    "RSP": -0.026573620521374068,
+    "gap_vs_RSP": -0.0011245555314420425
+   },
+   "2016": {
+    "universe_return": 0.2042893518277484,
+    "average_companies": 60,
+    "later_removed_members": 15,
+    "later_removed_with_prices": 6,
+    "^SP500TR": 0.11959914382459849,
+    "gap_vs_^SP500TR": 0.08469020800314991,
+    "RSP": 0.14503968243232462,
+    "gap_vs_RSP": 0.05924966939542378
+   },
+   "2017": {
+    "universe_return": 0.24466946620152452,
+    "average_companies": 65,
+    "later_removed_members": 14,
+    "later_removed_with_prices": 7,
+    "^SP500TR": 0.21831591113498566,
+    "gap_vs_^SP500TR": 0.02635355506653886,
+    "RSP": 0.18510520470101,
+    "gap_vs_RSP": 0.059564261500514526
+   },
+   "2018": {
+    "universe_return": -0.12180770095338017,
+    "average_companies": 71,
+    "later_removed_members": 13,
+    "later_removed_with_prices": 7,
+    "^SP500TR": -0.04384234239989343,
+    "gap_vs_^SP500TR": -0.07796535855348674,
+    "RSP": -0.0782300814340467,
+    "gap_vs_RSP": -0.04357761951933348
+   },
+   "2019": {
+    "universe_return": 0.36955794996288416,
+    "average_companies": 72,
+    "later_removed_members": 11,
+    "later_removed_with_prices": 5,
+    "^SP500TR": 0.31486361698064624,
+    "gap_vs_^SP500TR": 0.054694332982237914,
+    "RSP": 0.28905363878157114,
+    "gap_vs_RSP": 0.08050431118131302
+   },
+   "2020": {
+    "universe_return": 0.16658409885858713,
+    "average_companies": 73,
+    "later_removed_members": 10,
+    "later_removed_with_prices": 4,
+    "^SP500TR": 0.18398832038074883,
+    "gap_vs_^SP500TR": -0.0174042215221617,
+    "RSP": 0.12714348906938644,
+    "gap_vs_RSP": 0.03944060978920069
+   },
+   "2021": {
+    "universe_return": 0.335444730977436,
+    "average_companies": 74,
+    "later_removed_members": 8,
+    "later_removed_with_prices": 3,
+    "^SP500TR": 0.2870536928086284,
+    "gap_vs_^SP500TR": 0.048391038168807576,
+    "RSP": 0.2941164393707002,
+    "gap_vs_RSP": 0.04132829160673579
+   },
+   "2022": {
+    "universe_return": -0.14383269731784293,
+    "average_companies": 75,
+    "later_removed_members": 6,
+    "later_removed_with_prices": 3,
+    "^SP500TR": -0.18110889120312232,
+    "gap_vs_^SP500TR": 0.03727619388527939,
+    "RSP": -0.11624039308855691,
+    "gap_vs_RSP": -0.02759230422928602
+   },
+   "2023": {
+    "universe_return": 0.225544177939701,
+    "average_companies": 77,
+    "later_removed_members": 5,
+    "later_removed_with_prices": 3,
+    "^SP500TR": 0.26287660093763526,
+    "gap_vs_^SP500TR": -0.03733242299793427,
+    "RSP": 0.136958341518112,
+    "gap_vs_RSP": 0.08858583642158899
+   },
+   "2024": {
+    "universe_return": 0.19934438879145172,
+    "average_companies": 78,
+    "later_removed_members": 2,
+    "later_removed_with_prices": 2,
+    "^SP500TR": 0.2501968153019868,
+    "gap_vs_^SP500TR": -0.050852426510535065,
+    "RSP": 0.12784895270012683,
+    "gap_vs_RSP": 0.07149543609132489
+   }
+  }
+ },
+ "th_06": {
+  "index": "RSP",
+  "years": 12,
+  "mean_gap": 0.03293315860942553,
+  "threshold": 0.02,
+  "investigate": true
+ },
+ "price_windows": {
+  "events_checked": 3122,
+  "violations": 0
+ }
+}

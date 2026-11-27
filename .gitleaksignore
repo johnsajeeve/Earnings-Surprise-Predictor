@@ -1,0 +1,5 @@
+# Two false positives, approved by John on 27 November 2026 (decision C-68): SHA-256 hashes of public
+# FinBERT files pinned in finbert.py, beside file names that contain "token". Each line names one
+# finding in one commit; nothing else is ignored.
+b1ff4d90f4d301aebf49b207203e3e590f301a35:src/earnings/finbert.py:generic-api-key:33
+b1ff4d90f4d301aebf49b207203e3e590f301a35:src/earnings/finbert.py:generic-api-key:34

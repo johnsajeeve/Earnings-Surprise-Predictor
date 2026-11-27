@@ -1,0 +1,14 @@
+import random, re, json, pyarrow.parquet as pq
+rows=[r for r in pq.ParquetFile("hf/part-0.parquet").read(columns=["symbol","date","content"]).to_pylist() if "2015"<=r["date"][:4]<="2024" and (r["content"] or "").strip()]
+rng=random.Random(2030)
+split=lambda t:[s.strip() for s in re.split(r'(?<=[.!?])\s+',t) if len(s.split())>=4]
+# 1,000 sentences for the speed test
+pool=[]
+for r in rng.sample(rows,200): pool+=split(r["content"])
+sents=rng.sample(pool,1000); open("fb/sentences.json","w").write(json.dumps(sents))
+# sentences per transcript, from 100 random transcripts
+counts=[len(split(r["content"])) for r in rng.sample(rows,100)]
+import statistics
+print("sentences per transcript (100 sampled, regex split, not spaCy): mean",round(statistics.mean(counts)),"median",statistics.median(counts),"min",min(counts),"max",max(counts))
+json.dump({"mean":statistics.mean(counts),"n":len(counts)},open("fb/counts.json","w"))
+lens=[len(s.split()) for s in sents]; print("test sentences: mean words",round(statistics.mean(lens),1),"max",max(lens))

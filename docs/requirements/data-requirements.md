@@ -81,7 +81,7 @@ Decision 14 November 2026: any source from any country is acceptable, the primar
 | Transcripts, historical | Hugging Face `kurry/sp500_earnings_transcripts` (2005 to May 2025) | Text features | Origin and licence unclear. Likely current-constituent bias, so delisted companies may be missing (TX-07). Not for the public demo. |
 | Transcripts, forward | Alpha Vantage EARNINGS_CALL_TRANSCRIPT on a free key (25 requests a day) | Events from June 2025 onward | The free limit allows about 500 transcripts in 20 days. Licence for demo unverified. |
 | Consensus, forward | Daily snapshots from yfinance, and Finnhub or FMP free tiers if a test call shows they return estimates | Prospective check set (LB-07, LB-08) | Current values only. No standard deviation. Personal-use terms. |
-| Index membership | Candidates: `fja05680/sp500` (MIT), cross-checked against `Johnbrick123/sp500-data`; Wikipedia revision history or the `index-constitution` package as fallback. The choice is decision D-32, still open (pipeline.md Section 4.1). | Universe and peer set | Approximate. Must pass IM-01 and IM-02. |
+| Index membership | Candidates: `fja05680/sp500` (MIT), cross-checked against `Johnbrick123/sp500-data`; Wikipedia revision history or the `index-constitution` package as fallback. Chosen under decision C-43 (D-32): `fja05680/sp500` is the primary source and `Johnbrick123/sp500-data` is a cross-check only. Wikipedia and the package are not the primary route (pipeline.md Section 4.1). | Universe and peer set | Approximate. Must pass IM-01 and IM-02. |
 | Prices | yfinance, free | Momentum feature and outcome returns | Personal-use terms. Dividend-adjusted by default (PX-03). |
 | Fundamentals | SEC EDGAR XBRL company facts | Revenue growth and margins | Filing-date handling (FD-02). |
 | Sector history | To be found. Free point-in-time GICS history has not been located. | Sector scoring | If none is found, sector scoring is switched off (Product SRS-14). |
@@ -109,7 +109,7 @@ Status of each dataset against the gates it depends on. The primary route is the
 | Earnings surprise label | GATE-2 | Time-series SUE from EDGAR EPS (LB-01 to LB-06) | Conditional. Decided by the owner (C-25). Weaker than a consensus label. | Untested warm-up and restatement handling | Consensus label from I/B/E/S via WRDS, Zacks or a vendor that passes VL-12 |
 | Consensus (forward check) | GATE-2 | Daily snapshots from yfinance, Finnhub or FMP free tiers, from the start date (SR-10) | Usable only forward. Fails for a backtest. | Current values only, no standard deviation, personal-use terms | Historical consensus from a licensed source |
 | Transcripts | GATE-1, GATE-4 | Hugging Face `kurry/sp500_earnings_transcripts` for history; Alpha Vantage free key going forward | Conditional | Origin and licence of the Hugging Face set; survivorship in coverage (TX-07); Alpha Vantage free limit of 25 requests a day; segmentation untested | Capital IQ Transcripts via WRDS; FMP Ultimate |
-| Index membership | GATE-3 | Candidates in Section 4A.1 (decision D-32 open); Wikipedia revision history or the `index-constitution` package as fallback | Conditional | Approximate. Must pass IM-01 and IM-02. | CRSP via WRDS; EODHD S&P Global constituents |
+| Index membership | GATE-3 | `fja05680/sp500` (decision C-43), with Wikipedia revision history or the `index-constitution` package as fallback | Conditional | Approximate. Must pass IM-01 and IM-02. | CRSP via WRDS; EODHD S&P Global constituents |
 | Sector history | GATE-3 | None found. EDGAR SIC codes fail unless historical SIC is verified. | Unverified | No free point-in-time GICS source located, and the SIC spike of 19 November 2026 showed no dated history (decision C-29). If none, sector scoring is switched off (Product SRS-14). | Compustat via WRDS (GICS field history unchecked) |
 | Prices | GATE-4 | yfinance (development and research only) | Conditional | Personal-use terms; adjusted prices by default (PX-03) | CRSP via WRDS; EODHD end-of-day prices |
 | Fundamentals | GATE-1, GATE-2 | SEC EDGAR XBRL company facts | Conditional | Filing-date handling not built; restatements to check (FD-02, FD-03) | Compustat via WRDS |
@@ -224,7 +224,7 @@ Verification asks whether the data is correct, complete and consistently formatt
 | DV-02 | Must | Null rates are measured for each field, and each field has a maximum. | The three date fields have zero nulls. Other fields are within the thresholds in Section 11. | GATE-1 | Product FR-02 |
 | DV-03 | Must | Each event is unique on company, fiscal quarter and announcement date. | Uniqueness check passes on every load. | GATE-1 | Product FR-13 |
 | DV-04 | Must | Extreme values are flagged for a person to review, not removed automatically. | Flagged rows have a reviewer note before the dataset is signed off. | GATE-5 | Proposal 5.4 |
-| DV-05 | Must | Date order holds: capture before announcement, announcement before or on transcript, and release before the price window. | Date-order test on every load reports zero violations. | GATE-1, GATE-2 | Product FR-02 |
+| DV-05 | Must | Date order holds: capture before announcement, announcement before or on transcript (except a call that precedes the 8-K filing, which decision C-17 allows and which is listed), and release before the price window. | Date-order test on every load reports zero violations. | GATE-1, GATE-2 | Product FR-02 |
 | DV-06 | Must | Fiscal periods are mapped to calendar quarters, including companies with non-calendar fiscal years. | Mapping test passes on five known non-calendar companies. | GATE-1 | Product FR-02 |
 | DV-07 | Must | Announcement times are converted to UTC and mapped to the correct trading day. Releases after the close are dated to the next session. | Test covers a pre-open and an after-close release, both mapped correctly. | GATE-1, GATE-4 | Product FR-03 |
 | DV-08 | Must | Re-running ingestion on the same raw snapshot produces identical tables. | Table hashes match between two runs. | GATE-5 | Product ML-01 |
@@ -311,9 +311,22 @@ What this shows: the set is not limited to current index members. What it does n
 
 **EDGAR diluted EPS spike.** Partial, one company only (Apple), run before the decisions of 18 November 2026. The submissions data has a UTC acceptance time with seconds and an `items` field that lists Item 2.02. `sic` is a single current value, so it does not show history. Diluted EPS facts each have a `filed` date. There is no fourth-quarter EPS fact, so it must be derived (LB-03). The ten-company run is not done, so depth, restatement counts and early-period coverage are still unmeasured. The full script needs the SEC contact in the `SEC_USER_AGENT` environment variable, which the owner sets (decision C-10).
 
+
+**Call time against 8-K acceptance time (IG-16), 23 November 2026.** The Hugging Face `date` field holds a time of day for 99.4% of rows (196 of 33,362 are 00:00:00 placeholders) and states no time zone. Read as US Eastern with daylight saving, the 8-K acceptance time came before the call in 45 of 47 matched events in a 50-event sample (seed 2027, 2015 to 2024), with a median gap of 180 minutes (in these the filing came first; the quartiles of its lead are 59, 180 and 1,008 minutes). Three of the 47 matches were more than 24 hours apart and were not checked. On 2,749 after-close events the gap was the same in summer and winter under that reading (35 minutes, call after filing) and 60 minutes different under fixed standard time, so the stamps are Eastern with daylight saving (decision C-42).
+
+**EDGAR diluted EPS depth (LB-02, LB-03, LB-04), 23 November 2026.** For 10 companies (AAPL, MSFT, JPM, XOM, KO, IBM, PFE, F, XLNX, ATVI), 9 had 10 or more contiguous quarters of diluted EPS before 30 September 2014 (22 to 29 quarters). XOM was the exception because the SEC ticker file maps it to a new holding-company CIK (2115436) whose history starts in 2025; its earlier history is under CIK 34088. Fourth-quarter EPS has no direct fact and must be derived. Each fact carries its filing date, so the first-filed value can be selected. 0 to 25 periods per company have a later changed value. The SEC bulk files exist (`companyfacts.zip` and `submissions.zip`, last modified 21 November 2026). Whether they refresh nightly needs a second observation.
+
+**Consensus from yfinance (SR-10), 23 November 2026.** For 5 tickers the current quarter returned mean, low, high and analyst count, with no standard deviation. The estimate basis differs by ticker (AAPL gaap, the other four normalized). Finnhub and FMP were not tested (no key).
+
+**Hugging Face transcripts and removed companies (TX-07), 23 November 2026.** The card says MIT and "For research and educational use only", with no origin named. Of 230 tickers whose last index stint ended in 2015 to 2024 (from `fja05680/sp500`), 126 (55%) have transcripts in the set. In a random sample of 20, 12 did and 8 did not (CA, CHK, ESV, LB, MON, SWN, TE, WFM).
+
+**FinBERT speed (FE-09), 23 November 2026.** With `ProsusAI/finbert` as an example (D-35 open) on 6 CPUs, 14.7 to 28.3 sentences a second depending on batching. About 469 sentences per transcript by a simple split gives 18 to 35 hours for 4,000 transcripts.
+
+Evidence for these results: `audits/evidence/wave-0.1-spikes.md`. Wording approved by John on 23 November 2026 (decision C-43).
+
 ## 13. Open Decisions
 
-Open decisions are in the [decision log](../decision-log.md). Those that concern this document: D-06 (thresholds), D-18 (transcript sources and demo design), D-19 (fundamentals source), D-21 (optional institutional access) and D-23 (label thresholds).
+Open decisions are in the [decision log](../decision-log.md). Those that concern this document: D-06 (thresholds), D-18 (transcript sources and demo design), D-21 (optional institutional access) and D-23 (label thresholds).
 
 ## 14. Sources Checked
 

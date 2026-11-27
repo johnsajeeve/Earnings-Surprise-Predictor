@@ -40,7 +40,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | ER-06-AC1 | 0e3b2eff7256 | test_req_product.py::test_er_06_ac1_user_sees_prediction_with_limited_history_label | not tested (NOT IMPLEMENTED) |
 | ER-06-AC2 | 565ce6241b4c | test_req_product.py::test_er_06_ac2_system_marks_trailing_features_as_unavailable | not tested (NOT IMPLEMENTED) |
 | ER-07-AC1 | 77dbebe4951c | test_req_product.py::test_er_07_ac1_user_sees_q_a_analysis_unavailable_for | not tested (NOT IMPLEMENTED) |
-| ER-07-AC2 | 123cbb020266 | test_req_product.py::test_er_07_ac2_system_stores_q_a_features_as_unavailable | not tested (NOT IMPLEMENTED) |
+| ER-07-AC2 | 123cbb020266 | test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section | real check |
 | ER-08-AC1 | 0c9fd9f7ba3e | test_req_product.py::test_er_08_ac1_user_sees_insufficient_peers_in_the_sector | not tested (NOT IMPLEMENTED) |
 | ER-08-AC2 | 1a4cf429906a | test_req_product.py::test_er_08_ac2_system_stores_sector_features_as_unavailable_srs | not tested (NOT IMPLEMENTED) |
 | ER-09-AC1 | 6ef83ea221a1 | test_req_product.py::test_er_09_ac1_user_sees_sector_comparison_unavailable | not tested (NOT IMPLEMENTED) |
@@ -63,8 +63,8 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | FR-01-AC1 | dde66cae075f | test_req_product.py::test_fr_01_ac1_given_a_ticker_with_a_stored_transcript | not tested (NOT IMPLEMENTED) |
 | FR-01-AC2 | ac091c3c1355 | test_req_product.py::test_fr_01_ac2_given_the_same_ticker_submitted_twice_without | not tested (NOT IMPLEMENTED) |
 | FR-01-AC3 | 201fa5229861 | test_req_product.py::test_fr_01_ac3_given_a_ticker_with_no_earlier_transcript | not tested (NOT IMPLEMENTED) |
-| FR-02-AC1 | 0f96cee7f960 | test_req_product.py::test_fr_02_ac1_given_any_event_in_the_database_when | not tested (NOT IMPLEMENTED) |
-| FR-02-AC2 | 54ac651b4964 | test_req_product.py::test_fr_02_ac2_given_a_transcript_dated_after_its_announcement | not tested (NOT IMPLEMENTED) |
+| FR-02-AC1 | 0f96cee7f960 | test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded | real check |
+| FR-02-AC2 | 54ac651b4964 | test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded | real check |
 | FR-03-AC1 | 657409a5489e | test_req_product.py::test_fr_03_ac1_given_the_training_pipeline_runs_when_any | not tested (NOT IMPLEMENTED) |
 | FR-03-AC2 | 03bab02b68d2 | test_req_product.py::test_fr_03_ac2_given_the_test_suite_runs_then_a | not tested (NOT IMPLEMENTED) |
 | FR-04-AC1 | 0843ebf0d876 | test_req_product.py::test_fr_04_ac1_given_a_prediction_when_the_explanation_is | not tested (NOT IMPLEMENTED) |
@@ -84,14 +84,14 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | FR-10-AC2 | 4d0f37986ac0 | test_req_product.py::test_fr_10_ac2_given_the_evaluation_page_then_calibration_by | not tested (NOT IMPLEMENTED) |
 | FR-11-AC1 | 99b543e9602f | test_req_product.py::test_fr_11_ac1_given_a_prediction_is_stored_then_both | not tested (NOT IMPLEMENTED) |
 | FR-12-AC1 | 718372566e09 | test_req_product.py::test_fr_12_ac1_srs_01_to_srs_14_pass | not tested (NOT IMPLEMENTED) |
-| FR-13-AC1 | 5a56a7847cea | test_req_product.py::test_fr_13_ac1_given_the_same_transcript_is_ingested_twice | not tested (NOT IMPLEMENTED) |
-| FR-13-AC2 | 7cfb6db90c4b | test_req_product.py::test_fr_13_ac2_given_an_ingestion_job_fails_halfway_and | not tested (NOT IMPLEMENTED) |
-| FR-14-AC1 | 700f1587a28a | test_req_product.py::test_fr_14_ac1_given_a_new_consensus_estimate_arrives_for | not tested (NOT IMPLEMENTED) |
-| FR-14-AC2 | 6ec941bce255 | test_req_product.py::test_fr_14_ac2_given_a_prediction_for_an_event_announced | not tested (NOT IMPLEMENTED) |
-| FR-15-AC1 | 04f66b07eb98 | test_req_product.py::test_fr_15_ac1_given_a_transcript_with_a_recognised_q | not tested (NOT IMPLEMENTED) |
-| FR-15-AC2 | 77fc197bcd67 | test_req_product.py::test_fr_15_ac2_given_no_q_a_marker_is_found | not tested (NOT IMPLEMENTED) |
-| FR-16-AC1 | 250312e8235b | test_req_product.py::test_fr_16_ac1_given_a_transcript_is_already_scored_with | not tested (NOT IMPLEMENTED) |
-| FR-16-AC2 | ea930903f4fe | test_req_product.py::test_fr_16_ac2_given_the_finbert_version_changes_then_every | not tested (NOT IMPLEMENTED) |
+| FR-13-AC1 | 5a56a7847cea | test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release | real check |
+| FR-13-AC2 | 7cfb6db90c4b | test_transcripts.py::test_a_load_that_fails_halfway_and_is_run_again_gives_the_row_count_of_a_clean_run | real check |
+| FR-14-AC1 | 700f1587a28a | test_events.py::test_a_new_snapshot_is_a_new_row_and_the_earlier_one_is_unchanged | real check |
+| FR-14-AC2 | 6ec941bce255 | test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input | real check |
+| FR-15-AC1 | 04f66b07eb98 | test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section | real check |
+| FR-15-AC2 | 77fc197bcd67 | test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section | real check |
+| FR-16-AC1 | 250312e8235b | test_req_product.py::test_fr_16_ac1_given_a_transcript_is_already_scored_with<br>test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again | not tested (NOT IMPLEMENTED); real check |
+| FR-16-AC2 | ea930903f4fe | test_req_product.py::test_fr_16_ac2_given_the_finbert_version_changes_then_every<br>test_sentence_scores.py::test_a_new_model_revision_rescores_and_keeps_the_old_scores | not tested (NOT IMPLEMENTED); real check |
 | FR-17-AC1 | e0d35e3c81a6 | test_req_product.py::test_fr_17_ac1_given_a_fixture_transcript_with_a_known | not tested (NOT IMPLEMENTED) |
 | FR-17-AC2 | 86db92f13cb9 | test_req_product.py::test_fr_17_ac2_given_a_transcript_with_zero_words_then | not tested (NOT IMPLEMENTED) |
 | FR-18-AC1 | bc92e169cf93 | test_req_product.py::test_fr_18_ac1_given_four_prior_quarters_of_scores_then | not tested (NOT IMPLEMENTED) |
@@ -132,7 +132,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | MR-06-AC1 | ba40744c7673 | test_req_product.py::test_mr_06_ac1_rank_change_flag_fires_on_a_planted | not tested (NOT IMPLEMENTED) |
 | NFR-01-AC1 | 729a6be1c450 | test_req_product.py::test_nfr_01_ac1_under_500_ms | not tested (NEEDS MEASUREMENT) |
 | NFR-02-AC1 | d96754b0e280 | test_req_product.py::test_nfr_02_ac1_under_10_s_or_returned_as_pending | not tested (NEEDS MEASUREMENT) |
-| NFR-03-AC1 | 4718e36e3331 | test_req_product.py::test_nfr_03_ac1_check_runs_every_24_hours | not tested (NOT IMPLEMENTED) |
+| NFR-03-AC1 | 4718e36e3331 | test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times | real check |
 | NFR-04-AC1 | e8f77b27a11e | test_health_unit.py::test_all_ok_returns_200<br>test_health_unit.py::test_any_failure_returns_503_and_names_the_component<br>test_health_unit.py::test_database_exception_is_reported_not_raised<br>test_stack_integration.py::test_health_reports_all_services_ok | real check |
 | NFR-07-AC1 | befeb1d555db | test_req_product.py::test_nfr_07_ac1_automated_check_passes | not tested (NOT IMPLEMENTED) |
 | NFR-08-AC1 | 8c6909c17c2c | test_req_product.py::test_nfr_08_ac1_no_horizontal_scrolling_on_prediction_card | not tested (NEEDS MEASUREMENT) |
@@ -140,12 +140,12 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | NFR-11-AC1 | 2866d42bd8b3 | test_req_product.py::test_nfr_11_ac1_every_request_is_logged_with_id_latency_and_status | real check |
 | NFR-12-AC1 | 0bb3caa3b092 | test_req_product.py::test_nfr_12_ac1_available_at_metrics | not tested (NOT IMPLEMENTED) |
 | NFR-13-AC1 | 3aa52001b8bb | test_req_product.py::test_nfr_13_ac1_five_minutes | not tested (NEEDS MEASUREMENT) |
-| PL-01-AC1 | 07cad780150b | test_req_product.py::test_pl_01_ac1_each_run_produces_a_log_row_that | not tested (NOT IMPLEMENTED) |
-| PL-02-AC1 | 01a4d0a18feb | test_req_product.py::test_pl_02_ac1_injected_failure_produces_three_retries_and_one | not tested (NOT IMPLEMENTED) |
+| PL-01-AC1 | 07cad780150b | test_ingestion_framework.py::test_each_run_produces_a_queryable_row | real check |
+| PL-02-AC1 | 01a4d0a18feb | test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row | real check |
 | PL-03-AC1 | 794642428c88 | test_req_product.py::test_pl_03_ac1_health_response_lists_the_date_for_a | not tested (NOT IMPLEMENTED) |
-| PL-04-AC1 | 614fda020da7 | test_req_product.py::test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected | not tested (NOT IMPLEMENTED) |
-| PL-05-AC1 | 7ed3e4ffc2fd | test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | not tested (NOT IMPLEMENTED) |
-| PL-06-AC1 | be9f2109f8a8 | test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before | not tested (NOT IMPLEMENTED) |
+| PL-04-AC1 | 614fda020da7 | test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only | real check |
+| PL-05-AC1 | 7ed3e4ffc2fd | test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | real check |
+| PL-06-AC1 | be9f2109f8a8 | test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning | real check |
 | SCR-01-AC1 | 5d49425c3e3a | test_req_product.py::test_scr_01_ac1_input_field_submit_autocomplete_if_ui_01 | not tested (NOT IMPLEMENTED) |
 | SCR-02-AC1 | d171d15bb44b | test_req_product.py::test_scr_02_ac1_class_probabilities_confidence_evidence_base_input_as | not tested (NOT IMPLEMENTED) |
 | SCR-03-AC1 | 129bc0a9aec2 | test_req_product.py::test_scr_03_ac1_horizontal_bars_for_top_three_shap_features | not tested (NOT IMPLEMENTED) |
@@ -200,104 +200,104 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | UI-03-AC1 | 27268074bc59 | test_req_product.py::test_ui_03_ac1_each_citation_in_the_view_has_a | not tested (NOT IMPLEMENTED) |
 | UI-04-AC1 | 85f87e7315cf | test_req_product.py::test_ui_04_ac1_view_lists_every_peer_used_in_the | not tested (NOT IMPLEMENTED) |
 | UI-05-AC1 | 940bbc4f6f01 | test_req_product.py::test_ui_05_ac1_keyboard_only_walkthrough_completes_journey_j1 | not tested (NEEDS MEASUREMENT) |
-| AE-01-AC1 | fb4b2f747639 | test_req_data.py::test_ae_01_ac1_every_event_has_a_document_identifier_an | not tested (NOT IMPLEMENTED) |
+| AE-01-AC1 | fb4b2f747639 | test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing | real check |
 | AE-02-AC1 | 67029a648cb3 | test_req_data.py::test_ae_02_ac1_at_least_98_agreement_on_a_sample | not tested (NEEDS MEASUREMENT) |
-| AE-03-AC1 | dbeb5c043a20 | test_req_data.py::test_ae_03_ac1_basis_field_is_populated_and_has_one | not tested (NOT IMPLEMENTED) |
+| AE-03-AC1 | dbeb5c043a20 | test_financials.py::test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value<br>test_validation.py::test_the_dataset_has_one_eps_basis | real check |
 | AE-03-AC2 | fca92b3ec644 | test_req_data.py::test_ae_03_ac2_test_in_vl_07 | not tested (NOT IMPLEMENTED) |
-| AE-04-AC1 | af2afa6eb4fe | test_req_data.py::test_ae_04_ac1_after_a_simulated_correction_the_first_reported | not tested (NOT IMPLEMENTED) |
-| CE-01-AC1 | a66985239aa1 | test_req_data.py::test_ce_01_ac1_zero_rows_where_capture_time_is_on | not tested (NOT IMPLEMENTED) |
-| CE-02-AC1 | cde920b6f3ef | test_req_data.py::test_ce_02_ac1_test_vl_01_passes | not tested (NOT IMPLEMENTED) |
-| CE-02-AC2 | 3fb2e66d44f4 | test_req_data.py::test_ce_02_ac2_sr_08_test_passes | not tested (NOT IMPLEMENTED) |
+| AE-04-AC1 | af2afa6eb4fe | test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date | real check |
+| CE-01-AC1 | a66985239aa1 | test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event | real check |
+| CE-02-AC1 | cde920b6f3ef | test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event | real check |
+| CE-02-AC2 | 3fb2e66d44f4 | test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected | real check |
 | CE-03-AC1 | ad1be4e37888 | test_req_data.py::test_ce_03_ac1_basis_test_vl_07_passes | not tested (NOT IMPLEMENTED) |
 | CE-04-AC1 | 78d91ebbd9a5 | test_req_data.py::test_ce_04_ac1_exclusion_count_is_reported_per_year | not tested (NOT IMPLEMENTED) |
 | CE-05-AC1 | aa8e468ea0de | test_req_data.py::test_ce_05_ac1_dataset_version_has_a_label_route_value | not tested (NOT IMPLEMENTED) |
-| CE-05-AC2 | 31ac1195d87a | test_req_data.py::test_ce_05_ac2_a_test_fails_if_events_with_different | not tested (NOT IMPLEMENTED) |
+| CE-05-AC2 | 31ac1195d87a | test_label.py::test_a_training_set_with_two_label_routes_fails | real check |
 | CE-06-AC1 | 93df52bcf97a | test_req_data.py::test_ce_06_ac1_test_a_planted_forecast_dated_d_or | not tested (NOT IMPLEMENTED) |
 | CE-06-AC2 | c76b3597a9d4 | test_req_data.py::test_ce_06_ac2_report_shows_the_age_distribution_of_consensus | not tested (NOT IMPLEMENTED) |
-| DV-01-AC1 | fd8ffc0a15eb | test_req_data.py::test_dv_01_ac1_quarantine_count_is_reported_per_run | not tested (NOT IMPLEMENTED) |
-| DV-02-AC1 | 66645b8ea273 | test_req_data.py::test_dv_02_ac1_the_three_date_fields_have_zero_nulls | not tested (NOT IMPLEMENTED) |
+| DV-01-AC1 | fd8ffc0a15eb | test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged | real check |
+| DV-02-AC1 | 66645b8ea273 | test_validation.py::test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_counted_apart | real check |
 | DV-02-AC2 | 609c4e351fc1 | test_req_data.py::test_dv_02_ac2_other_fields_are_within_the_thresholds_in | not tested (NOT IMPLEMENTED) |
-| DV-03-AC1 | 658c1efa6dc2 | test_req_data.py::test_dv_03_ac1_uniqueness_check_passes_on_every_load | not tested (NOT IMPLEMENTED) |
+| DV-03-AC1 | 658c1efa6dc2 | test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date | real check |
 | DV-04-AC1 | 24d32192b751 | test_req_data.py::test_dv_04_ac1_flagged_rows_have_a_reviewer_note_before | not tested (NEEDS PERSON) |
-| DV-05-AC1 | 01f1b097463f | test_req_data.py::test_dv_05_ac1_date_order_test_on_every_load_reports | not tested (NOT IMPLEMENTED) |
-| DV-06-AC1 | b354565d743f | test_req_data.py::test_dv_06_ac1_mapping_test_passes_on_five_known_non | not tested (NOT IMPLEMENTED) |
-| DV-07-AC1 | a7312d22b934 | test_req_data.py::test_dv_07_ac1_test_covers_a_pre_open_and_an | not tested (NOT IMPLEMENTED) |
-| DV-08-AC1 | e88b523f7072 | test_req_data.py::test_dv_08_ac1_table_hashes_match_between_two_runs | not tested (NOT IMPLEMENTED) |
-| FD-01-AC1 | 7bbf225cddf6 | test_req_data.py::test_fd_01_ac1_every_row_has_a_filing_date | not tested (NOT IMPLEMENTED) |
-| FD-01-AC2 | a1acd7da6dec | test_req_data.py::test_fd_01_ac2_a_sample_of_20_values_matches_the | not tested (NOT IMPLEMENTED) |
-| FD-02-AC1 | e2cc6df31af2 | test_req_data.py::test_fd_02_ac1_test_with_a_planted_filing_dated_d | not tested (NOT IMPLEMENTED) |
-| FD-03-AC1 | e759082516f0 | test_req_data.py::test_fd_03_ac1_after_a_simulated_restatement_a_prediction_before | not tested (NOT IMPLEMENTED) |
-| FD-04-AC1 | 42293a525178 | test_req_data.py::test_fd_04_ac1_mapping_test_passes_on_the_five_non | not tested (NOT IMPLEMENTED) |
+| DV-05-AC1 | 01f1b097463f | test_validation.py::test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart | real check |
+| DV-06-AC1 | b354565d743f | test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies | real check |
+| DV-07-AC1 | a7312d22b934 | test_calendar.py::test_a_timestamp_without_a_time_zone_is_refused<br>test_calendar.py::test_known_exchange_holidays_and_open_days<br>test_calendar.py::test_pre_open_and_after_close_releases_map_to_the_right_session<br>test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session | real check |
+| DV-08-AC1 | e88b523f7072 | test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash | real check |
+| FD-01-AC1 | 7bbf225cddf6 | test_financials.py::test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value | real check |
+| FD-01-AC2 | a1acd7da6dec | test_req_data.py::test_fd_01_ac2_a_sample_of_20_values_matches_the | not tested (NEEDS MEASUREMENT) |
+| FD-02-AC1 | e2cc6df31af2 | test_financials.py::test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d | real check |
+| FD-03-AC1 | e759082516f0 | test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date | real check |
+| FD-04-AC1 | 42293a525178 | test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies | real check |
 | GS-01-AC1 | 9e2968e8a065 | test_req_data.py::test_gs_01_ac1_sign_off_exists_before_the_dataset_is | not tested (NEEDS PERSON) |
-| GS-02-AC1 | 2e259b4a6db3 | test_req_data.py::test_gs_02_ac1_data_card_exists_for_every_dataset_version | not tested (NOT IMPLEMENTED) |
-| IM-01-AC1 | 70d0fb633443 | test_req_data.py::test_im_01_ac1_at_sampled_year_ends_company_count_matches | not tested (NEEDS MEASUREMENT) |
-| IM-02-AC1 | 055954829070 | test_req_data.py::test_im_02_ac1_each_year_in_the_period_has_at | not tested (NEEDS MEASUREMENT) |
-| IM-02-AC2 | 1477383f9bd6 | test_req_data.py::test_im_02_ac2_each_record_has_a_removal_date_and | not tested (NEEDS MEASUREMENT) |
-| IM-03-AC1 | a311a0e7f6c7 | test_req_data.py::test_im_03_ac1_join_on_the_permanent_identifier_produces_one | not tested (NOT IMPLEMENTED) |
-| LB-01-AC1 | 52b68790905d | test_req_data.py::test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue | not tested (NOT IMPLEMENTED) |
-| LB-02-AC1 | 9accb5fb6217 | test_req_data.py::test_lb_02_ac1_exclusion_count_reported_per_year | not tested (NOT IMPLEMENTED) |
-| LB-02-AC2 | d209c6e5dbaa | test_req_data.py::test_lb_02_ac2_zero_variance_fixture_returns_unavailable | not tested (NOT IMPLEMENTED) |
-| LB-03-AC1 | a1f7dff36b54 | test_req_data.py::test_lb_03_ac1_derived_values_are_flagged | not tested (NOT IMPLEMENTED) |
-| LB-03-AC2 | 53bc45473894 | test_req_data.py::test_lb_03_ac2_sample_comparison_is_reported_with_differences_above | not tested (NOT IMPLEMENTED) |
-| LB-04-AC1 | 710fd7cf75e2 | test_req_data.py::test_lb_04_ac1_test_with_a_planted_restatement_filed_after | not tested (NOT IMPLEMENTED) |
-| LB-05-AC1 | 9a3ee20dca10 | test_req_data.py::test_lb_05_ac1_test_on_a_company_with_a_split | not tested (NOT IMPLEMENTED) |
+| GS-02-AC1 | 2e259b4a6db3 | test_validation.py::test_the_data_card_states_coverage_sources_gaps_and_that_it_is_not_signed_off | real check |
+| IM-01-AC1 | 70d0fb633443 | test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500<br>test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500 | real check |
+| IM-02-AC1 | 055954829070 | test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason | real check |
+| IM-02-AC2 | 1477383f9bd6 | test_req_data.py::test_im_02_ac2_each_removed_company_record_has_its_date_and_reason | not tested (NOT IMPLEMENTED) |
+| IM-03-AC1 | a311a0e7f6c7 | test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history<br>test_universe.py::test_ten_known_renames_resolve_to_one_company | real check |
+| LB-01-AC1 | 52b68790905d | test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals | real check |
+| LB-02-AC1 | 9accb5fb6217 | test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity | real check |
+| LB-02-AC2 | d209c6e5dbaa | test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity | real check |
+| LB-03-AC1 | a1f7dff36b54 | test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures | real check |
+| LB-03-AC2 | 53bc45473894 | test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent | real check |
+| LB-04-AC1 | 710fd7cf75e2 | test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement<br>test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label<br>test_label.py::test_a_quarter_refiled_with_a_shifted_start_date_is_still_the_same_quarter | real check |
+| LB-05-AC1 | 9a3ee20dca10 | test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series<br>test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each<br>test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios | real check |
 | LB-06-AC1 | 543d1662dfdb | test_req_data.py::test_lb_06_ac1_frozen_threshold_record_exists | not tested (NEEDS MEASUREMENT) |
 | LB-06-AC2 | c3dac6b8ccee | test_req_data.py::test_lb_06_ac2_class_shares_table_exists | not tested (NEEDS MEASUREMENT) |
 | LB-07-AC1 | 35e81b00f190 | test_req_data.py::test_lb_07_ac1_prospective_table_has_both_labels_per_event | not tested (NOT IMPLEMENTED) |
 | LB-07-AC2 | 68d8938d5878 | test_req_data.py::test_lb_07_ac2_thresholds_are_recorded | not tested (NOT IMPLEMENTED) |
 | LB-08-AC1 | 8a7a2c30b379 | test_req_data.py::test_lb_08_ac1_report_exists_with_all_three_measures_and | not tested (NEEDS MEASUREMENT) |
 | PX-01-AC1 | f3b1c23bb371 | test_req_data.py::test_px_01_ac1_20_sampled_announcement_day_closes_match_a | not tested (NEEDS MEASUREMENT) |
-| PX-02-AC1 | c6b0189db776 | test_req_data.py::test_px_02_ac1_test_with_a_planted_future_price_shows | not tested (NOT IMPLEMENTED) |
-| PX-03-AC1 | eb2776e30a12 | test_req_data.py::test_px_03_ac1_series_type_check_fails_any_series_containing | not tested (NOT IMPLEMENTED) |
+| PX-02-AC1 | c6b0189db776 | test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window | real check |
+| PX-03-AC1 | eb2776e30a12 | test_prices.py::test_a_series_that_mixes_adjusted_and_raw_prices_fails | real check |
 | SEC-01-AC1 | f488020764a4 | test_req_data.py::test_sec_01_ac1_test_vl_11_a_company_reclassified_in | not tested (NOT IMPLEMENTED) |
 | SEC-02-AC1 | 172b619c8130 | test_req_data.py::test_sec_02_ac1_unit_test_on_a_fixed_date_with | not tested (NOT IMPLEMENTED) |
-| SR-01-AC1 | 6f36b14388ae | test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | not tested (NOT IMPLEMENTED) |
+| SR-01-AC1 | 6f36b14388ae | test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | real check |
 | SR-02-AC1 | 49cc92f213fe | test_req_data.py::test_sr_02_ac1_every_feature_column_carries_a_source_tag | not tested (NOT IMPLEMENTED) |
 | SR-02-AC2 | d79e07584849 | test_req_data.py::test_sr_02_ac2_an_untagged_column_fails_the_build | not tested (NOT IMPLEMENTED) |
 | SR-03-AC1 | e1655f8a9749 | test_req_data.py::test_sr_03_ac1_demo_bundle_manifest_lists_each_source_and | not tested (NOT IMPLEMENTED) |
 | SR-03-AC2 | ab2d77d9f586 | test_req_data.py::test_sr_03_ac2_any_personal_use_source_fails_the_check | not tested (NOT IMPLEMENTED) |
-| SR-04-AC1 | d0e8f1635958 | test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches | not tested (NOT IMPLEMENTED) |
+| SR-04-AC1 | d0e8f1635958 | test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded | real check |
 | SR-05-AC1 | 719b1f5d00d1 | test_req_data.py::test_sr_05_ac1_written_answer_or_dated_refusal_on_file | not tested (NEEDS PERSON) |
-| SR-06-AC1 | 543a5a773e18 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | not tested (NOT IMPLEMENTED) |
-| SR-07-AC1 | e364b4a2e82d | test_req_data.py::test_sr_07_ac1_request_log_exists | not tested (NOT IMPLEMENTED) |
+| SR-06-AC1 | 543a5a773e18 | test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | expected failure (requirement not met yet) |
+| SR-07-AC1 | e364b4a2e82d | test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call | real check |
 | SR-07-AC2 | 7b1966ebfc7f | test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo | not tested (NOT IMPLEMENTED) |
-| SR-08-AC1 | 989d24e7a461 | test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot | not tested (NOT IMPLEMENTED) |
-| SR-09-AC1 | 6277d59075f9 | test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | not tested (NOT IMPLEMENTED) |
+| SR-08-AC1 | 989d24e7a461 | test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected | real check |
+| SR-09-AC1 | 6277d59075f9 | test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | real check |
 | SR-10-AC1 | 423a7f8f5f14 | test_req_data.py::test_sr_10_ac1_job_log_shows_a_successful_daily_run | not tested (NEEDS MEASUREMENT) |
-| SR-10-AC2 | 38c8241fdd26 | test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive | not tested (NEEDS MEASUREMENT) |
+| SR-10-AC2 | 38c8241fdd26 | test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged<br>test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive | not tested (NEEDS MEASUREMENT); real check |
 | SR-11-AC1 | 50571a6da203 | test_req_data.py::test_sr_11_ac1_a_test_fails_any_displayed_excerpt_longer | not tested (NOT IMPLEMENTED) |
-| TH-01-AC1 | 5f345a6ad7ec | test_req_data.py::test_th_01_ac1_at_least_90 | not tested (NOT IMPLEMENTED) |
+| TH-01-AC1 | 5f345a6ad7ec | test_validation.py::test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold | real check |
 | TH-02-AC1 | ea72bbe4f909 | test_req_data.py::test_th_02_ac1_at_least_95 | not tested (NOT IMPLEMENTED) |
 | TH-03-AC1 | 68773f11cb1b | test_req_data.py::test_th_03_ac1_at_least_98_within_0_5 | not tested (NOT IMPLEMENTED) |
 | TH-04-AC1 | 4e07408562be | test_req_data.py::test_th_04_ac1_3 | not tested (NOT IMPLEMENTED) |
-| TH-05-AC1 | d18077775a30 | test_req_data.py::test_th_05_ac1_within_5_of_published_count | not tested (NOT IMPLEMENTED) |
-| TH-06-AC1 | d02a023dab4f | test_req_data.py::test_th_06_ac1_to_be_set_after_the_first_comparison | not tested (NOT IMPLEMENTED) |
+| TH-05-AC1 | d18077775a30 | test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500<br>test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500 | real check |
+| TH-06-AC1 | d02a023dab4f | test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation | real check |
 | TH-07-AC1 | 3ccce1f4da94 | test_req_data.py::test_th_07_ac1_10 | not tested (NOT IMPLEMENTED) |
 | TH-08-AC1 | 3fd4f0e7022c | test_req_data.py::test_th_08_ac1_at_most_2 | not tested (NOT IMPLEMENTED) |
 | TH-09-AC1 | 20561fdcbdac | test_req_data.py::test_th_09_ac1_4_weeks_20_tickers_daily | not tested (NOT IMPLEMENTED) |
 | TH-10-AC1 | 2ebb9ecd5038 | test_req_data.py::test_th_10_ac1_28_of_30_events_agree_within_1 | not tested (NOT IMPLEMENTED) |
-| TH-11-AC1 | 5cb616d5f9fc | test_req_data.py::test_th_11_ac1_at_least_6_prior_seasonal_differences_8 | not tested (NOT IMPLEMENTED) |
+| TH-11-AC1 | 5cb616d5f9fc | test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals<br>test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity | real check |
 | TH-12-AC1 | 36e74346ea34 | test_req_data.py::test_th_12_ac1_differences_above_1_listed | not tested (NOT IMPLEMENTED) |
 | TH-13-AC1 | 49fe50121b0c | test_req_data.py::test_th_13_ac1_reported_no_pass_mark | not tested (NOT IMPLEMENTED) |
-| TH-14-AC1 | 973d0c649aa9 | test_req_data.py::test_th_14_ac1_zero | not tested (NOT IMPLEMENTED) |
-| TH-15-AC1 | d9a847a1a79a | test_req_data.py::test_th_15_ac1_0 | not tested (NOT IMPLEMENTED) |
-| TX-01-AC1 | 15cd3c5a0a8d | test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields | not tested (NOT IMPLEMENTED) |
-| TX-01-AC2 | 5cc51c034c05 | test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged | not tested (NOT IMPLEMENTED) |
-| TX-02-AC1 | d0e63beaee73 | test_req_data.py::test_tx_02_ac1_violations_are_zero_or_each_violation_is | not tested (NOT IMPLEMENTED) |
+| TH-14-AC1 | 973d0c649aa9 | test_req_data.py::test_th_14_ac1_zero | real check |
+| TH-15-AC1 | d9a847a1a79a | test_validation.py::test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_counted_apart | real check |
+| TX-01-AC1 | 15cd3c5a0a8d | test_transcripts.py::test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash | real check |
+| TX-01-AC2 | 5cc51c034c05 | test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed | real check |
+| TX-02-AC1 | d0e63beaee73 | test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation | real check |
 | TX-03-AC1 | f66325941b4f | test_req_data.py::test_tx_03_ac1_on_a_hand_labelled_sample_of_50 | not tested (NEEDS MEASUREMENT) |
-| TX-04-AC1 | 6ae1cd3d4c97 | test_req_data.py::test_tx_04_ac1_coverage_report_lists_every_missing_company_and | not tested (NEEDS MEASUREMENT) |
-| TX-05-AC1 | a94d40e75af8 | test_req_data.py::test_tx_05_ac1_given_two_transcripts_for_one_event_the | not tested (NOT IMPLEMENTED) |
-| TX-05-AC2 | 03652563f237 | test_req_data.py::test_tx_05_ac2_dv_03_passes | not tested (NOT IMPLEMENTED) |
+| TX-04-AC1 | 6ae1cd3d4c97 | test_req_data.py::test_tx_04_ac1_coverage_report_lists_every_missing_company_and<br>test_validation.py::test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold | not tested (NEEDS MEASUREMENT); real check |
+| TX-05-AC1 | a94d40e75af8 | test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release | real check |
+| TX-05-AC2 | 03652563f237 | test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date | real check |
 | TX-06-AC1 | 670328d42afc | test_req_data.py::test_tx_06_ac1_sample_of_20_transcripts_has_labels_on | not tested (NEEDS MEASUREMENT) |
-| TX-07-AC1 | d3cb76f2f6a3 | test_req_data.py::test_tx_07_ac1_coverage_table_by_year_survivor_status_and | not tested (NEEDS MEASUREMENT) |
-| VL-01-AC1 | 9ca57e51c4e2 | test_req_data.py::test_vl_01_ac1_the_pipeline_excludes_it | not tested (NOT IMPLEMENTED) |
-| VL-01-AC2 | 123fa1468d17 | test_req_data.py::test_vl_01_ac2_any_leaked_row_fails_the_build | not tested (NOT IMPLEMENTED) |
+| TX-07-AC1 | d3cb76f2f6a3 | test_req_data.py::test_tx_07_ac1_coverage_table_by_year_survivor_status_and<br>test_validation.py::test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold | not tested (NEEDS MEASUREMENT); real check |
+| VL-01-AC1 | 9ca57e51c4e2 | test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event | real check |
+| VL-01-AC2 | 123fa1468d17 | test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event | real check |
 | VL-02-AC1 | 6bdf4f473ce2 | test_req_data.py::test_vl_02_ac1_rebuilt_vectors_match_stored_vectors | not tested (NOT IMPLEMENTED) |
 | VL-02-AC2 | a9e984f648b4 | test_req_data.py::test_vl_02_ac2_any_mismatch_is_a_leak_and_fails | not tested (NOT IMPLEMENTED) |
 | VL-03-AC1 | 8f2e72ed7fa6 | test_req_data.py::test_vl_03_ac1_recomputed_values_match_stored_values | not tested (NOT IMPLEMENTED) |
 | VL-04-AC1 | 6e4652e4e9e4 | test_req_data.py::test_vl_04_ac1_counts_and_date_ranges_match_the_definitions | not tested (NOT IMPLEMENTED) |
-| VL-05-AC1 | fe4f49b44987 | test_req_data.py::test_vl_05_ac1_a_persistent_gap_above_a_threshold_set | not tested (NEEDS MEASUREMENT) |
-| VL-05-AC2 | 4fbb076d889d | test_req_data.py::test_vl_05_ac2_th_06_is_set_from_the_first | not tested (NEEDS MEASUREMENT) |
+| VL-05-AC1 | fe4f49b44987 | test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation<br>test_req_data.py::test_vl_05_ac1_a_persistent_gap_above_a_threshold_set | not tested (NEEDS MEASUREMENT); real check |
+| VL-05-AC2 | 4fbb076d889d | test_gaps.py::test_the_threshold_in_the_code_is_the_one_recorded_in_the_decision_log<br>test_req_data.py::test_vl_05_ac2_th_06_is_set_from_the_first | not tested (NEEDS MEASUREMENT); real check |
 | VL-06-AC1 | ed321a4e5abc | test_req_data.py::test_vl_06_ac1_no_class_is_below_10_in_any | not tested (NEEDS MEASUREMENT) |
 | VL-06-AC2 | 094b0a3b6aa7 | test_req_data.py::test_vl_06_ac2_any_change_after_the_freeze_is_logged | not tested (NEEDS MEASUREMENT) |
 | VL-07-AC1 | 105c46ef98e5 | test_req_data.py::test_vl_07_ac1_zero_mismatches_or_every_mismatch_is_corrected | not tested (NEEDS MEASUREMENT) |
@@ -335,7 +335,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | EQ-04-AC2 | 9e257d0acc05 | test_req_project_wide.py::test_eq_04_ac2_an_unpinned_dependency_fails_the_pin_check | real check |
 | EQ-05-AC1 | 723e57131636 | test_req_project_wide.py::test_eq_05_ac1_load_test_report_exists | not tested (NEEDS MEASUREMENT) |
 | EQ-06-AC1 | da5d12f4deec | test_req_project_wide.py::test_eq_06_ac1_three_scripted_tests_pass | not tested (NOT IMPLEMENTED) |
-| EQ-07-AC1 | eed1f3ef4b29 | test_req_project_wide.py::test_eq_07_ac1_test_runs_each_task_twice_and_compares | not tested (NOT IMPLEMENTED) |
+| EQ-07-AC1 | eed1f3ef4b29 | test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test | real check |
 | EQ-08-AC1 | d42611100171 | test_req_project_wide.py::test_eq_08_ac1_a_vulnerability_scan_job_runs_on_every_pull_request | real check |
 | EQ-09-AC1 | 5e694476b816 | test_req_project_wide.py::test_eq_09_ac1_coverage_report_in_continuous_integration | not tested (NOT IMPLEMENTED) |
 | ET-01-AC1 | ad81bc6ec849 | test_req_project_wide.py::test_et_01_ac1_approval_reference_on_file | not tested (NEEDS PERSON) |
@@ -346,7 +346,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | ET-04-AC2 | cd8eed7aae31 | test_req_project_wide.py::test_et_04_ac2_disclaimer_test_passes | not tested (NOT IMPLEMENTED) |
 | ET-05-AC1 | a5c402f529f1 | test_req_project_wide.py::test_et_05_ac1_written_confirmation_of_the_tier_and_declaration | not tested (NEEDS PERSON) |
 | OR-01-AC1 | be6242d842c2 | test_req_project_wide.py::test_or_01_ac1_restore_test_log_exists | not tested (NEEDS MEASUREMENT) |
-| OR-02-AC1 | f782dca454fa | test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | not tested (NOT IMPLEMENTED) |
+| OR-02-AC1 | f782dca454fa | test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | real check |
 | OR-02-AC2 | 61503b843d79 | test_req_project_wide.py::test_or_02_ac2_budget_alert_exists_before_any_spend | not tested (NOT IMPLEMENTED) |
 | OR-03-AC1 | 2b9c2a8bc125 | test_req_project_wide.py::test_or_03_ac1_demo_service_account_has_no_write_rights | not tested (NOT IMPLEMENTED) |
 | PD-01-AC1 | 8d29c883c3a4 | test_req_project_wide.py::test_pd_01_ac1_capacity_check_is_recorded_at_each_milestone | not tested (NEEDS PERSON) |
@@ -364,8 +364,8 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | SC-04-AC2 | de4c24e67bb4 | test_req_project_wide.py::test_sc_04_ac2_the_evaluation_job_refuses_synthetic_input | not tested (NOT IMPLEMENTED) |
 | SC-05-AC1 | 8cb59c91c091 | test_req_project_wide.py::test_sc_05_ac1_no_rouge_or_bertscore_threshold_exists_in | not tested (NOT IMPLEMENTED) |
 | SC-06-AC1 | b6130c2e8d6e | test_req_project_wide.py::test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check | expected failure (requirement not met yet) |
-| SC-07-AC1 | 82ad50560617 | test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | expected failure (requirement not met yet) |
-| SC-07-AC2 | 2132217967f2 | test_req_project_wide.py::test_sc_07_ac2_a_test_fails_if_events_with_different | not tested (NOT IMPLEMENTED) |
+| SC-07-AC1 | 82ad50560617 | test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | real check |
+| SC-07-AC2 | 2132217967f2 | test_label.py::test_a_training_set_with_two_label_routes_fails | real check |
 | SP-01-AC1 | 4a2271eda027 | test_req_project_wide.py::test_sp_01_ac1_loader_test_with_a_pickle_file_fails | not tested (NOT IMPLEMENTED) |
 | SP-02-AC1 | 3d3f4713e4f1 | test_req_project_wide.py::test_sp_02_ac1_review_checklist_is_signed_off_before_release | not tested (NEEDS PERSON) |
 | SP-03-AC1 | 037e4f01576a | test_req_project_wide.py::test_sp_03_ac1_test_set_of_20_transcript_excerpts_containing | not tested (NOT IMPLEMENTED) |
@@ -379,36 +379,36 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | SS-02-AC2 | fb3f3d84096e | test_req_project_wide.py::test_ss_02_ac2_no_requirement_document_holds_its_own_open | not tested (NEEDS PERSON) |
 | SS-03-AC1 | 6ea83895ff00 | test_req_project_wide.py::test_ss_03_ac1_sign_off_record_on_file | not tested (BLOCKED) |
 | SS-04-AC1 | 92f057513472 | test_req_project_wide.py::test_ss_04_ac1_change_log_is_complete | not tested (NEEDS PERSON) |
-| FE-01-AC1 | c00122e2c0ac | test_req_feature_engineering.py::test_fe_01_ac1_a_fixture_transcript_with_a_known_sentence | not tested (NOT IMPLEMENTED) |
-| FE-01-AC2 | 532878740b3d | test_req_feature_engineering.py::test_fe_01_ac2_two_runs_give_identical_rows | not tested (NOT IMPLEMENTED) |
-| FE-02-AC1 | 1d7eeaa1ae14 | test_req_feature_engineering.py::test_fe_02_ac1_a_fixture_call_with_a_safe_harbour | not tested (BLOCKED) |
-| FE-03-AC1 | 98754ca5aefa | test_req_feature_engineering.py::test_fe_03_ac1_a_test_finds_each_sentence_in_the | not tested (NOT IMPLEMENTED) |
+| FE-01-AC1 | c00122e2c0ac | test_req_feature_engineering.py::test_fe_01_ac1_a_fixture_transcript_with_a_known_sentence<br>test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time | not tested (NOT IMPLEMENTED); real check |
+| FE-01-AC2 | 532878740b3d | test_req_feature_engineering.py::test_fe_01_ac2_two_runs_give_identical_rows<br>test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time | not tested (NOT IMPLEMENTED); real check |
+| FE-02-AC1 | 1d7eeaa1ae14 | test_req_feature_engineering.py::test_fe_02_ac1_a_fixture_call_with_a_safe_harbour | not tested (NOT IMPLEMENTED) |
+| FE-03-AC1 | 98754ca5aefa | test_req_feature_engineering.py::test_fe_03_ac1_a_test_finds_each_sentence_in_the<br>test_sentence_models.py::test_every_sentence_is_found_in_the_cleaned_text_by_exact_match | not tested (NOT IMPLEMENTED); real check |
 | FE-04-AC1 | d8f434d98ae5 | test_req_feature_engineering.py::test_fe_04_ac1_fixture_without_roles_q_a_sentiment_delta | not tested (NOT IMPLEMENTED) |
-| FE-05-AC1 | bb79d1d5c2e1 | test_req_feature_engineering.py::test_fe_05_ac1_score_rows_have_a_non_null_model | not tested (BLOCKED) |
-| FE-05-AC2 | eaa1d569ee77 | test_req_feature_engineering.py::test_fe_05_ac2_register_entry_exists | not tested (BLOCKED) |
-| FE-06-AC1 | b2821ebf17f4 | test_req_feature_engineering.py::test_fe_06_ac1_a_fixture_sentence_over_the_limit_is | not tested (NOT IMPLEMENTED) |
+| FE-05-AC1 | bb79d1d5c2e1 | test_req_feature_engineering.py::test_fe_05_ac1_score_rows_have_a_non_null_model<br>test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again<br>test_sentence_scores.py::test_the_database_refuses_a_score_without_a_model_revision | not tested (NOT IMPLEMENTED); real check |
+| FE-05-AC2 | eaa1d569ee77 | test_req_feature_engineering.py::test_fe_05_ac2_register_entry_exists<br>test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence | not tested (NOT IMPLEMENTED); real check |
+| FE-06-AC1 | b2821ebf17f4 | test_req_feature_engineering.py::test_fe_06_ac1_a_fixture_sentence_over_the_limit_is<br>test_sentence_models.py::test_a_sentence_longer_than_the_model_accepts_is_cut_and_flagged | not tested (NOT IMPLEMENTED); real check |
 | FE-06-AC2 | a277788170af | test_req_feature_engineering.py::test_fe_06_ac2_the_truncated_share_is_in_the_feature | not tested (NOT IMPLEMENTED) |
-| FE-07-AC1 | d16aca682341 | test_req_feature_engineering.py::test_fe_07_ac1_hand_calculated_fixture_matches_to_four_decimals | not tested (NOT IMPLEMENTED) |
-| FE-08-AC1 | 2bbe8955ceec | test_req_feature_engineering.py::test_fe_08_ac1_hand_calculated_fixture_matches | not tested (BLOCKED) |
-| FE-08-AC2 | a6c24f3f93fa | test_req_feature_engineering.py::test_fe_08_ac2_fixture_with_3_sentences_is_unavailable | not tested (BLOCKED) |
+| FE-07-AC1 | d16aca682341 | test_req_feature_engineering.py::test_fe_07_ac1_hand_calculated_fixture_matches_to_four_decimals<br>test_sentence_scores.py::test_call_scores_are_the_plain_mean_of_the_sentences_that_count | not tested (NOT IMPLEMENTED); real check |
+| FE-08-AC1 | 2bbe8955ceec | test_req_feature_engineering.py::test_fe_08_ac1_hand_calculated_fixture_matches | not tested (NOT IMPLEMENTED) |
+| FE-08-AC2 | a6c24f3f93fa | test_req_feature_engineering.py::test_fe_08_ac2_fixture_with_3_sentences_is_unavailable | not tested (NOT IMPLEMENTED) |
 | FE-09-AC1 | 3dbaedec6185 | test_req_feature_engineering.py::test_fe_09_ac1_benchmark_record_exists_with_the_hardware_stated | not tested (NEEDS MEASUREMENT) |
-| FE-10-AC1 | 3f0b8932d058 | test_req_feature_engineering.py::test_fe_10_ac1_fixture_sentences_with_known_hedge_counts_match | not tested (BLOCKED) |
-| FE-10-AC2 | 2d52f842305f | test_req_feature_engineering.py::test_fe_10_ac2_list_version_is_in_the_feature_set | not tested (BLOCKED) |
+| FE-10-AC1 | 3f0b8932d058 | test_req_feature_engineering.py::test_fe_10_ac1_fixture_sentences_with_known_hedge_counts_match | not tested (NOT IMPLEMENTED) |
+| FE-10-AC2 | 2d52f842305f | test_req_feature_engineering.py::test_fe_10_ac2_list_version_is_in_the_feature_set | not tested (NOT IMPLEMENTED) |
 | FE-11-AC1 | eaa1d569ee77 | test_req_feature_engineering.py::test_fe_11_ac1_register_entry_exists | not tested (NOT IMPLEMENTED) |
-| FE-12-AC1 | a9420d23a058 | test_req_feature_engineering.py::test_fe_12_ac1_fixture_with_a_known_word_count | not tested (BLOCKED) |
-| FE-13-AC1 | 86b55e535aa0 | test_req_feature_engineering.py::test_fe_13_ac1_fixture_sentences_with_known_negation_counts_match | not tested (BLOCKED) |
-| FE-14-AC1 | 4804b2b37799 | test_req_feature_engineering.py::test_fe_14_ac1_fixture_with_4_flagged_of_20_gives | not tested (BLOCKED) |
-| FE-15-AC1 | ee277e360c0c | test_req_feature_engineering.py::test_fe_15_ac1_fixture_q_a_with_5_questions_gives | not tested (BLOCKED) |
-| FE-16-AC1 | 5235f241f8a0 | test_req_feature_engineering.py::test_fe_16_ac1_fixture_matches_a_hand_calculation | not tested (BLOCKED) |
+| FE-12-AC1 | a9420d23a058 | test_req_feature_engineering.py::test_fe_12_ac1_fixture_with_a_known_word_count | not tested (NOT IMPLEMENTED) |
+| FE-13-AC1 | 86b55e535aa0 | test_req_feature_engineering.py::test_fe_13_ac1_fixture_sentences_with_known_negation_counts_match | not tested (NOT IMPLEMENTED) |
+| FE-14-AC1 | 4804b2b37799 | test_req_feature_engineering.py::test_fe_14_ac1_fixture_with_4_flagged_of_20_gives | not tested (NOT IMPLEMENTED) |
+| FE-15-AC1 | ee277e360c0c | test_req_feature_engineering.py::test_fe_15_ac1_fixture_q_a_with_5_questions_gives | not tested (NOT IMPLEMENTED) |
+| FE-16-AC1 | 5235f241f8a0 | test_req_feature_engineering.py::test_fe_16_ac1_fixture_matches_a_hand_calculation | not tested (NOT IMPLEMENTED) |
 | FE-17-AC1 | 119655cb47ec | test_req_feature_engineering.py::test_fe_17_ac1_fixture_matches | not tested (NOT IMPLEMENTED) |
 | FE-17-AC2 | 0b0e2492d592 | test_req_feature_engineering.py::test_fe_17_ac2_fixture_with_no_analyst_turns_is_unavailable | not tested (NOT IMPLEMENTED) |
-| FE-18-AC1 | 2bbe8955ceec | test_req_feature_engineering.py::test_fe_18_ac1_hand_calculated_fixture_matches | not tested (BLOCKED) |
-| FE-19-AC1 | 119655cb47ec | test_req_feature_engineering.py::test_fe_19_ac1_fixture_matches | not tested (BLOCKED) |
+| FE-18-AC1 | 2bbe8955ceec | test_req_feature_engineering.py::test_fe_18_ac1_hand_calculated_fixture_matches | not tested (NOT IMPLEMENTED) |
+| FE-19-AC1 | 119655cb47ec | test_req_feature_engineering.py::test_fe_19_ac1_fixture_matches | not tested (NOT IMPLEMENTED) |
 | FE-20-AC1 | 30e9e29c09e6 | test_req_feature_engineering.py::test_fe_20_ac1_fixture_company_without_gross_profit_is_unavailable | not tested (NOT IMPLEMENTED) |
-| FE-21-AC1 | 7d6feeff117c | test_req_feature_engineering.py::test_fe_21_ac1_fixture_with_rising_sues_gives_a_positive | not tested (BLOCKED) |
-| FE-21-AC2 | 038a0577e763 | test_req_feature_engineering.py::test_fe_21_ac2_fixture_with_three_prior_values_is_unavailable | not tested (BLOCKED) |
-| FE-22-AC1 | 119655cb47ec | test_req_feature_engineering.py::test_fe_22_ac1_fixture_matches | not tested (BLOCKED) |
-| FE-22-AC2 | a7ed588cd72a | test_req_feature_engineering.py::test_fe_22_ac2_a_planted_future_price_has_no_effect | not tested (BLOCKED) |
+| FE-21-AC1 | 7d6feeff117c | test_req_feature_engineering.py::test_fe_21_ac1_fixture_with_rising_sues_gives_a_positive | not tested (NOT IMPLEMENTED) |
+| FE-21-AC2 | 038a0577e763 | test_req_feature_engineering.py::test_fe_21_ac2_fixture_with_three_prior_values_is_unavailable | not tested (NOT IMPLEMENTED) |
+| FE-22-AC1 | 119655cb47ec | test_req_feature_engineering.py::test_fe_22_ac1_fixture_matches | not tested (NOT IMPLEMENTED) |
+| FE-22-AC2 | a7ed588cd72a | test_req_feature_engineering.py::test_fe_22_ac2_a_planted_future_price_has_no_effect | not tested (NOT IMPLEMENTED) |
 | FE-23-AC1 | a5dc1e019008 | test_req_feature_engineering.py::test_fe_23_ac1_a_t0_vector_built_for_a_planted | not tested (NOT IMPLEMENTED) |
 | FE-24-AC1 | cd04efcac77c | test_req_feature_engineering.py::test_fe_24_ac1_fixture_with_a_null_feature_trains_and | not tested (NOT IMPLEMENTED) |
 | FE-24-AC2 | 882f816ab756 | test_req_feature_engineering.py::test_fe_24_ac2_no_stored_zero_stands_for_missing | not tested (NOT IMPLEMENTED) |
@@ -417,7 +417,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | FE-27-AC1 | 7bc0b4d9f717 | test_req_feature_engineering.py::test_fe_27_ac1_registry_file_exists_and_every_column_of | not tested (NOT IMPLEMENTED) |
 | FE-28-AC1 | edc91b8205d8 | test_req_feature_engineering.py::test_fe_28_ac1_test_changes_each_component_in_turn_and | not tested (NOT IMPLEMENTED) |
 | FE-28-AC2 | bb151798bd25 | test_req_feature_engineering.py::test_fe_28_ac2_two_runs_are_identical | not tested (NOT IMPLEMENTED) |
-| FE-29-AC1 | 5f1f69541829 | test_req_feature_engineering.py::test_fe_29_ac1_re_running_a_batch_leaves_the_row | not tested (NOT IMPLEMENTED) |
+| FE-29-AC1 | 5f1f69541829 | test_req_feature_engineering.py::test_fe_29_ac1_re_running_a_batch_leaves_the_row<br>test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again<br>test_sentence_scores.py::test_the_scoring_task_run_twice_leaves_the_same_rows | not tested (NOT IMPLEMENTED); real check |
 | FE-30-AC1 | 567aeb729ed3 | test_req_feature_engineering.py::test_fe_30_ac1_the_feature_set_version_in_the_test | not tested (NOT IMPLEMENTED) |
 | FE-31-AC1 | bbeff7e09969 | test_req_feature_engineering.py::test_fe_31_ac1_report_exists_and_the_baseline_is_stored | not tested (NEEDS MEASUREMENT) |
 | FE-32-AC1 | 565d708f039b | test_req_feature_engineering.py::test_fe_32_ac1_the_notebook_executes_without_error_in_the | not tested (NOT IMPLEMENTED) |
@@ -460,26 +460,26 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | AG-25-AC1 | 1206dcf82a09 | test_req_explanation_agent.py::test_ag_25_ac1_results_table_has_all_three_values_per | not tested (NEEDS MEASUREMENT) |
 | AG-26-AC1 | cf7bb015f009 | test_req_explanation_agent.py::test_ag_26_ac1_migration_exists_and_the_fields_are_populated | not tested (NOT IMPLEMENTED) |
 | DB-01-AC1 | 9f7c33ece34d | test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql | real check |
-| DB-01-AC2 | 1f6839ebdbfa | test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | not tested (NOT IMPLEMENTED) |
-| DB-02-AC1 | 504f4171484a | test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | not tested (BLOCKED) |
-| DB-03-AC1 | 61553542c50f | test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | not tested (BLOCKED) |
-| DB-03-AC2 | 0b503f907749 | test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | not tested (BLOCKED) |
-| DB-04-AC1 | 194bfc45ce6b | test_req_database.py::test_db_04_ac1_join_on_company_id_across_ten_known | not tested (NOT IMPLEMENTED) |
+| DB-01-AC2 | 1f6839ebdbfa | test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | real check |
+| DB-02-AC1 | 504f4171484a | test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | expected failure (requirement not met yet) |
+| DB-03-AC1 | 61553542c50f | test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | real check |
+| DB-03-AC2 | 0b503f907749 | test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | real check |
+| DB-04-AC1 | 194bfc45ce6b | test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history | real check |
 | DB-05-AC1 | 4c8dd45eb9d1 | test_req_database.py::test_db_05_ac1_inserting_a_duplicate_of_each_fails | not tested (NOT IMPLEMENTED) |
 | DB-06-AC1 | 1da7d438cbc2 | test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability | not tested (NOT IMPLEMENTED) |
-| DB-07-AC1 | a0c98b50be17 | test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | not tested (NOT IMPLEMENTED) |
-| DB-08-AC1 | 0ed1e228e9cc | test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each | not tested (NOT IMPLEMENTED) |
-| DB-09-AC1 | 86b1c534c190 | test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later | not tested (NOT IMPLEMENTED) |
-| DB-09-AC2 | 645e7fe7514d | test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of | not tested (NOT IMPLEMENTED) |
-| DB-10-AC1 | 671a35897c0e | test_req_database.py::test_db_10_ac1_an_overlapping_membership_insert_fails | not tested (NOT IMPLEMENTED) |
-| DB-10-AC2 | a27e0056745c | test_req_database.py::test_db_10_ac2_a_date_on_a_boundary_resolves_to | not tested (NOT IMPLEMENTED) |
-| DB-11-AC1 | 924b81e649e6 | test_req_database.py::test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table | not tested (NOT IMPLEMENTED) |
+| DB-07-AC1 | a0c98b50be17 | test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | real check |
+| DB-08-AC1 | 0ed1e228e9cc | test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table | real check |
+| DB-09-AC1 | 86b1c534c190 | test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned | real check |
+| DB-09-AC2 | 645e7fe7514d | test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly | real check |
+| DB-10-AC1 | 671a35897c0e | test_storage_rules.py::test_an_overlapping_membership_insert_fails | real check |
+| DB-10-AC2 | a27e0056745c | test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period | real check |
+| DB-11-AC1 | 924b81e649e6 | test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes | real check |
 | DB-12-AC1 | 7bb3d16990e9 | test_req_database.py::test_db_12_ac1_insert_of_a_featurevector_without_a_feature | not tested (NOT IMPLEMENTED) |
-| DB-13-AC1 | b431d2cfe695 | test_req_database.py::test_db_13_ac1_fault_injected_mid_event_leaves_no_rows | not tested (NOT IMPLEMENTED) |
-| DB-13-AC2 | 529e9566adbe | test_req_database.py::test_db_13_ac2_re_running_a_stage_leaves_the_row | not tested (NOT IMPLEMENTED) |
+| DB-13-AC1 | b431d2cfe695 | test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only | real check |
+| DB-13-AC2 | 529e9566adbe | test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only | real check |
 | DB-14-AC1 | c41d812d12fd | test_req_database.py::test_db_14_ac1_explain_output_for_each_named_query_is | not tested (NOT IMPLEMENTED) |
-| DB-15-AC1 | 1333b5197f76 | test_req_database.py::test_db_15_ac1_size_report_exists | not tested (NEEDS MEASUREMENT) |
-| DB-16-AC1 | 931636ac485f | test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | not tested (NOT IMPLEMENTED) |
+| DB-15-AC1 | 1333b5197f76 | test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart<br>test_req_database.py::test_db_15_ac1_size_report_exists | not tested (NEEDS MEASUREMENT); real check |
+| DB-16-AC1 | 931636ac485f | test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | real check |
 | DB-17-AC1 | 76b4852da8d3 | test_req_database.py::test_db_17_ac1_section_11_matches_the_migrated_schema | not tested (BLOCKED) |
 | UX-01-AC1 | 56226558b098 | test_req_frontend.py::test_ux_01_ac1_the_dashboard_s_container_has_no_database | not tested (NOT IMPLEMENTED) |
 | UX-01-AC2 | aad81e4365ca | test_req_frontend.py::test_ux_01_ac2_a_search_finds_no_database_import | not tested (NOT IMPLEMENTED) |
@@ -494,37 +494,39 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | UX-09-AC1 | 029af24dd811 | test_req_frontend.py::test_ux_09_ac1_a_page_test_finds_no_transcript_text | not tested (BLOCKED) |
 | UX-10-AC1 | a220daae1f8a | test_req_frontend.py::test_ux_10_ac1_task_script_is_on_file_and_dated | not tested (NEEDS PERSON) |
 | UX-11-AC1 | 8ab50ef609d1 | test_req_frontend.py::test_ux_11_ac1_service_starts_from_the_readme_command_and | not tested (BLOCKED) |
-| IG-01-AC1 | 35f0f4fe8553 | test_req_ingestion_and_preparation.py::test_ig_01_ac1_running_the_same_task_twice_gives_an | not tested (NOT IMPLEMENTED) |
-| IG-01-AC2 | ec6937f5f7ed | test_req_ingestion_and_preparation.py::test_ig_01_ac2_killing_a_worker_mid_task_and_restarting | not tested (NOT IMPLEMENTED) |
-| IG-02-AC1 | f2dd3e0e0b1b | test_req_ingestion_and_preparation.py::test_ig_02_ac1_an_injected_failure_produces_three_retries_and | not tested (NOT IMPLEMENTED) |
-| IG-03-AC1 | ee776b63eb02 | test_req_ingestion_and_preparation.py::test_ig_03_ac1_each_run_produces_a_queryable_row | not tested (NOT IMPLEMENTED) |
-| IG-03-AC2 | 3ff567b09bca | test_req_ingestion_and_preparation.py::test_ig_03_ac2_a_forced_error_gives_status_failed | not tested (NOT IMPLEMENTED) |
-| IG-04-AC1 | 975848720eb8 | test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company | not tested (NEEDS MEASUREMENT) |
-| IG-05-AC1 | 7caa6237eb6e | test_req_ingestion_and_preparation.py::test_ig_05_ac1_the_schedule_file_lists_each_job_with | not tested (BLOCKED) |
-| IG-05-AC2 | 89b1a39cbb4a | test_req_ingestion_and_preparation.py::test_ig_05_ac2_a_job_missing_from_the_file_does | not tested (BLOCKED) |
-| IG-06-AC1 | 9398f929c9f1 | test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and | not tested (NOT IMPLEMENTED) |
-| IG-07-AC1 | 3e264c726c18 | test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no | not tested (NOT IMPLEMENTED) |
-| IG-08-AC1 | 46b998009ae7 | test_req_ingestion_and_preparation.py::test_ig_08_ac1_with_the_variable_unset_the_client_raises | not tested (NOT IMPLEMENTED) |
-| IG-09-AC1 | ff58e9bf6dc7 | test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses | not tested (NEEDS MEASUREMENT) |
-| IG-10-AC1 | 66351d22295e | test_req_ingestion_and_preparation.py::test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the | not tested (NOT IMPLEMENTED) |
-| IG-11-AC1 | 80034aba52e1 | test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the | not tested (NOT IMPLEMENTED) |
-| IG-12-AC1 | 0b44fd2e05a5 | test_req_ingestion_and_preparation.py::test_ig_12_ac1_tests_pass_with_the_network_disabled | not tested (NOT IMPLEMENTED) |
-| IG-12-AC2 | 524197fe2ddc | test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin | not tested (NOT IMPLEMENTED) |
-| IG-13-AC1 | ef3cac898955 | test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history | not tested (BLOCKED) |
-| IG-13-AC2 | 8d5378b976cd | test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review | not tested (BLOCKED) |
-| IG-14-AC1 | 26e969ea0585 | test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason | not tested (NOT IMPLEMENTED) |
-| IG-14-AC2 | 8c3a096df73e | test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05 | not tested (NOT IMPLEMENTED) |
-| IG-15-AC1 | 87f61dedd0cc | test_req_ingestion_and_preparation.py::test_ig_15_ac1_fixture_with_a_call_before_the_filing | not tested (NOT IMPLEMENTED) |
-| IG-16-AC1 | fb7ec513106c | test_req_ingestion_and_preparation.py::test_ig_16_ac1_spike_result_is_in_data_section_12 | not tested (NEEDS MEASUREMENT) |
-| IG-17-AC1 | be9f2109f8a8 | test_req_ingestion_and_preparation.py::test_ig_17_ac1_hash_of_raw_text_is_identical_before | not tested (NOT IMPLEMENTED) |
-| IG-17-AC2 | e6360ebd8761 | test_req_ingestion_and_preparation.py::test_ig_17_ac2_rule_list_has_a_version | not tested (NOT IMPLEMENTED) |
-| IG-18-AC1 | 907e9cf84c80 | test_req_ingestion_and_preparation.py::test_ig_18_ac1_on_50_hand_labelled_calls_at_least | not tested (BLOCKED) |
-| IG-18-AC2 | 593b6f9108df | test_req_ingestion_and_preparation.py::test_ig_18_ac2_a_call_with_no_marker_is_flagged | not tested (BLOCKED) |
-| IG-19-AC1 | d13701d6c539 | test_req_ingestion_and_preparation.py::test_ig_19_ac1_re_running_any_stage_leaves_table_hashes | not tested (NOT IMPLEMENTED) |
+| UX-12-AC1 | 15e68f80026d | test_req_frontend.py::test_ux_12_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| UX-13-AC1 | 369a465fb680 | test_req_frontend.py::test_ux_13_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| IG-01-AC1 | 35f0f4fe8553 | test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash | real check |
+| IG-01-AC2 | ec6937f5f7ed | test_gaps.py::test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run | real check |
+| IG-02-AC1 | f2dd3e0e0b1b | test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row | real check |
+| IG-03-AC1 | ee776b63eb02 | test_ingestion_framework.py::test_each_run_produces_a_queryable_row | real check |
+| IG-03-AC2 | 3ff567b09bca | test_ingestion_framework.py::test_a_forced_error_gives_status_failed | real check |
+| IG-04-AC1 | 975848720eb8 | test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company_run | not tested (NEEDS MEASUREMENT) |
+| IG-05-AC1 | 7caa6237eb6e | test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times | real check |
+| IG-05-AC2 | 89b1a39cbb4a | test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run | real check |
+| IG-06-AC1 | 9398f929c9f1 | test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged | real check |
+| IG-07-AC1 | 3e264c726c18 | test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no_more | not tested (NOT IMPLEMENTED) |
+| IG-08-AC1 | 46b998009ae7 | test_edgar_client.py::test_with_the_contact_unset_the_client_raises_and_sends_nothing | real check |
+| IG-09-AC1 | ff58e9bf6dc7 | test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses_the_bulk | not tested (NOT IMPLEMENTED) |
+| IG-10-AC1 | 66351d22295e | test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy<br>test_transcripts.py::test_a_stored_payload_is_parsed_with_the_network_disabled | real check |
+| IG-11-AC1 | 80034aba52e1 | test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release | real check |
+| IG-12-AC1 | 0b44fd2e05a5 | test_gaps.py::test_the_whole_test_run_has_no_outside_network | real check |
+| IG-12-AC2 | 524197fe2ddc | test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_that_it_is_made_up | real check |
+| IG-13-AC1 | ef3cac898955 | test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history<br>test_universe.py::test_ten_known_renames_resolve_to_one_company | real check |
+| IG-13-AC2 | 8d5378b976cd | test_universe.py::test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list | real check |
+| IG-14-AC1 | 26e969ea0585 | test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason | real check |
+| IG-14-AC2 | 8c3a096df73e | test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release | real check |
+| IG-15-AC1 | 87f61dedd0cc | test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff | real check |
+| IG-16-AC1 | fb7ec513106c | test_req_ingestion_and_preparation.py::test_ig_16_ac1_the_spike_result_is_in_data_section_12 | real check |
+| IG-17-AC1 | be9f2109f8a8 | test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning | real check |
+| IG-17-AC2 | e6360ebd8761 | test_transcripts.py::test_the_cleaning_rules_have_a_version_and_only_touch_characters_and_spaces | real check |
+| IG-18-AC1 | 907e9cf84c80 | test_req_ingestion_and_preparation.py::test_ig_18_ac1_on_50_hand_labelled_calls_at_least | not tested (NEEDS PERSON) |
+| IG-18-AC2 | 593b6f9108df | test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles | real check |
+| IG-19-AC1 | d13701d6c539 | test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table | real check |
 | IG-19-AC2 | 32a34b570d12 | test_req_ingestion_and_preparation.py::test_ig_19_ac2_the_label_stage_run_without_a_freeze | not tested (NOT IMPLEMENTED) |
-| IG-20-AC1 | 91c145200dcc | test_req_ingestion_and_preparation.py::test_ig_20_ac1_a_planted_record_dated_after_its_cutoff | not tested (NOT IMPLEMENTED) |
-| IG-21-AC1 | 1ad5976be6f4 | test_req_ingestion_and_preparation.py::test_ig_21_ac1_the_same_job_runs_for_5_and | not tested (BLOCKED) |
-| IG-22-AC1 | e614bffbb1d0 | test_req_ingestion_and_preparation.py::test_ig_22_ac1_report_exists_after_a_run_and_matches | not tested (NOT IMPLEMENTED) |
+| IG-20-AC1 | 91c145200dcc | test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label | real check |
+| IG-21-AC1 | 1ad5976be6f4 | test_universe.py::test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file | real check |
+| IG-22-AC1 | e614bffbb1d0 | test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing | real check |
 | MD-01-AC1 | a951e5f760c3 | test_req_modelling_and_evaluation.py::test_md_01_ac1_fixture_prediction_has_three_probabilities_summing_to | not tested (NOT IMPLEMENTED) |
 | MD-01-AC2 | 62412e9fbc07 | test_req_modelling_and_evaluation.py::test_md_01_ac2_the_class_order_in_the_record_matches | not tested (NOT IMPLEMENTED) |
 | MD-02-AC1 | 463a64eec542 | test_req_modelling_and_evaluation.py::test_md_02_ac1_report_lists_the_three_models_with_the | not tested (NOT IMPLEMENTED) |
@@ -559,6 +561,10 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | MD-22-AC1 | 2dae63eb5b49 | test_req_modelling_and_evaluation.py::test_md_22_ac1_event_with_features_gets_one_stored_prediction | not tested (NOT IMPLEMENTED) |
 | MD-22-AC2 | 24bc2d3e6966 | test_req_modelling_and_evaluation.py::test_md_22_ac2_a_second_run_adds_none | not tested (NOT IMPLEMENTED) |
 | MD-23-AC1 | edc214a96b2b | test_req_modelling_and_evaluation.py::test_md_23_ac1_altered_artefact_makes_the_endpoint_return_503 | not tested (NOT IMPLEMENTED) |
+| MD-24-AC1 | 84b32dc1b464 | test_req_modelling_and_evaluation.py::test_md_24_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| MD-25-AC1 | 1a3089e5a65e | test_req_modelling_and_evaluation.py::test_md_25_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| MD-26-AC1 | 3dcb0aa36de1 | test_req_modelling_and_evaluation.py::test_md_26_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| MD-27-AC1 | 4240befad35c | test_req_modelling_and_evaluation.py::test_md_27_ac1_placeholder | not tested (NOT IMPLEMENTED) |
 | SV-01-AC1 | 223f07089bdc | test_req_api_and_serving.py::test_sv_01_ac1_the_api_code_imports_no_model_package | real check |
 | SV-01-AC2 | c4e2a3048447 | test_req_api_and_serving.py::test_sv_01_ac2_a_request_makes_no_model_call | not tested (NOT IMPLEMENTED) |
 | SV-02-AC1 | dff77e5510bf | test_req_api_and_serving.py::test_sv_02_ac1_a_static_check_finds_no_database_call | not tested (NOT IMPLEMENTED) |
@@ -607,18 +613,180 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | DP-14-AC1 | bc0fcb558011 | test_req_deployment_and_operations.py::test_dp_14_ac1_rollback_is_timed_once | not tested (NEEDS MEASUREMENT) |
 | DP-14-AC2 | 297f76d3b587 | test_req_deployment_and_operations.py::test_dp_14_ac2_service_scales_to_zero_in_a_test | not tested (NEEDS MEASUREMENT) |
 | DP-15-AC1 | 76c6f788d624 | test_req_deployment_and_operations.py::test_dp_15_ac1_adr_0003_names_how_the_worker_runs | not tested (NOT IMPLEMENTED) |
+| DP-16-AC1 | 67b4b0d1bd1e | test_req_deployment_and_operations.py::test_dp_16_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| DP-17-AC1 | c3cdd6c2bdf1 | test_req_deployment_and_operations.py::test_dp_17_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| DP-18-AC1 | dc9f4bb7fcfa | test_req_deployment_and_operations.py::test_dp_18_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| DP-19-AC1 | 0d6cac8f9566 | test_req_deployment_and_operations.py::test_dp_19_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| DP-20-AC1 | dcfd48250531 | test_req_deployment_and_operations.py::test_dp_20_ac1_placeholder | not tested (NOT IMPLEMENTED) |
+| LC-01-AC1 | 1b07bc0d9815 | test_licensing.py::test_every_locked_package_and_container_image_has_a_licence_row | real check |
+| LC-02-AC1 | bf90dc08bd15 | test_licensing.py::test_every_row_uses_a_listed_class_and_only_two_data_classes_may_be_deployed | real check |
+| LC-03-AC1 | 32aa8cc33924 | test_licensing.py::test_every_dataset_the_project_imports_may_be_deployed<br>test_licensing.py::test_the_gap_in_dataset_licences_is_exactly_the_one_recorded | expected failure (requirement not met yet); real check |
+| LC-04-AC1 | 9caa7adc4fe3 | test_licensing.py::test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused | real check |
+| LC-05-AC1 | 8d39602b7231 | test_licensing.py::test_the_committed_notices_are_the_ones_the_registers_produce | real check |
+| LC-06-AC1 | fb039ef7822d | test_licensing.py::test_every_committed_fixture_says_which_dataset_it_comes_from<br>test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution | real check |
+| LC-07-AC1 | 126fc65ff3b3 | test_licensing.py::test_every_source_name_in_the_code_has_a_register_row | real check |
+| LC-08-AC1 | 70aac4f5174a | test_licensing.py::test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found<br>test_licensing.py::test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation | real check |
+| LC-09-AC1 | 31e606baa57b | test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data | real check |
+| LC-10-AC1 | 0a3d2e9b950c | test_licensing.py::test_a_licence_check_older_than_ninety_days_is_listed_as_stale | real check |
+| LC-11-AC1 | 125555a8ceab | test_licensing.py::test_every_library_and_image_in_use_may_be_used_in_a_deployed_system<br>test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded | expected failure (requirement not met yet); real check |
 
 ## B. Test to requirement checks and code
 
 | Test | Requirement checks | Code | Kind |
 |---|---|---|---|
+| test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first | IG-10, LB-02, PL-04 | src/earnings/financials.py | real check |
+| test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier | AE-04, LB-03, LB-04 | src/earnings/financials.py | real check |
+| test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis | LB-03, LB-05 | src/earnings/financials.py | real check |
+| test_audit_fixes.py::test_a_quarter_refiled_with_a_shifted_end_date_is_still_the_same_quarter | LB-04 | src/earnings/label.py | real check |
+| test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label | LB-01, LB-04 | src/earnings/label.py | real check |
+| test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label | LB-05 | src/earnings/financials.py, src/earnings/label.py | real check |
+| test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched | IG-14, IM-03, TX-01, TX-04 | src/earnings/transcripts.py | real check |
+| test_audit_fixes.py::test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices | FR-14, IG-15, PX-02 | src/earnings/events.py, src/earnings/prices.py | real check |
+| test_audit_fixes.py::test_a_sixteen_week_fourth_quarter_is_a_quarter | DV-06, LB-01 | src/earnings/label.py | real check |
+| test_audit_fixes.py::test_the_price_window_check_fails_when_a_read_lets_the_announcement_day_through | DV-05, PX-02 | src/earnings/prices.py | real check |
+| test_audit_fixes.py::test_each_gate_counts_a_planted_fault | AE-03, CE-01, DV-02, DV-03, IG-20, VL-01 | src/earnings/label.py, src/earnings/validation.py | real check |
+| test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins | LB-05, PX-01, VL-05 | src/earnings/financials.py, src/earnings/prices.py | real check |
+| test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing | AE-01, TX-01 | src/earnings/events.py, src/earnings/migrations/versions | real check |
+| test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters | DV-06, LB-01 | src/earnings/label.py | real check |
+| test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known | DV-08, IG-05, IG-10 | src/earnings/transcripts.py | real check |
+| test_audit_fixes.py::test_a_quarter_reported_as_basic_and_diluted_is_read | IG-10, LB-01, LB-04 | src/earnings/financials.py | real check |
+| test_audit_fixes.py::test_a_later_cumulative_result_does_not_hide_what_the_three_quarters_gave_earlier | LB-03, LB-04 | src/earnings/financials.py | real check |
+| test_audit_fixes.py::test_the_three_quarter_sum_also_puts_the_quarters_on_the_years_share_basis | LB-03, LB-05 | src/earnings/financials.py | real check |
+| test_audit_fixes.py::test_the_loaded_splits_keep_unknown_ratios_and_the_load_uses_the_price_sources_splits | LB-05 | src/earnings/financials.py | real check |
+| test_audit_fixes.py::test_the_ten_day_and_twenty_day_limits_are_where_they_were_approved | LB-01, LB-04 | src/earnings/label.py | real check |
+| test_audit_fixes.py::test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates | FD-03, LB-04 | src/earnings/financials.py, src/earnings/label.py | real check |
+| test_audit_fixes.py::test_the_checks_put_events_in_a_capture_gap_into_quarantine | DV-01, IG-06, SR-10 | src/earnings/validation.py | real check |
+| test_calendar.py::test_known_exchange_holidays_and_open_days | DV-07-AC1 | src/earnings/calendar.py | real check |
+| test_calendar.py::test_pre_open_and_after_close_releases_map_to_the_right_session | DV-07-AC1 | src/earnings/calendar.py | real check |
+| test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session | DV-07-AC1 | src/earnings/calendar.py, src/earnings/financials.py | real check |
+| test_calendar.py::test_a_timestamp_without_a_time_zone_is_refused | DV-07-AC1 | src/earnings/calendar.py | real check |
 | test_config.py::test_missing_required_setting_raises | SP-06 | src/earnings/config.py | real check |
 | test_config.py::test_sec_user_agent_is_optional | SP-06 | src/earnings/config.py | real check |
+| test_config.py::test_the_superuser_settings_are_optional_so_a_service_can_run_without_them | DB-02 | src/earnings/config.py | real check |
+| test_consensus_capture.py::test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected | CE-02-AC2, SR-08-AC1 | src/earnings/consensus.py, src/earnings/migrations/versions | real check |
+| test_consensus_capture.py::test_sr_08_snapshots_are_append_only_for_the_worker_role | SR-08 | src/earnings/migrations/versions | real check |
+| test_consensus_capture.py::test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent | SR-10 | src/earnings/consensus.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_sr_10_a_source_failure_is_reported_and_stores_no_row | SR-10 | src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_sr_10_gap_longer_than_three_days_is_reported | SR-10 | src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_sr_10_catch_up_asks_only_when_today_has_no_capture | SR-10 | src/earnings/consensus.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_sr_10_daily_schedule_runs_at_22_30_utc | SR-10 | src/earnings/celery_app.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers | SR-10 | src/earnings/capture_universe.csv, src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_sr_10_a_row_with_no_mean_is_not_stored | SR-10 | src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_the_start_date_in_the_code_and_in_the_migration_are_the_same | SR-08 | src/earnings/consensus.py, src/earnings/migrations/versions | real check |
+| test_consensus_capture.py::test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on | SR-10 | src/earnings/config.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_the_catch_up_task_retries_when_the_database_is_still_starting | SR-10 | src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try | SR-10 | src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task | IG-06, SR-10 | src/earnings/consensus.py, src/earnings/tasks.py | real check |
+| test_consensus_capture.py::test_a_stack_that_never_captured_reports_a_gap_from_the_start_day | SR-10 | src/earnings/consensus.py | real check |
+| test_consensus_capture.py::test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows | EQ-07, SR-10 | src/earnings/consensus.py, src/earnings/tasks.py | real check |
+| test_edgar_client.py::test_with_the_contact_unset_the_client_raises_and_sends_nothing | IG-08-AC1 | src/earnings/clients/edgar.py | real check |
+| test_edgar_client.py::test_the_contact_is_sent_as_the_user_agent_and_never_logged_or_shown | IG-08 | src/earnings/clients/edgar.py | real check |
+| test_edgar_client.py::test_the_contact_goes_only_to_sec_gov_hosts | IG-08, SP-06 | src/earnings/clients/edgar.py | real check |
+| test_edgar_client.py::test_a_request_log_line_is_written_for_each_source_call | SR-07-AC1 | src/earnings/clients/edgar.py, src/earnings/consensus.py | real check |
+| test_edgar_client.py::test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock | IG-07 | src/earnings/clients/edgar.py, src/earnings/limits.py | real check |
+| test_edgar_client.py::test_two_worker_processes_together_stay_under_the_limit_through_redis | IG-07 | src/earnings/limits.py, src/earnings/tasks.py | real check |
+| test_edgar_client.py::test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network | IG-10, IG-12 | src/earnings/parsing.py, tests/fixtures/edgar_companyfacts_aapl_trimmed.json | real check |
+| test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline | DB-11, IG-10 | src/earnings/parsing.py, src/earnings/rawstore.py | real check |
+| test_edgar_client.py::test_raw_payloads_are_insert_only_and_the_length_is_checked | DB-11 | src/earnings/migrations/versions | real check |
+| test_edgar_client.py::test_fetching_the_same_payload_twice_leaves_an_identical_table_hash | IG-01 | src/earnings/rawstore.py, src/earnings/tasks.py | real check |
+| test_events.py::test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded | CE-05, DB-06, FR-02-AC1, FR-02-AC2 | src/earnings/events.py, src/earnings/migrations/versions | real check |
+| test_events.py::test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route | CE-05, DB-06 | src/earnings/migrations/versions | real check |
+| test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement | DB-09, LB-04-AC1 | src/earnings/events.py, src/earnings/label.py | real check |
+| test_events.py::test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input | FR-14-AC2 | src/earnings/events.py | real check |
+| test_events.py::test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing | IG-22-AC1, TX-07 | src/earnings/events.py | real check |
+| test_events.py::test_the_size_report_keeps_measured_and_estimated_figures_apart | DB-15-AC1 | src/earnings/events.py | real check |
+| test_events.py::test_a_new_snapshot_is_a_new_row_and_the_earlier_one_is_unchanged | FR-14-AC1 | src/earnings/migrations/versions | real check |
+| test_events.py::test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only | DB-13-AC1, DB-13-AC2, PL-04-AC1 | src/earnings/events.py | real check |
+| test_events.py::test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day | FR-02 | src/earnings/events.py, src/earnings/financials.py | real check |
+| test_events.py::test_an_event_whose_eps_was_filed_before_the_release_is_excluded_from_training | FR-02 | src/earnings/events.py | real check |
+| test_financials.py::test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date | AE-04-AC1, FD-03-AC1 | src/earnings/financials.py, src/earnings/migrations/versions | real check |
+| test_financials.py::test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value | AE-04 | src/earnings/migrations/versions | real check |
+| test_financials.py::test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d | FD-02-AC1 | src/earnings/migrations/versions | real check |
+| test_financials.py::test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value | AE-03-AC1, FD-01-AC1 | src/earnings/financials.py | real check |
+| test_financials.py::test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version | FD-01 | src/earnings/financials.py | real check |
+| test_financials.py::test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version | FD-03 | src/earnings/migrations/versions | real check |
+| test_financials.py::test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes | DB-11-AC1 | src/earnings/financials.py, src/earnings/rawstore.py | real check |
+| test_financials.py::test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures | LB-03-AC1 | src/earnings/financials.py | real check |
+| test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it | LB-03 | src/earnings/financials.py | real check |
+| test_financials.py::test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up | LB-03 | src/earnings/financials.py | real check |
+| test_financials.py::test_revenue_uses_the_first_tag_a_company_reports_and_names_it | FD-01 | src/earnings/financials.py | real check |
+| test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff | IG-15-AC1 | src/earnings/financials.py | real check |
+| test_financials.py::test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none | IG-15 | src/earnings/financials.py | real check |
+| test_financials.py::test_older_submission_pages_are_read_like_the_recent_block | IG-15 | src/earnings/financials.py | real check |
+| test_financials.py::test_backfill_counts_requests_skips_stored_payloads_and_reads_only_pages_that_can_matter | IG-09 | src/earnings/backfill.py | real check |
+| test_financials.py::test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure | LB-04 | src/earnings/financials.py | real check |
+| test_gaps.py::test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times | IG-05-AC1, NFR-03-AC1 | src/earnings/schedule.py, src/earnings/tasks.py | real check |
+| test_gaps.py::test_the_filing_check_stores_each_list_and_counts_only_new_earnings_releases | IG-05 | src/earnings/tasks.py | real check |
+| test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged | IG-06-AC1, SR-10-AC2 | src/earnings/consensus.py, src/earnings/validation.py | real check |
+| test_gaps.py::test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run | IG-01-AC2 | src/earnings/events.py | real check |
+| test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table | IG-19-AC1 | src/earnings/events.py, src/earnings/prices.py, src/earnings/transcripts.py | real check |
+| test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing | AE-01-AC1 | src/earnings/validation.py | real check |
+| test_gaps.py::test_the_derived_quarter_comparison_lists_every_difference_above_one_percent | LB-03-AC2, TH-12 | src/earnings/pressrelease.py | real check |
+| test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation | TH-06-AC1, VL-05-AC1 | src/earnings/validation.py | real check |
+| test_gaps.py::test_the_whole_test_run_has_no_outside_network | IG-12-AC1 | tests/conftest.py | real check |
+| test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new | EQ-07, IG-05 | src/earnings/tasks.py | real check |
+| test_gaps.py::test_the_transcript_check_run_twice_changes_no_data | EQ-07, NFR-03 | src/earnings/clients/huggingface.py, src/earnings/tasks.py | real check |
+| test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows | EQ-07, IG-05, IG-06 | src/earnings/tasks.py, src/earnings/validation.py | real check |
+| test_gaps.py::test_the_threshold_in_the_code_is_the_one_recorded_in_the_decision_log | VL-05-AC2 | src/earnings/validation.py | real check |
 | test_health_unit.py::test_all_ok_returns_200 | NFR-04-AC1 | src/earnings/api/main.py | real check |
 | test_health_unit.py::test_any_failure_returns_503_and_names_the_component | NFR-04-AC1 | src/earnings/api/main.py | real check |
 | test_health_unit.py::test_sec_user_agent_value_is_never_returned | SP-06 | src/earnings/api/main.py, src/earnings/config.py | real check |
 | test_health_unit.py::test_sec_user_agent_unset_is_reported_false | SP-06 | src/earnings/api/main.py, src/earnings/config.py | real check |
 | test_health_unit.py::test_database_exception_is_reported_not_raised | NFR-04-AC1 | src/earnings/api/main.py, src/earnings/db.py | real check |
+| test_ingestion_framework.py::test_an_injected_failure_gives_three_retries_and_one_dead_letter_row | IG-02-AC1, PL-02-AC1 | src/earnings/migrations/versions, src/earnings/tasking.py | real check |
+| test_ingestion_framework.py::test_a_task_that_recovers_leaves_no_dead_letter | IG-02 | src/earnings/tasking.py | real check |
+| test_ingestion_framework.py::test_retry_settings_and_late_acknowledgement_follow_decision_c_45 | IG-02 | src/earnings/tasking.py | real check |
+| test_ingestion_framework.py::test_the_redis_redelivery_timeout_is_four_hours | IG-04 | src/earnings/celery_app.py, src/earnings/tasking.py | real check |
+| test_ingestion_framework.py::test_each_run_produces_a_queryable_row | IG-03-AC1, PL-01-AC1 | src/earnings/migrations/versions, src/earnings/runlog.py | real check |
+| test_ingestion_framework.py::test_a_forced_error_gives_status_failed | IG-03-AC2 | src/earnings/runlog.py | real check |
+| test_ingestion_framework.py::test_a_run_that_reports_failure_with_zero_rows_is_not_a_success | IG-03 | src/earnings/runlog.py | real check |
+| test_ingestion_framework.py::test_capture_task_records_a_failed_run_when_every_company_fails | IG-03, SR-10 | src/earnings/tasks.py | real check |
+| test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash | IG-01-AC1 | src/earnings/consensus.py, src/earnings/tasks.py | real check |
+| test_ingestion_framework.py::test_a_job_missing_from_the_schedule_file_does_not_run | IG-05-AC2 | src/earnings/celery_app.py, src/earnings/schedule.py | real check |
+| test_ingestion_framework.py::test_every_listed_job_has_a_utc_time_and_a_registered_task | IG-05 | src/earnings/schedule.py | real check |
+| test_ingestion_framework.py::test_a_job_with_no_success_for_more_than_three_days_is_reported | IG-06 | src/earnings/runlog.py | real check |
+| test_label.py::test_sue_matches_a_hand_calculation_to_four_decimals | LB-01-AC1, TH-11-AC1 | src/earnings/label.py | real check |
+| test_label.py::test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity | LB-02-AC1, LB-02-AC2, TH-11-AC1 | src/earnings/label.py | real check |
+| test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label | IG-20-AC1, LB-04-AC1 | src/earnings/label.py | real check |
+| test_label.py::test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series | LB-05-AC1 | src/earnings/label.py | real check |
+| test_label.py::test_the_real_apple_data_gives_the_two_dated_split_factors_once_each | LB-05-AC1 | src/earnings/label.py | real check |
+| test_label.py::test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged | LB-05 | src/earnings/label.py | real check |
+| test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead | LB-01 | src/earnings/label.py | real check |
+| test_label.py::test_a_label_whose_inputs_hold_a_scale_error_is_marked | DV-04 | src/earnings/label.py | real check |
+| test_label.py::test_a_training_set_with_two_label_routes_fails | CE-05-AC2, SC-07-AC2 | src/earnings/label.py | real check |
+| test_label.py::test_a_quarter_refiled_with_a_shifted_start_date_is_still_the_same_quarter | LB-04-AC1 | src/earnings/label.py | real check |
+| test_licensing.py::test_every_locked_package_and_container_image_has_a_licence_row | LC-01-AC1 | src/earnings/licensing.py, src/earnings/third_party_register.csv | real check |
+| test_licensing.py::test_every_row_uses_a_listed_class_and_only_two_data_classes_may_be_deployed | LC-02-AC1 | src/earnings/licensing.py | real check |
+| test_licensing.py::test_every_dataset_the_project_imports_may_be_deployed | LC-03-AC1 | src/earnings/source_register.csv | expected failure (requirement not met yet) |
+| test_licensing.py::test_the_gap_in_dataset_licences_is_exactly_the_one_recorded | LC-03-AC1 | src/earnings/licensing.py, src/earnings/source_register.csv | real check |
+| test_licensing.py::test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused | DP-13, LC-04-AC1, SR-03 | src/earnings/licensing.py | real check |
+| test_licensing.py::test_the_committed_notices_are_the_ones_the_registers_produce | LC-05-AC1 | src/earnings/licensing.py | real check |
+| test_licensing.py::test_every_committed_fixture_says_which_dataset_it_comes_from | LC-06-AC1 | tests/fixtures/fixture_sources.csv | real check |
+| test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution | DP-10, LC-06-AC1 | tests/fixtures/fixture_sources.csv | real check |
+| test_licensing.py::test_every_source_name_in_the_code_has_a_register_row | LC-07-AC1, SR-01 | src/earnings/clients, src/earnings/licensing.py | real check |
+| test_licensing.py::test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found | LC-08-AC1 | src/earnings/licensing.py, src/earnings/schedule.py | real check |
+| test_licensing.py::test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation | LC-08-AC1 | src/earnings/clients/yahoo.py, src/earnings/schedule.py | real check |
+| test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data | FE-05, LC-09-AC1 | src/earnings/third_party_register.csv | real check |
+| test_licensing.py::test_a_licence_check_older_than_ninety_days_is_listed_as_stale | LC-10-AC1 | src/earnings/licensing.py | real check |
+| test_licensing.py::test_every_library_and_image_in_use_may_be_used_in_a_deployed_system | LC-11-AC1 | src/earnings/third_party_register.csv | expected failure (requirement not met yet) |
+| test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded | LC-11-AC1 | src/earnings/licensing.py, src/earnings/third_party_register.csv | real check |
+| test_pressrelease.py::test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter | AE-02 | src/earnings/pressrelease.py | real check |
+| test_pressrelease.py::test_adjusted_rows_negatives_and_cut_tables_are_handled | AE-02 | src/earnings/pressrelease.py | real check |
+| test_pressrelease.py::test_agreement_is_within_half_a_percent_of_the_stored_value | AE-02 | src/earnings/pressrelease.py | real check |
+| test_pressrelease.py::test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy | AE-02, IG-10-AC1 | src/earnings/pressrelease.py | real check |
+| test_pressrelease.py::test_events_are_compared_and_the_summary_counts_every_outcome | AE-02, TH-12 | src/earnings/pressrelease.py | real check |
+| test_prices.py::test_the_raw_close_is_rebuilt_from_a_split_adjusted_answer | PX-01 | src/earnings/prices.py | real check |
+| test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing | PX-01 | src/earnings/migrations/versions, src/earnings/prices.py | real check |
+| test_prices.py::test_a_planted_future_price_never_reaches_the_momentum_window | PX-02-AC1 | src/earnings/migrations/versions, src/earnings/prices.py | real check |
+| test_prices.py::test_a_series_that_mixes_adjusted_and_raw_prices_fails | PX-03-AC1 | src/earnings/prices.py | real check |
+| test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall | PX-01, VL-05 | src/earnings/prices.py | real check |
+| test_prices.py::test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows | FE-24, PX-01 | src/earnings/prices.py | real check |
+| test_prices.py::test_a_series_that_does_not_cover_the_events_is_refused | PX-01 | src/earnings/prices.py | real check |
+| test_prices.py::test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios | LB-05-AC1 | src/earnings/events.py, src/earnings/label.py | real check |
+| test_prices.py::test_the_equal_weight_universe_uses_only_the_members_of_the_day | VL-05 | src/earnings/prices.py | real check |
+| test_prices.py::test_the_price_windows_of_an_event_do_not_overlap_the_announcement | DV-05 | src/earnings/prices.py | real check |
+| test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once | PX-01, VL-05 | src/earnings/prices.py | real check |
+| test_prices.py::test_a_reused_ticker_is_refused_at_loading_and_stores_no_price | PX-01 | src/earnings/prices.py | real check |
 | test_req_api_and_serving.py::test_sv_01_ac1_the_api_code_imports_no_model_package | SV-01-AC1 | src/earnings/api/main.py, src/earnings/api/middleware.py | real check |
 | test_req_api_and_serving.py::test_sv_01_ac2_a_request_makes_no_model_call | SV-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_api_and_serving.py::test_sv_02_ac1_a_static_check_finds_no_database_call | SV-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -647,98 +815,52 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_api_and_serving.py::test_sv_15_ac2_expired_tampered_and_none_tokens_return_401 | SV-15-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_api_and_serving.py::test_sv_16_ac1_secret_scan_passes | SV-16-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_api_and_serving.py::test_sv_16_ac2_logs_contain_no_token | SV-16-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_ae_01_ac1_every_event_has_a_document_identifier_an | AE-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_ae_02_ac1_at_least_98_agreement_on_a_sample | AE-02-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_data.py::test_ae_03_ac1_basis_field_is_populated_and_has_one | AE-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_ae_03_ac2_test_in_vl_07 | AE-03-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_ae_04_ac1_after_a_simulated_correction_the_first_reported | AE-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_ce_01_ac1_zero_rows_where_capture_time_is_on | CE-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_ce_02_ac1_test_vl_01_passes | CE-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_ce_02_ac2_sr_08_test_passes | CE-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_ce_03_ac1_basis_test_vl_07_passes | CE-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_ce_04_ac1_exclusion_count_is_reported_per_year | CE-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_ce_05_ac1_dataset_version_has_a_label_route_value | CE-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_ce_05_ac2_a_test_fails_if_events_with_different | CE-05-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_ce_06_ac1_test_a_planted_forecast_dated_d_or | CE-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_ce_06_ac2_report_shows_the_age_distribution_of_consensus | CE-06-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_dv_01_ac1_quarantine_count_is_reported_per_run | DV-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_dv_02_ac1_the_three_date_fields_have_zero_nulls | DV-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_dv_02_ac2_other_fields_are_within_the_thresholds_in | DV-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_dv_03_ac1_uniqueness_check_passes_on_every_load | DV-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_dv_04_ac1_flagged_rows_have_a_reviewer_note_before | DV-04-AC1 | none yet | not tested (NEEDS PERSON) |
-| test_req_data.py::test_dv_05_ac1_date_order_test_on_every_load_reports | DV-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_dv_06_ac1_mapping_test_passes_on_five_known_non | DV-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_dv_07_ac1_test_covers_a_pre_open_and_an | DV-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_dv_08_ac1_table_hashes_match_between_two_runs | DV-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_fd_01_ac1_every_row_has_a_filing_date | FD-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_fd_01_ac2_a_sample_of_20_values_matches_the | FD-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_fd_02_ac1_test_with_a_planted_filing_dated_d | FD-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_fd_03_ac1_after_a_simulated_restatement_a_prediction_before | FD-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_fd_04_ac1_mapping_test_passes_on_the_five_non | FD-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_fd_01_ac2_a_sample_of_20_values_matches_the | FD-01-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_gs_01_ac1_sign_off_exists_before_the_dataset_is | GS-01-AC1 | none yet | not tested (NEEDS PERSON) |
-| test_req_data.py::test_gs_02_ac1_data_card_exists_for_every_dataset_version | GS-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_im_01_ac1_at_sampled_year_ends_company_count_matches | IM-01-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_data.py::test_im_02_ac1_each_year_in_the_period_has_at | IM-02-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_data.py::test_im_02_ac2_each_record_has_a_removal_date_and | IM-02-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_data.py::test_im_03_ac1_join_on_the_permanent_identifier_produces_one | IM-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_lb_01_ac1_fixture_company_with_a_hand_calculated_sue | LB-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_lb_02_ac1_exclusion_count_reported_per_year | LB-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_lb_02_ac2_zero_variance_fixture_returns_unavailable | LB-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_lb_03_ac1_derived_values_are_flagged | LB-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_lb_03_ac2_sample_comparison_is_reported_with_differences_above | LB-03-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_lb_04_ac1_test_with_a_planted_restatement_filed_after | LB-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_lb_05_ac1_test_on_a_company_with_a_split | LB-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_lb_06_ac1_frozen_threshold_record_exists | LB-06-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_lb_06_ac2_class_shares_table_exists | LB-06-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_lb_07_ac1_prospective_table_has_both_labels_per_event | LB-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_lb_07_ac2_thresholds_are_recorded | LB-07-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_lb_08_ac1_report_exists_with_all_three_measures_and | LB-08-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_px_01_ac1_20_sampled_announcement_day_closes_match_a | PX-01-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_data.py::test_px_02_ac1_test_with_a_planted_future_price_shows | PX-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_px_03_ac1_series_type_check_fails_any_series_containing | PX-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sec_01_ac1_test_vl_11_a_company_reclassified_in | SEC-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sec_02_ac1_unit_test_on_a_fixed_date_with | SEC-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | SR-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_sr_01_ac1_register_has_one_row_per_dataset_each | SR-01-AC1 | src/earnings/source_register.csv | real check |
+| test_req_data.py::test_every_source_the_code_fetches_from_has_a_register_row | SR-01 | src/earnings/clients/edgar.py, src/earnings/source_register.csv | real check |
 | test_req_data.py::test_sr_02_ac1_every_feature_column_carries_a_source_tag | SR-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_02_ac2_an_untagged_column_fails_the_build | SR-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_03_ac1_demo_bundle_manifest_lists_each_source_and | SR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_03_ac2_any_personal_use_source_fails_the_check | SR-03-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_04_ac1_hash_of_each_stored_raw_file_matches | SR-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_sr_05_ac1_written_answer_or_dated_refusal_on_file | SR-05-AC1 | none yet | not tested (NEEDS PERSON) |
-| test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | SR-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_07_ac1_request_log_exists | SR-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_sr_06_ac1_register_lists_a_fallback_per_dataset_and | SR-06-AC1 | src/earnings/source_register.csv | expected failure (requirement not met yet) |
 | test_req_data.py::test_sr_07_ac2_no_scraped_source_appears_in_the_demo | SR-07-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_08_ac1_test_rejects_any_row_for_a_snapshot | SR-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | SR-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_sr_09_ac1_source_register_has_a_cost_column_and | SR-09-AC1 | src/earnings/source_register.csv | real check |
 | test_req_data.py::test_sr_10_ac1_job_log_shows_a_successful_daily_run | SR-10-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_sr_10_ac2_a_gap_of_more_than_3_consecutive | SR-10-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_sr_11_ac1_a_test_fails_any_displayed_excerpt_longer | SR-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_th_01_ac1_at_least_90 | TH-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_02_ac1_at_least_95 | TH-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_03_ac1_at_least_98_within_0_5 | TH-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_04_ac1_3 | TH-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_th_05_ac1_within_5_of_published_count | TH-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_th_06_ac1_to_be_set_after_the_first_comparison | TH-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_07_ac1_10 | TH-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_08_ac1_at_most_2 | TH-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_09_ac1_4_weeks_20_tickers_daily | TH-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_10_ac1_28_of_30_events_agree_within_1 | TH-10-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_th_11_ac1_at_least_6_prior_seasonal_differences_8 | TH-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_12_ac1_differences_above_1_listed | TH-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_th_13_ac1_reported_no_pass_mark | TH-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_th_14_ac1_zero | TH-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_th_15_ac1_0 | TH-15-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_tx_01_ac1_100_of_rows_have_all_three_fields | TX-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_tx_01_ac2_rows_missing_one_are_rejected_and_logged | TX-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_tx_02_ac1_violations_are_zero_or_each_violation_is | TX-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_data.py::test_th_14_ac1_zero | TH-14-AC1 | src/earnings/source_register.csv | real check |
 | test_req_data.py::test_tx_03_ac1_on_a_hand_labelled_sample_of_50 | TX-03-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_tx_04_ac1_coverage_report_lists_every_missing_company_and | TX-04-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_data.py::test_tx_05_ac1_given_two_transcripts_for_one_event_the | TX-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_tx_05_ac2_dv_03_passes | TX-05-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_tx_06_ac1_sample_of_20_transcripts_has_labels_on | TX-06-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_tx_07_ac1_coverage_table_by_year_survivor_status_and | TX-07-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_data.py::test_vl_01_ac1_the_pipeline_excludes_it | VL-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_data.py::test_vl_01_ac2_any_leaked_row_fails_the_build | VL-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_vl_02_ac1_rebuilt_vectors_match_stored_vectors | VL-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_vl_02_ac2_any_mismatch_is_a_leak_and_fails | VL-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_data.py::test_vl_03_ac1_recomputed_values_match_stored_values | VL-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -758,27 +880,27 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_data.py::test_vl_11_ac1_every_sampled_company_shows_the_sector_that | VL-11-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_vl_12_ac1_at_least_28_of_30_estimates_agree | VL-12-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_data.py::test_vl_12_ac2_otherwise_the_source_cannot_build_the_label | VL-12-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
+| test_req_data.py::test_im_02_ac2_each_removed_company_record_has_its_date_and_reason | IM-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_01_ac1_the_code_uses_no_database_other_than_postgresql | DB-01-AC1 | src/earnings/config.py, src/earnings/db.py | real check |
-| test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | DB-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | DB-02-AC1 | none yet | not tested (BLOCKED) |
-| test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | DB-03-AC1 | none yet | not tested (BLOCKED) |
-| test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | DB-03-AC2 | none yet | not tested (BLOCKED) |
-| test_req_database.py::test_db_04_ac1_join_on_company_id_across_ten_known | DB-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_database.py::test_db_01_ac2_the_extension_list_matches_the_migrations | DB-01-AC2 | src/earnings/migrate.py, src/earnings/migrations/versions | real check |
+| test_req_database.py::test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden | DB-02 | src/earnings/config.py, src/earnings/migrate.py | real check |
+| test_req_database.py::test_db_02_ac1_each_role_is_tested_for_one_allowed | DB-02-AC1 | src/earnings/migrate.py | expected failure (requirement not met yet) |
+| test_req_database.py::test_db_03_ac1_a_load_fixture_with_more_clients_than | DB-03-AC1 | src/earnings/config.py, src/earnings/db.py | real check |
+| test_req_database.py::test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44 | DB-03 | src/earnings/db.py, src/earnings/migrate.py | real check |
+| test_req_database.py::test_the_application_roles_cannot_connect_to_the_postgres_database | DB-02 | src/earnings/migrate.py | real check |
+| test_req_database.py::test_db_03_ac2_a_long_query_is_cancelled | DB-03-AC2 | src/earnings/migrate.py | real check |
 | test_req_database.py::test_db_05_ac1_inserting_a_duplicate_of_each_fails | DB-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_06_ac1_insert_of_an_out_of_range_probability | DB-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | DB-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_08_ac1_the_worker_role_s_update_on_each | DB-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_09_ac1_a_planted_version_dated_d_or_later | DB-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_09_ac2_a_test_finds_no_direct_read_of | DB-09-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_10_ac1_an_overlapping_membership_insert_fails | DB-10-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_10_ac2_a_date_on_a_boundary_resolves_to | DB-10-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_11_ac1_rebuild_from_stored_payloads_gives_identical_table | DB-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone | DB-07-AC1 | src/earnings/migrations/versions | real check |
 | test_req_database.py::test_db_12_ac1_insert_of_a_featurevector_without_a_feature | DB-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_13_ac1_fault_injected_mid_event_leaves_no_rows | DB-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_database.py::test_db_13_ac2_re_running_a_stage_leaves_the_row | DB-13-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_14_ac1_explain_output_for_each_named_query_is | DB-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_database.py::test_db_15_ac1_size_report_exists | DB-15-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_database.py::test_the_functions_that_drop_or_empty_a_database_refuse_a_project_database_name | DB-16 | src/earnings/migrate.py | real check |
+| test_req_database.py::test_the_worker_service_does_not_receive_the_superuser_password | DB-02 | docker-compose.yml | real check |
+| test_req_database.py::test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1 | tests/conftest.py, tests/db_support.py | real check |
+| test_req_database.py::test_db_04_company_id_is_one_canonical_cik_form | DB-04 | src/earnings/identifiers.py, src/earnings/migrations/versions | real check |
+| test_req_database.py::test_no_table_uses_a_ticker_as_its_key | DB-04 | src/earnings/migrations/versions | real check |
+| test_req_database.py::test_db_05_company_duplicate_is_refused_by_the_database | DB-05 | src/earnings/migrations/versions | real check |
 | test_req_database.py::test_db_17_ac1_section_11_matches_the_migrated_schema | DB-17-AC1 | none yet | not tested (BLOCKED) |
 | test_req_deployment_and_operations.py::test_dp_07_ci_runs_the_requirement_consistency_checks | DP-07 | .github/workflows/ci.yml, docs/tools/check_requirements.py, scripts/check_commit_refs.py, scripts/check_requirement_refs.py | real check |
 | test_req_deployment_and_operations.py::test_dp_10_ac1_no_private_file_is_tracked_by_git | DP-10-AC1 | .gitignore | real check |
@@ -800,6 +922,11 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_deployment_and_operations.py::test_dp_14_ac1_rollback_is_timed_once | DP-14-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_deployment_and_operations.py::test_dp_14_ac2_service_scales_to_zero_in_a_test | DP-14-AC2 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_deployment_and_operations.py::test_dp_15_ac1_adr_0003_names_how_the_worker_runs | DP-15-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_deployment_and_operations.py::test_dp_16_ac1_placeholder | DP-16-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_deployment_and_operations.py::test_dp_17_ac1_placeholder | DP-17-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_deployment_and_operations.py::test_dp_18_ac1_placeholder | DP-18-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_deployment_and_operations.py::test_dp_19_ac1_placeholder | DP-19-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_deployment_and_operations.py::test_dp_20_ac1_placeholder | DP-20-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_explanation_agent.py::test_ag_01_ac1_trace_of_a_run_shows_the_order | AG-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_explanation_agent.py::test_ag_02_ac1_the_agent_s_role_fails_an_update | AG-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_explanation_agent.py::test_ag_03_ac1_fixture_with_tied_shap_values_gives_the | AG-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -839,34 +966,34 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_explanation_agent.py::test_ag_26_ac1_migration_exists_and_the_fields_are_populated | AG-26-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_01_ac1_a_fixture_transcript_with_a_known_sentence | FE-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_01_ac2_two_runs_give_identical_rows | FE-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_feature_engineering.py::test_fe_02_ac1_a_fixture_call_with_a_safe_harbour | FE-02-AC1 | none yet | not tested (BLOCKED) |
+| test_req_feature_engineering.py::test_fe_02_ac1_a_fixture_call_with_a_safe_harbour | FE-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_03_ac1_a_test_finds_each_sentence_in_the | FE-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_04_ac1_fixture_without_roles_q_a_sentiment_delta | FE-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_feature_engineering.py::test_fe_05_ac1_score_rows_have_a_non_null_model | FE-05-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_05_ac2_register_entry_exists | FE-05-AC2 | none yet | not tested (BLOCKED) |
+| test_req_feature_engineering.py::test_fe_05_ac1_score_rows_have_a_non_null_model | FE-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_05_ac2_register_entry_exists | FE-05-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_06_ac1_a_fixture_sentence_over_the_limit_is | FE-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_06_ac2_the_truncated_share_is_in_the_feature | FE-06-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_07_ac1_hand_calculated_fixture_matches_to_four_decimals | FE-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_feature_engineering.py::test_fe_08_ac1_hand_calculated_fixture_matches | FE-08-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_08_ac2_fixture_with_3_sentences_is_unavailable | FE-08-AC2 | none yet | not tested (BLOCKED) |
+| test_req_feature_engineering.py::test_fe_08_ac1_hand_calculated_fixture_matches | FE-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_08_ac2_fixture_with_3_sentences_is_unavailable | FE-08-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_09_ac1_benchmark_record_exists_with_the_hardware_stated | FE-09-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_feature_engineering.py::test_fe_10_ac1_fixture_sentences_with_known_hedge_counts_match | FE-10-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_10_ac2_list_version_is_in_the_feature_set | FE-10-AC2 | none yet | not tested (BLOCKED) |
+| test_req_feature_engineering.py::test_fe_10_ac1_fixture_sentences_with_known_hedge_counts_match | FE-10-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_10_ac2_list_version_is_in_the_feature_set | FE-10-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_11_ac1_register_entry_exists | FE-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_feature_engineering.py::test_fe_12_ac1_fixture_with_a_known_word_count | FE-12-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_13_ac1_fixture_sentences_with_known_negation_counts_match | FE-13-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_14_ac1_fixture_with_4_flagged_of_20_gives | FE-14-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_15_ac1_fixture_q_a_with_5_questions_gives | FE-15-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_16_ac1_fixture_matches_a_hand_calculation | FE-16-AC1 | none yet | not tested (BLOCKED) |
+| test_req_feature_engineering.py::test_fe_12_ac1_fixture_with_a_known_word_count | FE-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_13_ac1_fixture_sentences_with_known_negation_counts_match | FE-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_14_ac1_fixture_with_4_flagged_of_20_gives | FE-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_15_ac1_fixture_q_a_with_5_questions_gives | FE-15-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_16_ac1_fixture_matches_a_hand_calculation | FE-16-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_17_ac1_fixture_matches | FE-17-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_17_ac2_fixture_with_no_analyst_turns_is_unavailable | FE-17-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_feature_engineering.py::test_fe_18_ac1_hand_calculated_fixture_matches | FE-18-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_19_ac1_fixture_matches | FE-19-AC1 | none yet | not tested (BLOCKED) |
+| test_req_feature_engineering.py::test_fe_18_ac1_hand_calculated_fixture_matches | FE-18-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_19_ac1_fixture_matches | FE-19-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_20_ac1_fixture_company_without_gross_profit_is_unavailable | FE-20-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_feature_engineering.py::test_fe_21_ac1_fixture_with_rising_sues_gives_a_positive | FE-21-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_21_ac2_fixture_with_three_prior_values_is_unavailable | FE-21-AC2 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_22_ac1_fixture_matches | FE-22-AC1 | none yet | not tested (BLOCKED) |
-| test_req_feature_engineering.py::test_fe_22_ac2_a_planted_future_price_has_no_effect | FE-22-AC2 | none yet | not tested (BLOCKED) |
+| test_req_feature_engineering.py::test_fe_21_ac1_fixture_with_rising_sues_gives_a_positive | FE-21-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_21_ac2_fixture_with_three_prior_values_is_unavailable | FE-21-AC2 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_22_ac1_fixture_matches | FE-22-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_feature_engineering.py::test_fe_22_ac2_a_planted_future_price_has_no_effect | FE-22-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_23_ac1_a_t0_vector_built_for_a_planted | FE-23-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_24_ac1_fixture_with_a_null_feature_trains_and | FE-24-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_feature_engineering.py::test_fe_24_ac2_no_stored_zero_stands_for_missing | FE-24-AC2 | none yet | not tested (NOT IMPLEMENTED) |
@@ -893,37 +1020,14 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_frontend.py::test_ux_09_ac1_a_page_test_finds_no_transcript_text | UX-09-AC1 | none yet | not tested (BLOCKED) |
 | test_req_frontend.py::test_ux_10_ac1_task_script_is_on_file_and_dated | UX-10-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_frontend.py::test_ux_11_ac1_service_starts_from_the_readme_command_and | UX-11-AC1 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_01_ac1_running_the_same_task_twice_gives_an | IG-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_01_ac2_killing_a_worker_mid_task_and_restarting | IG-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_02_ac1_an_injected_failure_produces_three_retries_and | IG-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_03_ac1_each_run_produces_a_queryable_row | IG-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_03_ac2_a_forced_error_gives_status_failed | IG-03-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company | IG-04-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_ingestion_and_preparation.py::test_ig_05_ac1_the_schedule_file_lists_each_job_with | IG-05-AC1 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_05_ac2_a_job_missing_from_the_file_does | IG-05-AC2 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_06_ac1_simulated_4_day_gap_is_reported_and | IG-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no | IG-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_08_ac1_with_the_variable_unset_the_client_raises | IG-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses | IG-09-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_ingestion_and_preparation.py::test_ig_10_ac1_parsing_runs_from_stored_payloads_with_the | IG-10-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_11_ac1_load_report_shows_the_revision_and_the | IG-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_12_ac1_tests_pass_with_the_network_disabled | IG-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_12_ac2_fixtures_state_their_origin | IG-12-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_13_ac1_ten_known_renames_give_one_continuous_history | IG-13-AC1 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_13_ac2_every_name_match_appears_in_the_review | IG-13-AC2 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_14_ac1_unlinked_fixture_is_rejected_with_a_reason | IG-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_14_ac2_duplicate_fixture_follows_tx_05 | IG-14-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_15_ac1_fixture_with_a_call_before_the_filing | IG-15-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_16_ac1_spike_result_is_in_data_section_12 | IG-16-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_ingestion_and_preparation.py::test_ig_17_ac1_hash_of_raw_text_is_identical_before | IG-17-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_17_ac2_rule_list_has_a_version | IG-17-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_18_ac1_on_50_hand_labelled_calls_at_least | IG-18-AC1 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_18_ac2_a_call_with_no_marker_is_flagged | IG-18-AC2 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_19_ac1_re_running_any_stage_leaves_table_hashes | IG-19-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_frontend.py::test_ux_12_ac1_placeholder | UX-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_frontend.py::test_ux_13_ac1_placeholder | UX-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_ingestion_and_preparation.py::test_ig_16_ac1_the_spike_result_is_in_data_section_12 | IG-16-AC1 | docs/requirements/data-requirements.md | real check |
+| test_req_ingestion_and_preparation.py::test_ig_04_ac1_the_longest_task_in_the_100_company_run | IG-04-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
+| test_req_ingestion_and_preparation.py::test_ig_07_ac1_test_with_a_mocked_clock_shows_no_more | IG-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_ingestion_and_preparation.py::test_ig_09_ac1_backfill_of_the_100_company_subset_uses_the_bulk | IG-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_ingestion_and_preparation.py::test_ig_18_ac1_on_50_hand_labelled_calls_at_least | IG-18-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_ingestion_and_preparation.py::test_ig_19_ac2_the_label_stage_run_without_a_freeze | IG-19-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_20_ac1_a_planted_record_dated_after_its_cutoff | IG-20-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_ingestion_and_preparation.py::test_ig_21_ac1_the_same_job_runs_for_5_and | IG-21-AC1 | none yet | not tested (BLOCKED) |
-| test_req_ingestion_and_preparation.py::test_ig_22_ac1_report_exists_after_a_run_and_matches | IG-22-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_modelling_and_evaluation.py::test_md_01_ac1_fixture_prediction_has_three_probabilities_summing_to | MD-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_modelling_and_evaluation.py::test_md_01_ac2_the_class_order_in_the_record_matches | MD-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_modelling_and_evaluation.py::test_md_02_ac1_report_lists_the_three_models_with_the | MD-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -958,6 +1062,10 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_modelling_and_evaluation.py::test_md_22_ac1_event_with_features_gets_one_stored_prediction | MD-22-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_modelling_and_evaluation.py::test_md_22_ac2_a_second_run_adds_none | MD-22-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_modelling_and_evaluation.py::test_md_23_ac1_altered_artefact_makes_the_endpoint_return_503 | MD-23-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_modelling_and_evaluation.py::test_md_24_ac1_placeholder | MD-24-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_modelling_and_evaluation.py::test_md_25_ac1_placeholder | MD-25-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_modelling_and_evaluation.py::test_md_26_ac1_placeholder | MD-26-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_modelling_and_evaluation.py::test_md_27_ac1_placeholder | MD-27-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_nfr_11_ac1_every_request_is_logged_with_id_latency_and_status | NFR-11-AC1 | src/earnings/api/middleware.py | real check |
 | test_req_product.py::test_api_03_ac1_contract_test_checks_the_shape_for_404 | API-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_api_04_ac1_contract_test_on_each_prediction_endpoint | API-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -987,7 +1095,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_product.py::test_er_06_ac1_user_sees_prediction_with_limited_history_label | ER-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_er_06_ac2_system_marks_trailing_features_as_unavailable | ER-06-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_er_07_ac1_user_sees_q_a_analysis_unavailable_for | ER-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_er_07_ac2_system_stores_q_a_features_as_unavailable | ER-07-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_er_08_ac1_user_sees_insufficient_peers_in_the_sector | ER-08-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_er_08_ac2_system_stores_sector_features_as_unavailable_srs | ER-08-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_er_09_ac1_user_sees_sector_comparison_unavailable | ER-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1010,8 +1117,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_product.py::test_fr_01_ac1_given_a_ticker_with_a_stored_transcript | FR-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_01_ac2_given_the_same_ticker_submitted_twice_without | FR-01-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_01_ac3_given_a_ticker_with_no_earlier_transcript | FR-01-AC3 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_02_ac1_given_any_event_in_the_database_when | FR-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_02_ac2_given_a_transcript_dated_after_its_announcement | FR-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_03_ac1_given_the_training_pipeline_runs_when_any | FR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_03_ac2_given_the_test_suite_runs_then_a | FR-03-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_04_ac1_given_a_prediction_when_the_explanation_is | FR-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1031,12 +1136,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_product.py::test_fr_10_ac2_given_the_evaluation_page_then_calibration_by | FR-10-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_11_ac1_given_a_prediction_is_stored_then_both | FR-11-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_12_ac1_srs_01_to_srs_14_pass | FR-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_13_ac1_given_the_same_transcript_is_ingested_twice | FR-13-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_13_ac2_given_an_ingestion_job_fails_halfway_and | FR-13-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_14_ac1_given_a_new_consensus_estimate_arrives_for | FR-14-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_14_ac2_given_a_prediction_for_an_event_announced | FR-14-AC2 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_15_ac1_given_a_transcript_with_a_recognised_q | FR-15-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_fr_15_ac2_given_no_q_a_marker_is_found | FR-15-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_16_ac1_given_a_transcript_is_already_scored_with | FR-16-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_16_ac2_given_the_finbert_version_changes_then_every | FR-16-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_fr_17_ac1_given_a_fixture_transcript_with_a_known | FR-17-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1079,18 +1178,13 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_product.py::test_mr_06_ac1_rank_change_flag_fires_on_a_planted | MR-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_nfr_01_ac1_under_500_ms | NFR-01-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_product.py::test_nfr_02_ac1_under_10_s_or_returned_as_pending | NFR-02-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_product.py::test_nfr_03_ac1_check_runs_every_24_hours | NFR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_nfr_07_ac1_automated_check_passes | NFR-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_nfr_08_ac1_no_horizontal_scrolling_on_prediction_card | NFR-08-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_product.py::test_nfr_09_ac1_completes_within_24_hours | NFR-09-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_product.py::test_nfr_12_ac1_available_at_metrics | NFR-12-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_nfr_13_ac1_five_minutes | NFR-13-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_product.py::test_pl_01_ac1_each_run_produces_a_log_row_that | PL-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_pl_02_ac1_injected_failure_produces_three_retries_and_one | PL-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_pl_03_ac1_health_response_lists_the_date_for_a | PL-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_pl_04_ac1_fixture_with_insufficient_eps_history_is_rejected | PL-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | PL-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_product.py::test_pl_06_ac1_hash_of_raw_text_is_identical_before | PL-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | PL-05-AC1 | src/earnings/migrate.py, src/earnings/migrations/versions | real check |
 | test_req_product.py::test_scr_01_ac1_input_field_submit_autocomplete_if_ui_01 | SCR-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_scr_02_ac1_class_probabilities_confidence_evidence_base_input_as | SCR-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_product.py::test_scr_03_ac1_horizontal_bars_for_top_three_shap_features | SCR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1149,7 +1243,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_sc_02_ac1_adr_records_streamlit_as_accepted | SC-02-AC1 | docs/adr/0002-streamlit-frontend.md | real check |
 | test_req_project_wide.py::test_sc_02_ac2_only_one_frontend_framework_is_in_the_repository | SC-02-AC2 | requirements-pending.txt, requirements.txt | real check |
 | test_req_project_wide.py::test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check | SC-06-AC1 | docs/adr | expected failure (requirement not met yet) |
-| test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | SC-07-AC1 | docs/adr | expected failure (requirement not met yet) |
+| test_req_project_wide.py::test_sc_07_ac1_an_adr_records_the_label_route | SC-07-AC1 | docs/adr | real check |
 | test_req_project_wide.py::test_eq_01_ci_runs_the_tests_on_every_pull_request | EQ-01 | .github/workflows/ci.yml | real check |
 | test_req_project_wide.py::test_eq_02_ci_runs_lint_format_and_type_checks | EQ-02 | .github/workflows/ci.yml, pyproject.toml | real check |
 | test_req_project_wide.py::test_eq_04_ac2_an_unpinned_dependency_fails_the_pin_check | EQ-04-AC2 | scripts/check_pins.py | real check |
@@ -1188,7 +1282,8 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_eq_04_ac1_build_succeeds_on_a_fresh_clone_in | EQ-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_eq_05_ac1_load_test_report_exists | EQ-05-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
 | test_req_project_wide.py::test_eq_06_ac1_three_scripted_tests_pass | EQ-06-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_project_wide.py::test_eq_07_ac1_test_runs_each_task_twice_and_compares | EQ-07-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test | EQ-07-AC1 | src/earnings/tasks.py, tests/test_ingestion_framework.py | real check |
+| test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows | EQ-07 | src/earnings/db.py, src/earnings/tasks.py | real check |
 | test_req_project_wide.py::test_eq_09_ac1_coverage_report_in_continuous_integration | EQ-09-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_et_01_ac1_approval_reference_on_file | ET-01-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_project_wide.py::test_et_02_ac1_documents_on_file | ET-02-AC1 | none yet | not tested (NEEDS PERSON) |
@@ -1198,7 +1293,7 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_et_04_ac2_disclaimer_test_passes | ET-04-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_et_05_ac1_written_confirmation_of_the_tier_and_declaration | ET-05-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_project_wide.py::test_or_01_ac1_restore_test_log_exists | OR-01-AC1 | none yet | not tested (NEEDS MEASUREMENT) |
-| test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1 | none yet | not tested (NOT IMPLEMENTED) |
+| test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every | OR-02-AC1 | src/earnings/source_register.csv | real check |
 | test_req_project_wide.py::test_or_02_ac2_budget_alert_exists_before_any_spend | OR-02-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_or_03_ac1_demo_service_account_has_no_write_rights | OR-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_pd_01_ac1_capacity_check_is_recorded_at_each_milestone | PD-01-AC1 | none yet | not tested (NEEDS PERSON) |
@@ -1212,7 +1307,6 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_sc_04_ac1_reported_tables_state_their_data_source | SC-04-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_sc_04_ac2_the_evaluation_job_refuses_synthetic_input | SC-04-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_sc_05_ac1_no_rouge_or_bertscore_threshold_exists_in | SC-05-AC1 | none yet | not tested (NOT IMPLEMENTED) |
-| test_req_project_wide.py::test_sc_07_ac2_a_test_fails_if_events_with_different | SC-07-AC2 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_sp_01_ac1_loader_test_with_a_pickle_file_fails | SP-01-AC1 | none yet | not tested (NOT IMPLEMENTED) |
 | test_req_project_wide.py::test_sp_02_ac1_review_checklist_is_signed_off_before_release | SP-02-AC1 | none yet | not tested (NEEDS PERSON) |
 | test_req_project_wide.py::test_sp_03_ac1_test_set_of_20_transcript_excerpts_containing | SP-03-AC1 | none yet | not tested (NOT IMPLEMENTED) |
@@ -1224,11 +1318,89 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | test_req_project_wide.py::test_ss_02_ac2_no_requirement_document_holds_its_own_open | SS-02-AC2 | none yet | not tested (NEEDS PERSON) |
 | test_req_project_wide.py::test_ss_03_ac1_sign_off_record_on_file | SS-03-AC1 | none yet | not tested (BLOCKED) |
 | test_req_project_wide.py::test_ss_04_ac1_change_log_is_complete | SS-04-AC1 | none yet | not tested (NEEDS PERSON) |
+| test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time | FE-01-AC1, FE-01-AC2 | src/earnings/sentences.py | real check |
+| test_sentence_models.py::test_every_sentence_is_found_in_the_cleaned_text_by_exact_match | FE-03-AC1 | src/earnings/sentences.py, src/earnings/transcripts.py | real check |
+| test_sentence_models.py::test_a_sentence_longer_than_the_model_accepts_is_cut_and_flagged | FE-05, FE-06-AC1 | src/earnings/finbert.py | real check |
+| test_sentence_models.py::test_the_three_scores_come_out_under_the_right_names_and_in_the_order_asked | FE-05, FR-16 | src/earnings/finbert.py | real check |
+| test_sentence_scores.py::test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases | FE-02 | src/earnings/sentences.py | real check |
+| test_sentence_scores.py::test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_features | FE-02 | src/earnings/sentences.py | real check |
+| test_sentence_scores.py::test_lists_of_who_is_on_the_call_do_not_count_for_text_features | FE-02 | src/earnings/sentences.py | real check |
+| test_sentence_scores.py::test_new_marking_rules_reach_stored_calls_without_scoring_anything | FE-02, FR-16 | src/earnings/finbert.py | real check |
+| test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again | FE-05-AC1, FE-29-AC1, FR-16-AC1 | src/earnings/finbert.py, src/earnings/migrations/versions | real check |
+| test_sentence_scores.py::test_the_database_refuses_a_score_without_a_model_revision | FE-05-AC1 | src/earnings/migrations/versions | real check |
+| test_sentence_scores.py::test_a_new_model_revision_rescores_and_keeps_the_old_scores | FR-16-AC2 | src/earnings/finbert.py | real check |
+| test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored | FE-29, FR-16 | src/earnings/finbert.py | real check |
+| test_sentence_scores.py::test_a_failing_transcript_stores_nothing_and_the_others_are_still_scored | EQ-07, FE-29 | src/earnings/finbert.py | real check |
+| test_sentence_scores.py::test_call_scores_are_the_plain_mean_of_the_sentences_that_count | FE-07-AC1 | src/earnings/finbert.py | real check |
+| test_sentence_scores.py::test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown | FE-04, TX-06 | src/earnings/finbert.py, src/earnings/sentences.py | real check |
+| test_sentence_scores.py::test_the_cut_flag_of_a_sentence_is_stored | FE-06 | src/earnings/finbert.py | real check |
+| test_sentence_scores.py::test_the_scoring_task_run_twice_leaves_the_same_rows | FE-29-AC1 | src/earnings/tasks.py | real check |
+| test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence | ET-03, FE-05-AC2 | src/earnings/finbert.py, src/earnings/third_party_register.csv | real check |
+| test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found | FR-15, IG-18, TX-06 | src/earnings/transcripts.py | real check |
+| test_speaker_check.py::test_a_call_is_the_companys_when_its_opening_names_it_not_when_another_does | IG-14, TX-01 | src/earnings/speaker.py | real check |
+| test_speaker_check.py::test_a_call_that_never_says_the_name_needs_two_of_the_companys_own_managers | IG-14, TX-01 | src/earnings/speaker.py | real check |
 | test_stack_integration.py::test_health_reports_all_services_ok | DP-01-AC1, NFR-04-AC1 | docker-compose.yml, src/earnings/api/main.py | real check |
 | test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker | SC-01 | src/earnings/celery_app.py, src/earnings/tasks.py | real check |
 | test_stack_integration.py::test_postgres_accepts_a_query_with_the_app_credentials | DP-01-AC1 | docker-compose.yml, src/earnings/db.py | real check |
 | test_stack_integration.py::test_openapi_specification_is_served_and_lists_health | API-01-AC1 | src/earnings/api/main.py | real check |
 | test_stack_integration.py::test_unknown_unversioned_path_returns_404 | API-02-AC1 | src/earnings/api/main.py | real check |
+| test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table | DB-08-AC1 | src/earnings/migrations/versions, src/earnings/schema.py | real check |
+| test_storage_rules.py::test_the_append_only_registry_matches_the_privileges_in_the_database | DB-08 | src/earnings/migrations/versions, src/earnings/schema.py | real check |
+| test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned | DB-09-AC1 | src/earnings/migrations/versions, src/earnings/schema.py | real check |
+| test_storage_rules.py::test_the_as_of_read_returns_one_latest_row_per_source_and_period | DB-09 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_no_feature_code_reads_a_versioned_table_directly | DB-09-AC2 | src/earnings, tests/db_support.py | real check |
+| test_storage_rules.py::test_an_overlapping_membership_insert_fails | DB-10-AC1 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period | DB-10-AC2 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company | DB-10 | src/earnings/migrations/versions | real check |
+| test_storage_rules.py::test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded | SR-04-AC1 | src/earnings/rawstore.py | real check |
+| test_transcripts.py::test_the_raw_text_hash_is_identical_before_and_after_cleaning | IG-17-AC1, PL-06-AC1 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_the_cleaning_rules_have_a_version_and_only_touch_characters_and_spaces | IG-17-AC2 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question | IG-18 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles | ER-07, IG-18-AC2 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role | TX-06 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason | IG-14-AC1 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation | TX-02-AC1 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release | FR-13-AC1, IG-11-AC1, IG-14-AC2, TX-05-AC1 | src/earnings/migrations/versions, src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_a_load_that_fails_halfway_and_is_run_again_gives_the_row_count_of_a_clean_run | FR-13-AC2 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash | PL-06, TX-01-AC1 | src/earnings/migrations/versions | real check |
+| test_transcripts.py::test_the_review_sheet_draws_the_same_calls_every_time_and_shows_the_boundary | IG-18 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_the_download_is_refused_when_the_size_or_checksum_does_not_match | IG-11 | src/earnings/clients/huggingface.py | real check |
+| test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section | ER-07-AC2, FR-15-AC1, FR-15-AC2, TX-06 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed | TX-01-AC2 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_a_stored_payload_is_parsed_with_the_network_disabled | IG-10-AC1 | src/earnings/transcripts.py | real check |
+| test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_that_it_is_made_up | IG-12-AC2 | none yet | real check |
+| test_transcripts.py::test_one_trading_day_is_counted_with_exchange_holidays | TX-02 | src/earnings/calendar.py, src/earnings/transcripts.py | real check |
+| test_universe.py::test_names_are_normalised_for_exact_matching_only | IG-13 | src/earnings/membership.py | real check |
+| test_universe.py::test_the_stored_source_files_parse_offline | IG-13 | src/earnings/membership.py | real check |
+| test_universe.py::test_ten_known_renames_resolve_to_one_company | IG-13-AC1, IM-03-AC1 | src/earnings/membership.py, src/earnings/universe.py | real check |
+| test_universe.py::test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list | IG-13-AC2 | src/earnings/universe.py | real check |
+| test_universe.py::test_a_ticker_that_the_sec_gives_to_another_company_is_not_accepted | IG-13 | src/earnings/universe.py | real check |
+| test_universe.py::test_two_renames_on_one_day_are_not_guessed | IG-13 | src/earnings/universe.py | real check |
+| test_universe.py::test_join_on_company_id_across_ten_renames_gives_one_continuous_history | DB-04-AC1, IG-13-AC1, IM-03-AC1 | src/earnings/migrations/versions, src/earnings/universe_build.py | real check |
+| test_universe.py::test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file | IG-21-AC1 | src/earnings/universe.csv, src/earnings/universe_build.py | real check |
+| test_universe.py::test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason | IM-02, IM-02-AC1 | src/earnings/universe.csv | real check |
+| test_universe.py::test_year_end_counts_on_the_real_membership_file | IM-01 | src/earnings/universe.py | real check |
+| test_universe.py::test_company_counts_count_each_company_once_and_explain_share_classes | IM-01 | src/earnings/universe.py | real check |
+| test_universe.py::test_the_real_year_end_company_counts_are_within_five_of_500 | IM-01-AC1, TH-05-AC1 | audits/evidence/wave-1.3/report.json | real check |
+| test_universe.py::test_the_selection_uses_the_values_approved_in_decision_c_47 | IG-21 | src/earnings/universe.py | real check |
+| test_universe.py::test_a_company_that_joined_after_the_end_of_2024_is_never_current | IM-02 | src/earnings/universe.py | real check |
+| test_universe.py::test_a_removal_reason_that_names_another_company_is_marked_not_passed_on_as_this_ones | IM-02 | src/earnings/universe.py | real check |
+| test_universe.py::test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500 | IM-01-AC1, TH-05-AC1 | src/earnings/universe.py, tests/fixtures/ticker_cik_map.csv | real check |
+| test_universe.py::test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule | IM-02 | src/earnings/universe.py | real check |
+| test_universe.py::test_touching_and_overlapping_spells_merge_into_one_period | IG-13 | src/earnings/universe.py | real check |
+| test_validation.py::test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies | DV-06-AC1, FD-04-AC1 | src/earnings/validation.py | real check |
+| test_validation.py::test_an_event_is_unique_on_company_quarter_and_announcement_date | DV-03-AC1, TX-05-AC2 | src/earnings/migrations/versions, src/earnings/validation.py | real check |
+| test_validation.py::test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_counted_apart | DV-02-AC1, TH-15-AC1 | src/earnings/validation.py | real check |
+| test_validation.py::test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart | DV-05-AC1 | src/earnings/validation.py | real check |
+| test_validation.py::test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged | DV-01-AC1, DV-04 | src/earnings/validation.py | real check |
+| test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones | DV-01, DV-04 | src/earnings/validation.py | real check |
+| test_validation.py::test_building_events_twice_from_the_same_rows_gives_the_same_table_hash | DV-08-AC1 | src/earnings/events.py, src/earnings/validation.py | real check |
+| test_validation.py::test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event | CE-01-AC1, CE-02-AC1, VL-01-AC1, VL-01-AC2 | src/earnings/events.py, src/earnings/validation.py | real check |
+| test_validation.py::test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold | TH-01-AC1, TX-04-AC1, TX-07-AC1 | src/earnings/validation.py | real check |
+| test_validation.py::test_the_dataset_has_one_eps_basis | AE-03-AC1 | src/earnings/validation.py | real check |
+| test_validation.py::test_the_plans_of_the_ticker_and_event_lookups_use_an_index | DB-14 | src/earnings/migrations/versions | real check |
+| test_validation.py::test_the_hand_audit_sheet_draws_the_same_events_every_time_without_repeats | VL-09 | src/earnings/validation.py | real check |
+| test_validation.py::test_the_data_card_states_coverage_sources_gaps_and_that_it_is_not_signed_off | GS-02-AC1 | src/earnings/datacard.py | real check |
 
 ## C. Code to tests and requirements
 
@@ -1237,13 +1409,15 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | .github/workflows/ci.yml | test_dp_07_ci_runs_the_requirement_consistency_checks<br>test_eq_01_ci_runs_the_tests_on_every_pull_request<br>test_eq_02_ci_runs_lint_format_and_type_checks<br>test_eq_08_ac1_a_vulnerability_scan_job_runs_on_every_pull_request<br>test_sp_06_ac1_a_secret_scanner_runs_in_continuous_integration | DP-07, EQ-01, EQ-02, EQ-08-AC1, SP-06-AC1 |
 | .gitignore | test_dp_10_ac1_no_private_file_is_tracked_by_git | DP-10-AC1 |
 | Dockerfile | test_eq_04_images_are_pinned_to_exact_tags<br>test_eq_04_the_dependency_files_in_the_repository_are_pinned | EQ-04 |
+| audits/evidence/wave-1.3/report.json | test_the_real_year_end_company_counts_are_within_five_of_500 | IM-01-AC1, TH-05-AC1 |
 | audits/test_matrix.json | test_do_03_the_committed_matrix_is_what_the_markers_produce_now | DO-03 |
 | audits/test_matrix.md | test_do_03_the_committed_matrix_is_what_the_markers_produce_now | DO-03 |
-| docker-compose.yml | test_eq_04_images_are_pinned_to_exact_tags<br>test_health_reports_all_services_ok<br>test_postgres_accepts_a_query_with_the_app_credentials | DP-01-AC1, EQ-04, NFR-04-AC1 |
+| docker-compose.yml | test_the_worker_service_does_not_receive_the_superuser_password<br>test_eq_04_images_are_pinned_to_exact_tags<br>test_health_reports_all_services_ok<br>test_postgres_accepts_a_query_with_the_app_credentials | DB-02, DP-01-AC1, EQ-04, NFR-04-AC1 |
 | docs/adr | test_sc_06_ac1_an_adr_records_plain_sql_retrieval_with_the_licence_check<br>test_sc_07_ac1_an_adr_records_the_label_route | SC-06-AC1, SC-07-AC1 |
 | docs/adr/0001-celery-redis-task-queue.md | test_sc_01_ac1_adr_records_celery_with_redis_as_accepted | SC-01-AC1 |
 | docs/adr/0002-streamlit-frontend.md | test_sc_02_ac1_adr_records_streamlit_as_accepted | SC-02-AC1 |
 | docs/requirements | test_do_05_ac1_the_id_checker_reports_no_duplicate_definition | DO-05-AC1 |
+| docs/requirements/data-requirements.md | test_ig_16_ac1_the_spike_result_is_in_data_section_12 | IG-16-AC1 |
 | docs/tools/check_requirements.py | test_dp_07_ci_runs_the_requirement_consistency_checks<br>test_do_05_ac1_the_id_checker_reports_no_duplicate_definition | DO-05-AC1, DP-07 |
 | pyproject.toml | test_eq_02_ci_runs_lint_format_and_type_checks | EQ-02 |
 | requirements-pending.txt | test_sc_02_ac2_only_one_frontend_framework_is_in_the_repository | SC-02-AC2 |
@@ -1253,10 +1427,53 @@ The fingerprint identifies the wording of the check the tests were reviewed agai
 | scripts/check_pins.py | test_eq_04_ac2_an_unpinned_dependency_fails_the_pin_check<br>test_eq_04_the_dependency_files_in_the_repository_are_pinned | EQ-04, EQ-04-AC2 |
 | scripts/check_requirement_refs.py | test_dp_07_ci_runs_the_requirement_consistency_checks | DP-07 |
 | scripts/test_matrix.py | test_do_03_a_check_fingerprint_ignores_spacing_but_not_wording<br>test_do_03_coverage_contexts_map_each_test_to_the_files_it_executed<br>test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against<br>test_do_03_junit_outcomes_map_to_pass_fail_blocked_and_not_tested<br>test_do_03_the_committed_matrix_is_what_the_markers_produce_now<br>test_do_03_the_lock_flags_a_changed_new_and_removed_check<br>test_do_03_the_matrix_can_be_walked_in_both_directions | DO-03 |
+| src/earnings | test_no_feature_code_reads_a_versioned_table_directly | DB-09-AC2 |
 | src/earnings/api/main.py | test_all_ok_returns_200<br>test_any_failure_returns_503_and_names_the_component<br>test_database_exception_is_reported_not_raised<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_health_reports_all_services_ok<br>test_openapi_specification_is_served_and_lists_health<br>test_unknown_unversioned_path_returns_404 | API-01-AC1, API-02-AC1, DP-01-AC1, NFR-04-AC1, SP-06, SV-01-AC1 |
 | src/earnings/api/middleware.py | test_sv_01_ac1_the_api_code_imports_no_model_package<br>test_nfr_11_ac1_every_request_is_logged_with_id_latency_and_status<br>test_sp_05_ac1_the_request_log_holds_only_the_allowed_fields | NFR-11-AC1, SP-05-AC1, SV-01-AC1 |
-| src/earnings/celery_app.py | test_sc_01_ac1_adr_records_celery_with_redis_as_accepted<br>test_celery_task_round_trip_through_redis_and_worker | SC-01, SC-01-AC1 |
-| src/earnings/config.py | test_missing_required_setting_raises<br>test_sec_user_agent_is_optional<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql | DB-01-AC1, SP-06 |
-| src/earnings/db.py | test_database_exception_is_reported_not_raised<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_postgres_accepts_a_query_with_the_app_credentials | DB-01-AC1, DP-01-AC1, NFR-04-AC1 |
-| src/earnings/tasks.py | test_celery_task_round_trip_through_redis_and_worker | SC-01 |
+| src/earnings/backfill.py | test_backfill_counts_requests_skips_stored_payloads_and_reads_only_pages_that_can_matter | IG-09 |
+| src/earnings/calendar.py | test_a_timestamp_without_a_time_zone_is_refused<br>test_known_exchange_holidays_and_open_days<br>test_pre_open_and_after_close_releases_map_to_the_right_session<br>test_real_apple_releases_filed_after_the_close_count_for_the_next_session<br>test_one_trading_day_is_counted_with_exchange_holidays | DV-07-AC1, TX-02 |
+| src/earnings/capture_universe.csv | test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers | SR-10 |
+| src/earnings/celery_app.py | test_sr_10_daily_schedule_runs_at_22_30_utc<br>test_a_job_missing_from_the_schedule_file_does_not_run<br>test_the_redis_redelivery_timeout_is_four_hours<br>test_sc_01_ac1_adr_records_celery_with_redis_as_accepted<br>test_celery_task_round_trip_through_redis_and_worker | IG-04, IG-05-AC2, SC-01, SC-01-AC1, SR-10 |
+| src/earnings/clients | test_every_source_name_in_the_code_has_a_register_row | LC-07-AC1, SR-01 |
+| src/earnings/clients/edgar.py | test_a_request_log_line_is_written_for_each_source_call<br>test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock<br>test_the_contact_goes_only_to_sec_gov_hosts<br>test_the_contact_is_sent_as_the_user_agent_and_never_logged_or_shown<br>test_with_the_contact_unset_the_client_raises_and_sends_nothing<br>test_every_source_the_code_fetches_from_has_a_register_row | IG-07, IG-08, IG-08-AC1, SP-06, SR-01, SR-07-AC1 |
+| src/earnings/clients/huggingface.py | test_the_transcript_check_run_twice_changes_no_data<br>test_the_download_is_refused_when_the_size_or_checksum_does_not_match | EQ-07, IG-11, NFR-03 |
+| src/earnings/clients/yahoo.py | test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation | LC-08-AC1 |
+| src/earnings/config.py | test_missing_required_setting_raises<br>test_sec_user_agent_is_optional<br>test_the_superuser_settings_are_optional_so_a_service_can_run_without_them<br>test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on<br>test_sec_user_agent_unset_is_reported_false<br>test_sec_user_agent_value_is_never_returned<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden<br>test_db_03_ac1_a_load_fixture_with_more_clients_than | DB-01-AC1, DB-02, DB-03-AC1, SP-06, SR-10 |
+| src/earnings/consensus.py | test_a_company_whose_first_attempt_times_out_gets_one_more_try<br>test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task<br>test_a_stack_that_never_captured_reports_a_gap_from_the_start_day<br>test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected<br>test_sr_10_a_row_with_no_mean_is_not_stored<br>test_sr_10_a_source_failure_is_reported_and_stores_no_row<br>test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent<br>test_sr_10_catch_up_asks_only_when_today_has_no_capture<br>test_sr_10_gap_longer_than_three_days_is_reported<br>test_sr_10_universe_uses_ten_digit_ciks_and_unique_tickers<br>test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows<br>test_the_start_date_in_the_code_and_in_the_migration_are_the_same<br>test_a_request_log_line_is_written_for_each_source_call<br>test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged<br>test_running_the_same_tasks_twice_gives_an_identical_table_hash | CE-02-AC2, EQ-07, IG-01-AC1, IG-06, IG-06-AC1, SR-07-AC1, SR-08, SR-08-AC1, SR-10, SR-10-AC2 |
+| src/earnings/datacard.py | test_the_data_card_states_coverage_sources_gaps_and_that_it_is_not_signed_off | GS-02-AC1 |
+| src/earnings/db.py | test_database_exception_is_reported_not_raised<br>test_db_01_ac1_the_code_uses_no_database_other_than_postgresql<br>test_db_03_ac1_a_load_fixture_with_more_clients_than<br>test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44<br>test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_postgres_accepts_a_query_with_the_app_credentials | DB-01-AC1, DB-03, DB-03-AC1, DP-01-AC1, EQ-07, NFR-04-AC1 |
+| src/earnings/events.py | test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices<br>test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing<br>test_a_snapshot_captured_on_or_after_the_announcement_is_not_an_input<br>test_an_event_whose_eps_was_filed_before_the_release_is_excluded_from_training<br>test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded<br>test_short_history_is_rejected_with_its_reason_and_a_failed_build_leaves_whole_events_only<br>test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day<br>test_the_coverage_report_matches_a_hand_count_and_lists_what_is_missing<br>test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement<br>test_the_size_report_keeps_measured_and_estimated_figures_apart<br>test_a_task_killed_halfway_and_run_again_gives_the_row_count_of_a_clean_run<br>test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table<br>test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios<br>test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event<br>test_building_events_twice_from_the_same_rows_gives_the_same_table_hash | AE-01, CE-01-AC1, CE-02-AC1, CE-05, DB-06, DB-09, DB-13-AC1, DB-13-AC2, DB-15-AC1, DV-08-AC1, FR-02, FR-02-AC1, FR-02-AC2, FR-14, FR-14-AC2, IG-01-AC2, IG-15, IG-19-AC1, IG-22-AC1, LB-04-AC1, LB-05-AC1, PL-04-AC1, PX-02, TX-01, TX-07, VL-01-AC1, VL-01-AC2 |
+| src/earnings/financials.py | test_a_later_cumulative_result_does_not_hide_what_the_three_quarters_gave_earlier<br>test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier<br>test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis<br>test_a_quarter_reported_as_basic_and_diluted_is_read<br>test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates<br>test_an_unknown_share_basis_inside_the_window_gives_no_label<br>test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins<br>test_the_loaded_splits_keep_unknown_ratios_and_the_load_uses_the_price_sources_splits<br>test_the_per_share_unit_is_read_even_when_another_unit_comes_first<br>test_the_three_quarter_sum_also_puts_the_quarters_on_the_years_share_basis<br>test_real_apple_releases_filed_after_the_close_count_for_the_next_session<br>test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day<br>test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff<br>test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure<br>test_a_placeholder_call_time_gives_the_filing_time_and_no_time_gives_none<br>test_a_quarter_not_reported_on_its_own_is_the_difference_of_cumulative_figures<br>test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up<br>test_every_row_has_a_filing_date_and_the_eps_basis_is_one_value<br>test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date<br>test_older_submission_pages_are_read_like_the_recent_block<br>test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes<br>test_revenue_uses_the_first_tag_a_company_reports_and_names_it<br>test_stored_filing_dates_are_the_ones_in_the_payload_and_the_same_period_keeps_every_version<br>test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it | AE-03-AC1, AE-04, AE-04-AC1, DB-11-AC1, DV-07-AC1, FD-01, FD-01-AC1, FD-03, FD-03-AC1, FR-02, IG-10, IG-15, IG-15-AC1, LB-01, LB-02, LB-03, LB-03-AC1, LB-04, LB-05, PL-04, PX-01, VL-05 |
+| src/earnings/finbert.py | test_a_sentence_longer_than_the_model_accepts_is_cut_and_flagged<br>test_the_three_scores_come_out_under_the_right_names_and_in_the_order_asked<br>test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown<br>test_a_failing_transcript_stores_nothing_and_the_others_are_still_scored<br>test_a_new_model_revision_rescores_and_keeps_the_old_scores<br>test_call_scores_are_the_plain_mean_of_the_sentences_that_count<br>test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored<br>test_new_marking_rules_reach_stored_calls_without_scoring_anything<br>test_scoring_twice_writes_nothing_and_scores_no_sentence_again<br>test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence<br>test_the_cut_flag_of_a_sentence_is_stored | EQ-07, ET-03, FE-02, FE-04, FE-05, FE-05-AC1, FE-05-AC2, FE-06, FE-06-AC1, FE-07-AC1, FE-29, FE-29-AC1, FR-16, FR-16-AC1, FR-16-AC2, TX-06 |
+| src/earnings/identifiers.py | test_db_04_company_id_is_one_canonical_cik_form | DB-04 |
+| src/earnings/label.py | test_a_quarter_refiled_with_a_shifted_end_date_is_still_the_same_quarter<br>test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates<br>test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters<br>test_a_sixteen_week_fourth_quarter_is_a_quarter<br>test_a_target_value_first_filed_long_after_the_announcement_gives_no_label<br>test_an_unknown_share_basis_inside_the_window_gives_no_label<br>test_each_gate_counts_a_planted_fault<br>test_the_ten_day_and_twenty_day_limits_are_where_they_were_approved<br>test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement<br>test_a_label_whose_inputs_hold_a_scale_error_is_marked<br>test_a_planted_restatement_or_future_filing_does_not_change_the_label<br>test_a_quarter_refiled_with_a_shifted_start_date_is_still_the_same_quarter<br>test_a_split_inside_the_window_gives_the_same_sue_as_the_unsplit_series<br>test_a_training_set_with_two_label_routes_fails<br>test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged<br>test_sue_matches_a_hand_calculation_to_four_decimals<br>test_the_real_apple_data_gives_the_two_dated_split_factors_once_each<br>test_too_little_history_or_zero_variance_gives_an_unavailable_label_not_infinity<br>test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead<br>test_labels_use_the_price_sources_dated_share_splits_and_ignore_spin_off_ratios | AE-03, CE-01, CE-05-AC2, DB-09, DV-02, DV-03, DV-04, DV-06, FD-03, IG-20, IG-20-AC1, LB-01, LB-01-AC1, LB-02-AC1, LB-02-AC2, LB-04, LB-04-AC1, LB-05, LB-05-AC1, SC-07-AC2, TH-11-AC1, VL-01 |
+| src/earnings/licensing.py | test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused<br>test_a_licence_check_older_than_ninety_days_is_listed_as_stale<br>test_every_locked_package_and_container_image_has_a_licence_row<br>test_every_row_uses_a_listed_class_and_only_two_data_classes_may_be_deployed<br>test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found<br>test_every_source_name_in_the_code_has_a_register_row<br>test_the_committed_notices_are_the_ones_the_registers_produce<br>test_the_gap_in_dataset_licences_is_exactly_the_one_recorded<br>test_the_software_exceptions_are_exactly_the_ones_recorded | DP-13, LC-01-AC1, LC-02-AC1, LC-03-AC1, LC-04-AC1, LC-05-AC1, LC-07-AC1, LC-08-AC1, LC-10-AC1, LC-11-AC1, SR-01, SR-03 |
+| src/earnings/limits.py | test_edgar_requests_never_exceed_the_limit_in_any_second_with_a_mocked_clock<br>test_two_worker_processes_together_stay_under_the_limit_through_redis | IG-07 |
+| src/earnings/membership.py | test_names_are_normalised_for_exact_matching_only<br>test_ten_known_renames_resolve_to_one_company<br>test_the_stored_source_files_parse_offline | IG-13, IG-13-AC1, IM-03-AC1 |
+| src/earnings/migrate.py | test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_02_ac1_each_role_is_tested_for_one_allowed<br>test_db_02_migrator_worker_and_api_roles_allowed_and_forbidden<br>test_db_03_ac2_a_long_query_is_cancelled<br>test_the_application_roles_cannot_connect_to_the_postgres_database<br>test_the_functions_that_drop_or_empty_a_database_refuse_a_project_database_name<br>test_the_pool_and_time_out_values_are_the_ones_approved_in_decision_c_44<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on | DB-01-AC2, DB-02, DB-02-AC1, DB-03, DB-03-AC2, DB-16, PL-05-AC1 |
+| src/earnings/migrations/versions | test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing<br>test_sr_08_ac1_snapshot_rows_without_capture_time_or_before_start_are_rejected<br>test_sr_08_snapshots_are_append_only_for_the_worker_role<br>test_the_start_date_in_the_code_and_in_the_migration_are_the_same<br>test_raw_payloads_are_insert_only_and_the_length_is_checked<br>test_a_new_snapshot_is_a_new_row_and_the_earlier_one_is_unchanged<br>test_events_carry_three_dates_and_a_route_and_a_late_transcript_is_excluded<br>test_the_event_table_refuses_missing_dates_unmarked_and_a_made_up_route<br>test_a_filing_dated_d_or_later_is_not_visible_to_a_prediction_at_d<br>test_a_simulated_correction_is_a_new_row_and_leaves_the_first_value<br>test_first_filed_value_survives_a_restatement_and_the_as_of_read_follows_the_filing_date<br>test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version<br>test_an_injected_failure_gives_three_retries_and_one_dead_letter_row<br>test_each_run_produces_a_queryable_row<br>test_a_planted_future_price_never_reaches_the_momentum_window<br>test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing<br>test_db_01_ac2_the_extension_list_matches_the_migrations<br>test_db_04_company_id_is_one_canonical_cik_form<br>test_db_05_company_duplicate_is_refused_by_the_database<br>test_db_07_ac1_schema_query_finds_no_timestamp_without_zone<br>test_no_table_uses_a_ticker_as_its_key<br>test_pl_05_ac1_migration_history_matches_the_deployed_schema_on<br>test_scoring_twice_writes_nothing_and_scores_no_sentence_again<br>test_the_database_refuses_a_score_without_a_model_revision<br>test_a_date_on_a_boundary_resolves_to_exactly_one_period<br>test_a_planted_version_dated_d_or_later_is_not_returned<br>test_an_overlapping_membership_insert_fails<br>test_the_append_only_registry_matches_the_privileges_in_the_database<br>test_the_as_of_read_returns_one_latest_row_per_source_and_period<br>test_the_worker_role_cannot_update_or_delete_an_append_only_table<br>test_two_share_classes_can_coexist_but_a_ticker_belongs_to_one_company<br>test_a_transcript_row_needs_a_company_a_call_date_and_its_raw_text_with_a_hash<br>test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release<br>test_join_on_company_id_across_ten_renames_gives_one_continuous_history<br>test_an_event_is_unique_on_company_quarter_and_announcement_date<br>test_the_plans_of_the_ticker_and_event_lookups_use_an_index | AE-01, AE-04, AE-04-AC1, CE-02-AC2, CE-05, DB-01-AC2, DB-04, DB-04-AC1, DB-05, DB-06, DB-07-AC1, DB-08, DB-08-AC1, DB-09, DB-09-AC1, DB-10, DB-10-AC1, DB-10-AC2, DB-11, DB-14, DV-03-AC1, FD-02-AC1, FD-03, FD-03-AC1, FE-05-AC1, FE-29-AC1, FR-02-AC1, FR-02-AC2, FR-13-AC1, FR-14-AC1, FR-16-AC1, IG-02-AC1, IG-03-AC1, IG-11-AC1, IG-13-AC1, IG-14-AC2, IM-03-AC1, PL-01-AC1, PL-02-AC1, PL-05-AC1, PL-06, PX-01, PX-02-AC1, SR-08, SR-08-AC1, TX-01, TX-01-AC1, TX-05-AC1, TX-05-AC2 |
+| src/earnings/parsing.py | test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline<br>test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network | DB-11, IG-10, IG-12 |
+| src/earnings/pressrelease.py | test_the_derived_quarter_comparison_lists_every_difference_above_one_percent<br>test_a_filing_is_fetched_once_stored_and_then_read_from_the_stored_copy<br>test_adjusted_rows_negatives_and_cut_tables_are_handled<br>test_agreement_is_within_half_a_percent_of_the_stored_value<br>test_events_are_compared_and_the_summary_counts_every_outcome<br>test_the_real_apple_release_gives_the_gaap_diluted_eps_of_the_quarter | AE-02, IG-10-AC1, LB-03-AC2, TH-12 |
+| src/earnings/prices.py | test_a_call_before_the_filing_moves_the_cutoff_for_snapshots_and_prices<br>test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins<br>test_the_price_window_check_fails_when_a_read_lets_the_announcement_day_through<br>test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table<br>test_a_company_the_source_cannot_serve_is_listed_and_gets_no_rows<br>test_a_planted_future_price_never_reaches_the_momentum_window<br>test_a_reused_ticker_is_refused_at_loading_and_stores_no_price<br>test_a_series_that_does_not_cover_the_events_is_refused<br>test_a_series_that_mixes_adjusted_and_raw_prices_fails<br>test_a_spin_off_the_source_lists_twice_is_counted_once<br>test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing<br>test_the_equal_weight_universe_uses_only_the_members_of_the_day<br>test_the_price_windows_of_an_event_do_not_overlap_the_announcement<br>test_the_raw_close_is_rebuilt_from_a_split_adjusted_answer<br>test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall | DV-05, FE-24, FR-14, IG-15, IG-19-AC1, LB-05, PX-01, PX-02, PX-02-AC1, PX-03-AC1, VL-05 |
+| src/earnings/rawstore.py | test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline<br>test_fetching_the_same_payload_twice_leaves_an_identical_table_hash<br>test_rebuilding_the_tables_from_the_stored_payload_gives_identical_hashes<br>test_the_hash_of_each_stored_raw_payload_matches_the_hash_recorded | DB-11, DB-11-AC1, IG-01, IG-10, SR-04-AC1 |
+| src/earnings/runlog.py | test_a_forced_error_gives_status_failed<br>test_a_job_with_no_success_for_more_than_three_days_is_reported<br>test_a_run_that_reports_failure_with_zero_rows_is_not_a_success<br>test_each_run_produces_a_queryable_row | IG-03, IG-03-AC1, IG-03-AC2, IG-06, PL-01-AC1 |
+| src/earnings/schedule.py | test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times<br>test_a_job_missing_from_the_schedule_file_does_not_run<br>test_every_listed_job_has_a_utc_time_and_a_registered_task<br>test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_found<br>test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation | IG-05, IG-05-AC1, IG-05-AC2, LC-08-AC1, NFR-03-AC1 |
+| src/earnings/schema.py | test_a_planted_version_dated_d_or_later_is_not_returned<br>test_the_append_only_registry_matches_the_privileges_in_the_database<br>test_the_worker_role_cannot_update_or_delete_an_append_only_table | DB-08, DB-08-AC1, DB-09-AC1 |
+| src/earnings/sentences.py | test_a_known_text_gives_the_known_number_of_sentences_every_time<br>test_every_sentence_is_found_in_the_cleaned_text_by_exact_match<br>test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown<br>test_lists_of_who_is_on_the_call_do_not_count_for_text_features<br>test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_features<br>test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases | FE-01-AC1, FE-01-AC2, FE-02, FE-03-AC1, FE-04, TX-06 |
+| src/earnings/source_register.csv | test_every_dataset_the_project_imports_may_be_deployed<br>test_the_gap_in_dataset_licences_is_exactly_the_one_recorded<br>test_every_source_the_code_fetches_from_has_a_register_row<br>test_sr_01_ac1_register_has_one_row_per_dataset_each<br>test_sr_06_ac1_register_lists_a_fallback_per_dataset_and<br>test_sr_09_ac1_source_register_has_a_cost_column_and<br>test_th_14_ac1_zero<br>test_or_02_ac1_source_register_shows_zero_cost_for_every | LC-03-AC1, OR-02-AC1, SR-01, SR-01-AC1, SR-06-AC1, SR-09-AC1, TH-14-AC1 |
+| src/earnings/speaker.py | test_a_call_is_the_companys_when_its_opening_names_it_not_when_another_does<br>test_a_call_that_never_says_the_name_needs_two_of_the_companys_own_managers | IG-14, TX-01 |
+| src/earnings/tasking.py | test_a_task_that_recovers_leaves_no_dead_letter<br>test_an_injected_failure_gives_three_retries_and_one_dead_letter_row<br>test_retry_settings_and_late_acknowledgement_follow_decision_c_45<br>test_the_redis_redelivery_timeout_is_four_hours | IG-02, IG-02-AC1, IG-04, PL-02-AC1 |
+| src/earnings/tasks.py | test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task<br>test_sr_10_capture_stores_what_the_source_returned_and_is_idempotent<br>test_sr_10_catch_up_asks_only_when_today_has_no_capture<br>test_sr_10_daily_schedule_runs_at_22_30_utc<br>test_the_capture_task_run_twice_in_a_day_leaves_the_same_rows<br>test_the_catch_up_task_retries_when_the_database_is_still_starting<br>test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on<br>test_fetching_the_same_payload_twice_leaves_an_identical_table_hash<br>test_two_worker_processes_together_stay_under_the_limit_through_redis<br>test_the_data_gates_run_twice_leave_the_same_rows<br>test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new<br>test_the_filing_check_stores_each_list_and_counts_only_new_earnings_releases<br>test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times<br>test_the_transcript_check_run_twice_changes_no_data<br>test_capture_task_records_a_failed_run_when_every_company_fails<br>test_running_the_same_tasks_twice_gives_an_identical_table_hash<br>test_eq_07_ac1_every_registered_task_has_a_run_twice_test<br>test_eq_07_load_companies_twice_leaves_the_same_rows<br>test_the_scoring_task_run_twice_leaves_the_same_rows<br>test_celery_task_round_trip_through_redis_and_worker | EQ-07, EQ-07-AC1, FE-29-AC1, IG-01, IG-01-AC1, IG-03, IG-05, IG-05-AC1, IG-06, IG-07, NFR-03, NFR-03-AC1, SC-01, SR-10 |
+| src/earnings/third_party_register.csv | test_every_library_and_image_in_use_may_be_used_in_a_deployed_system<br>test_every_locked_package_and_container_image_has_a_licence_row<br>test_every_model_row_names_the_licence_of_its_training_data<br>test_the_software_exceptions_are_exactly_the_ones_recorded<br>test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence | ET-03, FE-05, FE-05-AC2, LC-01-AC1, LC-09-AC1, LC-11-AC1 |
+| src/earnings/transcripts.py | test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched<br>test_a_release_that_rolls_off_the_newest_filing_list_is_still_known<br>test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table<br>test_every_sentence_is_found_in_the_cleaned_text_by_exact_match<br>test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found<br>test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation<br>test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason<br>test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles<br>test_a_load_that_fails_halfway_and_is_run_again_gives_the_row_count_of_a_clean_run<br>test_a_stored_payload_is_parsed_with_the_network_disabled<br>test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role<br>test_loading_is_idempotent_counts_empty_rows_and_keeps_the_earliest_call_of_a_release<br>test_one_trading_day_is_counted_with_exchange_holidays<br>test_rows_without_a_ticker_or_a_valid_call_date_are_rejected_and_listed<br>test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section<br>test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question<br>test_the_cleaning_rules_have_a_version_and_only_touch_characters_and_spaces<br>test_the_raw_text_hash_is_identical_before_and_after_cleaning<br>test_the_review_sheet_draws_the_same_calls_every_time_and_shows_the_boundary | DV-08, ER-07, ER-07-AC2, FE-03-AC1, FR-13-AC1, FR-13-AC2, FR-15, FR-15-AC1, FR-15-AC2, IG-05, IG-10, IG-10-AC1, IG-11-AC1, IG-14, IG-14-AC1, IG-14-AC2, IG-17-AC1, IG-17-AC2, IG-18, IG-18-AC2, IG-19-AC1, IM-03, PL-06-AC1, TX-01, TX-01-AC2, TX-02, TX-02-AC1, TX-04, TX-05-AC1, TX-06 |
+| src/earnings/universe.csv | test_removed_companies_cover_every_year_and_carry_a_date_and_a_reason<br>test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file | IG-21-AC1, IM-02, IM-02-AC1 |
+| src/earnings/universe.py | test_a_company_that_joined_after_the_end_of_2024_is_never_current<br>test_a_removal_reason_that_names_another_company_is_marked_not_passed_on_as_this_ones<br>test_a_ticker_that_the_sec_gives_to_another_company_is_not_accepted<br>test_company_counts_count_each_company_once_and_explain_share_classes<br>test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500<br>test_every_match_that_is_not_a_plain_ticker_match_is_in_the_review_list<br>test_selection_is_reproducible_covers_every_year_and_applies_the_cik_rule<br>test_ten_known_renames_resolve_to_one_company<br>test_the_selection_uses_the_values_approved_in_decision_c_47<br>test_touching_and_overlapping_spells_merge_into_one_period<br>test_two_renames_on_one_day_are_not_guessed<br>test_year_end_counts_on_the_real_membership_file | IG-13, IG-13-AC1, IG-13-AC2, IG-21, IM-01, IM-01-AC1, IM-02, IM-03-AC1, TH-05-AC1 |
+| src/earnings/universe_build.py | test_join_on_company_id_across_ten_renames_gives_one_continuous_history<br>test_the_same_job_runs_for_5_and_for_100_companies_from_a_list_file | DB-04-AC1, IG-13-AC1, IG-21-AC1, IM-03-AC1 |
+| src/earnings/validation.py | test_each_gate_counts_a_planted_fault<br>test_the_checks_put_events_in_a_capture_gap_into_quarantine<br>test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged<br>test_a_mean_gap_above_the_threshold_is_marked_for_investigation<br>test_every_labelled_event_has_its_document_announcement_date_and_eps_filing<br>test_the_data_gates_run_twice_leave_the_same_rows<br>test_the_threshold_in_the_code_is_the_one_recorded_in_the_decision_log<br>test_a_planted_snapshot_captured_after_the_announcement_never_reaches_an_event<br>test_an_event_is_unique_on_company_quarter_and_announcement_date<br>test_building_events_twice_from_the_same_rows_gives_the_same_table_hash<br>test_date_order_errors_are_listed_and_calls_before_the_filing_are_listed_apart<br>test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones<br>test_failing_rows_are_quarantined_once_and_kept_and_extreme_labels_are_flagged<br>test_fiscal_periods_map_to_calendar_quarters_for_five_non_calendar_companies<br>test_the_coverage_gate_reports_a_miss_and_keeps_the_threshold<br>test_the_dataset_has_one_eps_basis<br>test_the_hand_audit_sheet_draws_the_same_events_every_time_without_repeats<br>test_the_three_date_fields_have_no_nulls_in_usable_events_and_gaps_are_counted_apart | AE-01-AC1, AE-03, AE-03-AC1, CE-01, CE-01-AC1, CE-02-AC1, DV-01, DV-01-AC1, DV-02, DV-02-AC1, DV-03, DV-03-AC1, DV-04, DV-05-AC1, DV-06-AC1, DV-08-AC1, EQ-07, FD-04-AC1, IG-05, IG-06, IG-06-AC1, IG-20, SR-10, SR-10-AC2, TH-01-AC1, TH-06-AC1, TH-15-AC1, TX-04-AC1, TX-05-AC2, TX-07-AC1, VL-01, VL-01-AC1, VL-01-AC2, VL-05-AC1, VL-05-AC2, VL-09 |
+| tests/conftest.py | test_the_whole_test_run_has_no_outside_network<br>test_db_16_ac1_the_test_configuration_refuses_to_start_against | DB-16-AC1, IG-12-AC1 |
+| tests/db_support.py | test_db_16_ac1_the_test_configuration_refuses_to_start_against<br>test_no_feature_code_reads_a_versioned_table_directly | DB-09-AC2, DB-16-AC1 |
+| tests/fixtures/edgar_companyfacts_aapl_trimmed.json | test_the_recorded_edgar_response_states_its_origin_and_parses_with_no_network | IG-10, IG-12 |
+| tests/fixtures/fixture_sources.csv | test_every_committed_fixture_says_which_dataset_it_comes_from<br>test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution | DP-10, LC-06-AC1 |
+| tests/fixtures/ticker_cik_map.csv | test_company_counts_recomputed_from_the_fixtures_are_within_five_of_500 | IM-01-AC1, TH-05-AC1 |
 | tests/requirement_checks.lock | test_do_03_every_check_matches_the_text_its_tests_were_reviewed_against | DO-03 |
+| tests/test_ingestion_framework.py | test_eq_07_ac1_every_registered_task_has_a_run_twice_test | EQ-07-AC1 |

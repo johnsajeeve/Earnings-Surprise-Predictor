@@ -1,0 +1,89 @@
+{
+ "tickers_in_file": 1209,
+ "tickers_resolved": 778,
+ "tickers_not_resolved": 431,
+ "companies": 742,
+ "companies_by_status": {
+  "current": 494,
+  "removed": 144,
+  "later": 31,
+  "out-of-window": 73
+ },
+ "selected_current": 80,
+ "selected_removed": 20,
+ "excluded_by_rule": 6,
+ "year_end_ticker_counts": {
+  "2015": 502,
+  "2016": 506,
+  "2017": 505,
+  "2018": 505,
+  "2019": 505,
+  "2020": 505,
+  "2021": 505,
+  "2022": 503,
+  "2023": 503,
+  "2024": 503
+ },
+ "year_end_company_counts": {
+  "2015": {
+   "tickers": 502,
+   "companies": 499,
+   "second_share_classes": 3,
+   "unresolved_tickers": 49
+  },
+  "2016": {
+   "tickers": 506,
+   "companies": 503,
+   "second_share_classes": 3,
+   "unresolved_tickers": 42
+  },
+  "2017": {
+   "tickers": 505,
+   "companies": 502,
+   "second_share_classes": 3,
+   "unresolved_tickers": 34
+  },
+  "2018": {
+   "tickers": 505,
+   "companies": 502,
+   "second_share_classes": 3,
+   "unresolved_tickers": 26
+  },
+  "2019": {
+   "tickers": 505,
+   "companies": 502,
+   "second_share_classes": 3,
+   "unresolved_tickers": 17
+  },
+  "2020": {
+   "tickers": 505,
+   "companies": 502,
+   "second_share_classes": 3,
+   "unresolved_tickers": 13
+  },
+  "2021": {
+   "tickers": 505,
+   "companies": 502,
+   "second_share_classes": 3,
+   "unresolved_tickers": 13
+  },
+  "2022": {
+   "tickers": 503,
+   "companies": 500,
+   "second_share_classes": 3,
+   "unresolved_tickers": 9
+  },
+  "2023": {
+   "tickers": 503,
+   "companies": 500,
+   "second_share_classes": 3,
+   "unresolved_tickers": 7
+  },
+  "2024": {
+   "tickers": 503,
+   "companies": 500,
+   "second_share_classes": 3,
+   "unresolved_tickers": 6
+  }
+ }
+}

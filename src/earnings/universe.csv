@@ -1,0 +1,101 @@
+company_id,name,status,removal_date,removal_reason
+0001020569,IRON MOUNTAIN INC,current,,
+0001601046,"Keysight Technologies, Inc.",current,,
+0000026172,CUMMINS INC,current,,
+0000796343,ADOBE INC.,current,,
+0000040533,GENERAL DYNAMICS CORP,current,,
+0001396009,Vulcan Materials CO,current,,
+0001601712,Synchrony Financial,current,,
+0001000228,HENRY SCHEIN INC,current,,
+0000842023,BIO-TECHNE Corp,current,,
+0000832101,IDEX CORP /DE/,current,,
+0000726728,REALTY INCOME CORP,current,,
+0000849399,Gen Digital Inc.,current,,
+0000010456,BAXTER INTERNATIONAL INC,current,,
+0001437107,"Discovery, Inc.",current,,
+0000820027,AMERIPRISE FINANCIAL INC,current,,
+0000864749,TRIMBLE INC.,current,,
+0001501585,"HUNTINGTON INGALLS INDUSTRIES, INC.",current,,
+0000900075,COPART INC,current,,
+0000815556,FASTENAL CO,current,,
+0001478242,IQVIA HOLDINGS INC.,current,,
+0001413329,Philip Morris International Inc.,current,,
+0000075677,PACKAGING CORP OF AMERICA,current,,
+0000096021,SYSCO CORP,current,,
+0001408198,MSCI Inc.,current,,
+0001002047,"NetApp, Inc.",current,,
+0000077476,PEPSICO INC,current,,
+0000051143,INTERNATIONAL BUSINESS MACHINES CORP,current,,
+0001326801,"Meta Platforms, Inc.",current,,
+0000004904,AMERICAN ELECTRIC POWER CO INC,current,,
+0001442145,"Verisk Analytics, Inc.",current,,
+0000920148,LABCORP HOLDINGS INC.,current,,
+0001090012,DEVON ENERGY CORP/DE,current,,
+0001385157,TE Connectivity plc,current,,
+0000711404,"COOPER COMPANIES, INC.",current,,
+0000927628,CAPITAL ONE FINANCIAL CORP,current,,
+0001374310,"Cboe Global Markets, Inc.",current,,
+0000764622,PINNACLE WEST CAPITAL CORP,current,,
+0000079282,"BROWN & BROWN, INC.",current,,
+0000313616,DANAHER CORP /DE/,current,,
+0000024741,CORNING INC /NY,current,,
+0001166691,COMCAST CORP,current,,
+0000004127,"SKYWORKS SOLUTIONS, INC.",current,,
+0000072903,XCEL ENERGY INC,current,,
+0000759944,CITIZENS FINANCIAL GROUP INC/RI,current,,
+0000002488,ADVANCED MICRO DEVICES INC,current,,
+0000087347,SLB LIMITED/NV,current,,
+0000072971,WELLS FARGO & COMPANY/MN,current,,
+0001297996,"DIGITAL REALTY TRUST, INC.",current,,
+0001065088,EBAY INC,current,,
+0000093751,STATE STREET CORP,current,,
+0001034054,SBA COMMUNICATIONS CORP,current,,
+0001000697,WATERS CORP /DE/,current,,
+0000055785,KIMBERLY CLARK CORP,current,,
+0001389170,Targa Resources Corp.,current,,
+0000018230,CATERPILLAR INC,current,,
+0000076334,Parker-Hannifin Corp,current,,
+0000070858,BANK OF AMERICA CORP /DE/,current,,
+0001341439,ORACLE CORP,current,,
+0000874766,"HARTFORD INSURANCE GROUP, INC.",current,,
+0001170010,CARMAX INC,current,2025-10-31,Market capitalization changes.
+0001585689,Hilton Worldwide Holdings Inc.,current,,
+0000732717,AT&T INC.,current,,
+0000033185,EQUIFAX INC,current,,
+0000008818,Avery Dennison Corp,current,,
+0000884887,ROYAL CARIBBEAN CRUISES LTD,current,,
+0000319201,KLA CORP,current,,
+0001757898,STERIS plc,current,,
+0000006951,APPLIED MATERIALS INC /DE,current,,
+0001048911,FEDEX CORP,current,,
+0000910521,DECKERS OUTDOOR CORP,current,,
+0001013462,Ansys,current,2025-07-18,Synopsys acquired Ansys.
+0000027904,"DELTA AIR LINES, INC.",current,,
+0001513761,Norwegian Cruise Line Holdings Ltd.,current,,
+0000277948,CSX CORP,current,,
+0001571949,"Intercontinental Exchange, Inc.",current,,
+0001618921,Walgreens Boots Alliance,current,2025-08-28,Sycamore Partners acquired Walgreen Boots Alliance.
+0000109198,TJX COMPANIES INC /DE/,current,,
+0000033213,EQT Corp,current,,
+0001069183,"AXON ENTERPRISE, INC.",current,,
+0001090872,"AGILENT TECHNOLOGIES, INC.",current,,
+0001274057,Hospira,removed,2015-09-03,Hospira was acquired.
+0000909954,Keurig Green Mountain,removed,2016-03-03,JAB Holding Company acquired Keurig Green Mountain.
+0000865436,Whole Foods Market,removed,2017-08-28,Amazon acquired Whole Foods Market.
+0001646383,CSRA,removed,2018-04-04,General Dynamics acquired CSRA.
+0001685040,"Brighthouse Financial, Inc.",removed,2019-04-02,not stated for this company; the source row reads: DowDuPont completed the corporate spin-off of Dow Inc.
+0000072333,Nordstrom,removed,2020-06-22,Market capitalization changes.
+0000048039,HollyFrontier,removed,2021-06-04,Market capitalization changes.
+0001378946,People's United Financial,removed,2022-04-04,M&T Bank acquired People's United Financial.
+0000719739,SVB Financial Group,removed,2023-03-15,"The FDIC placed SVB's main subsidiary, Silicon Valley Bank, into receivership."
+0000701985,"Bath & Body Works, Inc.",removed,2024-10-01,Market capitalization changes.
+0000079958,Precision Castparts Corporation,removed,2016-02-01,the source gives no reason
+0000203077,St Jude Medical,removed,2017-01-05,Abbott Laboratories acquired St. Jude Medical.
+0000030419,Dun & Bradstreet,removed,2017-04-05,not stated for this company; the source row reads: Gartner acquired CEB.
+0000718877,Activision Blizzard,removed,2023-10-18,Acquisition of Activision Blizzard by Microsoft.
+0001530721,Capri Holdings Ltd,removed,2020-05-12,Market capitalization changes.
+0000075829,Pall Corporation,removed,2015-08-31,Pall was acquired.
+0001021860,NOV Inc.,removed,2021-09-20,Market capitalization changes.
+0000059558,LINCOLN NATIONAL CORP,removed,2023-09-18,Market capitalization changes.
+0000354908,FLIR Systems,removed,2021-05-14,Teledyne Technologies acquired FLIR Systems.
+0001108827,QEP Resources,removed,2015-07-01,not stated for this company; the source row reads: Baxter completed the corporate spin-off of Baxalta.

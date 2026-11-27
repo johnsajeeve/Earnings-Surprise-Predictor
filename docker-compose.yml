@@ -1,19 +1,32 @@
-# Four services: PostgreSQL, Redis, the Celery worker and the FastAPI app.
+# Five services: PostgreSQL, Redis, a one-shot migration step, the Celery worker and the FastAPI app.
 # Start:  cp .env.example .env && docker compose up --build -d
 # Check:  curl http://localhost:8000/health
 # Stop:   docker compose down        (add -v to also delete the database volume)
 # Image versions are pinned to exact versions (Project-Wide EQ-04).
 
-x-app-env: &app-env
+x-common-env: &common-env
   # The database URL is built in code from these parts, so a password with special characters is safe.
   POSTGRES_HOST: db
-  POSTGRES_USER: ${POSTGRES_USER:-earnings}
-  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env first}
   POSTGRES_DB: ${POSTGRES_DB:-earnings}
+  # Passwords of the application roles (Database DB-02, decision C-44). The services run as
+  # earnings_worker and earnings_api. The superuser password is NOT here: see x-app-env.
+  DB_MIGRATOR_PASSWORD: ${DB_MIGRATOR_PASSWORD:?Copy .env.example to .env first}
+  DB_WORKER_PASSWORD: ${DB_WORKER_PASSWORD:?Copy .env.example to .env first}
+  DB_API_PASSWORD: ${DB_API_PASSWORD:?Copy .env.example to .env first}
+  CAPTURE_CATCH_UP: ${CAPTURE_CATCH_UP:-false}
+  YAHOO_COLLECTION: ${YAHOO_COLLECTION:-false}
   CELERY_BROKER_URL: redis://redis:6379/0
   CELERY_RESULT_BACKEND: redis://redis:6379/1
   # Passed through from your shell. Empty if unset. Never written to a file in the repo.
   SEC_USER_AGENT: ${SEC_USER_AGENT:-}
+
+# The superuser only creates the roles and the database. The `migrate` step needs it. The `api`
+# service keeps it because the CI test job runs the tests inside that service and the tests build a
+# test database. The worker, which runs the queued tasks, does not get it (Phase 1 audit finding).
+x-app-env: &app-env
+  <<: *common-env
+  POSTGRES_USER: ${POSTGRES_USER:-earnings}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env first}
 
 services:
   db:
@@ -28,32 +41,54 @@ services:
     ports:
       - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-earnings} -d ${POSTGRES_DB:-earnings}"]
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-earnings} -d ${POSTGRES_DB:-earnings}"]
       interval: 5s
       timeout: 5s
       retries: 10
     restart: unless-stopped
 
+  # Valkey, the BSD-licensed fork of Redis 7.2, in place of Redis 7.4, which is not open source
+  # (decision C-63). It speaks the same protocol, so the service keeps its name.
   redis:
-    image: redis:7.4.12-alpine
+    image: valkey/valkey:8.1.12-alpine
     ports:
       - "127.0.0.1:${REDIS_PORT:-6379}:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "valkey-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 10
     restart: unless-stopped
 
-  worker:
-    build: .
-    command: celery -A earnings.celery_app worker --loglevel=info --concurrency=2
+  # Runs once at start: creates the roles, then applies the migrations (Product PL-05, Database
+  # DB-02). The worker and the API wait for it to finish.
+  migrate:
+    build:
+      context: .
+      target: app
+    command: python -m earnings.migrate
     environment: *app-env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  worker:
+    build:
+      context: .
+      target: worker
+    # -B runs the scheduler inside the worker (decision C-44). Its schedule file is written to /tmp.
+    command: celery -A earnings.celery_app worker -B -s /tmp/celerybeat-schedule --loglevel=info --concurrency=2
+    environment: *common-env
+    volumes:
+      - data:/data
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD-SHELL", "celery -A earnings.celery_app inspect ping -d celery@$$HOSTNAME -t 5"]
       interval: 15s
@@ -63,9 +98,13 @@ services:
     restart: unless-stopped
 
   api:
-    build: .
+    build:
+      context: .
+      target: app
     command: uvicorn earnings.api.main:app --host 0.0.0.0 --port 8000 --no-access-log
     environment: *app-env
+    volumes:
+      - data:/data
     ports:
       - "127.0.0.1:${API_PORT:-8000}:8000"
     healthcheck:
@@ -80,9 +119,13 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
       worker:
         condition: service_healthy
     restart: unless-stopped
 
 volumes:
   pgdata:
+  # Large source files that are downloaded once and read in batches (Deployment DP-04).
+  data:

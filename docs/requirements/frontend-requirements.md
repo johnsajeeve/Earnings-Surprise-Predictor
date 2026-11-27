@@ -52,6 +52,15 @@ Every requirement has a "Traces to" entry naming where in the project it comes f
 | UX-08 | Should | Streamlit's usage statistics are switched off in configuration, and the dashboard loads no third-party scripts or trackers, so the statement that no end-user data is stored stays true. Whether the default is on in the installed version is to be checked, not assumed. | Configuration test. Page source lists no external script. | Market Section 6 (data protection); Project-Wide SP-05 |
 | UX-09 | Must | The dashboard displays only the cited sentences, never a full transcript, until the licence question in decision D-18 is settled. Cited sentences stay within the quotation limit in the source register (Data SR-11). | A page test finds no transcript text beyond the cited sentences and none over the limit. | Data SR-03, SR-11; decision D-18 |
 
+## 5A. Improvements from comparable products (DRAFT, added 26 November 2026, awaiting approval)
+
+Extensions to the proposal, can be dropped (Project-Wide SS-04).
+
+| ID | Priority | Requirement | Acceptance check | Traces to |
+|---|---|---|---|---|
+| UX-12 | Should | The prediction card shows what the company's result rests on: the number of past events used, any missing data that affects it, and whether the company has left the index. | A fixture company with missing data and a removed company each show their notes on the card. | Data TX-07, IM-02; NIST AI RMF Map 2.2 |
+| UX-13 | Could | The dashboard links to a way to report a wrong or disputed output. It collects no account and no personal data. | The link is on the prediction card and the page it opens asks for no personal data. | NIST AI RMF Measure 3.3; Product NG4 |
+
 ## 6. Testing and packaging
 
 | ID | Priority | Requirement | Acceptance check | Traces to |

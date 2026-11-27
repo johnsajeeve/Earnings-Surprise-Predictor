@@ -17,11 +17,12 @@ Each requirement is defined in exactly one document. Other documents cite its ID
 | [feature-engineering-requirements.md](feature-engineering-requirements.md) | How the feature matrix is built: text preparation, FinBERT scoring, linguistic and tabular features, versioning. Draft | 32 requirements (FE-01 to FE-32) |
 | [explanation-agent-requirements.md](explanation-agent-requirements.md) | How the explanation agent retrieves, generates, verifies, is kept safe and is evaluated. Draft | 26 requirements (AG-01 to AG-26) |
 | [database-requirements.md](database-requirements.md) | PostgreSQL access, schema management, time and append-only rules, raw data, writes, recovery. Draft | 17 requirements (DB-01 to DB-17) |
-| [frontend-requirements.md](frontend-requirements.md) | Streamlit dashboard structure, API use, states, caching, rendering, privacy, testing. Draft | 11 requirements (UX-01 to UX-11) |
+| [frontend-requirements.md](frontend-requirements.md) | Streamlit dashboard structure, API use, states, caching, rendering, privacy, testing. Draft | 13 requirements (UX-01 to UX-13) |
 | [ingestion-and-preparation-requirements.md](ingestion-and-preparation-requirements.md) | How data is fetched, scheduled, cleaned, segmented and built into events. Draft | 22 requirements (IG-01 to IG-22) |
-| [modelling-and-evaluation-requirements.md](modelling-and-evaluation-requirements.md) | How models are trained, tuned, calibrated, explained, scored and evaluated. Draft | 23 requirements (MD-01 to MD-23) |
+| [modelling-and-evaluation-requirements.md](modelling-and-evaluation-requirements.md) | How models are trained, tuned, calibrated, explained, scored and evaluated. Draft | 27 requirements (MD-01 to MD-27) |
 | [api-and-serving-requirements.md](api-and-serving-requirements.md) | How the API is built and behaves, including deferred authentication. Draft | 16 requirements (SV-01 to SV-16) |
-| [deployment-and-operations-requirements.md](deployment-and-operations-requirements.md) | Local build, secrets, pipeline, logs, releases and the optional cloud deployment. Draft | 15 requirements (DP-01 to DP-15) |
+| [deployment-and-operations-requirements.md](deployment-and-operations-requirements.md) | Local build, secrets, pipeline, logs, releases and the optional cloud deployment. Draft | 20 requirements (DP-01 to DP-20) |
+| [licensing-requirements.md](licensing-requirements.md) | Licences of data, models, word lists, libraries and images, and what may be committed or deployed. Draft | 11 requirements (LC-01 to LC-11) |
 | [proposal-drift-review.md](proposal-drift-review.md) | Comparison of all documents with the SSOT | Not a requirements document |
 | [library-enquiry-draft.md](library-enquiry-draft.md) | Draft email to the library for optional institutional data | Not a requirements document |
 | assessment-requirements.md | Empty. Decision D-25 | None |
@@ -46,6 +47,7 @@ An ID prefix belongs to one document.
 | Modelling and evaluation | MD |
 | API and serving | SV |
 | Deployment and operations | DP |
+| Licensing | LC |
 | Decision log | C-nn (closed), D-nn (open) |
 
 Pipeline coverage: every step has an owner document. Sources, licences and label checks are in the Data document; fetching, scheduling and event building in the Ingestion and Preparation document; storage in the Database document; features in the Feature Engineering document; training, calibration, explanation and metrics in the Modelling and Evaluation document (headline rules in Product Sections 8 and 8A); the API in the API and Serving document (headline rules in Product Sections 6 and 13); the explanation layer in the Explanation Agent document; the dashboard in the Frontend document; running and hosting in the Deployment and Operations document; delivery, security and ethics in the Project-Wide document.

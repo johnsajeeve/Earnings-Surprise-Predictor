@@ -1,0 +1,47 @@
+[
+ {
+  "company": "ORACLE CORP",
+  "company_id": "0001341439",
+  "fiscal_year_end_month": 5,
+  "periods": 73,
+  "shared_calendar_quarters": [],
+  "gaps": [],
+  "one_to_one": true
+ },
+ {
+  "company": "Parker-Hannifin Corp",
+  "company_id": "0000076334",
+  "fiscal_year_end_month": 6,
+  "periods": 73,
+  "shared_calendar_quarters": [],
+  "gaps": [],
+  "one_to_one": true
+ },
+ {
+  "company": "AGILENT TECHNOLOGIES, INC.",
+  "company_id": "0001090872",
+  "fiscal_year_end_month": 10,
+  "periods": 73,
+  "shared_calendar_quarters": [],
+  "gaps": [],
+  "one_to_one": true
+ },
+ {
+  "company": "ADOBE INC.",
+  "company_id": "0000796343",
+  "fiscal_year_end_month": 11,
+  "periods": 74,
+  "shared_calendar_quarters": [],
+  "gaps": [],
+  "one_to_one": true
+ },
+ {
+  "company": "TJX COMPANIES INC /DE/",
+  "company_id": "0000109198",
+  "fiscal_year_end_month": 1,
+  "periods": 73,
+  "shared_calendar_quarters": [],
+  "gaps": [],
+  "one_to_one": true
+ }
+]

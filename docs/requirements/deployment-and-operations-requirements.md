@@ -63,6 +63,27 @@ Costs of the managed database, managed Redis and workers were not verified here.
 | DP-14 | Should (if cloud is used) | Services are stateless, read their port and settings from the environment, use `/health` as the readiness check, scale to zero when idle, and run from an image tag so a rollback is a redeploy of the previous tag within 10 minutes (timed once). Pricing for each managed component is checked on the provider's pricing page before creation. | Rollback is timed once. Service scales to zero in a test. | Project-Wide DO-04, OR-02; Product NFR-04 |
 | DP-15 | Should (if Option C) | A Celery worker cannot run as a request-driven Cloud Run service, because it takes no web requests. Option C needs a worker pool or a virtual machine, and the choice is recorded in ADR 0003. | ADR 0003 names how the worker runs. | ADR 0001 (open point on Cloud Run workers) |
 
+## 5A. Hosting and licence compliance (DRAFT, added 26 November 2026, awaiting approval)
+
+**What the licences mean for hosting.** The [Licensing Requirements](licensing-requirements.md) show that the transcripts, prices and consensus snapshots may not be deployed. A cloud copy today could hold only SEC data and the membership list. Whether predictions and features computed from the other sources may be published is a legal question that has not been answered. So the safe choice for the December and February milestones is **Option A: local Docker plus a recorded demo**. Option B is considered only after that question and decision D-49 are settled.
+
+**Host facts read on 26 November 2026.**
+
+| Host | What its page said | Consequence |
+|---|---|---|
+| Google Cloud Run (free tier) | Per month, request-based billing: 2 million requests, 360,000 GB-seconds, 180,000 vCPU-seconds, 1 GB outbound from North America. "A Google Cloud billing account is required." The provider may change the offer with 30 days' notice | Possible for Option B. Needs a payment method, so a spend ceiling first (DP-12, D-15). The Cloud Run pricing page itself could not be read |
+| Neon (free plan) | 1 GB storage per project, 100 CU-hours, 5 GB transfer; compute is suspended when a limit is reached; "no credit card required" | Possible for a deployable-data database. The local database is 822 MB, most of it data that may not be deployed |
+| Streamlit Community Cloud | Terms updated November 2025: an addendum limits some use to "personal and non-commercial purposes" and says it may not be used to process "financial information" among sensitive personal data. App limits shown are dated February 2024 | Not to be used until the meaning of that clause for company financial data is settled |
+| Hugging Face Spaces | Not read from the provider. Web summaries say running a code Space may now need a paid plan | Unverified |
+
+| ID | Priority | Requirement | Acceptance check | Traces to |
+|---|---|---|---|---|
+| DP-16 | Must (if cloud is used) | A deployment profile file lists each hosted component, its host, the free-tier limits with the page and date they came from, and the datasets each component holds. | Every hosted component has a row with its host, limits, source page, date and datasets. | DP-11, DP-14; Section 5A |
+| DP-17 | Must (if cloud is used) | Each host's terms are read and recorded before it is used, including limits on commercial use and on kinds of data. A host whose terms bar this use is not chosen. | A terms record with a date exists for every host in the deployment profile. | Section 5A; Licensing LC-10 |
+| DP-18 | Must (if cloud is used) | The deployed database is built by an export that takes only datasets that may be deployed, and its size is checked against the host's limit before loading. | An export that would include a dataset that may not be deployed fails. | Licensing LC-04; DP-13 |
+| DP-19 | Must (if cloud is used) | Deployed images hold no raw source data, no model weights that may not be deployed and no environment file. | A scan of each image to be deployed finds none of them. | DP-06, DP-10; Licensing LC-11 |
+| DP-20 | Should | A setting stops predictions and explanations being served without a rebuild or redeploy, and the health endpoint reports that it is on. | With the setting on, the prediction endpoints return the unavailable state and health reports it. | NIST AI RMF Manage 2.4 (extension, can be dropped under SS-04) |
+
 ## 6. Evidence read
 
 No requirement above depends on an outside source. Read as background, mostly as summaries:

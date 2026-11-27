@@ -1,0 +1,76 @@
+{
+ "_origin": "REAL response from https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json (Apple Inc.), retrieved 2026-11-23 by the project's EDGAR client; trimmed to 6 diluted EPS facts of fiscal 2014. Not a complete payload.",
+ "cik": 320193,
+ "entityName": "Apple Inc.",
+ "facts": {
+  "us-gaap": {
+   "EarningsPerShareDiluted": {
+    "label": "Earnings Per Share, Diluted",
+    "units": {
+     "USD/shares": [
+      {
+       "start": "2011-09-25",
+       "end": "2012-09-29",
+       "val": 6.31,
+       "accn": "0001193125-14-383437",
+       "fy": 2014,
+       "fp": "FY",
+       "form": "10-K",
+       "filed": "2014-10-27"
+      },
+      {
+       "start": "2012-09-30",
+       "end": "2012-12-29",
+       "val": 13.81,
+       "accn": "0001193125-14-024487",
+       "fy": 2014,
+       "fp": "Q1",
+       "form": "10-Q",
+       "filed": "2014-01-28"
+      },
+      {
+       "start": "2012-09-30",
+       "end": "2012-12-29",
+       "val": 1.97,
+       "accn": "0001193125-14-383437",
+       "fy": 2014,
+       "fp": "FY",
+       "form": "10-K",
+       "filed": "2014-10-27"
+      },
+      {
+       "start": "2012-09-30",
+       "end": "2013-03-30",
+       "val": 23.9,
+       "accn": "0001193125-14-157311",
+       "fy": 2014,
+       "fp": "Q2",
+       "form": "10-Q",
+       "filed": "2014-04-24"
+      },
+      {
+       "start": "2012-12-30",
+       "end": "2013-03-30",
+       "val": 10.09,
+       "accn": "0001193125-14-157311",
+       "fy": 2014,
+       "fp": "Q2",
+       "form": "10-Q",
+       "filed": "2014-04-24"
+      },
+      {
+       "start": "2012-12-30",
+       "end": "2013-03-30",
+       "val": 1.44,
+       "accn": "0001193125-14-383437",
+       "fy": 2014,
+       "fp": "FY",
+       "form": "10-K",
+       "filed": "2014-10-27"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

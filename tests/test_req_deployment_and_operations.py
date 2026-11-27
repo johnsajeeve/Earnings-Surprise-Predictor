@@ -173,3 +173,37 @@ def test_dp_14_ac2_service_scales_to_zero_in_a_test():
 def test_dp_15_ac1_adr_0003_names_how_the_worker_runs():
     """DP-15-AC1: ADR 0003 names how the worker runs."""
     not_tested("NOT IMPLEMENTED", "the code this check exercises is not built yet")
+
+
+@pytest.mark.req("DP-16-AC1")
+def test_dp_16_ac1_placeholder():
+    """DP-16-AC1: Every hosted component has a row with its host, limits, source page, date and
+    datasets.
+    """
+    not_tested("NOT IMPLEMENTED", "no deployment profile exists yet")
+
+
+@pytest.mark.req("DP-17-AC1")
+def test_dp_17_ac1_placeholder():
+    """DP-17-AC1: A terms record with a date exists for every host in the deployment profile."""
+    not_tested("NOT IMPLEMENTED", "no host has been chosen")
+
+
+@pytest.mark.req("DP-18-AC1")
+def test_dp_18_ac1_placeholder():
+    """DP-18-AC1: An export that would include a dataset that may not be deployed fails."""
+    not_tested("NOT IMPLEMENTED", "the export is not built")
+
+
+@pytest.mark.req("DP-19-AC1")
+def test_dp_19_ac1_placeholder():
+    """DP-19-AC1: A scan of each image to be deployed finds none of them."""
+    not_tested("NOT IMPLEMENTED", "no image is built for deployment")
+
+
+@pytest.mark.req("DP-20-AC1")
+def test_dp_20_ac1_placeholder():
+    """DP-20-AC1: With the setting on, the prediction endpoints return the unavailable state
+    and health reports it.
+    """
+    not_tested("NOT IMPLEMENTED", "there is no prediction endpoint yet")

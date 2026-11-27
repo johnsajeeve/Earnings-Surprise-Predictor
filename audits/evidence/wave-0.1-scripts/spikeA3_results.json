@@ -1,0 +1,38 @@
+{
+ "H1 Eastern with DST": {
+  "n_within_24h": 356,
+  "n_summer": 250,
+  "n_winter": 63,
+  "median_summer": -89,
+  "median_winter": -112,
+  "abs_diff": 24,
+  "call_first_share": 4.5
+ },
+ "H2 Eastern standard all year (UTC-5)": {
+  "n_within_24h": 356,
+  "n_summer": 250,
+  "n_winter": 63,
+  "median_summer": -149,
+  "median_winter": -112,
+  "abs_diff": 36,
+  "call_first_share": 3.4
+ },
+ "H3 London with DST": {
+  "n_within_24h": 370,
+  "n_summer": 260,
+  "n_winter": 64,
+  "median_summer": 199,
+  "median_winter": 187,
+  "abs_diff": 12,
+  "call_first_share": 76.8
+ },
+ "H4 UTC": {
+  "n_within_24h": 369,
+  "n_summer": 259,
+  "n_winter": 64,
+  "median_summer": 145,
+  "median_winter": 187,
+  "abs_diff": 42,
+  "call_first_share": 76.2
+ }
+}
