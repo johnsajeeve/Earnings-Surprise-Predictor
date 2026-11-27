@@ -444,13 +444,17 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Wave 2.1: brief written, nothing built. Needs John: the new dependencies and the safe-harbour rule.
 - Not re-audited by a fresh agent. Work by Claude.
 
+### 27 Nov 2026: approvals for Wave 2.1; what replaces Yahoo
+
+- John approved the Wave 2.1 packages, the safe-harbour rule and the SSOT licensing row (C-67). The row was added with the wording shown.
+- Asked by John: what to do about Yahoo. Finnhub's free earnings calendar, not tested before, returns upcoming estimates (`audits/evidence/finnhub-calendar-check-2026-11-27.md`); my earlier "not usable" was too broad. Its terms need written approval to share derived results. New open decision D-50. Nothing is collected from either source.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 As of 27 November 2026.
 
-**To start Wave 2.1** (`audits/evidence/wave-2.1-task-brief.md`): the new dependencies, and the safe-harbour rule.
-
-**Yes or no:** add the licensing row to the SSOT document map (wording shown in chat).
+**Soon (by mid-December):** D-50, what replaces Yahoo: send the Finnhub question, and register for WRDS and read the CRSP terms.
 
 **Only you can do these**
 - Confirm the section 29A research basis for the transcripts with the University library's copyright team (C-65). Ask the transcript publisher where the text comes from. If you want Yahoo collection back, ask Yahoo for permission.

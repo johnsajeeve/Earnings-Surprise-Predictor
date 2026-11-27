@@ -125,6 +125,7 @@ The agent only explains a decision the model has already made. It does not touch
 | requirements/product-requirements.md | What the system does: FR, SRS, EX, NFR, API, UI, PL, ML, TR, MR | Data sources, delivery process |
 | requirements/data-requirements.md | Data sources, licences, label construction, verification and validation: SR, TX, AE, CE, LB, IM, SEC, PX, FD, DV, VL, GS | Product behaviour |
 | requirements/project-wide-requirements.md | Delivery, assessment, supervision, engineering, security, ethics, operations, LLM operations, documentation: ASM, PD, SS, SC, EQ, SP, ET, OR, AI, DO | Product behaviour |
+| requirements/licensing-requirements.md | Licences of data, models, word lists, libraries and images, and what may be committed or deployed: LC | Data sources and access |
 | requirements/README.md | Index, ID registry, withdrawn IDs | Requirements |
 | requirements/proposal-drift-review.md | Comparison of the documents with this file | Requirements |
 | architecture/earnings-predictor-architecture.pptx | Architecture and workflow diagrams | Requirements |
