@@ -2,8 +2,8 @@
 (Feature Engineering FE-01 to FE-04).
 
 A sentence is a slice of one speaker turn of the cleaned transcript, so it can be found again in the
-cleaned text by exact match. Operator turns and the safe-harbour passage are marked non-analytic.
-They are stored and scored, and left out of every text feature.
+cleaned text by exact match. Operator turns, lists of who is on the call and the safe-harbour
+passage are marked non-analytic. They are stored and scored, and left out of every text feature.
 """
 
 import re
@@ -13,8 +13,12 @@ from functools import lru_cache
 from importlib.metadata import version
 from typing import Any
 
+from earnings.transcripts import is_participant_list
+
 SPACY_MODEL = "en_core_web_sm"
-SAFE_HARBOUR_RULE_VERSION = "1"  # the rule John approved on 27 November 2026 (decision C-67)
+# approved by John on 27 November 2026: the rule (decision C-67), then the reach limit (C-68)
+SAFE_HARBOUR_RULE_VERSION = "2"
+SAFE_HARBOUR_REACH = 12  # a closing phrase counts only this many sentences after the opening one
 _HARBOUR_START = re.compile(r"forward-looking statement|safe harbor|safe harbour", re.IGNORECASE)
 _HARBOUR_END = re.compile(
     r"forward-looking|safe harbor|actual results|risk factors|SEC filings|"
@@ -56,13 +60,15 @@ def splitter_version() -> str:
 
 
 def safe_harbour_span(texts: list[str]) -> range:
-    """Rule version 1, applied to the sentences of one prepared-remarks turn: from the first that
+    """Rule version 2, applied to the sentences of one prepared-remarks turn: from the first that
     names forward-looking statements or a safe harbour, through the last in the same turn that uses
-    one of the closing phrases. Empty when the turn has no opening phrase."""
+    one of the closing phrases within SAFE_HARBOUR_REACH sentences of the opening one. Empty when
+    the turn has no opening phrase."""
     start = next((i for i, t in enumerate(texts) if _HARBOUR_START.search(t)), None)
     if start is None:
         return range(0)
-    ends = [i for i in range(start, len(texts)) if _HARBOUR_END.search(texts[i])]
+    reach = min(len(texts), start + SAFE_HARBOUR_REACH + 1)
+    ends = [i for i in range(start, reach) if _HARBOUR_END.search(texts[i])]
     return range(start, (ends[-1] if ends else start) + 1)
 
 
@@ -73,7 +79,7 @@ def sentences(turns: list[dict[str, Any]], split: Splitter = spacy_split) -> lis
                                               strict=True)):  # fmt: skip
         found = [
             Sentence(len(out) + i, index, turn["section"], turn["speaker"], turn["role"], text,
-                     turn["role"] != "operator")
+                     turn["role"] != "operator" and not is_participant_list(turn["speaker"]))
             for i, text in enumerate(texts)
         ]  # fmt: skip
         if turn["section"] == "prepared" and turn["role"] != "operator":

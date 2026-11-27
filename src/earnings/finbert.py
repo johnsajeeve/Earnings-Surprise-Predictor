@@ -222,6 +222,40 @@ def pending(engine: Engine, revision: str = REVISION) -> list[int]:
         )  # fmt: skip
 
 
+class NoScoring:
+    """A scorer that refuses, so that updating marks can never score a sentence."""
+
+    def __init__(self, revision: str) -> None:
+        self.revision = revision
+
+    def score(self, texts: Sequence[str]) -> list[Score]:
+        raise RuntimeError("the sentences changed: score them with the score command")
+
+
+def remark(
+    engine: Engine, revision: str = REVISION, split: sn.Splitter = sn.spacy_split
+) -> dict[str, Any]:
+    """Apply the current marking rules to the calls already scored, without scoring anything."""
+    with engine.connect() as conn:
+        ids = list(
+            conn.execute(
+                text("SELECT DISTINCT transcript_id FROM transcript_sentence "
+                     "WHERE model_revision = :r ORDER BY transcript_id"),
+                {"r": revision},
+            ).scalars()
+        )  # fmt: skip
+    updated, failed = 0, []
+    for transcript_id in ids:
+        try:
+            result = score_transcript(engine, transcript_id, NoScoring(revision), split)
+            updated += result["marks_updated"]
+        except Exception as exc:  # noqa: BLE001  one failing transcript must not stop the others
+            log.error("marking failed for transcript %s: %s", transcript_id, exc)
+            failed.append(transcript_id)
+    return {"transcripts": len(ids), "marks_updated": updated, "failed": failed,
+            "safe_harbour_rule": sn.SAFE_HARBOUR_RULE_VERSION}  # fmt: skip
+
+
 def hardware() -> dict[str, Any]:
     cpu = ""
     info = Path("/proc/cpuinfo")
@@ -280,7 +314,11 @@ def main(argv: list[str]) -> int:
                    "hardware": hardware()}  # fmt: skip
         print(json.dumps(result, indent=1))
         return 1 if result["failed"] else 0
-    print("python -m earnings.finbert download | score [HOW_MANY]")
+    if command == "remark":
+        result = remark(get_engine("worker"))
+        print(json.dumps(result, indent=1))
+        return 1 if result["failed"] else 0
+    print("python -m earnings.finbert download | score [HOW_MANY] | remark")
     return 2
 
 

@@ -113,7 +113,12 @@ def test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases():
     assert sn.safe_harbour_span(["Safe harbor applies.", "No obligation to update."]) == range(0, 2)
     # a closing phrase alone starts nothing
     assert sn.safe_harbour_span(["Actual results beat the plan.", "Risk factors fell."]) == range(0)
-    assert sn.SAFE_HARBOUR_RULE_VERSION == "1"
+    assert sn.SAFE_HARBOUR_RULE_VERSION == "2"
+    filler = [f"Point {i}." for i in range(20)]
+    for distance, last in ((12, 12), (13, 0)):  # the closing phrase counts up to 12 sentences on
+        texts = ["Safe harbor applies.", *filler]
+        texts[distance] = "Actual results may differ."
+        assert sn.safe_harbour_span(texts) == range(0, last + 1)
 
 
 @pytest.mark.req("FE-02")
@@ -132,6 +137,36 @@ def test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_featu
     counted = [s.text for s in sn.sentences(without, split_on_stops) if s.analytic]
     assert counted == [s.text for s in found if s.analytic]
     assert [s.position for s in found] == list(range(len(found)))
+
+
+@pytest.mark.req("FE-02")
+@pytest.mark.code("src/earnings/sentences.py")
+def test_lists_of_who_is_on_the_call_do_not_count_for_text_features():
+    turns = [
+        turn("Executives", "management", "prepared", "Max Poe - Chief. Ida Row - Investors."),
+        turn("Analysts", "analyst", "prepared", "Ann Lee - Some Bank."),
+        turn("Max Poe", "management", "prepared", "Revenue grew."),
+    ]
+    found = sn.sentences(turns, split_on_stops)
+    assert [s.text for s in found if s.analytic] == ["Revenue grew."]
+
+
+@pytest.mark.req("FE-02", "FR-16")
+@pytest.mark.code("src/earnings/finbert.py")
+def test_new_marking_rules_reach_stored_calls_without_scoring_anything(worker):
+    tid = store(worker, TURNS)
+    fb.score_transcript(worker, tid, FakeScorer(), split_on_stops)
+    right = rows(worker)
+    with worker.begin() as conn:  # as if an older rule had counted everything
+        conn.execute(text("UPDATE transcript_sentence SET analytic = true"))
+    result = fb.remark(worker, "r1", split_on_stops)
+    assert result["marks_updated"] == sum(not r.analytic for r in right) and not result["failed"]
+    assert rows(worker) == right
+    with worker.begin() as conn:  # changed text is not scored here
+        conn.execute(text("UPDATE transcript SET turns = jsonb_set(turns, '{2,text}', "
+                          "'\"Revenue fell.\"')"))  # fmt: skip
+    assert fb.remark(worker, "r1", split_on_stops)["failed"] == [tid]
+    assert rows(worker) == right
 
 
 @pytest.mark.req("FE-29-AC1", "FR-16-AC1", "FE-05-AC1")

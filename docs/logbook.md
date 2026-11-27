@@ -457,11 +457,19 @@ This is a record of what was done and when, with the commit messages. It is not 
 - 10 real calls scored at 36.6 sentences a second; about 12.7 hours projected for all. Full scoring started as a background container (`earnings-scoring`); it continues where it left off if stopped.
 - Wave 2.1 is PARTIAL (`audits/evidence/wave-2.1.md`). Not audited by a fresh agent. Work by Claude.
 
+### 27 Nov 2026: four approvals applied (C-68); reminder to email
+
+- John approved the secret-scan exception, the safe-harbour limit, leaving participant lists out of text measures, and the new sentence columns (C-68). Applied; calls already scored were re-marked without rescoring; full scoring restarted.
+- John asked to be reminded to email Finnhub later; draft saved in `docs/finnhub-enquiry-draft.md`.
+- Work by Claude. Decisions by John.
+
 ## Waiting on John
 
 As of 27 November 2026.
 
-**Before Wave 2.2:** D-51 (safe-harbour fix, participant lists, table columns), verdicts on `audits/evidence/wave-2.1/safe_harbour_examples.md`, and the D-34 phrase lists, which I will show you first.
+**Reminder (asked by you):** email Finnhub, using `docs/finnhub-enquiry-draft.md`.
+
+**Before Wave 2.2 code:** the D-34 phrase lists and the Wave 2.2 brief. Verdicts on `audits/evidence/wave-2.1/safe_harbour_examples.md` when you can.
 
 **Soon (by mid-December):** D-50, what replaces Yahoo: send the Finnhub question, and register for WRDS and read the CRSP terms.
 

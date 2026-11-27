@@ -513,6 +513,7 @@
       "requirements": [
         "EQ-07",
         "ET-03",
+        "FE-02",
         "FE-04",
         "FE-05",
         "FE-05-AC1",
@@ -535,6 +536,7 @@
         "tests/test_sentence_scores.py::test_a_new_model_revision_rescores_and_keeps_the_old_scores",
         "tests/test_sentence_scores.py::test_call_scores_are_the_plain_mean_of_the_sentences_that_count",
         "tests/test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored",
+        "tests/test_sentence_scores.py::test_new_marking_rules_reach_stored_calls_without_scoring_anything",
         "tests/test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again",
         "tests/test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence",
         "tests/test_sentence_scores.py::test_the_cut_flag_of_a_sentence_is_stored"
@@ -886,6 +888,7 @@
         "tests/test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time",
         "tests/test_sentence_models.py::test_every_sentence_is_found_in_the_cleaned_text_by_exact_match",
         "tests/test_sentence_scores.py::test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown",
+        "tests/test_sentence_scores.py::test_lists_of_who_is_on_the_call_do_not_count_for_text_features",
         "tests/test_sentence_scores.py::test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_features",
         "tests/test_sentence_scores.py::test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases"
       ]
@@ -3832,6 +3835,8 @@
       ],
       "document": "feature-engineering-requirements.md",
       "id_level_tests": [
+        "tests/test_sentence_scores.py::test_lists_of_who_is_on_the_call_do_not_count_for_text_features",
+        "tests/test_sentence_scores.py::test_new_marking_rules_reach_stored_calls_without_scoring_anything",
         "tests/test_sentence_scores.py::test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_features",
         "tests/test_sentence_scores.py::test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases"
       ]
@@ -4718,7 +4723,8 @@
       "document": "product-requirements.md",
       "id_level_tests": [
         "tests/test_sentence_models.py::test_the_three_scores_come_out_under_the_right_names_and_in_the_order_asked",
-        "tests/test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored"
+        "tests/test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored",
+        "tests/test_sentence_scores.py::test_new_marking_rules_reach_stored_calls_without_scoring_anything"
       ]
     },
     "FR-17": {
@@ -14683,6 +14689,25 @@
       "kind": "real check",
       "requirements": [
         "FE-29",
+        "FR-16"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_lists_of_who_is_on_the_call_do_not_count_for_text_features": {
+      "code": [
+        "src/earnings/sentences.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-02"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_new_marking_rules_reach_stored_calls_without_scoring_anything": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-02",
         "FR-16"
       ]
     },

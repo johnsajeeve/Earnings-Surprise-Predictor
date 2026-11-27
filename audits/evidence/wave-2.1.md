@@ -53,3 +53,10 @@ A rerun of the same 10 calls with a scorer that raises if called: nothing scored
 - The worker role may not delete rows (DB-02), and I did not widen that. Changed sentences are scored again and overwritten. If a changed transcript has fewer sentences, scoring stops with an error and the old rows stay.
 - The spaCy and rule versions are recorded in the run output and here, not per row. FE-01 places them in the feature-set version (FE-28, a later wave).
 - The columns added to Product Section 11's TranscriptSentence were listed in the task brief, but my chat summary asked only about packages and the rule. Section 11 is not edited; John is asked to confirm the columns (D-51).
+
+## After John's four approvals (C-68, 27 November 2026)
+
+- Safe-harbour rule version 2 (a closing phrase counts within 12 sentences of the opening one). Lists of who is on the call no longer count. The table of splitting figures above was measured with version 1; the version 2 figures are in the audit section below.
+- Calls already scored with version 1 were re-marked with `python -m earnings.finbert remark`: 92 calls, 358 marks updated, nothing rescored. Full scoring was restarted with version 2.
+- The secret scan ignores the two false positives. Product Section 11 lists the confirmed columns.
+- The 20 example calls were drawn with version 1. Of the rule's matches, version 2 changes only calls that lost more than 13 sentences.
