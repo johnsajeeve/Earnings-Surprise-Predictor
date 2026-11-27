@@ -1,6 +1,6 @@
 # Universe fixtures: origin
 
-All files are REAL data, retrieved on 23 November 2026 by the project's own clients and trimmed to what the tests need. None is synthetic.
+The files are real data retrieved by the project's own clients and trimmed, except the two marked SYNTHETIC below.
 
 | File | Origin | Trimmed to |
 |---|---|---|
@@ -16,8 +16,12 @@ All files are REAL data, retrieved on 23 November 2026 by the project's own clie
 |---|---|---|
 | `aapl_companyfacts_2012_2015.json` | SEC company facts for Apple Inc. (CIK 0000320193), retrieved 23 November 2026 by the project's client | six tags (diluted EPS, three revenue tags, gross profit, operating income) and periods ending 2012-09-01 to 2015-12-31 |
 | `aapl_submissions_8k_sample.json` | SEC submissions for Apple Inc., same day | 8 earnings-release 8-Ks (Item 2.02) since 2020 |
-| `hf_transcript_excerpts.json` | Hugging Face `kurry/sp500_earnings_transcripts`, revision `f3ded372da8d18dc6ad98955c4558e34b5fe6d45`; REAL rows (Apple 2025-01-30 and 2025-05-01, Abbott 2020-07-15, Conagra 2024-12-19, DayForce 2022-02-10) | Texts cut to 400 characters, turns after the boundary cut; operator turns whole; the empty-text row is real |
+| `hf_transcript_excerpts.json` | SYNTHETIC since 27 November 2026 (decision C-62): made-up calls in the source's shape | not applicable |
 | `aapl_8k_index.json` | SEC filing index of Apple 8-K 0000320193-25-000007, retrieved 25 November 2026 by the project's client | nothing |
 | `aapl_press_release_table.html` | The same filing's exhibit 99.1, retrieved 25 November 2026 | the one table that holds the diluted EPS row |
 | `aapl_split_ratio_tag.json` | SEC company facts for Apple Inc., stored payload of the project database, retrieved by the project client in November 2026 | only the tag StockholdersEquityNoteStockSplitConversionRatio1 |
-| `aapl_yahoo_prices_june_2014.json` | yfinance daily history for AAPL, retrieved 26 November 2026 by the project client. Personal-use source: a small excerpt for tests | nine trading days; the full split list; 2014 dividends only |
+| `synthetic_prices_with_splits.json` | SYNTHETIC (decision C-62): made-up prices in the shape of the yfinance answer | not applicable |
+
+## Attribution
+
+`wikipedia_history_sample.json` is an excerpt of the Wikipedia page "Historical components of the S&P 500", by Wikipedia contributors, licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). It was trimmed for the tests. This excerpt is shared under the same licence.

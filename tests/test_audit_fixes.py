@@ -114,15 +114,15 @@ def test_a_target_value_first_filed_long_after_the_announcement_gives_no_label()
 @pytest.mark.req("LB-05")
 @pytest.mark.code("src/earnings/label.py", "src/earnings/financials.py")
 def test_an_unknown_share_basis_inside_the_window_gives_no_label():
-    # real: Hilton, 4 January 2017. The source gives 0.4873, a reverse split mixed with spin-offs
+    # shaped like a real case: a ratio that is a reverse split mixed with spin-offs. SYNTHETIC
     c = _series()
     d = _announcement(c)
-    unknown = label.Split(Decimal("0.4873"), ENDS[-6] + timedelta(days=40), ambiguous=True)
+    unknown = label.Split(Decimal("0.4731"), ENDS[-6] + timedelta(days=40), ambiguous=True)
     result = label.compute_sue(_versions(c), d, [unknown])
     assert result.sue is None and result.reason == "the share basis in the window is unknown"
-    long_ago = label.Split(Decimal("0.4873"), date(2001, 1, 1), ambiguous=True)
+    long_ago = label.Split(Decimal("0.4731"), date(2001, 1, 1), ambiguous=True)
     assert label.compute_sue(_versions(c), d, [long_ago]).sue is not None
-    assert label.is_unknown_basis(Decimal("0.4873")) and not label.is_unknown_basis(
+    assert label.is_unknown_basis(Decimal("0.4731")) and not label.is_unknown_basis(
         Decimal("1.046")
     )
     assert not label.is_unknown_basis(Decimal("0.5"))  # a plain 1-for-2 is known
@@ -383,3 +383,159 @@ def test_a_release_that_rolls_off_the_newest_filing_list_is_still_known(test_db)
         )
     found = [r.accession for r in tr._releases_for(engine, CO)]
     assert sorted(found) == ["kept", "new", "old"]  # nothing lost, and "kept" only once
+
+
+@pytest.mark.req("LB-01", "LB-04", "IG-10")
+@pytest.mark.code("src/earnings/financials.py")
+def test_a_quarter_reported_as_basic_and_diluted_is_read():
+    # shaped like a real case (second audit): a quarter filed first under the combined tag and only
+    # months later under the diluted tag. SYNTHETIC values
+    def node(rows):
+        return {"units": {"USD/shares": rows}}
+
+    both = {
+        "facts": {"us-gaap": {
+            fin.EPS_TAG: node([
+                _raw("2017-01-01", "2017-03-31", 0.80, "2017-04-30", "d1"),
+                _raw("2016-10-01", "2016-12-31", 0.66, "2017-12-15", "later"),
+                _raw("2017-01-01", "2017-03-31", 0.80, "2017-04-30", "b1"),
+            ]),
+            fin.BASIC_AND_DILUTED_TAG: node([
+                _raw("2016-10-01", "2016-12-31", 0.65, "2017-02-23", "first"),
+                _raw("2017-01-01", "2017-03-31", 0.99, "2017-04-30", "d1"),  # same filing
+            ]),
+        }}
+    }  # fmt: skip
+    rows = fin.eps_rows(json.dumps(both).encode())
+    q4 = sorted((r.filed, r.eps) for r in rows if r.period_end == date(2016, 12, 31))
+    assert q4[0] == (date(2017, 2, 23), Decimal("0.65"))  # the first filing is known
+    q1 = [r.eps for r in rows if r.period_end == date(2017, 3, 31) and r.accession == "d1"]
+    assert q1 == [Decimal("0.8")]  # one filing with both tags: the diluted tag wins
+    only_combined = {"facts": {"us-gaap": {fin.BASIC_AND_DILUTED_TAG: node(
+        [_raw("2016-10-01", "2016-12-31", 0.65, "2017-02-23", "first")])}}}  # fmt: skip
+    assert [r.eps for r in fin.eps_rows(json.dumps(only_combined).encode())] == [Decimal("0.65")]
+
+
+@pytest.mark.req("LB-03", "LB-04")
+@pytest.mark.code("src/earnings/financials.py")
+def test_a_later_cumulative_result_does_not_hide_what_the_three_quarters_gave_earlier():
+    # shaped like IBM 2011: the year first starts a day earlier than the nine months, so the
+    # year-minus-nine-months result only appears with a filing years later. SYNTHETIC values
+    quarters = [
+        _raw("2011-01-01", "2011-03-31", 1.0, "2011-04-30", "q1"),
+        _raw("2011-04-01", "2011-06-30", 1.0, "2011-07-30", "q2"),
+        _raw("2011-07-01", "2011-09-30", 1.0, "2011-10-30", "q3"),
+        _raw("2011-01-01", "2011-09-30", 3.0, "2011-10-30", "q3"),
+        _raw("2010-12-31", "2011-12-31", 5.0, "2012-02-28", "fy", "10-K"),
+        _raw("2011-01-01", "2011-12-31", 5.0, "2014-02-25", "refiled", "10-K"),
+    ]
+    rows = fin.eps_rows(_payload({"USD/shares": quarters}))
+    q4 = min((r for r in rows if r.period_end == date(2011, 12, 31)
+              and r.period_kind == "quarter"), key=lambda r: r.filed)  # fmt: skip
+    assert (q4.filed, q4.eps, q4.derived) == (date(2012, 2, 28), Decimal("2.0"), True)
+
+
+# ---- the eight planted faults the second audit found no test for ---------------------------------
+
+
+@pytest.mark.req("LB-03", "LB-05")
+@pytest.mark.code("src/earnings/financials.py")
+def test_the_three_quarter_sum_also_puts_the_quarters_on_the_years_share_basis():
+    quarters = [  # SYNTHETIC: a 2-for-1 split after Q2, year filed after it, no nine-month figure
+        _raw("2022-01-01", "2022-03-31", 2.0, "2022-04-30", "q1"),
+        _raw("2022-04-01", "2022-06-30", 2.0, "2022-07-30", "q2"),
+        _raw("2022-07-01", "2022-09-30", 1.0, "2022-10-30", "q3"),
+        _raw("2022-01-01", "2022-12-31", 4.0, "2023-02-15", "fy", "10-K"),
+    ]
+    split = [label.Split(Decimal(2), date(2022, 8, 22))]
+    q4 = next(r for r in fin.eps_rows(_payload({"USD/shares": quarters}), split) if r.derived)
+    assert q4.eps == Decimal("1.0")  # 4.0 - (1.0 + 1.0 + 1.0), not 4.0 - 5.0
+
+
+@pytest.mark.req("LB-05")
+@pytest.mark.code("src/earnings/financials.py")
+def test_the_loaded_splits_keep_unknown_ratios_and_the_load_uses_the_price_sources_splits(test_db):
+    from earnings.clients.edgar import RawResponse
+    from earnings.db import get_engine
+    from earnings.rawstore import store_payload
+
+    engine = get_engine("worker")
+    with engine.begin() as conn:
+        conn.execute(text("INSERT INTO company VALUES (:c, 'Synthetic')"), {"c": CO})
+        conn.execute(  # the company has prices, so the price source's factors are used
+            text("INSERT INTO price_daily (company_id, ticker, price_date, close_raw, source, "
+                 "source_version) VALUES (:c, 'S', '2024-01-02', 1, 'synthetic', 'x')"), {"c": CO}
+        )  # fmt: skip
+        for day, value in (("2023-08-22", "2"), ("2021-01-04", "0.4731")):
+            conn.execute(
+                text("INSERT INTO adjustment_factor (company_id, ex_date, kind, value, source, "
+                     "source_version) VALUES (:c, :d, 'split', :v, 'yfinance-prices', 'x')"),
+                {"c": CO, "d": day, "v": value},
+            )  # fmt: skip
+    found = fin.company_splits(engine, CO)
+    assert [(str(s.effective), s.ambiguous) for s in found] == [
+        ("2021-01-04", True), ("2023-08-22", False)]  # fmt: skip
+    body = _payload({"USD/shares": [
+        _raw("2022-08-01", "2023-04-30", 1.84, "2023-05-18", "n9"),
+        _raw("2022-08-01", "2023-07-31", 1.28, "2023-09-28", "fy", "10-K")]})  # fmt: skip
+    store_payload(engine, RawResponse("sec-edgar", fin.FACTS_URL.format(cik=CO), 200,
+                                      "application/json", body, datetime.now(UTC)))  # fmt: skip
+    fin.load_financials(engine, CO)  # the payload itself has no split tag
+    with engine.connect() as conn:
+        q4 = conn.execute(text("SELECT eps_diluted FROM eps_history WHERE derived")).scalar_one()
+    assert q4 == Decimal("0.36")
+
+
+@pytest.mark.req("LB-01", "LB-04")
+@pytest.mark.code("src/earnings/label.py")
+def test_the_ten_day_and_twenty_day_limits_are_where_they_were_approved():
+    c = _series()
+    base = _versions(c)
+    target = base[-1]
+    d = target.period_end + timedelta(days=60)
+    for before, labelled in ((10, True), (11, False)):  # filed this many days before D
+        early = label.EpsVersion(target.period_start, target.period_end, target.value,
+                                 d - timedelta(days=before))  # fmt: skip
+        assert (label.compute_sue([*base[:-1], early], d).sue is not None) is labelled
+    first = base[-3]
+    for shift, same in ((20, True), (21, False)):  # quarter ends this far apart
+        other = label.EpsVersion(first.period_start, first.period_end + timedelta(days=shift),
+                                 Decimal("9"), first.filed + timedelta(days=5))  # fmt: skip
+        assert (len(label.first_filed([first, other])) == 1) is same
+
+
+@pytest.mark.req("LB-04", "FD-03")
+@pytest.mark.code("src/earnings/label.py", "src/earnings/financials.py")
+def test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates():
+    end, filed = date(2024, 3, 31), date(2024, 5, 1)
+    derived = label.EpsVersion(date(2024, 1, 1), end, Decimal("2"), filed, derived=True)
+    direct = label.EpsVersion(date(2024, 1, 1), end, Decimal("1"), filed)
+    assert label.first_filed([derived, direct])[end] == direct
+
+    def revenue(start, finish, value, when, accn):  # SYNTHETIC revenue facts
+        return {"start": start, "end": finish, "val": value, "filed": when, "accn": accn,
+                "form": "10-Q", "fy": 2020, "fp": "Q"}  # fmt: skip
+
+    payload = json.dumps({"facts": {"us-gaap": {"Revenues": {"units": {"USD": [
+        revenue("2020-01-01", "2020-09-30", 300, "2020-10-30", "n9"),
+        revenue("2020-01-01", "2020-12-31", 399, "2021-02-10", "fy"),
+        revenue("2020-10-01", "2020-12-31", 33, "2022-02-16", "late")]}}}}}).encode()  # fmt: skip
+    q4 = sorted((r.filed, r.revenue, r.derived) for r in fin.fundamentals_rows(payload)
+                if r.period_end == date(2020, 12, 31))  # fmt: skip
+    assert q4 == [
+        (date(2021, 2, 10), Decimal("99"), True),
+        (date(2022, 2, 16), Decimal("33"), False),
+    ]
+
+
+@pytest.mark.req("IG-06", "SR-10", "DV-01")
+@pytest.mark.code("src/earnings/validation.py")
+def test_the_checks_put_events_in_a_capture_gap_into_quarantine(built, monkeypatch):
+    from earnings import validation as val
+
+    engine, _ = built
+    with engine.connect() as conn:
+        event_id = conn.execute(text("SELECT event_id FROM earnings_event")).scalar_one()
+    monkeypatch.setattr(val, "capture_gap_events", lambda engine: [event_id])
+    report = val.run_checks(engine)
+    assert report["quarantine_by_reason"][val.GAP_REASON] == 1

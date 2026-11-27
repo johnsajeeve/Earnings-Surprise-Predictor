@@ -1,41 +1,41 @@
 {
- "source": "kurry/sp500_earnings_transcripts",
- "revision": "f3ded372da8d18dc6ad98955c4558e34b5fe6d45",
- "note": "REAL rows cut to short excerpts (Agent AG-19). Texts over 400 characters are cut; operator turns are whole.",
+ "source": "synthetic",
+ "shaped_like": "kurry/sp500_earnings_transcripts",
+ "note": "SYNTHETIC. Every name and sentence is made up (decision C-62). The shape follows the source's columns. No text of any real call is held here.",
  "rows": [
   {
    "case": "winter_call",
    "symbol": "AAPL",
-   "company_name": "Apple Inc.",
-   "company_id": 24937.0,
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
    "year": 2025,
    "quarter": 1,
    "date": "2025-01-30 17:00:00",
-   "content": "Suhasini Chandramouli: Good afternoon, and welcome to the Apple Q1 Fiscal Year 2025 Earnings Conference Call. My name is Suhasini Chandramouli, Director of Investor Relations. Today's call is being recorded. Speaking first today are Apple CEO, Tim Cook, and he will be followed by CFO, Kevan Parekh. After that, we'll open the call to questions from analysts. Please note that some of the information you'll hear during our\nTim Cook: Thank you, Suhasini. Good afternoon, everyone, and thanks for joining the call. Before I talk about our results I'd like to take a moment to acknowledge the devastating wildfires that impacted the Los Angeles area this month. From our retail teams to Apple TV+, Apple Music, Fitness Plus, Beats and more LA is home to many of our team members. Our thoughts are with everyone who is beginning the road\nKevan Parekh: Thanks Tim, and good afternoon everyone. I'm going to cover the results for the first quarter of our fiscal year. We are very pleased to report an all-time high for revenue with December quarter revenue of $124.3 billion, up 4% year-over-year. We achieved all-time revenue records in the Americas, Europe, Japan, and rest of Asia Pacific and grew in the vast majority of markets we track. Products re\nSuhasini Chandramouli: Thank you, Kevin. We ask that you limit yourself to two questions. Operator, may we have the first question please?\nOperator: Certainly, we will go ahead and take our first question from Erik Woodring with Morgan Stanley. Please go ahead.\nErik Woodring: Great guys, Thanks so much for taking my questions. Tim, in your prepared remarks, you had noted that iPhone 16 models are selling better in markets where Apple Intelligence is available? And I'm just wondering if you could double-click on that comment a bit and share any other details you believe could better help us understand how Apple Intelligence is really impacting iPhone demand and/or what ",
+   "content": "Operator: Good afternoon, and welcome to the Northwind Widgets Fourth Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks.\nAda Byrne: Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results.\nCal Dorn: Demand for widgets was steady this quarter, and we may see some uncertainty in the second half.\nGil Hart: Revenue rose from the same quarter a year ago. Gross margin was about flat.\nOperator: Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox.\nEli Fox: Could you say more about orders in the second half?",
    "structured_content": [
     {
-     "speaker": "Suhasini Chandramouli",
-     "text": "Good afternoon, and welcome to the Apple Q1 Fiscal Year 2025 Earnings Conference Call. My name is Suhasini Chandramouli, Director of Investor Relations. Today's call is being recorded. Speaking first today are Apple CEO, Tim Cook, and he will be followed by CFO, Kevan Parekh. After that, we'll open the call to questions from analysts. Please note that some of the information you'll hear during our"
+     "speaker": "Operator",
+     "text": "Good afternoon, and welcome to the Northwind Widgets Fourth Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks."
     },
     {
-     "speaker": "Tim Cook",
-     "text": "Thank you, Suhasini. Good afternoon, everyone, and thanks for joining the call. Before I talk about our results I'd like to take a moment to acknowledge the devastating wildfires that impacted the Los Angeles area this month. From our retail teams to Apple TV+, Apple Music, Fitness Plus, Beats and more LA is home to many of our team members. Our thoughts are with everyone who is beginning the road"
+     "speaker": "Ada Byrne",
+     "text": "Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results."
     },
     {
-     "speaker": "Kevan Parekh",
-     "text": "Thanks Tim, and good afternoon everyone. I'm going to cover the results for the first quarter of our fiscal year. We are very pleased to report an all-time high for revenue with December quarter revenue of $124.3 billion, up 4% year-over-year. We achieved all-time revenue records in the Americas, Europe, Japan, and rest of Asia Pacific and grew in the vast majority of markets we track. Products re"
+     "speaker": "Cal Dorn",
+     "text": "Demand for widgets was steady this quarter, and we may see some uncertainty in the second half."
     },
     {
-     "speaker": "Suhasini Chandramouli",
-     "text": "Thank you, Kevin. We ask that you limit yourself to two questions. Operator, may we have the first question please?"
+     "speaker": "Gil Hart",
+     "text": "Revenue rose from the same quarter a year ago. Gross margin was about flat."
     },
     {
      "speaker": "Operator",
-     "text": "Certainly, we will go ahead and take our first question from Erik Woodring with Morgan Stanley. Please go ahead."
+     "text": "Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox."
     },
     {
-     "speaker": "Erik Woodring",
-     "text": "Great guys, Thanks so much for taking my questions. Tim, in your prepared remarks, you had noted that iPhone 16 models are selling better in markets where Apple Intelligence is available? And I'm just wondering if you could double-click on that comment a bit and share any other details you believe could better help us understand how Apple Intelligence is really impacting iPhone demand and/or what "
+     "speaker": "Eli Fox",
+     "text": "Could you say more about orders in the second half?"
     }
    ],
    "expected_boundary": 4
@@ -43,113 +43,113 @@
   {
    "case": "summer_call",
    "symbol": "AAPL",
-   "company_name": "Apple Inc.",
-   "company_id": 24937.0,
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
    "year": 2025,
    "quarter": 2,
    "date": "2025-05-01 19:13:00",
-   "content": "Suhasini Chandramouli: Good afternoon, and welcome to the Apple Q2 Fiscal Year 2025 Earnings Conference Call. My name is Suhasini Chandramouli, Director of Investor Relations. Today's call is being recorded. Speaking first today is Apple's CEO, Tim Cook; and he'll be followed by CFO, Kevan Parekh. After that, we'll open the call to questions from analysts. Please note that some of the information you'll hear during our \nTim Cook: Thank you, Suhasini. Good afternoon, everyone, and thanks for joining the call. Today, we are reporting 95.4 billion in revenue, up 5% from a year ago and at the high end of the range we provided last quarter. Diluted EPS was $1.65, up 8% year-over-year and a March quarter record. Services achieved an all-time revenue record, growing 12% compared to the prior year. We also set a number of quarterl\nKevan Parekh: Thanks, Tim, and good afternoon, everyone. Our March quarter revenue of $95.4 billion was up 5% year-over-year despite a headwind of almost 2.5 percentage points from foreign exchange. We also grew in the majority of the markets we track. Products revenue was $68.7 billion, up 3% year-over-year, driven by growth in iPhone, iPad, and Mac. And thanks to our high levels of customer satisfaction and s\nSuhasini Chandramouli: We ask that you limit yourself to two questions. Operator, may we have the first question, please?\nOperator: Certainly. We'll go ahead and take our first question from Erik Woodring with Morgan Stanley.\nErik Woodring: Great, thanks so much guys for taking my questions. Tim, I'd love to maybe touch on the tariff point first. There were comments from you earlier on CNBC talking about 50% of iPhones for the U.S. currently coming from India. Where do you expect the mix of India-sourced iPhones for the U.S. to be by the end of your fiscal year? And is it the goal to source 100% of your U.S.-bound iPhones from India?",
+   "content": "Operator: Good afternoon, and welcome to the Northwind Widgets First Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks.\nAda Byrne: Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results.\nCal Dorn: Demand for widgets was steady this quarter, and we may see some uncertainty in the second half.\nGil Hart: Revenue rose from the same quarter a year ago. Gross margin was about flat.\nOperator: Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox.\nEli Fox: Could you say more about orders in the second half?",
    "structured_content": [
     {
-     "speaker": "Suhasini Chandramouli",
-     "text": "Good afternoon, and welcome to the Apple Q2 Fiscal Year 2025 Earnings Conference Call. My name is Suhasini Chandramouli, Director of Investor Relations. Today's call is being recorded. Speaking first today is Apple's CEO, Tim Cook; and he'll be followed by CFO, Kevan Parekh. After that, we'll open the call to questions from analysts. Please note that some of the information you'll hear during our "
+     "speaker": "Operator",
+     "text": "Good afternoon, and welcome to the Northwind Widgets First Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks."
     },
     {
-     "speaker": "Tim Cook",
-     "text": "Thank you, Suhasini. Good afternoon, everyone, and thanks for joining the call. Today, we are reporting 95.4 billion in revenue, up 5% from a year ago and at the high end of the range we provided last quarter. Diluted EPS was $1.65, up 8% year-over-year and a March quarter record. Services achieved an all-time revenue record, growing 12% compared to the prior year. We also set a number of quarterl"
+     "speaker": "Ada Byrne",
+     "text": "Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results."
     },
     {
-     "speaker": "Kevan Parekh",
-     "text": "Thanks, Tim, and good afternoon, everyone. Our March quarter revenue of $95.4 billion was up 5% year-over-year despite a headwind of almost 2.5 percentage points from foreign exchange. We also grew in the majority of the markets we track. Products revenue was $68.7 billion, up 3% year-over-year, driven by growth in iPhone, iPad, and Mac. And thanks to our high levels of customer satisfaction and s"
+     "speaker": "Cal Dorn",
+     "text": "Demand for widgets was steady this quarter, and we may see some uncertainty in the second half."
     },
     {
-     "speaker": "Suhasini Chandramouli",
-     "text": "We ask that you limit yourself to two questions. Operator, may we have the first question, please?"
+     "speaker": "Gil Hart",
+     "text": "Revenue rose from the same quarter a year ago. Gross margin was about flat."
     },
     {
      "speaker": "Operator",
-     "text": "Certainly. We'll go ahead and take our first question from Erik Woodring with Morgan Stanley."
+     "text": "Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox."
     },
     {
-     "speaker": "Erik Woodring",
-     "text": "Great, thanks so much guys for taking my questions. Tim, I'd love to maybe touch on the tariff point first. There were comments from you earlier on CNBC talking about 50% of iPhones for the U.S. currently coming from India. Where do you expect the mix of India-sourced iPhones for the U.S. to be by the end of your fiscal year? And is it the goal to source 100% of your U.S.-bound iPhones from India?"
+     "speaker": "Eli Fox",
+     "text": "Could you say more about orders in the second half?"
     }
    ],
    "expected_boundary": 4
   },
   {
    "case": "boundary_after_four_turns",
-   "symbol": "ABT",
-   "company_name": "Abbott Laboratories",
-   "company_id": 247483.0,
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
    "year": 2020,
    "quarter": 2,
    "date": "2020-07-15 22:45:00",
-   "content": "Operator: Good morning and thank you for standing by. Welcome to Abbott's Second Quarter 2020 Earnings Conference Call. [Operator Instructions] This call is being recorded by Abbott. With the exception of any participants' questions asked during the question-and-answer session, the entire call, including the question-and-answer session, is material copyrighted by Abbott. It cannot be recorded or rebroadcast without Abbott's express written permission.\nScott Leinenweber: Good morning and thank you for joining us. With me today are Robert Ford, President and Chief Executive Officer; and Bob Funck, Executive Vice President, Finance and Chief Financial Officer. Robert and Bob will provide opening remarks. Following their comments, we'll take your questions.\nRobert Ford: Thanks, Scott. Good morning, everyone, and thank you for joining us. I hope you and your families are staying healthy and safe during these challenging times.\nRobert Funck: Thanks, Robert. As Scott mentioned earlier, please note that all references to sales growth rates, unless otherwise noted, are on an organic basis.\nOperator: [Operator Instructions] And our first question comes from Robbie Marcus from JPMorgan.\nRobert Marcus: Congrats on a much better-than-expected quarter. Maybe we could start at the top. With 2Q coming in better but still a decent amount of uncertainty about the balance of the year and the recovery trajectory, what gives you the confidence in providing an EPS floor here of at least $3.25?",
+   "content": "Operator: Good afternoon, and welcome to the Northwind Widgets Second Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks.\nAda Byrne: Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results.\nCal Dorn: Demand for widgets was steady this quarter, and we may see some uncertainty in the second half.\nGil Hart: Revenue rose from the same quarter a year ago. Gross margin was about flat.\nOperator: Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox.\nEli Fox: Could you say more about orders in the second half?",
    "structured_content": [
     {
      "speaker": "Operator",
-     "text": "Good morning and thank you for standing by. Welcome to Abbott's Second Quarter 2020 Earnings Conference Call. [Operator Instructions] This call is being recorded by Abbott. With the exception of any participants' questions asked during the question-and-answer session, the entire call, including the question-and-answer session, is material copyrighted by Abbott. It cannot be recorded or rebroadcast without Abbott's express written permission."
+     "text": "Good afternoon, and welcome to the Northwind Widgets Second Quarter Earnings Conference Call. All lines are muted. A question-and-answer session will follow the prepared remarks."
     },
     {
-     "speaker": "Scott Leinenweber",
-     "text": "Good morning and thank you for joining us. With me today are Robert Ford, President and Chief Executive Officer; and Bob Funck, Executive Vice President, Finance and Chief Financial Officer. Robert and Bob will provide opening remarks. Following their comments, we'll take your questions."
+     "speaker": "Ada Byrne",
+     "text": "Thank you. With me today are our chief executive and our finance chief. Some statements today are forward-looking and may differ from results."
     },
     {
-     "speaker": "Robert Ford",
-     "text": "Thanks, Scott. Good morning, everyone, and thank you for joining us. I hope you and your families are staying healthy and safe during these challenging times."
+     "speaker": "Cal Dorn",
+     "text": "Demand for widgets was steady this quarter, and we may see some uncertainty in the second half."
     },
     {
-     "speaker": "Robert Funck",
-     "text": "Thanks, Robert. As Scott mentioned earlier, please note that all references to sales growth rates, unless otherwise noted, are on an organic basis."
+     "speaker": "Gil Hart",
+     "text": "Revenue rose from the same quarter a year ago. Gross margin was about flat."
     },
     {
      "speaker": "Operator",
-     "text": "[Operator Instructions] And our first question comes from Robbie Marcus from JPMorgan."
+     "text": "Thank you. [Operator Instructions] Our first question comes from the line of Eli Fox."
     },
     {
-     "speaker": "Robert Marcus",
-     "text": "Congrats on a much better-than-expected quarter. Maybe we could start at the top. With 2Q coming in better but still a decent amount of uncertainty about the balance of the year and the recovery trajectory, what gives you the confidence in providing an EPS floor here of at least $3.25?"
+     "speaker": "Eli Fox",
+     "text": "Could you say more about orders in the second half?"
     }
    ],
    "expected_boundary": 4
   },
   {
    "case": "no_operator_turn",
-   "symbol": "CAG",
-   "company_name": "Conagra Brands, Inc.",
-   "company_id": 26893.0,
-   "year": 2025,
-   "quarter": 2,
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
+   "year": 2024,
+   "quarter": 3,
    "date": "2024-12-19 09:00:00",
-   "content": "Melissa Napier: Good morning. This is Melissa Napier from Conagra Brands' Investor Relations. Thank you for listening to our prepared remarks for the Conagra Brands second quarter and first half fiscal 2025 earnings. At 9:30 eastern time this morning, we will hold a separate live question-and-answer session on today's results, which you can access via webcast on our Investor Relations website. Our press release, \nSean Connolly: Thanks, Melissa, and good morning, everyone. Thank you for joining our second quarter fiscal 2025 earnings call. Let's begin on Slide 4. Our second quarter results reflect the fact that we continue to win with consumers despite ongoing economic pressures. We saw a return to growth in Q2 as we drove volume improvement, an organic net sales increase, and market share gains, demonstrating the continu\nDavid Marberger: Thanks, Sean, and good morning, everyone. Slide 20 shows our financial results for key metrics in the quarter. As Sean mentioned, Conagra returned to volume and organic net sales growth in Q2, driven by volume growth in our domestic retail business. Organic net sales were $3.2 billion in the quarter, up 30 basis points over prior year. Adjusted gross margin of 26.4% and adjusted operating margin o\nEnd of Q&A: ",
+   "content": "Ada Byrne: Welcome to the Northwind Widgets update.\nCal Dorn: Here are the figures.\nGil Hart: And the outlook.\nAda Byrne: That ends the update.",
    "structured_content": [
     {
-     "speaker": "Melissa Napier",
-     "text": "Good morning. This is Melissa Napier from Conagra Brands' Investor Relations. Thank you for listening to our prepared remarks for the Conagra Brands second quarter and first half fiscal 2025 earnings. At 9:30 eastern time this morning, we will hold a separate live question-and-answer session on today's results, which you can access via webcast on our Investor Relations website. Our press release, "
+     "speaker": "Ada Byrne",
+     "text": "Welcome to the Northwind Widgets update."
     },
     {
-     "speaker": "Sean Connolly",
-     "text": "Thanks, Melissa, and good morning, everyone. Thank you for joining our second quarter fiscal 2025 earnings call. Let's begin on Slide 4. Our second quarter results reflect the fact that we continue to win with consumers despite ongoing economic pressures. We saw a return to growth in Q2 as we drove volume improvement, an organic net sales increase, and market share gains, demonstrating the continu"
+     "speaker": "Cal Dorn",
+     "text": "Here are the figures."
     },
     {
-     "speaker": "David Marberger",
-     "text": "Thanks, Sean, and good morning, everyone. Slide 20 shows our financial results for key metrics in the quarter. As Sean mentioned, Conagra returned to volume and organic net sales growth in Q2, driven by volume growth in our domestic retail business. Organic net sales were $3.2 billion in the quarter, up 30 basis points over prior year. Adjusted gross margin of 26.4% and adjusted operating margin o"
+     "speaker": "Gil Hart",
+     "text": "And the outlook."
     },
     {
-     "speaker": "End of Q&A",
-     "text": ""
+     "speaker": "Ada Byrne",
+     "text": "That ends the update."
     }
    ],
    "expected_boundary": null
   },
   {
    "case": "empty_text",
-   "symbol": "DAY",
-   "company_name": "Dayforce Inc.",
-   "company_id": 246737890.0,
-   "year": 2021,
-   "quarter": 4,
+   "symbol": "AAPL",
+   "company_name": "Northwind Widgets Inc.",
+   "company_id": "1",
+   "year": 2022,
+   "quarter": 1,
    "date": "2022-02-10 17:00:00",
    "content": "",
    "structured_content": [],

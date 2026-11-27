@@ -191,6 +191,7 @@ def test_running_the_transcript_event_price_and_gate_stages_again_changes_no_tab
     _eps(engine, CO)
     announce = ENDS[12] + timedelta(days=25)
     with engine.begin() as conn:
+        conn.execute(text("UPDATE company SET name = 'Northwind Widgets Inc.'"))
         conn.execute(
             text("INSERT INTO ticker_history (company_id, ticker, valid_from) "
                  "VALUES (:c, 'SYN', '2000-01-01')"), {"c": CO},

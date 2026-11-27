@@ -2,82 +2,89 @@
  "sampled": 200,
  "differences_above_1pct": [
   {
-   "company_id": "0000072971",
-   "period_end": "2018-03-31",
-   "stored": "0.96",
-   "press": "1.12",
-   "relative_difference": 0.1667
+   "company_id": "0000764622",
+   "period_end": "2022-12-31",
+   "stored": "-0.22",
+   "press": "-0.21",
+   "relative_difference": 0.0455
   },
   {
-   "company_id": "0001166691",
-   "period_end": "2016-09-30",
-   "stored": "0.92",
-   "press": "0.80",
-   "relative_difference": 0.1304
+   "company_id": "0000759944",
+   "period_end": "2024-06-30",
+   "stored": "0.78",
+   "press": "0.82",
+   "relative_difference": 0.0513
   },
   {
    "company_id": "0000010456",
-   "period_end": "2022-12-31",
-   "stored": "0.37",
-   "press": "0.36",
-   "relative_difference": 0.027
+   "period_end": "2024-09-30",
+   "stored": "0.27",
+   "press": "0.12",
+   "relative_difference": 0.5556
   },
   {
-   "company_id": "0001396009",
-   "period_end": "2015-12-31",
-   "stored": "0.65",
-   "press": "0.69",
-   "relative_difference": 0.0615
+   "company_id": "0000927628",
+   "period_end": "2013-09-30",
+   "stored": "1.86",
+   "press": "591.1",
+   "relative_difference": 316.7957
   },
   {
-   "company_id": "0001166691",
-   "period_end": "2014-09-30",
-   "stored": "0.99",
-   "press": "0.65",
-   "relative_difference": 0.3434
+   "company_id": "0000006951",
+   "period_end": "2014-10-26",
+   "stored": "0.21",
+   "press": "0.23",
+   "relative_difference": 0.0952
   },
   {
-   "company_id": "0000313616",
-   "period_end": "2012-12-31",
-   "stored": "0.89",
-   "press": "0.94",
-   "relative_difference": 0.0562
+   "company_id": "0000010456",
+   "period_end": "2023-12-31",
+   "stored": "0.48",
+   "press": "0.14",
+   "relative_difference": 0.7083
   },
   {
-   "company_id": "0001065088",
-   "period_end": "2021-06-30",
-   "stored": "15.68",
-   "press": "-0.01",
-   "relative_difference": 1.0006
-  },
-  {
-   "company_id": "0000920148",
-   "period_end": "2023-06-30",
-   "stored": "2.12",
-   "press": "1.74",
-   "relative_difference": 0.1792
-  },
-  {
-   "company_id": "0000070858",
-   "period_end": "2015-12-31",
-   "stored": "0.22",
-   "press": "1.31",
-   "relative_difference": 4.9545
+   "company_id": "0000764622",
+   "period_end": "2021-12-31",
+   "stored": "0.25",
+   "press": "0.24",
+   "relative_difference": 0.04
   },
   {
    "company_id": "0000820027",
-   "period_end": "2013-03-31",
-   "stored": "1.58",
-   "press": "-12.4",
-   "relative_difference": 8.8481
+   "period_end": "2013-09-30",
+   "stored": "1.86",
+   "press": "-40.6",
+   "relative_difference": 22.828
+  },
+  {
+   "company_id": "0000010456",
+   "period_end": "2018-12-31",
+   "stored": "0.65",
+   "press": "0.66",
+   "relative_difference": 0.0154
+  },
+  {
+   "company_id": "0000070858",
+   "period_end": "2017-06-30",
+   "stored": "0.46",
+   "press": "0.87",
+   "relative_difference": 0.8913
+  },
+  {
+   "company_id": "0001413329",
+   "period_end": "2024-09-30",
+   "stored": "1.97",
+   "press": "6.20",
+   "relative_difference": 2.1472
   }
  ],
  "counts": {
-  "not parsed": 88,
-  "agree": 94,
-  "differ": 14,
-  "other column": 4
+  "not parsed": 90,
+  "differ": 15,
+  "agree": 89,
+  "other column": 6
  },
- "agree_of_sampled": 0.47,
- "agree_of_parsed": 0.8392857142857143
+ "agree_of_sampled": 0.445,
+ "agree_of_parsed": 0.8090909090909091
 }

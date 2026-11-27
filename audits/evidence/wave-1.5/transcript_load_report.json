@@ -5,12 +5,13 @@
  "other_companies": 28372,
  "outside_dates": 1400,
  "rejected": {
-  "no earnings release filed within 3 days of the call": 157
+  "no earnings release filed within 3 days of the call": 157,
+  "the call does not name the company and its managers are not the company's": 39
  },
- "loaded": 3431,
- "duplicates": 2,
- "segmentation_failed": 38,
- "call_before_release": 13,
- "call_late": 31,
+ "loaded": 3394,
+ "duplicates": 0,
+ "segmentation_failed": 44,
+ "call_before_release": 7,
+ "call_late": 23,
  "placeholder_times": 20
 }

@@ -30,6 +30,10 @@ FIRST_CALL_DATE = date(2013, 1, 1)  # earlier calls feed the sentiment surprise 
 LAST_CALL_DATE = date(2024, 12, 31)
 LINK_WINDOW_DAYS = 3  # an earnings release must be filed within this many days of the call
 
+PARTICIPANT_LISTS = frozenset(
+    {"executives", "analysts", "company representatives", "company participants",
+     "corporate participants", "conference call participants"}
+)  # fmt: skip
 OPERATOR = re.compile(r"\boperator\b", re.IGNORECASE)
 _QUESTION = re.compile(r"question", re.IGNORECASE)
 _ZERO_WIDTH = dict.fromkeys(map(ord, "​‌‍⁠﻿"), None)
@@ -122,11 +126,19 @@ def is_operator(speaker: str) -> bool:
     return bool(OPERATOR.search(speaker))
 
 
+def is_participant_list(speaker: str) -> bool:
+    """A list of who is on the call, which some transcripts put first. It is not speech."""
+    return speaker.strip().lower() in PARTICIPANT_LISTS
+
+
 def find_boundary(turns: list[dict[str, str]]) -> int | None:
-    """The first Operator turn that comes after at least two other turns and mentions a question or
-    "[Operator Instructions]". None means "Segmentation failed" (Product ER-07)."""
+    """The first Operator turn that comes after at least two other speaking turns and mentions a
+    question or "[Operator Instructions]". Participant lists are not speaking turns (C-62). None
+    means "Segmentation failed" (Product ER-07)."""
     others = 0
     for i, turn in enumerate(turns):
+        if is_participant_list(turn["speaker"]):
+            continue
         if is_operator(turn["speaker"]):
             body = turn["text"]
             if others >= 2 and (
@@ -292,6 +304,52 @@ def _company_for(ticker_map: dict, symbol: str, day: date) -> str | None:
     return current.pop() if len(current) == 1 else None
 
 
+NOT_OWN_CALL = "the call does not name the company and its managers are not the company's"
+
+
+def _company_names(engine: Engine, company_id: str, brands: dict[str, list[str]]) -> list[str]:
+    """The company's name, its SEC names (former ones too) and its reviewed brand names."""
+    with engine.connect() as conn:
+        names = [
+            conn.execute(
+                text("SELECT name FROM company WHERE company_id = :c"), {"c": company_id}
+            ).scalar_one()
+        ]
+    found = fin._payload(engine, fin.SUBMISSIONS_URL.format(cik=company_id))
+    if found is not None:
+        doc = json.loads(found[1])
+        names += [doc.get("name") or ""]
+        names += [x["name"] for x in doc.get("formerNames", [])]
+    return names + brands.get(company_id, [])
+
+
+def _own_calls(engine: Engine, prepared: "list[Prepared]") -> set[str]:
+    """The source references of the calls that are the company's own (see `earnings.speaker`)."""
+    from earnings import speaker
+
+    brands, excepted = speaker.aliases(), speaker.exceptions()
+    by_company: dict[str, list[Prepared]] = defaultdict(list)
+    for p in prepared:
+        by_company[p.company_id].append(p)
+    out: set[str] = set()
+    for company_id, calls in by_company.items():
+        pattern = speaker.name_pattern(_company_names(engine, company_id, brands))
+        named = {p.row.ref: speaker.names_company(pattern, p.cleaned_text) for p in calls}
+        known: set[str] = set()
+        for p in calls:
+            if named[p.row.ref]:
+                known |= speaker.executives(p.turns)
+        for p in calls:
+            if speaker.accepted(
+                named[p.row.ref],
+                speaker.executives(p.turns),
+                known,
+                any(suffix in p.row.ref for suffix in excepted),
+            ):
+                out.add(p.row.ref)
+    return out
+
+
 def load_transcripts(
     engine: Engine, parquet: Path, company_ids: list[str], out_dir: Path | None = None
 ) -> dict[str, Any]:
@@ -364,6 +422,14 @@ def load_transcripts(
                     rejects.append({"company_id": cid, "ref": src.ref, "reason": result})
                     continue
                 prepared.append((result, 0))
+        verified = _own_calls(engine, [p for p, _ in prepared])
+        for p, _ in prepared:
+            if p.row.ref not in verified:
+                report["rejected"][NOT_OWN_CALL] += 1
+                rejects.append(
+                    {"company_id": p.company_id, "ref": p.row.ref, "reason": NOT_OWN_CALL}
+                )
+        prepared = [(p, n) for p, n in prepared if p.row.ref in verified]
         run.rows_read = report["rows_in_file"]
         # TX-05: for one release, the earliest call is kept; the others are duplicates
         groups: dict[tuple[str, str], list[Prepared]] = defaultdict(list)

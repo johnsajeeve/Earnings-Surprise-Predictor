@@ -1,21 +1,21 @@
 ticker,event_id,company_id,period_end,announcement_date,accession,stored_eps,derived,press_eps,row,result,note
-ADBE,56985,0000796343,2024-11-29,2024-12-11,0000796343-24-000250,3.78,True,3.79,Diluted net income per share | $ | 3.79 | $ | 3.23 | $ | 12.36 | $ | 11.82,agree,
-AMAT,55483,0000006951,2024-10-27,2024-11-14,0000006951-24-000037,2.09,True,2.09,Diluted earnings per share | $ | 2.09 | $ | 2.38 | $ | 8.61 | $ | 8.11 | (12)% | 6%,agree,
-AMD,55364,0000002488,2024-09-28,2024-10-29,0000002488-24-000161,0.47,False,0.47,Diluted earnings per share | $0.47 | $0.18 | Up 161% | $0.16 | Up 194%,agree,
-BAC,56038,0000070858,2024-09-30,2024-10-15,0000070858-24-000266,0.81,False,2.40,Diluted earnings per common share | 2.40 | 2.72 | 0.81 | 0.83 | 0.76 | 0.35 | 0.90,other column,stored value is in another column
-CAT,55621,0000018230,2024-09-30,2024-10-30,0000018230-24-000050,5.06,False,5.06,Profit per common share — diluted 2,agree,
-CMCSA,57948,0001166691,2024-09-30,2024-10-31,0001166691-24-000054,0.94,False,0.94,Diluted earnings per common share attributable to Comcast Corporation shareholders | $0.94 | $0.98 | $2.90 | $2.90,agree,
-COF,57416,0000927628,2024-09-30,2024-10-24,0000927628-24-000296,4.41,False,4.41,Diluted earnings per common share:(2),agree,
-CSX,56565,0000277948,2024-09-30,2024-10-16,0000277948-24-000052,0.46,False,,,not parsed,no GAAP diluted EPS row found in the press release
-DAL,55748,0000027904,2024-09-30,2024-10-10,0001683168-24-007033,1.97,False,1.97,Diluted earnings per share | 1.97 | 1.72 | 0.25 | 15 | %,agree,
-DECK,57334,0000910521,2024-09-30,2024-10-24,0000910521-24-000056,1.59,False,1.59,Diluted | $ | 1.59 | $ | 1.14 | $ | 2.34 | $ | 1.54,agree,
-IBM,55903,0000051143,2024-09-30,2024-10-23,0000051143-24-000043,-0.36,False,-0.34,Diluted Earnings/(Loss) Per Share: Continuing Operations (4),differ,relative difference 0.0556
-ICE,58590,0001571949,2024-09-30,2024-10-31,0001104659-24-112854,1.14,False,3.57,Diluted | $ | 3.57 | $ | 3.55 | $ | 1.14 | $ | 0.96,other column,stored value is in another column
-KMX,57999,0001170010,2024-11-30,2024-12-19,0001170010-24-000132,0.81,False,0.81,Net earnings per diluted share | $ | 0.81 | $ | 0.52 | 55.8 | % | $ | 2.62 | $ | 2.70 | (3.0) | %,agree,
-META,58063,0001326801,2024-09-30,2024-10-30,0001326801-24-000077,6.03,False,6.03,Diluted earnings per share (EPS) | $ | 6.03 | $ | 4.39 | 37 | %,agree,
-NCLH,58543,0001513761,2024-09-30,2024-10-31,0001171843-24-005927,0.95,False,0.95,Diluted | $ | 0.95 | $ | 0.71 | $ | 1.37 | $ | 0.62,agree,
-ORCL,58123,0001341439,2024-11-30,2024-12-09,0000950170-24-134537,1.1,False,,,not parsed,no GAAP diluted EPS row found in the press release
-PM,58352,0001413329,2024-09-30,2024-10-22,0001413329-24-000167,1.97,False,6.20,Reported Diluted EPS | $6.20 | - | $6.26 | $ 5.02,differ,relative difference 2.1472
-SYY,56474,0000096021,2024-09-28,2024-10-29,0000096021-24-000183,0.99,False,0.99,Diluted Earnings Per Share | $0.99 | $0.99 | —%,agree,
-TJX,56522,0000109198,2024-11-02,2024-11-20,0000109198-24-000056,1.14,False,,,not parsed,no exhibit 99 file in the filing
-WFC,56156,0000072971,2024-09-30,2024-10-11,0000072971-24-000218,1.42,False,1.42,Diluted earnings per common share | 1.42 | 1.48,agree,
+ADBE,63812,0000796343,2024-11-29,2024-12-11,0000796343-24-000250,3.78,True,3.79,Diluted net income per share | $ | 3.79 | $ | 3.23 | $ | 12.36 | $ | 11.82,agree,
+AMAT,62330,0000006951,2024-10-27,2024-11-14,0000006951-24-000037,2.09,True,2.09,Diluted earnings per share | $ | 2.09 | $ | 2.38 | $ | 8.61 | $ | 8.11 | (12)% | 6%,agree,
+AMD,62224,0000002488,2024-09-28,2024-10-29,0000002488-24-000161,0.47,False,0.47,Diluted earnings per share | $0.47 | $0.18 | Up 161% | $0.16 | Up 194%,agree,
+BAC,62868,0000070858,2024-09-30,2024-10-15,0000070858-24-000266,0.81,False,2.40,Diluted earnings per common share | 2.40 | 2.72 | 0.81 | 0.83 | 0.76 | 0.35 | 0.90,other column,stored value is in another column
+CAT,62465,0000018230,2024-09-30,2024-10-30,0000018230-24-000050,5.06,False,5.06,Profit per common share — diluted 2,agree,
+CMCSA,64775,0001166691,2024-09-30,2024-10-31,0001166691-24-000054,0.94,False,0.94,Diluted earnings per common share attributable to Comcast Corporation shareholders | $0.94 | $0.98 | $2.90 | $2.90,agree,
+COF,64243,0000927628,2024-09-30,2024-10-24,0000927628-24-000296,4.41,False,4.41,Diluted earnings per common share:(2),agree,
+CSX,63395,0000277948,2024-09-30,2024-10-16,0000277948-24-000052,0.46,False,,,not parsed,no GAAP diluted EPS row found in the press release
+DAL,62579,0000027904,2024-09-30,2024-10-10,0001683168-24-007033,1.97,False,1.97,Diluted earnings per share | 1.97 | 1.72 | 0.25 | 15 | %,agree,
+DECK,64180,0000910521,2024-09-30,2024-10-24,0000910521-24-000056,1.59,False,1.59,Diluted | $ | 1.59 | $ | 1.14 | $ | 2.34 | $ | 1.54,agree,
+IBM,62734,0000051143,2024-09-30,2024-10-23,0000051143-24-000043,-0.36,False,-0.34,Diluted Earnings/(Loss) Per Share: Continuing Operations (4),differ,relative difference 0.0556
+ICE,65414,0001571949,2024-09-30,2024-10-31,0001104659-24-112854,1.14,False,3.57,Diluted | $ | 3.57 | $ | 3.55 | $ | 1.14 | $ | 0.96,other column,stored value is in another column
+KMX,64826,0001170010,2024-11-30,2024-12-19,0001170010-24-000132,0.81,False,0.81,Net earnings per diluted share | $ | 0.81 | $ | 0.52 | 55.8 | % | $ | 2.62 | $ | 2.70 | (3.0) | %,agree,
+META,64899,0001326801,2024-09-30,2024-10-30,0001326801-24-000077,6.03,False,6.03,Diluted earnings per share (EPS) | $ | 6.03 | $ | 4.39 | 37 | %,agree,
+NCLH,65367,0001513761,2024-09-30,2024-10-31,0001171843-24-005927,0.95,False,0.95,Diluted | $ | 0.95 | $ | 0.71 | $ | 1.37 | $ | 0.62,agree,
+ORCL,64950,0001341439,2024-11-30,2024-12-09,0000950170-24-134537,1.1,False,,,not parsed,no GAAP diluted EPS row found in the press release
+PM,65176,0001413329,2024-09-30,2024-10-22,0001413329-24-000167,1.97,False,6.20,Reported Diluted EPS | $6.20 | - | $6.26 | $ 5.02,differ,relative difference 2.1472
+SYY,63304,0000096021,2024-09-28,2024-10-29,0000096021-24-000183,0.99,False,0.99,Diluted Earnings Per Share | $0.99 | $0.99 | —%,agree,
+TJX,63352,0000109198,2024-11-02,2024-11-20,0000109198-24-000056,1.14,False,,,not parsed,no exhibit 99 file in the filing
+WFC,62986,0000072971,2024-09-30,2024-10-11,0000072971-24-000218,1.42,False,1.42,Diluted earnings per common share | 1.42 | 1.48,agree,

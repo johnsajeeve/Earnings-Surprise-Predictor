@@ -27,6 +27,8 @@ CLASSES = {
 }
 # What may be put in a deployed or published bundle (LC-02). Share-alike is not permissive.
 DEPLOYABLE_DATA = frozenset({"permissive", "public-information"})
+# What may be committed to the public repository: share-alike only with its attribution (LC-06).
+REDISTRIBUTABLE_DATA = frozenset({"permissive", "public-information", "share-alike"})
 # What a library or image may be for use in a deployed system (LC-11).
 ALLOWED_SOFTWARE = frozenset({"permissive", "weak-copyleft"})
 RECHECK_DAYS = 90

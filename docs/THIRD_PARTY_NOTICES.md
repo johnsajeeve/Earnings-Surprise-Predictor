@@ -77,7 +77,7 @@ A licence class records what the source's pages said when checked. It is not leg
 - websockets 17.4 (python-package): BSD-3-Clause
 - yfinance 1.8.0 (python-package): Apache-2.0
 - postgres 16.16 (container-image): PostgreSQL Licence
-- redis 7.4.12-alpine (container-image): RSALv2 or SSPLv1
+- valkey/valkey 8.1.12-alpine (container-image): BSD-3-Clause
 - python 3.12.16-slim (container-image): PSF-2.0 with Debian packages under their own licences
 - ProsusAI/finbert 0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031 (model): CC BY-NC-SA 4.0
 - Loughran-McDonald master dictionary not yet downloaded (word-list): free for academic research; commercial licence from the authors

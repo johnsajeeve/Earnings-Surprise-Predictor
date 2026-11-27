@@ -2,10 +2,10 @@
  "coverage": {
   "shortfall_by_company_and_year": {
    "ADVANCED MICRO DEVICES INC": {
-    "2017": 1,
-    "2018": 2,
+    "2017": 3,
+    "2018": 5,
     "2019": 4,
-    "2020": 2,
+    "2020": 4,
     "2021": 3,
     "2022": 1
    },
@@ -33,7 +33,7 @@
    },
    "BAXTER INTERNATIONAL INC": {
     "2020": 3,
-    "2021": 2
+    "2021": 5
    },
    "BROWN & BROWN, INC.": {
     "2024": 1
@@ -79,14 +79,14 @@
     "2015": 1
    },
    "CUMMINS INC": {
-    "2015": 1,
-    "2016": 1,
+    "2015": 3,
+    "2016": 4,
     "2017": 2,
-    "2018": 2,
+    "2018": 3,
     "2019": 2,
-    "2020": 2,
-    "2021": 1,
-    "2022": 1
+    "2020": 3,
+    "2021": 3,
+    "2022": 2
    },
    "Capri Holdings Ltd": {
     "2018": 1,
@@ -246,7 +246,9 @@
     "2015": 5
    },
    "REALTY INCOME CORP": {
-    "2017": 2,
+    "2017": 3,
+    "2018": 1,
+    "2019": 1,
     "2020": 3,
     "2021": 1
    },
@@ -289,7 +291,8 @@
    },
    "Vulcan Materials CO": {
     "2018": 1,
-    "2020": 1
+    "2019": 1,
+    "2020": 2
    },
    "WATERS CORP /DE/": {
     "2020": 1
@@ -317,7 +320,7 @@
    },
    "2013 still in the index": {
     "releases": 185,
-    "with_transcript": 155
+    "with_transcript": 153
    },
    "2014 left the index": {
     "releases": 60,
@@ -325,7 +328,7 @@
    },
    "2014 still in the index": {
     "releases": 192,
-    "with_transcript": 175
+    "with_transcript": 172
    },
    "2015 left the index": {
     "releases": 56,
@@ -333,7 +336,7 @@
    },
    "2015 still in the index": {
     "releases": 219,
-    "with_transcript": 199
+    "with_transcript": 197
    },
    "2016 left the index": {
     "releases": 53,
@@ -341,7 +344,7 @@
    },
    "2016 still in the index": {
     "releases": 235,
-    "with_transcript": 215
+    "with_transcript": 212
    },
    "2017 left the index": {
     "releases": 49,
@@ -349,7 +352,7 @@
    },
    "2017 still in the index": {
     "releases": 247,
-    "with_transcript": 229
+    "with_transcript": 226
    },
    "2018 left the index": {
     "releases": 50,
@@ -357,7 +360,7 @@
    },
    "2018 still in the index": {
     "releases": 291,
-    "with_transcript": 264
+    "with_transcript": 259
    },
    "2019 left the index": {
     "releases": 44,
@@ -365,7 +368,7 @@
    },
    "2019 still in the index": {
     "releases": 293,
-    "with_transcript": 269
+    "with_transcript": 267
    },
    "2020 left the index": {
     "releases": 40,
@@ -373,7 +376,7 @@
    },
    "2020 still in the index": {
     "releases": 312,
-    "with_transcript": 279
+    "with_transcript": 275
    },
    "2021 left the index": {
     "releases": 34,
@@ -381,7 +384,7 @@
    },
    "2021 still in the index": {
     "releases": 310,
-    "with_transcript": 289
+    "with_transcript": 284
    },
    "2022 left the index": {
     "releases": 20,
@@ -389,7 +392,7 @@
    },
    "2022 still in the index": {
     "releases": 317,
-    "with_transcript": 302
+    "with_transcript": 301
    },
    "2023 left the index": {
     "releases": 22,
@@ -408,68 +411,67 @@
     "with_transcript": 309
    }
   },
-  "missing_count": 466
+  "missing_count": 496
  },
  "label_exclusions": {
   "2013": {
-   "fewer than 6 prior seasonal differences": 13,
-   "label ok": 176,
-   "no quarter ended within the reporting window": 4,
-   "the announced quarter's EPS was first filed more than 100 days after the announcement": 1
+   "fewer than 6 prior seasonal differences": 3,
+   "label ok": 184,
+   "no quarter ended within the reporting window": 4
   },
   "2014": {
-   "fewer than 6 prior seasonal differences": 10,
-   "label ok": 195,
+   "fewer than 6 prior seasonal differences": 3,
+   "label ok": 199,
    "no quarter ended within the reporting window": 1,
-   "the announced quarter's EPS was first filed more than 100 days after the announcement": 6
-  },
-  "2015": {
-   "fewer than 6 prior seasonal differences": 13,
-   "label ok": 221,
-   "no quarter ended within the reporting window": 5,
-   "the announced quarter's EPS was first filed more than 100 days after the announcement": 2
-  },
-  "2016": {
-   "fewer than 6 prior seasonal differences": 8,
-   "label ok": 242,
-   "no quarter ended within the reporting window": 7,
    "the announced quarter's EPS was first filed more than 100 days after the announcement": 4
   },
+  "2015": {
+   "fewer than 6 prior seasonal differences": 9,
+   "label ok": 224,
+   "no quarter ended within the reporting window": 3,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 1
+  },
+  "2016": {
+   "fewer than 6 prior seasonal differences": 4,
+   "label ok": 245,
+   "no quarter ended within the reporting window": 4,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 3
+  },
   "2017": {
-   "fewer than 6 prior seasonal differences": 7,
-   "label ok": 253,
-   "no quarter ended within the reporting window": 6,
-   "the announced quarter's EPS was first filed more than 100 days after the announcement": 5,
+   "fewer than 6 prior seasonal differences": 4,
+   "label ok": 257,
+   "no quarter ended within the reporting window": 3,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 4,
    "the share basis in the window is unknown": 3
   },
   "2018": {
-   "fewer than 6 prior seasonal differences": 9,
-   "label ok": 274,
-   "no quarter ended within the reporting window": 12,
-   "the announced quarter's EPS was first filed more than 100 days after the announcement": 11,
+   "fewer than 6 prior seasonal differences": 6,
+   "label ok": 278,
+   "no quarter ended within the reporting window": 9,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 8,
    "the share basis in the window is unknown": 4
   },
   "2019": {
-   "fewer than 6 prior seasonal differences": 12,
-   "label ok": 289,
-   "no quarter ended within the reporting window": 10,
-   "the announced quarter's EPS was first filed more than 100 days after the announcement": 6,
+   "fewer than 6 prior seasonal differences": 7,
+   "label ok": 295,
+   "no quarter ended within the reporting window": 8,
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 5,
    "the share basis in the window is unknown": 4
   },
   "2020": {
-   "fewer than 6 prior seasonal differences": 9,
-   "label ok": 308,
+   "fewer than 6 prior seasonal differences": 6,
+   "label ok": 309,
    "no quarter ended within the reporting window": 7,
-   "the announced quarter's EPS was first filed more than 100 days after the announcement": 6
+   "the announced quarter's EPS was first filed more than 100 days after the announcement": 4
   },
   "2021": {
-   "fewer than 6 prior seasonal differences": 11,
-   "label ok": 303,
+   "fewer than 6 prior seasonal differences": 7,
+   "label ok": 302,
    "no quarter ended within the reporting window": 5,
    "the announced quarter's EPS was first filed more than 100 days after the announcement": 7
   },
   "2022": {
-   "fewer than 6 prior seasonal differences": 7,
+   "fewer than 6 prior seasonal differences": 6,
    "label ok": 312,
    "no quarter ended within the reporting window": 4,
    "the announced quarter's EPS was first filed more than 100 days after the announcement": 2
@@ -489,13 +491,13 @@
  "size": {
   "measured": {
    "companies": 93,
-   "database_bytes": 856128535,
+   "database_bytes": 860896279,
    "largest_tables_bytes": {
-    "raw_payload": 364560384,
-    "transcript": 284721152,
-    "transcript_section": 94724096,
+    "raw_payload": 371433472,
+    "transcript": 282320896,
+    "transcript_section": 94666752,
     "price_daily": 83517440,
-    "eps_history": 7733248,
+    "eps_history": 7880704,
     "fundamentals_filing": 7233536,
     "adjustment_factor": 2056192,
     "earnings_event": 1327104
@@ -503,7 +505,7 @@
   },
   "estimated": {
    "companies": 500,
-   "database_bytes": 4602841586,
+   "database_bytes": 4628474618,
    "method": "measured size times 5.4 (company ratio); ESTIMATE, not measured"
   }
  }

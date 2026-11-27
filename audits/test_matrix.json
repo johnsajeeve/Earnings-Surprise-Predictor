@@ -466,11 +466,13 @@
         "DV-07-AC1",
         "FD-01",
         "FD-01-AC1",
+        "FD-03",
         "FD-03-AC1",
         "FR-02",
         "IG-10",
         "IG-15",
         "IG-15-AC1",
+        "LB-01",
         "LB-02",
         "LB-03",
         "LB-03-AC1",
@@ -481,11 +483,16 @@
         "VL-05"
       ],
       "tests": [
+        "tests/test_audit_fixes.py::test_a_later_cumulative_result_does_not_hide_what_the_three_quarters_gave_earlier",
         "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier",
         "tests/test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis",
+        "tests/test_audit_fixes.py::test_a_quarter_reported_as_basic_and_diluted_is_read",
+        "tests/test_audit_fixes.py::test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates",
         "tests/test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label",
         "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins",
+        "tests/test_audit_fixes.py::test_the_loaded_splits_keep_unknown_ratios_and_the_load_uses_the_price_sources_splits",
         "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first",
+        "tests/test_audit_fixes.py::test_the_three_quarter_sum_also_puts_the_quarters_on_the_years_share_basis",
         "tests/test_calendar.py::test_real_apple_releases_filed_after_the_close_count_for_the_next_session",
         "tests/test_events.py::test_the_announcement_date_is_the_new_york_day_of_acceptance_not_the_sec_filing_day",
         "tests/test_financials.py::test_a_call_before_the_filing_and_one_after_both_give_the_earlier_time_as_the_cutoff",
@@ -520,6 +527,7 @@
         "DV-03",
         "DV-04",
         "DV-06",
+        "FD-03",
         "IG-20",
         "IG-20-AC1",
         "LB-01",
@@ -536,11 +544,13 @@
       ],
       "tests": [
         "tests/test_audit_fixes.py::test_a_quarter_refiled_with_a_shifted_end_date_is_still_the_same_quarter",
+        "tests/test_audit_fixes.py::test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates",
         "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters",
         "tests/test_audit_fixes.py::test_a_sixteen_week_fourth_quarter_is_a_quarter",
         "tests/test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label",
         "tests/test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label",
         "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault",
+        "tests/test_audit_fixes.py::test_the_ten_day_and_twenty_day_limits_are_where_they_were_approved",
         "tests/test_events.py::test_the_label_agrees_with_the_database_as_of_rule_and_ignores_a_later_restatement",
         "tests/test_label.py::test_a_label_whose_inputs_hold_a_scale_error_is_marked",
         "tests/test_label.py::test_a_planted_restatement_or_future_filing_does_not_change_the_label",
@@ -765,7 +775,7 @@
         "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing",
         "tests/test_prices.py::test_the_equal_weight_universe_uses_only_the_members_of_the_day",
         "tests/test_prices.py::test_the_price_windows_of_an_event_do_not_overlap_the_announcement",
-        "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_the_real_apple_answer",
+        "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_a_split_adjusted_answer",
         "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall"
       ]
     },
@@ -848,6 +858,16 @@
         "tests/test_req_project_wide.py::test_or_02_ac1_source_register_shows_zero_cost_for_every"
       ]
     },
+    "src/earnings/speaker.py": {
+      "requirements": [
+        "IG-14",
+        "TX-01"
+      ],
+      "tests": [
+        "tests/test_speaker_check.py::test_a_call_is_the_companys_when_its_opening_names_it_not_when_another_does",
+        "tests/test_speaker_check.py::test_a_call_that_never_says_the_name_needs_two_of_the_companys_own_managers"
+      ]
+    },
     "src/earnings/tasking.py": {
       "requirements": [
         "IG-02",
@@ -921,6 +941,7 @@
         "ER-07-AC2",
         "FR-13-AC1",
         "FR-13-AC2",
+        "FR-15",
         "FR-15-AC1",
         "FR-15-AC2",
         "IG-05",
@@ -949,6 +970,7 @@
         "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched",
         "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known",
         "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
+        "tests/test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found",
         "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation",
         "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason",
         "tests/test_transcripts.py::test_a_call_with_no_boundary_is_flagged_and_has_no_question_section_or_roles",
@@ -1039,6 +1061,7 @@
         "IG-06",
         "IG-06-AC1",
         "IG-20",
+        "SR-10",
         "SR-10-AC2",
         "TH-01-AC1",
         "TH-06-AC1",
@@ -1055,6 +1078,7 @@
       ],
       "tests": [
         "tests/test_audit_fixes.py::test_each_gate_counts_a_planted_fault",
+        "tests/test_audit_fixes.py::test_the_checks_put_events_in_a_capture_gap_into_quarantine",
         "tests/test_gaps.py::test_a_four_day_capture_gap_is_reported_and_the_events_in_it_are_flagged",
         "tests/test_gaps.py::test_a_mean_gap_above_the_threshold_is_marked_for_investigation",
         "tests/test_gaps.py::test_every_labelled_event_has_its_document_announcement_date_and_eps_filing",
@@ -1109,7 +1133,7 @@
       ],
       "tests": [
         "tests/test_licensing.py::test_every_committed_fixture_says_which_dataset_it_comes_from",
-        "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed"
+        "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution"
       ]
     },
     "tests/fixtures/ticker_cik_map.csv": {
@@ -2590,7 +2614,7 @@
       ],
       "document": "deployment-and-operations-requirements.md",
       "id_level_tests": [
-        "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed"
+        "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution"
       ]
     },
     "DP-11": {
@@ -2756,6 +2780,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_the_checks_put_events_in_a_capture_gap_into_quarantine",
         "tests/test_validation.py::test_every_label_built_on_a_scaled_value_is_flagged_not_only_the_giant_ones"
       ]
     },
@@ -3689,6 +3714,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates",
         "tests/test_financials.py::test_the_same_filing_cannot_be_stored_twice_but_a_later_filing_adds_a_version"
       ]
     },
@@ -4579,7 +4605,9 @@
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found"
+      ]
     },
     "FR-16": {
       "checks": [
@@ -5048,6 +5076,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_the_checks_put_events_in_a_capture_gap_into_quarantine",
         "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
         "tests/test_ingestion_framework.py::test_a_job_with_no_success_for_more_than_three_days_is_reported"
@@ -5117,6 +5146,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_quarter_reported_as_basic_and_diluted_is_read",
         "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known",
         "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first",
         "tests/test_edgar_client.py::test_a_payload_is_stored_as_received_and_parsed_from_the_database_offline",
@@ -5153,7 +5183,7 @@
           "fingerprint": "524197fe2ddc",
           "ref": "IG-12-AC2",
           "tests": [
-            "tests/test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_which_rows_are_real"
+            "tests/test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_that_it_is_made_up"
           ],
           "text": "Fixtures state their origin."
         }
@@ -5213,7 +5243,9 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
-        "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched"
+        "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched",
+        "tests/test_speaker_check.py::test_a_call_is_the_companys_when_its_opening_names_it_not_when_another_does",
+        "tests/test_speaker_check.py::test_a_call_that_never_says_the_name_needs_two_of_the_companys_own_managers"
       ]
     },
     "IG-15": {
@@ -5291,6 +5323,7 @@
       ],
       "document": "ingestion-and-preparation-requirements.md",
       "id_level_tests": [
+        "tests/test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found",
         "tests/test_transcripts.py::test_the_boundary_is_the_first_operator_turn_after_two_other_turns_that_mentions_a_question",
         "tests/test_transcripts.py::test_the_review_sheet_draws_the_same_calls_every_time_and_shows_the_boundary"
       ]
@@ -5438,9 +5471,11 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_quarter_reported_as_basic_and_diluted_is_read",
         "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters",
         "tests/test_audit_fixes.py::test_a_sixteen_week_fourth_quarter_is_a_quarter",
         "tests/test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label",
+        "tests/test_audit_fixes.py::test_the_ten_day_and_twenty_day_limits_are_where_they_were_approved",
         "tests/test_label.py::test_when_the_announced_quarter_is_missing_the_previous_one_is_not_used_instead"
       ]
     },
@@ -5489,8 +5524,10 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_later_cumulative_result_does_not_hide_what_the_three_quarters_gave_earlier",
         "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier",
         "tests/test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis",
+        "tests/test_audit_fixes.py::test_the_three_quarter_sum_also_puts_the_quarters_on_the_years_share_basis",
         "tests/test_financials.py::test_a_year_is_not_derived_when_the_fourth_quarter_is_reported_or_quarters_do_not_line_up",
         "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
       ]
@@ -5510,9 +5547,13 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_a_later_cumulative_result_does_not_hide_what_the_three_quarters_gave_earlier",
         "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier",
         "tests/test_audit_fixes.py::test_a_quarter_refiled_with_a_shifted_end_date_is_still_the_same_quarter",
+        "tests/test_audit_fixes.py::test_a_quarter_reported_as_basic_and_diluted_is_read",
+        "tests/test_audit_fixes.py::test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates",
         "tests/test_audit_fixes.py::test_a_target_value_first_filed_long_after_the_announcement_gives_no_label",
+        "tests/test_audit_fixes.py::test_the_ten_day_and_twenty_day_limits_are_where_they_were_approved",
         "tests/test_financials.py::test_a_later_filing_with_a_shifted_start_does_not_replace_the_first_cumulative_figure"
       ]
     },
@@ -5534,6 +5575,8 @@
         "tests/test_audit_fixes.py::test_a_quarter_derived_across_a_split_puts_both_figures_on_one_basis",
         "tests/test_audit_fixes.py::test_an_unknown_share_basis_inside_the_window_gives_no_label",
         "tests/test_audit_fixes.py::test_price_coverage_has_its_stated_threshold_and_the_latest_factor_version_wins",
+        "tests/test_audit_fixes.py::test_the_loaded_splits_keep_unknown_ratios_and_the_load_uses_the_price_sources_splits",
+        "tests/test_audit_fixes.py::test_the_three_quarter_sum_also_puts_the_quarters_on_the_years_share_basis",
         "tests/test_label.py::test_ratios_that_are_not_share_splits_are_ignored_and_repeats_are_merged"
       ]
     },
@@ -5669,13 +5712,13 @@
     "LC-06": {
       "checks": [
         {
-          "fingerprint": "2b9f5c5879ba",
+          "fingerprint": "fb039ef7822d",
           "ref": "LC-06-AC1",
           "tests": [
             "tests/test_licensing.py::test_every_committed_fixture_says_which_dataset_it_comes_from",
-            "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed"
+            "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution"
           ],
-          "text": "No committed fixture holds real text or values from a source that may not be deployed."
+          "text": "No committed fixture holds real data from a source that does not permit redistribution, and each share-alike excerpt carries its attribution and licence."
         }
       ],
       "document": "licensing-requirements.md",
@@ -6759,7 +6802,7 @@
         "tests/test_prices.py::test_a_series_that_does_not_cover_the_events_is_refused",
         "tests/test_prices.py::test_a_spin_off_the_source_lists_twice_is_counted_once",
         "tests/test_prices.py::test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing",
-        "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_the_real_apple_answer",
+        "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_a_split_adjusted_answer",
         "tests/test_prices.py::test_total_return_counts_a_split_and_a_dividend_and_not_a_false_fall"
       ]
     },
@@ -7538,6 +7581,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_audit_fixes.py::test_the_checks_put_events_in_a_capture_gap_into_quarantine",
         "tests/test_consensus_capture.py::test_a_company_whose_first_attempt_times_out_gets_one_more_try",
         "tests/test_consensus_capture.py::test_a_gap_of_more_than_three_days_is_logged_by_the_capture_task",
         "tests/test_consensus_capture.py::test_a_stack_that_never_captured_reports_a_gap_from_the_start_day",
@@ -8487,7 +8531,9 @@
       "document": "data-requirements.md",
       "id_level_tests": [
         "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched",
-        "tests/test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing"
+        "tests/test_audit_fixes.py::test_a_transcript_has_a_call_type_and_an_event_keeps_its_eps_filing",
+        "tests/test_speaker_check.py::test_a_call_is_the_companys_when_its_opening_names_it_not_when_another_does",
+        "tests/test_speaker_check.py::test_a_call_that_never_says_the_name_needs_two_of_the_companys_own_managers"
       ]
     },
     "TX-02": {
@@ -8572,6 +8618,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found",
         "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role",
         "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
       ]
@@ -9138,6 +9185,16 @@
         "TX-04"
       ]
     },
+    "tests/test_audit_fixes.py::test_a_later_cumulative_result_does_not_hide_what_the_three_quarters_gave_earlier": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-03",
+        "LB-04"
+      ]
+    },
     "tests/test_audit_fixes.py::test_a_later_direct_quarter_does_not_erase_the_value_derivable_earlier": {
       "code": [
         "src/earnings/financials.py"
@@ -9168,6 +9225,17 @@
         "LB-04"
       ]
     },
+    "tests/test_audit_fixes.py::test_a_quarter_reported_as_basic_and_diluted_is_read": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-10",
+        "LB-01",
+        "LB-04"
+      ]
+    },
     "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known": {
       "code": [
         "src/earnings/transcripts.py"
@@ -9177,6 +9245,17 @@
         "DV-08",
         "IG-05",
         "IG-10"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_a_reported_value_beats_a_derived_one_filed_the_same_day_and_fundamentals_follow_dates": {
+      "code": [
+        "src/earnings/financials.py",
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FD-03",
+        "LB-04"
       ]
     },
     "tests/test_audit_fixes.py::test_a_seventeen_week_quarter_in_a_53_week_year_does_not_break_the_run_of_quarters": {
@@ -9257,6 +9336,26 @@
         "VL-05"
       ]
     },
+    "tests/test_audit_fixes.py::test_the_checks_put_events_in_a_capture_gap_into_quarantine": {
+      "code": [
+        "src/earnings/validation.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "DV-01",
+        "IG-06",
+        "SR-10"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_the_loaded_splits_keep_unknown_ratios_and_the_load_uses_the_price_sources_splits": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-05"
+      ]
+    },
     "tests/test_audit_fixes.py::test_the_per_share_unit_is_read_even_when_another_unit_comes_first": {
       "code": [
         "src/earnings/financials.py"
@@ -9276,6 +9375,26 @@
       "requirements": [
         "DV-05",
         "PX-02"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_the_ten_day_and_twenty_day_limits_are_where_they_were_approved": {
+      "code": [
+        "src/earnings/label.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-01",
+        "LB-04"
+      ]
+    },
+    "tests/test_audit_fixes.py::test_the_three_quarter_sum_also_puts_the_quarters_on_the_years_share_basis": {
+      "code": [
+        "src/earnings/financials.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "LB-03",
+        "LB-05"
       ]
     },
     "tests/test_calendar.py::test_a_timestamp_without_a_time_zone_is_refused": {
@@ -10333,11 +10452,11 @@
         "SR-01"
       ]
     },
-    "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed": {
+    "tests/test_licensing.py::test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution": {
       "code": [
         "tests/fixtures/fixture_sources.csv"
       ],
-      "kind": "expected failure (requirement not met yet)",
+      "kind": "real check",
       "requirements": [
         "DP-10",
         "LC-06-AC1"
@@ -10524,7 +10643,7 @@
         "DV-05"
       ]
     },
-    "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_the_real_apple_answer": {
+    "tests/test_prices.py::test_the_raw_close_is_rebuilt_from_a_split_adjusted_answer": {
       "code": [
         "src/earnings/prices.py"
       ],
@@ -14387,6 +14506,37 @@
         "SS-04-AC1"
       ]
     },
+    "tests/test_speaker_check.py::test_a_call_is_the_companys_when_its_opening_names_it_not_when_another_does": {
+      "code": [
+        "src/earnings/speaker.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-14",
+        "TX-01"
+      ]
+    },
+    "tests/test_speaker_check.py::test_a_call_that_never_says_the_name_needs_two_of_the_companys_own_managers": {
+      "code": [
+        "src/earnings/speaker.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "IG-14",
+        "TX-01"
+      ]
+    },
+    "tests/test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found": {
+      "code": [
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-15",
+        "IG-18",
+        "TX-06"
+      ]
+    },
     "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker": {
       "code": [
         "src/earnings/celery_app.py",
@@ -14676,7 +14826,7 @@
         "IG-18"
       ]
     },
-    "tests/test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_which_rows_are_real": {
+    "tests/test_transcripts.py::test_the_transcript_fixture_states_its_origin_and_that_it_is_made_up": {
       "code": [],
       "kind": "real check",
       "requirements": [

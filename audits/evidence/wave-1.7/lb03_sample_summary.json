@@ -2,39 +2,32 @@
  "sampled": 20,
  "differences_above_1pct": [
   {
-   "company_id": "0000864749",
-   "period_end": "2021-12-31",
-   "stored": "0.46",
-   "press": "0.45",
-   "relative_difference": 0.0217
+   "company_id": "0001013462",
+   "period_end": "2017-12-31",
+   "stored": "0.60",
+   "press": "0.61",
+   "relative_difference": 0.0167
   },
   {
-   "company_id": "0000070858",
-   "period_end": "2023-12-31",
-   "stored": "0.36",
-   "press": "3.08",
-   "relative_difference": 7.5556
+   "company_id": "0001048911",
+   "period_end": "2022-05-31",
+   "stored": "2.16",
+   "press": "2.13",
+   "relative_difference": 0.0139
   },
   {
-   "company_id": "0000764622",
-   "period_end": "2021-12-31",
-   "stored": "0.25",
-   "press": "0.24",
-   "relative_difference": 0.04
-  },
-  {
-   "company_id": "0000927628",
-   "period_end": "2012-12-31",
-   "stored": "1.41",
-   "press": "585.6",
-   "relative_difference": 414.3191
+   "company_id": "0001166691",
+   "period_end": "2022-12-31",
+   "stored": "0.69",
+   "press": "0.70",
+   "relative_difference": 0.0145
   }
  ],
  "counts": {
-  "differ": 6,
-  "not parsed": 5,
-  "agree": 9
+  "differ": 3,
+  "not parsed": 9,
+  "agree": 8
  },
- "agree_of_sampled": 0.45,
- "agree_of_parsed": 0.6
+ "agree_of_sampled": 0.4,
+ "agree_of_parsed": 0.7272727272727273
 }

@@ -60,7 +60,7 @@ wcwidth,python-package,0.9.4,MIT,permissive,,yes,installed package metadata in t
 websockets,python-package,17.4,BSD-3-Clause,permissive,,yes,installed package metadata in the project image,2026-11-26,
 yfinance,python-package,1.8.0,Apache-2.0,permissive,,yes,installed package metadata in the project image,2026-11-26,
 postgres,container-image,16.16,PostgreSQL Licence,permissive,,yes,"not fetched: stated from knowledge, to be read before deployment",2026-11-26,unverified
-redis,container-image,7.4.12-alpine,RSALv2 or SSPLv1,source-available,,yes,https://redis.io/legal/licenses/,2026-11-26,Redis 7.2 and earlier are BSD-3-Clause; Valkey is BSD-3-Clause
+valkey/valkey,container-image,8.1.12-alpine,BSD-3-Clause,permissive,,yes,https://github.com/valkey-io/valkey,2026-11-27,"replaces redis 7.4.12 (RSALv2 or SSPLv1), decision C-63"
 python,container-image,3.12.16-slim,PSF-2.0 with Debian packages under their own licences,unclear,,yes,not fetched: stated from knowledge; the image bundles many licences,2026-11-26,unverified
 ProsusAI/finbert,model,0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031,CC BY-NC-SA 4.0,non-commercial,Financial PhraseBank CC BY-NC-SA 3.0; Reuters TRC2 under NIST access terms,"approved, not yet imported (C-54)",https://huggingface.co/ProsusAI/finbert,2026-11-26,
 Loughran-McDonald master dictionary,word-list,not yet downloaded,free for academic research; commercial licence from the authors,restricted,,"approved, not yet imported (C-14)",https://sraf.nd.edu/loughranmcdonald-master-dictionary/,2026-11-26,

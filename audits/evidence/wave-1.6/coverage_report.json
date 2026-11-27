@@ -1,10 +1,10 @@
 {
  "shortfall_by_company_and_year": {
   "ADVANCED MICRO DEVICES INC": {
-   "2017": 1,
-   "2018": 2,
+   "2017": 3,
+   "2018": 5,
    "2019": 4,
-   "2020": 2,
+   "2020": 4,
    "2021": 3,
    "2022": 1
   },
@@ -32,7 +32,7 @@
   },
   "BAXTER INTERNATIONAL INC": {
    "2020": 3,
-   "2021": 2
+   "2021": 5
   },
   "BROWN & BROWN, INC.": {
    "2024": 1
@@ -78,14 +78,14 @@
    "2015": 1
   },
   "CUMMINS INC": {
-   "2015": 1,
-   "2016": 1,
+   "2015": 3,
+   "2016": 4,
    "2017": 2,
-   "2018": 2,
+   "2018": 3,
    "2019": 2,
-   "2020": 2,
-   "2021": 1,
-   "2022": 1
+   "2020": 3,
+   "2021": 3,
+   "2022": 2
   },
   "Capri Holdings Ltd": {
    "2018": 1,
@@ -245,7 +245,9 @@
    "2015": 5
   },
   "REALTY INCOME CORP": {
-   "2017": 2,
+   "2017": 3,
+   "2018": 1,
+   "2019": 1,
    "2020": 3,
    "2021": 1
   },
@@ -288,7 +290,8 @@
   },
   "Vulcan Materials CO": {
    "2018": 1,
-   "2020": 1
+   "2019": 1,
+   "2020": 2
   },
   "WATERS CORP /DE/": {
    "2020": 1
@@ -316,7 +319,7 @@
   },
   "2013 still in the index": {
    "releases": 185,
-   "with_transcript": 155
+   "with_transcript": 153
   },
   "2014 left the index": {
    "releases": 60,
@@ -324,7 +327,7 @@
   },
   "2014 still in the index": {
    "releases": 192,
-   "with_transcript": 175
+   "with_transcript": 172
   },
   "2015 left the index": {
    "releases": 56,
@@ -332,7 +335,7 @@
   },
   "2015 still in the index": {
    "releases": 219,
-   "with_transcript": 199
+   "with_transcript": 197
   },
   "2016 left the index": {
    "releases": 53,
@@ -340,7 +343,7 @@
   },
   "2016 still in the index": {
    "releases": 235,
-   "with_transcript": 215
+   "with_transcript": 212
   },
   "2017 left the index": {
    "releases": 49,
@@ -348,7 +351,7 @@
   },
   "2017 still in the index": {
    "releases": 247,
-   "with_transcript": 229
+   "with_transcript": 226
   },
   "2018 left the index": {
    "releases": 50,
@@ -356,7 +359,7 @@
   },
   "2018 still in the index": {
    "releases": 291,
-   "with_transcript": 264
+   "with_transcript": 259
   },
   "2019 left the index": {
    "releases": 44,
@@ -364,7 +367,7 @@
   },
   "2019 still in the index": {
    "releases": 293,
-   "with_transcript": 269
+   "with_transcript": 267
   },
   "2020 left the index": {
    "releases": 40,
@@ -372,7 +375,7 @@
   },
   "2020 still in the index": {
    "releases": 312,
-   "with_transcript": 279
+   "with_transcript": 275
   },
   "2021 left the index": {
    "releases": 34,
@@ -380,7 +383,7 @@
   },
   "2021 still in the index": {
    "releases": 310,
-   "with_transcript": 289
+   "with_transcript": 284
   },
   "2022 left the index": {
    "releases": 20,
@@ -388,7 +391,7 @@
   },
   "2022 still in the index": {
    "releases": 317,
-   "with_transcript": 302
+   "with_transcript": 301
   },
   "2023 left the index": {
    "releases": 22,
@@ -407,5 +410,5 @@
    "with_transcript": 309
   }
  },
- "missing_count": 466
+ "missing_count": 496
 }

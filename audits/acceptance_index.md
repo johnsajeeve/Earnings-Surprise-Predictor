@@ -680,7 +680,7 @@ Every check of every requirement has a reference `ID-ACn`, numbered in the order
 | LC-03-AC1 | No dataset in the source register has a class that may not be deployed. |
 | LC-04-AC1 | A manifest naming a restricted, unclear, share-alike or unregistered dataset is refused. |
 | LC-05-AC1 | The committed notices file equals the generated one. |
-| LC-06-AC1 | No committed fixture holds real text or values from a source that may not be deployed. |
+| LC-06-AC1 | No committed fixture holds real data from a source that does not permit redistribution, and each share-alike excerpt carries its attribution and licence. |
 | LC-07-AC1 | A source name in a client module with no register entry fails the test. |
 | LC-08-AC1 | No scheduled job uses a source whose terms bar automated collection. |
 | LC-09-AC1 | Every model row names the licence of its training data. |

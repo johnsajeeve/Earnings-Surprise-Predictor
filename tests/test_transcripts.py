@@ -2,8 +2,9 @@
 (Ingestion IG-11, IG-14, IG-17, IG-18; Data TX-01, TX-02, TX-05, TX-06;
 Product FR-13, PL-06, ER-07).
 
-The excerpts in tests/fixtures/hf_transcript_excerpts.json are REAL rows of the Hugging Face set,
-cut to short excerpts (README_universe.md). Rows built by hand in tests are SYNTHETIC and say so.
+Every transcript here is SYNTHETIC (tests/fixtures/hf_transcript_excerpts.json and rows built in
+tests): the source does not permit redistribution (decision C-62). The names are made up. The
+filing times used for linking are real SEC data.
 """
 
 import json
@@ -154,7 +155,7 @@ def test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation(
 def _setup(engine, rows, extra_tickers=()):
     """SYNTHETIC company and ticker, the real Apple release list, and a small parquet of rows."""
     with engine.begin() as conn:
-        conn.execute(text("INSERT INTO company VALUES (:c, 'Apple Inc.')"), {"c": AAPL})
+        conn.execute(text("INSERT INTO company VALUES (:c, 'Northwind Widgets Inc.')"), {"c": AAPL})
         conn.execute(
             text(
                 "INSERT INTO ticker_history (company_id, ticker, valid_from) "
@@ -479,10 +480,10 @@ def test_a_stored_payload_is_parsed_with_the_network_disabled(test_db, monkeypat
 
 
 @pytest.mark.req("IG-12-AC2")
-def test_the_transcript_fixture_states_its_origin_and_which_rows_are_real():
-    assert EXCERPTS["source"] == "kurry/sp500_earnings_transcripts"
-    assert EXCERPTS["revision"] == hf.REVISION
-    assert "REAL rows" in EXCERPTS["note"]
+def test_the_transcript_fixture_states_its_origin_and_that_it_is_made_up():
+    assert EXCERPTS["source"] == "synthetic" and "SYNTHETIC" in EXCERPTS["note"]
+    assert EXCERPTS["shaped_like"] == "kurry/sp500_earnings_transcripts"
+    assert {r["company_name"] for r in EXCERPTS["rows"]} == {"Northwind Widgets Inc."}
 
 
 @pytest.mark.req("TX-02")

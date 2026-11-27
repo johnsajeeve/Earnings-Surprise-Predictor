@@ -1,8 +1,7 @@
 """Prices and dated adjustment factors, the price windows and the survivorship comparison
 (Data PX-01 to PX-03, VL-05, DV-05, LB-05; Database DB-09).
 
-The Apple payload is a REAL excerpt (tests/fixtures/README_universe.md). Other values built in a
-test are SYNTHETIC and say so.
+Every price here is SYNTHETIC: the price source does not permit redistribution (decision C-62).
 """
 
 import json
@@ -18,7 +17,7 @@ from earnings import label, prices
 from earnings.clients import yahoo
 
 FX = Path(__file__).parent / "fixtures"
-APPLE = (FX / "aapl_yahoo_prices_june_2014.json").read_bytes()
+WITH_SPLITS = (FX / "synthetic_prices_with_splits.json").read_bytes()
 AAPL = "0000320193"
 
 
@@ -44,31 +43,30 @@ def _payload(rows, splits=None, dividends=None):  # SYNTHETIC source answer
 
 @pytest.mark.req("PX-01")
 @pytest.mark.code("src/earnings/prices.py")
-def test_the_raw_close_is_rebuilt_from_the_real_apple_answer():
-    parsed = prices.parse_payload(APPLE)
+def test_the_raw_close_is_rebuilt_from_a_split_adjusted_answer():
+    # SYNTHETIC: the source's close is adjusted for a 7-for-1 and a later 4-for-1 split
+    parsed = prices.parse_payload(WITH_SPLITS)
     closes = {d: c for d, c, _ in parsed.prices}
-    # Apple closed near 645.57 on 6 June 2014, before the 7-for-1 split; the source shows 23.056
-    assert abs(closes[date(2014, 6, 6)] - Decimal("645.57")) < Decimal("0.05")
-    assert abs(closes[date(2014, 6, 9)] - Decimal("93.70")) < Decimal("0.05")  # after it, 4x only
-    assert (date(2014, 6, 9), Decimal("7.0")) in parsed.splits
-    paid = dict(parsed.dividends)
-    assert paid[date(2014, 5, 8)] > Decimal("3")  # the raw dividend before the split
+    assert closes[date(2024, 6, 7)] == Decimal("560.0000")  # 20.00 x 7 x 4, before both splits
+    assert closes[date(2024, 6, 10)] == Decimal("82.0000")  # 20.50 x 4, after the first
+    assert (date(2024, 6, 10), Decimal("7.0")) in parsed.splits
+    assert dict(parsed.dividends)[date(2024, 5, 9)] == Decimal("3.0800")  # 0.11 x 28
 
 
 @pytest.mark.req("PX-01")
 @pytest.mark.code("src/earnings/prices.py", "src/earnings/migrations/versions")
 def test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_adds_nothing(engine):
-    first = prices.store_prices(engine, AAPL, "AAPL", APPLE)
-    again = prices.store_prices(engine, AAPL, "AAPL", APPLE)
+    first = prices.store_prices(engine, AAPL, "SYNW", WITH_SPLITS)
+    again = prices.store_prices(engine, AAPL, "SYNW", WITH_SPLITS)
     assert first["loaded"] and first["prices"] == 9 and again["prices"] == again["factors"] == 0
     with engine.connect() as conn:
         raw = conn.execute(
-            text("SELECT close_raw FROM price_daily WHERE price_date = '2014-06-06'")
+            text("SELECT close_raw FROM price_daily WHERE price_date = '2024-06-07'")
         ).scalar_one()
         split = conn.execute(
             text(
                 "SELECT ex_date, value FROM adjustment_factor WHERE kind = 'split' "
-                "AND ex_date = '2014-06-09'"
+                "AND ex_date = '2024-06-10'"
             )  # fmt: skip
         ).one()
         columns = (
@@ -84,9 +82,9 @@ def test_factors_are_stored_apart_from_raw_prices_with_their_dates_and_a_rerun_a
         version = conn.execute(
             text("SELECT source_version FROM raw_payload WHERE source = :s"), {"s": yahoo.SOURCE}
         ).scalar_one()
-    assert abs(raw - Decimal("645.57")) < Decimal("0.05") and float(split[1]) == 7.0
+    assert raw == Decimal("560.0000") and float(split[1]) == 7.0
     assert not [c for c in columns if "adj" in c]  # no adjusted price beside the raw one
-    assert version == json.loads(APPLE)["version"]  # SR-04: the source version is recorded
+    assert version == "synthetic"  # SR-04: the source version is recorded
 
 
 @pytest.mark.req("PX-02-AC1")
@@ -210,21 +208,21 @@ def test_the_price_windows_of_an_event_do_not_overlap_the_announcement(engine, m
 @pytest.mark.req("PX-01", "VL-05")
 @pytest.mark.code("src/earnings/prices.py")
 def test_a_spin_off_the_source_lists_twice_is_counted_once():
-    # REAL numbers: Danaher, 5 July 2016 (Fortive spin-off). The source gives a ratio of 1.319
-    # and also a dividend of 27.7037 raw on the same day: both stand for the same distribution
+    # SYNTHETIC numbers in the shape of a real spin-off the source lists twice: a ratio and also a
+    # large dividend on the same day, both standing for the same distribution
     raw = prices.Series(
         prices.RAW,
         "s",
-        ((date(2016, 7, 1), Decimal("102.32")), (date(2016, 7, 5), Decimal("80.40"))),
+        ((date(2016, 7, 1), Decimal("100.00")), (date(2016, 7, 5), Decimal("80.00"))),
     )
     day = date(2016, 7, 5)
-    level = prices.total_return(raw, {day: Decimal("1.319")}, {day: Decimal("27.7037")})
-    assert abs(float(level.points[-1][1]) - 80.40 * 1.319 / 102.32) < 1e-6  # about +3.6%
+    level = prices.total_return(raw, {day: Decimal("1.3")}, {day: Decimal("23")})
+    assert abs(float(level.points[-1][1]) - 80 * 1.3 / 100) < 1e-6  # +4%
     # an ordinary dividend beside a spin-off ratio, or any dividend beside a share split, counts
-    small = prices.total_return(raw, {day: Decimal("1.319")}, {day: Decimal("0.16")})
-    assert abs(float(small.points[-1][1]) - (80.40 * 1.319 + 0.16) / 102.32) < 1e-6
-    split = prices.total_return(raw, {day: Decimal("2")}, {day: Decimal("27.7037")})
-    assert abs(float(split.points[-1][1]) - (80.40 * 2 + 27.7037) / 102.32) < 1e-6
+    small = prices.total_return(raw, {day: Decimal("1.3")}, {day: Decimal("0.16")})
+    assert abs(float(small.points[-1][1]) - (80 * 1.3 + 0.16) / 100) < 1e-6
+    split = prices.total_return(raw, {day: Decimal("2")}, {day: Decimal("23")})
+    assert abs(float(split.points[-1][1]) - (80 * 2 + 23) / 100) < 1e-6
 
 
 @pytest.mark.req("PX-01")

@@ -436,24 +436,29 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Needs John: D-49, DR-37, D-48 (h), D-11 and D-12, the D-34 lists, and the SSOT row for the new document (wording given in chat; not edited).
 - Work by Claude. Decisions by John.
 
+### 27 Nov 2026: honest options applied; the wrong calls and the Q&A boundary fixed; Wave 2.1 brief
+
+- Asked by John: research the best honest option for all open questions, start the next wave, and say whether made-up test data would break the project.
+- Paused all Yahoo collection (C-61). Speaker check added (C-62): 39 wrong calls rejected. Found and fixed: in 1,007 calls the Q&A boundary sat on the opening announcement. Read the second EPS tag and fixed the hidden derivation; the second audit's expected values match. Tests now catch its 8 planted faults. Valkey replaces Redis (C-63). Transcript and price excerpts replaced by synthetic fixtures (C-64). Research basis for the transcripts recorded, with its limits (C-65). Not done on John's behalf: draft requirement approval, the SSOT row; D-11 and D-12 reopened (C-66).
+- Data now: 3,394 transcripts and events, 3,228 labelled, 3,168 usable, 1,859 of them 2015 to 2021. Coverage 88.2% (target 90%).
+- Wave 2.1: brief written, nothing built. Needs John: the new dependencies and the safe-harbour rule.
+- Not re-audited by a fresh agent. Work by Claude.
+
 ## Waiting on John
 
-As of 26 November 2026, after the independent audit.
+As of 27 November 2026.
 
-**Urgent**
-- **D-49 (b):** the daily consensus capture (22:30 UTC) and the price load use yfinance; Yahoo's terms bar automated access without permission. Stop, ask Yahoo, or accept the risk.
-- **DR-37:** other companies' calls are in the event data. Do not use it for features or training.
-- **Re-confirm:** D-48 (h), and D-11, D-12 and the D-34 phrase lists (the second audit says my delegated approvals went too far).
+**To start Wave 2.1** (`audits/evidence/wave-2.1-task-brief.md`): the new dependencies, and the safe-harbour rule.
 
-**Decide:** the rest of D-49 (draft licence, hosting and improvement requirements).
-
-**Add**
-- **Tiingo free key** in `.env` (never in chat): the second price source (PX-01) and possibly prices for removed companies (not verified).
+**Yes or no:** add the licensing row to the SSOT document map (wording shown in chat).
 
 **Only you can do these**
-- **Hand labels:** 50 calls (`audits/evidence/wave-1.5/boundary_review_sheet.md`) and 100 events (`audits/evidence/wave-1.7/hand_audit_sheet.md`). Both were redrawn from the rebuilt data.
-- **Reviewer (D-09):** a person who did not build the data (GS-01); also reviewer notes on the flagged extreme labels (DV-04).
-- **Supervisor:** written agreement to the time-series label (C-25, SC-07, SS-04).
-- D-16 ethics (apply in December), D-29 submission date, D-40 and D-46 (read and approve the component requirement documents), D-03, D-17, D-21, the planning items D-02 to D-08 and D-14, DR-21 (private email on GitHub), the Phase 0 spot-check, and the two SSOT map edits. I will show the exact SSOT wording when you want to make them.
+- Confirm the section 29A research basis for the transcripts with the University library's copyright team (C-65). Ask the transcript publisher where the text comes from. If you want Yahoo collection back, ask Yahoo for permission.
+- Hand labels: 50 calls and 100 events (both redrawn on 27 November).
+- A reviewer who did not build the data (D-09); reviewer notes on extreme labels (DV-04).
+- Supervisor: written agreement to the time-series label; D-11, D-12.
+- D-49 (a): approve or change the draft requirements.
+- D-16 ethics, D-29 submission date, D-40, D-46, D-03, D-17, D-21, D-02 to D-08, D-14, DR-21, the Phase 0 spot-check.
+- Tiingo key if you want a second price source: read its terms yourself first, because its terms page refused my request.
 
-**Later, before their waves:** D-37, D-39, D-42, D-43, D-27 and D-15 (provider and spending).
+**Later:** D-37, D-39, D-42, D-43, D-27, D-15.

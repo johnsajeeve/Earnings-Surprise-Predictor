@@ -25,6 +25,10 @@ SUBMISSIONS_PAGE_URL = "https://data.sec.gov/submissions/{name}"
 
 EPS_TAG = "EarningsPerShareDiluted"
 EPS_UNIT, MONEY_UNIT = "USD/shares", "USD"
+# Some filings give one figure for basic and diluted EPS under its own tag. It is the diluted EPS.
+BASIC_AND_DILUTED_TAG = "EarningsPerShareBasicAndDiluted"
+PER_SHARE_TAGS = (EPS_TAG, BASIC_AND_DILUTED_TAG)
+START_TOLERANCE_DAYS = 7  # cumulative figures of one fiscal year may start a few days apart
 # The first tag that a company reports for a period is used, in this order (decision in the
 # evidence file of Wave 1.4). The tag that was used is stored.
 REVENUE_TAGS = (
@@ -66,7 +70,7 @@ def extract_facts(payload: bytes, tag: str) -> list[Fact]:
     node = json.loads(payload)["facts"].get("us-gaap", {}).get(tag)
     if not node:
         return []
-    unit = EPS_UNIT if tag == EPS_TAG else MONEY_UNIT
+    unit = EPS_UNIT if tag in PER_SHARE_TAGS else MONEY_UNIT
     if unit not in node["units"]:
         raise ValueError(f"{tag} has no {unit} values, only {sorted(node['units'])}")
     out = []
@@ -202,7 +206,8 @@ def derive_from_cumulative(
     for f in first.values():
         months = _months(f)
         if months:  # `first` is in filing order: the first filing of a cumulative figure is kept
-            by_start[f.start].setdefault(months, f)
+            near = (k for k in by_start if abs((f.start - k).days) <= START_TOLERANCE_DAYS)
+            by_start[next(near, f.start)].setdefault(months, f)
     out = []
     for classes in by_start.values():
         for lo, hi, quarter_name in ((3, 6, "Q2"), (6, 9, "Q3"), (9, 12, "Q4")):
@@ -237,9 +242,9 @@ def derived_quarters(
     only used for a year that the cumulative method does not cover.
     """
     out = derive_from_cumulative(facts, splits)
-    covered = [d.end for d in out]
+    covered = [(d.end, d.filed) for d in out]
     for year, q4_start, value in derive_fourth_quarters(facts, splits):
-        if not any(abs((year.end - e).days) <= 3 for e in covered):
+        if not reported_by(covered, year.end, year.filed):
             out.append(
                 DerivedQuarter(
                     q4_start,
@@ -255,12 +260,24 @@ def derived_quarters(
     return out
 
 
+def diluted_eps_facts(payload: bytes) -> list[Fact]:
+    """Diluted EPS facts of both tags. Where one filing reports a period under both, the diluted
+    tag is kept."""
+    facts = extract_facts(payload, EPS_TAG)
+    have = {(f.start, f.end, f.accession) for f in facts}
+    return facts + [
+        f
+        for f in extract_facts(payload, BASIC_AND_DILUTED_TAG)
+        if (f.start, f.end, f.accession) not in have
+    ]
+
+
 def eps_rows(payload: bytes, splits: "Sequence[label.Split] | None" = None) -> list[EpsRow]:
     """Every EPS version of a payload, with derived quarters. `splits` puts the two figures of a
     derivation on one share basis; without it the payload's own split tag is used."""
     if splits is None:
         splits = label.splits_from_facts(payload)
-    facts = extract_facts(payload, EPS_TAG)
+    facts = diluted_eps_facts(payload)
     rows = [
         EpsRow(
             f.start,

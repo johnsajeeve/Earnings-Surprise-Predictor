@@ -47,12 +47,14 @@ services:
       retries: 10
     restart: unless-stopped
 
+  # Valkey, the BSD-licensed fork of Redis 7.2, in place of Redis 7.4, which is not open source
+  # (decision C-63). It speaks the same protocol, so the service keeps its name.
   redis:
-    image: redis:7.4.12-alpine
+    image: valkey/valkey:8.1.12-alpine
     ports:
       - "127.0.0.1:${REDIS_PORT:-6379}:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "valkey-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 10

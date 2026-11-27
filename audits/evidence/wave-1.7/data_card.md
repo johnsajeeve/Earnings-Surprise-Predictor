@@ -1,7 +1,7 @@
-# Data card: dataset version audit-fixes-2026-11-26
+# Data card: dataset version c62-2026-11-27
 
 ## Coverage
-- Events: 3431 (3130 usable as labelled rows)
+- Events: 3394 (3168 usable as labelled rows)
 - Companies: 93
 - Announcement dates: 2013-01-16 to 2024-12-19
 - Label route: time-series; EPS basis: gaap-diluted
@@ -27,12 +27,13 @@
 - Prices: raw closes rebuilt from the yfinance close and its split list; dated factors apart.
 
 ## Known gaps
-- 3,431 events, 3,196 with a label; 103 fewer than 6 prior differences, 69 no quarter in the reporting window, 52 announced quarter first filed over 100 days late, 11 unknown share basis
-- 69 events excluded from training, including 32 built on a wrongly scaled EPS value
-- Transcript coverage 2015 to 2024: 89.0% against 90% (TX-04); results cover the covered events
+- 3,394 events, 3,228 with a label, 3,168 usable (1,859 in 2015 to 2021)
+- 39 transcripts rejected as another company's calls (C-62)
+- Transcript coverage 2015 to 2024: 88.2% against 90% (TX-04); results cover the covered events
+- Press release agreement (AE-02) not shown by the automatic reader
 - 7 companies have no transcript; 17 of 100 have no price history
-- Second-source check of closing prices not run (PX-01)
-- 51 labels (PepsiCo, State Street) have no outside recomputation
+- Price and consensus collection paused from 27 November 2026 (C-61)
+- Transcripts: research use only, origin of the text not stated; not deployable (C-65)
 
 ## Sign-off
 - Not signed off: no reviewer who did not build the dataset has been named (Data GS-01, decision D-09).

@@ -23,3 +23,19 @@ The table is the auditor's findings. "Checked by Claude" says what was verified 
 **Not checked by it:** outside source documents, the hand samples, a second price source, the raw transcript file, much of the early waves, and whether the scheduled jobs fire.
 
 Disclosure by the auditor: its test containers first inherited the SEC contact string from the shell; it noticed within about a minute, before any job was due, and recreated them without it.
+
+## Update, 27 November 2026
+
+| # | State | How it was checked (by Claude; not re-audited by a fresh agent) |
+|---|---|---|
+| 1 | Fixed (C-62) | Speaker check: 39 calls rejected on reload, which are the 37 listed here plus the two former duplicates; an opening-text search for the named other companies now finds none. One genuine IBM call is a reviewed exception |
+| 2 | Fixed | The combined tag is read. The four values this audit gave for Realty Income and Gen Digital match exactly; Applied Materials has all 46 events labelled |
+| 3 | Fixed (26 Nov) | Test |
+| 4 | Fixed | IBM's quarter ending December 2011 is now known from 28 February 2012 |
+| 5 | Fixed | All 8 planted faults are caught by new tests (rerun by Claude) |
+| 6 | Partly | D-11 and D-12 reopened; D-34 lists to be shown before use (C-66) |
+| 7 to 11 | Open | |
+
+The auditor's scripts were lost when the temporary folder was cleared, so its full recomputation was **not** rerun on the rebuilt data.
+
+A further defect found while fixing finding 1: in 1,007 calls the Q&A boundary was on the opening announcement, because two participant-list entries counted as speakers (DR-23). Fixed.

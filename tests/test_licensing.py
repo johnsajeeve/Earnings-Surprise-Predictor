@@ -42,7 +42,7 @@ def test_every_locked_package_and_container_image_has_a_licence_row():
     dockerfile = repo_path("Dockerfile").read_text("utf-8")
     images = re.findall(r"^\s+image:\s*([a-z0-9./_-]+):(\S+)", compose, re.M)
     images += re.findall(r"^FROM\s+([a-z0-9./_-]+):(\S+)", dockerfile, re.M)
-    assert {n for n, _ in images} >= {"postgres", "redis", "python"}
+    assert {n for n, _ in images} >= {"postgres", "valkey/valkey", "python"}
     for name, version in images:
         assert image_rows[name]["version"] == version, f"image {name} {version} has no row"
     for r in lic.third_party():
@@ -99,7 +99,11 @@ def test_a_bundle_with_a_dataset_that_may_not_be_deployed_is_refused():
 def test_the_committed_notices_are_the_ones_the_registers_produce():
     committed = repo_path("docs/THIRD_PARTY_NOTICES.md").read_text("utf-8")
     assert committed == lic.notices()
-    assert "SEC EDGAR" in committed and "CC BY-SA 4.0" in committed and "redis 7.4.12" in committed
+    assert (
+        "SEC EDGAR" in committed
+        and "CC BY-SA 4.0" in committed
+        and "valkey 8.1.12" in committed.replace("valkey/valkey", "valkey")
+    )
 
 
 @pytest.mark.req("LC-06-AC1")
@@ -114,16 +118,20 @@ def test_every_committed_fixture_says_which_dataset_it_comes_from():
 
 @pytest.mark.req("LC-06-AC1", "DP-10")
 @pytest.mark.code("tests/fixtures/fixture_sources.csv")
-@pytest.mark.xfail(
-    strict=True,
-    reason="NOT MET: real transcript and Yahoo price excerpts, and Wikipedia text, are committed "
-    "to the public repository. Decision D-49 (e)",
-)
-def test_no_committed_fixture_holds_real_data_from_a_source_that_may_not_be_deployed():
-    barred = lic.not_deployable_datasets()
-    held = [r["file"] for r in _fixture_sources()
-            if r["content"] == "real" and r["dataset_id"] in barred]  # fmt: skip
-    assert held == []
+def test_no_committed_fixture_holds_real_data_from_a_source_that_forbids_redistribution():
+    classes = {r["dataset_id"]: r["licence_class"] for r in lic.datasets()}
+    real = [r for r in _fixture_sources() if r["content"] == "real"]
+    barred = [r["file"] for r in real
+              if classes[r["dataset_id"]] not in lic.REDISTRIBUTABLE_DATA]  # fmt: skip
+    assert barred == []
+    notes = (FIXTURES / "README_universe.md").read_text("utf-8")
+    for r in real:  # a share-alike excerpt states its attribution and licence
+        if classes[r["dataset_id"]] == "share-alike":
+            assert r["file"] in notes and "CC BY-SA 4.0" in notes
+    # a made-up file says so itself
+    for r in _fixture_sources():
+        if r["content"] == "synthetic":
+            assert "SYNTHETIC" in (FIXTURES / r["file"]).read_text("utf-8")
 
 
 @pytest.mark.req("LC-07-AC1", "SR-01")
@@ -200,8 +208,8 @@ def test_a_licence_check_older_than_ninety_days_is_listed_as_stale():
 @pytest.mark.code("src/earnings/third_party_register.csv")
 @pytest.mark.xfail(
     strict=True,
-    reason="NOT MET: Redis 7.4 is source-available, and the Python base image's licences are not "
-    "established. Decision D-49 (d)",
+    reason="NOT MET: the licences inside the Python base image have not been established. "
+    "Redis 7.4 was replaced by Valkey (C-63)",
 )
 def test_every_library_and_image_in_use_may_be_used_in_a_deployed_system():
     assert lic.software_exceptions() == {}
@@ -210,4 +218,4 @@ def test_every_library_and_image_in_use_may_be_used_in_a_deployed_system():
 @pytest.mark.req("LC-11-AC1")
 @pytest.mark.code("src/earnings/licensing.py", "src/earnings/third_party_register.csv")
 def test_the_software_exceptions_are_exactly_the_ones_recorded():
-    assert lic.software_exceptions() == {"redis": "source-available", "python": "unclear"}
+    assert lic.software_exceptions() == {"python": "unclear"}

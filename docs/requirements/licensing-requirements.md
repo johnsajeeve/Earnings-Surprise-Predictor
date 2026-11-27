@@ -24,7 +24,7 @@ John asked that every dataset the project imports has a permissive licence. **It
 | Finnhub free key | Personal use; no sharing of data or derived results | restricted | Not deployable. Not used by the primary route |
 | `ProsusAI/finbert` weights (approved, C-54) | CC BY-NC-SA 4.0, "restricts commercial use". Trained on Financial PhraseBank (CC BY-NC-SA 3.0) and a Reuters corpus under NIST access terms | non-commercial | Usable for a non-commercial dissertation. Not permissive |
 | Loughran and McDonald word list (approved, C-14) | "free for use in academic research"; commercial licences from the authors | restricted | Not permissive |
-| Redis 7.4.12 container image | Redis 7.4: RSALv2 or SSPLv1. Redis 7.2 and earlier: BSD 3-Clause | source-available | Not open source. Valkey (BSD 3-Clause) or Redis 7.2 would remove this |
+| Redis 7.4.12 container image (replaced on 27 November 2026) | Redis 7.4: RSALv2 or SSPLv1. Redis 7.2 and earlier: BSD 3-Clause | source-available | Replaced by Valkey 8.1.12 (BSD 3-Clause), C-63 |
 | Python packages in `requirements.lock` | MIT, BSD, Apache-2.0, PSF; `psycopg` LGPL 3.0 only; `certifi` MPL 2.0 | permissive or weak-copyleft | Allowed |
 | PostgreSQL and Python base images | Not fetched on this date | permissive; unclear | To be read before deployment |
 
@@ -46,17 +46,23 @@ John asked that every dataset the project imports has a permissive licence. **It
 | LC-03 | Must | Every dataset the project imports has a class that may be deployed. | No dataset in the source register has a class that may not be deployed. | John's request of 26 November 2026 |
 | LC-04 | Must | A deployment bundle is described by a manifest of dataset ids, and it is refused when it names a dataset that is unregistered or may not be deployed. | A manifest naming a restricted, unclear, share-alike or unregistered dataset is refused. | Data SR-03; Deployment and Operations DP-13 |
 | LC-05 | Must | The attribution notices are generated from the registers and committed. | The committed notices file equals the generated one. | Project-Wide ET-03 |
-| LC-06 | Must | The public repository holds no real data from a dataset that may not be deployed, beyond a quotation limit recorded for that source. | No committed fixture holds real text or values from a source that may not be deployed. | Data SR-03, SR-11; Deployment and Operations DP-10 |
+| LC-06 | Must | The public repository holds no real data from a source that does not permit redistribution. Data whose licence permits it on conditions, such as share-alike data, is held with those conditions met. | No committed fixture holds real data from a source that does not permit redistribution, and each share-alike excerpt carries its attribution and licence. | Data SR-03, SR-11; Deployment and Operations DP-10 |
 | LC-07 | Must | Every outside source named in the code has a source register row. | A source name in a client module with no register entry fails the test. | Data SR-01 |
 | LC-08 | Must | No job collects from a source whose terms bar automated collection. | No scheduled job uses a source whose terms bar automated collection. | Section 3; Data SR-07 |
 | LC-09 | Must | For each model, the licence of the weights and of the training data are both recorded. | Every model row names the licence of its training data. | Project-Wide ET-03; Feature Engineering FE-05 |
 | LC-10 | Should | Licence evidence is checked again no more than 90 days before any deployment or publication. | A row checked more than 90 days before the date given is listed as stale. | Section 1 |
 | LC-11 | Must | Every library and container image used in a deployed system is permissive, or weak-copyleft and used unchanged. | No library or image in use has any other class. | Deployment and Operations DP-01; John's request of 26 November 2026 |
 
-## 6. Decisions this document leaves to John
+## 6. What was decided, and what is open
 
-Listed as D-49 in the [decision log](../decision-log.md). Until they are made, the tests for LC-03, LC-06, LC-08 and LC-11 are expected failures: they report the gap and do not hide it.
+Decided on 27 November 2026 (decision log C-61 and C-63 to C-65): collection from Yahoo is off; Valkey replaces Redis; the public excerpts that may not be redistributed are synthetic; transcripts stay private for non-commercial research; hosting is local. LC-06 and the scheduled-job part of LC-08 are now met. **LC-03 and LC-11 are not met**: transcripts, prices, consensus, Finnhub and the share-alike data are not in a deployable class, and the licences inside the Python base image have not been established. Their tests are expected failures.
+
+**The research basis for the transcripts.** The Copyright, Designs and Patents Act 1988, section 29A (read on legislation.gov.uk, 27 November 2026), says a copy made by a person with lawful access, for computational analysis "for the sole purpose of research for a non-commercial purpose", with sufficient acknowledgement, does not infringe copyright; that transferring the copy to another person, or using it for another purpose, does infringe unless the owner allows it; and that a contract term which purports to prevent or restrict such copying "is unenforceable". The government guidance page says the same of contract terms. So analysis on the owner's machine is the use relied on, and publishing or deploying the text is not covered. **Not settled:** whether access to this data set is lawful, since it names no source for the text; how the exception sits with website terms on automated access; and the position outside the United Kingdom. This is not legal advice.
+
+Open: decision D-49.
 
 ## 7. Pages read
 
-SEC privacy page and webmaster FAQ; the Hugging Face card of the transcript set; Yahoo Terms of Service (read to part of section 12); the yfinance README; `ProsusAI/finbert` and `empiriolabsai/finance-sentiment` model pages and the `mmBERT-base` page; Financial PhraseBank dataset page; the Loughran and McDonald page; the Redis licence page; the Valkey site and repository; package metadata in the project image. Web search results were used only to look for alternatives, and are not relied on for any licence statement. All on 26 November 2026.
+On 27 November 2026: section 29A on legislation.gov.uk and the government page on copyright exceptions; the Valkey migration page and image tags. The Tiingo terms page refused the request (403) and the Alpha Vantage terms could not be read as text, so neither is relied on.
+
+On 26 November 2026: SEC privacy page and webmaster FAQ; the Hugging Face card of the transcript set; Yahoo Terms of Service (read to part of section 12); the yfinance README; `ProsusAI/finbert` and `empiriolabsai/finance-sentiment` model pages and the `mmBERT-base` page; Financial PhraseBank dataset page; the Loughran and McDonald page; the Redis licence page; the Valkey site and repository; package metadata in the project image. Web search results were used only to look for alternatives, and are not relied on for any licence statement. All on 26 November 2026.
