@@ -76,8 +76,51 @@ A licence class records what the source's pages said when checked. It is not leg
 - wcwidth 0.9.4 (python-package): MIT
 - websockets 17.4 (python-package): BSD-3-Clause
 - yfinance 1.8.0 (python-package): Apache-2.0
+- Jinja2 3.1.6 (python-package): BSD
+- Pygments 2.21.0 (python-package): BSD-2-Clause
+- blis 1.3.4 (python-package): BSD
+- catalogue 2.0.10 (python-package): MIT
+- cloudpathlib 0.26.0 (python-package): MIT
+- confection 1.3.4 (python-package): MIT
+- cymem 2.0.16 (python-package): MIT
+- filelock 4.3.1 (python-package): MIT
+- fsspec 2026.9.0 (python-package): BSD-3-Clause
+- hf-xet 1.8.0 (python-package): Apache-2.0
+- httpcore 1.0.9 (python-package): BSD-3-Clause
+- httpcore2 2.16.2 (python-package): BSD-3-Clause
+- httpx 0.29.0 (python-package): BSD-3-Clause
+- httpx2 2.16.2 (python-package): BSD-3-Clause
+- huggingface_hub 2.5.0 (python-package): Apache-2.0
+- markdown-it-py 4.3.0 (python-package): MIT
+- mdurl 0.1.2 (python-package): MIT
+- mpmath 1.3.0 (python-package): BSD
+- murmurhash 1.0.16 (python-package): MIT
+- networkx 3.7 (python-package): BSD-3-Clause
+- preshed 3.0.15 (python-package): MIT
+- regex 2026.11.25 (python-package): Apache-2.0 AND CNRI-Python
+- rich 15.0.0 (python-package): MIT
+- safetensors 0.8.0 (python-package): Apache-2.0
+- setuptools 84.2.1 (python-package): MIT
+- shellingham 1.5.4 (python-package): ISC
+- smart_open 10.0.0 (python-package): MIT
+- spacy 3.8.18 (python-package): MIT
+- spacy-legacy 3.0.12 (python-package): MIT
+- spacy-loggers 1.0.5 (python-package): MIT
+- srsly 2.5.6 (python-package): MIT
+- sympy 1.14.0 (python-package): BSD
+- thinc 8.3.14 (python-package): MIT
+- tokenizers 0.23.3 (python-package): Apache-2.0
+- torch 2.15.0+cpu (python-package): Apache-2.0 AND Apache-2.0 WITH LLVM-exception AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND ISC AND MIT AND Zlib
+- tqdm 4.70.1 (python-package): MPL-2.0 AND MIT
+- transformers 5.24.1 (python-package): Apache-2.0
+- truststore 0.10.5 (python-package): MIT
+- typer 0.29.3 (python-package): MIT
+- wasabi 1.1.3 (python-package): MIT
+- weasel 1.0.1 (python-package): MIT
+- wrapt 2.5.2 (python-package): BSD-2-Clause
 - postgres 16.16 (container-image): PostgreSQL Licence
 - valkey/valkey 8.1.12-alpine (container-image): BSD-3-Clause
 - python 3.12.16-slim (container-image): PSF-2.0 with Debian packages under their own licences
 - ProsusAI/finbert 0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031 (model): CC BY-NC-SA 4.0
+- en_core_web_sm 3.8.0 (model): MIT
 - Loughran-McDonald master dictionary not yet downloaded (word-list): free for academic research; commercial licence from the authors

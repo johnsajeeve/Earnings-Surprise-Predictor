@@ -450,9 +450,18 @@ This is a record of what was done and when, with the commit messages. It is not 
 - Asked by John: what to do about Yahoo. Finnhub's free earnings calendar, not tested before, returns upcoming estimates (`audits/evidence/finnhub-calendar-check-2026-11-27.md`); my earlier "not usable" was too broad. Its terms need written approval to share derived results. New open decision D-50. Nothing is collected from either source.
 - Work by Claude. Decisions by John.
 
+### 27 Nov 2026: Wave 2.1 built; scoring of all calls started
+
+- Built: sentence splitting, the safe-harbour rule as approved, FinBERT scoring with a pinned model, table `transcript_sentence`, a separate worker image. No existing package version changed.
+- All 1,675,517 sentences of 3,394 calls match their cleaned text. The rule removes far too much on four calls (D-51); not changed without John.
+- 10 real calls scored at 36.6 sentences a second; about 12.7 hours projected for all. Full scoring started as a background container (`earnings-scoring`); it continues where it left off if stopped.
+- Wave 2.1 is PARTIAL (`audits/evidence/wave-2.1.md`). Not audited by a fresh agent. Work by Claude.
+
 ## Waiting on John
 
 As of 27 November 2026.
+
+**Before Wave 2.2:** D-51 (safe-harbour fix, participant lists, table columns), verdicts on `audits/evidence/wave-2.1/safe_harbour_examples.md`, and the D-34 phrase lists, which I will show you first.
 
 **Soon (by mid-December):** D-50, what replaces Yahoo: send the Finnhub question, and register for WRDS and read the CRSP terms.
 

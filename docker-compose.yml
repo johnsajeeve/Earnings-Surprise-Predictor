@@ -63,7 +63,9 @@ services:
   # Runs once at start: creates the roles, then applies the migrations (Product PL-05, Database
   # DB-02). The worker and the API wait for it to finish.
   migrate:
-    build: .
+    build:
+      context: .
+      target: app
     command: python -m earnings.migrate
     environment: *app-env
     depends_on:
@@ -72,7 +74,9 @@ services:
     restart: "no"
 
   worker:
-    build: .
+    build:
+      context: .
+      target: worker
     # -B runs the scheduler inside the worker (decision C-44). Its schedule file is written to /tmp.
     command: celery -A earnings.celery_app worker -B -s /tmp/celerybeat-schedule --loglevel=info --concurrency=2
     environment: *common-env
@@ -94,7 +98,9 @@ services:
     restart: unless-stopped
 
   api:
-    build: .
+    build:
+      context: .
+      target: app
     command: uvicorn earnings.api.main:app --host 0.0.0.0 --port 8000 --no-access-log
     environment: *app-env
     volumes:

@@ -1,0 +1,11 @@
+# Packages only the worker image installs (Deployment DP-03). Exact pins (Project-Wide EQ-04).
+# The resolved set with transitive packages is requirements-worker.lock. Approved by John on
+# 27 November 2026 (decision C-67). The spaCy model en_core_web_sm 3.8.0 is installed by the
+# Dockerfile from its release file, checked by hash.
+
+# CPU build, from https://download.pytorch.org/whl/cpu
+torch==2.15.0+cpu
+
+# Text features (Proposal 4.2: FinBERT via Transformers, spaCy)
+transformers==5.24.1
+spacy==3.8.18

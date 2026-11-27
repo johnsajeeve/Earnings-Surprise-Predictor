@@ -944,6 +944,9 @@ EXPECTED_SCHEMA = {
         "turns", "segmentation_status", "boundary_turn", "status", "call_type",
     ],
     "transcript_section": ["section_id", "transcript_id", "kind", "text"],
+    "transcript_sentence": ["sentence_id", "transcript_id", "section_id", "position", "text",
+                            "speaker", "role", "analytic", "truncated", "finbert_positive",
+                            "finbert_negative", "finbert_neutral", "model_revision"],
 }  # fmt: skip
 
 
@@ -991,6 +994,7 @@ def test_pl_05_ac1_migration_history_matches_the_deployed_schema_on():
         assert head == migrate.head_revision()
         # The expected schema at head. A new migration adds its table here in the same change.
         assert tables == {
+            "transcript_sentence",
             "alembic_version",
             "company",
             "estimate_snapshot",

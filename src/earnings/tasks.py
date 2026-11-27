@@ -1,6 +1,7 @@
 """Celery tasks. Ingestion and feature tasks are added here in later steps."""
 
 import logging
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -8,7 +9,7 @@ import redis
 from celery.signals import worker_ready
 from sqlalchemy import text
 
-from earnings import consensus, universe, validation
+from earnings import consensus, finbert, universe, validation
 from earnings import financials as fin
 from earnings.celery_app import celery_app
 from earnings.clients import huggingface
@@ -204,6 +205,23 @@ def run_data_gates(self: IdempotentTask) -> dict[str, Any]:
         if report["late_jobs"]:
             log.warning("late scheduled jobs: %s", ", ".join(report["late_jobs"]))
         return report
+
+
+@celery_app.task(name="earnings.score_transcript", base=IdempotentTask, bind=True)
+def score_transcript(self: IdempotentTask, transcript_id: int) -> dict[str, int]:
+    """Score one transcript with FinBERT (FR-16). Safe to run twice (FE-29): a second run writes
+    nothing. It runs in the worker only, which is the image that holds the model packages (DP-03).
+    The whole set is scored by hand with `python -m earnings.finbert score`."""
+    engine = get_engine("worker")
+    with run_record(engine, "score-transcript", finbert.MODEL_ID, self.request.id) as run:
+        result = finbert.score_transcript(engine, transcript_id, _scorer())
+        run.rows_read, run.rows_written = 1, result["scored"]
+        return result
+
+
+@lru_cache(maxsize=1)
+def _scorer() -> "finbert.Scorer":
+    return finbert.FinBert(finbert.model_dir())
 
 
 @worker_ready.connect

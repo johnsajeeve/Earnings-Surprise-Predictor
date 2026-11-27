@@ -103,7 +103,8 @@ def test_eq_04_ac2_an_unpinned_dependency_fails_the_pin_check(tmp_path):
 def test_eq_04_the_dependency_files_in_the_repository_are_pinned():
     script = repo_path("scripts/check_pins.py")
     files = [repo_path("requirements.txt"), repo_path("requirements.lock")]
-    for name in ("requirements-pending.txt", "requirements-dev.txt"):
+    for name in ("requirements-worker.txt", "requirements-worker.lock",
+                 "requirements-pending.txt", "requirements-dev.txt"):  # fmt: skip
         if (ROOT / name).exists():
             files.append(ROOT / name)
     result = subprocess.run(
@@ -442,6 +443,7 @@ RUN_TWICE_TESTS = {
     "earnings.fetch_company_facts": (
         "test_fetching_the_same_payload_twice_leaves_an_identical_table_hash"
     ),
+    "earnings.score_transcript": "test_the_scoring_task_run_twice_leaves_the_same_rows",
 }
 
 
@@ -464,6 +466,7 @@ def test_eq_07_ac1_every_registered_task_has_a_run_twice_test():
             "test_edgar_client",
             "test_consensus_capture",
             "test_gaps",
+            "test_sentence_scores",
         )
     }
     for task, test in RUN_TWICE_TESTS.items():

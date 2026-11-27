@@ -509,6 +509,37 @@
         "tests/test_financials.py::test_the_fourth_quarter_uses_the_nine_month_figure_so_a_split_does_not_break_it"
       ]
     },
+    "src/earnings/finbert.py": {
+      "requirements": [
+        "EQ-07",
+        "ET-03",
+        "FE-04",
+        "FE-05",
+        "FE-05-AC1",
+        "FE-05-AC2",
+        "FE-06",
+        "FE-06-AC1",
+        "FE-07-AC1",
+        "FE-29",
+        "FE-29-AC1",
+        "FR-16",
+        "FR-16-AC1",
+        "FR-16-AC2",
+        "TX-06"
+      ],
+      "tests": [
+        "tests/test_sentence_models.py::test_a_sentence_longer_than_the_model_accepts_is_cut_and_flagged",
+        "tests/test_sentence_models.py::test_the_three_scores_come_out_under_the_right_names_and_in_the_order_asked",
+        "tests/test_sentence_scores.py::test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown",
+        "tests/test_sentence_scores.py::test_a_failing_transcript_stores_nothing_and_the_others_are_still_scored",
+        "tests/test_sentence_scores.py::test_a_new_model_revision_rescores_and_keeps_the_old_scores",
+        "tests/test_sentence_scores.py::test_call_scores_are_the_plain_mean_of_the_sentences_that_count",
+        "tests/test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored",
+        "tests/test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again",
+        "tests/test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence",
+        "tests/test_sentence_scores.py::test_the_cut_flag_of_a_sentence_is_stored"
+      ]
+    },
     "src/earnings/identifiers.py": {
       "requirements": [
         "DB-04"
@@ -660,10 +691,13 @@
         "FD-02-AC1",
         "FD-03",
         "FD-03-AC1",
+        "FE-05-AC1",
+        "FE-29-AC1",
         "FR-02-AC1",
         "FR-02-AC2",
         "FR-13-AC1",
         "FR-14-AC1",
+        "FR-16-AC1",
         "IG-02-AC1",
         "IG-03-AC1",
         "IG-11-AC1",
@@ -706,6 +740,8 @@
         "tests/test_req_database.py::test_db_07_ac1_schema_query_finds_no_timestamp_without_zone",
         "tests/test_req_database.py::test_no_table_uses_a_ticker_as_its_key",
         "tests/test_req_product.py::test_pl_05_ac1_migration_history_matches_the_deployed_schema_on",
+        "tests/test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again",
+        "tests/test_sentence_scores.py::test_the_database_refuses_a_score_without_a_model_revision",
         "tests/test_storage_rules.py::test_a_date_on_a_boundary_resolves_to_exactly_one_period",
         "tests/test_storage_rules.py::test_a_planted_version_dated_d_or_later_is_not_returned",
         "tests/test_storage_rules.py::test_an_overlapping_membership_insert_fails",
@@ -837,6 +873,23 @@
         "tests/test_storage_rules.py::test_the_worker_role_cannot_update_or_delete_an_append_only_table"
       ]
     },
+    "src/earnings/sentences.py": {
+      "requirements": [
+        "FE-01-AC1",
+        "FE-01-AC2",
+        "FE-02",
+        "FE-03-AC1",
+        "FE-04",
+        "TX-06"
+      ],
+      "tests": [
+        "tests/test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time",
+        "tests/test_sentence_models.py::test_every_sentence_is_found_in_the_cleaned_text_by_exact_match",
+        "tests/test_sentence_scores.py::test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown",
+        "tests/test_sentence_scores.py::test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_features",
+        "tests/test_sentence_scores.py::test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases"
+      ]
+    },
     "src/earnings/source_register.csv": {
       "requirements": [
         "LC-03-AC1",
@@ -886,6 +939,7 @@
       "requirements": [
         "EQ-07",
         "EQ-07-AC1",
+        "FE-29-AC1",
         "IG-01",
         "IG-01-AC1",
         "IG-03",
@@ -917,12 +971,15 @@
         "tests/test_ingestion_framework.py::test_running_the_same_tasks_twice_gives_an_identical_table_hash",
         "tests/test_req_project_wide.py::test_eq_07_ac1_every_registered_task_has_a_run_twice_test",
         "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
+        "tests/test_sentence_scores.py::test_the_scoring_task_run_twice_leaves_the_same_rows",
         "tests/test_stack_integration.py::test_celery_task_round_trip_through_redis_and_worker"
       ]
     },
     "src/earnings/third_party_register.csv": {
       "requirements": [
+        "ET-03",
         "FE-05",
+        "FE-05-AC2",
         "LC-01-AC1",
         "LC-09-AC1",
         "LC-11-AC1"
@@ -931,7 +988,8 @@
         "tests/test_licensing.py::test_every_library_and_image_in_use_may_be_used_in_a_deployed_system",
         "tests/test_licensing.py::test_every_locked_package_and_container_image_has_a_licence_row",
         "tests/test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data",
-        "tests/test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded"
+        "tests/test_licensing.py::test_the_software_exceptions_are_exactly_the_ones_recorded",
+        "tests/test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence"
       ]
     },
     "src/earnings/transcripts.py": {
@@ -939,6 +997,7 @@
         "DV-08",
         "ER-07",
         "ER-07-AC2",
+        "FE-03-AC1",
         "FR-13-AC1",
         "FR-13-AC2",
         "FR-15",
@@ -970,6 +1029,7 @@
         "tests/test_audit_fixes.py::test_a_call_filed_under_the_current_ticker_before_a_rename_is_matched",
         "tests/test_audit_fixes.py::test_a_release_that_rolls_off_the_newest_filing_list_is_still_known",
         "tests/test_gaps.py::test_running_the_transcript_event_price_and_gate_stages_again_changes_no_table",
+        "tests/test_sentence_models.py::test_every_sentence_is_found_in_the_cleaned_text_by_exact_match",
         "tests/test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found",
         "tests/test_transcripts.py::test_a_call_before_the_release_is_noted_and_one_far_after_it_is_a_violation",
         "tests/test_transcripts.py::test_a_call_is_linked_to_the_release_filed_within_three_days_or_rejected_with_a_reason",
@@ -3165,7 +3225,8 @@
         "tests/test_gaps.py::test_the_data_gates_run_twice_leave_the_same_rows",
         "tests/test_gaps.py::test_the_filing_check_run_twice_stores_one_copy_and_finds_nothing_new",
         "tests/test_gaps.py::test_the_transcript_check_run_twice_changes_no_data",
-        "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows"
+        "tests/test_req_project_wide.py::test_eq_07_load_companies_twice_leaves_the_same_rows",
+        "tests/test_sentence_scores.py::test_a_failing_transcript_stores_nothing_and_the_others_are_still_scored"
       ]
     },
     "EQ-08": {
@@ -3554,7 +3615,9 @@
         }
       ],
       "document": "project-wide-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence"
+      ]
     },
     "ET-04": {
       "checks": [
@@ -3738,7 +3801,8 @@
           "fingerprint": "c00122e2c0ac",
           "ref": "FE-01-AC1",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_01_ac1_a_fixture_transcript_with_a_known_sentence"
+            "tests/test_req_feature_engineering.py::test_fe_01_ac1_a_fixture_transcript_with_a_known_sentence",
+            "tests/test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time"
           ],
           "text": "A fixture transcript with a known sentence count gives that count."
         },
@@ -3746,7 +3810,8 @@
           "fingerprint": "532878740b3d",
           "ref": "FE-01-AC2",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_01_ac2_two_runs_give_identical_rows"
+            "tests/test_req_feature_engineering.py::test_fe_01_ac2_two_runs_give_identical_rows",
+            "tests/test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time"
           ],
           "text": "Two runs give identical rows."
         }
@@ -3766,7 +3831,10 @@
         }
       ],
       "document": "feature-engineering-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_sentence_scores.py::test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_features",
+        "tests/test_sentence_scores.py::test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases"
+      ]
     },
     "FE-03": {
       "checks": [
@@ -3774,7 +3842,8 @@
           "fingerprint": "98754ca5aefa",
           "ref": "FE-03-AC1",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_03_ac1_a_test_finds_each_sentence_in_the"
+            "tests/test_req_feature_engineering.py::test_fe_03_ac1_a_test_finds_each_sentence_in_the",
+            "tests/test_sentence_models.py::test_every_sentence_is_found_in_the_cleaned_text_by_exact_match"
           ],
           "text": "A test finds each sentence in the cleaned text by exact match."
         }
@@ -3794,7 +3863,9 @@
         }
       ],
       "document": "feature-engineering-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_sentence_scores.py::test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown"
+      ]
     },
     "FE-05": {
       "checks": [
@@ -3802,7 +3873,9 @@
           "fingerprint": "bb79d1d5c2e1",
           "ref": "FE-05-AC1",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_05_ac1_score_rows_have_a_non_null_model"
+            "tests/test_req_feature_engineering.py::test_fe_05_ac1_score_rows_have_a_non_null_model",
+            "tests/test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again",
+            "tests/test_sentence_scores.py::test_the_database_refuses_a_score_without_a_model_revision"
           ],
           "text": "Score rows have a non-null model revision."
         },
@@ -3810,14 +3883,17 @@
           "fingerprint": "eaa1d569ee77",
           "ref": "FE-05-AC2",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_05_ac2_register_entry_exists"
+            "tests/test_req_feature_engineering.py::test_fe_05_ac2_register_entry_exists",
+            "tests/test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence"
           ],
           "text": "Register entry exists."
         }
       ],
       "document": "feature-engineering-requirements.md",
       "id_level_tests": [
-        "tests/test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data"
+        "tests/test_licensing.py::test_every_model_row_names_the_licence_of_its_training_data",
+        "tests/test_sentence_models.py::test_a_sentence_longer_than_the_model_accepts_is_cut_and_flagged",
+        "tests/test_sentence_models.py::test_the_three_scores_come_out_under_the_right_names_and_in_the_order_asked"
       ]
     },
     "FE-06": {
@@ -3826,7 +3902,8 @@
           "fingerprint": "b2821ebf17f4",
           "ref": "FE-06-AC1",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_06_ac1_a_fixture_sentence_over_the_limit_is"
+            "tests/test_req_feature_engineering.py::test_fe_06_ac1_a_fixture_sentence_over_the_limit_is",
+            "tests/test_sentence_models.py::test_a_sentence_longer_than_the_model_accepts_is_cut_and_flagged"
           ],
           "text": "A fixture sentence over the limit is flagged."
         },
@@ -3840,7 +3917,9 @@
         }
       ],
       "document": "feature-engineering-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_sentence_scores.py::test_the_cut_flag_of_a_sentence_is_stored"
+      ]
     },
     "FE-07": {
       "checks": [
@@ -3848,7 +3927,8 @@
           "fingerprint": "d16aca682341",
           "ref": "FE-07-AC1",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_07_ac1_hand_calculated_fixture_matches_to_four_decimals"
+            "tests/test_req_feature_engineering.py::test_fe_07_ac1_hand_calculated_fixture_matches_to_four_decimals",
+            "tests/test_sentence_scores.py::test_call_scores_are_the_plain_mean_of_the_sentences_that_count"
           ],
           "text": "Hand-calculated fixture matches to four decimals."
         }
@@ -4214,13 +4294,18 @@
           "fingerprint": "5f1f69541829",
           "ref": "FE-29-AC1",
           "tests": [
-            "tests/test_req_feature_engineering.py::test_fe_29_ac1_re_running_a_batch_leaves_the_row"
+            "tests/test_req_feature_engineering.py::test_fe_29_ac1_re_running_a_batch_leaves_the_row",
+            "tests/test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again",
+            "tests/test_sentence_scores.py::test_the_scoring_task_run_twice_leaves_the_same_rows"
           ],
           "text": "Re-running a batch leaves the row count unchanged."
         }
       ],
       "document": "feature-engineering-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_sentence_scores.py::test_a_failing_transcript_stores_nothing_and_the_others_are_still_scored",
+        "tests/test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored"
+      ]
     },
     "FE-30": {
       "checks": [
@@ -4615,7 +4700,8 @@
           "fingerprint": "250312e8235b",
           "ref": "FR-16-AC1",
           "tests": [
-            "tests/test_req_product.py::test_fr_16_ac1_given_a_transcript_is_already_scored_with"
+            "tests/test_req_product.py::test_fr_16_ac1_given_a_transcript_is_already_scored_with",
+            "tests/test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again"
           ],
           "text": "Given a transcript is already scored with the current FinBERT version, when the batch runs, then no sentence is rescored."
         },
@@ -4623,13 +4709,17 @@
           "fingerprint": "ea930903f4fe",
           "ref": "FR-16-AC2",
           "tests": [
-            "tests/test_req_product.py::test_fr_16_ac2_given_the_finbert_version_changes_then_every"
+            "tests/test_req_product.py::test_fr_16_ac2_given_the_finbert_version_changes_then_every",
+            "tests/test_sentence_scores.py::test_a_new_model_revision_rescores_and_keeps_the_old_scores"
           ],
           "text": "Given the FinBERT version changes, then every affected transcript is rescored and the old scores are retained with their version."
         }
       ],
       "document": "product-requirements.md",
-      "id_level_tests": []
+      "id_level_tests": [
+        "tests/test_sentence_models.py::test_the_three_scores_come_out_under_the_right_names_and_in_the_order_asked",
+        "tests/test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored"
+      ]
     },
     "FR-17": {
       "checks": [
@@ -8618,6 +8708,7 @@
       ],
       "document": "data-requirements.md",
       "id_level_tests": [
+        "tests/test_sentence_scores.py::test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown",
         "tests/test_speaker_check.py::test_participant_lists_are_not_speaking_turns_when_the_boundary_is_found",
         "tests/test_transcripts.py::test_every_turn_keeps_its_speaker_and_gets_a_section_and_a_role",
         "tests/test_transcripts.py::test_sections_are_stored_apart_and_a_call_without_a_boundary_has_no_question_section"
@@ -14504,6 +14595,163 @@
       "kind": "not tested (NEEDS PERSON)",
       "requirements": [
         "SS-04-AC1"
+      ]
+    },
+    "tests/test_sentence_models.py::test_a_known_text_gives_the_known_number_of_sentences_every_time": {
+      "code": [
+        "src/earnings/sentences.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-01-AC1",
+        "FE-01-AC2"
+      ]
+    },
+    "tests/test_sentence_models.py::test_a_sentence_longer_than_the_model_accepts_is_cut_and_flagged": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-05",
+        "FE-06-AC1"
+      ]
+    },
+    "tests/test_sentence_models.py::test_every_sentence_is_found_in_the_cleaned_text_by_exact_match": {
+      "code": [
+        "src/earnings/sentences.py",
+        "src/earnings/transcripts.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-03-AC1"
+      ]
+    },
+    "tests/test_sentence_models.py::test_the_three_scores_come_out_under_the_right_names_and_in_the_order_asked": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-05",
+        "FR-16"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_a_call_without_speaker_roles_still_gets_scores_and_says_the_roles_are_unknown": {
+      "code": [
+        "src/earnings/finbert.py",
+        "src/earnings/sentences.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-04",
+        "TX-06"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_a_failing_transcript_stores_nothing_and_the_others_are_still_scored": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "EQ-07",
+        "FE-29"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_a_new_model_revision_rescores_and_keeps_the_old_scores": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FR-16-AC2"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_call_scores_are_the_plain_mean_of_the_sentences_that_count": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-07-AC1"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_changed_marks_are_updated_without_rescoring_and_changed_text_is_rescored": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-29",
+        "FR-16"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_operator_turns_and_the_safe_harbour_passage_do_not_count_for_text_features": {
+      "code": [
+        "src/earnings/sentences.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-02"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_scoring_twice_writes_nothing_and_scores_no_sentence_again": {
+      "code": [
+        "src/earnings/finbert.py",
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-05-AC1",
+        "FE-29-AC1",
+        "FR-16-AC1"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_the_checkpoint_in_the_code_is_the_one_in_the_register_with_its_licence": {
+      "code": [
+        "src/earnings/finbert.py",
+        "src/earnings/third_party_register.csv"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "ET-03",
+        "FE-05-AC2"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_the_cut_flag_of_a_sentence_is_stored": {
+      "code": [
+        "src/earnings/finbert.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-06"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_the_database_refuses_a_score_without_a_model_revision": {
+      "code": [
+        "src/earnings/migrations/versions"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-05-AC1"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_the_safe_harbour_span_starts_and_ends_on_the_approved_phrases": {
+      "code": [
+        "src/earnings/sentences.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-02"
+      ]
+    },
+    "tests/test_sentence_scores.py::test_the_scoring_task_run_twice_leaves_the_same_rows": {
+      "code": [
+        "src/earnings/tasks.py"
+      ],
+      "kind": "real check",
+      "requirements": [
+        "FE-29-AC1"
       ]
     },
     "tests/test_speaker_check.py::test_a_call_is_the_companys_when_its_opening_names_it_not_when_another_does": {

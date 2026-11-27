@@ -27,6 +27,7 @@ def _fixture_sources():
 @pytest.mark.code("src/earnings/licensing.py", "src/earnings/third_party_register.csv")
 def test_every_locked_package_and_container_image_has_a_licence_row():
     lock = repo_path("requirements.lock").read_text("utf-8")
+    lock += "\n" + repo_path("requirements-worker.lock").read_text("utf-8")  # the worker image
 
     def by_name(kind):  # "redis" is both a Python package and a container image
         return {r["component"].lower(): r for r in lic.third_party() if r["kind"] == kind}

@@ -25,12 +25,20 @@ A healthy stack answers `200` with `"status": "ok"` for Postgres, Redis and the 
 The commands CI runs, for use locally. Tools are pinned in `requirements-dev.txt` and run in a throwaway container, so nothing is installed on your machine:
 
 ```
-python3 scripts/check_pins.py requirements.txt requirements.lock requirements-pending.txt requirements-dev.txt
+python3 scripts/check_pins.py requirements.txt requirements.lock requirements-worker.txt requirements-worker.lock requirements-pending.txt requirements-dev.txt
 docker run --rm -e PYTHONDONTWRITEBYTECODE=1 -v "$PWD:/work" -w /work python:3.12.16-slim sh -c \
   'pip install -q --root-user-action=ignore -r requirements.txt -c requirements.lock -r requirements-dev.txt \
    && ruff check --no-cache . && ruff format --check --no-cache . && mypy --cache-dir=/tmp/mypycache'
 docker compose run --rm --no-deps -v "$PWD/tests:/app/tests:ro" -v "$PWD/requirements-dev.txt:/app/requirements-dev.txt:ro" api sh -c \
   'pip install --user -q -r requirements-dev.txt && python -m pytest -p no:cacheprovider tests'
+```
+
+The worker has its own image with spaCy, PyTorch (CPU) and Transformers (`requirements-worker.txt`). To score the stored transcripts with FinBERT (non-commercial licence, downloaded once to the data volume; scoring all calls takes many hours and continues where it left off if stopped):
+
+```bash
+docker compose exec worker python -m earnings.finbert download
+docker compose run -d --name earnings-scoring worker python -m earnings.finbert score
+docker logs --tail 3 earnings-scoring
 ```
 
 The tests that call the live services need the stack running (`docker compose up -d --wait`).

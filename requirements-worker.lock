@@ -1,0 +1,45 @@
+# Everything requirements-worker.txt adds on top of requirements.lock, resolved on Python 3.12.16
+# on 27 November 2026 under requirements.lock as a constraint: no shared version changed.
+# Regenerate when requirements-worker.txt or requirements.lock changes.
+Jinja2==3.1.6
+Pygments==2.21.0
+blis==1.3.4
+catalogue==2.0.10
+cloudpathlib==0.26.0
+confection==1.3.4
+cymem==2.0.16
+filelock==4.3.1
+fsspec==2026.9.0
+hf-xet==1.8.0
+httpcore==1.0.9
+httpcore2==2.16.2
+httpx==0.29.0
+httpx2==2.16.2
+huggingface_hub==2.5.0
+markdown-it-py==4.3.0
+mdurl==0.1.2
+mpmath==1.3.0
+murmurhash==1.0.16
+networkx==3.7
+preshed==3.0.15
+regex==2026.11.25
+rich==15.0.0
+safetensors==0.8.0
+setuptools==84.2.1
+shellingham==1.5.4
+smart_open==10.0.0
+spacy==3.8.18
+spacy-legacy==3.0.12
+spacy-loggers==1.0.5
+srsly==2.5.6
+sympy==1.14.0
+thinc==8.3.14
+tokenizers==0.23.3
+torch==2.15.0+cpu
+tqdm==4.70.1
+transformers==5.24.1
+truststore==0.10.5
+typer==0.29.3
+wasabi==1.1.3
+weasel==1.0.1
+wrapt==2.5.2

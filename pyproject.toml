@@ -30,7 +30,9 @@ no_implicit_optional = true
 
 [[tool.mypy.overrides]]
 # These libraries ship no type information.
-module = ["celery.*", "kombu.*", "yfinance.*", "pyarrow.*"]
+# spaCy, PyTorch and Transformers are installed in the worker image only.
+module = ["celery.*", "kombu.*", "yfinance.*", "pyarrow.*", "spacy.*", "torch.*", "transformers.*",
+          "huggingface_hub.*"]
 ignore_missing_imports = true
 
 [tool.coverage.run]

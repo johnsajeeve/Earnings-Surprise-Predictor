@@ -143,7 +143,7 @@ One row per wave in the plan. The checker fails if a wave is missing, if a statu
 | W1.6 | Events, label and validation | PARTIAL | audits/evidence/wave-1.6.md |
 | W1.7 | Dataset validation and sign-off | PARTIAL | audits/evidence/wave-1.7.md |
 | W1.8 | Prices | PARTIAL | audits/evidence/wave-1.8.md |
-| W2.1 | Sentences and FinBERT | NOT STARTED | - |
+| W2.1 | Sentences and FinBERT | PARTIAL | audits/evidence/wave-2.1.md |
 | W2.2 | Linguistic features | NOT STARTED | - |
 | W2.3 | Tabular features | NOT STARTED | - |
 | W2.4 | Matrix, registry and versioning | NOT STARTED | - |
