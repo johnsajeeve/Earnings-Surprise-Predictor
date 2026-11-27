@@ -209,6 +209,9 @@ def run_data_gates(self: IdempotentTask) -> dict[str, Any]:
 @worker_ready.connect
 def queue_catch_up(**_: Any) -> None:
     """At worker start, queue the catch-up check if the setting allows it (decision C-46)."""
+    if not get_settings().yahoo_collection:
+        log.info("Yahoo collection is off (YAHOO_COLLECTION): no capture is queued")
+        return
     if not get_settings().capture_catch_up:
         log.info("capture catch-up is off (CAPTURE_CATCH_UP)")
         return

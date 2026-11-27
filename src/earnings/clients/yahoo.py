@@ -12,6 +12,20 @@ SOURCE = "yfinance-prices"
 HISTORY_START = "2012-01-01"
 
 
+class CollectionDisabled(RuntimeError):
+    """Yahoo collection is off (decision C-61)."""
+
+
+def require_yahoo_collection() -> None:
+    from earnings.config import get_settings
+
+    if not get_settings().yahoo_collection:
+        raise CollectionDisabled(
+            "collection from Yahoo is off: its terms bar automated access without written "
+            "permission (decision C-61). See YAHOO_COLLECTION in .env.example"
+        )
+
+
 def url_for(ticker: str) -> str:
     return f"yfinance://history/{ticker}"
 
@@ -19,6 +33,7 @@ def url_for(ticker: str) -> str:
 def fetch_payload(ticker: str, start: str = HISTORY_START, end: str | None = None) -> bytes:
     """One ticker's daily rows and its full split and dividend lists, as JSON. The close is the one
     yfinance returns with auto_adjust off: adjusted for splits, not for dividends."""
+    require_yahoo_collection()
     import yfinance
 
     handle = yfinance.Ticker(ticker)

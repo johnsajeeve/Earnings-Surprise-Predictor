@@ -324,6 +324,14 @@
         "tests/test_transcripts.py::test_the_download_is_refused_when_the_size_or_checksum_does_not_match"
       ]
     },
+    "src/earnings/clients/yahoo.py": {
+      "requirements": [
+        "LC-08-AC1"
+      ],
+      "tests": [
+        "tests/test_licensing.py::test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation"
+      ]
+    },
     "src/earnings/config.py": {
       "requirements": [
         "DB-01-AC1",
@@ -10337,9 +10345,10 @@
     },
     "tests/test_licensing.py::test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation": {
       "code": [
+        "src/earnings/clients/yahoo.py",
         "src/earnings/schedule.py"
       ],
-      "kind": "expected failure (requirement not met yet)",
+      "kind": "real check",
       "requirements": [
         "LC-08-AC1"
       ]

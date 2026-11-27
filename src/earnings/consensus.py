@@ -16,6 +16,8 @@ from typing import Any
 
 from sqlalchemy import Engine, text
 
+from earnings.clients.yahoo import require_yahoo_collection
+
 log = logging.getLogger(__name__)
 
 SOURCE = "yfinance"
@@ -52,6 +54,7 @@ def load_universe() -> list[tuple[str, str, str]]:
 
 def fetch_yfinance(ticker: str) -> dict[str, Any]:
     """The current-quarter consensus from yfinance, with the raw table as received."""
+    require_yahoo_collection()
     import yfinance
 
     frame = yfinance.Ticker(ticker).earnings_estimate

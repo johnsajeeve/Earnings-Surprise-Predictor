@@ -46,9 +46,10 @@ def test_the_schedule_file_lists_the_four_daily_jobs_with_the_approved_times():
         "check-transcripts": (3, 45),
         "data-gates": (4, 15),
     }
+    everything = schedule.beat_schedule(yahoo_collection=True)
     for name, job in schedule.JOBS.items():
         assert job["task"] in celery_app.tasks
-        entry = celery_app.conf.beat_schedule[name]["schedule"]
+        entry = everything[name]["schedule"]
         # every day: once in each 24 hours (NFR-03)
         assert len(entry.day_of_week) == 7 and len(entry.hour) == len(entry.minute) == 1
 

@@ -37,6 +37,11 @@ class Settings(BaseSettings):
     # that runs the daily capture.
     capture_catch_up: bool = False
 
+    # Collection through yfinance. Off: Yahoo's terms bar automated access without written
+    # permission (read 26 November 2026; decision C-61). Turning it on is the owner's choice and
+    # needs that permission or a recorded decision to accept the risk.
+    yahoo_collection: bool = False
+
     # Contact string the SEC asks for in the User-Agent header (decision C-10).
     # Optional here, because the health check must work before it is set.
     sec_user_agent: str = ""

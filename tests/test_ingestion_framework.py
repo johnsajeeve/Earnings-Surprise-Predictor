@@ -184,7 +184,9 @@ def test_a_job_missing_from_the_schedule_file_does_not_run():
     from earnings import schedule
 
     scheduled = set(celery_app.conf.beat_schedule)
-    assert scheduled == set(schedule.JOBS)  # the file is the only source of the schedule
+    # the file is the only source of the schedule; the paused Yahoo job stays listed in it
+    assert set(schedule.beat_schedule(yahoo_collection=True)) == set(schedule.JOBS)
+    assert scheduled == set(schedule.JOBS) - {"capture-consensus"}
     scheduled_tasks = {entry["task"] for entry in celery_app.conf.beat_schedule.values()}
     # Registered tasks that are not in the file are never scheduled, for example the backfill.
     for unlisted in ("earnings.fetch_company_facts", "earnings.load_companies", "earnings.ping"):

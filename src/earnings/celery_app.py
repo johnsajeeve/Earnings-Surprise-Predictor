@@ -27,5 +27,5 @@ celery_app.conf.update(
     broker_transport_options={"visibility_timeout": VISIBILITY_TIMEOUT_SECONDS},
     # Scheduled jobs: only those listed in earnings/schedule.py run (Ingestion IG-05).
     # Beat is embedded in the worker (docker-compose.yml).
-    beat_schedule=beat_schedule(),
+    beat_schedule=beat_schedule(_settings.yahoo_collection),
 )

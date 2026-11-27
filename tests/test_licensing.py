@@ -149,15 +149,32 @@ def test_every_scheduled_job_declares_what_it_collects_and_a_barred_source_is_fo
 
 
 @pytest.mark.req("LC-08-AC1")
-@pytest.mark.code("src/earnings/schedule.py")
-@pytest.mark.xfail(
-    strict=True,
-    reason="NOT MET: the daily consensus capture collects through yfinance. Decision D-49 (b)",
-)
-def test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation():
-    from earnings.schedule import JOBS
+@pytest.mark.code("src/earnings/schedule.py", "src/earnings/clients/yahoo.py")
+def test_no_scheduled_job_collects_from_a_source_whose_terms_bar_automation(monkeypatch):
+    from earnings import consensus
+    from earnings.celery_app import celery_app
+    from earnings.clients import yahoo
+    from earnings.config import get_settings
+    from earnings.schedule import beat_schedule
 
-    assert lic.jobs_on_barred_sources(list(JOBS)) == []
+    assert lic.jobs_on_barred_sources(sorted(beat_schedule())) == []
+    assert lic.jobs_on_barred_sources(sorted(celery_app.conf.beat_schedule)) == []
+    monkeypatch.delenv("YAHOO_COLLECTION", raising=False)
+    get_settings.cache_clear()
+    try:  # both real fetches refuse before any request is made
+        for fetch in (yahoo.fetch_payload, consensus.fetch_yfinance):
+            with pytest.raises(yahoo.CollectionDisabled):
+                fetch("AAPL")
+        queued = []
+        from earnings import tasks
+
+        monkeypatch.setattr(tasks.capture_catch_up, "delay", lambda: queued.append(1))
+        monkeypatch.setenv("CAPTURE_CATCH_UP", "true")
+        get_settings.cache_clear()
+        tasks.queue_catch_up()
+        assert queued == []  # the start-up catch-up queues nothing either
+    finally:
+        get_settings.cache_clear()
 
 
 @pytest.mark.req("LC-09-AC1", "FE-05")

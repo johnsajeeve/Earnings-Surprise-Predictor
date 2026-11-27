@@ -184,8 +184,9 @@ def test_sr_10_catch_up_asks_only_when_today_has_no_capture(test_db):
 @pytest.mark.code("src/earnings/celery_app.py", "src/earnings/tasks.py")
 def test_sr_10_daily_schedule_runs_at_22_30_utc():
     from earnings.celery_app import celery_app
+    from earnings.schedule import beat_schedule
 
-    entry = celery_app.conf.beat_schedule["capture-consensus"]
+    entry = beat_schedule(yahoo_collection=True)["capture-consensus"]
     assert entry["task"] == "earnings.capture_consensus"
     schedule = entry["schedule"]
     assert (schedule.hour, schedule.minute) == ({22}, {30})
@@ -237,6 +238,7 @@ def test_the_start_up_catch_up_is_off_unless_the_setting_turns_it_on(monkeypatch
     monkeypatch.setattr(tasks, "capture_catch_up", fake)
 
     monkeypatch.delenv("CAPTURE_CATCH_UP", raising=False)
+    monkeypatch.setenv("YAHOO_COLLECTION", "true")
     get_settings.cache_clear()
     tasks.queue_catch_up()
     assert queued == []  # off by default: a test or CI stack makes no outside call

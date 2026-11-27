@@ -14,6 +14,7 @@ x-common-env: &common-env
   DB_WORKER_PASSWORD: ${DB_WORKER_PASSWORD:?Copy .env.example to .env first}
   DB_API_PASSWORD: ${DB_API_PASSWORD:?Copy .env.example to .env first}
   CAPTURE_CATCH_UP: ${CAPTURE_CATCH_UP:-false}
+  YAHOO_COLLECTION: ${YAHOO_COLLECTION:-false}
   CELERY_BROKER_URL: redis://redis:6379/0
   CELERY_RESULT_BACKEND: redis://redis:6379/1
   # Passed through from your shell. Empty if unset. Never written to a file in the repo.
